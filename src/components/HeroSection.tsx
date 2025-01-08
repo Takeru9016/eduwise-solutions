@@ -15,34 +15,40 @@ export default function Hero() {
   return (
     <section className="bg-light-99 py-12 md:py-16 lg:py-20">
       <div className="container mx-auto px-4">
-        <div className="max-w-[1200px] mx-auto text-center">
-          <h1 className="font-vietnam font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-4 md:mb-6">
-            <span className="text-primary-75">Confused</span> About What&apos;s
-            Next?
-          </h1>
-          <p className="text-grey-35 text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-6 md:mb-8 font-vietnam">
-            Whether you&apos;re interested in IT Jobs, MBA programs or
-            professional courses that get you job-ready, we&apos;re here to
-            support you every step of the way!
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button
-              variant="default"
-              className="bg-primary-75 hover:bg-primary-70 text-white w-full sm:w-auto"
-              size="lg"
-            >
-              Explore Courses
-            </Button>
-            <Button
-              variant="outline"
-              className="border-primary-75 text-primary-75 hover:bg-primary-99 w-full sm:w-auto"
-              size="lg"
-            >
-              Contact Us
-            </Button>
+        <div className="max-w-[1200px] mx-auto text-left">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-8">
+            <div className="md:w-1/2 text-center md:text-left">
+              <h1 className="font-vietnam font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-4 md:mb-6">
+                <span className="text-primary-75">Confused</span> About
+                What&apos;s Next?
+              </h1>
+              <p className="text-grey-35 text-base sm:text-lg md:text-xl max-w-2xl mb-6 md:mb-8 font-vietnam">
+                Whether you&apos;re interested in IT Jobs, MBA programs or
+                professional courses that get you job-ready, we&apos;re here to
+                support you every step of the way!
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start items-center">
+                <Button
+                  variant="default"
+                  className="bg-primary-75 hover:bg-primary-70 text-white w-full sm:w-auto"
+                  size="lg"
+                >
+                  Explore Courses
+                </Button>
+                <Button
+                  variant="outline"
+                  className="border-primary-75 text-primary-75 hover:bg-primary-99 w-full sm:w-auto"
+                  size="lg"
+                >
+                  Contact Us
+                </Button>
+              </div>
+            </div>
+            <div className="relative w-full md:w-1/2 h-96 md:h-[500px] lg:h-[600px] mb-8 md:mb-12">
+              <Image src="/hero.png" alt="hero" width={1000} height={1000} />
+            </div>
           </div>
-
-          {/* Partner Logos */}
+          Partner Logos
           <div className="mt-12 md:mt-16 lg:mt-20">
             <p className="text-grey-40 mb-6 text-sm md:text-base">
               Trusted by leading companies

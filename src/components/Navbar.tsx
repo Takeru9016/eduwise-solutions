@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 import { Menu } from "lucide-react";
 
@@ -23,13 +23,14 @@ export default function Navbar() {
         <div className="flex justify-between items-center">
           {/* Logo - Responsive sizes */}
           <Link href="/" className="relative">
-            <Image
+            {/* <Image
               src="/logo.svg"
               alt="Eduwise Solutions"
               width={120}
               height={40}
               className="w-[100px] md:w-[120px] lg:w-[140px] object-contain"
-            />
+            /> */}
+            <p className="text-2xl font-vietnam">Eduwise Solutions</p>
           </Link>
 
           {/* Desktop Navigation */}
@@ -43,12 +44,14 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Button
-              variant="default"
-              className="bg-primary-75 hover:bg-primary-70 ml-4"
-            >
-              Contact Us
-            </Button>
+            <Link href="/contact">
+              <Button
+                variant="default"
+                className="bg-primary-75 hover:bg-primary-70 ml-4"
+              >
+                Contact Us
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Navigation */}

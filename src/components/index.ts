@@ -5,3 +5,4 @@ export { default as ProgramSection } from "./ProgramSection";
 export { default as Testimonials } from "./Testimonials";
 export { default as FAQs } from "./FAQs";
 export { default as Footer } from "./Footer";
+export { default as ContactUs } from "./ContactUs";

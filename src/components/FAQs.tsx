@@ -1,12 +1,9 @@
-import { Mail } from "lucide-react";
-
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
 
 const faqs = [
   {
@@ -47,8 +44,10 @@ export default function FAQs() {
               Frequently Asked Questions
             </h2>
             <p className="text-grey-40 text-sm md:text-base">
-              Still you have any questions? Contact our Team via
-              support@skillbridge.com
+              Still you have any questions? Contact our Team via{" "}
+              <span className="text-primary-50 font-black">
+                admin@eduwise.solutions
+              </span>
             </p>
           </div>
 
@@ -69,22 +68,6 @@ export default function FAQs() {
                 </AccordionItem>
               ))}
             </Accordion>
-          </div>
-
-          <div className="text-center space-y-4">
-            <Button
-              variant="link"
-              className="text-primary-75 hover:text-primary-70 text-base md:text-lg"
-            >
-              See All FAQ&apos;s
-            </Button>
-
-            <div className="flex items-center justify-center gap-2 text-grey-40">
-              <Mail className="w-4 h-4" />
-              <span className="text-sm">
-                or mail us at support@skillbridge.com
-              </span>
-            </div>
           </div>
         </div>
       </div>

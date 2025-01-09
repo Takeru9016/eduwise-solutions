@@ -1,4 +1,4 @@
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
 
@@ -32,18 +32,19 @@ export default function Footer() {
             {/* Company Info */}
             <div className="space-y-6">
               <Link href="/" className="block w-[140px]">
-                <Image
+                {/* <Image
                   src="/logo.svg"
                   alt="Eduwise Solutions"
                   width={140}
                   height={40}
                   className="h-auto w-full"
-                />
+                /> */}
+                <p className="text-2xl font-vietnam">Eduwise Solutions</p>
               </Link>
               <div className="space-y-4">
                 <div className="flex items-center gap-3 text-grey-35">
                   <Mail className="w-5 h-5 text-primary-75" />
-                  <span>hello@skillbridge.com</span>
+                  <span>admin@eduwise.solutions</span>
                 </div>
                 <div className="flex items-center gap-3 text-grey-35">
                   <Phone className="w-5 h-5 text-primary-75" />

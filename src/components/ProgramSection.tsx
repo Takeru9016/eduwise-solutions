@@ -9,37 +9,28 @@ const programs = [
     title: "Master's Programme (Earn while you Learn)",
     duration: "2 Years",
     level: "Beginner",
-    provider: "University Name",
     description:
       "We provide various Online Master's program such as MBA, MS (Data Science) & Cloud Computing, MCA",
-    imageUrl: "/images/masters-program.jpg",
+    imageUrl: "/masters.png",
+    link: "/masters",
   },
   {
-    title: "Master's Programme (Earn while you Learn)",
+    title: "Professional Certification",
     duration: "2 Years",
     level: "Beginner",
-    provider: "University Name",
     description:
-      "We provide various Online Master's program such as MBA, MS (Data Science) & Cloud Computing, MCA",
-    imageUrl: "/images/masters-program.jpg",
+      "We provide professional courses with 100% Job Guarantee in - IT JOBS and NON-IT JOBS.",
+    imageUrl: "/professional.png",
+    link: "/professional",
   },
   {
-    title: "Master's Programme (Earn while you Learn)",
+    title: "Certification Programme",
     duration: "2 Years",
     level: "Beginner",
-    provider: "University Name",
     description:
-      "We provide various Online Master's program such as MBA, MS (Data Science) & Cloud Computing, MCA",
-    imageUrl: "/images/masters-program.jpg",
-  },
-  {
-    title: "Master's Programme (Earn while you Learn)",
-    duration: "2 Years",
-    level: "Beginner",
-    provider: "University Name",
-    description:
-      "We provide various Online Master's program such as MBA, MS (Data Science) & Cloud Computing, MCA",
-    imageUrl: "/images/masters-program.jpg",
+      "Digital marketing, Trading, Cybersecurity, Ethical Hacking, Data Science, Web Development, MERN Stack",
+    imageUrl: "/certification.png",
+    link: "/certification",
   },
 ];
 
@@ -61,44 +52,35 @@ export default function Programs() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {programs.map((program, index) => (
-            <Card
-              key={index}
-              className="overflow-hidden hover:shadow-lg transition-all duration-300 border border-light-90"
-            >
-              <div className="relative h-48 md:h-56 lg:h-64 w-full">
-                <Image
-                  src={program.imageUrl}
-                  alt={program.title}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <CardHeader className="p-4 md:p-6">
-                <CardTitle className="text-lg md:text-xl lg:text-2xl font-vietnam font-semibold">
-                  {program.title}
-                </CardTitle>
-                <div className="flex flex-wrap gap-2 md:gap-4 text-sm text-grey-40 mt-2">
-                  <span>{program.duration}</span>
-                  <span>•</span>
-                  <span>{program.level}</span>
-                  <span>•</span>
-                  <span>By {program.provider}</span>
+            <Link href={program.link} key={index}>
+              <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 h-full border border-light-90">
+                <div className="relative h-48 md:h-56 lg:h-64 w-full">
+                  <Image
+                    src={program.imageUrl}
+                    alt={program.title}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
-              </CardHeader>
-              <CardContent className="p-4 md:p-6 pt-0">
-                <p className="text-grey-35 text-sm md:text-base mb-4">
-                  {program.description}
-                </p>
-                <Button
-                  variant="outline"
-                  className="border-primary-75 text-primary-75 hover:bg-primary-99 w-full sm:w-auto"
-                >
-                  Learn More
-                </Button>
-              </CardContent>
-            </Card>
+                <CardHeader className="p-4 md:p-6">
+                  <CardTitle className="text-lg md:text-xl lg:text-2xl font-vietnam font-semibold">
+                    {program.title}
+                  </CardTitle>
+                  <div className="flex flex-wrap gap-2 md:gap-4 text-sm text-grey-40 mt-2">
+                    <span>{program.duration}</span>
+                    <span>|</span>
+                    <span>{program.level}</span>
+                  </div>
+                </CardHeader>
+                <CardContent className="p-4 md:p-6 pt-0">
+                  <p className="text-grey-35 text-sm md:text-base mb-4">
+                    {program.description}
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
           ))}
         </div>
       </div>

@@ -1,4 +1,4 @@
-import Image from "next/image";
+// import Image from "next/image";
 
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -86,14 +86,14 @@ const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => (
         </p>
 
         <div className="flex items-center gap-4">
-          <div className="relative w-12 h-12 rounded-full overflow-hidden">
+          {/* <div className="relative w-12 h-12 rounded-full overflow-hidden">
             <Image
               src={testimonial.avatar}
               alt={testimonial.name}
               fill
               className="object-cover"
             />
-          </div>
+          </div> */}
           <div>
             <h4 className="font-vietnam font-semibold text-grey-20">
               {testimonial.name}

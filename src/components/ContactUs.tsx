@@ -40,9 +40,9 @@ const contactFormSchema = z.object({
   firstName: z.string().min(2, "First name should be at least 2 characters"),
   lastName: z.string().min(2, "Last name should be at least 2 characters"),
   email: z.string().email("Please enter a valid email"),
-  phone: z
+  mobile: z
     .string()
-    .regex(/^\+?[0-9]{10,14}$/, "Please enter a valid phone number"),
+    .regex(/^\+?[0-9]{10,14}$/, "Please enter a valid mobile number"),
   subject: z.string().min(1, "Please select a subject"),
   message: z.string().min(10, "Message should be at least 10 characters"),
 });
@@ -73,7 +73,7 @@ export default function ContactUs() {
       firstName: "",
       lastName: "",
       email: "",
-      phone: "",
+      mobile: "",
       subject: "",
       message: "",
     },
@@ -213,11 +213,11 @@ export default function ContactUs() {
                       />
                       <FormField
                         control={form.control}
-                        name="phone"
+                        name="mobile"
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel className="text-grey-35">
-                              Phone
+                              Mobile Number
                             </FormLabel>
                             <FormControl>
                               <Input

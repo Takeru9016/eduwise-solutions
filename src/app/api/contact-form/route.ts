@@ -1,83 +1,148 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextResponse } from "next/server";
 import { google } from "googleapis";
 
-const auth = new google.auth.GoogleAuth({
-  credentials: {
-    client_email: process.env.GOOGLE_SHEETS_CLIENT_EMAIL,
-    private_key: process.env.GOOGLE_SHEETS_PRIVATE_KEY?.replace(/\\n/g, "\n"),
-  },
-  scopes: ["https://www.googleapis.com/auth/spreadsheets"],
-});
+// Utility function to validate environment variables
+function validateEnvVariables() {
+  const requiredVars = {
+    SPREADSHEET_ID: process.env.SPREADSHEET_ID,
+    GOOGLE_SHEETS_CLIENT_EMAIL: process.env.GOOGLE_SHEETS_CLIENT_EMAIL,
+    GOOGLE_SHEETS_PRIVATE_KEY: process.env.GOOGLE_SHEETS_PRIVATE_KEY,
+  };
+
+  const missingVars = Object.entries(requiredVars)
+    .filter(([_, value]) => !value)
+    .map(([name]) => name);
+
+  if (missingVars.length > 0) {
+    throw new Error(
+      `Missing required environment variables: ${missingVars.join(", ")}`
+    );
+  }
+
+  // Log environment variable status (safely)
+  console.log("Environment variables check:", {
+    hasSpreadsheetId: !!process.env.SPREADSHEET_ID,
+    hasClientEmail: !!process.env.GOOGLE_SHEETS_CLIENT_EMAIL,
+    hasPrivateKey: !!process.env.GOOGLE_SHEETS_PRIVATE_KEY,
+  });
+}
+
+// Utility function to initialize Google Sheets client
+async function initializeGoogleSheets() {
+  const privateKey = process.env.GOOGLE_SHEETS_PRIVATE_KEY?.replace(
+    /\\n/g,
+    "\n"
+  )?.replace(/\n/g, "\n");
+
+  const auth = new google.auth.GoogleAuth({
+    credentials: {
+      client_email: process.env.GOOGLE_SHEETS_CLIENT_EMAIL,
+      private_key: privateKey,
+    },
+    scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+  });
+
+  const sheets = google.sheets({ version: "v4", auth });
+  console.log("Google Sheets client initialized");
+
+  // Test the connection
+  try {
+    const spreadsheet = await sheets.spreadsheets.get({
+      spreadsheetId: process.env.SPREADSHEET_ID,
+    });
+
+    // Verify the required sheet exists
+    const sheetExists = spreadsheet.data.sheets?.some(
+      (sheet) => sheet.properties?.title === "Inquiry Data"
+    );
+
+    if (!sheetExists) {
+      throw new Error("Sheet 'Inquiry Data' not found in spreadsheet");
+    }
+
+    console.log(
+      "Successfully connected to spreadsheet and verified sheet exists"
+    );
+    return sheets;
+  } catch (error) {
+    console.error("Failed to verify spreadsheet access:", error);
+    throw error;
+  }
+}
 
 export async function POST(req: Request) {
+  console.log("Received contact form submission");
+
   try {
-    if (
-      !process.env.SPREADSHEET_ID ||
-      !process.env.GOOGLE_SHEETS_CLIENT_EMAIL ||
-      !process.env.GOOGLE_SHEETS_PRIVATE_KEY
-    ) {
-      throw new Error("Missing required environment variables");
-    }
+    // Validate environment variables
+    validateEnvVariables();
 
+    // Parse and validate request body
     const body = await req.json();
+    console.log("Parsed request body:", {
+      ...body,
+      message: body.message?.slice(0, 50) + "...", // Truncate message for logging
+    });
 
-    // Validate required fields
-    const requiredFields = [
-      "firstName",
-      "lastName",
-      "email",
-      "phone",
-      "subject",
-      "message",
-    ];
-    for (const field of requiredFields) {
-      if (!body[field]) {
-        return NextResponse.json(
-          { error: `Missing required field: ${field}` },
-          { status: 400 }
-        );
-      }
-    }
+    // Initialize Google Sheets
+    const sheets = await initializeGoogleSheets();
 
-    const { firstName, lastName, email, phone, subject, message } = body;
-
+    // Append data to sheet
     try {
-      const sheets = google.sheets({ version: "v4", auth });
       await sheets.spreadsheets.values.append({
         spreadsheetId: process.env.SPREADSHEET_ID,
-        range: "Sheet1!A:G",
+        range: "Inquiry Data",
         valueInputOption: "USER_ENTERED",
         requestBody: {
           values: [
             [
-              new Date().toISOString(),
-              firstName,
-              lastName,
-              email,
-              phone,
-              subject,
-              message,
+              body.firstName,
+              body.lastName,
+              body.email,
+              body.mobile,
+              body.subject,
+              body.message,
             ],
           ],
         },
       });
-    } catch (googleError) {
-      console.error("Google Sheets Error:", googleError);
+
+      console.log("Successfully appended data to sheet");
+      return NextResponse.json({
+        success: true,
+        message: "Form submission saved successfully",
+      });
+    } catch (appendError) {
+      console.error("Failed to append data to sheet:", appendError);
       return NextResponse.json(
-        { error: "Failed to save to database" },
+        {
+          error: "Failed to save form submission",
+          details:
+            appendError instanceof Error
+              ? appendError.message
+              : "Unknown error",
+        },
         { status: 503 }
       );
     }
-
-    return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Server Error:", error);
+    console.error("Server error:", error);
+
+    // Determine appropriate status code based on error type
+    const statusCode =
+      error instanceof Error &&
+      error.message.includes("Missing required environment variables")
+        ? 500 // Server configuration error
+        : 503; // Service unavailable (e.g., Google Sheets API issues)
+
     return NextResponse.json(
       {
-        error:
+        error: "Failed to process form submission",
+        details:
           error instanceof Error ? error.message : "Unknown error occurred",
       },
-      { status: 500 }
+      { status: statusCode }
     );
   }
 }

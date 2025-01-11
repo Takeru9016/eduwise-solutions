@@ -21,7 +21,7 @@ export default function AboutPage() {
                 between aspiring learners and top-tier educational
                 opportunities. We partner with leading educational institutions
                 and companies to bring you an extensive range of courses,
-                tailored to meet the demands of today's fast-evolving
+                tailored to meet the demands of today&apos;s fast-evolving
                 professional landscape.
               </p>
             </div>

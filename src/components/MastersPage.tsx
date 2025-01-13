@@ -8,29 +8,29 @@ import { Card, CardContent } from "@/components/ui/card";
 const mastersCourses = [
   {
     title: "MBA",
-    university: "Manipal University Jaipur",
+    // university: "Manipal University Jaipur",
     degree: "MASTER OF BUSINESS ADMINISTRATION",
     duration: "24 Months",
-    fee: "INR 1,75,000",
-    image: "/images/masters/mba.jpg",
+    // fee: "INR 1,75,000",
+    image: "/courses/mba.png",
     link: "/masters/mba",
   },
   {
-    title: "MBA",
-    university: "Manipal Academy of Higher Education",
-    degree: "MASTER OF BUSINESS ADMINISTRATION",
+    title: "MSc",
+    // university: "Manipal Academy of Higher Education",
+    degree: "MASTER IN ARTIFICIAL INTELLIGENCE & DATA SCIENCE",
     duration: "24 Months",
-    fee: "INR 2,80,000",
-    image: "/images/masters/mba-2.jpg",
+    // fee: "INR 2,80,000",
+    image: "/courses/aids.jpg",
     link: "/masters/msc-in-ds",
   },
   {
-    title: "MCA",
-    university: "Manipal Academy of Higher Education",
-    degree: "MASTER OF COMPUTER APPLICATIONS (MCA)",
+    title: "MSc",
+    // university: "Manipal Academy of Higher Education",
+    degree: "MASTER IN CLOUD COMPUTING",
     duration: "24 Months",
-    fee: "INR 2,20,000",
-    image: "/images/masters/mca.jpg",
+    // fee: "INR 2,20,000",
+    image: "/courses/cloud.jpeg",
     isNew: true,
     link: "/masters/msc-in-cloud",
   },
@@ -141,13 +141,13 @@ export default function MastersPage() {
                         {course.title}
                       </span>
                     </div>
-                    <h3 className="font-vietnam font-semibold text-grey-20 mb-2">
+                    {/* <h3 className="font-vietnam font-semibold text-grey-20 mb-2">
                       {course.university}
-                    </h3>
+                    </h3> */}
                     <p className="text-sm text-grey-35 mb-4">{course.degree}</p>
                     <div className="flex items-center justify-between text-sm text-grey-40">
                       <span>⏱ {course.duration}</span>
-                      <span>💰 {course.fee}</span>
+                      {/* <span>💰 {course.fee}</span> */}
                     </div>
                     <Button className="w-full mt-4 bg-primary-75 hover:bg-primary-70 text-white">
                       Know More

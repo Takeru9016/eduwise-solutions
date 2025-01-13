@@ -1,44 +1,23 @@
-// import Image from "next/image";
 import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
 
 export default function Footer() {
-  const footerLinks = {
-    quickLinks: [
-      { label: "Home", href: "/" },
-      { label: "Benefits", href: "/benefits" },
-      { label: "Our Courses", href: "/courses" },
-      { label: "Our Testimonials", href: "/testimonials" },
-    ],
-    about: [
-      { label: "Company", href: "/about/company" },
-      { label: "Achievements", href: "/about/achievements" },
-      { label: "Our Goals", href: "/about/goals" },
-    ],
-    social: [
-      { label: "Facebook", href: "#", icon: "facebook" },
-      { label: "Twitter", href: "#", icon: "twitter" },
-      { label: "Instagram", href: "#", icon: "instagram" },
-      { label: "LinkedIn", href: "#", icon: "linkedin" },
-    ],
-  };
+  const socialLinks = [
+    { label: "Facebook", href: "#", icon: "facebook" },
+    { label: "Twitter", href: "#", icon: "twitter" },
+    { label: "Instagram", href: "#", icon: "instagram" },
+    { label: "LinkedIn", href: "#", icon: "linkedin" },
+  ];
 
   return (
     <footer className="bg-white border-t border-light-90">
       <div className="container mx-auto px-4">
         {/* Main Footer Content */}
         <div className="py-12 md:py-16">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-12">
             {/* Company Info */}
             <div className="space-y-6">
               <Link href="/" className="block w-[140px]">
-                {/* <Image
-                  src="/logo.svg"
-                  alt="Eduwise Solutions"
-                  width={140}
-                  height={40}
-                  className="h-auto w-full"
-                /> */}
                 <p className="text-2xl font-vietnam">Eduwise Solutions</p>
               </Link>
               <div className="space-y-4">
@@ -57,51 +36,13 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Quick Links */}
-            <div>
-              <h3 className="font-vietnam font-semibold text-grey-20 text-lg mb-6">
-                Quick Links
-              </h3>
-              <ul className="space-y-4">
-                {footerLinks.quickLinks.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="text-grey-35 hover:text-primary-75 transition-colors"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* About Us */}
-            <div>
-              <h3 className="font-vietnam font-semibold text-grey-20 text-lg mb-6">
-                About Us
-              </h3>
-              <ul className="space-y-4">
-                {footerLinks.about.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="text-grey-35 hover:text-primary-75 transition-colors"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
             {/* Social Profiles */}
             <div>
               <h3 className="font-vietnam font-semibold text-grey-20 text-lg mb-6">
                 Social Profiles
               </h3>
               <div className="flex flex-wrap gap-4">
-                {footerLinks.social.map((social) => (
+                {socialLinks.map((social) => (
                   <Link
                     key={social.label}
                     href={social.href}

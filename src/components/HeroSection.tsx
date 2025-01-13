@@ -2,17 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
+import PartnersLogo from "./PartnersLogo";
 
 export default function Hero() {
-  const partners = [
-    "/images/partners/netflix.svg",
-    "/images/partners/google.svg",
-    "/images/partners/microsoft.svg",
-    "/images/partners/ibm.svg",
-    "/images/partners/tesla.svg",
-    "/images/partners/amazon.svg",
-  ];
-
   return (
     <section className="bg-light-99">
       <div className="container mx-auto px-4 py-8">
@@ -51,7 +43,7 @@ export default function Hero() {
 
           <div className="relative w-full h-[400px] md:h-[500px]">
             <Image
-              src="/hero.png"
+              src="/home/hero.png"
               alt="hero"
               fill
               style={{ objectFit: "contain" }}
@@ -60,24 +52,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="mt-12 pb-10">
-          <h3 className="text-black text-center mb-8 text-sm md:text-lg font-bold">
-            Trusted by leading companies
-          </h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8 items-center">
-            {partners.map((logo, index) => (
-              <div key={index} className="flex justify-center">
-                <Image
-                  src={logo}
-                  alt="Partner logo"
-                  width={120}
-                  height={40}
-                  className="h-8 w-auto grayscale opacity-75 hover:opacity-100 transition-opacity"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
+        <PartnersLogo />
       </div>
     </section>
   );

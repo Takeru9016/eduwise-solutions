@@ -11,11 +11,7 @@ const courseCategories = [
     duration: "2 Years",
     level: "Beginner",
     provider: "University Name",
-    images: [
-      "/images/masters/img1.jpg",
-      "/images/masters/img2.jpg",
-      "/images/masters/img3.jpg",
-    ],
+    images: ["/courses/mba.png", "/courses/aids.jpg", "/courses/cloud.jpeg"],
     viewLink: "/masters",
   },
   {
@@ -26,9 +22,9 @@ const courseCategories = [
     level: "Intermediate",
     provider: "University Name",
     images: [
-      "/images/professional/img1.jpg",
-      "/images/professional/img2.jpg",
-      "/images/professional/img3.jpg",
+      "/courses/it jobs.jpg",
+      "/courses/jobs.jpg",
+      "/courses/non-it.jpg",
     ],
     viewLink: "/professional",
   },
@@ -40,9 +36,9 @@ const courseCategories = [
     level: "Intermediate",
     provider: "University Name",
     images: [
-      "/images/certification/img1.jpg",
-      "/images/certification/img2.jpg",
-      "/images/certification/img3.jpg",
+      "/courses/mern.png",
+      "/courses/ethical.png",
+      "/courses/trading.jpg",
     ],
     viewLink: "/certification",
   },

@@ -44,7 +44,7 @@ const contactFormSchema = z.object({
     .string()
     .regex(/^\+?[0-9]{10,14}$/, "Please enter a valid mobile number"),
   subject: z.string().min(1, "Please select a subject"),
-  message: z.string().min(10, "Message should be at least 10 characters"),
+  message: z.string().optional(), // Made message field optional
 });
 
 type ContactFormValues = z.infer<typeof contactFormSchema>;
@@ -60,6 +60,16 @@ const subjects = [
   { value: "certification_programme", label: "Certification Programme" },
   { value: "other", label: "Other" },
 ];
+
+// New Required Label Component
+const RequiredLabel: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => (
+  <FormLabel className="text-grey-35 flex items-center gap-1">
+    {children}
+    <span className="text-red-500">*</span>
+  </FormLabel>
+);
 
 export default function ContactUs() {
   const [showDialog, setShowDialog] = useState(false);
@@ -85,7 +95,10 @@ export default function ContactUs() {
       setErrorMessage("");
       setShowDialog(false);
 
-      const response = await submitWithRetry(data);
+      const response = await submitWithRetry({
+        ...data,
+        message: data.message || "",
+      });
       if (!response) {
         throw new Error("Network error - please try again");
       }
@@ -96,7 +109,6 @@ export default function ContactUs() {
         throw new Error(result.error || "Submission failed");
       }
 
-      // Only reset form and show success message on successful submission
       setIsSuccess(true);
       form.reset();
       setShowDialog(true);
@@ -155,9 +167,7 @@ export default function ContactUs() {
                         name="firstName"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-grey-35">
-                              First Name
-                            </FormLabel>
+                            <RequiredLabel>First Name</RequiredLabel>
                             <FormControl>
                               <Input
                                 {...field}
@@ -174,9 +184,7 @@ export default function ContactUs() {
                         name="lastName"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-grey-35">
-                              Last Name
-                            </FormLabel>
+                            <RequiredLabel>Last Name</RequiredLabel>
                             <FormControl>
                               <Input
                                 {...field}
@@ -196,9 +204,7 @@ export default function ContactUs() {
                         name="email"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-grey-35">
-                              Email
-                            </FormLabel>
+                            <RequiredLabel>Email</RequiredLabel>
                             <FormControl>
                               <Input
                                 {...field}
@@ -216,9 +222,7 @@ export default function ContactUs() {
                         name="mobile"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-grey-35">
-                              Mobile Number
-                            </FormLabel>
+                            <RequiredLabel>Mobile Number</RequiredLabel>
                             <FormControl>
                               <Input
                                 {...field}
@@ -237,9 +241,7 @@ export default function ContactUs() {
                       name="subject"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-grey-35">
-                            Subject
-                          </FormLabel>
+                          <RequiredLabel>Subject</RequiredLabel>
                           <Select
                             onValueChange={field.onChange}
                             defaultValue={field.value}
@@ -273,6 +275,10 @@ export default function ContactUs() {
                         <FormItem>
                           <FormLabel className="text-grey-35">
                             Message
+                            <span className="text-primary-50 uppercase">
+                              {" "}
+                              (Optional)
+                            </span>
                           </FormLabel>
                           <FormControl>
                             <Textarea

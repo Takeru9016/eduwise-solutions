@@ -7,13 +7,13 @@ export default function PartnersLogo() {
   const [isHovered, setIsHovered] = useState(false);
 
   const partners = [
-    { src: "/amazon.svg", alt: "Amazon" },
-    { src: "/almabetter.png", alt: "Alma Better" },
-    { src: "/upgrad.svg", alt: "upGrad" },
-    { src: "/isda academy.png", alt: "ISDA Academy" },
-    { src: "/unacademy.png", alt: "Unacademy" },
-    { src: "/squareyards.jpeg", alt: "Square Yards" },
-    { src: "/manipal.png", alt: "Manipal" },
+    { src: "/partners/amazon.svg", alt: "Amazon" },
+    { src: "/partners/almabetter.png", alt: "Alma Better" },
+    { src: "/partners/upgrad.svg", alt: "upGrad" },
+    { src: "/partners/isda academy.png", alt: "ISDA Academy" },
+    { src: "/partners/unacademy.png", alt: "Unacademy" },
+    { src: "/partners/squareyards.jpeg", alt: "Square Yards" },
+    { src: "/partners/manipal.png", alt: "Manipal" },
   ];
 
   // Duplicate the array to create a seamless loop

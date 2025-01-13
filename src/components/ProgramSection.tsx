@@ -11,7 +11,7 @@ const programs = [
     level: "Beginner",
     description:
       "We provide various Online Master's program such as MBA, MS (Data Science) & Cloud Computing, MCA",
-    imageUrl: "/masters.png",
+    imageUrl: "/home/masters.png",
     link: "/masters",
   },
   {
@@ -20,7 +20,7 @@ const programs = [
     level: "Beginner",
     description:
       "We provide professional courses with 100% Job Guarantee in - IT JOBS and NON-IT JOBS.",
-    imageUrl: "/professional.png",
+    imageUrl: "/home/professional.png",
     link: "/professional",
   },
   {
@@ -29,7 +29,7 @@ const programs = [
     level: "Beginner",
     description:
       "Digital marketing, Trading, Cybersecurity, Ethical Hacking, Data Science, Web Development, MERN Stack",
-    imageUrl: "/certification.png",
+    imageUrl: "/home/certification.png",
     link: "/certification",
   },
 ];

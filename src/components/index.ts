@@ -5,5 +5,14 @@ export { default as ProgramSection } from "./ProgramSection";
 export { default as Testimonials } from "./Testimonials";
 export { default as FAQs } from "./FAQs";
 export { default as Footer } from "./Footer";
+export { default as OurCourse } from "./OurCourse";
 export { default as ContactUs } from "./ContactUs";
 export { default as AboutUs } from "./AboutUs";
+<<<<<<< HEAD
+=======
+export { default as MastersPage } from "./MastersPage";
+export { default as ProfessionalPage } from "./ProfessionalPage";
+export { default as MBA } from "./MBA";
+export { default as MSc_in_DS } from "./MSc_in_DS";
+export { default as MSc_in_CC } from "./MSc_in_CC";
+>>>>>>> 0fe76d9 (feat: Add pages for MSc in Cloud Computing, MSc in Data Science, MBA, and Professional programs with corresponding components)

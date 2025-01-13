@@ -3,7 +3,11 @@ import { Award, GraduationCap, BarChart3, Rocket, Target } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
+<<<<<<< HEAD
 export default function AboutPage() {
+=======
+export default function AboutUs() {
+>>>>>>> 0fe76d9 (feat: Add pages for MSc in Cloud Computing, MSc in Data Science, MBA, and Professional programs with corresponding components)
   return (
     <main className="bg-white">
       {/* Hero Section */}

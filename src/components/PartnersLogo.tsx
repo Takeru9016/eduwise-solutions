@@ -7,17 +7,23 @@ export default function PartnersLogo() {
   const [isHovered, setIsHovered] = useState(false);
 
   const partners = [
-    { src: "/partners/amazon.svg", alt: "Amazon" },
-    { src: "/partners/almabetter.png", alt: "Alma Better" },
+    // { src: "/partners/amazon.svg", alt: "Amazon" },
+    // { src: "/partners/almabetter.png", alt: "Alma Better" },
     { src: "/partners/upgrad.svg", alt: "upGrad" },
-    { src: "/partners/isda academy.png", alt: "ISDA Academy" },
+    // { src: "/partners/isda academy.png", alt: "ISDA Academy" },
     { src: "/partners/unacademy.png", alt: "Unacademy" },
     { src: "/partners/squareyards.jpeg", alt: "Square Yards" },
     { src: "/partners/manipal.png", alt: "Manipal" },
   ];
 
-  // Duplicate the array to create a seamless loop
-  const duplicatedPartners = [...partners, ...partners];
+  // Filter out commented partners and duplicate the active ones
+  const activePartners = partners.filter((partner) => partner.src);
+  const duplicatedPartners = [
+    ...activePartners,
+    ...activePartners,
+    ...activePartners,
+    ...activePartners,
+  ];
 
   return (
     <div className="mt-12 pb-10 relative">
@@ -66,7 +72,7 @@ export default function PartnersLogo() {
           }
         }
         .animate-scroll {
-          animation: scroll 30s linear infinite;
+          animation: scroll 20s linear infinite;
         }
       `}</style>
     </div>

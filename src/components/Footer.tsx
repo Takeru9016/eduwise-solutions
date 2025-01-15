@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Mail, Phone, MapPin } from "lucide-react";
 
 export default function Footer() {
@@ -18,7 +19,14 @@ export default function Footer() {
             {/* Company Info */}
             <div className="space-y-6">
               <Link href="/" className="block w-[140px]">
-                <p className="text-2xl font-vietnam">Eduwise Solutions</p>
+                <Image
+                  src="/logo.png"
+                  alt="Eduwise Solutions"
+                  width={120}
+                  height={40}
+                  className="w-[120px] md:w-[140px] lg:w-[180px] object-contain"
+                />
+                {/* <p className="text-2xl font-vietnam">Eduwise Solutions</p> */}
               </Link>
               <div className="space-y-4">
                 <div className="flex items-center gap-3 text-grey-35">

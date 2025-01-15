@@ -29,7 +29,7 @@ const courseCategories = [
     viewLink: "/professional",
   },
   {
-    title: "Certification Programmer",
+    title: "Certification Programme",
     description:
       "Digital marketing, Trading, Cybersecurity, Ethical Hacking, Data Science, Web Development, MERN Stack",
     duration: "2 Years",

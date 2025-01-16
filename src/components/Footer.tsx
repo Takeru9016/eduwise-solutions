@@ -20,11 +20,11 @@ export default function Footer() {
             <div className="space-y-6">
               <Link href="/" className="block w-[140px]">
                 <Image
-                  src="/logo.png"
+                  src="/eduwise.png"
                   alt="Eduwise Solutions"
                   width={120}
                   height={40}
-                  className="w-[120px] md:w-[140px] lg:w-[180px] object-contain"
+                  className="w-[120px] md:w-[140px] lg:w-[200px] object-contain"
                 />
                 {/* <p className="text-2xl font-vietnam">Eduwise Solutions</p> */}
               </Link>
@@ -67,12 +67,12 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="border-t border-light-90 py-6">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
             <p className="text-grey-35 text-sm">
               © {new Date().getFullYear()} Eduwise Solutions. All rights
               reserved.
             </p>
-            <div className="flex items-center gap-6">
+            {/* <div className="flex items-center gap-6">
               <Link
                 href="/privacy"
                 className="text-sm text-grey-35 hover:text-primary-75"
@@ -85,7 +85,7 @@ export default function Footer() {
               >
                 Terms of Service
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

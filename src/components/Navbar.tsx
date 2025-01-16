@@ -24,11 +24,11 @@ export default function Navbar() {
           {/* Logo - Responsive sizes */}
           <Link href="/" className="relative">
             <Image
-              src="/logo.png"
+              src="/eduwise.png"
               alt="Eduwise Solutions"
               width={120}
               height={40}
-              className="w-[120px] md:w-[140px] lg:w-[180px] object-contain"
+              className="w-[120px] md:w-[140px] lg:w-[160px] object-contain"
             />
             {/* <p className="text-2xl font-vietnam">Eduwise Solutions</p> */}
           </Link>

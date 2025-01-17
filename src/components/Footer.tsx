@@ -1,3 +1,4 @@
+// components/Footer.tsx
 import Link from "next/link";
 import Image from "next/image";
 import { Mail, Phone, MapPin } from "lucide-react";
@@ -10,23 +11,28 @@ export default function Footer() {
     { label: "LinkedIn", href: "#", icon: "linkedin" },
   ];
 
+  const legalLinks = [
+    { label: "Privacy Policy", href: "/privacy" },
+    { label: "Terms of Service", href: "/terms" },
+    { label: "Refund Policy", href: "/refund" },
+  ];
+
   return (
     <footer className="bg-white border-t border-light-90">
       <div className="container mx-auto px-4">
         {/* Main Footer Content */}
         <div className="py-12 md:py-16">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12">
             {/* Company Info */}
             <div className="space-y-6">
               <Link href="/" className="block w-[140px]">
                 <Image
-                  src="/eduwise.png"
+                  src="/logo.png"
                   alt="Eduwise Solutions"
                   width={120}
                   height={40}
-                  className="w-[120px] md:w-[140px] lg:w-[200px] object-contain"
+                  className="w-[120px] md:w-[140px] lg:w-[180px] object-contain"
                 />
-                {/* <p className="text-2xl font-vietnam">Eduwise Solutions</p> */}
               </Link>
               <div className="space-y-4">
                 <div className="flex items-center gap-3 text-grey-35">
@@ -44,12 +50,47 @@ export default function Footer() {
               </div>
             </div>
 
+            {/* Company Links & Legal */}
+            <div>
+              <h3 className="font-vietnam font-semibold text-grey-20 text-lg mb-6">
+                Important Links
+              </h3>
+              <ul className="space-y-3">
+                <li>
+                  <Link
+                    href="/about"
+                    className="text-grey-35 hover:text-primary-75"
+                  >
+                    About Us
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/courses"
+                    className="text-grey-35 hover:text-primary-75"
+                  >
+                    Our Courses
+                  </Link>
+                </li>
+                {legalLinks.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="text-grey-35 hover:text-primary-75"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
             {/* Social Profiles */}
             <div>
               <h3 className="font-vietnam font-semibold text-grey-20 text-lg mb-6">
-                Social Profiles
+                Connect With Us
               </h3>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-4 mb-8">
                 {socialLinks.map((social) => (
                   <Link
                     key={social.label}
@@ -61,38 +102,21 @@ export default function Footer() {
                   </Link>
                 ))}
               </div>
+              <div className="text-grey-35">
+                <p>
+                  Join our community and stay updated with the latest courses
+                  and opportunities.
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
         <div className="border-t border-light-90 py-6">
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-            <p className="text-grey-35 text-sm">
-              © {new Date().getFullYear()} Eduwise Solutions. All rights
-              reserved.
-            </p>
-            {/* <div className="flex items-center gap-6">
-              <Link
-                href="/refund"
-                className="text-sm text-grey-35 hover:text-primary-75"
-              >
-                Refund Policy
-              </Link>
-              <Link
-                href="/privacy"
-                className="text-sm text-grey-35 hover:text-primary-75"
-              >
-                Privacy Policy
-              </Link>
-              <Link
-                href="/terms"
-                className="text-sm text-grey-35 hover:text-primary-75"
-              >
-                Terms of Service
-              </Link>
-            </div> */}
-          </div>
+          <p className="text-grey-35 text-sm text-center">
+            © {new Date().getFullYear()} Eduwise Solutions. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

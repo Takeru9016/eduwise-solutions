@@ -18,7 +18,6 @@ const certificationCourses = [
     title: "Digital Marketing",
     duration: "3 Months",
     level: "Beginner",
-    fee: "₹20,000",
     topics: [
       "SEO & Content Marketing",
       "Social Media Marketing",
@@ -32,7 +31,6 @@ const certificationCourses = [
     title: "Web Development",
     duration: "4 Months",
     level: "Intermediate",
-    fee: "₹25,000",
     topics: [
       "Frontend Development",
       "Backend Development",
@@ -45,7 +43,6 @@ const certificationCourses = [
     title: "Cybersecurity",
     duration: "3 Months",
     level: "Advanced",
-    fee: "₹30,000",
     topics: [
       "Network Security",
       "Ethical Hacking",
@@ -63,10 +60,10 @@ export default function CertificationPage() {
       <section className="py-12 md:py-16 lg:py-20 bg-primary-99">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-vietnam font-bold text-grey-15 mb-6">
-              Professional Certification Programs
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-vietnam font-bold text-center text-grey-15 mb-6">
+              Certification Programs
             </h1>
-            <p className="text-grey-35 text-base md:text-lg">
+            <p className="text-grey-35 text-base md:text-lg text-justify">
               At Eduwise Solutions, we provide industry-relevant certification
               courses designed to help you gain practical skills and advance
               your career. Our programs include hands-on training, expert
@@ -118,6 +115,14 @@ export default function CertificationPage() {
                         {course.level}
                       </span>
                     </div>
+                    <div className="flex items-center justify-between mb-4">
+                      <Badge
+                        variant="outline"
+                        className="text-primary-75 border-primary-75"
+                      >
+                        100% Job Guarantee
+                      </Badge>
+                    </div>
                   </div>
                   <div className="space-y-2 mb-6">
                     <p className="font-medium text-grey-20">Key Topics:</p>
@@ -133,23 +138,6 @@ export default function CertificationPage() {
                       ))}
                     </ul>
                   </div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-2">
-                      <DollarSign className="w-4 h-4 text-primary-75" />
-                      <span className="font-semibold text-grey-20">
-                        {course.fee}
-                      </span>
-                    </div>
-                    <Badge
-                      variant="outline"
-                      className="text-primary-75 border-primary-75"
-                    >
-                      100% Job Guarantee
-                    </Badge>
-                  </div>
-                  <Button className="w-full bg-primary-75 hover:bg-primary-70">
-                    Learn More
-                  </Button>
                 </CardContent>
               </Card>
             ))}

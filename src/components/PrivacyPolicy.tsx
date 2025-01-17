@@ -153,9 +153,9 @@ export default function PrivacyPolicyPage() {
                   contact us at:
                 </p>
                 <div className="mt-4">
-                  <p className="font-semibold">Eduwise Solutions</p>
-                  <p>Email: privacy@eduwise.solutions</p>
-                  <p>Address: [Your Address]</p>
+                  <p className="text-primary-50 font-bold">
+                    legal@eduwise.solutions
+                  </p>
                 </div>
               </CardContent>
             </Card>

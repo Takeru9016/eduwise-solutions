@@ -30,7 +30,6 @@ export default function Navbar() {
               height={40}
               className="w-[120px] md:w-[140px] lg:w-[160px] object-contain"
             />
-            {/* <p className="text-2xl font-vietnam">Eduwise Solutions</p> */}
           </Link>
 
           {/* Desktop Navigation */}
@@ -73,12 +72,14 @@ export default function Navbar() {
                     {link.label}
                   </Link>
                 ))}
-                <Button
-                  variant="default"
-                  className="bg-primary-75 hover:bg-primary-70 w-full mt-4"
-                >
-                  Contact Us
-                </Button>
+                <Link href="/contact">
+                  <Button
+                    variant="default"
+                    className="bg-primary-75 hover:bg-primary-70 w-full mt-4"
+                  >
+                    Contact Us
+                  </Button>
+                </Link>
               </div>
             </SheetContent>
           </Sheet>

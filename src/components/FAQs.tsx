@@ -1,36 +1,39 @@
+// components/FAQs.tsx
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import { HelpCircle, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
-const faqs = [
+const homepageFaqs = [
   {
-    question: "Can I enroll in multiple courses at once?",
+    question: "What is Eduwise Solutions?",
     answer:
-      "Absolutely! You can enroll in multiple courses simultaneously and access them at your convenience.",
+      "Eduwise Solutions is a platform that connects learners with the best educational opportunities in the ed-tech world. We offer counseling services and discounts on a variety of professional courses.",
   },
   {
-    question: "What kind of support can I expect from instructors?",
+    question: "Do you provide job placement guaranteed?",
     answer:
-      "Our instructors provide comprehensive support through live sessions, doubt clearing, and personalized feedback throughout your learning journey.",
+      "Yes, our in-house course has job-guaranteed courses include placement guaranteed. For other courses, we offer career counseling and networking opportunities.",
   },
   {
-    question:
-      "Are the courses self-paced or do they have specific start and end dates?",
+    question: "Can I earn while learning?",
     answer:
-      "We offer both self-paced and scheduled courses. Most of our programs provide flexibility to learn at your own pace while maintaining structured milestones.",
+      "Absolutely! Our Online Masters and select professional programs are designed to let you balance work and studies.",
   },
   {
-    question: "Are there any prerequisites for the courses?",
+    question: "What types of courses are available?",
     answer:
-      "Prerequisites vary by course. Each course page clearly lists any required prior knowledge or experience. Many of our beginner courses have no prerequisites.",
+      "We offer a wide range of programs, including Online Masters, Skill Development courses, Job Guaranteed courses, MBA programs, and more.",
   },
   {
-    question: "Can I download the course materials for offline access?",
+    question: "Do you offer payment plans?",
     answer:
-      "Yes, most course materials are available for download, allowing you to study offline at your convenience.",
+      "Yes, many courses offer flexible payment plans. We can guide you through available options during counseling.",
   },
 ];
 
@@ -38,31 +41,56 @@ export default function FAQs() {
   return (
     <section className="py-12 md:py-16 lg:py-20 bg-white">
       <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-vietnam font-bold text-grey-15 mb-4">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-grey-40 text-sm md:text-base">
-              Still you have any questions? Contact our Team via{" "}
-              <span className="text-primary-50 font-black">
-                admin@eduwise.solutions
-              </span>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          {/* Left Column - Main Content */}
+          <div className="lg:sticky lg:top-24">
+            <div className="flex items-center gap-2 mb-6">
+              <HelpCircle className="w-6 h-6 text-primary-75" />
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-vietnam font-bold text-grey-15">
+                Common Questions
+              </h2>
+            </div>
+            <p className="text-grey-35 text-lg mb-8 leading-relaxed">
+              Get quick answers to frequently asked questions about our programs
+              and services. We&apos;re here to help you understand our offerings
+              better.
             </p>
+            <div className="bg-light-97 rounded-xl p-6 md:p-8">
+              <h3 className="font-vietnam font-semibold text-grey-20 text-xl mb-4">
+                Need More Help?
+              </h3>
+              <p className="text-grey-35 mb-6">
+                Can&apos;t find what you&apos;re looking for? Our support team
+                is here to assist you.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button
+                  asChild
+                  variant="default"
+                  className="bg-primary-75 hover:bg-primary-70"
+                >
+                  <Link href="/faq" className="flex items-center gap-2">
+                    View All FAQs
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </Button>
+              </div>
+            </div>
           </div>
 
-          <div className="bg-light-97 rounded-xl p-4 md:p-6 lg:p-8 mb-8">
+          {/* Right Column - FAQ Accordion */}
+          <div className="bg-light-97 rounded-2xl p-6 md:p-8">
             <Accordion type="single" collapsible className="w-full space-y-4">
-              {faqs.map((faq, index) => (
+              {homepageFaqs.map((faq, index) => (
                 <AccordionItem
                   key={index}
                   value={`item-${index + 1}`}
-                  className="bg-white rounded-lg border border-light-90 px-4 md:px-6"
+                  className="bg-white rounded-xl border border-light-90 hover:border-primary-75 transition-all duration-200"
                 >
-                  <AccordionTrigger className="text-left font-vietnam font-medium text-grey-20 text-sm md:text-base py-4">
+                  <AccordionTrigger className="px-6 text-left font-vietnam font-medium text-grey-20 text-base md:text-lg py-4 hover:text-primary-75 hover:no-underline">
                     {faq.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-grey-35 text-sm md:text-base pb-4">
+                  <AccordionContent className="text-grey-35 text-base leading-relaxed px-6 pb-6">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>

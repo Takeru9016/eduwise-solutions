@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import {
   Clock,
   Users,
@@ -9,7 +8,6 @@ import {
   GraduationCap,
 } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
@@ -202,35 +200,6 @@ export default function CertificationPage() {
                 </CardContent>
               </Card>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container px-4">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-            <div className="max-w-2xl">
-              <h2 className="text-3xl font-vietnam font-bold text-gray-900 mb-4">
-                <span className="text-gray-900">
-                  Take the First Step Toward Your
-                </span>
-                <br />
-                <span className="text-emerald-700">Dream Career!</span>
-              </h2>
-              <p className="text-gray-600">
-                Join our Online Masters Program today and experience a unique
-                blend of learning and earning.
-              </p>
-            </div>
-            <div>
-              <Button
-                asChild
-                className="bg-emerald-700 hover:bg-emerald-600 text-white px-8 py-2 rounded-md"
-              >
-                <Link href="/contact">Contact Us</Link>
-              </Button>
-            </div>
           </div>
         </div>
       </section>

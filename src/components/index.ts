@@ -17,3 +17,5 @@ export { default as CertificationPage } from "./CertificationPage";
 export { default as RefundPage } from "./RefundPage";
 export { default as PrivacyPolicy } from "./PrivacyPolicy";
 export { default as TermsOfService } from "./TermsOfService";
+export { default as FAQsPage } from "./FAQsPage";
+export { default as CTASection } from "./CTASection";

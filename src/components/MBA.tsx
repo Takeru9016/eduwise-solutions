@@ -7,7 +7,6 @@ import {
   Building,
   BookOpen,
   Monitor,
-  CreditCard,
   CheckCircle2,
 } from "lucide-react";
 
@@ -25,12 +24,6 @@ const specializations = [
   "Project Management",
   "Supply Chain Management",
   "Banking Finance Service & Insurance",
-];
-
-const classTimings = [
-  "10:00 am - 11:00 am",
-  "12:00 pm - 1:00 pm",
-  "2:00 pm - 3:00 pm",
 ];
 
 export default function MBAPage() {
@@ -112,42 +105,6 @@ export default function MBAPage() {
                   </ul>
                 </CardContent>
               </Card>
-
-              {/* Class Schedule */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-2xl font-vietnam">
-                    Class Schedule
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <p className="text-grey-35">
-                      Classes will be held on Saturday and Sunday
-                    </p>
-                    <div className="bg-primary-99 p-4 rounded-lg">
-                      <h4 className="font-semibold mb-3">
-                        Weekend Live Class Timings:
-                      </h4>
-                      <ul className="space-y-2">
-                        {classTimings.map((time, index) => (
-                          <li
-                            key={index}
-                            className="flex items-center gap-2 text-grey-35"
-                          >
-                            <Clock className="w-4 h-4 text-primary-75" />
-                            {time}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <p className="text-grey-35">
-                      All live classes will be recorded and available on the LMS
-                      portal for later viewing.
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
             </div>
 
             {/* Sidebar */}
@@ -177,50 +134,6 @@ export default function MBAPage() {
                       </li>
                     ))}
                   </ul>
-                </CardContent>
-              </Card>
-
-              {/* Fee Structure */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-xl font-vietnam">
-                    Fee Payment Options
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div className="space-y-2">
-                      <h4 className="font-semibold">Payment Modes:</h4>
-                      <ul className="space-y-2">
-                        {["Semester-wise", "Annually", "Full fee payment"].map(
-                          (mode, index) => (
-                            <li
-                              key={index}
-                              className="flex items-center gap-2 text-grey-35"
-                            >
-                              <CreditCard className="w-4 h-4 text-primary-75" />
-                              {mode}
-                            </li>
-                          )
-                        )}
-                      </ul>
-                    </div>
-                    <div className="bg-primary-99 p-4 rounded-lg">
-                      <h4 className="font-semibold mb-2">Instant Discounts:</h4>
-                      <ul className="space-y-2">
-                        <li className="text-grey-35">
-                          5% in Annual Fee Payment
-                        </li>
-                        <li className="text-grey-35">
-                          10% in Full Fee Payment
-                        </li>
-                      </ul>
-                    </div>
-                    <p className="text-grey-35">
-                      EMI options available without interest & no processing
-                      charges
-                    </p>
-                  </div>
                 </CardContent>
               </Card>
             </div>

@@ -8,7 +8,7 @@ export default function Hero() {
   return (
     <section className="bg-light-99">
       <div className="container mx-auto px-4 py-8">
-        <div className="grid md:grid-cols-2 gap-8 items-center">
+        <div className="grid md:grid-cols-2 gap-20 items-center">
           <div className="text-center md:text-left">
             <h1 className="font-vietnam font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-4">
               <span className="text-primary-75">Confused</span> About
@@ -43,7 +43,7 @@ export default function Hero() {
 
           <div className="relative w-full h-[400px] md:h-[500px]">
             <Image
-              src="/home/hero.png"
+              src="/home/hero-2.jpg"
               alt="hero"
               fill
               style={{ objectFit: "contain" }}

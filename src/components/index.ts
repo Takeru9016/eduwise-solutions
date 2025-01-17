@@ -13,3 +13,7 @@ export { default as ProfessionalPage } from "./ProfessionalPage";
 export { default as MBA } from "./MBA";
 export { default as MSc_in_DS } from "./MSc_in_DS";
 export { default as MSc_in_CC } from "./MSc_in_CC";
+export { default as CertificationPage } from "./CertificationPage";
+export { default as RefundPage } from "./RefundPage";
+export { default as PrivacyPolicy } from "./PrivacyPolicy";
+export { default as TermsOfService } from "./TermsOfService";

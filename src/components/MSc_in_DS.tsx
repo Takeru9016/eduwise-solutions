@@ -72,6 +72,21 @@ export default function MScAIDSPage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Left Column - Reordered Content */}
             <div className="lg:col-span-2">
+              {/* Key Features - Moved to bottom */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {features.map((feature, index) => (
+                  <Card key={index} className="border-none shadow-lg">
+                    <CardContent className="p-6">
+                      <feature.icon className="w-10 h-10 text-primary-75 mb-4" />
+                      <h3 className="text-xl font-vietnam font-semibold text-grey-20 mb-2">
+                        {feature.title}
+                      </h3>
+                      <p className="text-grey-35">{feature.description}</p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+
               {/* Program Requirements - Moved to top */}
               <Card className="border-none shadow-lg mb-8">
                 <CardHeader>
@@ -146,21 +161,6 @@ export default function MScAIDSPage() {
                   </ul>
                 </CardContent>
               </Card>
-
-              {/* Key Features - Moved to bottom */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {features.map((feature, index) => (
-                  <Card key={index} className="border-none shadow-lg">
-                    <CardContent className="p-6">
-                      <feature.icon className="w-10 h-10 text-primary-75 mb-4" />
-                      <h3 className="text-xl font-vietnam font-semibold text-grey-20 mb-2">
-                        {feature.title}
-                      </h3>
-                      <p className="text-grey-35">{feature.description}</p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
             </div>
 
             {/* Right Sidebar - Unchanged */}

@@ -5,6 +5,8 @@ import {
   DollarSign,
   Building2,
   HeartHandshake,
+  Percent,
+  Focus,
 } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
@@ -33,6 +35,14 @@ const benefits = [
   {
     icon: HeartHandshake,
     title: "End-to-End Support",
+  },
+  {
+    icon: Focus,
+    title: "Career-Focused Approach",
+  },
+  {
+    icon: Percent,
+    title: "Special Discounts",
   },
 ];
 

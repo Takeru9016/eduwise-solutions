@@ -74,6 +74,12 @@ export default function Footer() {
             </p>
             {/* <div className="flex items-center gap-6">
               <Link
+                href="/refund"
+                className="text-sm text-grey-35 hover:text-primary-75"
+              >
+                Refund Policy
+              </Link>
+              <Link
                 href="/privacy"
                 className="text-sm text-grey-35 hover:text-primary-75"
               >

@@ -29,8 +29,8 @@ export default function Footer() {
                 <Image
                   src="/logo.png"
                   alt="Eduwise Solutions"
-                  width={120}
-                  height={40}
+                  width={140}
+                  height={60}
                   className="w-[120px] md:w-[140px] lg:w-[180px] object-contain"
                 />
               </Link>

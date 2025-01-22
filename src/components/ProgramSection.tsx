@@ -11,21 +11,21 @@ const programs = [
     subtitle: "Earn while you Learn",
     description:
       "We provide various Online Master's program such as MBA, MS (Data Science) & Cloud Computing, MCA",
-    imageUrl: "/masters.png", // Ensure these images are in the public folder
+    imageUrl: "/home/masters.png",
     link: "/masters",
   },
   {
     title: "Professional Certification",
     description:
       "We provide professional courses with 100% Job Guarantee in - IT JOBS and NON-IT JOBS.",
-    imageUrl: "/professional.png",
+    imageUrl: "/home/professional.png",
     link: "/professional",
   },
   {
     title: "Certification Programme",
     description:
       "Digital marketing, Trading, Cybersecurity, Ethical Hacking, Data Science, Web Development, MERN Stack",
-    imageUrl: "/certification.png",
+    imageUrl: "/home/certification.png",
     link: "/certification",
   },
 ];

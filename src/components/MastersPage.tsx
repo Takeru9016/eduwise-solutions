@@ -8,28 +8,22 @@ import { Card, CardContent } from "@/components/ui/card";
 const mastersCourses = [
   {
     title: "MBA",
-    // university: "Manipal University Jaipur",
     degree: "MASTER OF BUSINESS ADMINISTRATION",
-    duration: "24 Months",
-    // fee: "INR 1,75,000",
+    duration: "12 & 24 Months",
     image: "/courses/mba.png",
     link: "/masters/mba",
   },
   {
     title: "MSc",
-    // university: "Manipal Academy of Higher Education",
     degree: "MASTER IN ARTIFICIAL INTELLIGENCE & DATA SCIENCE",
-    duration: "24 Months",
-    // fee: "INR 2,80,000",
+    duration: "12 & 24 Months",
     image: "/courses/aids.jpg",
     link: "/masters/msc-in-ds",
   },
   {
     title: "MSc",
-    // university: "Manipal Academy of Higher Education",
     degree: "MASTER IN CLOUD COMPUTING",
-    duration: "24 Months",
-    // fee: "INR 2,20,000",
+    duration: "12 & 24 Months",
     image: "/courses/cloud.jpeg",
     isNew: true,
     link: "/masters/msc-in-cloud",
@@ -141,13 +135,9 @@ export default function MastersPage() {
                         {course.title}
                       </span>
                     </div>
-                    {/* <h3 className="font-vietnam font-semibold text-grey-20 mb-2">
-                      {course.university}
-                    </h3> */}
                     <p className="text-sm text-grey-35 mb-4">{course.degree}</p>
                     <div className="flex items-center justify-between text-sm text-grey-40">
                       <span>⏱ {course.duration}</span>
-                      {/* <span>💰 {course.fee}</span> */}
                     </div>
                     <Button className="w-full mt-4 bg-primary-75 hover:bg-primary-70 text-white">
                       Know More

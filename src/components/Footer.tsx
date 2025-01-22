@@ -3,20 +3,31 @@ import Link from "next/link";
 import Image from "next/image";
 import { Mail, Phone, MapPin } from "lucide-react";
 
+const socialLinks = [
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/share/1GfVBLdak6/",
+    icon: "facebook",
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/eduwise_insta/",
+    icon: "instagram",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/eduwisesolutions/",
+    icon: "linkedin",
+  },
+];
+
+const legalLinks = [
+  { label: "Privacy Policy", href: "/privacy" },
+  { label: "Terms of Service", href: "/terms" },
+  { label: "Refund Policy", href: "/refund" },
+];
+
 export default function Footer() {
-  const socialLinks = [
-    { label: "Facebook", href: "#", icon: "facebook" },
-    { label: "Twitter", href: "#", icon: "twitter" },
-    { label: "Instagram", href: "#", icon: "instagram" },
-    { label: "LinkedIn", href: "#", icon: "linkedin" },
-  ];
-
-  const legalLinks = [
-    { label: "Privacy Policy", href: "/privacy" },
-    { label: "Terms of Service", href: "/terms" },
-    { label: "Refund Policy", href: "/refund" },
-  ];
-
   return (
     <footer className="bg-white border-t border-light-90">
       <div className="container mx-auto px-4">
@@ -27,11 +38,11 @@ export default function Footer() {
             <div className="space-y-6">
               <Link href="/" className="block w-[140px]">
                 <Image
-                  src="/logo.png"
+                  src="/eduwise.png"
                   alt="Eduwise Solutions"
-                  width={140}
-                  height={60}
-                  className="w-[120px] md:w-[140px] lg:w-[180px] object-contain"
+                  width={120}
+                  height={40}
+                  className="w-[120px] md:w-[140px] lg:w-[160px] object-contain"
                 />
               </Link>
               <div className="space-y-4">
@@ -45,7 +56,10 @@ export default function Footer() {
                 </div>
                 <div className="flex items-start gap-3 text-grey-35">
                   <MapPin className="w-5 h-5 text-primary-75 mt-1" />
-                  <span>Somewhere in the World</span>
+                  <span>
+                    235, Binnamangala, 2nd Floor, 13th Cross Road, 2nd Stage,
+                    Indira Nagar, Bengaluru - 560038
+                  </span>
                 </div>
               </div>
             </div>

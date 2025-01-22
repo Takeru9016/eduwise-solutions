@@ -25,7 +25,10 @@ export default function ContactInfo() {
           <MapPin className="w-6 h-6 text-primary-75 mt-1" />
           <div>
             <p className="font-vietnam font-medium text-grey-20">Location</p>
-            <p className="text-grey-35">Some Where in the World</p>
+            <p className="text-grey-35">
+              235, Binnamangala, 2nd Floor, 13th Cross Road, 2nd Stage, Indira
+              Nagar, Bengaluru - 560038
+            </p>
           </div>
         </div>
       </div>

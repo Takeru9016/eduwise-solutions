@@ -43,7 +43,7 @@ export default function Hero() {
 
           <div className="relative w-full h-[400px] md:h-[500px]">
             <Image
-              src="/home/hero-2.jpg"
+              src="/home/hero-3.png"
               alt="hero"
               fill
               style={{ objectFit: "contain" }}

@@ -9,8 +9,6 @@ const courseCategories = [
     description:
       "We provide various Online Master's program such as MBA, MS (Data Science) & Cloud Computing, MCA.",
     duration: "2 Years",
-    level: "Beginner",
-    provider: "University Name",
     images: ["/courses/mba.png", "/courses/aids.jpg", "/courses/cloud.jpeg"],
     viewLink: "/masters",
   },
@@ -19,8 +17,6 @@ const courseCategories = [
     description:
       "We provide professional courses with 100% Job Guarantee in - IT JOBS and NON-IT JOBS.",
     duration: "2 Years",
-    level: "Intermediate",
-    provider: "University Name",
     images: [
       "/courses/it jobs.jpg",
       "/courses/jobs.jpg",
@@ -33,8 +29,6 @@ const courseCategories = [
     description:
       "Digital marketing, Trading, Cybersecurity, Ethical Hacking, Data Science, Web Development, MERN Stack",
     duration: "2 Years",
-    level: "Intermediate",
-    provider: "University Name",
     images: [
       "/courses/mern.png",
       "/courses/ethical.png",
@@ -79,13 +73,6 @@ export default function CoursesPage() {
                     <p className="text-grey-35 max-w-2xl mb-4">
                       {category.description}
                     </p>
-                    <div className="flex flex-wrap gap-4 text-sm text-grey-40">
-                      <span>{category.duration}</span>
-                      <span>•</span>
-                      <span>{category.level}</span>
-                      <span>•</span>
-                      <span>By {category.provider}</span>
-                    </div>
                   </div>
                   <Button
                     asChild

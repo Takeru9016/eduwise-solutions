@@ -42,7 +42,7 @@ const benefits = [
   },
   {
     icon: Percent,
-    title: "Special Discounts",
+    title: "Exclusive Benefits",
   },
 ];
 

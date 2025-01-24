@@ -50,9 +50,9 @@ export default function Footer() {
               <Image
                 src="/eduwise.png"
                 alt="Eduwise Solutions"
-                width={160}
-                height={48}
-                className="w-[160px] object-contain"
+                width={200}
+                height={60}
+                className="w-[160px] object-contain cursor-pointer"
               />
             </Link>
 

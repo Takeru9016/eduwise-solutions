@@ -4,9 +4,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { CheckCircle2, XCircle } from "lucide-react";
+import { CheckCircle2, XCircle, Sparkles, Mail, Send } from "lucide-react";
 
-import SocialProfile from "./SocialProfile";
 import ContactInfo from "./ContactInfo";
 import LoadingOverlay from "./LoadingOverlay";
 import { submitWithRetry } from "@/utils/api";
@@ -130,18 +129,25 @@ export default function ContactUs() {
     <main className="min-h-screen bg-white">
       {isSubmitting && <LoadingOverlay />}
 
-      {/* Header Section */}
-      <section className="py-12 md:py-16 lg:py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-vietnam font-bold text-grey-15 mb-6">
+      {/* Hero Section */}
+      <section className="relative py-20 md:py-28 bg-gradient-to-b from-primary-99 to-white overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-20 w-72 h-72 bg-primary-95 rounded-full opacity-20 blur-3xl" />
+          <div className="absolute bottom-20 right-20 w-96 h-96 bg-primary-97 rounded-full opacity-20 blur-3xl" />
+        </div>
+
+        <div className="container mx-auto relative">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 bg-white text-primary-75 px-4 py-2 rounded-full text-sm font-medium mb-6">
+              <Sparkles size={16} className="text-primary-75" />
+              Get in Touch with Us
+            </div>
+
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-vietnam font-bold text-grey-15 mb-6">
               Contact Us
             </h1>
-            <p className="text-grey-35 text-base md:text-lg">
-              <b className="text-primary-70 font-bold text-xl">
-                Welcome to Eduwise Solutions Contact page.{" "}
-              </b>
-              <br />
+
+            <p className="text-grey-35 text-lg md:text-xl leading-relaxed">
               We&apos;re here to help and answer any questions you might have.
               Feel free to reach out to us using the form below.
             </p>
@@ -150,104 +156,123 @@ export default function ContactUs() {
       </section>
 
       {/* Contact Form Section */}
-      <section className="pb-12 md:pb-16 lg:pb-20">
-        <div className="container mx-auto px-4">
+      <section className="py-16 relative">
+        <div className="container mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Form */}
             <div className="lg:col-span-2">
-              <div className="bg-light-97 p-6 md:p-8 rounded-lg">
+              <div className="bg-white p-8 rounded-xl shadow-lg border border-light-90">
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="w-12 h-12 rounded-full bg-primary-99 flex items-center justify-center">
+                    <Mail className="w-6 h-6 text-primary-75" />
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-vietnam font-bold text-grey-15">
+                      Send us a Message
+                    </h2>
+                    <p className="text-grey-35">Fill in the form below</p>
+                  </div>
+                </div>
+
                 <Form {...form}>
                   <form
                     onSubmit={form.handleSubmit(onSubmit)}
                     className="space-y-6"
                   >
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {/* First Name Field */}
                       <FormField
                         control={form.control}
                         name="firstName"
                         render={({ field }) => (
-                          <FormItem>
+                          <FormItem className="space-y-2">
                             <RequiredLabel>First Name</RequiredLabel>
                             <FormControl>
                               <Input
                                 {...field}
                                 placeholder="Enter First Name"
-                                className="bg-white border-light-90"
+                                className="h-12 bg-light-97 border-light-90 focus:border-primary-75 focus:ring-primary-75"
                               />
                             </FormControl>
-                            <FormMessage />
+                            <FormMessage className="text-red-500" />
                           </FormItem>
                         )}
                       />
+
+                      {/* Last Name Field */}
                       <FormField
                         control={form.control}
                         name="lastName"
                         render={({ field }) => (
-                          <FormItem>
+                          <FormItem className="space-y-2">
                             <RequiredLabel>Last Name</RequiredLabel>
                             <FormControl>
                               <Input
                                 {...field}
                                 placeholder="Enter Last Name"
-                                className="bg-white border-light-90"
+                                className="h-12 bg-light-97 border-light-90 focus:border-primary-75 focus:ring-primary-75"
                               />
                             </FormControl>
-                            <FormMessage />
+                            <FormMessage className="text-red-500" />
                           </FormItem>
                         )}
                       />
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {/* Email Field */}
                       <FormField
                         control={form.control}
                         name="email"
                         render={({ field }) => (
-                          <FormItem>
+                          <FormItem className="space-y-2">
                             <RequiredLabel>Email</RequiredLabel>
                             <FormControl>
                               <Input
                                 {...field}
                                 type="email"
                                 placeholder="Enter your Email"
-                                className="bg-white border-light-90"
+                                className="h-12 bg-light-97 border-light-90 focus:border-primary-75 focus:ring-primary-75"
                               />
                             </FormControl>
-                            <FormMessage />
+                            <FormMessage className="text-red-500" />
                           </FormItem>
                         )}
                       />
+
+                      {/* Mobile Field */}
                       <FormField
                         control={form.control}
                         name="mobile"
                         render={({ field }) => (
-                          <FormItem>
+                          <FormItem className="space-y-2">
                             <RequiredLabel>Mobile Number</RequiredLabel>
                             <FormControl>
                               <Input
                                 {...field}
                                 placeholder="Enter Phone Number"
-                                className="bg-white border-light-90"
+                                className="h-12 bg-light-97 border-light-90 focus:border-primary-75 focus:ring-primary-75"
                               />
                             </FormControl>
-                            <FormMessage />
+                            <FormMessage className="text-red-500" />
                           </FormItem>
                         )}
                       />
                     </div>
 
+                    {/* Subject Field */}
                     <FormField
                       control={form.control}
                       name="subject"
                       render={({ field }) => (
-                        <FormItem>
+                        <FormItem className="space-y-2">
                           <RequiredLabel>Subject</RequiredLabel>
                           <Select
                             onValueChange={field.onChange}
                             defaultValue={field.value}
                           >
                             <FormControl>
-                              <SelectTrigger className="bg-white border-light-90">
+                              <SelectTrigger className="h-12 bg-light-97 border-light-90">
                                 <SelectValue placeholder="Select a subject" />
                               </SelectTrigger>
                             </FormControl>
@@ -263,20 +288,20 @@ export default function ContactUs() {
                               ))}
                             </SelectContent>
                           </Select>
-                          <FormMessage />
+                          <FormMessage className="text-red-500" />
                         </FormItem>
                       )}
                     />
 
+                    {/* Message Field */}
                     <FormField
                       control={form.control}
                       name="message"
                       render={({ field }) => (
-                        <FormItem>
+                        <FormItem className="space-y-2">
                           <FormLabel className="text-grey-35">
                             Message
-                            <span className="text-primary-50 uppercase">
-                              {" "}
+                            <span className="ml-2 text-sm text-primary-75 font-medium">
                               (Optional)
                             </span>
                           </FormLabel>
@@ -284,20 +309,27 @@ export default function ContactUs() {
                             <Textarea
                               {...field}
                               placeholder="Enter your Message here..."
-                              className="bg-white border-light-90 min-h-[150px]"
+                              className="min-h-[150px] bg-light-97 border-light-90 focus:border-primary-75 focus:ring-primary-75"
                             />
                           </FormControl>
-                          <FormMessage />
+                          <FormMessage className="text-red-500" />
                         </FormItem>
                       )}
                     />
 
                     <Button
                       type="submit"
-                      className="w-full md:w-auto bg-primary-75 hover:bg-primary-70 text-white"
+                      className="w-full md:w-auto bg-primary-75 hover:bg-primary-70 text-white h-12 px-8 flex items-center gap-2 text-base"
                       disabled={isSubmitting}
                     >
-                      {isSubmitting ? "Sending..." : "Send Your Message"}
+                      {isSubmitting ? (
+                        "Sending..."
+                      ) : (
+                        <>
+                          Send Message
+                          <Send size={18} />
+                        </>
+                      )}
                     </Button>
                   </form>
                 </Form>
@@ -307,7 +339,6 @@ export default function ContactUs() {
             {/* Contact Information */}
             <div className="space-y-8">
               <ContactInfo />
-              <SocialProfile />
             </div>
           </div>
         </div>
@@ -317,29 +348,29 @@ export default function ContactUs() {
       <Dialog open={showDialog} onOpenChange={setShowDialog}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
+            <DialogTitle className="flex items-center gap-2 text-xl">
               {isSuccess ? (
                 <>
-                  <CheckCircle2 className="w-5 h-5 text-green-500" />
-                  Success!
+                  <CheckCircle2 className="w-6 h-6 text-green-500" />
+                  Message Sent Successfully!
                 </>
               ) : (
                 <>
-                  <XCircle className="w-5 h-5 text-red-500" />
-                  Error
+                  <XCircle className="w-6 h-6 text-red-500" />
+                  Error Sending Message
                 </>
               )}
             </DialogTitle>
-            <DialogDescription>
+            <DialogDescription className="text-grey-35 mt-2">
               {isSuccess
-                ? "Your message has been sent successfully. We'll get back to you soon!"
+                ? "Thank you for reaching out! We'll get back to you soon."
                 : errorMessage ||
                   "There was an error sending your message. Please try again."}
             </DialogDescription>
           </DialogHeader>
-          <div className="mt-4">
+          <div className="mt-6">
             <Button
-              className="w-full bg-primary-75 hover:bg-primary-70 text-white"
+              className="w-full bg-primary-75 hover:bg-primary-70 text-white h-12"
               onClick={() => setShowDialog(false)}
             >
               {isSuccess ? "Close" : "Try Again"}

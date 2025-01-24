@@ -156,7 +156,7 @@ export default function FAQsPage() {
       <section className="bg-gradient-to-br from-primary-70 to-primary-80 text-white py-16 md:py-24">
         <div className="container mx-auto">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-vietnam font-bold mb-6">
+            <h1 className="text-3xl md:text-5xl font-vietnam font-bold mb-6">
               How can we help you?
             </h1>
             <p className="text-xl opacity-90 mb-8">

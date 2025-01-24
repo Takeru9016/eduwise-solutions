@@ -1,162 +1,208 @@
-import { Shield, Lock, Database, Mail, FileText } from "lucide-react";
+import {
+  Shield,
+  Lock,
+  Database,
+  Mail,
+  FileText,
+  CheckCircle,
+} from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function PrivacyPolicyPage() {
   return (
     <main className="min-h-screen bg-white">
       {/* Header Section */}
-      <section className="py-12 md:py-16 lg:py-20 bg-primary-99">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-vietnam font-bold text-grey-15 mb-6">
+      <section className="relative py-16 md:py-20 lg:py-24 bg-primary-99 overflow-hidden">
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-vietnam font-bold text-grey-15 mb-6 animate-fade-in-up">
               Privacy Policy
             </h1>
-            <p className="text-grey-35 text-lg">
+            <p className="text-grey-35 text-xl md:text-2xl max-w-2xl mx-auto">
+              Your data privacy and security are our top priorities
+            </p>
+            <p className="text-grey-35 text-lg mt-4">
               Last updated: January 15, 2025
             </p>
           </div>
         </div>
+        {/* Decorative Background Elements */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-primary-50 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-primary-25 rounded-full blur-3xl"></div>
+        </div>
       </section>
 
       {/* Main Content */}
-      <section className="py-12">
+      <section className="py-12 md:py-16 lg:py-20">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto space-y-8">
-            {/* Introduction */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Shield className="w-6 h-6 text-primary-75" />
-                  Introduction
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4 text-grey-35">
-                <p>
-                  At Eduwise Solutions, we are committed to protecting your
-                  privacy and ensuring the security of your personal
-                  information. This Privacy Policy explains how we collect, use,
-                  and protect your data when you use our services.
-                </p>
-              </CardContent>
-            </Card>
+          <Tabs defaultValue="overview" className="max-w-4xl mx-auto">
+            <TabsList className="grid w-full grid-cols-3 mb-8">
+              <TabsTrigger value="overview">Overview</TabsTrigger>
+              <TabsTrigger value="details">Details</TabsTrigger>
+              <TabsTrigger value="rights">Your Rights</TabsTrigger>
+            </TabsList>
 
-            {/* Information We Collect */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Database className="w-6 h-6 text-primary-75" />
-                  Information We Collect
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-2">
-                  <h3 className="font-semibold text-grey-20">
-                    Personal Information:
-                  </h3>
-                  <ul className="list-disc pl-6 text-grey-35 space-y-2">
-                    <li>Name and contact details</li>
-                    <li>Email address</li>
-                    <li>Phone number</li>
-                    <li>Educational background</li>
-                    <li>Employment history</li>
+            <TabsContent value="overview">
+              <div className="space-y-6">
+                <Card className="hover:shadow-lg transition-shadow duration-300">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-3">
+                      <Shield className="w-7 h-7 text-primary-75" />
+                      Our Commitment
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-grey-35 leading-relaxed">
+                      At Eduwise Solutions, we are committed to protecting your
+                      privacy through transparent data practices, robust
+                      security measures, and respectful information handling.
+                    </p>
+                  </CardContent>
+                </Card>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <Card className="hover:shadow-lg transition-shadow duration-300">
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-3">
+                        <Database className="w-6 h-6 text-primary-75" />
+                        Data We Collect
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-2 text-grey-35">
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="w-4 h-4 text-green-500" />
+                          Personal Details
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="w-4 h-4 text-green-500" />
+                          Contact Information
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="w-4 h-4 text-green-500" />
+                          Technical Usage Data
+                        </li>
+                      </ul>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="hover:shadow-lg transition-shadow duration-300">
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-3">
+                        <Lock className="w-6 h-6 text-primary-75" />
+                        Data Protection
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-2 text-grey-35">
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="w-4 h-4 text-green-500" />
+                          End-to-End Encryption
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="w-4 h-4 text-green-500" />
+                          Regular Security Audits
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <CheckCircle className="w-4 h-4 text-green-500" />
+                          Strict Access Controls
+                        </li>
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="details">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-3">
+                    <FileText className="w-7 h-7 text-primary-75" />
+                    Detailed Information Breakdown
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div>
+                    <h3 className="font-semibold text-grey-20 mb-3">
+                      Personal Information
+                    </h3>
+                    <ul className="list-disc pl-6 text-grey-35 space-y-2">
+                      <li>Name and contact details</li>
+                      <li>Email address</li>
+                      <li>Phone number</li>
+                      <li>Educational background</li>
+                      <li>Employment history</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-grey-20 mb-3">
+                      Technical Information
+                    </h3>
+                    <ul className="list-disc pl-6 text-grey-35 space-y-2">
+                      <li>Device information</li>
+                      <li>IP address</li>
+                      <li>Browser type</li>
+                      <li>Usage data</li>
+                    </ul>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="rights">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-3">
+                    <FileText className="w-7 h-7 text-primary-75" />
+                    Your Privacy Rights
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="bg-primary-99 p-4 rounded-lg">
+                    <h3 className="font-semibold text-grey-20 mb-2">
+                      Your Control, Your Data
+                    </h3>
+                    <p className="text-grey-35">
+                      We believe in empowering you with complete control over
+                      your personal information.
+                    </p>
+                  </div>
+                  <ul className="list-disc pl-6 text-grey-35 space-y-3">
+                    <li>Access and review your personal information</li>
+                    <li>Request corrections to your data</li>
+                    <li>Request deletion of your data</li>
+                    <li>Object to specific data processing activities</li>
+                    <li>Request data portability</li>
                   </ul>
-                </div>
-                <div className="space-y-2">
-                  <h3 className="font-semibold text-grey-20">
-                    Technical Information:
-                  </h3>
-                  <ul className="list-disc pl-6 text-grey-35 space-y-2">
-                    <li>Device information</li>
-                    <li>IP address</li>
-                    <li>Browser type</li>
-                    <li>Usage data</li>
-                  </ul>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
 
-            {/* How We Use Your Information */}
-            <Card>
+          {/* Contact Section */}
+          <div className="mt-12 text-center">
+            <Card className="max-w-xl mx-auto">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Lock className="w-6 h-6 text-primary-75" />
-                  How We Use Your Information
+                <CardTitle className="flex items-center justify-center gap-3">
+                  <Mail className="w-7 h-7 text-primary-75" />
+                  Contact Our Privacy Team
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4 text-grey-35">
-                <p>We use your information to:</p>
-                <ul className="list-disc pl-6 space-y-2">
-                  <li>Provide and maintain our educational services</li>
-                  <li>Process your enrollment and payments</li>
-                  <li>Send important course updates and notifications</li>
-                  <li>Improve our services and user experience</li>
-                  <li>Comply with legal obligations</li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            {/* Data Security */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Lock className="w-6 h-6 text-primary-75" />
-                  Data Security
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="text-grey-35">
-                <p>
-                  We implement appropriate security measures to protect your
-                  personal information from unauthorized access, alteration,
-                  disclosure, or destruction. This includes:
+              <CardContent>
+                <p className="text-grey-35 mb-4">
+                  For any privacy-related inquiries or concerns, reach out to
+                  us:
                 </p>
-                <ul className="list-disc pl-6 mt-4 space-y-2">
-                  <li>Encryption of sensitive data</li>
-                  <li>Regular security assessments</li>
-                  <li>Access controls and authentication</li>
-                  <li>Secure data storage practices</li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            {/* Your Rights */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <FileText className="w-6 h-6 text-primary-75" />
-                  Your Rights
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="text-grey-35">
-                <p>You have the right to:</p>
-                <ul className="list-disc pl-6 mt-4 space-y-2">
-                  <li>Access your personal information</li>
-                  <li>Request corrections to your data</li>
-                  <li>Request deletion of your data</li>
-                  <li>Object to data processing</li>
-                  <li>Data portability</li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            {/* Contact Information */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Mail className="w-6 h-6 text-primary-75" />
-                  Contact Us
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="text-grey-35">
-                <p>
-                  If you have any questions about this Privacy Policy, please
-                  contact us at:
-                </p>
-                <div className="mt-4">
-                  <p className="text-primary-50 font-bold">
-                    legal@eduwise.solutions
-                  </p>
-                </div>
+                <a
+                  href="mailto:legal@eduwise.solutions"
+                  className="text-primary-50 font-bold text-xl hover:underline"
+                >
+                  legal@eduwise.solutions
+                </a>
               </CardContent>
             </Card>
           </div>

@@ -1,109 +1,108 @@
 import Link from "next/link";
-import { ArrowRight, Sparkles, GraduationCap } from "lucide-react";
-
+import { ArrowRight, BookOpen, Target, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function CTASection() {
   return (
-    <section className="relative py-20 overflow-hidden">
-      {/* Background with gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-99 via-primary-97 to-light-97" />
-
-      {/* Decorative elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-10 left-10 w-32 h-32 bg-primary-95 rounded-full opacity-20 blur-2xl" />
-        <div className="absolute bottom-10 right-10 w-40 h-40 bg-primary-90 rounded-full opacity-20 blur-3xl" />
-      </div>
-
-      <div className="container relative">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
-          {/* Left content */}
-          <div className="max-w-2xl">
-            <div className="flex items-center gap-2 mb-6">
-              <span className="inline-flex items-center gap-1.5 bg-primary-99 text-primary-70 px-4 py-1.5 rounded-full text-sm font-medium">
-                <Sparkles size={16} className="text-primary-70" />
-                Transform Your Future
-              </span>
+    <section className="relative py-24 bg-gradient-to-br from-primary-99 to-white overflow-hidden">
+      <div className="container relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Content Section */}
+          <div className="space-y-6">
+            <div className="inline-flex items-center gap-2 bg-primary-95 text-primary-70 px-4 py-2 rounded-full">
+              <Target size={16} className="text-primary-70" />
+              <span className="text-sm font-medium">Career Transformation</span>
             </div>
 
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-vietnam font-bold mb-6">
-              <span className="text-grey-15 block mb-2">
-                Take the First Step Toward
+            <h2 className="text-4xl lg:text-5xl font-bold text-grey-15 leading-tight">
+              Accelerate Your
+              <span className="text-primary-70 block">
+                Professional Journey
               </span>
-              <span className="text-primary-70">Your Dream Career!</span>
             </h2>
 
-            <div className="space-y-4 mb-8 text-grey-35">
-              <p className="text-lg">
-                Join our Online Masters Program today and experience a unique
-                blend of learning and earning opportunities.
-              </p>
+            <p className="text-lg text-grey-45 max-w-xl">
+              Unlock a world of opportunities with our cutting-edge Online
+              Masters Program. Designed for ambitious professionals who want to
+              stay ahead in a rapidly evolving job market.
+            </p>
 
-              {/* Feature highlights */}
-              <div className="flex flex-col sm:flex-row gap-6 mt-8">
-                <div className="flex items-start gap-3">
-                  <div className="mt-1">
-                    <GraduationCap className="w-5 h-5 text-primary-75" />
-                  </div>
+            {/* Key Features */}
+            <div className="grid sm:grid-cols-2 gap-4">
+              {[
+                {
+                  icon: BookOpen,
+                  title: "Expert Curriculum",
+                  description: "Industry-aligned learning paths",
+                },
+                {
+                  icon: Clock,
+                  title: "Flexible Learning",
+                  description: "Learn on your schedule",
+                },
+              ].map(({ icon: Icon, title, description }) => (
+                <div
+                  key={title}
+                  className="flex items-start gap-3 bg-primary-99/50 p-4 rounded-lg"
+                >
+                  <Icon className="w-6 h-6 text-primary-70 mt-1" />
                   <div>
-                    <h3 className="font-medium text-grey-20 mb-1">
-                      Expert-Led Programs
-                    </h3>
-                    <p className="text-sm">
-                      Learn from industry leaders and experts
-                    </p>
+                    <h3 className="font-semibold text-grey-20 mb-1">{title}</h3>
+                    <p className="text-sm text-grey-45">{description}</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3">
-                  <div className="mt-1">
-                    <Sparkles className="w-5 h-5 text-primary-75" />
-                  </div>
-                  <div>
-                    <h3 className="font-medium text-grey-20 mb-1">
-                      Flexible Learning
-                    </h3>
-                    <p className="text-sm">Study at your own pace, anywhere</p>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
 
-            {/* CTA Buttons */}
+            {/* Call-to-Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
               <Button
                 asChild
-                className="bg-primary-75 hover:bg-primary-70 text-white px-8 py-6 rounded-lg flex items-center gap-2 text-lg transition-all duration-200 hover:translate-y-[-2px]"
+                className="bg-primary-70 hover:bg-primary-75 text-white px-8 py-3 rounded-lg group transition-all duration-300"
               >
-                <Link href="/contact">
-                  Get Started Now
-                  <ArrowRight className="w-5 h-5" />
+                <Link href="/contact" className="flex items-center gap-2">
+                  Start Your Journey
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
+              </Button>
+              <Button
+                variant="outline"
+                asChild
+                className="border-primary-70 text-primary-70 hover:bg-primary-95/50 px-8 py-3 rounded-lg"
+              >
+                <Link href="/courses">Explore Programs</Link>
               </Button>
             </div>
           </div>
 
-          {/* Right side decorative element */}
-          <div className="relative w-full lg:w-[420px] h-[320px] bg-gradient-to-br from-primary-95 to-primary-99 rounded-2xl overflow-hidden">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-48 h-48 bg-primary-90 rounded-full opacity-50 blur-xl" />
-            </div>
-            <div className="absolute inset-0 backdrop-blur-sm">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary-75/10 to-transparent" />
-            </div>
-            <div className="relative p-8 text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-white rounded-full shadow-lg mb-6">
-                <GraduationCap className="w-8 h-8 text-primary-75" />
+          {/* Decorative Image/Section */}
+          <div className="hidden lg:block relative">
+            <div className="bg-gradient-to-br from-primary-95 to-primary-99 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary-75/10 to-transparent opacity-50 blur-2xl" />
+
+              <div className="relative z-10 text-center">
+                <div className="inline-flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-lg mb-6 mx-auto">
+                  <Target className="w-10 h-10 text-primary-70" />
+                </div>
+
+                <h3 className="text-3xl font-bold text-grey-15 mb-4">
+                  Transform Your Potential
+                </h3>
+
+                <p className="text-grey-45 max-w-md mx-auto">
+                  Join a community of 10,000+ professionals advancing their
+                  careers through innovative online learning.
+                </p>
               </div>
-              <h3 className="text-2xl font-vietnam font-bold text-grey-15 mb-4">
-                Start Learning Today
-              </h3>
-              <p className="text-grey-35">
-                Join thousands of students already learning with Eduwise
-                Solutions
-              </p>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Subtle Background Decorations */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-primary-95 rounded-full opacity-10 blur-3xl" />
+        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-primary-90 rounded-full opacity-10 blur-3xl" />
       </div>
     </section>
   );

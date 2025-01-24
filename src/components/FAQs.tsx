@@ -1,4 +1,6 @@
-// components/FAQs.tsx
+import Link from "next/link";
+import { ArrowRight, Sparkles, MessageCircle } from "lucide-react";
+
 import {
   Accordion,
   AccordionContent,
@@ -6,8 +8,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { HelpCircle, ArrowRight } from "lucide-react";
-import Link from "next/link";
 
 const homepageFaqs = [
   {
@@ -39,58 +39,88 @@ const homepageFaqs = [
 
 export default function FAQs() {
   return (
-    <section className="py-12 md:py-16 lg:py-20 bg-white">
-      <div className="container mx-auto px-4">
+    <section className="relative py-16 md:py-24 bg-gradient-to-b from-white to-light-97">
+      {/* Decorative elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-20 w-72 h-72 bg-primary-95 rounded-full opacity-20 blur-3xl" />
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-primary-97 rounded-full opacity-20 blur-3xl" />
+      </div>
+
+      <div className="container mx-auto relative">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Left Column - Main Content */}
           <div className="lg:sticky lg:top-24">
-            <div className="flex items-center gap-2 mb-6">
-              <HelpCircle className="w-6 h-6 text-primary-75" />
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-vietnam font-bold text-grey-15">
+            <div className="space-y-6">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 bg-primary-99 text-primary-75 px-4 py-2 rounded-full text-sm font-medium">
+                <Sparkles size={16} className="text-primary-75" />
+                Get Quick Answers
+              </div>
+
+              {/* Main Heading */}
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-vietnam font-bold text-grey-15">
                 Common Questions
               </h2>
-            </div>
-            <p className="text-grey-35 text-lg mb-8 leading-relaxed">
-              Get quick answers to frequently asked questions about our programs
-              and services. We&apos;re here to help you understand our offerings
-              better.
-            </p>
-            <div className="bg-light-97 rounded-xl p-6 md:p-8">
-              <h3 className="font-vietnam font-semibold text-grey-20 text-xl mb-4">
-                Need More Help?
-              </h3>
-              <p className="text-grey-35 mb-6">
-                Can&apos;t find what you&apos;re looking for? Our support team
-                is here to assist you.
+
+              {/* Description */}
+              <p className="text-grey-35 text-lg leading-relaxed">
+                Get quick answers to frequently asked questions about our
+                programs and services. We&apos;re here to help you understand
+                our offerings better.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button
-                  asChild
-                  variant="default"
-                  className="bg-primary-75 hover:bg-primary-70"
-                >
-                  <Link href="/faq" className="flex items-center gap-2">
-                    View All FAQs
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </Button>
+
+              {/* Help Cards */}
+              <div className="grid gap-6 mt-8">
+                {/* Support Card */}
+                <div className="bg-gradient-to-br from-primary-99 to-light-97 rounded-xl p-8 border border-primary-95">
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0">
+                      <div className="w-12 h-12 rounded-full bg-primary-95 flex items-center justify-center">
+                        <MessageCircle className="w-6 h-6 text-primary-75" />
+                      </div>
+                    </div>
+                    <div className="space-y-3">
+                      <h3 className="font-vietnam font-semibold text-grey-20 text-xl">
+                        Need More Help?
+                      </h3>
+                      <p className="text-grey-35">
+                        Can&apos;t find what you&apos;re looking for? Our
+                        support team is here to assist you.
+                      </p>
+                      <div className="pt-2">
+                        <Button
+                          asChild
+                          variant="default"
+                          className="bg-primary-75 hover:bg-primary-70 transition-all duration-200 hover:translate-y-[-2px]"
+                        >
+                          <Link href="/faq" className="flex items-center gap-2">
+                            View All FAQs
+                            <ArrowRight className="w-4 h-4" />
+                          </Link>
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
           {/* Right Column - FAQ Accordion */}
-          <div className="bg-light-97 rounded-2xl p-6 md:p-8">
+          <div className="bg-white rounded-2xl p-8 shadow-lg border border-light-90">
             <Accordion type="single" collapsible className="w-full space-y-4">
               {homepageFaqs.map((faq, index) => (
                 <AccordionItem
                   key={index}
                   value={`item-${index + 1}`}
-                  className="bg-white rounded-xl border border-light-90 hover:border-primary-75 transition-all duration-200"
+                  className="bg-light-97 rounded-xl border border-light-90 data-[state=open]:bg-white data-[state=open]:border-primary-95 transition-all duration-200"
                 >
-                  <AccordionTrigger className="px-6 text-left font-vietnam font-medium text-grey-20 text-base md:text-lg py-4 hover:text-primary-75 hover:no-underline">
-                    {faq.question}
+                  <AccordionTrigger className="px-6 text-left font-vietnam font-medium text-grey-20 text-lg py-4 hover:text-primary-75 [&[data-state=open]>div]:text-primary-75 hover:no-underline group">
+                    <div className="group-hover:text-primary-75 transition-colors">
+                      {faq.question}
+                    </div>
                   </AccordionTrigger>
-                  <AccordionContent className="text-grey-35 text-base leading-relaxed px-6 pb-6">
+                  <AccordionContent className="text-grey-35 leading-relaxed px-6 pb-6">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>

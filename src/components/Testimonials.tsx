@@ -1,5 +1,4 @@
-// import Image from "next/image";
-
+import { Sparkles, Quote } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
@@ -35,14 +34,30 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="py-12 md:py-16 lg:py-20 bg-light-97">
-      <div className="container mx-auto px-4">
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-vietnam font-bold text-grey-15 text-center mb-8 md:mb-12">
-          Our Testimonials
-        </h2>
+    <section className="relative py-16 md:py-24 bg-gradient-to-b from-light-97 to-white overflow-hidden">
+      {/* Decorative elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-20 w-72 h-72 bg-primary-95 rounded-full opacity-20 blur-3xl" />
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-primary-97 rounded-full opacity-20 blur-3xl" />
+      </div>
+
+      <div className="container mx-auto relative">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 bg-primary-99 text-primary-75 px-4 py-2 rounded-full text-sm font-medium mb-6">
+            <Sparkles size={16} className="text-primary-75" />
+            Success Stories
+          </div>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-vietnam font-bold text-grey-15 mb-4">
+            What Our Students Say
+          </h2>
+          <p className="text-grey-35 text-lg max-w-2xl mx-auto">
+            Hear from our graduates about their journey with Eduwise Solutions
+          </p>
+        </div>
 
         {/* Desktop View */}
-        <div className="hidden md:grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-6xl mx-auto">
+        <div className="hidden md:grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {testimonials.map((testimonial, index) => (
             <TestimonialCard key={index} testimonial={testimonial} />
           ))}
@@ -58,8 +73,8 @@ export default function Testimonials() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="hidden sm:flex" />
-            <CarouselNext className="hidden sm:flex" />
+            <CarouselPrevious className="bg-white border-2 border-primary-95 text-primary-75 hover:bg-primary-99" />
+            <CarouselNext className="bg-white border-2 border-primary-95 text-primary-75 hover:bg-primary-99" />
           </Carousel>
         </div>
       </div>
@@ -68,32 +83,37 @@ export default function Testimonials() {
 }
 
 const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => (
-  <Card className="border-none bg-white hover:shadow-lg transition-all duration-300">
-    <CardContent className="p-6 md:p-8">
+  <Card className="group border-none bg-white hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+    <CardContent className="p-8">
       <div className="flex flex-col h-full">
-        <div className="mb-6">
-          <svg
-            className="w-8 h-8 text-primary-75 opacity-50"
-            fill="currentColor"
-            viewBox="0 0 32 32"
-          >
-            <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H6c0-2.2 1.8-4 4-4V8zm14 0c-3.3 0-6 2.7-6 6v10h10V14h-8c0-2.2 1.8-4 4-4V8z" />
-          </svg>
+        {/* Rating Stars */}
+        {/* <div className="flex items-center gap-1 mb-6">
+          {[...Array(5)].map((_, i) => (
+            <Star
+              key={i}
+              size={18}
+              className="fill-primary-75 text-primary-75"
+              strokeWidth={0}
+            />
+          ))}
+        </div> */}
+
+        {/* Quote Icon */}
+        <div className="mb-6 relative">
+          <div className="absolute -top-2 -left-2 w-12 h-12 bg-primary-99 rounded-full opacity-50" />
+          <Quote className="w-8 h-8 text-primary-75 relative" />
         </div>
 
-        <p className="text-grey-35 font-vietnam text-base md:text-lg mb-6 flex-grow">
+        {/* Content */}
+        <p className="text-grey-35 font-vietnam text-lg leading-relaxed mb-8 flex-grow italic">
           &ldquo;{testimonial.content}&rdquo;
         </p>
 
-        <div className="flex items-center gap-4">
-          {/* <div className="relative w-12 h-12 rounded-full overflow-hidden">
-            <Image
-              src={testimonial.avatar}
-              alt={testimonial.name}
-              fill
-              className="object-cover"
-            />
-          </div> */}
+        {/* Author Info */}
+        <div className="flex items-center gap-4 pt-6 border-t border-light-90">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-99 text-primary-75 font-semibold text-xl">
+            {testimonial.name.charAt(0)}
+          </div>
           <div>
             <h4 className="font-vietnam font-semibold text-grey-20">
               {testimonial.name}

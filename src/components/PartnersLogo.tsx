@@ -2,43 +2,50 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { Building2 } from "lucide-react";
 
 export default function PartnersLogo() {
   const [isHovered, setIsHovered] = useState(false);
 
   const partners = [
-    // { src: "/partners/amazon.svg", alt: "Amazon" },
-    // { src: "/partners/almabetter.png", alt: "Alma Better" },
     { src: "/partners/upgrad.svg", alt: "upGrad" },
-    // { src: "/partners/isda academy.png", alt: "ISDA Academy" },
     { src: "/partners/unacademy.png", alt: "Unacademy" },
     { src: "/partners/squareyards.jpeg", alt: "Square Yards" },
     { src: "/partners/manipal.png", alt: "Manipal" },
   ];
 
-  // Filter out commented partners and duplicate the active ones
-  const activePartners = partners.filter((partner) => partner.src);
+  // Create duplicated array for seamless scrolling
   const duplicatedPartners = [
-    ...activePartners,
-    ...activePartners,
-    ...activePartners,
-    ...activePartners,
+    ...partners,
+    ...partners,
+    ...partners,
+    ...partners,
   ];
 
   return (
-    <div className="mt-12 pb-10 relative">
-      <h3 className="text-center mb-8 font-bold text-sm md:text-lg">
-        Trusted by leading companies
-      </h3>
+    <div className="mt-16 relative">
+      {/* Header */}
+      <div className="text-center mb-12">
+        <div className="flex items-center justify-center gap-2 mb-3">
+          <Building2 className="w-5 h-5 text-primary-75" />
+          <h3 className="font-vietnam font-semibold text-grey-20 text-sm md:text-base">
+            OUR TRUSTED PARTNERS
+          </h3>
+        </div>
+        <p className="text-grey-35 text-lg md:text-xl">
+          Join the ranks of students learning from industry leaders
+        </p>
+      </div>
 
-      <div className="relative w-full overflow-hidden">
+      {/* Partners Slider */}
+      <div className="relative w-full overflow-hidden bg-light-97 py-8">
         {/* Gradient Masks */}
-        <div className="absolute left-0 top-0 h-full w-24 bg-gradient-to-r from-white to-transparent z-10"></div>
-        <div className="absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-white to-transparent z-10"></div>
+        <div className="absolute left-0 top-0 h-full w-32 bg-gradient-to-r from-light-97 to-transparent z-10"></div>
+        <div className="absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-light-97 to-transparent z-10"></div>
 
         {/* Scrolling Container */}
         <div
-          className="flex gap-8 py-4 w-max animate-scroll"
+          className="flex gap-12 py-4 w-max animate-marquee"
           style={{
             animationPlayState: isHovered ? "paused" : "running",
           }}
@@ -46,33 +53,32 @@ export default function PartnersLogo() {
           onMouseLeave={() => setIsHovered(false)}
         >
           {duplicatedPartners.map((partner, idx) => (
-            <div
-              key={idx}
-              className="w-40 h-20 relative flex items-center justify-center group rounded-lg bg-white"
-            >
-              <Image
-                src={partner.src}
-                alt={partner.alt}
-                fill
-                className="object-contain p-4 transition-all duration-300 filter grayscale hover:grayscale-0"
-                sizes="160px"
-              />
+            <div key={idx} className="relative w-48 h-24 group">
+              <div className="absolute inset-0 bg-white rounded-xl shadow-sm transition-all duration-300 group-hover:shadow-md">
+                <Image
+                  src={partner.src}
+                  alt={partner.alt}
+                  fill
+                  className="object-contain p-6 transition-all duration-300 filter grayscale hover:grayscale-0"
+                  sizes="192px"
+                />
+              </div>
             </div>
           ))}
         </div>
       </div>
 
       <style jsx global>{`
-        @keyframes scroll {
+        @keyframes marquee {
           0% {
             transform: translateX(0);
           }
           100% {
-            transform: translateX(-50%);
+            transform: translateX(calc(-50% - 24px));
           }
         }
-        .animate-scroll {
-          animation: scroll 20s linear infinite;
+        .animate-marquee {
+          animation: marquee 30s linear infinite;
         }
       `}</style>
     </div>

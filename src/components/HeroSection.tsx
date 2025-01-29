@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight, Sparkles, BookOpen, Target } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import PartnersLogo from "./PartnersLogo";
+// import PartnersLogo from "./PartnersLogo";
 
 export default function Hero() {
   return (
@@ -80,9 +80,6 @@ export default function Hero() {
           {/* Right Image */}
           <div className="relative w-full">
             <div className="relative w-full h-[400px] md:h-[600px]">
-              {/* Background decorative element */}
-              <div className="absolute w-[650px] inset-0 bg-gradient-to-br from-primary-95 to-primary-99 rounded-3xl transform -rotate-2 p-5" />
-
               {/* Main image */}
               <div className="absolute inset-0 transform rotate-2">
                 <div className="relative w-full h-full">
@@ -95,7 +92,6 @@ export default function Hero() {
                       borderRadius: "24px",
                     }}
                     priority
-                    className="shadow-lg"
                   />
                 </div>
               </div>
@@ -104,9 +100,9 @@ export default function Hero() {
         </div>
 
         {/* Partners Section */}
-        <div className="mt-16 md:mt-20">
+        {/* <div className="mt-16 md:mt-20">
           <PartnersLogo />
-        </div>
+        </div> */}
       </div>
     </section>
   );

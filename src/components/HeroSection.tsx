@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Hero() {
   return (
-    <section className="relative bg-light-99 overflow-hidden">
+    <section className="relative bg-white overflow-hidden">
       {/* Decorative background elements */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-20 w-72 h-72 bg-primary-95 rounded-full opacity-20 blur-3xl" />
@@ -84,7 +84,7 @@ export default function Hero() {
               <div className="absolute inset-0 transform rotate-2">
                 <div className="relative w-full h-full">
                   <Image
-                    src="/home/hero-3.png"
+                    src="/home/hero.png"
                     alt="Student learning online"
                     fill
                     style={{

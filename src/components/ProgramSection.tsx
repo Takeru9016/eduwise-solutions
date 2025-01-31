@@ -16,6 +16,7 @@ const programs = [
   },
   {
     title: "Professional Certification",
+    subtitle: "100% Job Guarantee",
     description:
       "We provide professional courses with 100% Job Guarantee in - IT JOBS and NON-IT JOBS.",
     imageUrl: "/home/professional.png",
@@ -23,6 +24,7 @@ const programs = [
   },
   {
     title: "Certification Programme",
+    subtitle: "Get Certified",
     description:
       "Digital marketing, Trading, Cybersecurity, Ethical Hacking, Data Science, Web Development, MERN Stack",
     imageUrl: "/home/certification.png",
@@ -89,12 +91,12 @@ export default function Programs() {
 
                   {/* Call to Action */}
                   <div className="pt-4">
-                    <Link href={"/contact"}>
+                    <Link href={program.link}>
                       <Button
                         variant="link"
                         className="text-primary-75 hover:text-primary-70 p-0 h-auto font-medium group-hover:gap-3 flex items-center gap-2 transition-all duration-300"
                       >
-                        Enquire Now{" "}
+                        Know More{" "}
                         <ArrowRight
                           size={18}
                           className="transition-transform duration-300 group-hover:translate-x-1"

@@ -1,3 +1,4 @@
+import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -10,6 +11,8 @@ import {
   BrainCircuit,
   MessageCircle,
   Briefcase,
+  CheckCircle2,
+  ArrowRight,
 } from "lucide-react";
 
 const features = [
@@ -39,58 +42,169 @@ const features = [
 
 export default function MScinCCPage() {
   return (
-    <main className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <section className="py-12 md:py-16 lg:py-20 bg-primary-99">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <Badge className="mb-4 bg-primary-75">Masters Program</Badge>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-vietnam font-bold text-grey-15 mb-6">
+    <main className="min-h-screen bg-light-97">
+      {/* Hero Section - Modernized with gradient and pattern */}
+      <section className="relative py-16 lg:py-24 bg-gradient-to-br from-primary-99 to-primary-95 overflow-hidden">
+        <div className="absolute inset-0 bg-grid-pattern opacity-10" />
+        <div className="container relative mx-auto px-4">
+          <div className="max-w-4xl">
+            <Badge className="mb-6 bg-primary-75 hover:bg-primary-80 transition-colors">
+              Masters Program
+            </Badge>
+            <h1 className="text-4xl lg:text-6xl font-vietnam font-bold text-grey-15 mb-8">
               MSc in Cloud Computing
             </h1>
-            <div className="flex flex-wrap gap-4 text-grey-35">
-              <div className="flex items-center gap-2">
-                <Clock className="w-5 h-5" />
-                <span>12 Months</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <GraduationCap className="w-5 h-5" />
-                <span>Advanced IIT certification</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Building className="w-5 h-5" />
-                <span>Assured Placement</span>
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <Card className="bg-white/80 backdrop-blur border-none">
+                <CardContent className="p-6 flex items-center gap-3">
+                  <Clock className="w-6 h-6 text-primary-75" />
+                  <div>
+                    <p className="font-medium text-grey-20">Duration</p>
+                    <p className="text-grey-35">12 Months</p>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card className="bg-white/80 backdrop-blur border-none">
+                <CardContent className="p-6 flex items-center gap-3">
+                  <GraduationCap className="w-6 h-6 text-primary-75" />
+                  <div>
+                    <p className="font-medium text-grey-20">Certification</p>
+                    <p className="text-grey-35">IIT Advanced</p>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card className="bg-white/80 backdrop-blur border-none">
+                <CardContent className="p-6 flex items-center gap-3">
+                  <Building className="w-6 h-6 text-primary-75" />
+                  <div>
+                    <p className="font-medium text-grey-20">Placement</p>
+                    <p className="text-grey-35">100% Assured</p>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Main Content */}
-      <section className="py-12">
+      {/* Main Content - Redesigned with better hierarchy */}
+      <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Left Column - Reordered Content */}
-            <div className="lg:col-span-2">
-              {/* Key Features - Moved to bottom */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {features.map((feature, index) => (
-                  <Card key={index} className="border-none shadow-lg">
-                    <CardContent className="p-6">
-                      <feature.icon className="w-10 h-10 text-primary-75 mb-4" />
-                      <h3 className="text-xl font-vietnam font-semibold text-grey-20 mb-2">
-                        {feature.title}
-                      </h3>
-                      <p className="text-grey-35">{feature.description}</p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-
-              {/* Program Requirements - Moved to top */}
-              <Card className="border-none shadow-lg mb-8">
+            {/* Left Column */}
+            <div className="lg:col-span-2 space-y-8">
+              {/* Program Overview */}
+              <Card className="border-none shadow-lg">
                 <CardHeader>
                   <CardTitle className="text-2xl font-vietnam">
+                    Program Overview
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {features.map((feature, index) => (
+                      <div key={index} className="flex gap-4">
+                        <div className="w-12 h-12 rounded-xl bg-primary-99 flex items-center justify-center flex-shrink-0">
+                          <feature.icon className="w-6 h-6 text-primary-75" />
+                        </div>
+                        <div>
+                          <h3 className="font-vietnam font-semibold text-grey-20 mb-2">
+                            {feature.title}
+                          </h3>
+                          <p className="text-grey-35">{feature.description}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Program Highlights - Modernized */}
+              <Card className="border-none shadow-lg">
+                <CardHeader>
+                  <CardTitle className="text-2xl font-vietnam">
+                    Program Highlights
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {[
+                      "Masters Degree with Advanced IIT certification",
+                      "Global career opportunities across 60+ countries",
+                      "High-quality learning material",
+                      "Extra mile placement support",
+                      "Unlimited live doubt support",
+                      "Industry-aligned curriculum",
+                    ].map((highlight, index) => (
+                      <div key={index} className="flex items-start gap-3">
+                        <CheckCircle2 className="w-5 h-5 text-primary-75 mt-1" />
+                        <span className="text-grey-35">{highlight}</span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Learning Experience - Redesigned Grid */}
+              <Card className="border-none shadow-lg">
+                <CardHeader>
+                  <CardTitle className="text-2xl font-vietnam">
+                    Learning Experience
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {[
+                      {
+                        icon: Users,
+                        title: "Expert-Led Sessions",
+                        description:
+                          "Learn directly from industry veterans and IIT faculty",
+                      },
+                      {
+                        icon: MessageCircle,
+                        title: "Interactive Learning",
+                        description:
+                          "Engage in live discussions and doubt-clearing sessions",
+                      },
+                      {
+                        icon: BookOpen,
+                        title: "Comprehensive Material",
+                        description:
+                          "Access high-quality content developed with top institutions",
+                      },
+                      {
+                        icon: BrainCircuit,
+                        title: "Practical Projects",
+                        description:
+                          "Work on real-world Cloud Computing projects",
+                      },
+                    ].map((item, index) => (
+                      <div key={index} className="p-6 bg-primary-99 rounded-xl">
+                        <div className="flex gap-4">
+                          <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center">
+                            <item.icon className="w-6 h-6 text-primary-75" />
+                          </div>
+                          <div>
+                            <h3 className="font-vietnam font-semibold text-grey-20 mb-2">
+                              {item.title}
+                            </h3>
+                            <p className="text-grey-35">{item.description}</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Right Sidebar - Enhanced */}
+            <div className="space-y-6">
+              {/* Program Requirements - Modernized */}
+              <Card className="border-none shadow-lg">
+                <CardHeader>
+                  <CardTitle className="text-xl font-vietnam">
                     Program Requirements
                   </CardTitle>
                 </CardHeader>
@@ -98,9 +212,9 @@ export default function MScinCCPage() {
                   <div className="space-y-6">
                     <div>
                       <h4 className="font-semibold text-grey-20 mb-3">
-                        Eligibility Criteria
+                        Eligibility
                       </h4>
-                      <ul className="space-y-2">
+                      <ul className="space-y-3">
                         {[
                           "Bachelor's degree in relevant field",
                           "Basic programming knowledge",
@@ -114,212 +228,55 @@ export default function MScinCCPage() {
                         ))}
                       </ul>
                     </div>
-
-                    <div className="bg-primary-99 p-4 rounded-lg">
-                      <h4 className="font-semibold text-grey-20 mb-3">
-                        Admission Process
-                      </h4>
-                      <ul className="space-y-2">
-                        {[
-                          "Online application submission",
-                          "Document verification",
-                          "Technical assessment",
-                          "Personal interview",
-                        ].map((item, index) => (
-                          <li key={index} className="flex items-center gap-3">
-                            <div className="w-2 h-2 rounded-full bg-primary-75" />
-                            <span className="text-grey-35">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
                   </div>
                 </CardContent>
               </Card>
 
-              {/* Program Highlights - Moved to middle */}
-              <Card className="border-none shadow-lg mb-8">
-                <CardHeader>
-                  <CardTitle className="text-2xl font-vietnam">
-                    Program Highlights
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-4">
-                    {[
-                      "Masters Degree with Advanced IIT certification",
-                      "Global career opportunities across 60+ countries, including the UK, US, and Canada",
-                      "High-quality learning material created with ECTS-accredited university, Woolf, and E&ICT Academy, IIT Guwahati",
-                      "Extra mile placement support with dedicated mentorship",
-                      "Unlimited live doubt support throughout the program",
-                    ].map((highlight, index) => (
-                      <li key={index} className="flex items-start gap-3">
-                        <BrainCircuit className="w-5 h-5 text-primary-75 mt-1 flex-shrink-0" />
-                        <span className="text-grey-35">{highlight}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Right Sidebar - Unchanged */}
-            <div className="space-y-6">
-              {/* Course Details */}
+              {/* Career Support */}
               <Card className="border-none shadow-lg">
                 <CardHeader>
                   <CardTitle className="text-xl font-vietnam">
-                    Course Features
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-4">
-                    {[
-                      { icon: Clock, text: "12 months intensive program" },
-                      {
-                        icon: Users,
-                        text: "Limited batch size for personalized attention",
-                      },
-                      { icon: Building, text: "Industry-aligned curriculum" },
-                      { icon: MessageCircle, text: "50+ Mentorship sessions" },
-                      { icon: Briefcase, text: "Dedicated placement support" },
-                      { icon: BookOpen, text: "Comprehensive study materials" },
-                    ].map((item, index) => (
-                      <li key={index} className="flex items-center gap-3">
-                        <item.icon className="w-5 h-5 text-primary-75" />
-                        <span className="text-grey-35">{item.text}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-
-              {/* Certifications */}
-              <Card className="border-none shadow-lg">
-                <CardHeader>
-                  <CardTitle className="text-xl font-vietnam">
-                    Certifications
+                    Career Support
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    <div className="p-4 bg-primary-99 rounded-lg">
-                      <h4 className="font-semibold text-grey-20 mb-2">
-                        IIT Advanced Certification
-                      </h4>
-                      <p className="text-grey-35">
-                        Receive advanced certification from IIT Guwahati,
-                        enhancing your credibility in the industry.
-                      </p>
-                    </div>
-                    <div className="p-4 bg-primary-99 rounded-lg">
-                      <h4 className="font-semibold text-grey-20 mb-2">
-                        Global Recognition
-                      </h4>
-                      <p className="text-grey-35">
-                        Equivalent to an MS degree from US institutions,
-                        recognized across 60+ countries.
-                      </p>
-                    </div>
+                    {[
+                      {
+                        icon: Briefcase,
+                        title: "Placement Assistance",
+                        description: "Dedicated team for career guidance",
+                      },
+                      {
+                        icon: Users,
+                        title: "Mentorship",
+                        description: "1:1 sessions with industry experts",
+                      },
+                      {
+                        icon: Globe2,
+                        title: "Global Opportunities",
+                        description: "Access to international job markets",
+                      },
+                    ].map((item, index) => (
+                      <div
+                        key={index}
+                        className="flex gap-4 p-4 bg-primary-99 rounded-lg"
+                      >
+                        <item.icon className="w-6 h-6 text-primary-75" />
+                        <div>
+                          <h4 className="font-semibold text-grey-20">
+                            {item.title}
+                          </h4>
+                          <p className="text-grey-35 text-sm">
+                            {item.description}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                </CardContent>
-              </Card>
-
-              {/* Placement Support */}
-              <Card className="border-none shadow-lg">
-                <CardHeader>
-                  <CardTitle className="text-xl font-vietnam">
-                    Placement Support
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3">
-                    <li className="flex items-start gap-3">
-                      <Briefcase className="w-5 h-5 text-primary-75 mt-1" />
-                      <span className="text-grey-35">
-                        Dedicated placement team for career guidance
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <Users className="w-5 h-5 text-primary-75 mt-1" />
-                      <span className="text-grey-35">
-                        Industry expert mentorship sessions
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <Building className="w-5 h-5 text-primary-75 mt-1" />
-                      <span className="text-grey-35">
-                        Access to global job opportunities
-                      </span>
-                    </li>
-                  </ul>
                 </CardContent>
               </Card>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Learning Experience Section - Unchanged */}
-      <section className="py-12 bg-light-97">
-        <div className="container mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-vietnam font-bold text-grey-15 mb-8 text-center">
-            Learning Experience
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                icon: Users,
-                title: "Expert-Led Sessions",
-                description:
-                  "Learn directly from industry veterans and IIT faculty",
-              },
-              {
-                icon: MessageCircle,
-                title: "Interactive Learning",
-                description:
-                  "Engage in live discussions and doubt-clearing sessions",
-              },
-              {
-                icon: BookOpen,
-                title: "Comprehensive Material",
-                description:
-                  "Access high-quality content developed with top institutions",
-              },
-              {
-                icon: BrainCircuit,
-                title: "Practical Projects",
-                description: "Work on real-world AI and Data Science projects",
-              },
-              {
-                icon: Briefcase,
-                title: "Career Support",
-                description:
-                  "Get placement assistance and interview preparation",
-              },
-              {
-                icon: Globe2,
-                title: "Global Opportunities",
-                description:
-                  "Access to international job markets and networking",
-              },
-            ].map((item, index) => (
-              <Card key={index} className="border-none shadow-lg">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-lg bg-primary-99 flex items-center justify-center">
-                      <item.icon className="w-6 h-6 text-primary-75" />
-                    </div>
-                    <div>
-                      <h3 className="font-vietnam font-semibold text-grey-20 mb-2">
-                        {item.title}
-                      </h3>
-                      <p className="text-grey-35">{item.description}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
           </div>
         </div>
       </section>

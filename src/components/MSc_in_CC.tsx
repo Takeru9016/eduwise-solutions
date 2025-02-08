@@ -12,7 +12,6 @@ import {
   MessageCircle,
   Briefcase,
   CheckCircle2,
-  ArrowRight,
 } from "lucide-react";
 
 const features = [

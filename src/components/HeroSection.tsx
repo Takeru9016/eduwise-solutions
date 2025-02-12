@@ -33,10 +33,20 @@ export default function Hero() {
             </h1>
 
             {/* Description */}
-            <p className="text-grey-35 text-lg md:text-xl mb-8 leading-relaxed">
-              Whether you&apos;re interested in IT Jobs, MBA programs or
-              professional courses that get you job-ready, we&apos;re here to
-              support you every step of the way!
+            <p className="text-gray-600 text-lg md:text-xl mb-8 leading-relaxed">
+              Struggling to find the{" "}
+              <span className="text-primary-75 font-semibold animate-bounce inline-block">
+                RIGHT JOB
+              </span>{" "}
+              or the{" "}
+              <span className="text-primary-75 font-semibold animate-bounce inline-block">
+                PERFECT PROGRAM
+              </span>{" "}
+              to upskill yourself? 🤔
+              <br />
+              <span className="bg-gradient-to-r from-primary-50 to-primary-80 text-transparent bg-clip-text font-semibold">
+                We're here to guide you every step of the way! 🚀
+              </span>
             </p>
 
             {/* Feature Points */}

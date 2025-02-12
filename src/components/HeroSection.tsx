@@ -45,7 +45,7 @@ export default function Hero() {
               to upskill yourself? 🤔
               <br />
               <span className="bg-gradient-to-r from-primary-50 to-primary-80 text-transparent bg-clip-text font-semibold">
-                We're here to guide you every step of the way! 🚀
+                We&apos;re here to guide you every step of the way! 🚀
               </span>
             </p>
 

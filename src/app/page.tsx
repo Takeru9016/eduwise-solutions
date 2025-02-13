@@ -15,8 +15,8 @@ export default function Home() {
       <Navbar />
       <main className="min-h-screen">
         <HeroSection />
-        <BenefitSection />
         <ProgramSection />
+        <BenefitSection />
         <Testimonials />
         <FAQs />
         <CTASection />

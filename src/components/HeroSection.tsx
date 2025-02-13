@@ -31,21 +31,23 @@ export default function Hero() {
               </span>{" "}
               <span className="text-grey-15">About What&apos;s Next?</span>
             </h1>
+            <br />
 
             {/* Description */}
             <p className="text-gray-600 text-lg md:text-xl mb-8 leading-relaxed">
-              Struggling to find the{" "}
-              <span className="text-primary-75 font-semibold animate-bounce inline-block">
-                RIGHT JOB
-              </span>{" "}
-              or the{" "}
-              <span className="text-primary-75 font-semibold animate-bounce inline-block">
-                PERFECT PROGRAM
-              </span>{" "}
-              to upskill yourself? 🤔
-              <br />
-              <span className="bg-gradient-to-r from-primary-50 to-primary-80 text-transparent bg-clip-text font-semibold">
-                We&apos;re here to guide you every step of the way! 🚀
+              <span className="block mb-4">
+                Looking to elevate your career with{" "}
+                <span className="bg-primary-99 px-2 py-1 rounded-md text-gray-800 font-medium">
+                  THE RIGHT JOB
+                </span>{" "}
+                or enhance your skills with the{" "}
+                <span className="bg-primary-99 px-2 py-1 rounded-md text-gray-800 font-medium">
+                  PERFECT PROGRAM
+                </span>
+              </span>
+
+              <span className="block mt-6 text-gray-700">
+                We're here to guide you every step of the way! 🚀
               </span>
             </p>
 

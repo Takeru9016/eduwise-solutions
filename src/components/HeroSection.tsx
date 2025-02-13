@@ -47,7 +47,7 @@ export default function Hero() {
               </span>
 
               <span className="block mt-6 text-gray-700">
-                We're here to guide you every step of the way! 🚀
+                We&apos;re here to guide you every step of the way! 🚀
               </span>
             </p>
 

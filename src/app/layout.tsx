@@ -4,6 +4,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 
 import "./globals.css";
+import { Toaster } from "sonner";
 
 const beVietnamPro = Be_Vietnam_Pro({
   subsets: ["latin"],
@@ -45,6 +46,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${beVietnamPro.variable} font-vietnam antialiased`}>
         {children}
+        <Toaster position="top-center" richColors />
         <SpeedInsights />
         <Analytics />
       </body>

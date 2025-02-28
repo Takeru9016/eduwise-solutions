@@ -280,7 +280,7 @@ export default function ContactUs() {
                               {subjects.map((subject) => (
                                 <SelectItem
                                   key={subject.value}
-                                  value={subject.value}
+                                  value={subject.label}
                                   className="text-grey-35"
                                 >
                                   {subject.label}

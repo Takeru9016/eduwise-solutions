@@ -13,6 +13,7 @@ import {
   SheetHeader,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import BookButton from "./BookButton";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -67,7 +68,7 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-8">
+            <div className="hidden lg:flex items-center space-x-6">
               {navLinks.map((link) => (
                 <div key={link.label} className="relative group">
                   <Link
@@ -102,6 +103,12 @@ export default function Navbar() {
                   )}
                 </div>
               ))}
+
+              {/* Add BookButton to desktop menu */}
+              <div className="ml-2">
+                <BookButton />
+              </div>
+
               <Link href="/contact">
                 <Button
                   variant="default"
@@ -166,6 +173,7 @@ export default function Navbar() {
                         )}
                       </div>
                     ))}
+                    <BookButton />
                     <Link href="/contact">
                       <Button
                         variant="default"
@@ -180,11 +188,11 @@ export default function Navbar() {
                   {/* Mobile Contact Info */}
                   <div className="mt-8 pt-8 border-t border-light-90 space-y-4">
                     <a
-                      href="tel:+911234567890"
+                      href="tel:+9160093 92581"
                       className="flex items-center gap-2 text-grey-35 hover:text-primary-75 transition-colors"
                     >
                       <Phone size={16} className="text-primary-75" />
-                      <span>+91 1234 567 890</span>
+                      <span>+91 60093 92581</span>
                     </a>
                     <a
                       href="mailto:admin@eduwise.solutions"

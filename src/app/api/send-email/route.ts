@@ -123,9 +123,21 @@ export async function POST(request: NextRequest) {
       <div style="background-color: #f9f9f9; padding: 20px; border-radius: 5px; margin: 25px 0;">
       <h2 style="margin-top: 0;">Session Details:</h2>
       <ul>
+      <li><strong>Your Email:</strong> ${email}</li>
+      <li><strong>Your Phone Number:</strong> ${phoneNumber}</li>
       <li><strong>Date:</strong> ${formattedDate}</li>
-      <li><strong>Time:</strong> ${sessionTime}</li>
+      <li><strong>Time Slot Selected:</strong> ${sessionTime}</li>
       <li><strong>Course Interest:</strong> ${course}</li>
+      ${
+        message
+          ? `
+        <h2>Additional Message:</h2>
+        <p style="padding: 10px; background-color: #f9f9f9; border-left: 4px solid #ddd">
+        ${message}
+        </p>
+        `
+          : ""
+      }
       </ul>
       </div>
       

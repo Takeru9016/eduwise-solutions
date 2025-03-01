@@ -2,14 +2,16 @@
 
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { CalendarIcon, Clock, Check } from "lucide-react";
-import { format, addDays } from "date-fns";
+import { format } from "date-fns";
 import { toast } from "sonner";
 import ReactPhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 
+import { cn } from "@/lib/utils";
 import {
   Dialog,
   DialogContent,
@@ -42,16 +44,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
-import { cn } from "@/lib/utils";
-import Link from "next/link";
-
-// Define CountryData interface for react-phone-input-2
-interface CountryData {
-  name: string;
-  dialCode: string;
-  countryCode: string;
-  format?: string;
-}
 
 const formSchema = z.object({
   fullName: z.string().min(2, "Full name is required"),
@@ -140,9 +132,6 @@ export default function BookFormDialog({
 
   async function onSubmit(values: FormValues) {
     try {
-      //  Log the values being sent to help with debugging
-      // console.log("Submitting form with values:", values);
-
       const response = await fetch("/api/send-email", {
         method: "POST",
         headers: {
@@ -155,28 +144,37 @@ export default function BookFormDialog({
         }),
       });
 
-      // For debugging - log the response status
-      // console.log("Response status:", response.status);
-
       const data = await response.json();
-      // console.log("Response data:", data);
 
       if (!response.ok) {
         throw new Error(data.error || "Failed to send email");
       }
 
+      // Revamped toast notification - success
       toast.success("Session booked successfully!", {
         description: "Check your email for confirmation details.",
+        duration: 5000,
+        className: "bg-white border border-gray-100 shadow-lg rounded-lg",
+        descriptionClassName: "text-gray-600 text-sm",
+        position: "bottom-right",
+        icon: <Check className="h-5 w-5 text-green-500" />,
       });
+
       form.reset();
       onOpenChange(false);
     } catch (error) {
       console.error("Booking error:", error);
+
+      // Revamped toast notification - error
       toast.error("Booking failed", {
         description:
           error instanceof Error
             ? error.message
             : "There was a problem booking your session. Please try again.",
+        duration: 5000,
+        className: "bg-white border border-gray-100 shadow-lg rounded-lg",
+        descriptionClassName: "text-gray-600 text-sm",
+        position: "bottom-right",
       });
     }
   }
@@ -190,7 +188,7 @@ export default function BookFormDialog({
           </DialogTitle>
           <DialogDescription className="text-base text-gray-600">
             Whether to upskill or for any other query, please drop us a line and
-            we'll be happy to get back to you.
+            we&apos;ll be happy to get back to you.
           </DialogDescription>
         </DialogHeader>
 
@@ -291,14 +289,22 @@ export default function BookFormDialog({
                           <SelectValue placeholder="Select an option" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
+                      <SelectContent
+                        className="max-w-[400px] w-fit"
+                        align="start"
+                        alignOffset={0}
+                        sideOffset={8}
+                        avoidCollisions={true}
+                      >
                         {subjects.map((subject) => (
                           <SelectItem
                             key={subject.value}
                             value={subject.label}
                             className="text-grey-35"
                           >
-                            {subject.label}
+                            <span className="truncate block">
+                              {subject.label}
+                            </span>
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -460,7 +466,7 @@ export default function BookFormDialog({
                     </FormControl>
                     <div className="space-y-1 leading-none">
                       <FormLabel className="text-sm font-normal">
-                        I want to receive updates directly on WhatsApp.
+                        I want to receive updates on WhatsApp also.
                       </FormLabel>
                     </div>
                   </FormItem>
@@ -481,14 +487,15 @@ export default function BookFormDialog({
                     </FormControl>
                     <div className="space-y-1 leading-none">
                       <FormLabel className="text-sm font-normal">
-                        I agree to Eduwise Solutions{" "}
+                        I agree to{" "}
                         <Link
                           href="/terms"
-                          className="text-primary-600 hover:underline"
+                          className="text-primary-70 hover:underline"
                           target="_blank"
                         >
-                          Terms and Conditions.
-                        </Link>
+                          Terms and Conditions
+                        </Link>{" "}
+                        applied by Eduwise Solutions.
                       </FormLabel>
                       <FormMessage />
                     </div>

@@ -46,7 +46,24 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${beVietnamPro.variable} font-vietnam antialiased`}>
         {children}
-        <Toaster position="top-center" richColors />
+        <Toaster
+          richColors
+          position="top-center"
+          toastOptions={{
+            classNames: {
+              toast:
+                "group toast group flex w-full items-center border-l-4 border-green-500 p-4 pr-10 shadow-lg",
+              title: "font-medium text-gray-900",
+              description: "text-sm text-gray-600 mt-1",
+              actionButton:
+                "bg-gray-900 text-white px-3 py-1 rounded-md text-sm",
+              cancelButton:
+                "bg-gray-200 text-gray-800 px-3 py-1 rounded-md ml-2 text-sm",
+              error: "border-l-4 border-red-500",
+              success: "border-l-4 border-green-500",
+            },
+          }}
+        />
         <SpeedInsights />
         <Analytics />
       </body>

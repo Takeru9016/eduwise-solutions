@@ -37,11 +37,11 @@ export default function Hero() {
             <p className="text-gray-600 text-lg md:text-xl mb-8 leading-relaxed">
               <span className="block mb-4">
                 Looking to elevate your career with{" "}
-                <span className="bg-primary-99 px-2 py-1 rounded-md text-gray-800 font-medium">
+                <span className="bg-primary-97 px-2 py-1 rounded-md text-gray-800 font-medium">
                   THE RIGHT JOB
                 </span>{" "}
                 or enhance your skills with the{" "}
-                <span className="bg-primary-99 px-2 py-1 rounded-md text-gray-800 font-medium">
+                <span className="bg-primary-97 px-2 py-1 rounded-md text-gray-800 font-medium">
                   PERFECT PROGRAM
                 </span>
               </span>

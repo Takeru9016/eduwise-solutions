@@ -505,7 +505,7 @@ export default function BookFormDialog({
             </div>
             <Button
               type="submit"
-              className="w-full bg-black text-white hover:bg-gray-800"
+              className="w-full bg-primary-75 text-white hover:bg-gray-800"
             >
               Submit
             </Button>

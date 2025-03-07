@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, Phone, Mail, ChevronDown } from "lucide-react";
+import { Menu, Phone, Mail } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {

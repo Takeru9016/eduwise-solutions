@@ -168,9 +168,9 @@ export default function MBAPage() {
               Develop leadership skills, strategic thinking, and business acumen
               through our industry-aligned curriculum
             </p>
-            <Button className="bg-primary-75 hover:bg-primary-70 text-white px-8 py-6 text-lg">
+            {/* <Button className="bg-primary-75 hover:bg-primary-70 text-white px-8 py-6 text-lg">
               Download Brochure
-            </Button>
+            </Button> */}
           </div>
         </div>
       </section>

@@ -18,7 +18,7 @@ const mastersCourses = [
     title: "MBA",
     degree: "MASTER OF BUSINESS ADMINISTRATION",
     duration: "24 Months",
-    image: "/courses/mba.png",
+    // image: "/courses/mba.png",
     link: "/masters/mba",
     highlights: ["Industry mentorship", "Live projects", "Global exposure"],
   },
@@ -26,7 +26,7 @@ const mastersCourses = [
     title: "MSc",
     degree: "MASTER IN ARTIFICIAL INTELLIGENCE & DATA SCIENCE",
     duration: "24 Months",
-    image: "/courses/aids.jpg",
+    // image: "/courses/aids.jpg",
     link: "/masters/msc-in-ds",
     highlights: [
       "Advanced AI tools",
@@ -38,7 +38,7 @@ const mastersCourses = [
     title: "MSc",
     degree: "MASTER IN CLOUD COMPUTING",
     duration: "24 Months",
-    image: "/courses/cloud.jpeg",
+    // image: "/courses/cloud.jpeg",
     isNew: true,
     link: "/masters/msc-in-cloud",
     highlights: [
@@ -169,7 +169,7 @@ export default function MastersPage() {
             {mastersCourses.map((course, index) => (
               <Link href={course.link} key={index} className="group">
                 <Card className="flex flex-col h-full overflow-hidden hover:shadow-lg transition-all duration-300 border border-gray-100">
-                  <div className="relative h-48 overflow-hidden">
+                  {/* <div className="relative h-48 overflow-hidden">
                     <Image
                       src={course.image}
                       alt={course.title}
@@ -183,7 +183,7 @@ export default function MastersPage() {
                         </span>
                       </div>
                     )}
-                  </div>
+                  </div> */}
 
                   <CardContent className="flex flex-col flex-grow p-6">
                     <div className="flex items-center gap-2 mb-4">

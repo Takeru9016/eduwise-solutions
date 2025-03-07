@@ -7,20 +7,20 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 const courseCategories = [
-  {
-    title: "Master's Programme",
-    subtitle: "Earn while you Learn",
-    description:
-      "We provide various Online Master's program such as MBA, MS (Data Science) & Cloud Computing, MCA.",
-    images: ["/courses/mba.png", "/courses/aids.jpg", "/courses/cloud.jpeg"],
-    viewLink: "/masters",
-    icon: Trophy,
-    stats: [
-      { label: "Duration", value: "24 Months" },
-      { label: "Placement", value: "100%" },
-      { label: "Students", value: "5000+" },
-    ],
-  },
+  // {
+  //   title: "Master's Programme",
+  //   subtitle: "Earn while you Learn",
+  //   description:
+  //     "We provide various Online Master's program such as MBA, MS (Data Science) & Cloud Computing, MCA.",
+  //   images: ["/courses/mba.png", "/courses/aids.jpg", "/courses/cloud.jpeg"],
+  //   viewLink: "/masters",
+  //   icon: Trophy,
+  //   stats: [
+  //     { label: "Duration", value: "24 Months" },
+  //     { label: "Placement", value: "100%" },
+  //     { label: "Students", value: "5000+" },
+  //   ],
+  // },
   {
     title: "Professional Certification",
     subtitle: "100% Job Guarantee",
@@ -39,24 +39,24 @@ const courseCategories = [
       { label: "Companies", value: "100+" },
     ],
   },
-  {
-    title: "Certification Programme",
-    subtitle: "Industry-Ready Skills",
-    description:
-      "Digital marketing, Trading, Cybersecurity, Ethical Hacking, Data Science, Web Development, MERN Stack",
-    images: [
-      "/courses/mern.png",
-      "/courses/ethical.png",
-      "/courses/trading.jpg",
-    ],
-    viewLink: "/certification",
-    icon: Globe,
-    stats: [
-      { label: "Duration", value: "3 Months" },
-      { label: "Courses", value: "20+" },
-      { label: "Mentors", value: "50+" },
-    ],
-  },
+  // {
+  //   title: "Certification Programme",
+  //   subtitle: "Industry-Ready Skills",
+  //   description:
+  //     "Digital marketing, Trading, Cybersecurity, Ethical Hacking, Data Science, Web Development, MERN Stack",
+  //   images: [
+  //     "/courses/mern.png",
+  //     "/courses/ethical.png",
+  //     "/courses/trading.jpg",
+  //   ],
+  //   viewLink: "/certification",
+  //   icon: Globe,
+  //   stats: [
+  //     { label: "Duration", value: "3 Months" },
+  //     { label: "Courses", value: "20+" },
+  //     { label: "Mentors", value: "50+" },
+  //   ],
+  // },
 ];
 
 export default function CoursesPage() {

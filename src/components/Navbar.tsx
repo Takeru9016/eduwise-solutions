@@ -28,11 +28,11 @@ export default function Navbar() {
     {
       href: "/courses",
       label: "Courses",
-      children: [
-        { href: "/masters", label: "Master's Programme" },
-        { href: "/professional", label: "Professional Certification" },
-        { href: "/certification", label: "Certification Programme" },
-      ],
+      // children: [
+      //   { href: "/masters", label: "Master's Programme" },
+      //   { href: "/professional", label: "Professional Certification" },
+      //   { href: "/certification", label: "Certification Programme" },
+      // ],
     },
     { href: "/about", label: "About Us" },
   ];
@@ -77,16 +77,16 @@ export default function Navbar() {
                       ${pathname === link.href ? "text-primary-75" : ""}`}
                   >
                     {link.label}
-                    {link.children && (
+                    {/* {link.children && (
                       <ChevronDown
                         size={16}
                         className="group-hover:rotate-180 transition-transform duration-200"
                       />
-                    )}
+                    )} */}
                   </Link>
 
                   {/* Dropdown Menu */}
-                  {link.children && (
+                  {/* {link.children && (
                     <div className="absolute top-full left-0 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                       <div className="bg-white rounded-lg shadow-lg border border-light-90 min-w-[240px] py-2">
                         {link.children.map((child) => (
@@ -100,7 +100,7 @@ export default function Navbar() {
                         ))}
                       </div>
                     </div>
-                  )}
+                  )} */}
                 </div>
               ))}
 
@@ -151,13 +151,13 @@ export default function Navbar() {
                           href={link.href}
                           className={`text-grey-30 hover:text-primary-75 transition-colors text-lg flex items-center justify-between
                             ${pathname === link.href ? "text-primary-75" : ""}`}
-                          onClick={() => !link.children && setIsOpen(false)}
+                          // onClick={() => !link.children && setIsOpen(false)}
                         >
                           {link.label}
-                          {link.children && <ChevronDown size={16} />}
+                          {/* {link.children && <ChevronDown size={16} />} */}
                         </Link>
 
-                        {link.children && (
+                        {/* {link.children && (
                           <div className="pl-4 space-y-2">
                             {link.children.map((child) => (
                               <Link
@@ -170,7 +170,7 @@ export default function Navbar() {
                               </Link>
                             ))}
                           </div>
-                        )}
+                        )} */}
                       </div>
                     ))}
                     <BookButton />

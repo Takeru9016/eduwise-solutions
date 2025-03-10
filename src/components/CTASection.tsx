@@ -1,10 +1,95 @@
 import Link from "next/link";
-import { ArrowRight, BookOpen, Target, Clock } from "lucide-react";
+import { ArrowRight, BookOpen, Target, Clock, LucideIcon } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 
+// Types
+interface FeatureItem {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+}
+
+interface CTAButton {
+  text: string;
+  href: string;
+  variant: "primary" | "secondary";
+  icon?: LucideIcon;
+}
+
+// Reusable components
+const FeatureCard = ({ icon: Icon, title, description }: FeatureItem) => (
+  <div className="flex items-start gap-3 bg-primary-99/50 p-4 rounded-lg">
+    <Icon className="w-6 h-6 text-primary-70 mt-1" />
+    <div>
+      <h3 className="font-semibold text-grey-20 mb-1">{title}</h3>
+      <p className="text-sm text-grey-45">{description}</p>
+    </div>
+  </div>
+);
+
+const CTAButton = ({ text, href, variant, icon: Icon }: CTAButton) => {
+  const isPrimary = variant === "primary";
+
+  return (
+    <Button
+      asChild
+      variant={isPrimary ? "default" : "outline"}
+      className={`
+        ${
+          isPrimary
+            ? "bg-primary-70 hover:bg-primary-75 text-white group"
+            : "border-primary-70 text-primary-70 hover:bg-primary-95/50"
+        } 
+        px-8 py-3 rounded-lg transition-all duration-300
+      `}
+    >
+      <Link href={href} className={isPrimary ? "flex items-center gap-2" : ""}>
+        {text}
+        {Icon && (
+          <Icon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+        )}
+      </Link>
+    </Button>
+  );
+};
+
 export default function CTASection() {
+  const features: FeatureItem[] = [
+    {
+      icon: BookOpen,
+      title: "Expert Curriculum",
+      description: "Industry-aligned learning paths",
+    },
+    {
+      icon: Clock,
+      title: "Flexible Learning",
+      description: "Learn on your schedule",
+    },
+  ];
+
+  const ctaButtons: CTAButton[] = [
+    {
+      text: "Start Your Journey",
+      href: "/contact",
+      variant: "primary",
+      icon: ArrowRight,
+    },
+    {
+      text: "Explore Programs",
+      href: "/courses",
+      variant: "secondary",
+    },
+  ];
+
   return (
     <section className="relative py-24 bg-gradient-to-br from-primary-99 to-white overflow-hidden">
+      {/* Subtle Background Decorations */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-primary-95 rounded-full opacity-10 blur-3xl" />
+        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-primary-90 rounded-full opacity-10 blur-3xl" />
+      </div>
+
       <div className="container relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Content Section */}
@@ -29,49 +114,27 @@ export default function CTASection() {
 
             {/* Key Features */}
             <div className="grid sm:grid-cols-2 gap-4">
-              {[
-                {
-                  icon: BookOpen,
-                  title: "Expert Curriculum",
-                  description: "Industry-aligned learning paths",
-                },
-                {
-                  icon: Clock,
-                  title: "Flexible Learning",
-                  description: "Learn on your schedule",
-                },
-              ].map(({ icon: Icon, title, description }) => (
-                <div
-                  key={title}
-                  className="flex items-start gap-3 bg-primary-99/50 p-4 rounded-lg"
-                >
-                  <Icon className="w-6 h-6 text-primary-70 mt-1" />
-                  <div>
-                    <h3 className="font-semibold text-grey-20 mb-1">{title}</h3>
-                    <p className="text-sm text-grey-45">{description}</p>
-                  </div>
-                </div>
+              {features.map((feature) => (
+                <FeatureCard
+                  key={feature.title}
+                  icon={feature.icon}
+                  title={feature.title}
+                  description={feature.description}
+                />
               ))}
             </div>
 
             {/* Call-to-Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button
-                asChild
-                className="bg-primary-70 hover:bg-primary-75 text-white px-8 py-3 rounded-lg group transition-all duration-300"
-              >
-                <Link href="/contact" className="flex items-center gap-2">
-                  Start Your Journey
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </Button>
-              <Button
-                variant="outline"
-                asChild
-                className="border-primary-70 text-primary-70 hover:bg-primary-95/50 px-8 py-3 rounded-lg"
-              >
-                <Link href="/courses">Explore Programs</Link>
-              </Button>
+              {ctaButtons.map((button) => (
+                <CTAButton
+                  key={button.text}
+                  text={button.text}
+                  href={button.href}
+                  variant={button.variant}
+                  icon={button.icon}
+                />
+              ))}
             </div>
           </div>
 
@@ -97,12 +160,6 @@ export default function CTASection() {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Subtle Background Decorations */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-primary-95 rounded-full opacity-10 blur-3xl" />
-        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-primary-90 rounded-full opacity-10 blur-3xl" />
       </div>
     </section>
   );

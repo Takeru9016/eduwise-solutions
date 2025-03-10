@@ -1,4 +1,4 @@
-import { CertificationPage, CTASection, Footer, Navbar } from "@/components";
+import { CertificationPage, Footer, Navbar } from "@/components";
 
 export default function CertificationProgram() {
   return (
@@ -6,7 +6,6 @@ export default function CertificationProgram() {
       <Navbar />
       <main className="min-h-screen">
         <CertificationPage />
-        <CTASection />
       </main>
       <Footer />
     </>

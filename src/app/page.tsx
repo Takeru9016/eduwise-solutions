@@ -1,6 +1,5 @@
 import {
   BenefitSection,
-  CTASection,
   FAQs,
   Footer,
   HeroSection,
@@ -19,7 +18,6 @@ export default function Home() {
         <BenefitSection />
         <Testimonials />
         <FAQs />
-        <CTASection />
       </main>
       <Footer />
     </>

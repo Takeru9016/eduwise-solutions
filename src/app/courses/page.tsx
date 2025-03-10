@@ -1,4 +1,4 @@
-import { CTASection, Footer, Navbar, OurCourse } from "@/components";
+import { Footer, Navbar, OurCourse } from "@/components";
 
 export default function CoursePage() {
   return (
@@ -6,7 +6,6 @@ export default function CoursePage() {
       <Navbar />
       <main className="min-h-screen">
         <OurCourse />
-        <CTASection />
       </main>
       <Footer />
     </>

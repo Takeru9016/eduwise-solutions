@@ -35,6 +35,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
+// Schema and types
 const contactFormSchema = z.object({
   firstName: z.string().min(2, "First name should be at least 2 characters"),
   lastName: z.string().min(2, "Last name should be at least 2 characters"),
@@ -43,38 +44,103 @@ const contactFormSchema = z.object({
     .string()
     .regex(/^\+?[0-9]{10,14}$/, "Please enter a valid mobile number"),
   subject: z.string().min(1, "Please select a subject"),
-  message: z.string().optional(), // Made message field optional
+  message: z.string().optional(),
 });
 
 type ContactFormValues = z.infer<typeof contactFormSchema>;
 
-const subjects = [
-  { value: "mba", label: "Master in Business Admistration (MBA)" },
-  {
-    value: "msc_in_ds",
-    label: "MSc in Artifical Intelligence and Data Science",
-  },
-  { value: "msc_in_cc", label: "MSc in Cloud Computing" },
-  { value: "professional_certification", label: "Professional Certification" },
-  { value: "certification_programme", label: "Certification Programme" },
-  { value: "other", label: "Other" },
-];
+interface SubjectOption {
+  value: string;
+  label: string;
+}
 
-// New Required Label Component
-const RequiredLabel: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => (
+interface FormFieldProps {
+  name: keyof ContactFormValues;
+  label: string;
+  placeholder: string;
+  type?: string;
+  required?: boolean;
+  control: any;
+}
+
+// Reusable components
+const RequiredLabel = ({ children }: { children: React.ReactNode }) => (
   <FormLabel className="text-grey-35 flex items-center gap-1">
     {children}
     <span className="text-red-500">*</span>
   </FormLabel>
 );
 
-export default function ContactUs() {
+const SectionBadge = ({
+  icon: Icon,
+  text,
+}: {
+  icon: React.ElementType;
+  text: string;
+}) => (
+  <div className="inline-flex items-center gap-2 bg-white text-primary-75 px-4 py-2 rounded-full text-sm font-medium mb-6">
+    <Icon size={16} className="text-primary-75" />
+    {text}
+  </div>
+);
+
+const FormInputField = ({
+  name,
+  label,
+  placeholder,
+  type = "text",
+  required = true,
+  control,
+}: FormFieldProps) => (
+  <FormField
+    control={control}
+    name={name}
+    render={({ field }) => (
+      <FormItem className="space-y-2">
+        {required ? (
+          <RequiredLabel>{label}</RequiredLabel>
+        ) : (
+          <FormLabel className="text-grey-35">
+            {label}
+            <span className="ml-2 text-sm text-primary-75 font-medium">
+              (Optional)
+            </span>
+          </FormLabel>
+        )}
+        <FormControl>
+          <Input
+            {...field}
+            type={type}
+            placeholder={placeholder}
+            className="h-12 bg-light-97 border-light-90 focus:border-primary-75 focus:ring-primary-75"
+          />
+        </FormControl>
+        <FormMessage className="text-red-500" />
+      </FormItem>
+    )}
+  />
+);
+
+export default function ContactUsSection() {
   const [showDialog, setShowDialog] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  const subjects: SubjectOption[] = [
+    { value: "mba", label: "Master in Business Administration (MBA)" },
+    {
+      value: "msc_in_ds",
+      label: "MSc in Artificial Intelligence and Data Science",
+    },
+    { value: "msc_in_cc", label: "MSc in Cloud Computing" },
+    {
+      value: "professional_certification",
+      label: "Professional Certification",
+    },
+    { value: "certification_programme", label: "Certification Programme" },
+    { value: "other", label: "Other" },
+  ];
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
@@ -98,6 +164,7 @@ export default function ContactUs() {
         ...data,
         message: data.message || "",
       });
+
       if (!response) {
         throw new Error("Network error - please try again");
       }
@@ -138,10 +205,7 @@ export default function ContactUs() {
 
         <div className="container mx-auto relative">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 bg-white text-primary-75 px-4 py-2 rounded-full text-sm font-medium mb-6">
-              <Sparkles size={16} className="text-primary-75" />
-              Get in Touch with Us
-            </div>
+            <SectionBadge icon={Sparkles} text="Get in Touch with Us" />
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-vietnam font-bold text-grey-15 mb-6">
               Contact Us
@@ -180,87 +244,39 @@ export default function ContactUs() {
                     className="space-y-6"
                   >
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      {/* First Name Field */}
-                      <FormField
+                      <FormInputField
                         control={form.control}
                         name="firstName"
-                        render={({ field }) => (
-                          <FormItem className="space-y-2">
-                            <RequiredLabel>First Name</RequiredLabel>
-                            <FormControl>
-                              <Input
-                                {...field}
-                                placeholder="Enter First Name"
-                                className="h-12 bg-light-97 border-light-90 focus:border-primary-75 focus:ring-primary-75"
-                              />
-                            </FormControl>
-                            <FormMessage className="text-red-500" />
-                          </FormItem>
-                        )}
+                        label="First Name"
+                        placeholder="Enter First Name"
                       />
 
-                      {/* Last Name Field */}
-                      <FormField
+                      <FormInputField
                         control={form.control}
                         name="lastName"
-                        render={({ field }) => (
-                          <FormItem className="space-y-2">
-                            <RequiredLabel>Last Name</RequiredLabel>
-                            <FormControl>
-                              <Input
-                                {...field}
-                                placeholder="Enter Last Name"
-                                className="h-12 bg-light-97 border-light-90 focus:border-primary-75 focus:ring-primary-75"
-                              />
-                            </FormControl>
-                            <FormMessage className="text-red-500" />
-                          </FormItem>
-                        )}
+                        label="Last Name"
+                        placeholder="Enter Last Name"
                       />
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      {/* Email Field */}
-                      <FormField
+                      <FormInputField
                         control={form.control}
                         name="email"
-                        render={({ field }) => (
-                          <FormItem className="space-y-2">
-                            <RequiredLabel>Email</RequiredLabel>
-                            <FormControl>
-                              <Input
-                                {...field}
-                                type="email"
-                                placeholder="Enter your Email"
-                                className="h-12 bg-light-97 border-light-90 focus:border-primary-75 focus:ring-primary-75"
-                              />
-                            </FormControl>
-                            <FormMessage className="text-red-500" />
-                          </FormItem>
-                        )}
+                        label="Email"
+                        placeholder="Enter your Email"
+                        type="email"
                       />
 
-                      {/* Mobile Field */}
-                      <FormField
+                      <FormInputField
                         control={form.control}
                         name="mobile"
-                        render={({ field }) => (
-                          <FormItem className="space-y-2">
-                            <RequiredLabel>Mobile Number</RequiredLabel>
-                            <FormControl>
-                              <Input
-                                {...field}
-                                placeholder="Enter Phone Number"
-                                className="h-12 bg-light-97 border-light-90 focus:border-primary-75 focus:ring-primary-75"
-                              />
-                            </FormControl>
-                            <FormMessage className="text-red-500" />
-                          </FormItem>
-                        )}
+                        label="Mobile Number"
+                        placeholder="Enter Phone Number"
                       />
                     </div>
 
-                    {/* Subject Field */}
+                    {/*Subject Field */}
                     <FormField
                       control={form.control}
                       name="subject"

@@ -2,26 +2,91 @@ import Link from "next/link";
 import Image from "next/image";
 import { Mail, Phone, MapPin, ArrowRight } from "lucide-react";
 
+// Types
+interface FooterLink {
+  label: string;
+  href: string;
+}
+
+interface SocialLink extends FooterLink {
+  icon: string;
+}
+
+// Reusable components
+const ContactItem = ({
+  icon: Icon,
+  children,
+  href,
+}: {
+  icon: React.ElementType;
+  children: React.ReactNode;
+  href?: string;
+}) => {
+  const content = (
+    <div className="flex items-start gap-3 text-grey-35 group hover:text-primary-75 transition-colors">
+      <Icon className="w-5 h-5 text-primary-75 group-hover:text-primary-70 mt-1" />
+      <span>{children}</span>
+    </div>
+  );
+
+  if (href) {
+    return <a href={href}>{content}</a>;
+  }
+
+  return content;
+};
+
+const FooterLinkList = ({
+  title,
+  links,
+}: {
+  title: string;
+  links: FooterLink[];
+}) => (
+  <div>
+    <h3 className="font-vietnam font-semibold text-grey-20 text-lg mb-6">
+      {title}
+    </h3>
+    <ul className="space-y-3">
+      {links.map((link) => (
+        <li key={link.label}>
+          <Link
+            href={link.href}
+            className="text-grey-35 hover:text-primary-75 transition-colors flex items-center gap-2 group"
+          >
+            <ArrowRight
+              size={16}
+              className="opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all"
+            />
+            {link.label}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+
 export default function Footer() {
-  const companyLinks = [
+  const currentYear = new Date().getFullYear();
+
+  const companyLinks: FooterLink[] = [
     { label: "About Us", href: "/about" },
     { label: "Our Courses", href: "/courses" },
     { label: "Contact", href: "/contact" },
   ];
 
-  const programLinks = [
-    { label: "Master's Programme", href: "/masters" },
+  const programLinks: FooterLink[] = [
     { label: "Professional Certification", href: "/professional" },
     { label: "Certification Programme", href: "/certification" },
   ];
 
-  const legalLinks = [
+  const legalLinks: FooterLink[] = [
     { label: "Privacy Policy", href: "/privacy" },
     { label: "Terms of Service", href: "/terms" },
     { label: "Refund Policy", href: "/refund" },
   ];
 
-  const socialLinks = [
+  const socialLinks: SocialLink[] = [
     {
       label: "Facebook",
       href: "https://www.facebook.com/share/1GfVBLdak6/",
@@ -57,92 +122,29 @@ export default function Footer() {
             </Link>
 
             <div className="space-y-4">
-              <div className="flex items-center gap-3 text-grey-35 group hover:text-primary-75 transition-colors">
-                <Mail className="w-5 h-5 text-primary-75 group-hover:text-primary-70" />
-                <a href="mailto:admin@eduwise.solutions">
-                  admin@eduwise.solutions
-                </a>
-              </div>
-              <div className="flex items-center gap-3 text-grey-35 group hover:text-primary-75 transition-colors">
-                <Phone className="w-5 h-5 text-primary-75 group-hover:text-primary-70" />
-                <a href="tel:+916009392581">+91 60093 92581</a>
-              </div>
-              <div className="flex items-start gap-3 text-grey-35">
-                <MapPin className="w-5 h-5 text-primary-75 mt-1" />
-                <span>
-                  235, Binnamangala, 2nd Floor, 13th Cross Road, 2nd Stage,
-                  Indira Nagar, Bengaluru - 560038
-                </span>
-              </div>
+              <ContactItem icon={Mail} href="mailto:admin@eduwise.solutions">
+                admin@eduwise.solutions
+              </ContactItem>
+
+              <ContactItem icon={Phone} href="tel:+916009392581">
+                +91 60093 92581
+              </ContactItem>
+
+              <ContactItem icon={MapPin}>
+                235, Binnamangala, 2nd Floor, 13th Cross Road, 2nd Stage, Indira
+                Nagar, Bengaluru - 560038
+              </ContactItem>
             </div>
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h3 className="font-vietnam font-semibold text-grey-20 text-lg mb-6">
-              Company
-            </h3>
-            <ul className="space-y-3">
-              {companyLinks.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-grey-35 hover:text-primary-75 transition-colors flex items-center gap-2 group"
-                  >
-                    <ArrowRight
-                      size={16}
-                      className="opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all"
-                    />
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <FooterLinkList title="Company" links={companyLinks} />
 
           {/* Programs */}
-          <div>
-            <h3 className="font-vietnam font-semibold text-grey-20 text-lg mb-6">
-              Programs
-            </h3>
-            <ul className="space-y-3">
-              {programLinks.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-grey-35 hover:text-primary-75 transition-colors flex items-center gap-2 group"
-                  >
-                    <ArrowRight
-                      size={16}
-                      className="opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all"
-                    />
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-vietnam font-semibold text-grey-20 mb-4">
-              Legal
-            </h4>
-            <ul className="space-y-3">
-              {legalLinks.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-grey-35 hover:text-primary-75 transition-colors flex items-center gap-2 group"
-                  >
-                    <ArrowRight
-                      size={16}
-                      className="opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all"
-                    />
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <FooterLinkList title="Programs" links={programLinks} />
+
+          {/* Legal */}
+          <FooterLinkList title="Legal" links={legalLinks} />
 
           {/* Connect */}
           <div>
@@ -154,9 +156,11 @@ export default function Footer() {
                 <Link
                   key={social.label}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-12 h-12 flex items-center justify-center text-grey-35 hover:text-primary-75 transition-transform transform hover:scale-110"
+                  aria-label={social.label}
                 >
-                  <span className="sr-only">{social.label}</span>
                   <Image
                     src={social.icon}
                     alt={social.label}
@@ -173,8 +177,7 @@ export default function Footer() {
         <div className="border-t border-light-90 py-6">
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
             <p className="text-grey-35 text-sm text-center">
-              © {new Date().getFullYear()} Eduwise Solutions. All rights
-              reserved.
+              © {currentYear} Eduwise Solutions. All rights reserved.
             </p>
           </div>
         </div>

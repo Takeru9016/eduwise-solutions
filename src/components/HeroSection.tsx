@@ -3,12 +3,67 @@ import Link from "next/link";
 import { ArrowRight, Sparkles, BookOpen, Target } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-// import PartnersLogo from "./PartnersLogo";
 
-export default function Hero() {
+// Feature item component for better reusability
+const FeatureItem = ({
+  icon: Icon,
+  text,
+}: {
+  icon: React.ComponentType<any>;
+  text: string;
+}) => (
+  <div className="flex items-center gap-3">
+    <div className="flex-shrink-0">
+      <Icon className="w-5 h-5 text-primary-75" />
+    </div>
+    <span className="text-grey-35">{text}</span>
+  </div>
+);
+
+// CTA button component for consistency
+const CTAButton = ({
+  href,
+  variant,
+  children,
+}: {
+  href: string;
+  variant: string;
+  children: React.ReactNode;
+}) => (
+  <Link href={href}>
+    <Button
+      variant={
+        variant as
+          | "link"
+          | "default"
+          | "destructive"
+          | "outline"
+          | "secondary"
+          | "ghost"
+      }
+      className={`
+        w-full sm:w-auto px-8 py-6 text-lg rounded-lg transition-all duration-200
+        ${
+          variant === "default"
+            ? "bg-primary-75 hover:bg-primary-70 text-white flex items-center gap-2 hover:translate-y-[-2px]"
+            : "border-2 border-primary-75 text-primary-75 hover:bg-primary-99"
+        }
+      `}
+    >
+      {children}
+    </Button>
+  </Link>
+);
+
+export default function HeroSection() {
+  const features = [
+    { icon: BookOpen, text: "Expert-Led Programs" },
+    { icon: Target, text: "Job-Ready Skills" },
+  ];
+
   return (
     <section className="relative bg-white overflow-hidden">
-      {/* Decorative background elements */}
+      {/* Background decorative elements */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-20 w-72 h-72 bg-primary-95 rounded-full opacity-20 blur-3xl" />
         <div className="absolute bottom-20 right-20 w-96 h-96 bg-primary-97 rounded-full opacity-20 blur-3xl" />
@@ -31,7 +86,6 @@ export default function Hero() {
               </span>{" "}
               <span className="text-grey-15">About What&apos;s Next?</span>
             </h1>
-            <br />
 
             {/* Description */}
             <p className="text-gray-600 text-lg md:text-xl mb-8 leading-relaxed">
@@ -53,65 +107,46 @@ export default function Hero() {
 
             {/* Feature Points */}
             <div className="flex flex-col sm:flex-row gap-6 mb-8">
-              <div className="flex items-center gap-3">
-                <div className="flex-shrink-0">
-                  <BookOpen className="w-5 h-5 text-primary-75" />
-                </div>
-                <span className="text-grey-35">Expert-Led Programs</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="flex-shrink-0">
-                  <Target className="w-5 h-5 text-primary-75" />
-                </div>
-                <span className="text-grey-35">Job-Ready Skills</span>
-              </div>
+              {features.map((feature, index) => (
+                <FeatureItem
+                  key={index}
+                  icon={feature.icon}
+                  text={feature.text}
+                />
+              ))}
             </div>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <Link href="/courses">
-                <Button
-                  variant="default"
-                  className="bg-primary-75 hover:bg-primary-70 text-white w-full sm:w-auto px-8 py-6 text-lg rounded-lg flex items-center gap-2 transition-all duration-200 hover:translate-y-[-2px]"
-                >
-                  Explore Courses
-                  <ArrowRight className="w-5 h-5" />
-                </Button>
-              </Link>
-              <Link href="/contact">
-                <Button
-                  variant="outline"
-                  className="border-2 border-primary-75 text-primary-75 hover:bg-primary-99 w-full sm:w-auto px-8 py-6 text-lg rounded-lg transition-all duration-200"
-                >
-                  Contact Us
-                </Button>
-              </Link>
+              <CTAButton href="/courses" variant="default">
+                Explore Courses
+                <ArrowRight className="w-5 h-5" />
+              </CTAButton>
+
+              <CTAButton href="/contact" variant="outline">
+                Contact Us
+              </CTAButton>
             </div>
           </div>
 
           {/* Right Image */}
-          <div className="relative w-full">
-            <div className="relative w-full h-[400px] md:h-[600px]">
-              {/* Main image */}
-              <div className="absolute inset-0 transform rotate-2">
-                <div className="relative w-full h-full">
-                  <Image
-                    src="/home/hero.png"
-                    alt="Student learning online"
-                    fill
-                    style={{
-                      objectFit: "contain",
-                      borderRadius: "24px",
-                    }}
-                    priority
-                  />
-                </div>
-              </div>
+          <div className="relative w-full h-[400px] md:h-[600px]">
+            <div className="absolute inset-0 transform rotate-2">
+              <Image
+                src="/home/hero.png"
+                alt="Student learning online"
+                fill
+                priority
+                style={{
+                  objectFit: "contain",
+                  borderRadius: "24px",
+                }}
+              />
             </div>
           </div>
         </div>
 
-        {/* Partners Section */}
+        {/* Uncomment when PartnersLogo component is available */}
         {/* <div className="mt-16 md:mt-20">
           <PartnersLogo />
         </div> */}

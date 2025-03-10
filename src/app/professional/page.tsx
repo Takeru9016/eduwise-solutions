@@ -1,4 +1,4 @@
-import { CTASection, Footer, Navbar, ProfessionalPage } from "@/components";
+import { Footer, Navbar, ProfessionalPage } from "@/components";
 
 export default function ProfessionalProgram() {
   return (
@@ -6,7 +6,6 @@ export default function ProfessionalProgram() {
       <Navbar />
       <main className="min-h-screen">
         <ProfessionalPage />
-        <CTASection />
       </main>
       <Footer />
     </>

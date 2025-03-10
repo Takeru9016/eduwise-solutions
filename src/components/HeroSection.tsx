@@ -9,7 +9,7 @@ const FeatureItem = ({
   icon: Icon,
   text,
 }: {
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   text: string;
 }) => (
   <div className="flex items-center gap-3">

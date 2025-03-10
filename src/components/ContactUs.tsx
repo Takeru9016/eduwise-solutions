@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Control, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { CheckCircle2, XCircle, Sparkles, Mail, Send } from "lucide-react";
@@ -60,7 +60,7 @@ interface FormFieldProps {
   placeholder: string;
   type?: string;
   required?: boolean;
-  control: any;
+  control: Control<ContactFormValues>;
 }
 
 // Reusable components

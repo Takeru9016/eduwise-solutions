@@ -5,9 +5,12 @@ import {
   Rocket,
   Target,
   Sparkles,
+  Briefcase,
+  CheckCircle2,
+  BookOpen,
+  Building,
+  Users,
 } from "lucide-react";
-
-import CTASection from "./CTASection";
 
 // Reusable card component for features and mission/vision
 const FeatureCard = ({
@@ -45,6 +48,62 @@ const FeatureCard = ({
     </div>
   );
 };
+
+// Process step component
+const ProcessStep = ({
+  icon: Icon,
+  title,
+  description,
+  number,
+}: {
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  title: string;
+  description: string;
+  number: number;
+}) => {
+  return (
+    <div className="flex gap-6 items-start">
+      <div className="relative">
+        <div className="w-14 h-14 bg-primary-95 rounded-full flex items-center justify-center">
+          <Icon className="w-7 h-7 text-primary-75" />
+        </div>
+        <div className="absolute -top-2 -right-2 w-6 h-6 bg-primary-90 rounded-full flex items-center justify-center text-white font-bold text-sm">
+          {number}
+        </div>
+      </div>
+      <div>
+        <h3 className="text-xl font-vietnam font-semibold text-grey-15 mb-2">
+          {title}
+        </h3>
+        <p className="text-grey-35 leading-relaxed">{description}</p>
+      </div>
+    </div>
+  );
+};
+
+// Benefit card component
+const BenefitCard = ({
+  title,
+  description,
+}: {
+  title: string;
+  description: string;
+}) => {
+  return (
+    <div className="bg-white p-6 rounded-xl border border-light-90 hover:shadow-md transition-all">
+      <div className="flex gap-4 items-start">
+        <CheckCircle2 className="w-6 h-6 text-primary-75 flex-shrink-0 mt-1" />
+        <div>
+          <h4 className="text-lg font-vietnam font-semibold text-grey-15 mb-2">
+            {title}
+          </h4>
+          <p className="text-grey-35">{description}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // Section header component
 const SectionHeader = ({
   title,
@@ -106,6 +165,51 @@ export default function AboutUs() {
     },
   ];
 
+  // Data for "Our Process" section
+  const processSteps = [
+    {
+      icon: BookOpen,
+      title: "Skill Development",
+      description:
+        "We train candidates in resume building, LinkedIn optimization, business communication, interview techniques, Excel, call pitching, and more.",
+      number: 1,
+    },
+    {
+      icon: Building,
+      title: "Job Placements",
+      description:
+        "We partner with leading MNCs to place candidates in high-demand entry-level roles.",
+      number: 2,
+    },
+    {
+      icon: Users,
+      title: "Career Guidance",
+      description:
+        "We provide personalized counseling to help students choose the right job path and maximize their career opportunities.",
+      number: 3,
+    },
+  ];
+
+  // Data for "Why Choose Eduwise Solutions" section
+  const benefits = [
+    {
+      title: "Guaranteed Job Opportunities",
+      description: "We have real jobs waiting for skilled candidates.",
+    },
+    {
+      title: "Industry-Driven Training",
+      description: "Practical learning that helps you crack interviews.",
+    },
+    {
+      title: "MNC Partnerships",
+      description: "Direct access to recruiters from top companies.",
+    },
+    {
+      title: "Affordable & Effective",
+      description: "High-quality training at competitive prices.",
+    },
+  ];
+
   return (
     <main className="bg-white">
       {/* Hero Section */}
@@ -159,8 +263,82 @@ export default function AboutUs() {
         </div>
       </section>
 
-      {/* Mission & Vision Section */}
+      {/* What We Do Section */}
       <section className="py-20">
+        <div className="container">
+          <SectionHeader
+            title="What We Do"
+            subtitle="Connecting talent with opportunity through skill development"
+          />
+
+          <div className="bg-white/50 backdrop-blur-sm rounded-xl p-8 shadow-sm border border-light-90 max-w-4xl mx-auto">
+            <div className="flex gap-6 items-start">
+              <Briefcase className="w-12 h-12 text-primary-75 flex-shrink-0" />
+              <div>
+                <p className="text-grey-35 text-lg leading-relaxed">
+                  We specialize in entry-level job placements by equipping
+                  candidates with the right skills and connecting them with top
+                  MNCs. Through our industry-aligned training programs, we
+                  ensure that our students are job-ready and can confidently
+                  step into the corporate world.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Process Section */}
+      <section className="py-20 bg-light-97">
+        <div className="container">
+          <SectionHeader
+            title="Our Process"
+            subtitle="A structured approach to prepare you for success"
+          />
+
+          <div className="max-w-4xl mx-auto space-y-12">
+            {processSteps.map((step, index) => (
+              <ProcessStep
+                key={index}
+                icon={step.icon}
+                title={step.title}
+                description={step.description}
+                number={step.number}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Eduwise Solutions Section */}
+      <section className="py-20">
+        <div className="container">
+          <SectionHeader
+            title="Why Choose Eduwise Solutions?"
+            subtitle="Your success is our priority"
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {benefits.map((benefit, index) => (
+              <BenefitCard
+                key={index}
+                title={benefit.title}
+                description={benefit.description}
+              />
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <p className="text-grey-35 text-lg font-medium">
+              At Eduwise Solutions, your success is our priority. Let us help
+              you unlock your potential and confidently land your first job!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Mission & Vision Section */}
+      <section className="py-20 bg-light-97">
         <div className="container">
           <div className="max-w-4xl mx-auto">
             <SectionHeader
@@ -182,8 +360,6 @@ export default function AboutUs() {
           </div>
         </div>
       </section>
-
-      <CTASection />
     </main>
   );
 }

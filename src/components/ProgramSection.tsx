@@ -111,9 +111,9 @@ const ProgramCard = ({ program }: { program: ProgramCategory }) => {
 };
 
 export default function Programs() {
-  const featuredPrograms = programCategories.filter(
-    (program) => program.featured
-  );
+  // const featuredPrograms = programCategories.filter(
+  //   (program) => program.featured
+  // );
 
   return (
     <section className="relative py-16 md:py-24 bg-gradient-to-b from-white to-slate-50">

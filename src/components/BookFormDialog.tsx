@@ -496,7 +496,7 @@ export default function BookFormDialog({
                     </FormControl>
                     <div className="space-y-1 leading-none">
                       <FormLabel className="text-sm font-normal text-gray-600">
-                        I'd like to receive updates via WhatsApp
+                        I&apos;d like to receive updates via WhatsApp
                       </FormLabel>
                     </div>
                   </FormItem>

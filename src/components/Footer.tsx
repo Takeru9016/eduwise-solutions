@@ -77,7 +77,6 @@ export default function Footer() {
 
   const programLinks: FooterLink[] = [
     { label: "Professional Certification", href: "/professional" },
-    { label: "Certification Programme", href: "/certification" },
   ];
 
   const legalLinks: FooterLink[] = [

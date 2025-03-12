@@ -383,10 +383,10 @@ export default function ProfessionalPage() {
 
               <p className="text-grey-35 text-base md:text-lg leading-relaxed mb-8">
                 At Eduwise Solutions, we specialize in empowering individuals
-                with the skills and opportunities needed to thrive in today's
-                competitive job market. Our comprehensive 45-day program is
-                designed to equip you with fundamental skills to crack
-                entry-level job interviews and secure employment with a
+                with the skills and opportunities needed to thrive in
+                today&apos;s competitive job market. Our comprehensive 45-day
+                program is designed to equip you with fundamental skills to
+                crack entry-level job interviews and secure employment with a
                 guaranteed job placement.
               </p>
             </div>

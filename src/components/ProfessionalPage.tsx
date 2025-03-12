@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import {
   Check,
   Clock,
@@ -394,10 +395,13 @@ export default function ProfessionalPage() {
             <div className="w-full md:w-1/2 mt-8 md:mt-0">
               <div className="relative">
                 <div className="absolute inset-0 bg-primary-95 rounded-2xl transform rotate-3"></div>
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
                   alt="Students learning"
+                  width={1471}
+                  height={980}
                   className="relative rounded-2xl shadow-lg w-full h-auto object-cover"
+                  priority
                 />
 
                 <div className="absolute -bottom-6 -right-6 bg-white rounded-lg shadow-lg p-4 max-w-xs">

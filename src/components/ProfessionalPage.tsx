@@ -7,7 +7,7 @@ import {
   Clock,
   Briefcase,
   GraduationCap,
-  DollarSign,
+  IndianRupee,
   Sparkles,
   Target,
   Users,
@@ -17,7 +17,7 @@ import {
   Award,
   BookOpen,
   Laptop,
-  Handshake,
+  HandCoins,
   Zap,
   LifeBuoy,
   Presentation,
@@ -54,16 +54,28 @@ const features = [
 
 const careerOpportunities = [
   {
-    title: "Data Associate",
-  },
-  {
-    title: "Sales Executive",
+    title: "Business Development",
   },
   {
     title: "Customer Support Analyst",
   },
   {
+    title: "Data Associate",
+  },
+  {
+    title: "Data and Risk Management Analyst",
+  },
+  {
+    title: "Finance Analyst",
+  },
+  {
+    title: "HR Specialist",
+  },
+  {
     title: "Operations Manager",
+  },
+  {
+    title: "Product Compliance Specialist",
   },
 ];
 
@@ -315,11 +327,10 @@ const CurriculumAccordion = ({
             className="border border-light-90 rounded-lg overflow-hidden"
           >
             <button
-              className={`w-full flex justify-between items-center p-4 text-left ${
-                openWeek === weekIndex
-                  ? "bg-primary-95"
-                  : "bg-white hover:bg-primary-99"
-              } transition-colors`}
+              className={`w-full flex justify-between items-center p-4 text-left ${openWeek === weekIndex
+                ? "bg-primary-95"
+                : "bg-white hover:bg-primary-99"
+                } transition-colors`}
               onClick={() =>
                 setOpenWeek(openWeek === weekIndex ? null : weekIndex)
               }
@@ -683,19 +694,19 @@ export default function ProfessionalPage() {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden p-8 border-l-4 border-primary-75">
+            <div className="bg-white rounded-xl shadow-lg overflow-hidden p-8 border-l-4 border-primary-75 max-h-fit">
               <h3 className="text-2xl font-vietnam font-bold text-grey-15 mb-6">
                 Program Investment
               </h3>
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
                   <div className="w-14 h-14 rounded-full bg-primary-95 flex items-center justify-center flex-shrink-0">
-                    <DollarSign className="w-7 h-7 text-primary-75" />
+                    <IndianRupee className="w-7 h-7 text-primary-75" />
                   </div>
                   <div>
                     <p className="text-grey-20 font-bold">Upfront Payment</p>
                     <p className="text-2xl font-vietnam font-bold text-primary-75">
-                      ₹15,000
+                      ₹5,000
                     </p>
                     <p className="text-sm text-grey-35">One-time payment</p>
                   </div>
@@ -703,19 +714,15 @@ export default function ProfessionalPage() {
 
                 <div className="flex items-center gap-4">
                   <div className="w-14 h-14 rounded-full bg-primary-95 flex items-center justify-center flex-shrink-0">
-                    <Handshake className="w-7 h-7 text-primary-75" />
+                    <HandCoins className="w-7 h-7 text-primary-75" />
                   </div>
                   <div>
                     <p className="text-grey-20 font-bold">
                       Pay After Placement
                     </p>
                     <p className="text-2xl font-vietnam font-bold text-primary-75">
-                      ₹5,000{" "}
-                      <span className="text-sm text-grey-35">
-                        /month (6 months)
-                      </span>
+                      ₹20,000
                     </p>
-                    <p className="text-sm text-grey-35">Total: ₹30,000</p>
                   </div>
                 </div>
               </div>

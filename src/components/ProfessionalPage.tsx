@@ -72,7 +72,7 @@ const careerOpportunities = [
     title: "HR Specialist",
   },
   {
-    title: "Operations Manager",
+    title: "Operations Executive",
   },
   {
     title: "Product Compliance Specialist",
@@ -327,10 +327,11 @@ const CurriculumAccordion = ({
             className="border border-light-90 rounded-lg overflow-hidden"
           >
             <button
-              className={`w-full flex justify-between items-center p-4 text-left ${openWeek === weekIndex
-                ? "bg-primary-95"
-                : "bg-white hover:bg-primary-99"
-                } transition-colors`}
+              className={`w-full flex justify-between items-center p-4 text-left ${
+                openWeek === weekIndex
+                  ? "bg-primary-95"
+                  : "bg-white hover:bg-primary-99"
+              } transition-colors`}
               onClick={() =>
                 setOpenWeek(openWeek === weekIndex ? null : weekIndex)
               }
@@ -581,9 +582,6 @@ export default function ProfessionalPage() {
             <h2 className="text-3xl md:text-4xl font-vietnam font-bold text-grey-15">
               How It Works
             </h2>
-            <p className="text-grey-35 mt-4 max-w-3xl mx-auto">
-              Your journey to success in four simple steps
-            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">

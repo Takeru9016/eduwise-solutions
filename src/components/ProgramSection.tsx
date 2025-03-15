@@ -26,7 +26,7 @@ const programCategories: ProgramCategory[] = [
     title: "Professional Certification",
     subtitle: "100% Job Guarantee",
     description:
-      "Get a 100% job guarantee with our 50-day programme! Learn resume building, LinkedIn optimization, business communication, and more.",
+      "Get a 100% job guarantee with our 45-day programme! Learn resume building, LinkedIn optimization, business communication, and more.",
     image: "/courses/professional.png",
     viewLink: "/professional",
     featured: true,

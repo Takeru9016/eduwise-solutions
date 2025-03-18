@@ -94,7 +94,7 @@ export default function HeroSection() {
                 <span className="bg-primary-97 px-2 py-1 rounded-md text-gray-800 font-medium">
                   THE RIGHT JOB
                 </span>{" "}
-                or enhance your skills with the{" "}
+                and enhance your skills with the{" "}
                 <span className="bg-primary-97 px-2 py-1 rounded-md text-gray-800 font-medium">
                   PERFECT PROGRAM
                 </span>

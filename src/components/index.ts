@@ -19,3 +19,4 @@ export { default as PrivacyPolicy } from "./PrivacyPolicy";
 export { default as TermsOfService } from "./TermsOfService";
 export { default as FAQsPage } from "./FAQsPage";
 export { default as CTASection } from "./CTASection";
+export { default as PopupForm } from "./PopupForm";

@@ -263,6 +263,30 @@ export default function AboutUs() {
         </div>
       </section>
 
+      {/* Mission & Vision Section */}
+      <section className="py-20 bg-light-97">
+        <div className="container">
+          <div className="max-w-4xl mx-auto">
+            <SectionHeader
+              title="Our Mission & Vision"
+              subtitle="Empowering learners and shaping futures"
+            />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {missionVisionItems.map((item, index) => (
+                <FeatureCard
+                  key={index}
+                  icon={item.icon}
+                  title={item.title}
+                  description={item.description}
+                  variant="mission"
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* What We Do Section */}
       <section className="py-20">
         <div className="container">
@@ -333,30 +357,6 @@ export default function AboutUs() {
               At Eduwise Solutions, your success is our priority. Let us help
               you unlock your potential and confidently land your first job!
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Mission & Vision Section */}
-      <section className="py-20 bg-light-97">
-        <div className="container">
-          <div className="max-w-4xl mx-auto">
-            <SectionHeader
-              title="Our Mission & Vision"
-              subtitle="Empowering learners and shaping futures"
-            />
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {missionVisionItems.map((item, index) => (
-                <FeatureCard
-                  key={index}
-                  icon={item.icon}
-                  title={item.title}
-                  description={item.description}
-                  variant="mission"
-                />
-              ))}
-            </div>
           </div>
         </div>
       </section>

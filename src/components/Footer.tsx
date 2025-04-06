@@ -71,13 +71,13 @@ export default function Footer() {
 
   const companyLinks: FooterLink[] = [
     { label: "About Us", href: "/about" },
-    { label: "Our Courses", href: "/courses" },
+    // { label: "Our Courses", href: "/courses" },
     { label: "Contact", href: "/contact" },
   ];
 
-  const programLinks: FooterLink[] = [
-    { label: "Professional Certification", href: "/professional" },
-  ];
+  // const programLinks: FooterLink[] = [
+  //   { label: "Professional Certification", href: "/professional" },
+  // ];
 
   const legalLinks: FooterLink[] = [
     { label: "Privacy Policy", href: "/privacy" },
@@ -140,7 +140,7 @@ export default function Footer() {
           <FooterLinkList title="Company" links={companyLinks} />
 
           {/* Programs */}
-          <FooterLinkList title="Programs" links={programLinks} />
+          {/* <FooterLinkList title="Programs" links={programLinks} /> */}
 
           {/* Legal */}
           <FooterLinkList title="Legal" links={legalLinks} />

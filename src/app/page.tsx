@@ -1,10 +1,4 @@
-import {
-  BenefitSection,
-  FAQs,
-  Footer,
-  Navbar,
-  ProfessionalPage,
-} from "@/components";
+import { Footer, Navbar, ProfessionalPage } from "@/components";
 
 export default function Home() {
   return (
@@ -12,8 +6,7 @@ export default function Home() {
       <Navbar />
       <main className="min-h-screen">
         <ProfessionalPage />
-        <BenefitSection />
-        <FAQs />
+        {/* <FAQs /> */}
       </main>
       <Footer />
     </>

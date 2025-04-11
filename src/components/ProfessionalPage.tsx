@@ -301,6 +301,46 @@ interface Module {
   weeks: Week[];
 }
 
+// Add Razorpay types
+interface RazorpayResponse {
+  razorpay_payment_id: string;
+  razorpay_order_id: string;
+  razorpay_signature: string;
+}
+
+interface RazorpayOptions {
+  key: string;
+  amount: number;
+  currency: string;
+  name: string;
+  description: string;
+  order_id: string;
+  handler: (response: RazorpayResponse) => void;
+  modal: {
+    ondismiss: () => void;
+  };
+  prefill: {
+    name: string;
+    email: string;
+    contact: string;
+  };
+  theme: {
+    color: string;
+  };
+}
+
+interface RazorpayInstance {
+  open: () => void;
+  close: () => void;
+  on: (event: string, handler: (response: RazorpayResponse) => void) => void;
+}
+
+declare global {
+  interface Window {
+    Razorpay: new (options: RazorpayOptions) => RazorpayInstance;
+  }
+}
+
 // Accordion component for curriculum with proper TypeScript types
 const CurriculumAccordion = ({
   module,
@@ -371,13 +411,6 @@ const CurriculumAccordion = ({
   );
 };
 
-// Add this interface for Razorpay
-declare global {
-  interface Window {
-    Razorpay: any;
-  }
-}
-
 export default function ProfessionalPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [paymentStatus, setPaymentStatus] = useState<{
@@ -392,7 +425,7 @@ export default function ProfessionalPage() {
   const handlePayment = async () => {
     try {
       setIsLoading(true);
-      
+
       // Create order
       const response = await fetch("/api/create-order", {
         method: "POST",
@@ -401,22 +434,22 @@ export default function ProfessionalPage() {
         },
         body: JSON.stringify({ amount: 5000 }), // ₹5,000
       });
-      
+
       const data = await response.json();
-      
+
       if (!data.order) {
         throw new Error("Failed to create order");
       }
 
       // Initialize Razorpay
-      const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+      const options: RazorpayOptions = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
         amount: data.order.amount,
         currency: data.order.currency,
         name: "Eduwise Solutions",
         description: "Professional Program Payment",
         order_id: data.order.id,
-        handler: async function (response: any) {
+        handler: async function (response: RazorpayResponse) {
           try {
             // Verify payment
             const verifyResponse = await fetch("/api/verify-payment", {
@@ -432,12 +465,13 @@ export default function ProfessionalPage() {
             });
 
             const verifyData = await verifyResponse.json();
-            
+
             if (verifyData.success) {
               setPaymentStatus({
                 isOpen: true,
                 status: "success",
-                message: "Your payment was successful! Welcome to our Professional Program.",
+                message:
+                  "Your payment was successful! Welcome to our Professional Program.",
               });
             } else {
               setPaymentStatus({
@@ -456,7 +490,7 @@ export default function ProfessionalPage() {
           }
         },
         modal: {
-          ondismiss: function() {
+          ondismiss: function () {
             setPaymentStatus({
               isOpen: true,
               status: "cancelled",
@@ -489,7 +523,7 @@ export default function ProfessionalPage() {
   };
 
   const handleCloseModal = () => {
-    setPaymentStatus(prev => ({ ...prev, isOpen: false }));
+    setPaymentStatus((prev) => ({ ...prev, isOpen: false }));
   };
 
   return (
@@ -498,7 +532,7 @@ export default function ProfessionalPage() {
         src="https://checkout.razorpay.com/v1/checkout.js"
         strategy="lazyOnload"
       />
-      
+
       {/* Payment Status Modal */}
       <PaymentStatusModal
         isOpen={paymentStatus.isOpen}
@@ -506,7 +540,7 @@ export default function ProfessionalPage() {
         status={paymentStatus.status}
         message={paymentStatus.message}
       />
-      
+
       {/* Hero Section */}
       <section className="relative py-16 md:py-24 bg-gradient-to-b from-primary-99 to-white overflow-hidden">
         <div className="absolute inset-0">
@@ -632,7 +666,7 @@ export default function ProfessionalPage() {
           </div>
         </div>
       </section>
-      
+
       <BenefitSection />
 
       {/* Who Can Join Section */}
@@ -845,11 +879,14 @@ export default function ProfessionalPage() {
                       <p className="text-3xl font-vietnam font-bold text-primary-75">
                         ₹5,000
                       </p>
-                      <Badge className="bg-green-500 text-white text-sm px-3 py-1 animate-pulse">37% OFF</Badge>
+                      <Badge className="bg-green-500 text-white text-sm px-3 py-1 animate-pulse">
+                        37% OFF
+                      </Badge>
                     </div>
                     <div className="mt-1">
                       <p className="text-sm text-grey-35">
-                        <span className="line-through text-lg">₹8,000</span> • One-time payment
+                        <span className="line-through text-lg">₹8,000</span> •
+                        One-time payment
                       </p>
                       <div className="mt-2 bg-green-50 border border-green-200 rounded-md p-2 inline-block">
                         <p className="text-sm text-green-700 font-medium flex items-center">

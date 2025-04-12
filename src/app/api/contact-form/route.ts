@@ -58,7 +58,46 @@ async function initializeGoogleSheets() {
     );
 
     if (!sheetExists) {
-      throw new Error("Sheet 'Inquiry Data' not found in spreadsheet");
+      // Create the sheet if it doesn't exist
+      await sheets.spreadsheets.batchUpdate({
+        spreadsheetId: process.env.SPREADSHEET_ID,
+        requestBody: {
+          requests: [
+            {
+              addSheet: {
+                properties: {
+                  title: "Inquiry Data",
+                  gridProperties: {
+                    rowCount: 1000,
+                    columnCount: 6,
+                  },
+                },
+              },
+            },
+          ],
+        },
+      });
+
+      // Add headers to the new sheet
+      await sheets.spreadsheets.values.update({
+        spreadsheetId: process.env.SPREADSHEET_ID,
+        range: "Inquiry Data!A1:F1",
+        valueInputOption: "RAW",
+        requestBody: {
+          values: [
+            [
+              "First Name",
+              "Last Name",
+              "Email",
+              "Mobile Number",
+              "Subject",
+              "Message",
+            ],
+          ],
+        },
+      });
+
+      console.log("Created new sheet 'Inquiry Data' with headers");
     }
 
     console.log(

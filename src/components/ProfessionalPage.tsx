@@ -26,7 +26,9 @@ import {
   ChevronRight,
 } from "lucide-react";
 import Script from "next/script";
+
 import PaymentStatusModal from "./PaymentStatusModal";
+import PaymentModal from "./PaymentModal";
 
 import { Badge } from "@/components/ui/badge";
 import BenefitSection from "./BenefitSection";
@@ -412,7 +414,6 @@ const CurriculumAccordion = ({
 };
 
 export default function ProfessionalPage() {
-  const [isLoading, setIsLoading] = useState(false);
   const [paymentStatus, setPaymentStatus] = useState<{
     isOpen: boolean;
     status: "success" | "failure" | "cancelled";
@@ -421,109 +422,19 @@ export default function ProfessionalPage() {
     isOpen: false,
     status: "success",
   });
-
-  const handlePayment = async () => {
-    try {
-      setIsLoading(true);
-
-      // Create order
-      const response = await fetch("/api/create-order", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ amount: 5000 }), // ₹5,000
-      });
-
-      const data = await response.json();
-
-      if (!data.order) {
-        throw new Error("Failed to create order");
-      }
-
-      // Initialize Razorpay
-      const options: RazorpayOptions = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
-        amount: data.order.amount,
-        currency: data.order.currency,
-        name: "Eduwise Solutions",
-        description: "Professional Program Payment",
-        order_id: data.order.id,
-        handler: async function (response: RazorpayResponse) {
-          try {
-            // Verify payment
-            const verifyResponse = await fetch("/api/verify-payment", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                razorpay_order_id: response.razorpay_order_id,
-                razorpay_payment_id: response.razorpay_payment_id,
-                razorpay_signature: response.razorpay_signature,
-              }),
-            });
-
-            const verifyData = await verifyResponse.json();
-
-            if (verifyData.success) {
-              setPaymentStatus({
-                isOpen: true,
-                status: "success",
-                message:
-                  "Your payment was successful! Welcome to our Professional Program.",
-              });
-            } else {
-              setPaymentStatus({
-                isOpen: true,
-                status: "failure",
-                message: "Payment verification failed. Please contact support.",
-              });
-            }
-          } catch (error) {
-            console.error("Payment verification error:", error);
-            setPaymentStatus({
-              isOpen: true,
-              status: "failure",
-              message: "Payment verification failed. Please contact support.",
-            });
-          }
-        },
-        modal: {
-          ondismiss: function () {
-            setPaymentStatus({
-              isOpen: true,
-              status: "cancelled",
-              message: "You have cancelled the payment process.",
-            });
-          },
-        },
-        prefill: {
-          name: "",
-          email: "",
-          contact: "",
-        },
-        theme: {
-          color: "#2563eb",
-        },
-      };
-
-      const razorpay = new window.Razorpay(options);
-      razorpay.open();
-    } catch (error) {
-      console.error("Payment error:", error);
-      setPaymentStatus({
-        isOpen: true,
-        status: "failure",
-        message: "Failed to initiate payment. Please try again.",
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
 
   const handleCloseModal = () => {
     setPaymentStatus((prev) => ({ ...prev, isOpen: false }));
+  };
+  
+  const openPaymentModal = () => {
+    setIsPaymentModalOpen(true);
+  };
+  
+  const closePaymentModal = () => {
+    setIsPaymentModalOpen(false);
   };
 
   return (
@@ -539,6 +450,14 @@ export default function ProfessionalPage() {
         onClose={handleCloseModal}
         status={paymentStatus.status}
         message={paymentStatus.message}
+      />
+      
+      {/* Payment Modal */}
+      <PaymentModal
+        isOpen={isPaymentModalOpen}
+        onClose={closePaymentModal}
+        amount={5000}
+        programName="Professional Program"
       />
 
       {/* Hero Section */}
@@ -895,22 +814,13 @@ export default function ProfessionalPage() {
                         </p>
                       </div>
                     </div>
+                    
+                    {/* Payment Button */}
                     <button
-                      onClick={handlePayment}
-                      disabled={isLoading}
-                      className="mt-4 w-full bg-primary-75 text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-85 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                      onClick={openPaymentModal}
+                      className="mt-4 w-full bg-primary-75 text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-85 transition-colors flex items-center justify-center gap-2"
                     >
-                      {isLoading ? (
-                        <>
-                          <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                          Processing...
-                        </>
-                      ) : (
-                        <>
-                          <IndianRupee className="w-5 h-5" />
-                          Pay Now ₹5,000
-                        </>
-                      )}
+                      Enroll Now
                     </button>
                   </div>
                 </div>

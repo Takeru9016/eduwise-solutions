@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { IndianRupee, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 
 import PaymentStatusModal from "./PaymentStatusModal";
 
@@ -173,7 +173,7 @@ export default function PaymentForm({ amount, programName }: PaymentFormProps) {
             if (verifyData.success) {
               // Store user data in Google Sheets
               await storeUserData(response.razorpay_payment_id);
-              
+
               setPaymentStatus({
                 isOpen: true,
                 status: "success",
@@ -252,7 +252,7 @@ export default function PaymentForm({ amount, programName }: PaymentFormProps) {
       });
 
       const data = await response.json();
-      
+
       if (!data.success) {
         console.error("Failed to store user data:", data.error);
       }
@@ -268,10 +268,13 @@ export default function PaymentForm({ amount, programName }: PaymentFormProps) {
   return (
     <div className="bg-white rounded-lg p-4">
       <h3 className="text-xl font-semibold mb-4">Complete Your Enrollment</h3>
-      
+
       <div className="space-y-4">
         <div>
-          <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-1">
+          <label
+            htmlFor="fullName"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             Full Name
           </label>
           <input
@@ -289,9 +292,12 @@ export default function PaymentForm({ amount, programName }: PaymentFormProps) {
             <p className="mt-1 text-sm text-red-500">{errors.fullName}</p>
           )}
         </div>
-        
+
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             Email Address
           </label>
           <input
@@ -309,9 +315,12 @@ export default function PaymentForm({ amount, programName }: PaymentFormProps) {
             <p className="mt-1 text-sm text-red-500">{errors.email}</p>
           )}
         </div>
-        
+
         <div>
-          <label htmlFor="mobile" className="block text-sm font-medium text-gray-700 mb-1">
+          <label
+            htmlFor="mobile"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             Mobile Number
           </label>
           <input
@@ -329,7 +338,7 @@ export default function PaymentForm({ amount, programName }: PaymentFormProps) {
             <p className="mt-1 text-sm text-red-500">{errors.mobile}</p>
           )}
         </div>
-        
+
         <div className="pt-4">
           <button
             onClick={handlePayment}
@@ -342,14 +351,12 @@ export default function PaymentForm({ amount, programName }: PaymentFormProps) {
                 Processing...
               </>
             ) : (
-              <>
-                Pay Now ₹{amount}
-              </>
+              <>Pay Now ₹{amount}</>
             )}
           </button>
         </div>
       </div>
-      
+
       {/* Payment Status Modal */}
       <PaymentStatusModal
         isOpen={paymentStatus.isOpen}
@@ -359,4 +366,4 @@ export default function PaymentForm({ amount, programName }: PaymentFormProps) {
       />
     </div>
   );
-} 
+}

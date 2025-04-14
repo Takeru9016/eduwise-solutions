@@ -218,11 +218,11 @@ export default function RefundPolicyPage() {
         highlightIcon: Calendar,
         highlightTitle: "30 Working Days",
         highlightText:
-          "All approved refunds will be processed within a specified timeframe.",
+          "All approved refunds will be processed and credited within a specified timeframe.",
         listItems: [
-          "Refunds will be processed within 30 working days from the date of approval",
+          "Refunds will be processed and credited within 30 working days from the date of approval",
           "Processing time may vary based on payment method used",
-          "You will receive email confirmation once the refund is processed",
+          "You will receive email confirmation once the refund is processed and credited",
         ],
       },
     },
@@ -311,7 +311,7 @@ export default function RefundPolicyPage() {
             <NoticeCard
               icon={Calendar}
               title="Refund Processing Time"
-              description="All approved refunds will be processed within 30 working days from the date of approval. You will receive a confirmation email once your refund has been processed."
+              description="All approved refunds will be processed and credited within 30 working days from the date of approval. You will receive a confirmation email once your refund has been processed."
             />
 
               <TabsContent value="webinars">

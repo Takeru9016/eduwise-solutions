@@ -81,38 +81,64 @@ export default function FAQsPage() {
   const categories = useMemo<Category[]>(
     () => [
       {
-        title: "Getting Started",
+        title: "About Eduwise Solutions",
         icon: "🚀",
         questions: [
           {
             q: "What is Eduwise Solutions?",
-            a: "Eduwise Solutions is a platform that connects learners with the best educational opportunities in the ed-tech world. We offer counseling services and discounts on a variety of professional courses, including Online Masters, Skill Development, MBA programs, and more.",
+            a: "Eduwise Solutions is a career guidance and student placement platform that helps learners choose the right skill-based programs, job-guaranteed training, and professional courses. We specialize in supporting final-year students and fresh graduates in securing entry-level jobs across top companies.",
           },
           {
-            q: "How does Eduwise Solutions work?",
-            a: "We act as a bridge between learners and leading educational providers. By understanding your goals, we guide you to the right courses and ensure you get the best value through discounts and expert counseling.",
+            q: "What makes Eduwise Solutions different from others?",
+            a: "We go beyond selling courses. We offer: personalized counseling, handpicked course guidance, exclusive course discounts, and job placement support with real MNC connections.",
           },
           {
-            q: "How do I enroll in a course?",
-            a: "Simply browse our course catalog, select your preferred course, and our team will assist you with the enrollment process.",
+            q: "Where is Eduwise Solutions based, and do you support students from across India?",
+            a: "Eduwise Solutions is an India-based company. We serve students and job seekers from all over the country, regardless of your city or state.",
           },
         ],
       },
       {
-        title: "Courses & Programs",
+        title: "Job-Guaranteed Program",
+        icon: "🏆",
+        questions: [
+          {
+            q: "What is the 45-Day 100% Job-Guaranteed Program?",
+            a: "Our 45-day flagship training program is designed to make you job-ready. It includes training in resume building, business communication, LinkedIn optimization, Excel, interview preparation, hiring techniques, and job-specific skills.",
+          },
+          {
+            q: "What kind of job roles can I expect after completing the program?",
+            a: "Upon successful completion, learners can apply for roles such as: Business Development Executive, Customer Support Analyst, HR Executive, Operations Associate, Finance Executive, Data Associate, and Process Specialist.",
+          },
+          {
+            q: "Do you really guarantee a job?",
+            a: "Yes. If you complete the 45-day program and meet the eligibility criteria, we guarantee interview opportunities and offer full placement support until you get hired.",
+          },
+          {
+            q: "Who is eligible for the Job-Guaranteed Program?",
+            a: "This program is ideal for: final-year students, fresh graduates, job seekers seeking a career restart, and individuals looking to switch into entry-level corporate roles.",
+          },
+          {
+            q: "Can I apply even if I have no prior experience or technical background?",
+            a: "Absolutely. Our programs are designed for beginners and are suitable for anyone looking to build a strong foundation for an entry-level job.",
+          },
+        ],
+      },
+      {
+        title: "Program Structure & Delivery",
         icon: "📚",
         questions: [
           {
-            q: "What types of courses are available?",
-            a: "We offer a wide range of programs, including Online Masters, Skill Development courses, Job Guaranteed courses, MBA programs, UPSC preparation, and more.",
+            q: "How are the classes conducted?",
+            a: "All sessions are conducted live by industry experts. You will also have access to recorded sessions, hands-on live projects, and weekly mock interviews for consistent progress.",
           },
           {
-            q: "Are the courses self-paced?",
-            a: "It depends on the course provider. We offer both self-paced courses and those with fixed schedules. Our counselors can help you choose based on your preferences.",
+            q: "Can I continue my current job or studies while doing this course?",
+            a: "Yes! Our sessions are flexible and come with recordings. You can learn at your own pace and balance your current work or academic schedule.",
           },
           {
-            q: "Do you provide certifications?",
-            a: "Yes, most courses offer certifications upon completion, which are recognized by universities or industry leaders.",
+            q: "What is the main mode of communication during the program?",
+            a: "We communicate through: WhatsApp, Email, Video call sessions, and regular follow-up calls by our counselor team.",
           },
         ],
       },
@@ -121,44 +147,52 @@ export default function FAQsPage() {
         icon: "💳",
         questions: [
           {
-            q: "What are the course fees?",
-            a: "Course fees vary depending on the program and provider. Contact our team for a detailed fee structure and exclusive discounts.",
+            q: "How much does the program cost?",
+            a: "We offer two simple payment options: ₹5,000 upfront or ₹20,000 Pay After Placement (zero risk if you're not placed).",
           },
           {
-            q: "Do you offer payment plans?",
-            a: "Yes, many courses offer flexible payment plans. We can guide you through available options during counseling.",
+            q: "Is your counseling really free?",
+            a: "Yes. All career counseling sessions and guidance are completely free of charge. You only pay if you choose to enroll in a program.",
           },
           {
-            q: "What payment methods are accepted?",
-            a: "We accept payments via credit/debit cards, net banking, UPI, and other secure online payment methods.",
+            q: "What if I don't get placed even after completing the course?",
+            a: "If you actively participate in the program, follow all guidelines, and still don't get placed within 6 months, we provide a 100% refund as per our refund policy outlined in the Terms & Conditions.",
           },
         ],
       },
       {
-        title: "Support & Resources",
+        title: "Support & Career Services",
         icon: "🤝",
         questions: [
           {
-            q: "Will I receive support during my course?",
-            a: "Yes, most courses include access to instructors, mentorship, and peer support. Additional guidance is available from our team.",
+            q: "Do you provide one-on-one counseling?",
+            a: "Yes! Our career counselors offer personalized guidance to help you identify the right course or training program aligned with your goals.",
           },
           {
-            q: "How do I get technical support?",
-            a: "For course-related issues, contact the course provider. For website or enrollment issues, our support team is always available.",
+            q: "Do you help with resume and LinkedIn optimization?",
+            a: "Yes, we provide: ATS-optimized resume building, keyword enhancement for visibility, LinkedIn profile makeover, and portfolio & cover letter support.",
+          },
+          {
+            q: "What kind of support is offered during and after the program?",
+            a: "We provide: live instructor-led sessions, real-time projects, one-on-one doubt-clearing sessions, interview prep and mock rounds, and dedicated placement support.",
+          },
+          {
+            q: "How long will it take to get placed, and how long does placement support last?",
+            a: "Most learners are placed within 30 to 60 days of completing the program. Placement assistance continues for up to 6 months. If you're not placed within 6 months, you're eligible for a 100% refund, subject to our Terms & Conditions.",
           },
         ],
       },
       {
-        title: "Career & Placement",
+        title: "Industries & Placement",
         icon: "💼",
         questions: [
           {
-            q: "Do you provide job placement?",
-            a: "Yes, our in-house course has job-guaranteed courses include placement guaranteed. For other courses, we offer career counseling and networking opportunities.",
+            q: "What industries do your hiring partners come from?",
+            a: "Our hiring partners span multiple industries, including: Information Technology (IT), E-commerce, Customer Service, Finance, Business Development, Human Resources & Operations.",
           },
           {
-            q: "Can I earn while learning?",
-            a: "Absolutely! Our Online Masters and select professional programs are designed to let you balance work and studies.",
+            q: "How do I enroll in a program?",
+            a: "Simply visit www.Eduwise Solutions, fill out the contact form, or reach out via WhatsApp. Our team will guide you through the next steps.",
           },
         ],
       },

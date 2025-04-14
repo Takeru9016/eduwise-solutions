@@ -5,6 +5,7 @@ import {
   Ban,
   Mail,
   Clock,
+  Calendar,
 } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -210,6 +211,21 @@ export default function RefundPolicyPage() {
         ],
       },
     },
+    {
+      value: "processing-time",
+      title: "Refund Processing Time",
+      content: {
+        highlightIcon: Calendar,
+        highlightTitle: "30 Working Days",
+        highlightText:
+          "All approved refunds will be processed within a specified timeframe.",
+        listItems: [
+          "Refunds will be processed within 30 working days from the date of approval",
+          "Processing time may vary based on payment method used",
+          "You will receive email confirmation once the refund is processed",
+        ],
+      },
+    },
   ];
 
   const webinarCards: InfoCard[] = [
@@ -290,6 +306,13 @@ export default function RefundPolicyPage() {
                   </CardContent>
                 </Card>
               </TabsContent>
+
+              {/* Processing Time Notice */}
+            <NoticeCard
+              icon={Calendar}
+              title="Refund Processing Time"
+              description="All approved refunds will be processed within 30 working days from the date of approval. You will receive a confirmation email once your refund has been processed."
+            />
 
               <TabsContent value="webinars">
                 <Card>

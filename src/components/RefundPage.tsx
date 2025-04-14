@@ -307,13 +307,6 @@ export default function RefundPolicyPage() {
                 </Card>
               </TabsContent>
 
-              {/* Processing Time Notice */}
-            <NoticeCard
-              icon={Calendar}
-              title="Refund Processing Time"
-              description="All approved refunds will be processed and credited within 30 working days from the date of approval. You will receive a confirmation email once your refund has been processed."
-            />
-
               <TabsContent value="webinars">
                 <Card>
                   <CardHeader>
@@ -340,6 +333,14 @@ export default function RefundPolicyPage() {
                 </Card>
               </TabsContent>
             </Tabs>
+
+            {/* Processing Time Notice */}
+            <NoticeCard
+              icon={Calendar}
+              title="Refund Processing Time"
+              description="All approved refunds will be processed and credited within 30 working days from the date of approval. You will receive a confirmation email once your refund has been processed."
+            />
+
 
             {/* Additional Terms */}
             <Card className="mb-8">

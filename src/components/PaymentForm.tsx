@@ -147,7 +147,7 @@ export default function PaymentForm({ amount, programName }: PaymentFormProps) {
 
       // Initialize Razorpay
       const options: RazorpayOptions = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
+        key: process.env.RAZORPAY_KEY_ID!,
         amount: data.order.amount,
         currency: data.order.currency,
         name: "Eduwise Solutions",
@@ -210,7 +210,7 @@ export default function PaymentForm({ amount, programName }: PaymentFormProps) {
           contact: formData.mobile,
         },
         theme: {
-          color: "#2563eb",
+          color: "#04956A",
         },
       };
 

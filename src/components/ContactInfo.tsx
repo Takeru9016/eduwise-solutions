@@ -80,8 +80,8 @@ export default function ContactInfo() {
     {
       icon: Phone,
       title: "Phone",
-      value: "+91 60093 92581",
-      href: "tel:+916009392581",
+      value: "+91 91487 74540",
+      href: "tel:+919148774540",
     },
     {
       icon: MapPin,

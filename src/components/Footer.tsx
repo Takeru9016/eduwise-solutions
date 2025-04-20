@@ -126,8 +126,8 @@ export default function Footer() {
                 admin@eduwise.solutions
               </ContactItem>
 
-              <ContactItem icon={Phone} href="tel:+916009392581">
-                +91 60093 92581
+              <ContactItem icon={Phone} href="tel:+919148774540">
+                +91 91487 74540
               </ContactItem>
 
               <ContactItem icon={MapPin}>

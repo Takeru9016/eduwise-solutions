@@ -74,8 +74,8 @@ export default function Navbar() {
   const contactInfoItems: ContactInfo[] = [
     {
       icon: Phone,
-      href: "tel:+916009392581",
-      text: "+91 60093 92581",
+      href: "tel:+919148774540",
+      text: "+91 91487 74540",
     },
     {
       icon: Mail,

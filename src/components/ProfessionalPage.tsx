@@ -24,6 +24,10 @@ import {
   Medal,
   ChevronDown,
   ChevronRight,
+  Bell,
+  CalendarClock,
+  TimerIcon,
+  ArrowRight,
 } from "lucide-react";
 import Script from "next/script";
 
@@ -422,17 +426,25 @@ export default function ProfessionalPage() {
     isOpen: false,
     status: "success",
   });
-  
+
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+
+  // State for countdown timer
+  const [timeLeft, setTimeLeft] = useState({
+    days: 15,
+    hours: 8,
+    minutes: 45,
+    seconds: 12,
+  });
 
   const handleCloseModal = () => {
     setPaymentStatus((prev) => ({ ...prev, isOpen: false }));
   };
-  
+
   const openPaymentModal = () => {
     setIsPaymentModalOpen(true);
   };
-  
+
   const closePaymentModal = () => {
     setIsPaymentModalOpen(false);
   };
@@ -451,7 +463,7 @@ export default function ProfessionalPage() {
         status={paymentStatus.status}
         message={paymentStatus.message}
       />
-      
+
       {/* Payment Modal */}
       <PaymentModal
         isOpen={isPaymentModalOpen}
@@ -459,6 +471,70 @@ export default function ProfessionalPage() {
         amount={5000}
         programName="Professional Program"
       />
+
+      {/* New Batch Announcement Banner */}
+      <div className="bg-gradient-to-r from-primary-75 to-primary-85 text-white py-4 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full">
+          <div className="absolute top-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+          <div className="absolute bottom-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full translate-x-1/2 translate-y-1/2"></div>
+          <div className="absolute top-1/2 left-1/3 w-16 h-16 bg-white opacity-5 rounded-full"></div>
+        </div>
+
+        <div className="container mx-auto relative">
+          <div className="flex flex-col md:flex-row items-center justify-between">
+            <div className="flex items-center mb-4 md:mb-0">
+              <div className="bg-white bg-opacity-20 p-3 rounded-lg mr-4 hidden md:block">
+                <Bell className="h-6 w-6 text-white animate-pulse" />
+              </div>
+              <div>
+                <div className="flex items-center mb-1">
+                  <Badge className="bg-white text-primary-75 mr-2 animate-pulse">
+                    NEW BATCH
+                  </Badge>
+                  <h3 className="text-lg md:text-xl font-vietnam font-bold">
+                    New Batch Starting May 5th - Limited Seats!
+                  </h3>
+                </div>
+                <p className="text-white text-opacity-90 text-sm md:text-base">
+                  Join our upcoming 45-day intensive program and kickstart your
+                  career journey
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-col md:flex-row items-center">
+              <div className="flex space-x-3 md:mr-6 mb-4 md:mb-0">
+                <div className="bg-white bg-opacity-15 rounded-lg px-3 py-2 text-center">
+                  <div className="text-xl font-bold">{timeLeft.days}</div>
+                  <div className="text-xs text-white text-opacity-80">Days</div>
+                </div>
+                <div className="bg-white bg-opacity-15 rounded-lg px-3 py-2 text-center">
+                  <div className="text-xl font-bold">{timeLeft.hours}</div>
+                  <div className="text-xs text-white text-opacity-80">
+                    Hours
+                  </div>
+                </div>
+                <div className="bg-white bg-opacity-15 rounded-lg px-3 py-2 text-center">
+                  <div className="text-xl font-bold">{timeLeft.minutes}</div>
+                  <div className="text-xs text-white text-opacity-80">Mins</div>
+                </div>
+                <div className="bg-white bg-opacity-15 rounded-lg px-3 py-2 text-center">
+                  <div className="text-xl font-bold">{timeLeft.seconds}</div>
+                  <div className="text-xs text-white text-opacity-80">Secs</div>
+                </div>
+              </div>
+
+              <button
+                onClick={openPaymentModal}
+                className="bg-white text-primary-75 px-5 py-2 rounded-full font-bold hover:bg-opacity-90 transition-all flex items-center"
+              >
+                Secure Your Seat
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* Hero Section */}
       <section className="relative py-16 md:py-24 bg-gradient-to-b from-primary-99 to-white overflow-hidden">
@@ -516,6 +592,23 @@ export default function ProfessionalPage() {
                       </p>
                       <p className="text-sm text-grey-35">
                         45-day intensive program
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Added floating batch card */}
+                <div className="absolute -top-6 -left-6 bg-white rounded-lg shadow-lg p-4">
+                  <div className="flex items-center gap-3">
+                    <div className="bg-primary-75 rounded-full p-2">
+                      <Calendar className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <p className="font-vietnam font-bold text-grey-15">
+                        May 5th Batch
+                      </p>
+                      <p className="text-sm text-red-500 font-medium">
+                        Limited seats available!
                       </p>
                     </div>
                   </div>
@@ -814,7 +907,7 @@ export default function ProfessionalPage() {
                         </p>
                       </div>
                     </div>
-                    
+
                     {/* Payment Button */}
                     <button
                       onClick={openPaymentModal}

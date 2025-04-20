@@ -29,21 +29,21 @@ const SectionBadge = ({
   </div>
 );
 
-const FAQItem = ({ faq, index }: { faq: FAQ; index: number }) => (
-  <AccordionItem
-    value={`item-${index + 1}`}
-    className="bg-light-97 rounded-xl border border-light-90 data-[state=open]:bg-white data-[state=open]:border-primary-95 transition-all duration-200"
-  >
-    <AccordionTrigger className="px-6 text-left font-vietnam font-medium text-grey-20 text-lg py-4 hover:text-primary-75 [&[data-state=open]>div]:text-primary-75 hover:no-underline group">
-      <div className="group-hover:text-primary-75 transition-colors">
-        {faq.question}
-      </div>
-    </AccordionTrigger>
-    <AccordionContent className="text-grey-35 leading-relaxed px-6 pb-6">
-      {faq.answer}
-    </AccordionContent>
-  </AccordionItem>
-);
+// const FAQItem = ({ faq, index }: { faq: FAQ; index: number }) => (
+//   <AccordionItem
+//     value={`item-${index + 1}`}
+//     className="bg-light-97 rounded-xl border border-light-90 data-[state=open]:bg-white data-[state=open]:border-primary-95 transition-all duration-200"
+//   >
+//     <AccordionTrigger className="px-6 text-left font-vietnam font-medium text-grey-20 text-lg py-4 hover:text-primary-75 [&[data-state=open]>div]:text-primary-75 hover:no-underline group">
+//       <div className="group-hover:text-primary-75 transition-colors">
+//         {faq.question}
+//       </div>
+//     </AccordionTrigger>
+//     <AccordionContent className="text-grey-35 leading-relaxed px-6 pb-6">
+//       {faq.answer}
+//     </AccordionContent>
+//   </AccordionItem>
+// );
 
 const SupportCard = () => (
   <div className="bg-gradient-to-br from-primary-99 to-light-97 rounded-xl p-8 border border-primary-95">
@@ -136,19 +136,20 @@ export default function FAQsSection() {
               </p>
 
               {/* Help Card */}
-              <div className="grid gap-6 mt-8">
+              {/* <div className="grid gap-6 mt-8">
                 <SupportCard />
-              </div>
+              </div> */}
             </div>
           </div>
 
           {/* Right Column - FAQ Accordion */}
           <div className="bg-white rounded-2xl p-8 shadow-lg border border-light-90">
-            <Accordion type="single" collapsible className="w-full space-y-4">
+          <SupportCard />
+            {/* <Accordion type="single" collapsible className="w-full space-y-4">
               {homepageFaqs.map((faq, index) => (
                 <FAQItem key={index} faq={faq} index={index} />
               ))}
-            </Accordion>
+            </Accordion> */}
           </div>
         </div>
       </div>

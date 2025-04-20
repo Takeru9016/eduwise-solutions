@@ -1,4 +1,10 @@
-import { Footer, Navbar, ProfessionalPage } from "@/components";
+import {
+  FAQs,
+  Footer,
+  Navbar,
+  ProfessionalPage,
+  Testimonials,
+} from "@/components";
 
 export default function Home() {
   return (
@@ -6,7 +12,8 @@ export default function Home() {
       <Navbar />
       <main className="min-h-screen">
         <ProfessionalPage />
-        {/* <FAQs /> */}
+        <Testimonials />
+        <FAQs />
       </main>
       <Footer />
     </>

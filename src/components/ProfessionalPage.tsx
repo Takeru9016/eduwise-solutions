@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Script from "next/script";
 import {
   Check,
   Clock,
@@ -27,11 +28,9 @@ import {
   Bell,
   ArrowRight,
 } from "lucide-react";
-import Script from "next/script";
 
 import PaymentStatusModal from "./PaymentStatusModal";
 import PaymentModal from "./PaymentModal";
-
 import { Badge } from "@/components/ui/badge";
 import BenefitSection from "./BenefitSection";
 
@@ -427,14 +426,6 @@ export default function ProfessionalPage() {
 
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
 
-  // State for countdown timer
-  // const [timeLeft, setTimeLeft] = useState({
-  //   days: 15,
-  //   hours: 8,
-  //   minutes: 45,
-  //   seconds: 12,
-  // });
-
   const handleCloseModal = () => {
     setPaymentStatus((prev) => ({ ...prev, isOpen: false }));
   };
@@ -471,29 +462,32 @@ export default function ProfessionalPage() {
       />
 
       {/* New Batch Announcement Banner */}
-      <div className="bg-gradient-to-r from-primary-75 to-primary-85 text-white py-4 relative overflow-hidden">
+      <div className="bg-gradient-to-r from-primary-75 to-primary-80 text-white py-6 relative overflow-hidden">
+        {/* Animated background elements */}
         <div className="absolute top-0 left-0 w-full h-full">
-          <div className="absolute top-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
-          <div className="absolute bottom-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full translate-x-1/2 translate-y-1/2"></div>
-          <div className="absolute top-1/2 left-1/3 w-16 h-16 bg-white opacity-5 rounded-full"></div>
+          <div className="absolute top-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
+          <div className="absolute bottom-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full translate-x-1/2 translate-y-1/2 animate-pulse" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute top-1/2 left-1/3 w-16 h-16 bg-white opacity-5 rounded-full animate-pulse" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute top-1/4 right-1/4 w-20 h-20 bg-white opacity-5 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+          <div className="absolute bottom-1/3 left-1/4 w-12 h-12 bg-white opacity-5 rounded-full animate-pulse" style={{ animationDelay: '1.5s' }}></div>
         </div>
 
         <div className="container mx-auto relative">
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="flex items-center mb-4 md:mb-0">
-              <div className="bg-white bg-opacity-20 p-3 rounded-lg mr-4 hidden md:block">
-                <Bell className="h-6 w-6 text-white animate-pulse" />
+              <div className="bg-white bg-opacity-20 p-3 rounded-lg mr-4 hidden md:block animate-bounce">
+                <Bell className="h-6 w-6 text-white" />
               </div>
               <div>
-                <div className="flex items-center mb-1">
-                  <Badge className="bg-white text-primary-75 mr-2 animate-pulse">
-                    NEW BATCH
+                <div className="flex items-center mb-2">
+                  <Badge className="bg-white text-primary-75 mr-3 animate-pulse px-4 py-1 text-sm font-bold shadow-md">
+                    FIRST BATCH
                   </Badge>
-                  <h3 className="text-lg md:text-xl font-vietnam font-bold">
-                    New Batch Starting May 5th - Limited Seats!
+                  <h3 className="text-xl md:text-2xl font-vietnam font-bold">
+                    Batch Starting from May 5th - Limited Seats!
                   </h3>
                 </div>
-                <p className="text-white text-opacity-90 text-sm md:text-base">
+                <p className="text-white text-opacity-90 text-base md:text-lg ml-1">
                   Join our upcoming 45-day intensive program and kickstart your
                   career journey
                 </p>
@@ -501,33 +495,12 @@ export default function ProfessionalPage() {
             </div>
 
             <div className="flex flex-col md:flex-row items-center">
-              {/* <div className="flex space-x-3 md:mr-6 mb-4 md:mb-0">
-                <div className="bg-white bg-opacity-15 rounded-lg px-3 py-2 text-center">
-                  <div className="text-xl font-bold">{timeLeft.days}</div>
-                  <div className="text-xs text-white text-opacity-80">Days</div>
-                </div>
-                <div className="bg-white bg-opacity-15 rounded-lg px-3 py-2 text-center">
-                  <div className="text-xl font-bold">{timeLeft.hours}</div>
-                  <div className="text-xs text-white text-opacity-80">
-                    Hours
-                  </div>
-                </div>
-                <div className="bg-white bg-opacity-15 rounded-lg px-3 py-2 text-center">
-                  <div className="text-xl font-bold">{timeLeft.minutes}</div>
-                  <div className="text-xs text-white text-opacity-80">Mins</div>
-                </div>
-                <div className="bg-white bg-opacity-15 rounded-lg px-3 py-2 text-center">
-                  <div className="text-xl font-bold">{timeLeft.seconds}</div>
-                  <div className="text-xs text-white text-opacity-80">Secs</div>
-                </div>
-              </div> */}
-
               <button
                 onClick={openPaymentModal}
-                className="bg-white text-primary-75 px-5 py-2 rounded-full font-bold hover:bg-opacity-90 transition-all flex items-center"
+                className="bg-white text-primary-75 px-6 py-3 rounded-full font-bold hover:bg-opacity-90 transition-all flex items-center shadow-lg hover:shadow-xl transform hover:-translate-y-1 duration-300"
               >
-                Secure Your Seat
-                <ArrowRight className="ml-2 h-4 w-4" />
+                <span className="mr-2">Secure Your Seat</span>
+                <ArrowRight className="h-5 w-5 animate-pulse" />
               </button>
             </div>
           </div>
@@ -909,7 +882,7 @@ export default function ProfessionalPage() {
                     {/* Payment Button */}
                     <button
                       onClick={openPaymentModal}
-                      className="mt-4 w-full bg-primary-75 text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-85 transition-colors flex items-center justify-center gap-2"
+                      className="mt-4 w-full bg-primary-75 text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-80 transition-colors flex items-center justify-center gap-2"
                     >
                       Enroll Now
                     </button>

@@ -1,104 +1,7 @@
-import { Sparkles, Quote } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-
-// Types
-interface Testimonial {
-  name: string;
-  role: string;
-  content: string;
-  avatar: string;
-}
-
-interface SectionBadgeProps {
-  icon: React.ElementType;
-  text: string;
-}
-
-interface SectionHeaderProps {
-  badge: {
-    icon: React.ElementType;
-    text: string;
-  };
-  title: string;
-  subtitle: string;
-}
-
-// Reusable components
-const SectionBadge = ({ icon: Icon, text }: SectionBadgeProps) => (
-  <div className="inline-flex items-center gap-2 bg-primary-99 text-primary-75 px-4 py-2 rounded-full text-sm font-medium mb-6">
-    <Icon size={16} className="text-primary-75" />
-    {text}
-  </div>
-);
-
-const SectionHeader = ({ badge, title, subtitle }: SectionHeaderProps) => (
-  <div className="text-center mb-16">
-    <SectionBadge icon={badge.icon} text={badge.text} />
-    <h2 className="text-3xl md:text-4xl lg:text-5xl font-vietnam font-bold text-grey-15 mb-4">
-      {title}
-    </h2>
-    <p className="text-grey-35 text-lg max-w-2xl mx-auto">{subtitle}</p>
-  </div>
-);
-
-const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => (
-  <Card className="group border-none bg-white hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-    <CardContent className="p-8">
-      <div className="flex flex-col h-full">
-        {/* Quote Icon */}
-        <div className="mb-6 relative">
-          <div className="absolute -top-2 -left-2 w-12 h-12 bg-primary-99 rounded-full opacity-50" />
-          <Quote className="w-8 h-8 text-primary-75 relative" />
-        </div>
-
-        {/* Content */}
-        <p className="text-grey-35 font-vietnam text-lg leading-relaxed mb-8 flex-grow italic">
-          &ldquo;{testimonial.content}&rdquo;
-        </p>
-
-        {/* Author Info */}
-        <div className="flex items-center gap-4 pt-6 border-t border-light-90">
-          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-99 text-primary-75 font-semibold text-xl">
-            {testimonial.name.charAt(0)}
-          </div>
-          <div>
-            <h4 className="font-vietnam font-semibold text-grey-20">
-              {testimonial.name}
-            </h4>
-            <p className="text-sm text-grey-40">{testimonial.role}</p>
-          </div>
-        </div>
-      </div>
-    </CardContent>
-  </Card>
-);
+import { TestimonialsSection } from "./blocks/simple-animated-testimonials";
 
 // Main component
-export default function TestimonialsSection() {
-  const testimonials: Testimonial[] = [
-    {
-      name: "Madhur Sharma",
-      role: "MBA Graduate",
-      content:
-        "The Earn and-Learn MBA program at Eduwise Solutions changed my life. I was able to work as a marketing associate while completing my degree. This program gave me financial stability and a head start in my career!",
-      avatar: "/images/avatars/madhur.jpg",
-    },
-    {
-      name: "Nitesh Deshmukh",
-      role: "MSc Graduate",
-      content:
-        "Joining Eduwise Solutions was the best decision of my life. I was able to earn while gaining in-depth financial management knowledge. The flexible schedule helped me manage both my job and studies seamlessly.",
-      avatar: "/images/avatars/nitesh.jpg",
-    },
-  ];
-
+export default function TestimonialsSectionBasic() {
   return (
     <section className="relative py-16 md:py-24 bg-gradient-to-b from-light-97 to-white overflow-hidden">
       {/* Decorative background elements */}
@@ -108,36 +11,50 @@ export default function TestimonialsSection() {
       </div>
 
       <div className="container mx-auto relative">
-        {/* Section Header */}
-        <SectionHeader
-          badge={{ icon: Sparkles, text: "Success Stories" }}
-          title="What Our Students Say"
-          subtitle="Hear from our graduates about their journey with Eduwise Solutions"
+        <TestimonialsSection
+          testimonials={[
+            {
+              id: 1,
+              name: "M Pavithra",
+              role: "Key accounts manager",
+              company: "Myntra",
+              content:
+                "TI applied to over 50 jobs with no response. After joining Eduwise, I fixed my resume, improved my communication, and cracked an interview within 5 weeks. It changed everything.",
+              avatar: "/testimonials/pavithra.jpeg",
+              rating: 5,
+            },
+            {
+              id: 2,
+              name: "Varshitha BM",
+              role: "Senior assistant manager",
+              company: "SOBHA",
+              content:
+                "I used to feel invisible in interviews. After the program, I finally understood how to present my skills. I got hired, and now I feel like I finally belong somewhere.",
+              avatar: "/testimonials/varshitha.jpeg",
+              rating: 5,
+            },
+            {
+              id: 3,
+              name: "Tathagata Bhattacharjee",
+              role: "Portfolio Manager",
+              company: "SquareYards",
+              content:
+                "When I joined Eduwise, I had zero confidence and no idea how to approach the job market. Now I walk into interviews with clarity, purpose, and skills that speak for me.",
+              avatar: "/testimonials/tathagata.jpeg",
+              rating: 5,
+            },
+            {
+              id: 4,
+              name: "Kushal Sahu",
+              role: "Associate",
+              company: "Giva",
+              content:
+                "I never thought a short course could have such a big impact. Eduwise taught me the skills I wish college had. More importantly, they taught me how to use them.",
+              avatar: "/testimonials/kushal.jpeg",
+              rating: 5,
+            },
+          ]}
         />
-
-        {/* Desktop View */}
-        <div className="hidden md:grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {testimonials.map((testimonial, index) => (
-            <TestimonialCard key={index} testimonial={testimonial} />
-          ))}
-        </div>
-
-        {/* Mobile Carousel */}
-        <div className="md:hidden">
-          <Carousel className="w-full max-w-sm mx-auto">
-            <CarouselContent>
-              {testimonials.map((testimonial, index) => (
-                <CarouselItem key={index}>
-                  <TestimonialCard testimonial={testimonial} />
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <div className="flex justify-center gap-4 mt-6">
-              <CarouselPrevious className="bg-white border-2 border-primary-95 text-primary-75 hover:bg-primary-99 static translate-y-0" />
-              <CarouselNext className="bg-white border-2 border-primary-95 text-primary-75 hover:bg-primary-99 static translate-y-0" />
-            </div>
-          </Carousel>
-        </div>
       </div>
     </section>
   );

@@ -10,10 +10,10 @@ import { ArrowRight, Sparkles, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 // Types
-interface FAQ {
-  question: string;
-  answer: string;
-}
+// interface FAQ {
+//   question: string;
+//   answer: string;
+// }
 
 // Reusable components
 const SectionBadge = ({
@@ -79,33 +79,33 @@ const SupportCard = () => (
 );
 
 export default function FAQsSection() {
-  const homepageFaqs: FAQ[] = [
-    {
-      question: "What is Eduwise Solutions?",
-      answer:
-        "Eduwise Solutions is a platform that connects learners with the best educational opportunities in the ed-tech world. We offer counseling services and discounts on a variety of professional courses.",
-    },
-    {
-      question: "Do you provide job placement guaranteed?",
-      answer:
-        "Yes, our in-house course has job-guaranteed courses include placement guaranteed. For other courses, we offer career counseling and networking opportunities.",
-    },
-    {
-      question: "Can I earn while learning?",
-      answer:
-        "Absolutely! Our Online Masters and select professional programs are designed to let you balance work and studies.",
-    },
-    {
-      question: "What types of courses are available?",
-      answer:
-        "We offer a wide range of programs, including Online Masters, Skill Development courses, Job Guaranteed courses, MBA programs, and more.",
-    },
-    {
-      question: "Do you offer payment plans?",
-      answer:
-        "Yes, many courses offer flexible payment plans. We can guide you through available options during counseling.",
-    },
-  ];
+  // const homepageFaqs: FAQ[] = [
+  //   {
+  //     question: "What is Eduwise Solutions?",
+  //     answer:
+  //       "Eduwise Solutions is a platform that connects learners with the best educational opportunities in the ed-tech world. We offer counseling services and discounts on a variety of professional courses.",
+  //   },
+  //   {
+  //     question: "Do you provide job placement guaranteed?",
+  //     answer:
+  //       "Yes, our in-house course has job-guaranteed courses include placement guaranteed. For other courses, we offer career counseling and networking opportunities.",
+  //   },
+  //   {
+  //     question: "Can I earn while learning?",
+  //     answer:
+  //       "Absolutely! Our Online Masters and select professional programs are designed to let you balance work and studies.",
+  //   },
+  //   {
+  //     question: "What types of courses are available?",
+  //     answer:
+  //       "We offer a wide range of programs, including Online Masters, Skill Development courses, Job Guaranteed courses, MBA programs, and more.",
+  //   },
+  //   {
+  //     question: "Do you offer payment plans?",
+  //     answer:
+  //       "Yes, many courses offer flexible payment plans. We can guide you through available options during counseling.",
+  //   },
+  // ];
 
   return (
     <section className="relative py-16 md:py-24 bg-gradient-to-b from-white to-light-97">

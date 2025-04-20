@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { ArrowRight, Sparkles, MessageCircle } from "lucide-react";
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+// import {
+//   Accordion,
+//   AccordionContent,
+//   AccordionItem,
+//   AccordionTrigger,
+// } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 
 // Types

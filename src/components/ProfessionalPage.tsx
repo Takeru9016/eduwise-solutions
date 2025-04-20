@@ -25,8 +25,6 @@ import {
   ChevronDown,
   ChevronRight,
   Bell,
-  CalendarClock,
-  TimerIcon,
   ArrowRight,
 } from "lucide-react";
 import Script from "next/script";
@@ -430,12 +428,12 @@ export default function ProfessionalPage() {
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
 
   // State for countdown timer
-  const [timeLeft, setTimeLeft] = useState({
-    days: 15,
-    hours: 8,
-    minutes: 45,
-    seconds: 12,
-  });
+  // const [timeLeft, setTimeLeft] = useState({
+  //   days: 15,
+  //   hours: 8,
+  //   minutes: 45,
+  //   seconds: 12,
+  // });
 
   const handleCloseModal = () => {
     setPaymentStatus((prev) => ({ ...prev, isOpen: false }));
@@ -503,7 +501,7 @@ export default function ProfessionalPage() {
             </div>
 
             <div className="flex flex-col md:flex-row items-center">
-              <div className="flex space-x-3 md:mr-6 mb-4 md:mb-0">
+              {/* <div className="flex space-x-3 md:mr-6 mb-4 md:mb-0">
                 <div className="bg-white bg-opacity-15 rounded-lg px-3 py-2 text-center">
                   <div className="text-xl font-bold">{timeLeft.days}</div>
                   <div className="text-xs text-white text-opacity-80">Days</div>
@@ -522,7 +520,7 @@ export default function ProfessionalPage() {
                   <div className="text-xl font-bold">{timeLeft.seconds}</div>
                   <div className="text-xs text-white text-opacity-80">Secs</div>
                 </div>
-              </div>
+              </div> */}
 
               <button
                 onClick={openPaymentModal}

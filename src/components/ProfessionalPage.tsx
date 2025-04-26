@@ -484,7 +484,7 @@ export default function ProfessionalPage() {
                     FIRST BATCH
                   </Badge>
                   <h3 className="text-xl md:text-2xl font-vietnam font-bold">
-                    Batch Starting from May 5th - Limited Seats!
+                    Batch Starting from May 10th - Limited Seats!
                   </h3>
                 </div>
                 <p className="text-white text-opacity-90 text-base md:text-lg ml-1">
@@ -576,7 +576,7 @@ export default function ProfessionalPage() {
                     </div>
                     <div>
                       <p className="font-vietnam font-bold text-grey-15">
-                        May 5th Batch
+                        May 10th Batch
                       </p>
                       <p className="text-sm text-red-500 font-medium">
                         Limited seats available!

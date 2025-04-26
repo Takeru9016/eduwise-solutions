@@ -112,7 +112,7 @@ export default function FAQsPage() {
           },
           {
             q: "Do you really guarantee a job?",
-            a: "Yes. If you complete the 45-day program and meet the eligibility criteria, we guarantee interview opportunities and offer full placement support until you get hired.",
+            a: "Yes. If you complete the 45-day program and meet the eligibility criteria, we guarantee interview opportunities and offer full placement support till 4 months or else your money refund.",
           },
           {
             q: "Who is eligible for the Job-Guaranteed Program?",

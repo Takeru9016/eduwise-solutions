@@ -73,6 +73,7 @@ export default function Footer() {
     { label: "About Us", href: "/about" },
     // { label: "Our Courses", href: "/courses" },
     { label: "Contact", href: "/contact" },
+    {label: "Testimonials", href: "/testimonials"},
     {label: "FAQ", href: "/faq"}
   ];
 

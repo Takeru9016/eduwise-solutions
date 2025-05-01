@@ -143,7 +143,7 @@ export function TestimonialsSection({
         >
           <motion.div variants={itemVariants} className="relative">
             <div className="absolute -top-6 -left-6 z-10">
-              <Quote className="h-12 w-12 text-primary/20" strokeWidth={1} />
+              <Quote className="h-12 w-12 text-primary-80" strokeWidth={1} />
             </div>
 
             {/* Testimonial cards */}
@@ -216,7 +216,7 @@ export function TestimonialsSection({
               className="rounded-full h-10 w-10"
               aria-label="Previous testimonial"
             >
-              <ChevronLeft className="h-4 w-4" />
+              <ChevronLeft className="h-4 w-4 text-primary-75" />
             </Button>
 
             <div className="flex md:flex-col gap-2 items-center justify-center">
@@ -249,7 +249,7 @@ export function TestimonialsSection({
               className="rounded-full h-10 w-10"
               aria-label="Next testimonial"
             >
-              <ChevronRight className="h-4 w-4" />
+              <ChevronRight className="h-4 w-4 text-primary-75" />
             </Button>
           </motion.div>
         </motion.div>

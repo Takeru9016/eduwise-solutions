@@ -19,7 +19,7 @@ export default function TestimonialsSectionBasic() {
               role: "Key accounts manager",
               company: "Myntra",
               content:
-                "TI applied to over 50 jobs with no response. After joining Eduwise, I fixed my resume, improved my communication, and cracked an interview within 5 weeks. It changed everything.",
+                "I applied to over 50 jobs with no response. After joining Eduwise, I fixed my resume, improved my communication, and cracked an interview within 5 weeks. It changed everything.",
               avatar: "/testimonials/pavithra.jpeg",
               rating: 5,
             },

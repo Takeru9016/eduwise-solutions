@@ -1,3 +1,4 @@
+import { Testimonial } from "./blocks/simple-animated-testimonials";
 export { default as Navbar } from "./Navbar";
 export { default as HeroSection } from "./HeroSection";
 export { default as BenefitSection } from "./BenefitSection";
@@ -20,3 +21,4 @@ export { default as TermsOfService } from "./TermsOfService";
 export { default as FAQsPage } from "./FAQsPage";
 export { default as CTASection } from "./CTASection";
 export { default as PopupForm } from "./PopupForm";
+export { default as TestimonialPage } from "./TestimonialPage";

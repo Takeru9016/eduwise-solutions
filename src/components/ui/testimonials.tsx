@@ -135,7 +135,7 @@ export function Testimonials({
                       </div>
                       <div className="mt-5">
                         <p className="text-foreground leading-relaxed">
-                          "{testimonial.text}"
+                          &ldquo;{testimonial.text}&ldquo;
                         </p>
                       </div>
                     </Card>
@@ -205,7 +205,7 @@ export function Testimonials({
                     <Quote className="text-primary-70 absolute bottom-4 right-4 w-10 h-10" />
                     <Quote className="text-primary-70 absolute top-4 left-4 w-10 h-10 rotate-180" />
                     <p className="text-lg text-center italic px-10 py-4">
-                      "{testimonials[activeIndex].text}"
+                      &ldquo;{testimonials[activeIndex].text}&ldquo;
                     </p>
                   </div>
                   

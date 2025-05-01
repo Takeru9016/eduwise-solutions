@@ -466,10 +466,22 @@ export default function ProfessionalPage() {
         {/* Animated background elements */}
         <div className="absolute top-0 left-0 w-full h-full">
           <div className="absolute top-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
-          <div className="absolute bottom-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full translate-x-1/2 translate-y-1/2 animate-pulse" style={{ animationDelay: '1s' }}></div>
-          <div className="absolute top-1/2 left-1/3 w-16 h-16 bg-white opacity-5 rounded-full animate-pulse" style={{ animationDelay: '2s' }}></div>
-          <div className="absolute top-1/4 right-1/4 w-20 h-20 bg-white opacity-5 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-          <div className="absolute bottom-1/3 left-1/4 w-12 h-12 bg-white opacity-5 rounded-full animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+          <div
+            className="absolute bottom-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full translate-x-1/2 translate-y-1/2 animate-pulse"
+            style={{ animationDelay: "1s" }}
+          ></div>
+          <div
+            className="absolute top-1/2 left-1/3 w-16 h-16 bg-white opacity-5 rounded-full animate-pulse"
+            style={{ animationDelay: "2s" }}
+          ></div>
+          <div
+            className="absolute top-1/4 right-1/4 w-20 h-20 bg-white opacity-5 rounded-full animate-pulse"
+            style={{ animationDelay: "0.5s" }}
+          ></div>
+          <div
+            className="absolute bottom-1/3 left-1/4 w-12 h-12 bg-white opacity-5 rounded-full animate-pulse"
+            style={{ animationDelay: "1.5s" }}
+          ></div>
         </div>
 
         <div className="container mx-auto relative">
@@ -480,9 +492,6 @@ export default function ProfessionalPage() {
               </div>
               <div>
                 <div className="flex items-center mb-2">
-                  <Badge className="bg-white text-primary-75 mr-3 animate-pulse px-4 py-1 text-sm font-bold shadow-md">
-                    FIRST BATCH
-                  </Badge>
                   <h3 className="text-xl md:text-2xl font-vietnam font-bold">
                     Batch Starting from May 10th - Limited Seats!
                   </h3>

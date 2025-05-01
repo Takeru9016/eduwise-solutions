@@ -180,6 +180,16 @@ export default function Footer() {
             <p className="text-grey-35 text-sm text-center">
               © {currentYear} Eduwise Solutions. All rights reserved.
             </p>
+            <p className="text-grey-35 text-sm text-center flex items-center gap-2">
+              Made in India
+              <Image
+                src="/indian_flag.svg"
+                alt="India Flag"
+                width={20}
+                height={15}
+                className="inline-block"
+              />
+            </p>
           </div>
         </div>
       </div>

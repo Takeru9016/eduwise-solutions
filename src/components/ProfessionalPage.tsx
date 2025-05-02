@@ -497,7 +497,7 @@ export default function ProfessionalPage() {
                   </h3>
                 </div>
                 <p className="text-white text-opacity-90 text-base md:text-lg ml-1">
-                  Join our upcoming 45-day intensive program and kickstart your
+                  Join our upcoming 45-day master program and kickstart your
                   career journey
                 </p>
               </div>
@@ -532,7 +532,7 @@ export default function ProfessionalPage() {
               </div>
 
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-vietnam font-bold text-grey-15 mb-6 leading-tight">
-                45-Day Intensive Career Program with Job Guarantee
+                45-Day Master Program with Job Guarantee
               </h1>
 
               <p className="text-xl text-primary-75 font-semibold mb-6">
@@ -571,7 +571,7 @@ export default function ProfessionalPage() {
                         100% Job Guarantee
                       </p>
                       <p className="text-sm text-grey-35">
-                        45-day intensive program
+                        45-day program
                       </p>
                     </div>
                   </div>
@@ -789,7 +789,7 @@ export default function ProfessionalPage() {
               Comprehensive Career Program
             </h2>
             <p className="text-grey-35 text-lg mt-4 max-w-3xl mx-auto">
-              Our 45-day intensive program combines essential skills training
+              Our 45-day Master Program combines essential skills training
               with practical experience to make you job-ready
             </p>
           </div>

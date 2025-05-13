@@ -103,8 +103,8 @@ export default function FAQsPage() {
         icon: "🏆",
         questions: [
           {
-            q: "What is the 45-Day 100% Job-Guaranteed Program?",
-            a: "Our 45-day flagship training program is designed to make you job-ready. It includes training in resume building, business communication, LinkedIn optimization, Excel, interview preparation, hiring techniques, and job-specific skills.",
+            q: "What is the 15-Day 100% Job-Guaranteed Program?",
+            a: "Our 15-day flagship training program is designed to make you job-ready. It includes training in resume building, business communication, LinkedIn optimization, Excel, interview preparation, hiring techniques, and job-specific skills.",
           },
           {
             q: "What kind of job roles can I expect after completing the program?",
@@ -112,7 +112,7 @@ export default function FAQsPage() {
           },
           {
             q: "Do you really guarantee a job?",
-            a: "Yes. If you complete the 45-day program and meet the eligibility criteria, we guarantee interview opportunities and offer full placement support till 4 months or else your money refund.",
+            a: "Yes. If you complete the 15-day program and meet the eligibility criteria, we guarantee interview opportunities and offer full placement support till 4 months or else your money refund.",
           },
           {
             q: "Who is eligible for the Job-Guaranteed Program?",
@@ -148,7 +148,7 @@ export default function FAQsPage() {
         questions: [
           {
             q: "How much does the program cost?",
-            a: "We offer two simple payment options: ₹5,000 upfront or ₹20,000 Pay After Placement (zero risk if you're not placed).",
+            a: "We offer two simple payment options: ₹5,000 upfront & ₹20,000 Pay After Placement (zero risk if you're not placed).",
           },
           {
             q: "Is your counseling really free?",

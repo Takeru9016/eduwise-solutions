@@ -5,7 +5,6 @@ import Image from "next/image";
 import Script from "next/script";
 import {
   Check,
-  Clock,
   Briefcase,
   GraduationCap,
   IndianRupee,
@@ -14,7 +13,6 @@ import {
   Users,
   Building,
   Trophy,
-  Calendar,
   Award,
   BookOpen,
   Laptop,
@@ -23,7 +21,6 @@ import {
   LifeBuoy,
   Presentation,
   Medal,
-  ChevronDown,
   ChevronRight,
 } from "lucide-react";
 
@@ -52,7 +49,7 @@ const features = [
     icon: Target,
     title: "Fast-Track Career Growth",
     description:
-      "45-day intensive program designed to get you job-ready quickly.",
+      "15-day intensive program designed to get you job-ready quickly.",
   },
 ];
 
@@ -142,7 +139,7 @@ const programModules = [
         ],
       },
       {
-        title: "Week 5: Sales & Client Communication",
+        title: "Week 5: Client Communication",
         days: [
           "Day 29-30: Understanding Sales & Call Pitching Techniques",
           "Day 31-32: Live Call Pitching Practice & Role Plays",
@@ -290,17 +287,17 @@ const programTargets = [
 
 // Define interfaces for the data structures
 
-interface Week {
-  title: string;
-  days: string[];
-}
+// interface Week {
+//   title: string;
+//   days: string[];
+// }
 
-interface Module {
-  title: string;
-  duration: string;
-  description: string;
-  weeks: Week[];
-}
+// interface Module {
+//   title: string;
+//   duration: string;
+//   description: string;
+//   weeks: Week[];
+// }
 
 // Add Razorpay types
 interface RazorpayResponse {
@@ -343,74 +340,74 @@ declare global {
 }
 
 // Accordion component for curriculum with proper TypeScript types
-const CurriculumAccordion = ({
-  module,
-  moduleIndex,
-}: {
-  module: Module;
-  moduleIndex: number;
-}) => {
-  const [openWeek, setOpenWeek] = useState<number | null>(null);
+// const CurriculumAccordion = ({
+//   module,
+//   moduleIndex,
+// }: {
+//   module: Module;
+//   moduleIndex: number;
+// }) => {
+//   const [openWeek, setOpenWeek] = useState<number | null>(null);
 
-  return (
-    <div className="space-y-4">
-      <h3 className="text-xl md:text-2xl font-vietnam font-bold text-grey-15 border-b border-light-90 pb-3 flex items-center justify-between">
-        <span>
-          {module.title}{" "}
-          <span className="text-primary-75">({module.duration})</span>
-        </span>
-        <Badge className="bg-primary-75 text-white">
-          Module {moduleIndex + 1}
-        </Badge>
-      </h3>
+//   return (
+//     <div className="space-y-4">
+//       <h3 className="text-xl md:text-2xl font-vietnam font-bold text-grey-15 border-b border-light-90 pb-3 flex items-center justify-between">
+//         <span>
+//           {module.title}{" "}
+//           <span className="text-primary-75">({module.duration})</span>
+//         </span>
+//         <Badge className="bg-primary-75 text-white">
+//           Module {moduleIndex + 1}
+//         </Badge>
+//       </h3>
 
-      <div className="space-y-3">
-        {module.weeks.map((week: Week, weekIndex: number) => (
-          <div
-            key={weekIndex}
-            className="border border-light-90 rounded-lg overflow-hidden"
-          >
-            <button
-              className={`w-full flex justify-between items-center p-4 text-left ${
-                openWeek === weekIndex
-                  ? "bg-primary-95"
-                  : "bg-white hover:bg-primary-99"
-              } transition-colors`}
-              onClick={() =>
-                setOpenWeek(openWeek === weekIndex ? null : weekIndex)
-              }
-            >
-              <span className="font-vietnam font-semibold text-grey-15">
-                {week.title}
-              </span>
-              {openWeek === weekIndex ? (
-                <ChevronDown className="h-5 w-5 text-primary-75" />
-              ) : (
-                <ChevronRight className="h-5 w-5 text-primary-75" />
-              )}
-            </button>
+//       <div className="space-y-3">
+//         {module.weeks.map((week: Week, weekIndex: number) => (
+//           <div
+//             key={weekIndex}
+//             className="border border-light-90 rounded-lg overflow-hidden"
+//           >
+//             <button
+//               className={`w-full flex justify-between items-center p-4 text-left ${
+//                 openWeek === weekIndex
+//                   ? "bg-primary-95"
+//                   : "bg-white hover:bg-primary-99"
+//               } transition-colors`}
+//               onClick={() =>
+//                 setOpenWeek(openWeek === weekIndex ? null : weekIndex)
+//               }
+//             >
+//               <span className="font-vietnam font-semibold text-grey-15">
+//                 {week.title}
+//               </span>
+//               {openWeek === weekIndex ? (
+//                 <ChevronDown className="h-5 w-5 text-primary-75" />
+//               ) : (
+//                 <ChevronRight className="h-5 w-5 text-primary-75" />
+//               )}
+//             </button>
 
-            {openWeek === weekIndex && (
-              <div className="p-4 bg-white">
-                <div className="grid grid-cols-1 gap-2">
-                  {week.days.map((day: string, dayIndex: number) => (
-                    <div
-                      key={dayIndex}
-                      className="flex gap-3 p-3 rounded-lg border border-light-90 hover:border-primary-90 transition-colors"
-                    >
-                      <Calendar className="w-5 h-5 text-primary-75 mt-1 flex-shrink-0" />
-                      <span className="text-grey-35">{day}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
+//             {openWeek === weekIndex && (
+//               <div className="p-4 bg-white">
+//                 <div className="grid grid-cols-1 gap-2">
+//                   {week.days.map((day: string, dayIndex: number) => (
+//                     <div
+//                       key={dayIndex}
+//                       className="flex gap-3 p-3 rounded-lg border border-light-90 hover:border-primary-90 transition-colors"
+//                     >
+//                       <Calendar className="w-5 h-5 text-primary-75 mt-1 flex-shrink-0" />
+//                       <span className="text-grey-35">{day}</span>
+//                     </div>
+//                   ))}
+//                 </div>
+//               </div>
+//             )}
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };
 
 export default function ProfessionalPage() {
   const [paymentStatus, setPaymentStatus] = useState<{
@@ -475,7 +472,7 @@ export default function ProfessionalPage() {
               </div>
 
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-vietnam font-bold text-grey-15 mb-6 leading-tight">
-                45-Day Master Program with Job Guarantee
+                15-Day Master Program with Job Guarantee
               </h1>
 
               <p className="text-xl text-primary-75 font-semibold mb-6">
@@ -485,7 +482,7 @@ export default function ProfessionalPage() {
               <p className="text-grey-35 text-base md:text-lg leading-relaxed mb-8">
                 At Eduwise Solutions, we specialize in empowering individuals
                 with the skills and opportunities needed to thrive in
-                today&apos;s competitive job market. Our comprehensive 45-day
+                today&apos;s competitive job market. Our comprehensive 15-day
                 program is designed to equip you with fundamental skills to
                 crack entry-level job interviews and secure employment with a
                 guaranteed job placement.
@@ -513,7 +510,7 @@ export default function ProfessionalPage() {
                       <p className="font-vietnam font-bold text-grey-15">
                         100% Job Guarantee
                       </p>
-                      <p className="text-sm text-grey-35">45-day program</p>
+                      <p className="text-sm text-grey-35">15-day program</p>
                     </div>
                   </div>
                 </div>
@@ -548,7 +545,7 @@ export default function ProfessionalPage() {
             </div>
             <div className="text-center">
               <p className="text-3xl font-vietnam font-bold text-primary-75">
-                45
+                15
               </p>
               <p className="text-grey-35">Days Program</p>
             </div>
@@ -730,7 +727,7 @@ export default function ProfessionalPage() {
               Comprehensive Career Program
             </h2>
             <p className="text-grey-35 text-lg mt-4 max-w-3xl mx-auto">
-              Our 45-day Master Program combines essential skills training with
+              Our 15-day Master Program combines essential skills training with
               practical experience to make you job-ready
             </p>
           </div>
@@ -746,10 +743,10 @@ export default function ProfessionalPage() {
                     <Badge className="bg-primary-75 text-white px-3 py-1">
                       Module {index + 1}
                     </Badge>
-                    <div className="flex items-center text-black bg-white p-2 rounded-full text-xs font-medium">
+                    {/* <div className="flex items-center text-black bg-white p-2 rounded-full text-xs font-medium">
                       <Clock size={16} className="mr-2" />
                       {module.duration}
-                    </div>
+                    </div> */}
                   </div>
                   <h3 className="text-xl font-vietnam font-bold text-grey-15">
                     {module.title}
@@ -859,7 +856,7 @@ export default function ProfessionalPage() {
       </section>
 
       {/* Detailed Curriculum Section */}
-      <section className="py-16 bg-white">
+      {/* <section className="py-16 bg-white">
         <div className="container mx-auto">
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 bg-primary-99 text-primary-75 px-4 py-2 rounded-full text-sm font-medium mb-4 shadow-sm">
@@ -881,7 +878,7 @@ export default function ProfessionalPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
     </main>
   );
 }

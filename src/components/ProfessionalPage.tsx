@@ -551,7 +551,7 @@ export default function ProfessionalPage() {
             </div>
             <div className="text-center">
               <p className="text-3xl font-vietnam font-bold text-primary-75">
-                50+
+                150
               </p>
               <p className="text-grey-35">Industry Partners</p>
             </div>

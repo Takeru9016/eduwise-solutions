@@ -142,10 +142,28 @@ export default function AboutUs() {
         "We collaborate with industry-leading companies and universities to offer courses in fields like Data Science, Web Development, Online MBA, and more.",
     },
     {
-      icon: BarChart3,
+      icon: Users,
       title: "Passionate Counsellors",
       description:
         "Our experts bring years of experience and industry knowledge to help you set right career path.",
+    },
+    {
+      icon: BarChart3,
+      title: "Industry Experts with Real Impact",
+      description:
+        "With 8+ years of experience, we’ve trained over 2,000 learners and helped them build skills that matter in the real world.",
+    },
+    {
+      icon: Briefcase,
+      title: "150+ Hiring Collaborations",
+      description:
+        "We’ve partnered with 150+ companies — from MNCs to startups — to connect job-ready candidates directly with hiring teams.",
+    },
+    {
+      icon: CheckCircle2,
+      title: "Personal Mentorship for Career Success",
+      description:
+        "Backed by years of industry insights, our team not only trains you, but also guides your career path toward long-term success.",
     },
   ];
 
@@ -155,13 +173,13 @@ export default function AboutUs() {
       icon: Rocket,
       title: "Our Mission",
       description:
-        "To create a seamless platform where learners can access high-quality courses from leading institutions and companies, transforming aspirations into achievements.",
+        "To empower individuals with essential skills and real-world knowledge, helping them secure meaningful employment and build thriving careers—regardless of their academic background.",
     },
     {
       icon: Target,
       title: "Our Vision",
       description:
-        "To empower learners with the right education and abilities to excel and start their professional journey while enabling partner companies to reach and educate a broader audience effectively.",
+        "To become a trusted career-launch platform that transforms the lives of graduates by making job readiness accessible, practical, and result-driven—one job at a time.",
     },
   ];
 
@@ -247,7 +265,7 @@ export default function AboutUs() {
         <div className="container">
           <SectionHeader
             title="Who We Are"
-            subtitle="We're a team of dedicated professionals committed to transforming education"
+            subtitle="At Eduwise.solutions, we are passionate about empowering students and graduates to take confident steps toward successful careers. We are not just another education platform — we are your career success partner."
           />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -300,11 +318,9 @@ export default function AboutUs() {
               <Briefcase className="w-12 h-12 text-primary-75 flex-shrink-0" />
               <div>
                 <p className="text-grey-35 text-lg leading-relaxed">
-                  We specialize in entry-level job placements by equipping
-                  candidates with the right skills and connecting them with top
-                  MNCs. Through our industry-aligned training programs, we
-                  ensure that our students are job-ready and can confidently
-                  step into the corporate world.
+                  We offer a 15-day intensive program that builds essential job
+                  skills, enhances personal branding, and connects learners with
+                  top industry partners to ensure 100% job placement.
                 </p>
               </div>
             </div>

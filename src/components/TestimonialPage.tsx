@@ -17,8 +17,8 @@ const testimonials = [
   },
   {
     name: "Tathagata Bhattacharjee",
-    username: "Portfolio Manager",
-    company: "SquareYards",
+    username: "Sr. Relationship Manager",
+    company: "Assettrust Services Pvt Ltd",
     text: "When I joined Eduwise, I had zero confidence and no idea how to approach the job market. Now I walk into interviews with clarity, purpose, and skills that speak for me.",
     image: "/testimonials/tathagata.jpeg",
   },

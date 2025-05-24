@@ -64,7 +64,7 @@ export default function WebinarBanner() {
           Why 90% of Graduates Struggle — and How You Can Be the 10%
         </h2>
         <p className="text-lg md:text-2xl font-semibold text-yellow-300 mb-2">
-          "Skill Up. Stand Out. Get Hired."
+          &ldquo;Skill Up. Stand Out. Get Hired.&rdquo;
         </p>
         <div className="bg-white bg-opacity-10 rounded-lg px-6 py-2 inline-block text-lg font-medium mb-4">
           Sunday : 7:30pm - 8:30pm

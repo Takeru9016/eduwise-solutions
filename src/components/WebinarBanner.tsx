@@ -1,199 +1,497 @@
+"use client";
+
 import { useState } from "react";
-import { X } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { Calendar, CheckCircle2, XCircle, Sparkles, Users, Clock, CalendarDays } from "lucide-react";
+import { format } from "date-fns";
+import ReactPhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import { motion } from "framer-motion";
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Calendar as CalendarComponent } from "@/components/ui/calendar";
+import { cn } from "@/lib/utils";
+
+// Form validation schema
+const formSchema = z.object({
+  name: z.string().min(2, "Name should be at least 2 characters"),
+  dob: z.date({
+    required_error: "Date of birth is required",
+  }),
+  email: z.string().email("Please enter a valid email"),
+  mobile: z.string().min(10, "Please enter a valid mobile number"),
+  countryCode: z.string().default("+91"),
+  isGraduate: z.string().min(1, "Please select an option"),
+  graduationYear: z.string().optional(),
+});
+
+type FormValues = z.infer<typeof formSchema>;
+
+const webinarFeatures = [
+  {
+    icon: Users,
+    text: "Expert-led Session",
+  },
+  {
+    icon: Clock,
+    text: "60 Minutes Duration",
+  },
+  {
+    icon: Sparkles,
+    text: "Free Career Guidance",
+  },
+];
+
+const webinarTiming = {
+  day: "Sunday",
+  time: "7:30 PM - 8:30 PM",
+};
 
 export default function WebinarBanner() {
-  // Webinar Registration Modal State
-  const [isWebinarModalOpen, setIsWebinarModalOpen] = useState(false);
-  const [form, setForm] = useState({
-    name: "",
-    dob: "",
-    number: "",
-    email: "",
-    isGraduate: "yes",
-    gradYear: "",
-  });
-  const [formStatus, setFormStatus] = useState<null | "success" | "error">(
-    null
-  );
+  const [showDialog, setShowDialog] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [phoneValue, setPhoneValue] = useState("");
 
-  // Replace with your Google Apps Script endpoint
-  const GOOGLE_SHEET_ENDPOINT =
-    "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
+  const form = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      mobile: "",
+      countryCode: "+91",
+      isGraduate: "",
+      graduationYear: "",
+    },
+  });
 
-  const handleFormChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleFormSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setFormStatus(null);
+  const onSubmit = async (data: FormValues) => {
     try {
-      const res = await fetch(GOOGLE_SHEET_ENDPOINT, {
+      setIsSubmitting(true);
+      setErrorMessage("");
+
+      const response = await fetch("/api/contact-form", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstName: data.name,
+          lastName: "",
+          email: data.email,
+          mobile: data.mobile,
+          subject: "Webinar Registration",
+          message: `DOB: ${format(data.dob, "yyyy-MM-dd")}, Is Graduate: ${
+            data.isGraduate
+          }, Graduation Year: ${data.graduationYear || "N/A"}`,
+        }),
       });
-      if (res.ok) {
-        setFormStatus("success");
-        setForm({
-          name: "",
-          dob: "",
-          number: "",
-          email: "",
-          isGraduate: "yes",
-          gradYear: "",
-        });
-      } else {
-        setFormStatus("error");
+
+      if (!response.ok) {
+        throw new Error("Failed to submit registration");
       }
-    } catch {
-      setFormStatus("error");
+
+      setIsSuccess(true);
+      form.reset();
+      setPhoneValue("");
+
+      // Close the dialog after 2 seconds
+      setTimeout(() => {
+        setShowDialog(false);
+        setIsSuccess(false);
+      }, 5000);
+
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setIsSuccess(false);
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "Failed to submit registration - please try again"
+      );
+      setShowDialog(true);
+    } finally {
+      setIsSubmitting(false);
     }
-    setIsSubmitting(false);
   };
 
   return (
-    <section className="relative bg-gradient-to-r from-primary-75 to-primary-95 text-white py-10 px-4 md:px-0">
-      <div className="container mx-auto flex flex-col items-center justify-center text-center gap-4">
-        <h2 className="text-2xl md:text-4xl font-bold mb-2">
-          Why 90% of Graduates Struggle — and How You Can Be the 10%
-        </h2>
-        <p className="text-lg md:text-2xl font-semibold text-yellow-300 mb-2">
-          &ldquo;Skill Up. Stand Out. Get Hired.&rdquo;
-        </p>
-        <div className="bg-white bg-opacity-10 rounded-lg px-6 py-2 inline-block text-lg font-medium mb-4">
-          Sunday : 7:30pm - 8:30pm
+    <>
+      {/* Webinar Banner */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="relative overflow-hidden bg-gradient-to-r from-primary-95 via-primary-97 to-primary-95 rounded-2xl p-8 md:p-12 shadow-xl"
+      >
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <motion.div
+            className="absolute -top-24 -right-24 w-96 h-96 bg-primary-75 rounded-full opacity-10"
+            animate={{
+              scale: [1, 1.2, 1],
+              rotate: [0, 90, 0],
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          />
+          <motion.div
+            className="absolute -bottom-24 -left-24 w-96 h-96 bg-primary-75 rounded-full opacity-10"
+            animate={{
+              scale: [1.2, 1, 1.2],
+              rotate: [90, 0, 90],
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          />
         </div>
-        <button
-          className="mt-2 bg-yellow-400 hover:bg-yellow-500 text-primary-95 font-bold py-3 px-8 rounded-lg shadow-lg transition-colors text-lg"
-          onClick={() => setIsWebinarModalOpen(true)}
-        >
-          Register Now
-        </button>
-      </div>
-      {/* Webinar Registration Modal */}
-      {isWebinarModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-          <div className="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md relative">
-            <button
-              className="absolute top-3 right-3 text-gray-400 hover:text-gray-700"
-              onClick={() => {
-                setIsWebinarModalOpen(false);
-                setFormStatus(null);
-              }}
-              aria-label="Close"
-            >
-              <X className="w-6 h-6" />
-            </button>
-            <h3 className="text-2xl font-bold text-primary-75 mb-2 text-center">
-              Webinar Registration
-            </h3>
-            <p className="text-sm text-gray-600 mb-4 text-center">
-              Kindly fill the details, our expert will share you the webinar
-              G-meet link
-            </p>
-            <form className="space-y-4" onSubmit={handleFormSubmit}>
-              <div>
-                <label className="block text-sm font-medium mb-1">Name</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={form.name}
-                  onChange={handleFormChange}
-                  required
-                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-75"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">DOB</label>
-                <input
-                  type="date"
-                  name="dob"
-                  value={form.dob}
-                  onChange={handleFormChange}
-                  required
-                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-75"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Number</label>
-                <input
-                  type="tel"
-                  name="number"
-                  value={form.number}
-                  onChange={handleFormChange}
-                  required
-                  pattern="[0-9]{10,15}"
-                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-75"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">
-                  Mail ID
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={form.email}
-                  onChange={handleFormChange}
-                  required
-                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-75"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">
-                  Are you Graduate?
-                </label>
-                <select
-                  name="isGraduate"
-                  value={form.isGraduate}
-                  onChange={handleFormChange}
-                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-75"
-                >
-                  <option value="yes">Yes</option>
-                  <option value="no">No</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">
-                  Graduation year
-                </label>
-                <input
-                  type="number"
-                  name="gradYear"
-                  value={form.gradYear}
-                  onChange={handleFormChange}
-                  min="1950"
-                  max="2100"
-                  className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-75"
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-primary-75 text-white font-bold py-2 rounded-lg hover:bg-primary-80 transition-colors disabled:opacity-60"
-                disabled={isSubmitting}
+
+        <div className="relative z-10">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="text-center md:text-left max-w-2xl">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2 }}
+                className="inline-flex items-center gap-2 bg-white/50 backdrop-blur-sm text-primary-75 px-4 py-2 rounded-full text-sm font-medium mb-4"
               >
-                {isSubmitting ? "Submitting..." : "Submit"}
-              </button>
-              {formStatus === "success" && (
-                <div className="text-green-600 text-center mt-2">
-                  Thank you! Our expert will share the G-meet link soon.
+                <Sparkles size={16} />
+                Free Career Guidance Webinar
+              </motion.div>
+
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="text-3xl md:text-4xl lg:text-5xl font-bold text-grey-15 mb-4 leading-tight"
+              >
+                Discover Your Perfect Career Path
+              </motion.h2>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="text-grey-35 text-lg mb-6"
+              >
+                Join our expert-led session to explore career opportunities and get personalized guidance
+              </motion.p>
+
+              {/* Webinar Timing */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.45 }}
+                className="mb-6"
+              >
+                <div className="inline-flex items-center gap-3 bg-white/90 backdrop-blur-sm px-6 py-3 rounded-xl border border-primary-75/20">
+                  <div className="flex items-center gap-2">
+                    <CalendarDays className="w-5 h-5 text-primary-75" />
+                    <span className="text-grey-15 font-medium">{webinarTiming.day}</span>
+                  </div>
+                  <div className="w-px h-6 bg-primary-75/20" />
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-5 h-5 text-primary-75" />
+                    <span className="text-grey-15 font-medium">{webinarTiming.time}</span>
+                  </div>
                 </div>
-              )}
-              {formStatus === "error" && (
-                <div className="text-red-600 text-center mt-2">
-                  Submission failed. Please try again.
-                </div>
-              )}
-            </form>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="flex flex-wrap gap-4 justify-center md:justify-start"
+              >
+                {webinarFeatures.map((feature, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center gap-2 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full"
+                  >
+                    <feature.icon className="w-4 h-4 text-primary-75" />
+                    <span className="text-grey-15 text-sm">{feature.text}</span>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.6 }}
+              className="flex flex-col items-center gap-4"
+            >
+              <motion.div
+                animate={{
+                  y: [0, -10, 0],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                <Button
+                  onClick={() => setShowDialog(true)}
+                  className="bg-primary-75 hover:bg-primary-80 text-white px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+                >
+                  Register Now
+                </Button>
+              </motion.div>
+
+              <motion.div
+                animate={{
+                  opacity: [1, 0.5, 1],
+                  scale: [1, 1.05, 1],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="flex items-center gap-2"
+              >
+                <span className="inline-block w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+                <p className="text-sm font-bold text-red-500">
+                  Limited seats available
+                </p>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
-      )}
-    </section>
+      </motion.div>
+
+      {/* Registration Dialog */}
+      <Dialog open={showDialog} onOpenChange={setShowDialog}>
+        <DialogContent className="sm:max-w-[500px]">
+          <DialogHeader>
+            <DialogTitle>Webinar Registration</DialogTitle>
+            <DialogDescription>
+              Fill in your details to register for the webinar. Our expert will
+              get back to you with the meeting link.
+            </DialogDescription>
+          </DialogHeader>
+
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Full Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter your name" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="dob"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col">
+                    <FormLabel>Date of Birth</FormLabel>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <FormControl>
+                          <Button
+                            variant={"outline"}
+                            className={cn(
+                              "w-full pl-3 text-left font-normal",
+                              !field.value && "text-muted-foreground"
+                            )}
+                          >
+                            {field.value ? (
+                              format(field.value, "PPP")
+                            ) : (
+                              <span>Pick a date</span>
+                            )}
+                            <Calendar className="ml-auto h-4 w-4 opacity-50" />
+                          </Button>
+                        </FormControl>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <CalendarComponent
+                          mode="single"
+                          selected={field.value}
+                          onSelect={field.onChange}
+                          disabled={(date) =>
+                            date > new Date() || date < new Date("1900-01-01")
+                          }
+                          initialFocus
+                        />
+                      </PopoverContent>
+                    </Popover>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="email"
+                        placeholder="Enter your email"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="mobile"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Mobile Number</FormLabel>
+                    <FormControl>
+                      <ReactPhoneInput
+                        country={"in"}
+                        value={phoneValue}
+                        onChange={(phone, data) => {
+                          setPhoneValue(phone);
+                          if (data && "dialCode" in data) {
+                            const countryCode = `+${data.dialCode}`;
+                            const phoneWithoutCode = phone.replace(
+                              countryCode,
+                              ""
+                            );
+                            form.setValue("countryCode", countryCode);
+                            form.setValue("mobile", phoneWithoutCode);
+                            field.onChange(phoneWithoutCode);
+                          } else {
+                            form.setValue("countryCode", "+91");
+                            field.onChange(phone);
+                          }
+                        }}
+                        inputClass="!w-full !h-10 !rounded-md !pl-[60px] focus:!ring-2 focus:!ring-primary-100"
+                        containerClass="!w-full"
+                        buttonClass="!h-10 !rounded-l-md"
+                        dropdownClass="!max-h-[200px] !overflow-y-auto"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="isGraduate"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Are you a graduate?</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select an option" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="Yes">Yes</SelectItem>
+                        <SelectItem value="No">No</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {form.watch("isGraduate") === "Yes" && (
+                <FormField
+                  control={form.control}
+                  name="graduationYear"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Graduation Year</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="number"
+                          placeholder="Enter your graduation year"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
+
+              {errorMessage && (
+                <div className="flex items-center gap-2 text-red-500">
+                  <XCircle className="h-4 w-4" />
+                  <span>{errorMessage}</span>
+                </div>
+              )}
+
+              <Button
+                type="submit"
+                className="w-full bg-primary-75 hover:bg-primary-80"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Submitting..." : "Register"}
+              </Button>
+            </form>
+          </Form>
+
+          {isSuccess && (
+            <div className="flex items-center gap-2 text-green-500 mt-4">
+              <CheckCircle2 className="h-4 w-4" />
+              <span>Registration successful! We'll contact you soon.</span>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+    </>
   );
-}
+} 

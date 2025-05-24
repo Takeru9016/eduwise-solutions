@@ -28,6 +28,7 @@ import PaymentStatusModal from "./PaymentStatusModal";
 import PaymentModal from "./PaymentModal";
 import { Badge } from "@/components/ui/badge";
 import BenefitSection from "./BenefitSection";
+import WebinarBanner from "./WebinarBanner";
 
 const features = [
   {
@@ -455,6 +456,11 @@ export default function ProfessionalPage() {
         amount={5000}
         programName="Professional Program"
       />
+
+      {/* Webinar Banner */}
+      <div className="container mx-auto px-4 py-8">
+        <WebinarBanner />
+      </div>
 
       {/* Hero Section */}
       <section className="relative py-16 md:py-24 bg-gradient-to-b from-primary-99 to-white overflow-hidden">

@@ -21,3 +21,4 @@ export { default as FAQsPage } from "./FAQsPage";
 export { default as CTASection } from "./CTASection";
 export { default as PopupForm } from "./PopupForm";
 export { default as TestimonialPage } from "./TestimonialPage";
+export { default as MetaPixel } from "./MetaPixel";

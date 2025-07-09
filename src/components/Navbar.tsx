@@ -79,8 +79,8 @@ export default function Navbar() {
     },
     {
       icon: Mail,
-      href: "mailto:admin@eduwise.solutions",
-      text: "admin@eduwise.solutions",
+      href: "mailto:vishal.chettri@eduwise.solutions",
+      text: "vishal.chettri@eduwise.solutions",
     },
   ];
 

@@ -256,7 +256,7 @@ export default function RefundPolicyPage() {
     },
   ];
 
-  const supportEmail = "admin@eduwise.solutions";
+  const supportEmail = "vishal.chettri@eduwise.solutions";
 
   return (
     <main className="min-h-screen bg-white">

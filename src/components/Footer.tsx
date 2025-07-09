@@ -73,8 +73,8 @@ export default function Footer() {
     { label: "About Us", href: "/about" },
     // { label: "Our Courses", href: "/courses" },
     { label: "Contact", href: "/contact" },
-    {label: "Testimonials", href: "/testimonials"},
-    {label: "FAQ", href: "/faq"}
+    { label: "Testimonials", href: "/testimonials" },
+    { label: "FAQ", href: "/faq" }
   ];
 
   // const programLinks: FooterLink[] = [
@@ -123,8 +123,8 @@ export default function Footer() {
             </Link>
 
             <div className="space-y-4">
-              <ContactItem icon={Mail} href="mailto:admin@eduwise.solutions">
-                admin@eduwise.solutions
+              <ContactItem icon={Mail} href="mailto:vishal.chettri@eduwise.solutions">
+                vishal.chettri@eduwise.solutions
               </ContactItem>
 
               <ContactItem icon={Phone} href="tel:+919148774540">

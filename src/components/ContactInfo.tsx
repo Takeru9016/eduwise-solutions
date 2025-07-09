@@ -74,8 +74,8 @@ export default function ContactInfo() {
     {
       icon: Mail,
       title: "Email",
-      value: "admin@eduwise.solutions",
-      href: "mailto:admin@eduwise.solutions",
+      value: "vishal.chettri@eduwise.solutions",
+      href: "mailto:vishal.chettri@eduwise.solutions",
     },
     {
       icon: Phone,

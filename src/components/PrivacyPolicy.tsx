@@ -241,7 +241,7 @@ export default function PrivacyPolicyPage() {
                   href="mailto:legal@eduwise.solutions"
                   className="text-primary-50 font-bold text-xl hover:underline"
                 >
-                  admin@eduwise.solutions
+                  vishal.chettri@eduwise.solutions
                 </a>
               </CardContent>
             </Card>

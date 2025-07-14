@@ -29,6 +29,13 @@ const testimonials = [
     text: "I never thought a short course could have such a big impact. Eduwise taught me the skills I wish college had. More importantly, they taught me how to use them.",
     image: "/testimonials/kushal.jpeg",
   },
+  {
+    name: "Shraddha Dey",
+    username: "Customer Support",
+    company: "Saarthi IAS",
+    text: "As a fresher recently graduated, I was actively looking for good opportunities and was quite worried about my career. That’s when I came across Eduwise Solutions, helped me gain confidence, improve my resume, build a strong LinkedIn profile, and provided proper training. Thanks to their support, I have now secured a work-from-home job. Thank you so much, Eduwise Solutions, for guiding me through this journey!",
+    image: "/testimonials/shraddha.jpeg",
+  },
 ];
 
 export default function TestimonialPage() {

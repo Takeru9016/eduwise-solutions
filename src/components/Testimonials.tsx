@@ -53,6 +53,16 @@ export default function TestimonialsSectionBasic() {
               avatar: "/testimonials/kushal.jpeg",
               rating: 5,
             },
+            {
+              id: 5,
+              name: "Shraddha Dey",
+              role: "Customer Support",
+              company: "Saarthi IAS",
+              content:
+                "As a fresher recently graduated, I was actively looking for good opportunities and was quite worried about my career. That’s when I came across Eduwise Solutions, helped me gain confidence, improve my resume, build a strong LinkedIn profile, and provided proper training. Thanks to their support, I have now secured a work-from-home job. Thank you so much, Eduwise Solutions, for guiding me through this journey!",
+              avatar: "/testimonials/shraddha.jpeg",
+              rating: 5,
+            },
           ]}
         />
       </div>

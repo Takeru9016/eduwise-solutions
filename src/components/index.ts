@@ -1,24 +1,30 @@
-export { default as Navbar } from "./Navbar";
-export { default as HeroSection } from "./HeroSection";
-export { default as BenefitSection } from "./BenefitSection";
-export { default as ProgramSection } from "./ProgramSection";
-export { default as Testimonials } from "./Testimonials";
-export { default as FAQs } from "./FAQs";
-export { default as Footer } from "./Footer";
-export { default as OurCourse } from "./OurCourse";
-export { default as ContactUs } from "./ContactUs";
 export { default as AboutUs } from "./AboutUs";
-export { default as MastersPage } from "./MastersPage";
-export { default as ProfessionalPage } from "./ProfessionalPage";
-export { default as MBA } from "./MBA";
-export { default as MSc_in_DS } from "./MSc_in_DS";
-export { default as MSc_in_CC } from "./MSc_in_CC";
-export { default as CertificationPage } from "./CertificationPage";
-export { default as RefundPage } from "./RefundPage";
-export { default as PrivacyPolicy } from "./PrivacyPolicy";
-export { default as TermsOfService } from "./TermsOfService";
+export { default as ContactUs } from "./ContactUs";
 export { default as FAQsPage } from "./FAQsPage";
-export { default as CTASection } from "./CTASection";
-export { default as PopupForm } from "./PopupForm";
+export { default as HeroSection } from "./HeroSection";
 export { default as TestimonialPage } from "./TestimonialPage";
-export { default as MetaPixel } from "./MetaPixel";
+
+export { default as BookFormDialog } from "./common/BookFormDialog";
+export { default as BookButton } from "./common/BookButton";
+export { default as BenefitSection } from "./common/BenefitSection";
+export { default as ComingSoonPage } from "./common/ComingSoon";
+export { default as CTASection } from "./common/CTASection";
+export { default as FAQs } from "./common/FAQs";
+export { default as Footer } from "./common/Footer";
+export { default as MetaPixel } from "./common/MetaPixel";
+export { default as Navbar } from "./common/Navbar";
+export { default as ProgramSection } from "./common/ProgramSection";
+export { default as PopupForm } from "./common/PopupForm";
+export { default as Testimonials } from "./common/Testimonials";
+
+export { default as OurCourse } from "./courses/OurCourse";
+export { default as ProfessionalPage } from "./courses/ProfessionalPage";
+
+export { default as MastersPage } from "./masters/MastersPage";
+export { default as MBA } from "./masters/MBA";
+export { default as MSc_in_CC } from "./masters/MSc_in_CC";
+export { default as MSc_in_DS } from "./masters/MSc_in_DS";
+
+export { default as PrivacyPolicy } from "./legal/PrivacyPolicy";
+export { default as RefundPage } from "./legal/RefundPage";
+export { default as TermsOfService } from "./legal/TermsOfService";

@@ -30,7 +30,7 @@ interface CourseCategory {
   subtitle: string;
   description: string;
   mainImage: string;
-  additionalImages: string[];
+  additionalImages?: string[];
   viewLink: string;
   icon: React.ElementType;
   stats: CourseStat[];
@@ -41,16 +41,88 @@ const courseCategories: CourseCategory[] = [
     title: "Professional Certification",
     subtitle: "100% Job Guarantee",
     description:
-      "Get a 100% job guarantee with our 45-day programme! Learn resume building, LinkedIn optimization, business communication, and more.",
-    mainImage: "/courses/it jobs.jpg",
-    additionalImages: ["/courses/jobs.jpg", "/courses/non-it.jpg"],
+      "Get a 100% job guarantee with our 15-day programme! Learn resume building, LinkedIn optimization, business communication, and more.",
+    mainImage: "/courses/professional.png",
+    // additionalImages: ["/courses/jobs.jpg", "/courses/non-it.jpg"],
     viewLink: "/professional",
     icon: BookCheck,
     stats: [
-      { label: "Duration", value: "45 Days", icon: Clock },
+      { label: "Duration", value: "15 Days", icon: Clock },
       { label: "Live Session", value: "100%", icon: CheckCircle },
       { label: "Doubt Clearing", value: "1:1", icon: Users },
       { label: "Access", value: "Lifetime", icon: Infinity },
+      { label: "Companies", value: "250+", icon: Building },
+      { label: "Placement", value: "100%", icon: Award },
+    ],
+  },
+  {
+    title: "Artificial Intelligence",
+    subtitle: "Master the future of tech",
+    description:
+      "Dive into AI and machine learning with hands-on projects and real-world applications.",
+    mainImage: "/courses/artificial-intelligence.png",
+    // additionalImages: ["/courses/jobs.jpg", "/courses/non-it.jpg"],
+    viewLink: "/ai-ml",
+    icon: BookCheck,
+    stats: [
+      { label: "Duration", value: "3 Months", icon: Clock },
+      { label: "Live Session", value: "100%", icon: CheckCircle },
+      { label: "Doubt Clearing", value: "1:1", icon: Users },
+      // { label: "Access", value: "Lifetime", icon: Infinity },
+      { label: "Companies", value: "250+", icon: Building },
+      { label: "Placement", value: "100%", icon: Award },
+    ],
+  },
+  {
+    title: "Data Science",
+    subtitle: "Turn data into insights",
+    description:
+      "Explore data analysis, visualization, and predictive modeling using industry-standard tools.",
+    mainImage: "/courses/data-science.png",
+    // additionalImages: ["/courses/jobs.jpg", "/courses/non-it.jpg"],
+    viewLink: "/data-science",
+    icon: BookCheck,
+    stats: [
+      { label: "Duration", value: "3 Months", icon: Clock },
+      { label: "Live Session", value: "100%", icon: CheckCircle },
+      { label: "Doubt Clearing", value: "1:1", icon: Users },
+      // { label: "Access", value: "Lifetime", icon: Infinity },
+      { label: "Companies", value: "250+", icon: Building },
+      { label: "Placement", value: "100%", icon: Award },
+    ],
+  },
+  {
+    title: "Full Stack Web Development",
+    subtitle: "Build dynamic web apps",
+    description:
+      "Master front-end and back-end development using modern technologies like React, Node.js, and more.",
+    mainImage: "/courses/full-stack.png",
+    // additionalImages: ["/courses/jobs.jpg", "/courses/non-it.jpg"],
+    viewLink: "/full-stack",
+    icon: BookCheck,
+    stats: [
+      { label: "Duration", value: "3 Months", icon: Clock },
+      { label: "Live Session", value: "100%", icon: CheckCircle },
+      { label: "Doubt Clearing", value: "1:1", icon: Users },
+      // { label: "Access", value: "Lifetime", icon: Infinity },
+      { label: "Companies", value: "250+", icon: Building },
+      { label: "Placement", value: "100%", icon: Award },
+    ],
+  },
+  {
+    title: "Cyber Security",
+    subtitle: "Defend against digital threats",
+    description:
+      "Learn ethical hacking, network defense, and more to become a cybersecurity expert.",
+    mainImage: "/courses/cyber-security.png",
+    // additionalImages: ["/courses/jobs.jpg", "/courses/non-it.jpg"],
+    viewLink: "/cyber-sec",
+    icon: BookCheck,
+    stats: [
+      { label: "Duration", value: "3 Months", icon: Clock },
+      { label: "Live Session", value: "100%", icon: CheckCircle },
+      { label: "Doubt Clearing", value: "1:1", icon: Users },
+      // { label: "Access", value: "Lifetime", icon: Infinity },
       { label: "Companies", value: "250+", icon: Building },
       { label: "Placement", value: "100%", icon: Award },
     ],
@@ -130,7 +202,7 @@ const CourseCard = ({ category }: { category: CourseCategory }) => {
             </div>
 
             {/* Thumbnail strip at bottom */}
-            <div className="absolute bottom-0 left-0 right-0 flex gap-2 p-3 bg-black/30 backdrop-blur-sm">
+            {/* <div className="absolute bottom-0 left-0 right-0 flex gap-2 p-3 bg-black/30 backdrop-blur-sm">
               <div
                 className={`relative w-24 h-16 rounded-md overflow-hidden cursor-pointer border-2 ${
                   currentImage === category.mainImage
@@ -164,7 +236,7 @@ const CourseCard = ({ category }: { category: CourseCategory }) => {
                   />
                 </div>
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
       </CardContent>

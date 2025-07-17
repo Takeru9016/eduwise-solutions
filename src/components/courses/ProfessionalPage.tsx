@@ -25,9 +25,9 @@ import {
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
-import PaymentStatusModal from "./PaymentStatusModal";
-import PaymentModal from "./PaymentModal";
-import BenefitSection from "./BenefitSection";
+import PaymentStatusModal from "../payment/PaymentStatusModal";
+import PaymentModal from "../payment/PaymentModal";
+import BenefitSection from "../common/BenefitSection";
 // import WebinarBanner from "./WebinarBanner";
 
 const features = [

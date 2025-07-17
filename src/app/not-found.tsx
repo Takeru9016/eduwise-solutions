@@ -11,7 +11,7 @@ export default function NotFound() {
   useEffect(() => {
     setIsVisible(true);
 
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: { clientX: any; clientY: any; }) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
@@ -68,8 +68,8 @@ export default function NotFound() {
             Oops! Page Not Found
           </h2>
           <p className="text-lg text-gray-300 max-w-md mx-auto leading-relaxed">
-            The page you're looking for seems to have vanished into the digital
-            void. Let's get you back on track!
+            The page you&apos;re looking for seems to have vanished into the digital
+            void. Let&apos;s get you back on track!
           </p>
         </div>
 
@@ -92,8 +92,8 @@ export default function NotFound() {
           </div>
           <p className="text-gray-300 text-sm">
             The 404 error code was named after room 404 at CERN, where the first
-            web server was located. When pages weren't found, they'd say the
-            file was "not found in room 404"!
+            web server was located. When pages weren&apos;t found, they&apos;d say the
+            file was &quot;not found in room 404&quot;!
           </p>
         </div>
       </div>

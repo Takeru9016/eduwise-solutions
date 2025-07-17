@@ -1,4 +1,4 @@
-import { TestimonialsSection } from "./blocks/simple-animated-testimonials";
+import { TestimonialsSection } from "../blocks/simple-animated-testimonials";
 
 // Main component
 export default function TestimonialsSectionBasic() {

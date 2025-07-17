@@ -81,7 +81,7 @@ export default function Footer() {
     { label: "Artificial Intelligence", href: "/ai-ml" },
     { label: "Cyber Security", href: "/cyber-sec" },
     { label: "Data Science", href: "/data-science" },
-    { label: "Full Stack Web Developer", href: "/full-stack-web-dev" },
+    { label: "Full Stack Web Developer", href: "/full-stack" },
     { label: "Professional Certification", href: "/professional" },
   ];
 

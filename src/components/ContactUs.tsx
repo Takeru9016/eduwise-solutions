@@ -6,8 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { CheckCircle2, XCircle, Sparkles, Mail, Send } from "lucide-react";
 
-import ContactInfo from "./ContactInfo";
-import LoadingOverlay from "./LoadingOverlay";
+import ContactInfo from "./common/ContactInfo";
+import LoadingOverlay from "./common/LoadingOverlay";
 import { submitWithRetry } from "@/utils/api";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

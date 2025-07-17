@@ -68,7 +68,7 @@ const programCategories: ProgramCategory[] = [
     description:
       "Master front-end and back-end development using modern technologies like React, Node.js, and more.",
     image: "/courses/full-stack.png",
-    viewLink: "/full-stack-web-dev",
+    viewLink: "/full-stack",
     featured: false,
   },
 ];
@@ -90,15 +90,15 @@ const ProgramCard = ({ program }: { program: ProgramCategory }) => {
             <div className="space-y-6">
               {program.featured ? (
                 <Badge
-                  variant="outline"
-                  className="bg-primary-50 text-white text-sm border-primary-200 mb-2"
+                  variant="default"
+                  className="bg-primary-50 text-white text-base border-primary-200 mb-2"
                 >
                   Featured Program
                 </Badge>
               ) : (
                 <Badge
-                  variant="outline"
-                  className="bg-gray-200 text-gray-600 text-sm border-gray-300 mb-2"
+                  variant="secondary"
+                  className="bg-primary-75 text-white text-base border-primary-200 mb-2"
                 >
                   Coming Soon
                 </Badge>
@@ -179,7 +179,7 @@ export default function Programs() {
           <Link href="/courses">
             <Button
               variant="outline"
-              className="border-2 border-primary-500 text-primary-600 hover:bg-primary-50 px-6 py-2 rounded-lg flex items-center gap-2 transition-all duration-300"
+              className="border-2 border-primary-500 text-primary-600 hover:bg-primary-50 hover:text-white px-6 py-2 rounded-lg flex items-center gap-2 transition-all duration-300"
             >
               View All Programs
               <ArrowRight

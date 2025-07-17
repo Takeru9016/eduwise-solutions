@@ -31,7 +31,46 @@ const programCategories: ProgramCategory[] = [
     viewLink: "/professional",
     featured: true,
   },
-  // You can add more programs here when needed
+  {
+    id: "ai-cert",
+    title: "Artificial Intelligence",
+    subtitle: "Master the future of tech",
+    description:
+      "Dive into AI and machine learning with hands-on projects and real-world applications.",
+    image: "/courses/artificial-intelligence.png",
+    viewLink: "/ai-ml",
+    featured: false,
+  },
+  {
+    id: "cyber-security-cert",
+    title: "Cyber Security",
+    subtitle: "Defend against digital threats",
+    description:
+      "Learn ethical hacking, network defense, and more to become a cybersecurity expert.",
+    image: "/courses/cyber-security.png",
+    viewLink: "/cyber-sec",
+    featured: false,
+  },
+  {
+    id: "data-science-cert",
+    title: "Data Science",
+    subtitle: "Turn data into insights",
+    description:
+      "Explore data analysis, visualization, and predictive modeling using industry-standard tools.",
+    image: "/courses/data-science.png",
+    viewLink: "/data-science",
+    featured: false,
+  },
+  {
+    id: "full-stack-cert",
+    title: "Full Stack Web Developer",
+    subtitle: "Build dynamic web apps",
+    description:
+      "Master front-end and back-end development using modern technologies like React, Node.js, and more.",
+    image: "/courses/full-stack.png",
+    viewLink: "/full-stack-web-dev",
+    featured: false,
+  },
 ];
 
 const ProgramCard = ({ program }: { program: ProgramCategory }) => {
@@ -49,12 +88,19 @@ const ProgramCard = ({ program }: { program: ProgramCategory }) => {
           {/* Content - Left Side */}
           <div className="p-8 flex flex-col justify-between md:w-2/5 bg-gradient-to-br from-white to-slate-50">
             <div className="space-y-6">
-              {program.featured && (
+              {program.featured ? (
                 <Badge
                   variant="outline"
                   className="bg-primary-50 text-white text-sm border-primary-200 mb-2"
                 >
                   Featured Program
+                </Badge>
+              ) : (
+                <Badge
+                  variant="outline"
+                  className="bg-gray-200 text-gray-600 text-sm border-gray-300 mb-2"
+                >
+                  Coming Soon
                 </Badge>
               )}
 

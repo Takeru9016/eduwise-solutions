@@ -130,7 +130,8 @@ const courseCategories: CourseCategory[] = [
 ];
 
 const CourseCard = ({ category }: { category: CourseCategory }) => {
-  const [currentImage, setCurrentImage] = useState(category.mainImage);
+  const [currentImage] = useState(category.mainImage);
+  // const [currentImage, setCurrentImage] = useState(category.mainImage);
 
   return (
     <Card className="group hover:shadow-xl transition-all duration-300 overflow-hidden border-0 ring-1 ring-slate-200">

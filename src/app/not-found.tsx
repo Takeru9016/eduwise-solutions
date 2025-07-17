@@ -11,7 +11,7 @@ export default function NotFound() {
   useEffect(() => {
     setIsVisible(true);
 
-    const handleMouseMove = (e: { clientX: any; clientY: any; }) => {
+    const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 

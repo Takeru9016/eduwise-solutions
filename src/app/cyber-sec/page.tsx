@@ -2,8 +2,14 @@ import { ComingSoonPage } from "@/components";
 
 export default function CyberSec() {
   return (
-    <div>
+    <>
       <ComingSoonPage />
-    </div>
+      {/* <Navbar />
+      <main className="min-h-screen">
+        <CyberSecPage />
+        <CTASection />
+      </main>
+      <Footer /> */}
+    </>
   );
 }

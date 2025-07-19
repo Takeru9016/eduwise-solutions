@@ -19,6 +19,10 @@ export { default as Testimonials } from "./common/Testimonials";
 
 export { default as OurCourse } from "./courses/OurCourse";
 export { default as ProfessionalPage } from "./courses/ProfessionalPage";
+export { default as AIMLPage } from "./courses/AIMLPage";
+export { default as CyberSecPage } from "./courses/CyberSec";
+export { default as DSPage } from "./courses/DSPage";
+export { default as FullStackPage } from "./courses/FullStack";
 
 export { default as MastersPage } from "./masters/MastersPage";
 export { default as MBA } from "./masters/MBA";

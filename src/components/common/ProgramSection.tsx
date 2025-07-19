@@ -79,76 +79,78 @@ const ProgramCard = ({ program }: { program: ProgramCategory }) => {
   return (
     <Card
       key={program.id}
-      className="group hover:shadow-xl transition-all duration-300 overflow-hidden border border-slate-200"
+      className="group hover:shadow-xl transition-all duration-300 overflow-hidden border border-slate-200 bg-white"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <CardContent className="p-0">
-        <div className="flex flex-col md:flex-row">
-          {/* Content - Left Side */}
-          <div className="p-8 flex flex-col justify-between md:w-2/5 bg-gradient-to-br from-white to-slate-50">
-            <div className="space-y-6">
-              {program.featured ? (
-                <Badge
-                  variant="default"
-                  className="bg-primary-50 text-white text-base border-primary-200 mb-2"
-                >
-                  Featured Program
-                </Badge>
-              ) : (
-                <Badge
-                  variant="secondary"
-                  className="bg-primary-75 text-white text-base border-primary-200 mb-2"
-                >
-                  Coming Soon
-                </Badge>
-              )}
+        {/* Header Image */}
+        <div className="relative h-48 overflow-hidden">
+          <Image
+            src={program.image}
+            alt={program.title}
+            fill
+            className={`object-cover transition-transform duration-700 ${
+              isHovered ? "scale-105" : "scale-100"
+            }`}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+        </div>
 
-              <div>
-                <h3 className="text-2xl font-bold text-slate-900 mb-2">
-                  {program.title}
-                </h3>
-                <p className="text-primary-600 font-medium inline-block px-3 py-1 bg-primary-100 rounded-full text-sm">
-                  {program.subtitle}
-                </p>
-              </div>
-
-              <p className="text-slate-600 leading-relaxed">
-                {program.description}
-              </p>
-
-              <div className="pt-4">
-                <Link href={program.viewLink}>
-                  <Button
-                    variant="outline"
-                    className="border-primary-500 text-black hover:text-white hover:bg-primary-50 flex items-center gap-2 transition-all duration-300"
-                  >
-                    View Details
-                    <ArrowRight
-                      size={18}
-                      className={`transition-transform duration-300 ${
-                        isHovered ? "translate-x-1" : ""
-                      }`}
-                    />
-                  </Button>
-                </Link>
-              </div>
-            </div>
+        {/* Content */}
+        <div className="p-6 space-y-4">
+          {/* Badge */}
+          <div className="mb-4">
+            {program.featured ? (
+              <Badge
+                variant="default"
+                className="bg-primary-50 text-white text-base border-primary-200"
+              >
+                Most Popular Program
+              </Badge>
+            ) : (
+              <Badge
+                variant="secondary"
+                className="bg-primary-75 text-white text-sm border-primary-200"
+              >
+                Coming Soon
+              </Badge>
+            )}
           </div>
 
-          {/* Image - Right Side */}
-          <div className="md:w-3/5 relative overflow-hidden">
-            <div className="relative w-full h-full min-h-[280px]">
-              <Image
-                src={program.image}
-                alt={program.title}
-                fill
-                className={`object-cover transition-transform duration-700 ${
-                  isHovered ? "scale-105" : "scale-100"
-                }`}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            </div>
+          {/* Title */}
+          <div>
+            <h3 className="text-xl font-bold text-slate-900 mb-2 leading-tight">
+              {program.title}
+            </h3>
+            <p className="text-primary-600 font-medium inline-block px-3 py-1 bg-primary-100 rounded-full text-sm">
+              {program.subtitle}
+            </p>
+          </div>
+
+          {/* Description */}
+          <p className="text-slate-600 leading-relaxed text-sm">
+            {program.description}
+          </p>
+
+          {/* Action Buttons */}
+          <div className="flex gap-3 pt-4">
+            {/* <Button
+              variant="default"
+              className="bg-black hover:bg-gray-800 text-white px-6 py-2 rounded-full flex items-center gap-2 transition-all duration-300"
+            >
+              <Download size={16} />
+              Brochure
+            </Button> */}
+
+            <Link href={program.viewLink}>
+              <Button
+                variant="outline"
+                className="border-2 border-slate-300 text-slate-700 hover:bg-slate-50 px-6 py-2 rounded-full flex items-center gap-2 transition-all duration-300"
+              >
+                View Details
+              </Button>
+            </Link>
           </div>
         </div>
       </CardContent>
@@ -157,10 +159,6 @@ const ProgramCard = ({ program }: { program: ProgramCategory }) => {
 };
 
 export default function Programs() {
-  // const featuredPrograms = programCategories.filter(
-  //   (program) => program.featured
-  // );
-
   return (
     <section className="relative py-16 md:py-24 bg-gradient-to-b from-white to-slate-50">
       <div className="container mx-auto px-4">
@@ -191,7 +189,7 @@ export default function Programs() {
         </div>
 
         {/* Programs Grid */}
-        <div className="grid gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {programCategories.map((program) => (
             <ProgramCard key={program.id} program={program} />
           ))}

@@ -14,7 +14,6 @@ import {
   Medal,
   Zap,
   IndianRupee,
-  Award,
   Target,
   Presentation,
   BarChart3,
@@ -317,7 +316,7 @@ export default function AIMLPage() {
               Program Highlights
             </div>
             <h2 className="text-3xl md:text-4xl font-vietnam font-bold text-grey-15">
-              What You'll Get
+              What You&apos;ll Get
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

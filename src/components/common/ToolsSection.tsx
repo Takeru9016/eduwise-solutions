@@ -5,15 +5,8 @@ import {
   Cloud,
   Cpu,
   BarChart3,
-  Layers,
-  FlaskConical,
-  GitBranch,
-  ServerCog,
   BookOpen,
   Settings2,
-  Package2,
-  FileBarChart,
-  MessageSquareCode,
 } from "lucide-react";
 
 const toolsData = [
@@ -21,43 +14,63 @@ const toolsData = [
     icon: Code2,
     title: "Programming Languages & Frameworks",
     items: [
-      "Python", "C", "HTML", "CSS", "JavaScript", "Flask", "Django", "NumPy", "Pandas", "Matplotlib", "Seaborn", "OpenCV", "PyTorch", "TensorFlow", "Scikit-learn", "NLTK", "SpaCy"
+      "Python",
+      "C",
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Flask",
+      "Django",
+      "NumPy",
+      "Pandas",
+      "Matplotlib",
+      "Seaborn",
+      "OpenCV",
+      "PyTorch",
+      "TensorFlow",
+      "Scikit-learn",
+      "NLTK",
+      "SpaCy",
     ],
   },
   {
     icon: Terminal,
     title: "Development Environments & Tools",
     items: [
-      "Jupyter Notebook", "Google Colab", "Anaconda", "VS Code", "Git", "GitHub"
+      "Jupyter Notebook",
+      "Google Colab",
+      "Anaconda",
+      "VS Code",
+      "Git",
+      "GitHub",
     ],
   },
   {
     icon: Database,
     title: "Database & Big Data",
-    items: [
-      "MySQL", "MongoDB", "Hadoop", "MapReduce", "Hive", "Spark"
-    ],
+    items: ["MySQL", "MongoDB", "Hadoop", "MapReduce", "Hive", "Spark"],
   },
   {
     icon: Cloud,
     title: "Cloud & Deployment",
     items: [
-      "AWS (Amazon Web Services)", "Microsoft Azure", "GCP (Google Cloud Platform)", "Docker", "Kubernetes", "CI/CD Tools"
+      "AWS (Amazon Web Services)",
+      "Microsoft Azure",
+      "GCP (Google Cloud Platform)",
+      "Docker",
+      "Kubernetes",
+      "CI/CD Tools",
     ],
   },
   {
     icon: Cpu,
     title: "Machine Learning & AI Tools",
-    items: [
-      "AutoML", "MLflow", "TensorBoard"
-    ],
+    items: ["AutoML", "MLflow", "TensorBoard"],
   },
   {
     icon: BarChart3,
     title: "Other Tools & Platforms",
-    items: [
-      "Tableau", "Power BI", "Apache Kafka", "RabbitMQ"
-    ],
+    items: ["Tableau", "Power BI", "Apache Kafka", "RabbitMQ"],
   },
 ];
 
@@ -102,4 +115,4 @@ export default function ToolsSection() {
       </div>
     </section>
   );
-} 
+}

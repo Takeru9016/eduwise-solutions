@@ -17,8 +17,8 @@ import {
   Presentation,
   BarChart3,
   Target,
-  GraduationCap,
 } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import PaymentStatusModal from "../payment/PaymentStatusModal";
@@ -130,33 +130,6 @@ const careers = [
   { title: "BI Developer" },
 ];
 
-const dsFeatures = [
-  {
-    icon: Presentation,
-    title: "Foundation to advanced-level data science",
-  },
-  {
-    icon: BarChart3,
-    title: "Hands-on data analysis & visualization",
-  },
-  {
-    icon: Target,
-    title: "Project-driven learning methodology",
-  },
-];
-
-const dsTargets = [
-  { title: "Pursuing Technical Degrees", icon: GraduationCap },
-  { title: "Data science enthusiasts", icon: BarChart3 },
-  { title: "Professionals transitioning into data roles", icon: Briefcase },
-];
-
-const dsCareers = [
-  { title: "Data Scientist" },
-  { title: "Machine Learning Engineer" },
-  { title: "Data Analyst" },
-  { title: "Business Analyst" },
-];
 
 export default function DSPage() {
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
@@ -277,15 +250,22 @@ export default function DSPage() {
               <Sparkles size={16} className="text-primary-75" />
               Why Choose This Program
             </div>
-            <h2 className="text-3xl md:text-4xl font-vietnam font-bold text-grey-15">Key Features</h2>
+            <h2 className="text-3xl md:text-4xl font-vietnam font-bold text-grey-15">
+              Key Features
+            </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {dsFeatures.map((feature, index) => (
-              <div key={index} className="bg-white rounded-lg p-6 shadow-md border border-light-90 hover:border-primary-90 hover:shadow-lg transition-all duration-300 text-center">
+            {features.map((feature, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-lg p-6 shadow-md border border-light-90 hover:border-primary-90 hover:shadow-lg transition-all duration-300 text-center"
+              >
                 <div className="w-12 h-12 rounded-full bg-primary-95 flex items-center justify-center mb-4 mx-auto">
                   <feature.icon className="h-6 w-6 text-primary-75" />
                 </div>
-                <h3 className="text-xl font-vietnam font-bold text-grey-15 mb-2">{feature.title}</h3>
+                <h3 className="text-xl font-vietnam font-bold text-grey-15 mb-2">
+                  {feature.title}
+                </h3>
               </div>
             ))}
           </div>
@@ -299,15 +279,22 @@ export default function DSPage() {
               <Users size={16} className="text-primary-75" />
               Target Audience
             </div>
-            <h2 className="text-3xl md:text-4xl font-vietnam font-bold text-grey-15">Who Can Join</h2>
+            <h2 className="text-3xl md:text-4xl font-vietnam font-bold text-grey-15">
+              Who Can Join
+            </h2>
           </div>
           <div className="flex flex-col md:flex-row items-center justify-center gap-8 mx-auto">
-            {dsTargets.map((target, index) => (
-              <div key={index} className="bg-white rounded-lg p-6 shadow-md border border-light-90 hover:border-primary-90 hover:shadow-lg transition-all duration-300 w-full md:w-1/3 text-center">
+            {targets.map((target, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-lg p-6 shadow-md border border-light-90 hover:border-primary-90 hover:shadow-lg transition-all duration-300 w-full md:w-1/3 text-center"
+              >
                 <div className="w-16 h-16 rounded-full bg-primary-95 flex items-center justify-center mx-auto mb-4">
                   <target.icon className="h-8 w-8 text-primary-75" />
                 </div>
-                <h3 className="text-xl font-vietnam font-bold text-grey-15">{target.title}</h3>
+                <h3 className="text-xl font-vietnam font-bold text-grey-15">
+                  {target.title}
+                </h3>
               </div>
             ))}
           </div>
@@ -324,15 +311,22 @@ export default function DSPage() {
               <Zap size={16} className="text-primary-75" />
               Program Highlights
             </div>
-            <h2 className="text-3xl md:text-4xl font-vietnam font-bold text-grey-15">What You'll Get</h2>
+            <h2 className="text-3xl md:text-4xl font-vietnam font-bold text-grey-15">
+            What You&apos;ll Get
+            </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {highlights.map((highlight, index) => (
-              <div key={index} className="bg-white rounded-lg overflow-hidden shadow-md border border-light-90 hover:border-primary-90 hover:shadow-lg transition-all duration-300">
+              <div
+                key={index}
+                className="bg-white rounded-lg overflow-hidden shadow-md border border-light-90 hover:border-primary-90 hover:shadow-lg transition-all duration-300"
+              >
                 <div className="bg-primary-95 p-4">
                   <div className="flex items-center gap-3">
                     <highlight.icon className="w-6 h-6 text-primary-75" />
-                    <h3 className="text-xl font-vietnam font-bold text-grey-15">{highlight.category}</h3>
+                    <h3 className="text-xl font-vietnam font-bold text-grey-15">
+                      {highlight.category}
+                    </h3>
                   </div>
                 </div>
                 <div className="p-6">
@@ -358,23 +352,35 @@ export default function DSPage() {
               <BookOpen size={16} className="text-primary-75" />
               Program Structure
             </div>
-            <h2 className="text-3xl md:text-4xl font-vietnam font-bold text-grey-15">Curriculum Overview</h2>
+            <h2 className="text-3xl md:text-4xl font-vietnam font-bold text-grey-15">
+              Curriculum Overview
+            </h2>
             <p className="text-grey-35 text-lg mt-4 max-w-3xl mx-auto">
-              A step-by-step journey from basics to advanced data science concepts, with hands-on projects and real-world applications.
+              A step-by-step journey from basics to advanced data science
+              concepts, with hands-on projects and real-world applications.
             </p>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {modules.map((module, index) => (
-              <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl border-b-4 border-primary-75">
+              <div
+                key={index}
+                className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl border-b-4 border-primary-75"
+              >
                 <div className="bg-primary-95 p-6">
                   <div className="flex justify-between items-center mb-3">
-                    <Badge className="bg-primary-75 text-white px-3 py-1">Module {index + 1}</Badge>
+                    <Badge className="bg-primary-75 text-white px-3 py-1">
+                      Module {index + 1}
+                    </Badge>
                   </div>
-                  <h3 className="text-xl font-vietnam font-bold text-grey-15">{module.title}</h3>
+                  <h3 className="text-xl font-vietnam font-bold text-grey-15">
+                    {module.title}
+                  </h3>
                   <p className="mt-2 text-grey-35">{module.description}</p>
                 </div>
                 <div className="p-6">
-                  <h4 className="font-vietnam font-semibold text-grey-15 mb-3">Key Focus Areas:</h4>
+                  <h4 className="font-vietnam font-semibold text-grey-15 mb-3">
+                    Key Focus Areas:
+                  </h4>
                   <ul className="space-y-2">
                     {module.weeks.map((week, weekIdx) => (
                       <li key={weekIdx} className="flex items-start gap-2">
@@ -396,22 +402,28 @@ export default function DSPage() {
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-white rounded-xl shadow-lg overflow-hidden p-8 border-l-4 border-primary-75">
-              <h3 className="text-2xl font-vietnam font-bold text-grey-15 mb-6">Career Opportunities</h3>
+              <h3 className="text-2xl font-vietnam font-bold text-grey-15 mb-6">
+                Career Opportunities
+              </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {dsCareers.map((career, index) => (
+                {careers.map((career, index) => (
                   <div key={index} className="flex gap-3">
                     <div className="w-10 h-10 rounded-full bg-primary-95 flex items-center justify-center flex-shrink-0">
                       <Briefcase className="w-5 h-5 text-primary-75" />
                     </div>
                     <div>
-                      <h4 className="font-vietnam font-bold text-grey-15">{career.title}</h4>
+                      <h4 className="font-vietnam font-bold text-grey-15">
+                        {career.title}
+                      </h4>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
             <div className="bg-white rounded-xl shadow-lg overflow-hidden p-8 border-l-4 border-primary-75 max-h-fit">
-              <h3 className="text-2xl font-vietnam font-bold text-grey-15 mb-6">Program Investment</h3>
+              <h3 className="text-2xl font-vietnam font-bold text-grey-15 mb-6">
+                Program Investment
+              </h3>
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
                   <div className="w-14 h-14 rounded-full bg-primary-95 flex items-center justify-center flex-shrink-0">
@@ -420,12 +432,17 @@ export default function DSPage() {
                   <div>
                     <p className="text-grey-20 font-bold">Upfront Payment</p>
                     <div className="flex items-center gap-2 mt-1">
-                      <p className="text-3xl font-vietnam font-bold text-primary-75">₹11,000</p>
-                      <Badge className="bg-green-500 text-white text-sm px-3 py-1 animate-pulse">50% OFF</Badge>
+                      <p className="text-3xl font-vietnam font-bold text-primary-75">
+                        ₹11,000
+                      </p>
+                      <Badge className="bg-green-500 text-white text-sm px-3 py-1 animate-pulse">
+                        50% OFF
+                      </Badge>
                     </div>
                     <div className="mt-1">
                       <p className="text-sm text-grey-35">
-                        <span className="line-through text-lg">₹50,000</span> • One-time payment
+                        <span className="line-through text-lg">₹50,000</span> •
+                        One-time payment
                       </p>
                       <div className="mt-2 bg-green-50 border border-green-200 rounded-md p-2 inline-block">
                         <p className="text-sm text-green-700 font-medium flex items-center">
@@ -434,7 +451,10 @@ export default function DSPage() {
                         </p>
                       </div>
                     </div>
-                    <Button className="mt-4 w-full bg-primary-75 text-white text-lg px-6 py-3 hover:bg-primary-80 font-semibold flex items-center justify-center gap-2" onClick={openPaymentModal}>
+                    <Button
+                      className="mt-4 w-full bg-primary-75 text-white text-lg px-6 py-3 hover:bg-primary-80 font-semibold flex items-center justify-center gap-2"
+                      onClick={openPaymentModal}
+                    >
                       Enroll Now
                     </Button>
                   </div>
@@ -444,8 +464,12 @@ export default function DSPage() {
                     <Briefcase className="w-7 h-7 text-primary-75" />
                   </div>
                   <div>
-                    <p className="text-grey-20 font-bold">Pay After Placement</p>
-                    <p className="text-2xl font-vietnam font-bold text-primary-75">₹60,000</p>
+                    <p className="text-grey-20 font-bold">
+                      Pay After Placement
+                    </p>
+                    <p className="text-2xl font-vietnam font-bold text-primary-75">
+                      ₹60,000
+                    </p>
                   </div>
                 </div>
               </div>

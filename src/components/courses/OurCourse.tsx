@@ -38,24 +38,6 @@ interface CourseCategory {
 
 const courseCategories: CourseCategory[] = [
   {
-    title: "Professional Certification",
-    subtitle: "100% Job Guarantee",
-    description:
-      "Get a 100% job guarantee with our 15-day programme! Learn resume building, LinkedIn optimization, business communication, and more.",
-    mainImage: "/courses/professional.png",
-    // additionalImages: ["/courses/jobs.jpg", "/courses/non-it.jpg"],
-    viewLink: "/professional",
-    icon: BookCheck,
-    stats: [
-      { label: "Duration", value: "15 Days", icon: Clock },
-      { label: "Live Session", value: "100%", icon: CheckCircle },
-      { label: "Doubt Clearing", value: "1:1", icon: Users },
-      { label: "Access", value: "Lifetime", icon: Infinity },
-      { label: "Companies", value: "250+", icon: Building },
-      { label: "Placement", value: "100%", icon: Award },
-    ],
-  },
-  {
     title: "Artificial Intelligence",
     subtitle: "Master the future of tech",
     description:
@@ -123,6 +105,24 @@ const courseCategories: CourseCategory[] = [
       { label: "Live Session", value: "100%", icon: CheckCircle },
       { label: "Doubt Clearing", value: "1:1", icon: Users },
       // { label: "Access", value: "Lifetime", icon: Infinity },
+      { label: "Companies", value: "250+", icon: Building },
+      { label: "Placement", value: "100%", icon: Award },
+    ],
+  },
+  {
+    title: "Professional Certification",
+    subtitle: "100% Job Guarantee",
+    description:
+      "Get a 100% job guarantee with our 15-day programme! Learn resume building, LinkedIn optimization, business communication, and more.",
+    mainImage: "/courses/professional.png",
+    // additionalImages: ["/courses/jobs.jpg", "/courses/non-it.jpg"],
+    viewLink: "/professional",
+    icon: BookCheck,
+    stats: [
+      { label: "Duration", value: "15 Days", icon: Clock },
+      { label: "Live Session", value: "100%", icon: CheckCircle },
+      { label: "Doubt Clearing", value: "1:1", icon: Users },
+      { label: "Access", value: "Lifetime", icon: Infinity },
       { label: "Companies", value: "250+", icon: Building },
       { label: "Placement", value: "100%", icon: Award },
     ],

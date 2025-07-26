@@ -128,17 +128,17 @@ export default function ContactUsSection() {
   const [errorMessage, setErrorMessage] = useState("");
 
   const subjects: SubjectOption[] = [
-    { value: "mba", label: "Master in Business Administration (MBA)" },
+    { value: "aiml", label: "Artificial Intelligence & Machine Learning" },
     {
-      value: "msc_in_ds",
-      label: "MSc in Artificial Intelligence and Data Science",
+      value: "ds",
+      label: "Data Science",
     },
-    { value: "msc_in_cc", label: "MSc in Cloud Computing" },
+    { value: "cybersec", label: "Cyber Security" },
     {
       value: "professional_certification",
       label: "Professional Certification",
     },
-    { value: "certification_programme", label: "Certification Programme" },
+    { value: "fulstack", label: "Full Stack Web Development" },
     { value: "other", label: "Other" },
   ];
 

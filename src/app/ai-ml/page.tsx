@@ -1,15 +1,14 @@
-import { ComingSoonPage } from "@/components";
+import { AIMLPage, CTASection, Footer, Navbar } from "@/components";
 
 export default function AIML() {
   return (
     <>
-      <ComingSoonPage />
-      {/* <Navbar />
+      <Navbar />
       <main className="min-h-screen">
         <AIMLPage />
         <CTASection />
       </main>
-      <Footer /> */}
+      <Footer />
     </>
   );
 }

@@ -1,8 +1,6 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowRight, Sparkles } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -14,7 +12,6 @@ interface ProgramCategory {
   title: string;
   subtitle: string;
   description: string;
-  image: string;
   viewLink: string;
   featured?: boolean;
 }
@@ -22,22 +19,11 @@ interface ProgramCategory {
 // Enhanced data structure with more programs and unique IDs
 const programCategories: ProgramCategory[] = [
   {
-    id: "professional-cert",
-    title: "Professional Certification",
-    subtitle: "100% Job Guarantee",
-    description:
-      "Get a 100% job guarantee with our 45-day programme! Learn resume building, LinkedIn optimization, business communication, and more.",
-    image: "/courses/professional.png",
-    viewLink: "/professional",
-    featured: true,
-  },
-  {
     id: "ai-cert",
     title: "Artificial Intelligence",
     subtitle: "Master the future of tech",
     description:
       "Dive into AI and machine learning with hands-on projects and real-world applications.",
-    image: "/courses/artificial-intelligence.png",
     viewLink: "/ai-ml",
     featured: false,
   },
@@ -47,7 +33,6 @@ const programCategories: ProgramCategory[] = [
     subtitle: "Defend against digital threats",
     description:
       "Learn ethical hacking, network defense, and more to become a cybersecurity expert.",
-    image: "/courses/cyber-security.png",
     viewLink: "/cyber-sec",
     featured: false,
   },
@@ -57,7 +42,6 @@ const programCategories: ProgramCategory[] = [
     subtitle: "Turn data into insights",
     description:
       "Explore data analysis, visualization, and predictive modeling using industry-standard tools.",
-    image: "/courses/data-science.png",
     viewLink: "/data-science",
     featured: false,
   },
@@ -67,36 +51,27 @@ const programCategories: ProgramCategory[] = [
     subtitle: "Build dynamic web apps",
     description:
       "Master front-end and back-end development using modern technologies like React, Node.js, and more.",
-    image: "/courses/full-stack.png",
     viewLink: "/full-stack",
     featured: false,
+  },
+  {
+    id: "professional-cert",
+    title: "Professional Certification",
+    subtitle: "100% Job Guarantee",
+    description:
+      "Get a 100% job guarantee with our 45-day programme! Learn resume building, LinkedIn optimization, business communication, and more.",
+    viewLink: "/professional",
+    featured: true,
   },
 ];
 
 const ProgramCard = ({ program }: { program: ProgramCategory }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
     <Card
       key={program.id}
       className="group hover:shadow-xl transition-all duration-300 overflow-hidden border border-slate-200 bg-white"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
     >
       <CardContent className="p-0">
-        {/* Header Image */}
-        <div className="relative h-48 overflow-hidden">
-          <Image
-            src={program.image}
-            alt={program.title}
-            fill
-            className={`object-cover transition-transform duration-700 ${
-              isHovered ? "scale-105" : "scale-100"
-            }`}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-        </div>
-
         {/* Content */}
         <div className="p-6 space-y-4">
           {/* Badge */}
@@ -113,7 +88,7 @@ const ProgramCard = ({ program }: { program: ProgramCategory }) => {
                 variant="secondary"
                 className="bg-primary-75 text-white text-sm border-primary-200"
               >
-                Coming Soon
+                New Introduction
               </Badge>
             )}
           </div>

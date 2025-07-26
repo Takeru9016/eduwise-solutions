@@ -1,15 +1,14 @@
-import { ComingSoonPage } from "@/components";
+import { CTASection, CyberSecPage, Footer, Navbar } from "@/components";
 
 export default function CyberSec() {
   return (
     <>
-      <ComingSoonPage />
-      {/* <Navbar />
+      <Navbar />
       <main className="min-h-screen">
         <CyberSecPage />
         <CTASection />
       </main>
-      <Footer /> */}
+      <Footer />
     </>
   );
 }

@@ -1,5 +1,4 @@
 import {
-  BenefitSection,
   FAQs,
   Footer,
   HeroSection,
@@ -14,7 +13,6 @@ export default function Home() {
       <Navbar />
       <main className="min-h-screen">
         <HeroSection />
-        <BenefitSection/>
         <ProgramSection/>
         <Testimonials />
         <FAQs />

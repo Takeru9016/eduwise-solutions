@@ -5,7 +5,6 @@ import {
   Cloud,
   Cpu,
   BarChart3,
-  BookOpen,
   Settings2,
 } from "lucide-react";
 
@@ -88,7 +87,7 @@ export default function ToolsSection() {
           </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {toolsData.map((cat, idx) => (
+          {toolsData.map((cat) => (
             <div
               key={cat.title}
               className="bg-white rounded-xl shadow-lg border border-light-90 hover:border-primary-90 transition-all duration-300 p-8 flex flex-col items-center text-center"

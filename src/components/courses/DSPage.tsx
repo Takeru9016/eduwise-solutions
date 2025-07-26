@@ -14,9 +14,6 @@ import {
   Medal,
   Zap,
   IndianRupee,
-  Presentation,
-  BarChart3,
-  Target,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -129,7 +126,6 @@ const careers = [
   { title: "Data Engineer" },
   { title: "BI Developer" },
 ];
-
 
 export default function DSPage() {
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
@@ -312,7 +308,7 @@ export default function DSPage() {
               Program Highlights
             </div>
             <h2 className="text-3xl md:text-4xl font-vietnam font-bold text-grey-15">
-            What You&apos;ll Get
+              What You&apos;ll Get
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

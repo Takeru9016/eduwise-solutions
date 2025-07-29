@@ -125,14 +125,14 @@ const modules = [
   },
 ];
 
-const careers = [
-  { title: "Cyber Security Analyst" },
-  { title: "Penetration Tester" },
-  { title: "Security Engineer" },
-  { title: "SOC Analyst" },
-  { title: "Network Security Specialist" },
-  { title: "Incident Responder" },
-];
+// const careers = [
+//   { title: "Cyber Security Analyst" },
+//   { title: "Penetration Tester" },
+//   { title: "Security Engineer" },
+//   { title: "SOC Analyst" },
+//   { title: "Network Security Specialist" },
+//   { title: "Incident Responder" },
+// ];
 
 export default function CyberSecPage() {
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
@@ -226,7 +226,7 @@ export default function CyberSecPage() {
             </div>
             <div className="text-center">
               <p className="text-3xl font-vietnam font-bold text-primary-75">
-                6
+                3
               </p>
               <p className="text-grey-35">Months Program</p>
             </div>
@@ -402,7 +402,7 @@ export default function CyberSecPage() {
       <section className="py-16 bg-light-97">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden p-8 border-l-4 border-primary-75">
+            {/* <div className="bg-white rounded-xl shadow-lg overflow-hidden p-8 border-l-4 border-primary-75">
               <h3 className="text-2xl font-vietnam font-bold text-grey-15 mb-6">
                 Career Opportunities
               </h3>
@@ -420,7 +420,7 @@ export default function CyberSecPage() {
                   </div>
                 ))}
               </div>
-            </div>
+            </div> */}
             <div className="bg-white rounded-xl shadow-lg overflow-hidden p-8 border-l-4 border-primary-75 max-h-fit">
               <h3 className="text-2xl font-vietnam font-bold text-grey-15 mb-6">
                 Program Investment

@@ -219,7 +219,7 @@ export default function DSPage() {
             </div>
             <div className="text-center">
               <p className="text-3xl font-vietnam font-bold text-primary-75">
-                6
+                3
               </p>
               <p className="text-grey-35">Months Program</p>
             </div>
@@ -455,7 +455,7 @@ export default function DSPage() {
                     </Button>
                   </div>
                 </div>
-                <div className="flex items-center gap-4">
+                {/* <div className="flex items-center gap-4">
                   <div className="w-14 h-14 rounded-full bg-primary-95 flex items-center justify-center flex-shrink-0">
                     <Briefcase className="w-7 h-7 text-primary-75" />
                   </div>
@@ -467,7 +467,7 @@ export default function DSPage() {
                       ₹60,000
                     </p>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

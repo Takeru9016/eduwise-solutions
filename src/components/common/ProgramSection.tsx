@@ -81,14 +81,14 @@ const ProgramCard = ({ program }: { program: ProgramCategory }) => {
                 variant="default"
                 className="bg-primary-50 text-white text-base border-primary-200"
               >
-                Most Popular Program
+                Most Popular
               </Badge>
             ) : (
               <Badge
                 variant="secondary"
                 className="bg-primary-75 text-white text-sm border-primary-200"
               >
-                New Introduction
+                New
               </Badge>
             )}
           </div>
@@ -145,7 +145,10 @@ export default function Programs() {
               Featured Programs
             </div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900">
-              Our Programs
+              Choose your{" "}
+              <span className="px-2 py-1 rounded-md text-primary-80">
+                area of interest
+              </span>
             </h2>
           </div>
 

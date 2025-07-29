@@ -217,7 +217,7 @@ export default function FullStackPage() {
             </div>
             <div className="text-center">
               <p className="text-3xl font-vietnam font-bold text-primary-75">
-                6
+                3
               </p>
               <p className="text-grey-35">Months Program</p>
             </div>

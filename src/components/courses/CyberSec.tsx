@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import PaymentStatusModal from "../payment/PaymentStatusModal";
 import PaymentModal from "../payment/PaymentModal";
+import CSToolsSection from "../common/CSTools";
 
 const features = [
   {
@@ -315,7 +316,7 @@ export default function CyberSecPage() {
               Program Highlights
             </div>
             <h2 className="text-3xl md:text-4xl font-vietnam font-bold text-grey-15">
-            What You&apos;ll Get
+              What You&apos;ll Get
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -398,6 +399,10 @@ export default function CyberSecPage() {
           </div>
         </div>
       </section>
+
+      {/* Tools & Libraries Section */}
+      <CSToolsSection />
+
       {/* Career Opportunities & Pricing Section */}
       <section className="py-16 bg-light-97">
         <div className="container mx-auto">

@@ -20,7 +20,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import PaymentStatusModal from "../payment/PaymentStatusModal";
 import PaymentModal from "../payment/PaymentModal";
-import ToolsSection from "../common/ToolsSection";
+import ToolsSection from "../common/AIMLTools";
+import DSToolsSection from "../common/DSTools";
 
 const features = [
   {
@@ -392,7 +393,7 @@ export default function DSPage() {
         </div>
       </section>
       {/* Tools & Libraries Section */}
-      <ToolsSection />
+      <DSToolsSection />
       {/* Career Opportunities & Pricing Section */}
       <section className="py-16 bg-light-97">
         <div className="container mx-auto">

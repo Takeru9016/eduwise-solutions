@@ -172,7 +172,7 @@ export default function HeroSection() {
                     animation: "slideInRight 1s ease-out 0.6s forwards",
                   }}
                 >
-                  About What's Next?
+                  About What&apos;s Next?
                 </span>
               </div>
             </h1>
@@ -204,7 +204,7 @@ export default function HeroSection() {
               </p>
 
               <p className="text-gray-600 flex items-center justify-center gap-3 text-2xl">
-                <span>We're here to guide you every step of the way!</span>
+                <span>We&apos;re here to guide you every step of the way!</span>
                 <span className="text-4xl animate-bounce">🚀</span>
               </p>
             </div>

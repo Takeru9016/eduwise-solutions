@@ -3,6 +3,7 @@ import {
   Footer,
   HeroSection,
   Navbar,
+  BenefitSection,
   ProgramSection,
   Testimonials,
 } from "@/components";
@@ -14,6 +15,7 @@ export default function Home() {
       <main className="min-h-screen">
         <HeroSection />
         <ProgramSection/>
+        <BenefitSection />
         <Testimonials />
         <FAQs />
       </main>

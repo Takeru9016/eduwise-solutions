@@ -56,6 +56,22 @@ const courseCategories: CourseCategory[] = [
     ],
   },
   {
+    title: "DevOps",
+    subtitle: "Automate, ship, and scale",
+    description:
+      "Learn DevOps with Jenkins, Docker, Kubernetes, Terraform, Ansible, AWS, Prometheus & Grafana.",
+    mainImage: "/courses/devops.png",
+    viewLink: "/devops",
+    icon: BookCheck,
+    stats: [
+      { label: "Duration", value: "6 Months", icon: Clock },
+      { label: "Live Session", value: "100%", icon: CheckCircle },
+      { label: "Doubt Clearing", value: "1:1", icon: Users },
+      { label: "Companies", value: "250+", icon: Building },
+      { label: "Placement", value: "100%", icon: Award },
+    ],
+  },
+  {
     title: "Data Science",
     subtitle: "Turn data into insights",
     description:

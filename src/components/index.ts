@@ -23,6 +23,7 @@ export { default as AIMLPage } from "./courses/AIMLPage";
 export { default as CyberSecPage } from "./courses/CyberSec";
 export { default as DSPage } from "./courses/DSPage";
 export { default as FullStackPage } from "./courses/FullStack";
+export { default as DevOpsPage } from "./courses/DevOps";
 
 export { default as MastersPage } from "./masters/MastersPage";
 export { default as MBA } from "./masters/MBA";

@@ -28,6 +28,15 @@ const programCategories: ProgramCategory[] = [
     featured: false,
   },
   {
+    id: "devops-cert",
+    title: "DevOps",
+    subtitle: "Automate, ship, and scale",
+    description:
+      "Master CI/CD, Docker, Kubernetes, Terraform, Ansible, AWS, and monitoring with real projects.",
+    viewLink: "/devops",
+    featured: true,
+  },
+  {
     id: "cyber-security-cert",
     title: "Cyber Security",
     subtitle: "Defend against digital threats",

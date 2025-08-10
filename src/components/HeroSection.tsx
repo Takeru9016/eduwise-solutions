@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowRight,
   Sparkles,
@@ -119,7 +120,7 @@ export default function HeroSection() {
         />
 
         {/* Floating icons */}
-        <FloatingIcon
+        {/* <FloatingIcon
           icon={Star}
           className="top-24 left-1/3 animate-delay-1000"
         />
@@ -130,127 +131,180 @@ export default function HeroSection() {
         <FloatingIcon
           icon={Sparkles}
           className="top-1/2 right-20 animate-delay-500"
-        />
+        /> */}
       </div>
 
       <div className="container mx-auto px-6 py-16 relative z-10">
-        {/* Main content container with different layout */}
-        <div className="max-w-6xl mx-auto">
-          {/* Top badge section */}
-          <div className="text-center mb-12">
-            <div
-              className="inline-flex items-center gap-4 bg-white/95 backdrop-blur-md text-primary-75 px-8 py-4 rounded-full text-base font-bold shadow-2xl border border-primary-95/50 hover:shadow-primary-75/20 transition-all duration-500 group"
-              style={{ animation: "fadeInDown 0.8s ease-out" }}
-            >
-              <div className="relative">
-                <div className="w-10 h-10 bg-gradient-to-br from-primary-95 to-primary-75 rounded-full flex items-center justify-center group-hover:rotate-180 transition-transform duration-500">
-                  <Sparkles size={20} className="text-white" />
+        {/* Main content container with two-column layout */}
+        <div className="max-w-full mx-auto">
+          <div className="grid lg:grid-cols-2 gap-10 items-center min-h-[80vh]">
+            {/* Left Content */}
+            <div>
+              {/* Top badge section */}
+              <div className="text-center mb-12">
+                <div
+                  className="inline-flex items-center gap-4 bg-white/95 backdrop-blur-md text-primary-75 px-8 py-4 rounded-full text-base font-bold shadow-2xl border border-primary-95/50 hover:shadow-primary-75/20 transition-all duration-500 group"
+                  style={{ animation: "fadeInDown 0.8s ease-out" }}
+                >
+                  <div className="relative">
+                    <div className="w-10 h-10 bg-gradient-to-br from-primary-95 to-primary-75 rounded-full flex items-center justify-center group-hover:rotate-180 transition-transform duration-500">
+                      <Sparkles size={20} className="text-white" />
+                    </div>
+                    <div className="absolute -top-1 -right-1 w-4 h-4 bg-primary-75 rounded-full animate-ping" />
+                  </div>
+                  <span>Your Career Journey Starts Here</span>
                 </div>
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-primary-75 rounded-full animate-ping" />
               </div>
-              <span>Your Career Journey Starts Here</span>
-            </div>
-          </div>
 
-          {/* Main heading - centered with dramatic typography */}
-          <div className="text-center mb-16">
-            <h1 className="font-vietnam font-black leading-tight mb-8">
-              <div className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl mb-4">
-                <span
-                  className="inline-block text-primary-75 opacity-0"
-                  style={{
-                    animation: "slideInLeft 1s ease-out 0.2s forwards",
-                  }}
-                >
-                  Confused
-                </span>
-              </div>
-              <div className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl">
-                <span
-                  className="inline-block text-grey-15 opacity-0"
-                  style={{
-                    animation: "slideInRight 1s ease-out 0.6s forwards",
-                  }}
-                >
-                  About What&apos;s Next?
-                </span>
-              </div>
-            </h1>
-
-            {/* Enhanced description with centered layout */}
-            <div
-              className="max-w-4xl mx-auto space-y-6 text-xl md:text-2xl leading-relaxed opacity-0"
-              style={{ animation: "fadeInUp 1s ease-out 1s forwards" }}
-            >
-              <p className="text-gray-700">
-                Looking to elevate your career with{" "}
-                <span className="relative inline-block">
-                  <span className="bg-gradient-to-r from-primary-95 via-primary-90 to-primary-95 px-4 py-2 rounded-xl text-primary-75 font-bold shadow-lg">
-                    THE RIGHT JOB
-                  </span>
-                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-primary-75 rounded-full flex items-center justify-center">
-                    <Star className="w-3 h-3 text-white" />
+              {/* Main heading - left aligned with dramatic typography */}
+              <div className="text-left mb-16">
+                <h1 className="font-vietnam font-black leading-tight mb-8">
+                  <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center mb-6">
+                    <span
+                      className="inline-block text-primary-75 opacity-0"
+                      style={{
+                        animation: "slideInLeft 1s ease-out 0.2s forwards",
+                      }}
+                    >
+                      Accelerate Your Career.
+                    </span>
                   </div>
-                </span>{" "}
-                and enhance your skills with the{" "}
-                <span className="relative inline-block">
-                  <span className="bg-gradient-to-r from-primary-95 via-primary-90 to-primary-95 px-4 py-2 rounded-xl text-primary-75 font-bold shadow-lg">
-                    PERFECT PROGRAM
-                  </span>
-                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-primary-75 rounded-full flex items-center justify-center">
-                    <Zap className="w-3 h-3 text-white" />
+                  <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center">
+                    <span
+                      className="inline-block text-grey-15 opacity-0"
+                      style={{
+                        animation: "slideInRight 1s ease-out 0.6s forwards",
+                      }}
+                    >
+                      Eliminate the Skill Gap
+                    </span>
                   </div>
-                </span>
-              </p>
+                </h1>
 
-              <p className="text-gray-600 flex items-center justify-center gap-3 text-2xl">
-                <span>We&apos;re here to guide you every step of the way!</span>
-                <span className="text-4xl animate-bounce">🚀</span>
-              </p>
+                {/* Enhanced description with left layout */}
+                <div
+                  className="max-w-2xl space-y-6 text-xl md:text-2xl leading-relaxed opacity-0 text-center"
+                  style={{ animation: "fadeInUp 1s ease-out 1s forwards" }}
+                >
+                  <div className="text-gray-700">
+                    Looking to elevate your career with the{" "}
+                    <span className="relative inline-block mt-1">
+                      <span className="bg-gradient-to-r from-primary-95 via-primary-90 to-primary-95 px-4 py-2 rounded-xl text-black font-bold shadow-lg">
+                        RIGHT JOB
+                      </span>
+                      <div className="absolute -top-2 -right-2 w-6 h-6 bg-primary-75 rounded-full flex items-center justify-center">
+                        <Star className="w-3 h-3 text-white" />
+                      </div>
+                    </span>{" "}
+                    and enhance your skills with the{" "}
+                    <span className="relative inline-block lg:mt-7 mt-1">
+                      <span className="bg-gradient-to-r from-primary-95 via-primary-90 to-primary-95 px-4 py-2 rounded-xl text-black font-bold shadow-lg">
+                        PERFECT PROGRAM
+                      </span>
+                      <div className="absolute -top-2 -right-2 w-6 h-6 bg-primary-75 rounded-full flex items-center justify-center">
+                        <Zap className="w-3 h-3 text-white" />
+                      </div>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Feature badges - horizontal left layout */}
+              <div
+                className="flex flex-wrap gap-6 mb-16 opacity-0 justify-center"
+                style={{ animation: "fadeInUp 1s ease-out 1.4s forwards" }}
+              >
+                {features.map((feature, index) => (
+                  <FeatureBadge
+                    key={index}
+                    icon={feature.icon}
+                    text={feature.text}
+                    index={index}
+                  />
+                ))}
+              </div>
+
+              {/* CTA section - left aligned with more spacing */}
+              <div
+                className="flex flex-col sm:flex-row gap-8 opacity-0 justify-center"
+                style={{ animation: "fadeInUp 1s ease-out 1.8s forwards" }}
+              >
+                <ModernCTAButton
+                  href="/courses"
+                  variant="primary"
+                  className="group"
+                >
+                  <span className="flex items-center gap-3">
+                    Explore Courses
+                    <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
+                  </span>
+                </ModernCTAButton>
+
+                <ModernCTAButton
+                  href="/contact"
+                  variant="secondary"
+                  className="group"
+                >
+                  <span className="flex items-center gap-3">
+                    <Play className="w-6 h-6 group-hover:scale-125 transition-transform duration-300" />
+                    Contact Us
+                  </span>
+                </ModernCTAButton>
+              </div>
             </div>
-          </div>
 
-          {/* Feature badges - horizontal centered layout */}
-          <div
-            className="flex flex-wrap justify-center gap-6 mb-16 opacity-0"
-            style={{ animation: "fadeInUp 1s ease-out 1.4s forwards" }}
-          >
-            {features.map((feature, index) => (
-              <FeatureBadge
-                key={index}
-                icon={feature.icon}
-                text={feature.text}
-                index={index}
-              />
-            ))}
-          </div>
+            {/* Right Images Section */}
+            <div className="relative w-full flex justify-center lg:justify-end ml-20 mt-10 lg:mt-0">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 max-w-xs sm:max-w-lg w-full mx-auto">
+                {/* Large image spanning both columns on desktop, full width on mobile */}
+                <div
+                  className="sm:col-span-2 image-card large-image opacity-0"
+                  style={{ animation: "fadeInRight 1s ease-out 0.5s forwards" }}
+                >
+                  <Image
+                    src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=500&h=250&fit=crop"
+                    alt="Students studying together"
+                    width={500}
+                    height={250}
+                    className="w-full h-40 sm:h-64 object-cover rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105"
+                    unoptimized
+                  />
+                </div>
 
-          {/* CTA section - centered with more spacing */}
-          <div
-            className="flex flex-col sm:flex-row gap-8 justify-center items-center opacity-0"
-            style={{ animation: "fadeInUp 1s ease-out 1.8s forwards" }}
-          >
-            <ModernCTAButton
-              href="/courses"
-              variant="primary"
-              className="group"
-            >
-              <span className="flex items-center gap-3">
-                Explore Courses
-                <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
-              </span>
-            </ModernCTAButton>
+                {/* Two smaller images side by side on desktop, stacked on mobile */}
+                <div
+                  className="image-card opacity-0"
+                  style={{ animation: "fadeInRight 1s ease-out 0.7s forwards" }}
+                >
+                  <Image
+                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=250&h=200&fit=crop"
+                    alt="Students collaborating"
+                    width={250}
+                    height={200}
+                    className="w-full h-28 sm:h-48 object-cover rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105"
+                    unoptimized
+                  />
+                </div>
 
-            <ModernCTAButton
-              href="/contact"
-              variant="secondary"
-              className="group"
-            >
-              <span className="flex items-center gap-3">
-                <Play className="w-6 h-6 group-hover:scale-125 transition-transform duration-300" />
-                Contact Us
-              </span>
-            </ModernCTAButton>
+                <div
+                  className="image-card opacity-0"
+                  style={{ animation: "fadeInRight 1s ease-out 0.9s forwards" }}
+                >
+                  <Image
+                    src="https://images.unsplash.com/photo-1581726690015-c9861fa5057f?w=250&h=200&fit=crop"
+                    alt="Student studying with laptop"
+                    width={250}
+                    height={200}
+                    className="w-full h-28 sm:h-48 object-cover rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105"
+                    unoptimized
+                  />
+                </div>
+              </div>
+
+              {/* Decorative elements around images (hidden on mobile) */}
+              <div className="hidden sm:block absolute -top-4 -right-4 w-8 h-8 bg-primary-95 rounded-full opacity-60 animate-pulse" />
+              <div className="hidden sm:block absolute -bottom-6 -left-6 w-6 h-6 bg-primary-90 rounded-full opacity-40 animate-bounce" />
+            </div>
           </div>
         </div>
       </div>
@@ -294,6 +348,17 @@ export default function HeroSection() {
           from {
             opacity: 0;
             transform: translateX(100px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes fadeInRight {
+          from {
+            opacity: 0;
+            transform: translateX(50px);
           }
           to {
             opacity: 1;

@@ -79,6 +79,7 @@ export default function Footer() {
 
   const programLinks: FooterLink[] = [
     { label: "Artificial Intelligence", href: "/ai-ml" },
+    { label: "DevOps", href: "/devops" },
     { label: "Cyber Security", href: "/cyber-sec" },
     { label: "Data Science", href: "/data-science" },
     { label: "Full Stack Web Developer", href: "/full-stack" },

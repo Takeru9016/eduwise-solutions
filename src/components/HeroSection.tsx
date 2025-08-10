@@ -15,19 +15,19 @@ import {
 import { Button } from "@/components/ui/button";
 
 // Floating icon component
-const FloatingIcon = ({
-  icon: Icon,
-  className = "",
-}: {
-  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-  className?: string;
-}) => (
-  <div className={`absolute animate-float ${className}`}>
-    <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/30">
-      <Icon className="w-6 h-6 text-primary-75" />
-    </div>
-  </div>
-);
+// const FloatingIcon = ({
+//   icon: Icon,
+//   className = "",
+// }: {
+//   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+//   className?: string;
+// }) => (
+//   <div className={`absolute animate-float ${className}`}>
+//     <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/30">
+//       <Icon className="w-6 h-6 text-primary-75" />
+//     </div>
+//   </div>
+// );
 
 // Modern feature badge component
 const FeatureBadge = ({

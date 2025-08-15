@@ -492,7 +492,7 @@ export default function DevOpsPage() {
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 bg-primary-99 text-primary-75 px-4 py-2 rounded-full text-sm font-semibold mb-4">
               <Zap size={16} />
-              What You'll Get
+              What You&apos;ll Get
             </div>
             <h2 className="text-3xl lg:text-5xl font-vietnam font-bold text-grey-15 mb-6">
               Program Benefits
@@ -540,7 +540,7 @@ export default function DevOpsPage() {
               Curriculum
             </div>
             <h2 className="text-3xl lg:text-5xl font-vietnam font-bold text-grey-15 mb-6">
-              What You'll Learn
+              What You&apos;ll Learn
             </h2>
             <p className="text-grey-35 text-lg max-w-3xl mx-auto">
               A comprehensive curriculum designed to take you from basics to

@@ -22,7 +22,7 @@ export default function DevOpsBenefits() {
           </h2>
           <p className="text-grey-35 mt-4 leading-relaxed">
             This EduWise DevOps Training will help you become job-ready and
-            build a strong foundation for high-demand roles. EduWise's in-house
+            build a strong foundation for high-demand roles. EduWise&apos;s in-house
             DevOps training empowers you to start a high-paying career as a
             DevOps Engineer.
           </p>

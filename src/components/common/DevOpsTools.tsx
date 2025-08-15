@@ -21,7 +21,7 @@ const toolsData = [
   },
   {
     icon: Cpu,
-    title: "IaC & Config Mgmt",
+    title: "IaC & Config Management",
     items: [
       {
         name: "Terraform",

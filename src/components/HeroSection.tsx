@@ -14,21 +14,6 @@ import {
 
 import { Button } from "@/components/ui/button";
 
-// Floating icon component
-// const FloatingIcon = ({
-//   icon: Icon,
-//   className = "",
-// }: {
-//   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-//   className?: string;
-// }) => (
-//   <div className={`absolute animate-float ${className}`}>
-//     <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/30">
-//       <Icon className="w-6 h-6 text-primary-75" />
-//     </div>
-//   </div>
-// );
-
 // Modern feature badge component
 const FeatureBadge = ({
   icon: Icon,
@@ -40,16 +25,18 @@ const FeatureBadge = ({
   index: number;
 }) => (
   <div
-    className="flex items-center gap-3 bg-gradient-to-r from-white/90 to-white/70 backdrop-blur-md px-6 py-3 rounded-full shadow-xl border border-white/40 hover:shadow-2xl transition-all duration-500 hover:scale-105 group"
+    className="flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-white/95 to-white/80 backdrop-blur-md px-3 sm:px-6 py-2 sm:py-3 rounded-full shadow-xl border border-white/40 hover:shadow-2xl transition-all duration-500 hover:scale-105 group"
     style={{
       animationDelay: `${index * 300}ms`,
       animation: "fadeInUp 0.8s ease-out forwards",
     }}
   >
-    <div className="w-10 h-10 bg-gradient-to-br from-primary-90 to-primary-75 rounded-full flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
-      <Icon className="w-5 h-5 text-white" />
+    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary-90 to-primary-75 rounded-full flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
+      <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
     </div>
-    <span className="text-grey-35 font-semibold text-sm">{text}</span>
+    <span className="text-grey-35 font-semibold text-xs sm:text-sm">
+      {text}
+    </span>
   </div>
 );
 
@@ -68,7 +55,7 @@ const ModernCTAButton = ({
   <Link href={href}>
     <Button
       className={`
-        relative overflow-hidden px-8 py-4 text-lg font-bold rounded-full transition-all duration-500 transform hover:scale-110 group
+        relative overflow-hidden px-4 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-bold rounded-full transition-all duration-500 transform hover:scale-105 sm:hover:scale-110 group w-full sm:w-auto
         ${
           variant === "primary"
             ? "bg-gradient-to-r from-primary-75 via-primary-70 to-primary-75 bg-size-200 hover:bg-pos-100 text-white shadow-2xl hover:shadow-primary-75/50"
@@ -77,12 +64,30 @@ const ModernCTAButton = ({
         ${className}
       `}
     >
-      <span className="relative z-10 flex items-center gap-3">{children}</span>
+      <span className="relative z-10 flex items-center justify-center gap-2 sm:gap-3">
+        {children}
+      </span>
       {variant === "primary" && (
         <div className="absolute inset-0 bg-gradient-to-r from-primary-70 to-primary-65 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       )}
     </Button>
   </Link>
+);
+
+// Floating decorative element
+const FloatingDecor = ({
+  className,
+  delay = "0s",
+}: {
+  className: string;
+  delay?: string;
+}) => (
+  <div
+    className={`absolute animate-float ${className}`}
+    style={{ animationDelay: delay }}
+  >
+    <div className="w-2 h-2 sm:w-3 sm:h-3 bg-primary-90 rounded-full opacity-40" />
+  </div>
 );
 
 export default function HeroSection() {
@@ -92,74 +97,60 @@ export default function HeroSection() {
   ];
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-tr from-primary-99 via-white to-primary-97 overflow-hidden">
+    <section className="relative min-h-screen bg-gradient-to-br from-primary-99 via-white to-primary-97 overflow-hidden">
       {/* Dynamic background elements */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 pointer-events-none">
         {/* Animated mesh gradient */}
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-primary-90/60 to-transparent rounded-full blur-3xl animate-pulse" />
+        <div className="absolute inset-0 opacity-20 sm:opacity-30">
+          <div className="absolute top-10 sm:top-0 left-1/4 w-48 h-48 sm:w-96 sm:h-96 bg-gradient-to-br from-primary-90/60 to-transparent rounded-full blur-2xl sm:blur-3xl animate-pulse" />
           <div
-            className="absolute bottom-0 right-1/4 w-80 h-80 bg-gradient-to-tl from-primary-95/80 to-transparent rounded-full blur-2xl animate-pulse"
+            className="absolute bottom-10 sm:bottom-0 right-1/4 w-40 h-40 sm:w-80 sm:h-80 bg-gradient-to-tl from-primary-95/80 to-transparent rounded-full blur-xl sm:blur-2xl animate-pulse"
             style={{ animationDelay: "2s" }}
           />
           <div
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-primary-97 to-primary-95 rounded-full blur-xl animate-pulse"
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 sm:w-64 sm:h-64 bg-gradient-to-r from-primary-97 to-primary-95 rounded-full blur-lg sm:blur-xl animate-pulse"
             style={{ animationDelay: "1s" }}
           />
         </div>
 
-        {/* Geometric shapes */}
-        <div className="absolute top-20 right-20 w-6 h-6 border-2 border-primary-75 rotate-45 animate-spin-slow" />
-        <div
-          className="absolute bottom-32 left-16 w-8 h-8 border-2 border-primary-90 rounded-full animate-bounce"
-          style={{ animationDelay: "1.5s" }}
-        />
-        <div
-          className="absolute top-1/3 left-20 w-4 h-4 bg-primary-95 transform rotate-45 animate-pulse"
-          style={{ animationDelay: "0.5s" }}
-        />
-
-        {/* Floating icons */}
-        {/* <FloatingIcon
-          icon={Star}
-          className="top-24 left-1/3 animate-delay-1000"
-        />
-        <FloatingIcon
-          icon={Zap}
-          className="bottom-40 right-1/3 animate-delay-2000"
-        />
-        <FloatingIcon
-          icon={Sparkles}
-          className="top-1/2 right-20 animate-delay-500"
-        /> */}
+        {/* Floating decorative elements */}
+        <FloatingDecor className="top-20 right-10 sm:right-20" delay="0s" />
+        <FloatingDecor className="bottom-32 left-10 sm:left-16" delay="1.5s" />
+        <FloatingDecor className="top-1/3 left-10 sm:left-20" delay="0.5s" />
+        <FloatingDecor className="top-1/4 right-1/3" delay="2s" />
       </div>
 
-      <div className="container mx-auto px-6 py-16 relative z-10">
-        {/* Main content container with two-column layout */}
-        <div className="max-w-full mx-auto">
-          <div className="grid lg:grid-cols-2 gap-10 items-center min-h-[80vh]">
+      <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-16 relative z-10">
+        {/* Main content container */}
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[calc(100vh-4rem)]">
             {/* Left Content */}
-            <div>
+            <div className="order-1 lg:order-1 text-center lg:text-left">
               {/* Top badge section */}
-              <div className="text-center mb-12">
+              <div className="mb-8 sm:mb-12">
                 <div
-                  className="inline-flex items-center gap-4 bg-white/95 backdrop-blur-md text-primary-75 px-8 py-4 rounded-full text-base font-bold shadow-2xl border border-primary-95/50 hover:shadow-primary-75/20 transition-all duration-500 group"
+                  className="inline-flex items-center gap-3 sm:gap-4 bg-white/95 backdrop-blur-md text-primary-75 px-4 sm:px-8 py-3 sm:py-4 rounded-full text-sm sm:text-base font-bold shadow-2xl border border-primary-95/50 hover:shadow-primary-75/20 transition-all duration-500 group"
                   style={{ animation: "fadeInDown 0.8s ease-out" }}
                 >
                   <div className="relative">
-                    <div className="w-10 h-10 bg-gradient-to-br from-primary-95 to-primary-75 rounded-full flex items-center justify-center group-hover:rotate-180 transition-transform duration-500">
-                      <Sparkles size={20} className="text-white" />
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary-95 to-primary-75 rounded-full flex items-center justify-center group-hover:rotate-180 transition-transform duration-500">
+                      <Sparkles
+                        size={16}
+                        className="sm:w-5 sm:h-5 text-white"
+                      />
                     </div>
-                    <div className="absolute -top-1 -right-1 w-4 h-4 bg-primary-75 rounded-full animate-ping" />
+                    <div className="absolute -top-1 -right-1 w-3 h-3 sm:w-4 sm:h-4 bg-primary-75 rounded-full animate-ping" />
                   </div>
-                  <span>Your Career Journey Starts Here</span>
+                  <span className="whitespace-nowrap">
+                    Your Career Journey Starts Here
+                  </span>
                 </div>
               </div>
 
-              {/* Main heading - left aligned with dramatic typography */}
-              <div className="text-left mb-16">
-                <h1 className="font-vietnam font-black leading-tight mb-8">
-                  <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center mb-6">
+              {/* Main heading */}
+              <div className="mb-8 sm:mb-12 lg:mb-16">
+                <h1 className="font-vietnam font-black leading-tight mb-6 sm:mb-8">
+                  <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-3 sm:mb-6">
                     <span
                       className="inline-block text-primary-75 opacity-0"
                       style={{
@@ -169,7 +160,7 @@ export default function HeroSection() {
                       Accelerate Your Career.
                     </span>
                   </div>
-                  <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center">
+                  <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
                     <span
                       className="inline-block text-grey-15 opacity-0"
                       style={{
@@ -181,37 +172,37 @@ export default function HeroSection() {
                   </div>
                 </h1>
 
-                {/* Enhanced description with left layout */}
+                {/* Enhanced description */}
                 <div
-                  className="max-w-2xl space-y-6 text-xl md:text-2xl leading-relaxed opacity-0 text-center"
+                  className="max-w-2xl mx-auto lg:mx-0 space-y-4 sm:space-y-6 text-lg sm:text-xl lg:text-2xl leading-relaxed opacity-0"
                   style={{ animation: "fadeInUp 1s ease-out 1s forwards" }}
                 >
                   <div className="text-gray-700">
                     Looking to elevate your career with the{" "}
-                    <span className="relative inline-block mt-1">
-                      <span className="bg-gradient-to-r from-primary-95 via-primary-90 to-primary-95 px-4 py-2 rounded-xl text-black font-bold shadow-lg">
+                    <span className="relative inline-block">
+                      <span className="bg-gradient-to-r from-primary-95 via-primary-90 to-primary-95 px-2 sm:px-4 py-1 sm:py-2 rounded-lg sm:rounded-xl text-black font-bold shadow-lg text-base sm:text-inherit">
                         RIGHT JOB
                       </span>
-                      <div className="absolute -top-2 -right-2 w-6 h-6 bg-primary-75 rounded-full flex items-center justify-center">
-                        <Star className="w-3 h-3 text-white" />
+                      <div className="absolute -top-1 sm:-top-2 -right-1 sm:-right-2 w-4 h-4 sm:w-6 sm:h-6 bg-primary-75 rounded-full flex items-center justify-center">
+                        <Star className="w-2 h-2 sm:w-3 sm:h-3 text-white" />
                       </div>
                     </span>{" "}
                     and enhance your skills with the{" "}
-                    <span className="relative inline-block lg:mt-7 mt-1">
-                      <span className="bg-gradient-to-r from-primary-95 via-primary-90 to-primary-95 px-4 py-2 rounded-xl text-black font-bold shadow-lg">
+                    <span className="relative inline-block">
+                      <span className="bg-gradient-to-r from-primary-95 via-primary-90 to-primary-95 px-2 sm:px-4 py-1 sm:py-2 rounded-lg sm:rounded-xl text-black font-bold shadow-lg text-base sm:text-inherit">
                         PERFECT PROGRAM
                       </span>
-                      <div className="absolute -top-2 -right-2 w-6 h-6 bg-primary-75 rounded-full flex items-center justify-center">
-                        <Zap className="w-3 h-3 text-white" />
+                      <div className="absolute -top-1 sm:-top-2 -right-1 sm:-right-2 w-4 h-4 sm:w-6 sm:h-6 bg-primary-75 rounded-full flex items-center justify-center">
+                        <Zap className="w-2 h-2 sm:w-3 sm:h-3 text-white" />
                       </div>
                     </span>
                   </div>
                 </div>
               </div>
 
-              {/* Feature badges - horizontal left layout */}
+              {/* Feature badges */}
               <div
-                className="flex flex-wrap gap-6 mb-16 opacity-0 justify-center"
+                className="flex flex-wrap gap-3 sm:gap-6 mb-8 sm:mb-12 lg:mb-16 opacity-0 justify-center lg:justify-start"
                 style={{ animation: "fadeInUp 1s ease-out 1.4s forwards" }}
               >
                 {features.map((feature, index) => (
@@ -224,9 +215,9 @@ export default function HeroSection() {
                 ))}
               </div>
 
-              {/* CTA section - left aligned with more spacing */}
+              {/* CTA section */}
               <div
-                className="flex flex-col sm:flex-row gap-8 opacity-0 justify-center"
+                className="flex flex-col sm:flex-row gap-4 sm:gap-6 lg:gap-8 opacity-0 justify-center lg:justify-start"
                 style={{ animation: "fadeInUp 1s ease-out 1.8s forwards" }}
               >
                 <ModernCTAButton
@@ -234,9 +225,9 @@ export default function HeroSection() {
                   variant="primary"
                   className="group"
                 >
-                  <span className="flex items-center gap-3">
+                  <span className="flex items-center gap-2 sm:gap-3">
                     Explore Courses
-                    <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
+                    <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-1 sm:group-hover:translate-x-2 transition-transform duration-300" />
                   </span>
                 </ModernCTAButton>
 
@@ -245,8 +236,8 @@ export default function HeroSection() {
                   variant="secondary"
                   className="group"
                 >
-                  <span className="flex items-center gap-3">
-                    <Play className="w-6 h-6 group-hover:scale-125 transition-transform duration-300" />
+                  <span className="flex items-center gap-2 sm:gap-3">
+                    <Play className="w-5 h-5 sm:w-6 sm:h-6 group-hover:scale-110 sm:group-hover:scale-125 transition-transform duration-300" />
                     Contact Us
                   </span>
                 </ModernCTAButton>
@@ -254,67 +245,74 @@ export default function HeroSection() {
             </div>
 
             {/* Right Images Section */}
-            <div className="relative w-full flex justify-center lg:justify-end ml-20 mt-10 lg:mt-0">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 max-w-xs sm:max-w-lg w-full mx-auto">
-                {/* Large image spanning both columns on desktop, full width on mobile */}
+            <div className="order-2 lg:order-2 relative w-full flex justify-center">
+              <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:gap-6 max-w-sm sm:max-w-md lg:max-w-lg w-full">
+                {/* Large image spanning both columns */}
                 <div
-                  className="sm:col-span-2 image-card large-image opacity-0"
+                  className="col-span-2 opacity-0"
                   style={{ animation: "fadeInRight 1s ease-out 0.5s forwards" }}
                 >
-                  <Image
-                    src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=500&h=250&fit=crop"
-                    alt="Students studying together"
-                    width={500}
-                    height={250}
-                    className="w-full h-40 sm:h-64 object-cover rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105"
-                    unoptimized
-                  />
+                  <div className="relative overflow-hidden rounded-xl sm:rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105 group">
+                    <Image
+                      src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&h=300&fit=crop&auto=format&q=80"
+                      alt="Students studying together"
+                      width={600}
+                      height={300}
+                      className="w-full h-32 sm:h-48 lg:h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                      priority
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  </div>
                 </div>
 
-                {/* Two smaller images side by side on desktop, stacked on mobile */}
+                {/* Two smaller images */}
                 <div
-                  className="image-card opacity-0"
+                  className="opacity-0"
                   style={{ animation: "fadeInRight 1s ease-out 0.7s forwards" }}
                 >
-                  <Image
-                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=250&h=200&fit=crop"
-                    alt="Students collaborating"
-                    width={250}
-                    height={200}
-                    className="w-full h-28 sm:h-48 object-cover rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105"
-                    unoptimized
-                  />
+                  <div className="relative overflow-hidden rounded-lg sm:rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 group">
+                    <Image
+                      src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=300&h=240&fit=crop&auto=format&q=80"
+                      alt="Students collaborating"
+                      width={300}
+                      height={240}
+                      className="w-full h-24 sm:h-36 lg:h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  </div>
                 </div>
 
                 <div
-                  className="image-card opacity-0"
+                  className="opacity-0"
                   style={{ animation: "fadeInRight 1s ease-out 0.9s forwards" }}
                 >
-                  <Image
-                    src="https://images.unsplash.com/photo-1581726690015-c9861fa5057f?w=250&h=200&fit=crop"
-                    alt="Student studying with laptop"
-                    width={250}
-                    height={200}
-                    className="w-full h-28 sm:h-48 object-cover rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105"
-                    unoptimized
-                  />
+                  <div className="relative overflow-hidden rounded-lg sm:rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 group">
+                    <Image
+                      src="https://images.unsplash.com/photo-1581726690015-c9861fa5057f?w=300&h=240&fit=crop&auto=format&q=80"
+                      alt="Student studying with laptop"
+                      width={300}
+                      height={240}
+                      className="w-full h-24 sm:h-36 lg:h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  </div>
                 </div>
               </div>
 
-              {/* Decorative elements around images (hidden on mobile) */}
-              <div className="hidden sm:block absolute -top-4 -right-4 w-8 h-8 bg-primary-95 rounded-full opacity-60 animate-pulse" />
-              <div className="hidden sm:block absolute -bottom-6 -left-6 w-6 h-6 bg-primary-90 rounded-full opacity-40 animate-bounce" />
+              {/* Decorative elements (hidden on small screens) */}
+              <div className="hidden sm:block absolute -top-2 -right-2 lg:-top-4 lg:-right-4 w-6 h-6 lg:w-8 lg:h-8 bg-primary-95 rounded-full opacity-60 animate-pulse" />
+              <div className="hidden sm:block absolute -bottom-3 -left-3 lg:-bottom-6 lg:-left-6 w-4 h-4 lg:w-6 lg:h-6 bg-primary-90 rounded-full opacity-40 animate-bounce" />
             </div>
           </div>
         </div>
       </div>
 
-      {/* Enhanced CSS animations */}
+      {/* CSS Animations - Using CSS modules would be better in production */}
       <style jsx>{`
         @keyframes fadeInDown {
           from {
             opacity: 0;
-            transform: translateY(-30px);
+            transform: translateY(-20px);
           }
           to {
             opacity: 1;
@@ -325,7 +323,7 @@ export default function HeroSection() {
         @keyframes fadeInUp {
           from {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(20px);
           }
           to {
             opacity: 1;
@@ -336,7 +334,7 @@ export default function HeroSection() {
         @keyframes slideInLeft {
           from {
             opacity: 0;
-            transform: translateX(-100px);
+            transform: translateX(-50px);
           }
           to {
             opacity: 1;
@@ -347,7 +345,7 @@ export default function HeroSection() {
         @keyframes slideInRight {
           from {
             opacity: 0;
-            transform: translateX(100px);
+            transform: translateX(50px);
           }
           to {
             opacity: 1;
@@ -358,7 +356,7 @@ export default function HeroSection() {
         @keyframes fadeInRight {
           from {
             opacity: 0;
-            transform: translateX(50px);
+            transform: translateX(30px);
           }
           to {
             opacity: 1;
@@ -369,40 +367,15 @@ export default function HeroSection() {
         @keyframes float {
           0%,
           100% {
-            transform: translateY(0px) rotate(0deg);
+            transform: translateY(0px);
           }
           50% {
-            transform: translateY(-20px) rotate(10deg);
-          }
-        }
-
-        @keyframes spin-slow {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
+            transform: translateY(-15px);
           }
         }
 
         .animate-float {
           animation: float 6s ease-in-out infinite;
-        }
-
-        .animate-spin-slow {
-          animation: spin-slow 8s linear infinite;
-        }
-
-        .animate-delay-500 {
-          animation-delay: 0.5s;
-        }
-
-        .animate-delay-1000 {
-          animation-delay: 1s;
-        }
-
-        .animate-delay-2000 {
-          animation-delay: 2s;
         }
 
         .bg-size-200 {
@@ -411,6 +384,30 @@ export default function HeroSection() {
 
         .bg-pos-100 {
           background-position: 100% 100%;
+        }
+
+        @media (max-width: 640px) {
+          @keyframes slideInLeft {
+            from {
+              opacity: 0;
+              transform: translateY(-20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+
+          @keyframes slideInRight {
+            from {
+              opacity: 0;
+              transform: translateY(20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
         }
       `}</style>
     </section>

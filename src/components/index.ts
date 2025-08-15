@@ -16,6 +16,8 @@ export { default as Navbar } from "./common/Navbar";
 export { default as ProgramSection } from "./common/ProgramSection";
 export { default as PopupForm } from "./common/PopupForm";
 export { default as Testimonials } from "./common/Testimonials";
+export { default as DomainsShowcase } from "./common/DomainsShowcase";
+export { default as LearningJourney } from "./common/LearningJourney";
 
 export { default as OurCourse } from "./courses/OurCourse";
 export { default as ProfessionalPage } from "./courses/ProfessionalPage";
@@ -33,3 +35,4 @@ export { default as MSc_in_DS } from "./masters/MSc_in_DS";
 export { default as PrivacyPolicy } from "./legal/PrivacyPolicy";
 export { default as RefundPage } from "./legal/RefundPage";
 export { default as TermsOfService } from "./legal/TermsOfService";
+export { default as DevOpsBenefits } from "./courses/DevOpsBenefits";

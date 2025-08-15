@@ -17,6 +17,18 @@ import {
   Cloud,
   ServerCog,
   Settings2,
+  ArrowRight,
+  Clock,
+  Target,
+  Award,
+  Star,
+  TrendingUp,
+  // Globe,
+  Shield,
+  Code,
+  // Database,
+  // Cpu,
+  Network,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -24,107 +36,230 @@ import { Badge } from "@/components/ui/badge";
 import PaymentStatusModal from "../payment/PaymentStatusModal";
 import PaymentModal from "../payment/PaymentModal";
 import DevOpsToolsSection from "../common/DevOpsTools";
+import DevOpsBenefits from "./DevOpsBenefits";
+
+const stats = [
+  { icon: Users, value: "600+", label: "Students Trained" },
+  { icon: Clock, value: "3", label: "Months Program" },
+  { icon: Target, value: "25+", label: "Industry Projects" },
+  { icon: Award, value: "100%", label: "Placement Support" },
+];
 
 const features = [
   {
     icon: Sparkles,
     title: "100% Job Assistance",
+    description:
+      "Comprehensive placement support with resume building and interview preparation",
   },
   {
     icon: Laptop,
     title: "Industry Projects",
+    description:
+      "Real-world projects that showcase your skills to potential employers",
   },
   {
     icon: Users,
     title: "Expert Mentors",
+    description:
+      "Learn from industry professionals with years of DevOps experience",
+  },
+  {
+    icon: Shield,
+    title: "Lifetime Access",
+    description: "Access to course content and updates even after completion",
   },
 ];
 
 const highlights = [
   {
-    category: "Classes",
+    category: "Live Classes",
     icon: BookOpen,
+    color: "from-blue-500 to-blue-600",
     points: [
-      "Live & Recorded Sessions",
-      "Flexible Timing",
-      "Lifetime Content Access",
+      "Interactive Live Sessions",
+      "Flexible Timing Options",
+      "Recorded Sessions Access",
+      "Q&A with Experts",
     ],
   },
   {
-    category: "Projects",
+    category: "Hands-on Projects",
     icon: Laptop,
+    color: "from-green-500 to-green-600",
     points: [
       "Capstone Project",
       "Multiple Mini-Projects",
       "Industry Case Studies",
+      "Portfolio Building",
     ],
   },
   {
-    category: "Support",
+    category: "24/7 Support",
     icon: LifeBuoy,
+    color: "from-purple-500 to-purple-600",
     points: [
       "1-1 Mentorship",
       "Doubt Clearing Sessions",
       "Peer Learning Groups",
+      "Technical Support",
     ],
   },
   {
     category: "Certification",
     icon: Medal,
+    color: "from-orange-500 to-orange-600",
     points: [
       "Industry-Recognized Certificate",
       "Project Showcase",
       "LinkedIn Endorsement",
+      "Career Guidance",
     ],
   },
 ];
 
 const targets = [
-  { title: "Engineering Students & 3-yr Degree", icon: Users },
-  { title: "Career Changers", icon: Settings2 },
-  { title: "Working Professionals", icon: Briefcase },
+  {
+    title: "Engineering Students",
+    subtitle: "3-year degree holders",
+    icon: Users,
+    description: "Perfect for students looking to enter the tech industry",
+  },
+  {
+    title: "Career Changers",
+    subtitle: "From any background",
+    icon: Settings2,
+    description: "Transform your career with in-demand DevOps skills",
+  },
+  {
+    title: "Working Professionals",
+    subtitle: "IT & Non-IT backgrounds",
+    icon: Briefcase,
+    description: "Upskill and advance your career in DevOps",
+  },
 ];
+
+// Placeholder icons for modules
+const Terminal = ({ className }: { className?: string }) => (
+  <svg
+    className={className}
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+    />
+  </svg>
+);
+
+const Box = ({ className }: { className?: string }) => (
+  <svg
+    className={className}
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+    />
+  </svg>
+);
 
 const modules = [
   {
     title: "Linux Fundamentals & Git",
-    description: "Command line, shell scripting, and version control.",
-    weeks: ["Linux Essentials", "Shell Scripting Basics", "Git & GitHub"],
+    description:
+      "Master command line operations, shell scripting, and version control systems.",
+    duration: "4 weeks",
+    icon: Terminal,
+    topics: [
+      "Linux Essentials",
+      "Shell Scripting",
+      "Git & GitHub",
+      "CI/CD Basics",
+    ],
   },
   {
     title: "CI/CD with Jenkins",
-    description: "Build pipelines, automation, and best practices.",
-    weeks: ["Jenkins Setup", "Pipeline as Code", "Automated Testing & Deploys"],
+    description:
+      "Build robust pipelines, automate testing, and implement deployment strategies.",
+    duration: "3 weeks",
+    icon: Settings2,
+    topics: [
+      "Jenkins Setup",
+      "Pipeline as Code",
+      "Automated Testing",
+      "Deployment Strategies",
+    ],
   },
   {
     title: "Containerization with Docker",
-    description: "Images, containers, registries, and workflows.",
-    weeks: ["Docker Essentials", "Docker Compose", "Best Practices"],
+    description:
+      "Learn containerization, image management, and container orchestration.",
+    duration: "3 weeks",
+    icon: Box,
+    topics: [
+      "Docker Essentials",
+      "Docker Compose",
+      "Best Practices",
+      "Container Security",
+    ],
   },
   {
-    title: "Orchestration with Kubernetes",
-    description: "Deployments, services, scaling, and observability.",
-    weeks: ["K8s Core Objects", "Helm Basics", "Scaling & Monitoring"],
+    title: "Kubernetes Orchestration",
+    description:
+      "Deploy, scale, and manage containerized applications in production.",
+    duration: "4 weeks",
+    icon: Network,
+    topics: [
+      "K8s Core Objects",
+      "Helm Charts",
+      "Scaling & Monitoring",
+      "Production Deployments",
+    ],
   },
   {
-    title: "Infrastructure as Code (Terraform/Ansible)",
-    description: "Provisioning and configuration management.",
-    weeks: ["Terraform Basics", "IaC Workflows", "Ansible for Config Mgmt"],
+    title: "Infrastructure as Code",
+    description:
+      "Automate infrastructure provisioning with Terraform and Ansible.",
+    duration: "3 weeks",
+    icon: Code,
+    topics: [
+      "Terraform Basics",
+      "IaC Workflows",
+      "Ansible Automation",
+      "Cloud Provisioning",
+    ],
   },
   {
-    title: "Cloud on AWS & Monitoring",
-    description: "Core AWS services, Prometheus & Grafana.",
-    weeks: ["AWS Foundations", "Prometheus Metrics", "Grafana Dashboards"],
+    title: "Cloud & Monitoring",
+    description:
+      "Deploy on AWS and implement comprehensive monitoring solutions.",
+    duration: "3 weeks",
+    icon: Cloud,
+    topics: [
+      "AWS Services",
+      "Prometheus",
+      "Grafana Dashboards",
+      "Log Management",
+    ],
   },
 ];
 
 const careers = [
-  { title: "DevOps Consultant" },
-  { title: "Cloud Architect" },
-  { title: "Site Reliability Engineer" },
-  { title: "Release Manager" },
-  { title: "Security Engineer" },
-  { title: "Cloud Engineer" },
+  { title: "DevOps Engineer", salary: "₹8-15 LPA", icon: ServerCog },
+  { title: "Cloud Architect", salary: "₹12-25 LPA", icon: Cloud },
+  { title: "Site Reliability Engineer", salary: "₹10-20 LPA", icon: Shield },
+  { title: "Release Manager", salary: "₹8-18 LPA", icon: Settings2 },
+  { title: "Security Engineer", salary: "₹10-22 LPA", icon: Shield },
+  { title: "Cloud Engineer", salary: "₹8-16 LPA", icon: Cloud },
 ];
 
 export default function DevOpsPage() {
@@ -164,41 +299,74 @@ export default function DevOpsPage() {
       />
 
       {/* Hero Section */}
-      <section className="relative py-16 md:py-24 bg-gradient-to-b from-primary-99 to-white overflow-hidden">
-        <div className="container mx-auto relative">
-          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-            <div className="w-full md:w-1/2 text-center md:text-left">
-              <div className="inline-flex items-center gap-2 bg-white text-primary-75 px-4 py-2 rounded-full text-sm font-medium mb-6 shadow-sm">
-                <Sparkles size={16} className="text-primary-75" />
+      <section className="relative py-20 lg:py-32 bg-gradient-to-br from-primary-99 via-white to-primary-97 overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-primary-90/20 to-transparent rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-gradient-to-tl from-primary-95/30 to-transparent rounded-full blur-2xl" />
+        </div>
+
+        <div className="container mx-auto relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div className="text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm text-primary-75 px-4 py-2 rounded-full text-sm font-semibold mb-6 shadow-lg">
+                <Sparkles size={16} />
                 DevOps & Cloud Computing
               </div>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-vietnam font-bold text-grey-15 mb-6 leading-tight">
-                DevOps and Cloud Computing
+
+              <h1 className="text-4xl lg:text-6xl font-vietnam font-bold text-grey-15 mb-6 leading-tight">
+                Master DevOps &{" "}
+                <span className="bg-gradient-to-r from-primary-75 to-primary-90 bg-clip-text text-transparent">
+                  Cloud Computing
+                </span>
               </h1>
-              <p className="text-xl text-primary-75 font-semibold mb-6">
+
+              <p className="text-xl lg:text-2xl text-primary-75 font-semibold mb-6">
                 Become a DevOps Engineer with 100% Placement Support
               </p>
-              <p className="text-grey-35 text-base md:text-lg leading-relaxed mb-8">
-                Learn modern DevOps with Jenkins, Docker, Kubernetes, Terraform,
-                Ansible, AWS, Prometheus & Grafana. Work on industry-grade
-                projects and get job-ready.
+
+              <p className="text-grey-35 text-lg leading-relaxed mb-8 max-w-2xl mx-auto lg:mx-0">
+                Learn modern DevOps practices with Jenkins, Docker, Kubernetes,
+                Terraform, Ansible, AWS, and monitoring tools. Build
+                industry-grade projects and get job-ready.
               </p>
+
+              {/* CTA Buttons */}
+              {/* <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12">
+                <Button
+                  onClick={openPaymentModal}
+                  className="bg-primary-75 text-white px-8 py-4 text-lg font-semibold hover:bg-primary-80 transition-all duration-300 hover:scale-105 shadow-lg"
+                >
+                  Enroll Now - ₹7,000
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+                <Button
+                  variant="outline"
+                  className="border-2 border-primary-75 text-primary-75 px-8 py-4 text-lg font-semibold hover:bg-primary-75 hover:text-white transition-all duration-300"
+                >
+                  Download Brochure
+                </Button>
+              </div> */}
             </div>
-            <div className="w-full md:w-1/2 mt-8 md:mt-0">
-              <div className="relative">
-                <div className="absolute inset-0 bg-primary-95 rounded-2xl transform rotate-3"></div>
+
+            {/* Right Image */}
+            <div className="relative">
+              <div className="relative z-10">
                 <Image
                   src="/courses/devops.png"
-                  alt="DevOps & Cloud"
+                  alt="DevOps & Cloud Computing"
                   width={600}
                   height={400}
-                  className="relative rounded-2xl shadow-lg w-full h-auto object-cover"
+                  className="rounded-2xl shadow-2xl w-full h-auto object-cover"
                   priority
                 />
-                <div className="absolute -bottom-6 -right-6 bg-white rounded-lg shadow-lg p-4 max-w-xs">
-                  <div className="flex items-center gap-3">
-                    <div className="bg-primary-95 rounded-full p-2">
-                      <Cloud className="h-6 w-6 text-primary-75" />
+
+                {/* Floating Stats Card */}
+                <div className="absolute -bottom-6 -right-6 bg-white rounded-xl shadow-xl p-6 max-w-xs">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-12 h-12 bg-gradient-to-r from-primary-75 to-primary-90 rounded-full flex items-center justify-center">
+                      <Star className="w-6 h-6 text-white" />
                     </div>
                     <div>
                       <p className="font-vietnam font-bold text-grey-15">
@@ -207,65 +375,67 @@ export default function DevOpsPage() {
                       <p className="text-sm text-grey-35">Admissions Open</p>
                     </div>
                   </div>
+                  <div className="flex items-center gap-2 text-sm text-grey-35">
+                    <TrendingUp className="w-4 h-4 text-green-500" />
+                    <span>600+ Students Enrolled</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Stats Section */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 bg-white rounded-xl shadow-lg p-6">
-            <div className="text-center">
-              <p className="text-3xl font-vietnam font-bold text-primary-75">
-                600+
-              </p>
-              <p className="text-grey-35">Students Trained</p>
-            </div>
-            <div className="text-center">
-              <p className="text-3xl font-vietnam font-bold text-primary-75">
-                6
-              </p>
-              <p className="text-grey-35">Months Program</p>
-            </div>
-            <div className="text-center">
-              <p className="text-3xl font-vietnam font-bold text-primary-75">
-                25+
-              </p>
-              <p className="text-grey-35">Industry Projects</p>
-            </div>
-            <div className="text-center">
-              <p className="text-3xl font-vietnam font-bold text-primary-75">
-                100%
-              </p>
-              <p className="text-grey-35">Placement Support</p>
-            </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
+            {stats.map((stat, index) => (
+              <div
+                key={index}
+                className="bg-white/80 backdrop-blur-sm rounded-xl p-6 text-center shadow-lg border border-white/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+              >
+                <div className="w-12 h-12 bg-gradient-to-r from-primary-75 to-primary-90 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <stat.icon className="w-6 h-6 text-white" />
+                </div>
+                <p className="text-2xl lg:text-3xl font-vietnam font-bold text-primary-75 mb-1">
+                  {stat.value}
+                </p>
+                <p className="text-grey-35 font-medium">{stat.label}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-16 bg-light-97">
+      <section className="py-20 bg-light-97">
         <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 bg-primary-99 text-primary-75 px-4 py-2 rounded-full text-sm font-medium mb-4 shadow-sm">
-              <Sparkles size={16} className="text-primary-75" />
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 bg-primary-99 text-primary-75 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+              <Sparkles size={16} />
               Why Choose This Program
             </div>
-            <h2 className="text-3xl md:text-4xl font-vietnam font-bold text-grey-15">
-              Key Features
+            <h2 className="text-3xl lg:text-5xl font-vietnam font-bold text-grey-15 mb-6">
+              Program Highlights
             </h2>
+            <p className="text-grey-35 text-lg max-w-3xl mx-auto">
+              Comprehensive training designed to make you job-ready with
+              industry-relevant skills and hands-on experience.
+            </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="bg-white rounded-lg p-6 shadow-md border border-light-90 hover:border-primary-90 hover:shadow-lg transition-all duration-300 text-center"
+                className="bg-white rounded-2xl p-8 shadow-lg border border-light-90 hover:border-primary-90 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 text-center group"
               >
-                <div className="w-12 h-12 rounded-full bg-primary-95 flex items-center justify-center mb-4 mx-auto">
-                  <feature.icon className="h-6 w-6 text-primary-75" />
+                <div className="w-16 h-16 bg-gradient-to-r from-primary-75 to-primary-90 rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300">
+                  <feature.icon className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-xl font-vietnam font-bold text-grey-15 mb-2">
+                <h3 className="text-xl font-vietnam font-bold text-grey-15 mb-3">
                   {feature.title}
                 </h3>
+                <p className="text-grey-35 leading-relaxed">
+                  {feature.description}
+                </p>
               </div>
             ))}
           </div>
@@ -273,69 +443,83 @@ export default function DevOpsPage() {
       </section>
 
       {/* Who Can Join Section */}
-      <section className="py-16 bg-white">
+      <section className="py-20 bg-white">
         <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 bg-primary-99 text-primary-75 px-4 py-2 rounded-full text-sm font-medium mb-4 shadow-sm">
-              <Users size={16} className="text-primary-75" />
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 bg-primary-99 text-primary-75 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+              <Users size={16} />
               Target Audience
             </div>
-            <h2 className="text-3xl md:text-4xl font-vietnam font-bold text-grey-15">
+            <h2 className="text-3xl lg:text-5xl font-vietnam font-bold text-grey-15 mb-6">
               Who Can Join
             </h2>
+            <p className="text-grey-35 text-lg max-w-3xl mx-auto">
+              This program is designed for individuals from various backgrounds
+              who want to build a career in DevOps.
+            </p>
           </div>
-          <div className="flex flex-col md:flex-row items-center justify-center gap-8 mx-auto">
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {targets.map((target, index) => (
               <div
                 key={index}
-                className="bg-white rounded-lg p-6 shadow-md border border-light-90 hover:border-primary-90 hover:shadow-lg transition-all duration-300 w-full md:w-1/3 text-center"
+                className="bg-gradient-to-br from-primary-99 to-white rounded-2xl p-8 shadow-lg border border-primary-95 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 text-center group"
               >
-                <div className="w-16 h-16 rounded-full bg-primary-95 flex items-center justify-center mx-auto mb-4">
-                  <target.icon className="h-8 w-8 text-primary-75" />
+                <div className="w-20 h-20 bg-gradient-to-r from-primary-75 to-primary-90 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <target.icon className="h-10 w-10 text-white" />
                 </div>
-                <h3 className="text-xl font-vietnam font-bold text-grey-15">
+                <h3 className="text-2xl font-vietnam font-bold text-grey-15 mb-2">
                   {target.title}
                 </h3>
+                <p className="text-primary-75 font-semibold mb-3">
+                  {target.subtitle}
+                </p>
+                <p className="text-grey-35 leading-relaxed">
+                  {target.description}
+                </p>
               </div>
             ))}
           </div>
-          <p className="text-center text-grey-35 mt-8 bg-white bg-opacity-50 p-3 rounded-lg inline-block mx-auto">
-            *Anyone interested in DevOps & Cloud can enroll!*
-          </p>
         </div>
       </section>
 
+      {/* Benefits Section */}
+      <DevOpsBenefits />
+
       {/* Program Highlights Section */}
-      <section className="py-16 bg-light-97">
+      <section className="py-20 bg-light-97">
         <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 bg-primary-99 text-primary-75 px-4 py-2 rounded-full text-sm font-medium mb-4 shadow-sm">
-              <Zap size={16} className="text-primary-75" />
-              Program Highlights
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 bg-primary-99 text-primary-75 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+              <Zap size={16} />
+              What You'll Get
             </div>
-            <h2 className="text-3xl md:text-4xl font-vietnam font-bold text-grey-15">
-              What You&apos;ll Get
+            <h2 className="text-3xl lg:text-5xl font-vietnam font-bold text-grey-15 mb-6">
+              Program Benefits
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {highlights.map((highlight, index) => (
               <div
                 key={index}
-                className="bg-white rounded-lg overflow-hidden shadow-md border border-light-90 hover:border-primary-90 hover:shadow-lg transition-all duration-300"
+                className="bg-white rounded-2xl overflow-hidden shadow-lg border border-light-90 hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
               >
-                <div className="bg-primary-95 p-4">
+                <div className={`bg-gradient-to-r ${highlight.color} p-6`}>
                   <div className="flex items-center gap-3">
-                    <highlight.icon className="w-6 h-6 text-primary-75" />
-                    <h3 className="text-xl font-vietnam font-bold text-grey-15">
+                    <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                      <highlight.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <h3 className="text-xl font-vietnam font-bold text-white">
                       {highlight.category}
                     </h3>
                   </div>
                 </div>
                 <div className="p-6">
-                  <ul className="space-y-2">
+                  <ul className="space-y-3">
                     {highlight.points.map((point, pointIndex) => (
-                      <li key={pointIndex} className="flex items-start gap-2">
-                        <Check className="w-4 h-4 text-primary-75 mt-1 flex-shrink-0" />
+                      <li key={pointIndex} className="flex items-start gap-3">
+                        <Check className="w-5 h-5 text-primary-75 mt-0.5 flex-shrink-0" />
                         <span className="text-grey-35">{point}</span>
                       </li>
                     ))}
@@ -347,51 +531,60 @@ export default function DevOpsPage() {
         </div>
       </section>
 
-      {/* Program Structure / Curriculum Section */}
-      <section className="py-16 bg-white">
+      {/* Curriculum Section */}
+      <section className="py-20 bg-white">
         <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 bg-primary-99 text-primary-75 px-4 py-2 rounded-full text-sm font-medium mb-4 shadow-sm">
-              <BookOpen size={16} className="text-primary-75" />
-              Program Structure
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 bg-primary-99 text-primary-75 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+              <BookOpen size={16} />
+              Curriculum
             </div>
-            <h2 className="text-3xl md:text-4xl font-vietnam font-bold text-grey-15">
-              Curriculum Overview
+            <h2 className="text-3xl lg:text-5xl font-vietnam font-bold text-grey-15 mb-6">
+              What You'll Learn
             </h2>
-            <p className="text-grey-35 text-lg mt-4 max-w-3xl mx-auto">
-              A step-by-step journey from basics to advanced DevOps & Cloud
-              concepts, with hands-on projects and real-world applications.
+            <p className="text-grey-35 text-lg max-w-3xl mx-auto">
+              A comprehensive curriculum designed to take you from basics to
+              advanced DevOps practices.
             </p>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {modules.map((module, index) => (
               <div
                 key={index}
-                className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl border-b-4 border-primary-75"
+                className="bg-white rounded-2xl shadow-lg overflow-hidden border border-light-90 hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
               >
-                <div className="bg-primary-95 p-6">
-                  <div className="flex justify-between items-center mb-3">
-                    <Badge className="bg-primary-75 text-white px-3 py-1">
+                <div className="bg-gradient-to-r from-primary-95 to-primary-99 p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <Badge className="bg-primary-75 text-white px-4 py-2 text-sm font-semibold">
                       Module {index + 1}
                     </Badge>
+                    <span className="text-sm font-semibold text-primary-75 bg-white/50 px-3 py-1 rounded-full">
+                      {module.duration}
+                    </span>
                   </div>
-                  <h3 className="text-xl font-vietnam font-bold text-grey-15">
-                    {module.title}
-                  </h3>
-                  <p className="mt-2 text-grey-35">{module.description}</p>
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 bg-primary-75 rounded-xl flex items-center justify-center">
+                      <module.icon className="w-5 h-5 text-white" />
+                    </div>
+                    <h3 className="text-xl font-vietnam font-bold text-grey-15">
+                      {module.title}
+                    </h3>
+                  </div>
+                  <p className="text-grey-35">{module.description}</p>
                 </div>
                 <div className="p-6">
-                  <h4 className="font-vietnam font-semibold text-grey-15 mb-3">
-                    Key Focus Areas:
+                  <h4 className="font-vietnam font-semibold text-grey-15 mb-4">
+                    Key Topics:
                   </h4>
-                  <ul className="space-y-2">
-                    {module.weeks.map((week, weekIdx) => (
-                      <li key={weekIdx} className="flex items-start gap-2">
-                        <Check className="w-5 h-5 text-primary-75 mt-0.5 flex-shrink-0" />
-                        <span className="text-grey-35">{week}</span>
-                      </li>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {module.topics.map((topic, topicIdx) => (
+                      <div key={topicIdx} className="flex items-center gap-2">
+                        <Check className="w-4 h-4 text-primary-75 flex-shrink-0" />
+                        <span className="text-sm text-grey-35">{topic}</span>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               </div>
             ))}
@@ -403,57 +596,83 @@ export default function DevOpsPage() {
       <DevOpsToolsSection />
 
       {/* Career Opportunities & Pricing Section */}
-      <section className="py-16 bg-light-97">
+      <section className="py-20 bg-light-97">
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden p-8 border-l-4 border-primary-75">
-              <h3 className="text-2xl font-vietnam font-bold text-grey-15 mb-6">
-                Career Opportunities
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {careers.map((career, index) => (
-                  <div key={index} className="flex gap-3">
-                    <div className="w-10 h-10 rounded-full bg-primary-95 flex items-center justify-center flex-shrink-0">
-                      <ServerCog className="w-5 h-5 text-primary-75" />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Career Opportunities */}
+            <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-light-90">
+              <div className="bg-gradient-to-r from-primary-75 to-primary-90 p-8 text-white">
+                <h3 className="text-3xl font-vietnam font-bold mb-2">
+                  Career Opportunities
+                </h3>
+                <p className="text-white/90">
+                  High-paying roles in the booming DevOps industry
+                </p>
+              </div>
+              <div className="p-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {careers.map((career, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center gap-4 p-4 rounded-xl bg-light-97 hover:bg-primary-95/20 transition-colors"
+                    >
+                      <div className="w-12 h-12 bg-primary-95 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <career.icon className="w-6 h-6 text-primary-75" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-vietnam font-bold text-grey-15">
+                          {career.title}
+                        </h4>
+                        <p className="text-primary-75 font-semibold text-sm">
+                          {career.salary}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="font-vietnam font-bold text-grey-15">
-                        {career.title}
-                      </h4>
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden p-8 border-l-4 border-primary-75 max-h-fit">
-              <h3 className="text-2xl font-vietnam font-bold text-grey-15 mb-6">
-                Program Investment
-              </h3>
-              <div className="space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-full bg-primary-95 flex items-center justify-center flex-shrink-0">
-                    <IndianRupee className="w-7 h-7 text-primary-75" />
-                  </div>
-                  <div>
-                    <p className="text-grey-20 font-bold">Upfront Payment</p>
-                    <div className="flex items-center gap-2 mt-1">
-                      <p className="text-3xl font-vietnam font-bold text-primary-75">
-                        ₹7,000
-                      </p>
+
+            {/* Pricing */}
+            <div className="bg-gradient-to-br from-primary-75 to-primary-90 rounded-2xl shadow-xl overflow-hidden text-white">
+              <div className="p-8">
+                <h3 className="text-3xl font-vietnam font-bold mb-2">
+                  Program Investment
+                </h3>
+                <p className="text-white/90 mb-8">
+                  Affordable pricing with flexible payment options
+                </p>
+
+                <div className="bg-white/10 rounded-xl p-6 mb-8">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center">
+                      <IndianRupee className="w-8 h-8 text-white" />
                     </div>
-                    <div className="mt-1">
-                      <p className="text-sm text-grey-35">
-                        One-time payment • No Cost EMI options available
+                    <div>
+                      <p className="text-white/80 font-medium">
+                        One-time Payment
                       </p>
+                      <div className="flex items-baseline gap-2">
+                        <p className="text-4xl font-vietnam font-bold">
+                          ₹7,000
+                        </p>
+                        <p className="text-white/70 line-through">₹25,000</p>
+                      </div>
                     </div>
-                    <Button
-                      className="mt-4 w-full bg-primary-75 text-white text-lg px-6 py-3 hover:bg-primary-80 font-semibold flex items-center justify-center gap-2"
-                      onClick={openPaymentModal}
-                    >
-                      Enroll Now
-                    </Button>
                   </div>
                 </div>
+
+                <Button
+                  onClick={openPaymentModal}
+                  className="w-full bg-white text-primary-75 text-lg px-8 py-4 font-semibold hover:bg-primary-95 transition-all duration-300 hover:scale-105 shadow-lg"
+                >
+                  Enroll Now
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+
+                <p className="text-center text-black text-base mt-4">
+                  Limited time offer • Secure payment via Razorpay
+                </p>
               </div>
             </div>
           </div>

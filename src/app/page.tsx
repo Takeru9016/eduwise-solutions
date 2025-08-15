@@ -6,6 +6,8 @@ import {
   BenefitSection,
   ProgramSection,
   Testimonials,
+  DomainsShowcase,
+  // LearningJourney,
 } from "@/components";
 
 export default function Home() {
@@ -14,8 +16,10 @@ export default function Home() {
       <Navbar />
       <main className="min-h-screen">
         <HeroSection />
-        <ProgramSection/>
+        <DomainsShowcase />
+        <ProgramSection />
         <BenefitSection />
+        {/* <LearningJourney /> */}
         <Testimonials />
         <FAQs />
       </main>

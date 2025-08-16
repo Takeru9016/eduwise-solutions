@@ -1,21 +1,59 @@
-import { Settings2, Boxes, Cpu, Cloud } from "lucide-react";
+import { Settings2, Boxes, Cpu, Cloud, GitBranch, Brain } from "lucide-react";
 
 const toolsData = [
+  {
+    icon: GitBranch,
+    title: "Version Control & GitOps",
+    items: [
+      {
+        name: "Git",
+        image:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+      },
+      {
+        name: "GitOps",
+        image:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+      },
+      {
+        name: "Argo CD",
+        image:
+          "https://www.vectorlogo.zone/logos/argoprojio/argoprojio-icon.svg",
+      },
+    ],
+  },
   {
     icon: Boxes,
     title: "CI/CD & Containers",
     items: [
       {
         name: "Jenkins",
-        image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg",
+        image:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg",
       },
       {
         name: "Docker",
-        image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+        image:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
       },
       {
         name: "Kubernetes",
-        image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg",
+        image:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg",
+      },
+      {
+        name: "EKS",
+        image:
+          "https://www.vectorlogo.zone/logos/amazon_eks/amazon_eks-icon.svg",
+      },
+      {
+        name: "GKE",
+        image:
+          "https://www.vectorlogo.zone/logos/google_cloud/google_cloud-icon.svg",
+      },
+      {
+        name: "Rancher",
+        image: "https://www.vectorlogo.zone/logos/rancher/rancher-icon.svg",
       },
     ],
   },
@@ -25,29 +63,64 @@ const toolsData = [
     items: [
       {
         name: "Terraform",
-        image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg",
+        image:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg",
       },
       {
         name: "Ansible",
         image: "https://www.vectorlogo.zone/logos/ansible/ansible-icon.svg",
       },
+      {
+        name: "CloudFormation",
+        image:
+          "https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg",
+      },
     ],
   },
   {
     icon: Cloud,
-    title: "Cloud & Monitoring",
+    title: "Cloud & Serverless",
     items: [
       {
         name: "AWS",
-        image: "/aws.svg",
+        image:
+          "https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg",
+      },
+      {
+        name: "Azure",
+        image:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg",
+      },
+      {
+        name: "Lambda",
+        image:
+          "https://www.vectorlogo.zone/logos/amazon_awslambda/amazon_awslambda-icon.svg",
       },
       {
         name: "Prometheus",
-        image: "https://upload.wikimedia.org/wikipedia/commons/3/38/Prometheus_software_logo.svg",
+        image:
+          "https://upload.wikimedia.org/wikipedia/commons/3/38/Prometheus_software_logo.svg",
       },
       {
         name: "Grafana",
-        image: "https://upload.wikimedia.org/wikipedia/commons/a/a1/Grafana_logo.svg",
+        image:
+          "https://upload.wikimedia.org/wikipedia/commons/a/a1/Grafana_logo.svg",
+      },
+    ],
+  },
+  {
+    icon: Brain,
+    title: "ML & AI Platforms",
+    items: [
+      {
+        name: "TensorFlow",
+        image:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg",
+      },
+      {
+        name: "PyTorch",
+        image:
+          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg",
       },
     ],
   },
@@ -91,7 +164,8 @@ export default function DevOpsToolsSection() {
                         alt={item.name}
                         className="w-10 h-10 object-contain group-hover:scale-110 transition-transform duration-200"
                         onError={(e) => {
-                          (e.currentTarget as HTMLImageElement).style.display = "none";
+                          (e.currentTarget as HTMLImageElement).style.display =
+                            "none";
                         }}
                       />
                     </div>
@@ -108,5 +182,3 @@ export default function DevOpsToolsSection() {
     </section>
   );
 }
-
-

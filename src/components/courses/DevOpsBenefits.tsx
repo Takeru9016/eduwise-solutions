@@ -22,7 +22,7 @@ export default function DevOpsBenefits() {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="text-3xl md:text-4xl font-vietnam font-bold text-grey-15">
-            Companies Hiring for DevOps & it's various roles
+            Companies Hiring for DevOps & it&apos;s various roles
           </h2>
           <p className="text-grey-35 mt-4 leading-relaxed">
             This EduWise DevOps Training will help you become job-ready and

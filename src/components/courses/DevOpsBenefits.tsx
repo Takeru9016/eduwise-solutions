@@ -4,12 +4,12 @@ import Image from "next/image";
 
 export default function DevOpsBenefits() {
   const logos: { src: string; alt: string }[] = [
-    { src: "/partners/squareyards.jpeg", alt: "Squareyards" },
     { src: "/partners/amazon.svg", alt: "Amazon" },
-    { src: "/partners/unacademy.png", alt: "Unacademy" },
-    { src: "/partners/upgrad.svg", alt: "upGrad" },
-    { src: "/partners/manipal.png", alt: "Manipal" },
-    { src: "/partners/almabetter.png", alt: "AlmaBetter" },
+    { src: "/partners/ibm.svg", alt: "IBM" },
+    { src: "/partners/hcl.svg", alt: "HCL" },
+    { src: "/partners/tcs.png", alt: "TCS" },
+    { src: "/partners/tech_mahindra.svg", alt: "Tech Mahindra" },
+    { src: "/partners/wipro.svg", alt: "Wipro" },
   ];
 
   return (

@@ -299,51 +299,51 @@ export default function DevOpsPage() {
       />
 
       {/* Hero Section */}
-      <section className="relative py-20 lg:py-32 bg-gradient-to-br from-primary-99 via-white to-primary-97 overflow-hidden">
+      <section className="relative py-12 sm:py-16 md:py-20 lg:py-32 bg-gradient-to-br from-primary-99 via-white to-primary-97 overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-primary-90/20 to-transparent rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-gradient-to-tl from-primary-95/30 to-transparent rounded-full blur-2xl" />
+          <div className="absolute top-0 left-1/4 w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 bg-gradient-to-br from-primary-90/20 to-transparent rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-1/4 w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 bg-gradient-to-tl from-primary-95/30 to-transparent rounded-full blur-2xl" />
         </div>
 
-        <div className="container mx-auto relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Left Content */}
-            <div className="text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm text-primary-75 px-4 py-2 rounded-full text-sm font-semibold mb-6 shadow-lg">
-                <Sparkles size={16} />
+            <div className="text-center lg:text-left order-2 lg:order-1">
+              <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm text-primary-75 px-3 py-2 sm:px-4 rounded-full text-xs sm:text-sm font-semibold mb-4 sm:mb-6 shadow-lg">
+                <Sparkles size={14} className="sm:w-4 sm:h-4" />
                 DevOps & Cloud Computing
               </div>
 
-              <h1 className="text-4xl lg:text-6xl font-vietnam font-bold text-grey-15 mb-6 leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-vietnam font-bold text-grey-15 mb-4 sm:mb-6 leading-tight px-2 sm:px-0">
                 Master DevOps &{" "}
                 <span className="bg-gradient-to-r from-primary-75 to-primary-90 bg-clip-text text-transparent">
                   Cloud Computing
                 </span>
               </h1>
 
-              <p className="text-xl lg:text-2xl text-primary-75 font-semibold mb-6">
+              <p className="text-lg sm:text-xl lg:text-2xl text-primary-75 font-semibold mb-4 sm:mb-6 px-2 sm:px-0">
                 Become a DevOps Engineer with 100% Placement Support
               </p>
 
-              <p className="text-grey-35 text-lg leading-relaxed mb-8 max-w-2xl mx-auto lg:mx-0">
+              <p className="text-grey-35 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8 max-w-2xl mx-auto lg:mx-0 px-4 sm:px-0">
                 Learn modern DevOps practices with Jenkins, Docker, Kubernetes,
                 Terraform, Ansible, AWS, and monitoring tools. Build
                 industry-grade projects and get job-ready.
               </p>
 
               {/* CTA Buttons */}
-              {/* <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12">
+              {/* <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start mb-8 sm:mb-12 px-4 sm:px-0">
                 <Button
                   onClick={openPaymentModal}
-                  className="bg-primary-75 text-white px-8 py-4 text-lg font-semibold hover:bg-primary-80 transition-all duration-300 hover:scale-105 shadow-lg"
+                  className="bg-primary-75 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold hover:bg-primary-80 transition-all duration-300 hover:scale-105 shadow-lg w-full sm:w-auto"
                 >
                   Enroll Now - ₹7,000
-                  <ArrowRight className="ml-2 w-5 h-5" />
+                  <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
                 </Button>
                 <Button
                   variant="outline"
-                  className="border-2 border-primary-75 text-primary-75 px-8 py-4 text-lg font-semibold hover:bg-primary-75 hover:text-white transition-all duration-300"
+                  className="border-2 border-primary-75 text-primary-75 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold hover:bg-primary-75 hover:text-white transition-all duration-300 w-full sm:w-auto"
                 >
                   Download Brochure
                 </Button>
@@ -351,33 +351,53 @@ export default function DevOpsPage() {
             </div>
 
             {/* Right Image */}
-            <div className="relative">
-              <div className="relative z-10">
+            <div className="relative order-2 lg:order-2">
+              <div className="relative z-10 px-4 sm:px-0">
                 <Image
                   src="/courses/devops.png"
                   alt="DevOps & Cloud Computing"
                   width={600}
                   height={400}
-                  className="rounded-2xl shadow-2xl w-full h-auto object-cover"
+                  className="rounded-xl sm:rounded-2xl shadow-2xl w-full h-auto object-cover"
                   priority
                 />
 
-                {/* Floating Stats Card */}
-                <div className="absolute -bottom-6 -right-6 bg-white rounded-xl shadow-xl p-6 max-w-xs">
+                {/* Floating Stats Card - Hidden on small screens, visible on md+ */}
+                <div className="hidden md:block absolute -bottom-4 sm:-bottom-6 -right-2 sm:-right-6 bg-white rounded-lg sm:rounded-xl shadow-xl p-4 sm:p-6 max-w-xs">
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="w-12 h-12 bg-gradient-to-r from-primary-75 to-primary-90 rounded-full flex items-center justify-center">
-                      <Star className="w-6 h-6 text-white" />
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-primary-75 to-primary-90 rounded-full flex items-center justify-center">
+                      <Star className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                     </div>
                     <div>
-                      <p className="font-vietnam font-bold text-grey-15">
+                      <p className="font-vietnam font-bold text-grey-15 text-sm sm:text-base">
                         Batch 2025
                       </p>
-                      <p className="text-sm text-grey-35">Admissions Open</p>
+                      <p className="text-xs sm:text-sm text-grey-35">
+                        Admissions Open
+                      </p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-grey-35">
-                    <TrendingUp className="w-4 h-4 text-green-500" />
+                  <div className="flex items-center gap-2 text-xs sm:text-sm text-grey-35">
+                    <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 text-green-500" />
                     <span>600+ Students Enrolled</span>
+                  </div>
+                </div>
+
+                {/* Mobile Stats Card - Visible only on small screens */}
+                <div className="md:hidden mt-4 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-4 mx-4 sm:mx-0">
+                  <div className="flex items-center justify-center gap-3">
+                    <div className="w-10 h-10 bg-gradient-to-r from-primary-75 to-primary-90 rounded-full flex items-center justify-center">
+                      <Star className="w-5 h-5 text-white" />
+                    </div>
+                    <div className="text-center">
+                      <p className="font-vietnam font-bold text-grey-15 text-sm">
+                        Batch 2025 - Admissions Open
+                      </p>
+                      <div className="flex items-center justify-center gap-1 text-xs text-grey-35 mt-1">
+                        <TrendingUp className="w-3 h-3 text-green-500" />
+                        <span>600+ Students Enrolled</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -385,19 +405,21 @@ export default function DevOpsPage() {
           </div>
 
           {/* Stats Section */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-12 sm:mt-16 px-2 sm:px-0">
             {stats.map((stat, index) => (
               <div
                 key={index}
-                className="bg-white/80 backdrop-blur-sm rounded-xl p-6 text-center shadow-lg border border-white/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                className="bg-white/80 backdrop-blur-sm rounded-lg sm:rounded-xl p-4 sm:p-6 text-center shadow-lg border border-white/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
               >
-                <div className="w-12 h-12 bg-gradient-to-r from-primary-75 to-primary-90 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <stat.icon className="w-6 h-6 text-white" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-primary-75 to-primary-90 rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3">
+                  <stat.icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                 </div>
-                <p className="text-2xl lg:text-3xl font-vietnam font-bold text-primary-75 mb-1">
+                <p className="text-xl sm:text-2xl lg:text-3xl font-vietnam font-bold text-primary-75 mb-1">
                   {stat.value}
                 </p>
-                <p className="text-grey-35 font-medium">{stat.label}</p>
+                <p className="text-grey-35 font-medium text-xs sm:text-sm lg:text-base">
+                  {stat.label}
+                </p>
               </div>
             ))}
           </div>

@@ -1,4 +1,5 @@
 import { Terminal, Shield, Settings2 } from "lucide-react";
+import Image from "next/image";
 
 const toolsData = [
   {
@@ -72,9 +73,11 @@ export default function CSToolsSection() {
                     className="bg-primary-97 p-4 rounded-xl hover:bg-primary-95 transition-colors duration-200 flex flex-col items-center text-center group hover:shadow-md"
                   >
                     <div className="w-12 h-12 mb-3 flex items-center justify-center">
-                      <img
+                      <Image
                         src={item.image}
                         alt={item.name}
+                        width={40}
+                        height={40}
                         className="w-10 h-10 object-contain group-hover:scale-110 transition-transform duration-200"
                         onError={(e) => {
                           // Fallback in case image fails to load

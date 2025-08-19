@@ -39,7 +39,7 @@ export default function DomainsShowcase() {
 
 					{/* Row 1 */}
 					<div className="flex items-center gap-4 sm:gap-6 py-6 whitespace-nowrap">
-						<div className="flex animate-marquee gap-4 sm:gap-6 will-change-transform">
+						<div className="flex animate-[marquee_30s_linear_infinite] gap-4 sm:gap-6 will-change-transform">
 							{duplicated.map((item, idx) => (
 								<div
 									key={`row1-${idx}-${item.label}`}
@@ -59,7 +59,7 @@ export default function DomainsShowcase() {
 
 					{/* Row 2 (reverse) */}
 					<div className="flex items-center gap-4 sm:gap-6 py-6 whitespace-nowrap">
-						<div className="flex animate-[marquee_18s_linear_infinite_reverse] gap-4 sm:gap-6 will-change-transform">
+						<div className="flex animate-[marquee_30s_linear_infinite_reverse] gap-4 sm:gap-6 will-change-transform">
 							{duplicated.map((item, idx) => (
 								<div
 									key={`row2-${idx}-${item.label}`}

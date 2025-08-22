@@ -20,17 +20,17 @@ const toolsData = [
       {
         name: "Wireshark",
         image:
-          "https://upload.wikimedia.org/wikipedia/commons/5/5f/Wireshark_Logo.svg",
+          "/wireshark.svg",
       },
       {
         name: "Burp Suite",
         image:
-          "https://portswigger.net/cms/images/61/2a/2b2e-article-main-burp-suite-logo.png",
+          "/burpsuite.svg",
       },
       {
         name: "SIEM",
         image:
-          "https://upload.wikimedia.org/wikipedia/commons/2/2a/IBM_QRadar_logo.png",
+          "/siem.png",
       },
       {
         name: "Firewalls",

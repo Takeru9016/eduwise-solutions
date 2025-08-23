@@ -35,7 +35,7 @@ const toolsData = [
       {
         name: "Firewalls",
         image:
-          "https://cdn-icons-png.flaticon.com/512/565/565547.png",
+          "/firewall.png",
       },
     ],
   },

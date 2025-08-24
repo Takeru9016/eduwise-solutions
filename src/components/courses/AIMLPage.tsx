@@ -163,7 +163,7 @@ export default function AIMLPage() {
       <PaymentModal
         isOpen={isPaymentModalOpen}
         onClose={closePaymentModal}
-        amount={11000}
+        amount={6000}
         programName="AI & ML Program"
       />
       {/* Hero Section */}

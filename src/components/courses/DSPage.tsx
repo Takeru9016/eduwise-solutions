@@ -158,7 +158,7 @@ export default function DSPage() {
       <PaymentModal
         isOpen={isPaymentModalOpen}
         onClose={closePaymentModal}
-        amount={11000}
+        amount={6000}
         programName="Data Science Program"
       />
       {/* Hero Section */}

@@ -166,7 +166,7 @@ export default function CyberSecPage() {
       <PaymentModal
         isOpen={isPaymentModalOpen}
         onClose={closePaymentModal}
-        amount={11000}
+        amount={6000}
         programName="Cyber Security Program"
       />
       {/* Hero Section */}

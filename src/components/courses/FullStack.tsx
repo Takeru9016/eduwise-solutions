@@ -157,7 +157,7 @@ export default function FullStackPage() {
       <PaymentModal
         isOpen={isPaymentModalOpen}
         onClose={closePaymentModal}
-        amount={11000}
+        amount={6000}
         programName="Full Stack Program"
       />
       {/* Hero Section */}

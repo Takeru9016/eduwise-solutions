@@ -1,13 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
-import Script from "next/script";
 import {
   Check,
   Briefcase,
-  GraduationCap,
-  IndianRupee,
   Sparkles,
   Target,
   Users,
@@ -16,7 +12,6 @@ import {
   Award,
   BookOpen,
   Laptop,
-  HandCoins,
   Zap,
   LifeBuoy,
   Presentation,
@@ -25,10 +20,7 @@ import {
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
-import PaymentStatusModal from "../payment/PaymentStatusModal";
-import PaymentModal from "../payment/PaymentModal";
 import BenefitSection from "../common/BenefitSection";
-// import WebinarBanner from "./WebinarBanner";
 
 const features = [
   {
@@ -275,193 +267,9 @@ const programHighlights = [
   },
 ];
 
-const programTargets = [
-  {
-    title: "Graduation Final Year",
-    icon: GraduationCap,
-  },
-  {
-    title: "Fresh Graduates",
-    icon: Award,
-  },
-];
-
-// Define interfaces for the data structures
-
-// interface Week {
-//   title: string;
-//   days: string[];
-// }
-
-// interface Module {
-//   title: string;
-//   duration: string;
-//   description: string;
-//   weeks: Week[];
-// }
-
-// Add Razorpay types
-interface RazorpayResponse {
-  razorpay_payment_id: string;
-  razorpay_order_id: string;
-  razorpay_signature: string;
-}
-
-interface RazorpayOptions {
-  key: string;
-  amount: number;
-  currency: string;
-  name: string;
-  description: string;
-  order_id: string;
-  handler: (response: RazorpayResponse) => void;
-  modal: {
-    ondismiss: () => void;
-  };
-  prefill: {
-    name: string;
-    email: string;
-    contact: string;
-  };
-  theme: {
-    color: string;
-  };
-}
-
-interface RazorpayInstance {
-  open: () => void;
-  close: () => void;
-  on: (event: string, handler: (response: RazorpayResponse) => void) => void;
-}
-
-declare global {
-  interface Window {
-    Razorpay: new (options: RazorpayOptions) => RazorpayInstance;
-  }
-}
-
-// Accordion component for curriculum with proper TypeScript types
-// const CurriculumAccordion = ({
-//   module,
-//   moduleIndex,
-// }: {
-//   module: Module;
-//   moduleIndex: number;
-// }) => {
-//   const [openWeek, setOpenWeek] = useState<number | null>(null);
-
-//   return (
-//     <div className="space-y-4">
-//       <h3 className="text-xl md:text-2xl font-vietnam font-bold text-grey-15 border-b border-light-90 pb-3 flex items-center justify-between">
-//         <span>
-//           {module.title}{" "}
-//           <span className="text-primary-75">({module.duration})</span>
-//         </span>
-//         <Badge className="bg-primary-75 text-white">
-//           Module {moduleIndex + 1}
-//         </Badge>
-//       </h3>
-
-//       <div className="space-y-3">
-//         {module.weeks.map((week: Week, weekIndex: number) => (
-//           <div
-//             key={weekIndex}
-//             className="border border-light-90 rounded-lg overflow-hidden"
-//           >
-//             <button
-//               className={`w-full flex justify-between items-center p-4 text-left ${
-//                 openWeek === weekIndex
-//                   ? "bg-primary-95"
-//                   : "bg-white hover:bg-primary-99"
-//               } transition-colors`}
-//               onClick={() =>
-//                 setOpenWeek(openWeek === weekIndex ? null : weekIndex)
-//               }
-//             >
-//               <span className="font-vietnam font-semibold text-grey-15">
-//                 {week.title}
-//               </span>
-//               {openWeek === weekIndex ? (
-//                 <ChevronDown className="h-5 w-5 text-primary-75" />
-//               ) : (
-//                 <ChevronRight className="h-5 w-5 text-primary-75" />
-//               )}
-//             </button>
-
-//             {openWeek === weekIndex && (
-//               <div className="p-4 bg-white">
-//                 <div className="grid grid-cols-1 gap-2">
-//                   {week.days.map((day: string, dayIndex: number) => (
-//                     <div
-//                       key={dayIndex}
-//                       className="flex gap-3 p-3 rounded-lg border border-light-90 hover:border-primary-90 transition-colors"
-//                     >
-//                       <Calendar className="w-5 h-5 text-primary-75 mt-1 flex-shrink-0" />
-//                       <span className="text-grey-35">{day}</span>
-//                     </div>
-//                   ))}
-//                 </div>
-//               </div>
-//             )}
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
 export default function ProfessionalPage() {
-  const [paymentStatus, setPaymentStatus] = useState<{
-    isOpen: boolean;
-    status: "success" | "failure" | "cancelled";
-    message?: string;
-  }>({
-    isOpen: false,
-    status: "success",
-  });
-
-  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
-
-  const handleCloseModal = () => {
-    setPaymentStatus((prev) => ({ ...prev, isOpen: false }));
-  };
-
-  const openPaymentModal = () => {
-    setIsPaymentModalOpen(true);
-  };
-
-  const closePaymentModal = () => {
-    setIsPaymentModalOpen(false);
-  };
-
   return (
     <main className="min-h-screen bg-white">
-      <Script
-        src="https://checkout.razorpay.com/v1/checkout.js"
-        strategy="lazyOnload"
-      />
-
-      {/* Payment Status Modal */}
-      <PaymentStatusModal
-        isOpen={paymentStatus.isOpen}
-        onClose={handleCloseModal}
-        status={paymentStatus.status}
-        message={paymentStatus.message}
-      />
-
-      {/* Payment Modal */}
-      <PaymentModal
-        isOpen={isPaymentModalOpen}
-        onClose={closePaymentModal}
-        amount={5000}
-        programName="Professional Program"
-      />
-
-      {/* Webinar Banner */}
-      {/* <div className="container mx-auto px-4 py-8">
-        <WebinarBanner />
-      </div> */}
-
       {/* Hero Section */}
       <section className="relative py-16 md:py-24 bg-gradient-to-b from-primary-99 to-white overflow-hidden">
         <div className="absolute inset-0">
@@ -520,23 +328,6 @@ export default function ProfessionalPage() {
                     </div>
                   </div>
                 </div>
-
-                {/* Added floating batch card */}
-                {/* <div className="absolute -top-6 -left-6 bg-white rounded-lg shadow-lg p-4">
-                  <div className="flex items-center gap-3">
-                    <div className="bg-primary-75 rounded-full p-2">
-                      <Calendar className="h-6 w-6 text-white" />
-                    </div>
-                    <div>
-                      <p className="font-vietnam font-bold text-grey-15">
-                        May 10th Batch
-                      </p>
-                      <p className="text-sm text-red-500 font-medium">
-                        Limited seats available!
-                      </p>
-                    </div>
-                  </div>
-                </div> */}
               </div>
             </div>
           </div>
@@ -618,25 +409,20 @@ export default function ProfessionalPage() {
             </h2>
           </div>
 
-          <div className="flex flex-col md:flex-row items-center justify-center gap-8 max-w-3xl mx-auto">
-            {programTargets.map((target, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-lg p-6 shadow-md border border-light-90 hover:border-primary-90 hover:shadow-lg transition-all duration-300 w-full md:w-1/2 text-center"
-              >
-                <div className="w-16 h-16 rounded-full bg-primary-95 flex items-center justify-center mx-auto mb-4">
-                  <target.icon className="h-8 w-8 text-primary-75" />
-                </div>
-                <h3 className="text-xl font-vietnam font-bold text-grey-15">
-                  {target.title}
-                </h3>
+          <div className="max-w-3xl mx-auto">
+            <div className="bg-white rounded-xl p-8 shadow-md border border-light-90 text-center">
+              <div className="w-20 h-20 rounded-full bg-primary-95 flex items-center justify-center mx-auto mb-4">
+                <Award className="h-10 w-10 text-primary-75" />
               </div>
-            ))}
+              <h3 className="text-2xl font-vietnam font-bold text-grey-15 mb-2">
+                Course Completers Only
+              </h3>
+              <p className="text-grey-35">
+                Only learners who have successfully completed our courses are
+                eligible to apply for this professional program.
+              </p>
+            </div>
           </div>
-
-          <p className="text-center text-grey-35 mt-8 bg-white bg-opacity-50 p-3 rounded-lg inline-block mx-auto">
-            **Note: Any Individuals who graduate can pursue the course*
-          </p>
         </div>
       </section>
 
@@ -683,30 +469,34 @@ export default function ProfessionalPage() {
         </div>
       </section>
 
-      {/* Career Assurance Service Section - Redesigned */}
+      {/* Career Assurance Service Section - Enhanced */}
       <section className="py-16 bg-white">
         <div className="container mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-vietnam font-bold text-grey-15">
-              How It Works
+            <h2 className="text-3xl md:text-5xl font-vietnam font-bold text-grey-15">
+              Career Assurance Workflow
             </h2>
+            <p className="text-grey-35 text-lg mt-4 max-w-3xl mx-auto">
+              A structured, end-to-end process to transform graduates into
+              job-ready professionals.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
             {careerAssuranceSteps.map((step, index) => (
               <div
                 key={index}
-                className="bg-white p-6 rounded-lg border border-light-90 hover:border-primary-90 hover:shadow-lg transition-all duration-300"
+                className="bg-white p-8 rounded-xl border border-light-90 hover:border-primary-90 hover:shadow-xl transition-all duration-300"
               >
                 <div className="mb-4">
-                  <span className="text-5xl font-light text-primary-95">
+                  <span className="text-6xl font-light text-primary-95">
                     {index < 9 ? `0${step.number}` : step.number}
                   </span>
                 </div>
-                <h3 className="text-xl font-vietnam font-bold text-grey-15 mb-2">
+                <h3 className="text-2xl font-vietnam font-bold text-grey-15 mb-2">
                   {step.title}
                 </h3>
-                <p className="text-grey-35 text-sm">{step.description}</p>
+                <p className="text-grey-35">{step.description}</p>
                 {index < careerAssuranceSteps.length - 1 && (
                   <div className="hidden md:flex justify-end mt-4">
                     <ChevronRight className="h-5 w-5 text-primary-75" />
@@ -749,10 +539,6 @@ export default function ProfessionalPage() {
                     <Badge className="bg-primary-75 text-white px-3 py-1">
                       Module {index + 1}
                     </Badge>
-                    {/* <div className="flex items-center text-black bg-white p-2 rounded-full text-xs font-medium">
-                      <Clock size={16} className="mr-2" />
-                      {module.duration}
-                    </div> */}
                   </div>
                   <h3 className="text-xl font-vietnam font-bold text-grey-15">
                     {module.title}
@@ -779,19 +565,24 @@ export default function ProfessionalPage() {
             ))}
           </div>
 
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden p-8 border-l-4 border-primary-75">
-              <h3 className="text-2xl font-vietnam font-bold text-grey-15 mb-6">
-                Career Opportunities
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="mt-16">
+            <div className="bg-white rounded-2xl shadow-xl overflow-hidden p-10 border-l-4 border-primary-75">
+              <div className="flex items-center justify-between flex-wrap gap-4 mb-6">
+                <h3 className="text-3xl md:text-4xl font-vietnam font-bold text-grey-15">
+                  Career Opportunities
+                </h3>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {careerOpportunities.map((career, index) => (
-                  <div key={index} className="flex gap-3">
-                    <div className="w-10 h-10 rounded-full bg-primary-95 flex items-center justify-center flex-shrink-0">
-                      <Briefcase className="w-5 h-5 text-primary-75" />
+                  <div
+                    key={index}
+                    className="flex items-center gap-4 p-4 rounded-lg border border-light-90 hover:border-primary-90 transition-colors"
+                  >
+                    <div className="w-14 h-14 rounded-full bg-primary-95 flex items-center justify-center flex-shrink-0">
+                      <Briefcase className="w-7 h-7 text-primary-75" />
                     </div>
                     <div>
-                      <h4 className="font-vietnam font-bold text-grey-15">
+                      <h4 className="text-lg md:text-xl font-vietnam font-bold text-grey-15">
                         {career.title}
                       </h4>
                     </div>
@@ -799,92 +590,9 @@ export default function ProfessionalPage() {
                 ))}
               </div>
             </div>
-
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden p-8 border-l-4 border-primary-75 max-h-fit">
-              <h3 className="text-2xl font-vietnam font-bold text-grey-15 mb-6">
-                Program Investment
-              </h3>
-              <div className="space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-full bg-primary-95 flex items-center justify-center flex-shrink-0">
-                    <IndianRupee className="w-7 h-7 text-primary-75" />
-                  </div>
-                  <div>
-                    <p className="text-grey-20 font-bold">Upfront Payment</p>
-                    <div className="flex items-center gap-2 mt-1">
-                      <p className="text-3xl font-vietnam font-bold text-primary-75">
-                        ₹5,000
-                      </p>
-                      <Badge className="bg-green-500 text-white text-sm px-3 py-1 animate-pulse">
-                        37% OFF
-                      </Badge>
-                    </div>
-                    <div className="mt-1">
-                      <p className="text-sm text-grey-35">
-                        <span className="line-through text-lg">₹8,000</span> •
-                        One-time payment
-                      </p>
-                      <div className="mt-2 bg-green-50 border border-green-200 rounded-md p-2 inline-block">
-                        <p className="text-sm text-green-700 font-medium flex items-center">
-                          <Sparkles className="w-4 h-4 mr-1" />
-                          Special discount for you!
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Payment Button */}
-                    <button
-                      onClick={openPaymentModal}
-                      className="mt-4 w-full bg-primary-75 text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-80 transition-colors flex items-center justify-center gap-2"
-                    >
-                      Enroll Now
-                    </button>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-full bg-primary-95 flex items-center justify-center flex-shrink-0">
-                    <HandCoins className="w-7 h-7 text-primary-75" />
-                  </div>
-                  <div>
-                    <p className="text-grey-20 font-bold">
-                      Pay After Placement
-                    </p>
-                    <p className="text-2xl font-vietnam font-bold text-primary-75">
-                      ₹20,000
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
-
-      {/* Detailed Curriculum Section */}
-      {/* <section className="py-16 bg-white">
-        <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 bg-primary-99 text-primary-75 px-4 py-2 rounded-full text-sm font-medium mb-4 shadow-sm">
-              <Calendar size={16} className="text-primary-75" />
-              Detailed Curriculum
-            </div>
-            <h2 className="text-3xl md:text-4xl font-vietnam font-bold text-grey-15">
-              Week-by-Week Program Breakdown
-            </h2>
-          </div>
-
-          <div className="space-y-8">
-            {programModules.map((module, moduleIndex) => (
-              <CurriculumAccordion
-                key={moduleIndex}
-                module={module}
-                moduleIndex={moduleIndex}
-              />
-            ))}
-          </div>
-        </div>
-      </section> */}
     </main>
   );
 }

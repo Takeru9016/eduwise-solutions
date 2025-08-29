@@ -5,7 +5,6 @@ import { ArrowRight, Sparkles } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 
 interface ProgramCategory {
   id: string;
@@ -13,7 +12,6 @@ interface ProgramCategory {
   subtitle: string;
   description: string;
   viewLink: string;
-  featured?: boolean;
 }
 
 // Enhanced data structure with more programs and unique IDs
@@ -25,7 +23,6 @@ const programCategories: ProgramCategory[] = [
     description:
       "Dive into AI and machine learning with hands-on projects and real-world applications.",
     viewLink: "/ai-ml",
-    featured: false,
   },
   {
     id: "devops-cert",
@@ -34,7 +31,6 @@ const programCategories: ProgramCategory[] = [
     description:
       "Master CI/CD, Docker, Kubernetes, Terraform, Ansible, AWS, and monitoring with real projects.",
     viewLink: "/devops",
-    featured: true,
   },
   {
     id: "cyber-security-cert",
@@ -43,7 +39,6 @@ const programCategories: ProgramCategory[] = [
     description:
       "Learn ethical hacking, network defense, and more to become a cybersecurity expert.",
     viewLink: "/cyber-sec",
-    featured: false,
   },
   {
     id: "data-science-cert",
@@ -52,7 +47,6 @@ const programCategories: ProgramCategory[] = [
     description:
       "Explore data analysis, visualization, and predictive modeling using industry-standard tools.",
     viewLink: "/data-science",
-    featured: false,
   },
   {
     id: "full-stack-cert",
@@ -61,7 +55,6 @@ const programCategories: ProgramCategory[] = [
     description:
       "Master front-end and back-end development using modern technologies like React, Node.js, and more.",
     viewLink: "/full-stack",
-    featured: false,
   },
   {
     id: "professional-cert",
@@ -70,46 +63,63 @@ const programCategories: ProgramCategory[] = [
     description:
       "Get a 100% job guarantee with our 45-day programme! Learn resume building, LinkedIn optimization, business communication, and more.",
     viewLink: "/professional",
-    featured: true,
   },
 ];
 
 const ProgramCard = ({ program }: { program: ProgramCategory }) => {
+  const themeById: Record<string, { gradient: string; blob: string }> = {
+    "ai-cert": {
+      gradient: "from-violet-500 via-fuchsia-500 to-pink-500",
+      blob: "from-violet-300 via-fuchsia-300 to-pink-300",
+    },
+    "devops-cert": {
+      gradient: "from-emerald-500 via-teal-500 to-cyan-500",
+      blob: "from-emerald-300 via-teal-300 to-cyan-300",
+    },
+    "cyber-security-cert": {
+      gradient: "from-sky-500 via-blue-500 to-indigo-500",
+      blob: "from-sky-300 via-blue-300 to-indigo-300",
+    },
+    "data-science-cert": {
+      gradient: "from-amber-500 via-orange-500 to-rose-500",
+      blob: "from-amber-300 via-orange-300 to-rose-300",
+    },
+    "full-stack-cert": {
+      gradient: "from-fuchsia-500 via-rose-500 to-red-500",
+      blob: "from-fuchsia-300 via-rose-300 to-red-300",
+    },
+    "professional-cert": {
+      gradient: "from-yellow-500 via-amber-500 to-orange-500",
+      blob: "from-yellow-300 via-amber-300 to-orange-300",
+    },
+  };
+
+  const theme = themeById[program.id] ?? {
+    gradient: "from-slate-500 via-slate-400 to-slate-300",
+    blob: "from-slate-300 via-slate-200 to-slate-100",
+  };
+
   return (
     <Card
       key={program.id}
-      className="group hover:shadow-xl transition-all duration-300 overflow-hidden border border-slate-200 bg-white"
+      className="group hover:shadow-2xl transition-all duration-300 overflow-hidden border border-slate-200 bg-white relative"
     >
+      {/* Decorative gradient blob */}
+      <div className={`pointer-events-none absolute -top-10 -right-10 h-36 w-36 rounded-full bg-gradient-to-br ${theme.blob} opacity-30 blur-2xl`} />
       <CardContent className="p-0">
+        {/* Top gradient bar */}
+        <div className={`h-1 w-full bg-gradient-to-r ${theme.gradient}`} />
         {/* Content */}
         <div className="p-6 space-y-4">
-          {/* Badge */}
-          <div className="mb-4">
-            {program.featured ? (
-              <Badge
-                variant="default"
-                className="bg-primary-50 text-white text-base border-primary-200"
-              >
-                Most Popular
-              </Badge>
-            ) : (
-              <Badge
-                variant="secondary"
-                className="bg-primary-75 text-white text-sm border-primary-200"
-              >
-                New
-              </Badge>
-            )}
-          </div>
-
           {/* Title */}
           <div>
             <h3 className="text-xl font-bold text-slate-900 mb-2 leading-tight">
               {program.title}
             </h3>
-            <p className="text-primary-600 font-medium inline-block px-3 py-1 bg-primary-100 rounded-full text-sm">
+            <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium text-white bg-gradient-to-r ${theme.gradient} shadow-sm`}>
+              <Sparkles size={14} className="opacity-90" />
               {program.subtitle}
-            </p>
+            </span>
           </div>
 
           {/* Description */}
@@ -130,9 +140,11 @@ const ProgramCard = ({ program }: { program: ProgramCategory }) => {
             <Link href={program.viewLink}>
               <Button
                 variant="outline"
-                className="border-2 border-slate-300 text-slate-700 hover:bg-slate-50 px-6 py-2 rounded-full flex items-center gap-2 transition-all duration-300"
+                className={`border-2 border-transparent bg-gradient-to-r ${theme.gradient} p-[1px] rounded-full`}
               >
-                View Details
+                <span className="px-6 py-2 rounded-full bg-white text-slate-700 group-hover:bg-slate-50 transition-colors duration-300 flex items-center gap-2">
+                  View Details
+                </span>
               </Button>
             </Link>
           </div>

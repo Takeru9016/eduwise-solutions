@@ -29,6 +29,8 @@ import {
   // Database,
   // Cpu,
   Network,
+  Terminal,
+  Box,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -37,6 +39,7 @@ import PaymentStatusModal from "../payment/PaymentStatusModal";
 import PaymentModal from "../payment/PaymentModal";
 import DevOpsToolsSection from "../common/DevOpsTools";
 import DevOpsBenefits from "./DevOpsBenefits";
+import DevOpsComparisonTable from "./DevOpsComparisonTable";
 
 const stats = [
   { icon: Users, value: "600+", label: "Students Trained" },
@@ -138,39 +141,6 @@ const targets = [
     description: "Upskill and advance your career in DevOps",
   },
 ];
-
-// Placeholder icons for modules
-const Terminal = ({ className }: { className?: string }) => (
-  <svg
-    className={className}
-    fill="none"
-    stroke="currentColor"
-    viewBox="0 0 24 24"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-    />
-  </svg>
-);
-
-const Box = ({ className }: { className?: string }) => (
-  <svg
-    className={className}
-    fill="none"
-    stroke="currentColor"
-    viewBox="0 0 24 24"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
-    />
-  </svg>
-);
 
 const modules = [
   {
@@ -554,19 +524,28 @@ export default function DevOpsPage() {
       </section>
 
       {/* Curriculum Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto">
+      <section className="py-20 bg-gradient-to-br from-slate-50 via-white to-blue-50 relative overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-20 right-10 w-72 h-72 bg-gradient-to-br from-primary-75/10 to-transparent rounded-full blur-3xl" />
+          <div className="absolute bottom-20 left-10 w-96 h-96 bg-gradient-to-tl from-blue-500/10 to-transparent rounded-full blur-3xl" />
+        </div>
+
+        <div className="container mx-auto relative z-10">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 bg-primary-99 text-primary-75 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+            <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm text-primary-75 px-4 py-2 rounded-full text-sm font-semibold mb-6 shadow-lg border border-primary-75/20">
               <BookOpen size={16} />
-              Curriculum
+              Comprehensive Curriculum
             </div>
-            <h2 className="text-3xl lg:text-5xl font-vietnam font-bold text-grey-15 mb-6">
-              What You&apos;ll Learn
+            <h2 className="text-4xl lg:text-5xl font-vietnam font-bold text-grey-15 mb-6">
+              What You&apos;ll{" "}
+              <span className="bg-gradient-to-r from-primary-75 to-primary-90 bg-clip-text text-transparent">
+                Learn
+              </span>
             </h2>
-            <p className="text-grey-35 text-lg max-w-3xl mx-auto">
+            <p className="text-grey-35 text-xl max-w-4xl mx-auto leading-relaxed">
               A comprehensive curriculum designed to take you from basics to
-              advanced DevOps practices.
+              advanced DevOps practices with real-world projects
             </p>
           </div>
 
@@ -574,36 +553,48 @@ export default function DevOpsPage() {
             {modules.map((module, index) => (
               <div
                 key={index}
-                className="bg-white rounded-2xl shadow-lg overflow-hidden border border-light-90 hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+                className="group bg-white/95 backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden border border-white/20 hover:shadow-2xl transition-all duration-500 hover:-translate-y-3"
               >
-                <div className="bg-gradient-to-r from-primary-95 to-primary-99 p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <Badge className="bg-primary-75 text-white px-4 py-2 text-sm font-semibold">
-                      Module {index + 1}
-                    </Badge>
-                    <span className="text-sm font-semibold text-primary-75 bg-white/50 px-3 py-1 rounded-full">
-                      {module.duration}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 bg-primary-75 rounded-xl flex items-center justify-center">
-                      <module.icon className="w-5 h-5 text-white" />
+                <div className="bg-gradient-to-r from-primary-75 via-primary-80 to-primary-90 p-8 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent"></div>
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-between mb-6">
+                      <Badge className="bg-white/20 backdrop-blur-sm text-white px-4 py-2 text-sm font-semibold border border-white/30">
+                        Module {index + 1}
+                      </Badge>
+                      <span className="text-sm font-semibold text-white bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30">
+                        {module.duration}
+                      </span>
                     </div>
-                    <h3 className="text-xl font-vietnam font-bold text-grey-15">
-                      {module.title}
-                    </h3>
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-white/30">
+                        <module.icon className="w-7 h-7 text-white" />
+                      </div>
+                      <h3 className="text-2xl font-vietnam font-bold text-white">
+                        {module.title}
+                      </h3>
+                    </div>
+                    <p className="text-white/90 text-lg leading-relaxed">
+                      {module.description}
+                    </p>
                   </div>
-                  <p className="text-grey-35">{module.description}</p>
                 </div>
-                <div className="p-6">
-                  <h4 className="font-vietnam font-semibold text-grey-15 mb-4">
+                <div className="p-8">
+                  <h4 className="font-vietnam font-bold text-grey-15 mb-6 text-lg">
                     Key Topics:
                   </h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {module.topics.map((topic, topicIdx) => (
-                      <div key={topicIdx} className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-primary-75 flex-shrink-0" />
-                        <span className="text-sm text-grey-35">{topic}</span>
+                      <div
+                        key={topicIdx}
+                        className="flex items-center gap-3 group/item"
+                      >
+                        <div className="w-6 h-6 bg-gradient-to-br from-primary-75 to-primary-90 rounded-full flex items-center justify-center flex-shrink-0 group-hover/item:scale-110 transition-transform duration-300">
+                          <Check className="w-4 h-4 text-white" />
+                        </div>
+                        <span className="text-grey-35 font-medium">
+                          {topic}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -617,38 +608,53 @@ export default function DevOpsPage() {
       {/* Tools & Platforms Section */}
       <DevOpsToolsSection />
 
+      {/* Comparison Table Section */}
+      <DevOpsComparisonTable />
+
       {/* Career Opportunities & Pricing Section */}
-      <section className="py-20 bg-light-97">
-        <div className="container mx-auto">
+      <section className="py-20 bg-gradient-to-br from-slate-50 via-white to-blue-50 relative overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-primary-75/10 to-transparent rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-tl from-blue-500/10 to-transparent rounded-full blur-3xl" />
+        </div>
+
+        <div className="container mx-auto relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Career Opportunities */}
-            <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-light-90">
-              <div className="bg-gradient-to-r from-primary-75 to-primary-90 p-8 text-white">
-                <h3 className="text-3xl font-vietnam font-bold mb-2">
-                  Career Opportunities
-                </h3>
-                <p className="text-white/90">
-                  High-paying roles in the booming DevOps industry
-                </p>
+            <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden border border-white/20">
+              <div className="bg-gradient-to-r from-primary-75 via-primary-80 to-primary-90 p-8 text-white relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent"></div>
+                <div className="relative z-10">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-white/30">
+                      <TrendingUp className="w-6 h-6 text-white" />
+                    </div>
+                    <h3 className="text-3xl font-vietnam font-bold">
+                      Career Opportunities
+                    </h3>
+                  </div>
+                  <p className="text-white/90 text-lg">
+                    High-paying roles in the booming DevOps industry
+                  </p>
+                </div>
               </div>
               <div className="p-8">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {careers.map((career, index) => (
                     <div
                       key={index}
-                      className="flex items-center gap-4 p-4 rounded-xl bg-light-97 hover:bg-primary-95/20 transition-colors"
+                      className="group flex flex-col items-center text-center p-4 rounded-xl bg-gradient-to-br from-slate-50 to-white hover:from-primary-75/5 hover:to-primary-90/5 transition-all duration-300 border border-slate-100 hover:border-primary-75/20 hover:shadow-lg"
                     >
-                      <div className="w-12 h-12 bg-primary-95 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <div className="w-12 h-12 bg-gradient-to-br from-primary-75/20 to-primary-90/20 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
                         <career.icon className="w-6 h-6 text-primary-75" />
                       </div>
-                      <div className="flex-1">
-                        <h4 className="font-vietnam font-bold text-grey-15">
-                          {career.title}
-                        </h4>
-                        <p className="text-primary-75 font-semibold text-sm">
-                          {career.salary}
-                        </p>
-                      </div>
+                      <h4 className="font-vietnam font-bold text-grey-15 text-base mb-1">
+                        {career.title}
+                      </h4>
+                      <p className="text-primary-75 font-semibold text-sm">
+                        {career.salary}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -656,45 +662,54 @@ export default function DevOpsPage() {
             </div>
 
             {/* Pricing */}
-            <div className="bg-gradient-to-br from-primary-75 to-primary-90 rounded-2xl shadow-xl overflow-hidden text-white">
-              <div className="p-8">
-                <h3 className="text-3xl font-vietnam font-bold mb-2">
-                  Program Investment
-                </h3>
-                <p className="text-white/90 mb-8">
-                  Affordable pricing with flexible payment options
-                </p>
+            <div className="bg-gradient-to-br from-primary-75 via-primary-80 to-primary-90 rounded-3xl shadow-2xl overflow-hidden text-white relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
+              <div className="relative z-10 p-8">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-white/30">
+                    <IndianRupee className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-3xl font-vietnam font-bold">
+                      Program Investment
+                    </h3>
+                    <p className="text-white/90 text-lg">
+                      Affordable pricing with flexible payment options
+                    </p>
+                  </div>
+                </div>
 
-                <div className="bg-white/10 rounded-xl p-6 mb-8">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center">
-                      <IndianRupee className="w-8 h-8 text-white" />
-                    </div>
-                    <div>
-                      <p className="text-white/80 font-medium">
-                        One-time Payment
-                      </p>
-                      <div className="flex items-baseline gap-2">
-                        <p className="text-4xl font-vietnam font-bold">
-                          ₹7,000
+                <div className="bg-white/15 backdrop-blur-sm rounded-2xl p-8 mb-8 border border-white/20">
+                  <div className="text-center">
+                    <p className="text-white/80 font-medium text-lg mb-4">
+                      One-time Payment
+                    </p>
+                    <div className="flex items-center justify-center gap-4 mb-6">
+                      <p className="text-6xl font-vietnam font-bold">₹7,000</p>
+                      <div className="text-left">
+                        <p className="text-white/70 line-through text-2xl">
+                          ₹25,000
                         </p>
-                        <p className="text-white/70 line-through">₹25,000</p>
+                        <p className="text-green-300 font-semibold text-lg">
+                          72% OFF
+                        </p>
                       </div>
+                    </div>
+                    <div className="bg-white/20 backdrop-blur-sm rounded-xl p-4 border border-white/30">
+                      <p className="text-white font-medium">
+                        🎉 Limited Time Offer - Save ₹18,000!
+                      </p>
                     </div>
                   </div>
                 </div>
 
                 <Button
                   onClick={openPaymentModal}
-                  className="w-full bg-white text-primary-75 text-lg px-8 py-4 font-semibold hover:bg-primary-95 transition-all duration-300 hover:scale-105 shadow-lg"
+                  className="w-full bg-white text-primary-75 text-xl px-8 py-6 font-bold hover:bg-primary-95 hover:text-black transition-all duration-300 hover:scale-105 shadow-2xl rounded-2xl"
                 >
                   Enroll Now
-                  <ArrowRight className="ml-2 w-5 h-5" />
+                  <ArrowRight className="ml-3 w-6 h-6" />
                 </Button>
-
-                <p className="text-center text-black text-base mt-4">
-                  Limited time offer • Secure payment via Razorpay
-                </p>
               </div>
             </div>
           </div>

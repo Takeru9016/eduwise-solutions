@@ -128,6 +128,7 @@ export default function ContactUsSection() {
   const [errorMessage, setErrorMessage] = useState("");
 
   const subjects: SubjectOption[] = [
+    { value: "devops", label: "DevOps & Cloud Computing" },
     { value: "aiml", label: "Artificial Intelligence & Machine Learning" },
     {
       value: "ds",

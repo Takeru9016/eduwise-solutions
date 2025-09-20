@@ -105,7 +105,7 @@ const ContactSection = ({ email }: { email: string }) => (
 export default function TermsOfServicePage() {
   // Data
   const lastUpdated = "January 15, 2025";
-  const legalEmail = "vishal.chettri@eduwise.solutions";
+  const legalEmail = "contact@eduwise.solutions";
 
   const accountRequirements: ListItem[] = [
     { text: "Provide accurate and complete information" },

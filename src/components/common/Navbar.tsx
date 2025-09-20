@@ -67,7 +67,7 @@ const NAV_LINKS: NavLink[] = [
     label: "Courses",
     children: [
       { label: "Artificial Intelligence", href: "/ai-ml" },
-      { label: "DevOps", href: "/devops" },
+      { label: "DevOps & Cloud Computing", href: "/devops" },
       { label: "Cyber Security", href: "/cyber-sec" },
       { label: "Data Science", href: "/data-science" },
       { label: "Full Stack Web Developer", href: "/full-stack" },
@@ -78,7 +78,7 @@ const NAV_LINKS: NavLink[] = [
 
 const CONTACT_INFO = {
   phone: "+91 91487 74540",
-  email: "vishal.chettri@eduwise.solutions",
+  email: "contact@eduwise.solutions",
 } as const;
 
 const SCROLL_THRESHOLD = 20;

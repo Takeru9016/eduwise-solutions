@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, Phone, MapPin, ArrowRight } from "lucide-react";
+import { Mail, Phone, MapPinCheckInside, ArrowRight } from "lucide-react";
 
 // Types
 interface FooterLink {
@@ -79,7 +79,7 @@ export default function Footer() {
 
   const programLinks: FooterLink[] = [
     { label: "Artificial Intelligence", href: "/ai-ml" },
-    { label: "DevOps", href: "/devops" },
+    { label: "DevOps & Cloud Computing", href: "/devops" },
     { label: "Cyber Security", href: "/cyber-sec" },
     { label: "Data Science", href: "/data-science" },
     { label: "Full Stack Web Developer", href: "/full-stack" },
@@ -128,18 +128,15 @@ export default function Footer() {
             </Link>
 
             <div className="space-y-4">
-              <ContactItem
-                icon={Mail}
-                href="mailto:vishal.chettri@eduwise.solutions"
-              >
-                vishal.chettri@eduwise.solutions
+              <ContactItem icon={Mail} href="mailto:contact@eduwise.solutions">
+                contact@eduwise.solutions
               </ContactItem>
 
               <ContactItem icon={Phone} href="tel:+919148774540">
                 +91 91487 74540
               </ContactItem>
 
-              <ContactItem icon={MapPin}>
+              <ContactItem icon={MapPinCheckInside}>
                 235, Binnamangala, 2nd Floor, 13th Cross Road, 2nd Stage, Indira
                 Nagar, Bengaluru - 560038
               </ContactItem>

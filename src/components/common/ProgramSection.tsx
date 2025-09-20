@@ -26,7 +26,7 @@ const programCategories: ProgramCategory[] = [
   },
   {
     id: "devops-cert",
-    title: "DevOps",
+    title: "DevOps & Cloud Computing",
     subtitle: "Automate, ship, and scale",
     description:
       "Master CI/CD, Docker, Kubernetes, Terraform, Ansible, AWS, and monitoring with real projects.",
@@ -105,7 +105,9 @@ const ProgramCard = ({ program }: { program: ProgramCategory }) => {
       className="group hover:shadow-2xl transition-all duration-300 overflow-hidden border border-slate-200 bg-white relative"
     >
       {/* Decorative gradient blob */}
-      <div className={`pointer-events-none absolute -top-10 -right-10 h-36 w-36 rounded-full bg-gradient-to-br ${theme.blob} opacity-30 blur-2xl`} />
+      <div
+        className={`pointer-events-none absolute -top-10 -right-10 h-36 w-36 rounded-full bg-gradient-to-br ${theme.blob} opacity-30 blur-2xl`}
+      />
       <CardContent className="p-0">
         {/* Top gradient bar */}
         <div className={`h-1 w-full bg-gradient-to-r ${theme.gradient}`} />
@@ -116,7 +118,9 @@ const ProgramCard = ({ program }: { program: ProgramCategory }) => {
             <h3 className="text-xl font-bold text-slate-900 mb-2 leading-tight">
               {program.title}
             </h3>
-            <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium text-white bg-gradient-to-r ${theme.gradient} shadow-sm`}>
+            <span
+              className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium text-white bg-gradient-to-r ${theme.gradient} shadow-sm`}
+            >
               <Sparkles size={14} className="opacity-90" />
               {program.subtitle}
             </span>

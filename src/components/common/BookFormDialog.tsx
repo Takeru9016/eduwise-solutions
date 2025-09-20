@@ -73,6 +73,7 @@ interface BookFormDialogProps {
 
 // Course options
 const COURSES = [
+  { value: "devops", label: "DevOps & Cloud Computing" },
   { value: "mba", label: "Master in Business Administration (MBA)" },
   {
     value: "msc_in_ds",

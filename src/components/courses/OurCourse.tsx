@@ -56,7 +56,7 @@ const courseCategories: CourseCategory[] = [
     ],
   },
   {
-    title: "DevOps",
+    title: "DevOps & Cloud Computing",
     subtitle: "Automate, ship, and scale",
     description:
       "Learn DevOps with Jenkins, Docker, Kubernetes, Terraform, Ansible, AWS, Prometheus & Grafana.",

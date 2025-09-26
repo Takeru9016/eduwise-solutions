@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
-import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
+import { ChevronLeft, ChevronRight, Quote, Star, Linkedin } from "lucide-react";
 import { motion, useAnimation, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
@@ -17,6 +17,7 @@ export interface Testimonial {
   content: string;
   rating: number;
   avatar: string;
+  linkedinUrl?: string;
 }
 
 export interface TestimonialsSectionProps {
@@ -192,6 +193,24 @@ export function TestimonialsSection({
                     <p className="flex-1 italic text-base/relaxed">
                       &quot;{testimonial.content}&quot;
                     </p>
+
+                    {testimonial.linkedinUrl && (
+                      <div className="mt-4">
+                        <a
+                          href={testimonial.linkedinUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Button
+                            variant="outline"
+                            className="rounded-full hover:bg-blue-600 hover:text-white"
+                          >
+                            <Linkedin className="mr-2 h-4 w-4" />
+                            View on LinkedIn
+                          </Button>
+                        </a>
+                      </div>
+                    )}
 
                     {showVerifiedBadge && (
                       <div className="mt-4 text-xs text-right text-muted-foreground">

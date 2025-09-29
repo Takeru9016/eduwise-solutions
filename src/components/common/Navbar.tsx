@@ -74,6 +74,10 @@ const NAV_LINKS: NavLink[] = [
       { label: "Professional Certification", href: "/professional" },
     ],
   },
+  {
+    href: "/blogs",
+    label: "Blogs",
+  }
 ];
 
 const CONTACT_INFO = {

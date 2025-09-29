@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { PortableText } from "next-sanity";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { ArrowLeft } from "lucide-react";
 
 import { Navbar, Footer } from "@/components";
@@ -9,12 +10,29 @@ import { client } from "@/sanity/lib/client";
 import { POST_BY_SLUG_QUERY } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 
+type Category = { _id: string; title: string; slug?: { current: string } };
+type Author = { _id: string; name: string; image?: SanityImageSource };
+type SanityImageWithAlt = SanityImageSource & { alt?: string };
+type TypedObject = { _type: string; [key: string]: unknown };
+type Post = {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  publishedAt?: string;
+  mainImage?: SanityImageWithAlt;
+  body?: TypedObject[];
+  categories?: Category[];
+  author?: Author;
+};
+
 type Props = { params: { slug: string } };
 
 export const revalidate = 60;
 
 export default async function BlogPostPage({ params }: Props) {
-  const post = await client.fetch(POST_BY_SLUG_QUERY, { slug: params.slug });
+  const post = await client.fetch<Post>(POST_BY_SLUG_QUERY, {
+    slug: params.slug,
+  });
 
   if (!post) {
     return null;
@@ -45,9 +63,9 @@ export default async function BlogPostPage({ params }: Props) {
           )}
 
           <div className="flex items-center gap-2 flex-wrap mt-4">
-            {post.categories?.map((c: any) => (
-              <Badge key={c._id} variant="secondary">
-                {c.title}
+            {post.categories?.map((category) => (
+              <Badge key={category._id} variant="secondary">
+                {category.title}
               </Badge>
             ))}
           </div>
@@ -65,7 +83,7 @@ export default async function BlogPostPage({ params }: Props) {
           )}
 
           <div className="prose prose-slate max-w-none mt-10">
-            <PortableText value={post.body} />
+            <PortableText value={(post.body ?? ([] as TypedObject[]))} />
           </div>
         </article>
       </main>
@@ -73,5 +91,3 @@ export default async function BlogPostPage({ params }: Props) {
     </>
   );
 }
-
-

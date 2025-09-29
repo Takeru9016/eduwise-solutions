@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 import { Navbar, Footer } from "@/components";
 import { client } from "@/sanity/lib/client";
@@ -9,13 +10,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { urlFor } from "@/sanity/lib/image";
 
 type Category = { _id: string; title: string; slug?: { current: string } };
-type Author = { _id: string; name: string; image?: any };
+type Author = { _id: string; name: string; image?: SanityImageSource };
+type SanityImageWithAlt = SanityImageSource & { alt?: string };
 type Post = {
   _id: string;
   title: string;
   slug: { current: string };
   publishedAt?: string;
-  mainImage?: any;
+  mainImage?: SanityImageWithAlt;
   categories?: Category[];
   author?: Author;
 };

@@ -25,13 +25,12 @@ type Post = {
   author?: Author;
 };
 
-type Props = { params: { slug: string } };
-
 export const revalidate = 60;
 
-export default async function BlogPostPage({ params }: Props) {
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const post = await client.fetch<Post>(POST_BY_SLUG_QUERY, {
-    slug: params.slug,
+    slug,
   });
 
   if (!post) {

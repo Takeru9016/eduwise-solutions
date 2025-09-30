@@ -1,4 +1,7 @@
-import { TestimonialsSection } from "../blocks/simple-animated-testimonials";
+"use client";
+
+import { testimonials } from "@/const/testimonial";
+import { TestimonialsThree } from "@/components/ui/testimonials-three";
 
 // Main component
 export default function TestimonialsSectionBasic() {
@@ -11,66 +14,7 @@ export default function TestimonialsSectionBasic() {
       </div>
 
       <div className="container mx-auto relative">
-        <TestimonialsSection
-          testimonials={[
-            {
-              id: 1,
-              name: "M Pavithra",
-              role: "Key accounts manager",
-              company: "Myntra",
-              content:
-                "I applied to over 50 jobs with no response. After joining Eduwise, I fixed my resume, improved my communication, and cracked an interview within 5 weeks. It changed everything.",
-              avatar: "/testimonials/pavithra.jpeg",
-              rating: 5,
-              linkedinUrl: "",
-            },
-            {
-              id: 2,
-              name: "Varshitha BM",
-              role: "Senior assistant manager",
-              company: "SOBHA",
-              content:
-                "I used to feel invisible in interviews. After the program, I finally understood how to present my skills. I got hired, and now I feel like I finally belong somewhere.",
-              avatar: "/testimonials/varshitha.jpeg",
-              rating: 5,
-              linkedinUrl: "https://www.linkedin.com/in/varshitha-bm-8a55b31a4/",
-            },
-            {
-              id: 3,
-              name: "Tathagata Bhattacharjee",
-              role: "Sr. Relationship Manager",
-              company: "Assettrust Services Pvt Ltd",
-              content:
-                "When I joined Eduwise, I had zero confidence and no idea how to approach the job market. Now I walk into interviews with clarity, purpose, and skills that speak for me.",
-              avatar: "/testimonials/tathagata.jpeg",
-              rating: 5,
-              linkedinUrl:
-                "https://www.linkedin.com/in/tathagata-bhattacharjee-687023264/",
-            },
-            {
-              id: 4,
-              name: "Kushal Sahu",
-              role: "Associate",
-              company: "Giva",
-              content:
-                "I never thought a short course could have such a big impact. Eduwise taught me the skills I wish college had. More importantly, they taught me how to use them.",
-              avatar: "/testimonials/kushal.jpeg",
-              rating: 5,
-              linkedinUrl: "https://www.linkedin.com/in/kushal-sahu-288247312/",
-            },
-            {
-              id: 5,
-              name: "Shraddha Dey",
-              role: "Customer Support",
-              company: "Saarthi IAS",
-              content:
-                "As a fresher recently graduated, I was actively looking for good opportunities and was quite worried about my career. That’s when I came across Eduwise Solutions, helped me gain confidence, improve my resume, build a strong LinkedIn profile, and provided proper training. Thanks to their support, I have now secured a work-from-home job. Thank you so much, Eduwise Solutions, for guiding me through this journey!",
-              avatar: "/testimonials/shraddha.jpeg",
-              rating: 5,
-              linkedinUrl: "",
-            },
-          ]}
-        />
+        <TestimonialsThree testimonials={testimonials} />
       </div>
     </section>
   );

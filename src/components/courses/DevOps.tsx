@@ -684,20 +684,20 @@ export default function DevOpsPage() {
                     <p className="text-white/80 font-medium text-lg mb-4">
                       One-time Payment
                     </p>
-                    <div className="flex items-center justify-center gap-4 mb-6">
+                    <div className="flex flex-col items-center justify-center gap-4 mb-6">
                       <p className="text-6xl font-vietnam font-bold">₹10,000</p>
                       <div className="text-left">
                         <p className="text-white/70 line-through text-2xl">
                           ₹25,000
                         </p>
-                        <p className="text-green-300 font-semibold text-lg">
+                        <p className="text-primary-99 font-bold text-2xl">
                           60% OFF
                         </p>
                       </div>
                     </div>
                     <div className="bg-white/20 backdrop-blur-sm rounded-xl p-4 border border-white/30">
                       <p className="text-white font-medium">
-                        🎉 Limited Time Offer - Save ₹18,000!
+                        🎉 Limited Time Offer - Save ₹15,000!
                       </p>
                     </div>
                   </div>

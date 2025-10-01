@@ -23,15 +23,11 @@ export interface TestimonialThreeUp {
 interface TestimonialsThreeProps {
   testimonials: TestimonialThreeUp[];
   className?: string;
-  autoPlay?: boolean;
-  autoPlayIntervalMs?: number;
 }
 
 export function TestimonialsThree({
   testimonials,
   className,
-  autoPlay = true,
-  autoPlayIntervalMs = 5000,
 }: TestimonialsThreeProps) {
   const sorted = useMemo(
     () => [...testimonials].sort((a, b) => a.id - b.id),
@@ -49,14 +45,6 @@ export function TestimonialsThree({
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  // Auto-advance
-  useEffect(() => {
-    if (!autoPlay || sorted.length <= 3) return;
-    const timer = setInterval(() => {
-      setIndex((prev) => (prev + 1) % sorted.length);
-    }, autoPlayIntervalMs);
-    return () => clearInterval(timer);
-  }, [autoPlay, autoPlayIntervalMs, sorted.length]);
 
   const handlePrev = () => {
     setIndex((prev) => (prev - 1 + sorted.length) % sorted.length);

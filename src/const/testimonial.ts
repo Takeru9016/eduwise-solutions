@@ -13,7 +13,7 @@ export const testimonials = [
   {
     id: 2,
     name: "Kushal Sahu",
-    role: "Associate",
+    role: "Client Analyst",
     company: "Giva",
     content:
       "I never thought a short course could have such a big impact. Eduwise taught me the skills I wish college had. More importantly, they taught me how to use them.",

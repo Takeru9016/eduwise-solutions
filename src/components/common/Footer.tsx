@@ -71,7 +71,7 @@ export default function Footer() {
 
   const companyLinks: FooterLink[] = [
     { label: "About Us", href: "/about" },
-    // { label: "Blogs", href: "/blogs" },
+    { label: "Blogs", href: "/blogs" },
     { label: "Our Courses", href: "/courses" },
     { label: "Contact", href: "/contact" },
     { label: "FAQ", href: "/faq" },

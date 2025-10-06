@@ -67,7 +67,7 @@ const NAV_LINKS: NavLink[] = [
     label: "Courses",
     children: [
       { label: "Artificial Intelligence", href: "/ai-ml" },
-      { label: "DevOps & Cloud Computing", href: "/devops" },
+      { label: "DevOps with Cloud & AI", href: "/devops" },
       { label: "Cyber Security", href: "/cyber-sec" },
       { label: "Data Science", href: "/data-science" },
       { label: "Full Stack Web Developer", href: "/full-stack" },
@@ -161,11 +161,11 @@ const NavLink = ({
               >
                 <span className="inline-flex items-center gap-2">
                   {child.label}
-                  {child.href === "/devops" && (
+                  {/* {child.href === "/devops" && (
                     <span className="text-[10px] px-2 py-0.5 rounded-full bg-primary-95 text-primary-75 border border-primary-90">
                       New
                     </span>
-                  )}
+                  )} */}
                 </span>
               </Link>
             ))}

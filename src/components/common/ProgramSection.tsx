@@ -26,7 +26,7 @@ const programCategories: ProgramCategory[] = [
   },
   {
     id: "devops-cert",
-    title: "DevOps & Cloud Computing",
+    title: "DevOps with Cloud & AI",
     subtitle: "Automate, ship, and scale",
     description:
       "Master CI/CD, Docker, Kubernetes, Terraform, Ansible, AWS, and monitoring with real projects.",

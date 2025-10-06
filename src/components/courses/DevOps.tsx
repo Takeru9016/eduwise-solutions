@@ -282,13 +282,13 @@ export default function DevOpsPage() {
             <div className="text-center lg:text-left order-2 lg:order-1">
               <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm text-primary-75 px-3 py-2 sm:px-4 rounded-full text-xs sm:text-sm font-semibold mb-4 sm:mb-6 shadow-lg">
                 <Sparkles size={14} className="sm:w-4 sm:h-4" />
-                DevOps & Cloud Computing
+                DevOps with Cloud & AI
               </div>
 
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-vietnam font-bold text-grey-15 mb-4 sm:mb-6 leading-tight px-2 sm:px-0">
-                Master DevOps &{" "}
+                Master DevOps {" "}
                 <span className="bg-gradient-to-r from-primary-75 to-primary-90 bg-clip-text text-transparent">
-                  Cloud Computing
+                  with Cloud & AI
                 </span>
               </h1>
 

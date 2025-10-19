@@ -23,14 +23,7 @@ import {
   Award,
   Star,
   TrendingUp,
-  // Globe,
   Shield,
-  Code,
-  // Database,
-  // Cpu,
-  Network,
-  Terminal,
-  Box,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -139,87 +132,6 @@ const targets = [
     subtitle: "IT & Non-IT backgrounds",
     icon: Briefcase,
     description: "Upskill and advance your career in DevOps",
-  },
-];
-
-const modules = [
-  {
-    title: "Linux Fundamentals & Git",
-    description:
-      "Master command line operations, shell scripting, and version control systems.",
-    duration: "4 weeks",
-    icon: Terminal,
-    topics: [
-      "Linux Essentials",
-      "Shell Scripting",
-      "Git & GitHub",
-      "CI/CD Basics",
-    ],
-  },
-  {
-    title: "CI/CD with Jenkins",
-    description:
-      "Build robust pipelines, automate testing, and implement deployment strategies.",
-    duration: "3 weeks",
-    icon: Settings2,
-    topics: [
-      "Jenkins Setup",
-      "Pipeline as Code",
-      "Automated Testing",
-      "Deployment Strategies",
-    ],
-  },
-  {
-    title: "Containerization with Docker",
-    description:
-      "Learn containerization, image management, and container orchestration.",
-    duration: "3 weeks",
-    icon: Box,
-    topics: [
-      "Docker Essentials",
-      "Docker Compose",
-      "Best Practices",
-      "Container Security",
-    ],
-  },
-  {
-    title: "Kubernetes Orchestration",
-    description:
-      "Deploy, scale, and manage containerized applications in production.",
-    duration: "4 weeks",
-    icon: Network,
-    topics: [
-      "K8s Core Objects",
-      "Helm Charts",
-      "Scaling & Monitoring",
-      "Production Deployments",
-    ],
-  },
-  {
-    title: "Infrastructure as Code",
-    description:
-      "Automate infrastructure provisioning with Terraform and Ansible.",
-    duration: "3 weeks",
-    icon: Code,
-    topics: [
-      "Terraform Basics",
-      "IaC Workflows",
-      "Ansible Automation",
-      "Cloud Provisioning",
-    ],
-  },
-  {
-    title: "Cloud & Monitoring",
-    description:
-      "Deploy on AWS and implement comprehensive monitoring solutions.",
-    duration: "3 weeks",
-    icon: Cloud,
-    topics: [
-      "AWS Services",
-      "Prometheus",
-      "Grafana Dashboards",
-      "Log Management",
-    ],
   },
 ];
 

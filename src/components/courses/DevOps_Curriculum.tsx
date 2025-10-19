@@ -391,7 +391,7 @@ export default function DevOpsCurriculum() {
 
                     <div className="space-y-3">
                       <h4 className="font-semibold text-sm lg:text-base text-gray-700">
-                        What You'll Learn:
+                        What You&lsquo;ll Learn:
                       </h4>
                       <ul className="space-y-2.5">
                         {selectedCareerTrackData?.details.map(

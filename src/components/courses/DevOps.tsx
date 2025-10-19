@@ -34,16 +34,16 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import PaymentStatusModal from "../payment/PaymentStatusModal";
 import PaymentModal from "../payment/PaymentModal";
 import DevOpsToolsSection from "../common/DevOpsTools";
 import DevOpsBenefits from "./DevOpsBenefits";
 import DevOpsComparisonTable from "./DevOpsComparisonTable";
+import DevOpsCurriculum from "./DevOps_Curriculum";
 
 const stats = [
   { icon: Users, value: "600+", label: "Students Trained" },
-  { icon: Clock, value: "3", label: "Months Program" },
+  { icon: Clock, value: "3.5", label: "Months Program" },
   { icon: Target, value: "25+", label: "Industry Projects" },
   { icon: Award, value: "100%", label: "Placement Support" },
 ];
@@ -286,7 +286,7 @@ export default function DevOpsPage() {
               </div>
 
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-vietnam font-bold text-grey-15 mb-4 sm:mb-6 leading-tight px-2 sm:px-0">
-                Master DevOps {" "}
+                Master DevOps{" "}
                 <span className="bg-gradient-to-r from-primary-75 to-primary-90 bg-clip-text text-transparent">
                   with Cloud & AI
                 </span>
@@ -549,7 +549,9 @@ export default function DevOpsPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <DevOpsCurriculum />
+
+          {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {modules.map((module, index) => (
               <div
                 key={index}
@@ -601,7 +603,7 @@ export default function DevOpsPage() {
                 </div>
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
       </section>
 

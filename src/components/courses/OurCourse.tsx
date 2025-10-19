@@ -64,7 +64,7 @@ const courseCategories: CourseCategory[] = [
     viewLink: "/devops",
     icon: BookCheck,
     stats: [
-      { label: "Duration", value: "3 Months", icon: Clock },
+      { label: "Duration", value: "3.5 Months", icon: Clock },
       { label: "Live Session", value: "100%", icon: CheckCircle },
       { label: "Doubt Clearing", value: "1:1", icon: Users },
       { label: "Companies", value: "250+", icon: Building },

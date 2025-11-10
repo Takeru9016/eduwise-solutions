@@ -46,6 +46,18 @@ export const testimonials = [
   },
   {
     id: 5,
+    name: "Arvind Sharma",
+    role: "Cloud Infrastructure Engineer",
+    company: "Kyndryl India",
+    content:
+      "It was a great journey with eduwise solutions, step by step they have guided me with training and doubt clearing session, and special thanks to placement team for supporting me for opportunities in the market... Highly recommended, the best platform value for money and time",
+    avatar: "/testimonials/arvind.jpeg",
+    rating: 5,
+    linkedinUrl: "https://www.linkedin.com/in/arvind-sharma-1486b4373/",
+  },
+
+  {
+    id: 6,
     name: "Shraddha Dey",
     role: "Customer Support",
     company: "Saarthi IAS",
@@ -56,7 +68,7 @@ export const testimonials = [
     linkedinUrl: "",
   },
   {
-    id: 6,
+    id: 7,
     name: "M Pavithra",
     role: "Key accounts manager",
     company: "Myntra",
@@ -66,15 +78,4 @@ export const testimonials = [
     rating: 5,
     linkedinUrl: "",
   },
-  {
-    id: 7,
-    name: "Arvind Sharma",
-    role: "Cloud infrastructure Engineer",
-    company: "JRD System",
-    content:
-      "It was a great journey with eduwise solutions, step by step they have guided me with training and doubt clearing session, and special thanks to placement team for supporting me for opportunities in the market... Highly recommended, the best platform value for money and time",
-    avatar: "/testimonials/arvind.jpeg",
-    rating: 5,
-    linkedinUrl: "",
-  }
 ];

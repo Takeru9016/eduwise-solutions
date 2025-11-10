@@ -66,4 +66,15 @@ export const testimonials = [
     rating: 5,
     linkedinUrl: "",
   },
+  {
+    id: 7,
+    name: "Arvind Sharma",
+    role: "Cloud infrastructure Engineer",
+    company: "JRD System",
+    content:
+      "It was a great journey with eduwise solutions, step by step they have guided me with training and doubt clearing session, and special thanks to placement team for supporting me for opportunities in the market... Highly recommended, the best platform value for money and time",
+    avatar: "/testimonials/arvind.jpeg",
+    rating: 5,
+    linkedinUrl: "",
+  }
 ];

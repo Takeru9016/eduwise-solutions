@@ -5,7 +5,7 @@ import { Analytics } from "@vercel/analytics/next";
 
 import "./globals.css";
 import { Toaster } from "sonner";
-import { PopupForm, MetaPixel } from "@/components";
+import { PopupForm, MetaPixel, Chatbot } from "@/components";
 
 const beVietnamPro = Be_Vietnam_Pro({
   subsets: ["latin"],
@@ -69,6 +69,7 @@ export default function RootLayout({
         />
         <SpeedInsights />
         <Analytics />
+        <Chatbot />
       </body>
     </html>
   );

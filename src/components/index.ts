@@ -37,3 +37,5 @@ export { default as RefundPage } from "./legal/RefundPage";
 export { default as TermsOfService } from "./legal/TermsOfService";
 export { default as DevOpsBenefits } from "./courses/DevOpsBenefits";
 export { default as DevOpsComparisonTable } from "./courses/DevOpsComparisonTable";
+
+export { default as Chatbot } from "./chatbot/Chatbot";

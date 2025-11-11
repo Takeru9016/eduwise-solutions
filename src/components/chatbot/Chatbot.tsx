@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { MessageCircle, X, Send, Minimize2, FileText } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -224,7 +225,7 @@ const MessageBubble = ({
         </p>
 
         {message.pdf && (
-          <a
+          <Link
             href={message.pdf}
             target="_blank"
             rel="noopener noreferrer"
@@ -232,7 +233,7 @@ const MessageBubble = ({
           >
             <FileText size={14} />
             View PDF
-          </a>
+          </Link>
         )}
 
         <time
@@ -405,7 +406,6 @@ export default function ChatWidget({
   const [isLoading, setIsLoading] = useState(false);
   const [onboardingStep, setOnboardingStep] = useState<OnboardingStep>(0);
   const [userData, setUserData] = useState<UserData>({});
-  const [error, setError] = useState<string | null>(null);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -513,7 +513,7 @@ export default function ChatWidget({
 
       let botResponse = "";
       let nextStep: OnboardingStep = 0;
-      let updatedUserData = { ...userData };
+      const updatedUserData = { ...userData };
 
       switch (onboardingStep) {
         case 1:
@@ -555,7 +555,6 @@ export default function ChatWidget({
     async (userInput: string) => {
       addMessage(createMessage("user", userInput));
       setIsLoading(true);
-      setError(null);
 
       try {
         const { answer, pdf } = await sendQuestion(userInput);
@@ -563,7 +562,6 @@ export default function ChatWidget({
       } catch (err) {
         const errorMessage =
           err instanceof Error ? err.message : "Unknown error";
-        setError(errorMessage);
         addMessage(
           createMessage(
             "bot",

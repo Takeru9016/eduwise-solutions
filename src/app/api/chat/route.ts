@@ -36,6 +36,13 @@ interface SimilarityResult {
   similarity: number;
 }
 
+interface MessageContent {
+  text?: string;
+  content?: string;
+}
+
+type MessageContentType = string | MessageContent | MessageContent[];
+
 class VectorStoreManager {
   private static instance: VectorStoreManager;
   private vectorStore: VectorDocument[] | null = null;
@@ -160,6 +167,29 @@ class KnowledgeBaseService {
     return null;
   }
 
+  private static parseMessageContent(content: MessageContentType): string {
+    if (typeof content === "string") {
+      return content.trim();
+    }
+
+    if (Array.isArray(content)) {
+      return content
+        .map((part) => {
+          if (typeof part === "string") return part;
+          return part.text || part.content || "";
+        })
+        .join("")
+        .trim();
+    }
+
+    if (typeof content === "object" && content !== null) {
+      const messageContent = content as MessageContent;
+      return messageContent.text || String(content).trim();
+    }
+
+    return String(content).trim();
+  }
+
   static async generateAnswer(question: string): Promise<string> {
     const knowledgeBasePath = this.findKnowledgeBasePath();
 
@@ -220,22 +250,9 @@ YOUR ANSWER:`;
       throw new Error("Empty response from Gemini");
     }
 
-    let answer: string;
-
-    if (typeof result.content === "string") {
-      answer = result.content.trim();
-    } else if (Array.isArray(result.content)) {
-      answer = result.content
-        .map((part: any) =>
-          typeof part === "string" ? part : part.text || part.content || ""
-        )
-        .join("")
-        .trim();
-    } else if (typeof result.content === "object") {
-      answer = (result.content as any).text || String(result.content).trim();
-    } else {
-      answer = String(result.content).trim();
-    }
+    // Fix: pass the correct type to parseMessageContent
+    const content = typeof result.content === "string" ? result.content : "";
+    const answer = this.parseMessageContent(content);
 
     if (!answer || answer.length === 0) {
       throw new Error("Empty answer generated");
@@ -275,7 +292,7 @@ class GoogleSheetsLogger {
   }
 
   private static async findExistingRow(
-    sheets: any,
+    sheets: ReturnType<typeof google.sheets>,
     spreadsheetId: string,
     sessionId: string
   ): Promise<number | null> {
@@ -293,7 +310,7 @@ class GoogleSheetsLogger {
   }
 
   private static async updateExistingRow(
-    sheets: any,
+    sheets: ReturnType<typeof google.sheets>,
     spreadsheetId: string,
     rowNum: number,
     sessionId: string,
@@ -350,7 +367,7 @@ class GoogleSheetsLogger {
   }
 
   private static async appendNewRow(
-    sheets: any,
+    sheets: ReturnType<typeof google.sheets>,
     spreadsheetId: string,
     sessionId: string,
     userData?: UserData,
@@ -422,8 +439,12 @@ class GoogleSheetsLogger {
       }
 
       console.log("Logged to Google Sheets successfully");
-    } catch (error: any) {
-      console.error("Sheets logging error:", error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error("Sheets logging error:", error.message);
+      } else {
+        console.error("Sheets logging error:", String(error));
+      }
     }
   }
 }
@@ -448,8 +469,12 @@ async function handleChatRequest(body: ChatRequest): Promise<ChatResponse> {
   if (question) {
     try {
       answer = await KnowledgeBaseService.generateAnswer(question);
-    } catch (error: any) {
-      console.error("Processing error:", error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error("Processing error:", error.message);
+      } else {
+        console.error("Processing error:", String(error));
+      }
       answer =
         "I apologize, but I'm having trouble accessing information right now. Please try asking your question again, or I can connect you with an advisor for immediate assistance.";
     }
@@ -476,10 +501,11 @@ export async function POST(req: NextRequest) {
     const body: ChatRequest = await req.json();
     const response = await handleChatRequest(body);
     return NextResponse.json(response);
-  } catch (err: any) {
+  } catch (err) {
     console.error("Fatal error:", err);
 
-    const isClientError = err.message.includes("required");
+    const errorMessage = err instanceof Error ? err.message : String(err);
+    const isClientError = errorMessage.includes("required");
     const statusCode = isClientError ? 400 : 500;
 
     return NextResponse.json(
@@ -487,7 +513,7 @@ export async function POST(req: NextRequest) {
         error: "Failed to process request",
         answer:
           "I apologize, but I'm experiencing technical difficulties. Please try again in a moment.",
-        details: err.message,
+        details: errorMessage,
         needsAdvisor: true,
       },
       { status: statusCode }

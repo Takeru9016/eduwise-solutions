@@ -65,7 +65,6 @@ High-quality training at competitive prices.
 
 At Eduwise Solutions, your success is our priority. Let us help you unlock your potential and confidently land your first job!
 
-
 Our Program or Course
 
 1.	AI & ML Program
@@ -181,9 +180,7 @@ Programming Languages & Frameworks
 ⦁	AI Developer
 ⦁	NLP Specialist
 
-Program Fees
-Upfront Payment ₹6,000
-72% OFF ₹21,000 • One-time payment Special discount for early birds!
+AI & Machine Learning Course Fees: Upfront Payment ₹6,000, 72% OFF ₹21,000 • One-time payment Special discount for early birds!
 
 ---------------------------------------------------------------------
 
@@ -197,7 +194,7 @@ DevOps & Cloud Computing
 Admissions Open
 600+ Students Trained
 3.5 Months Program
-Program Fees Affordable pricing with flexible payment options One-time Payment ₹10,000, ₹25,000 60% OFF
+DevOps with Cloud & AI Fees Affordable pricing with flexible payment options One-time Payment ₹10,000, ₹25,000 60% OFF
 25+ Industry Projects
 100% Placement Support
 
@@ -359,7 +356,6 @@ Other Platforms: Full fees upfront with no placement guarantee
 Eduwise Solutions: Lifetime LMS Access → learn, revise, and upgrade skills anytime
 Other Platforms: Access only till course validity expires
 
-
 ⦁	Career Opportunities
 1.	High-paying roles in the booming DevOps industry (DevOps Engineer ₹8-15 LPA)
 2.	Cloud Architect(₹12-25 LPA)
@@ -462,7 +458,7 @@ Essential Cyber Security Tools & Platforms
 ⦁	SIEM
 ⦁	Firewalls
 
-Program Fees: Upfront Payment ₹6,000 72% OFF ₹21,000 One-time payment
+Cyber Security Fees: Upfront Payment ₹6,000 72% OFF ₹21,000 One-time payment
 Special discount for early birds!
 
 ----------------------------------------------------------------------------
@@ -570,7 +566,7 @@ Career Opportunities
 ⦁	Data Engineer
 ⦁	BI Developer
 
-Program Fees: Upfront Payment ₹6,000 72% OFF ₹21,000 • One-time payment
+Data Science Fees: Upfront Payment ₹6,000 72% OFF ₹21,000 • One-time payment
 Special discount for early birds!
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -689,7 +685,7 @@ Career Opportunities
 ⦁	DevOps Engineer
 ⦁	Software Engineer
 
-Program Fees: Upfront Payment ₹6,000, 72% OFF ₹21,000 • One-time payment
+Full Stack Development Fees: Upfront Payment ₹6,000, 72% OFF ₹21,000 • One-time payment
 Special discount for early birds!
 
 

@@ -76,7 +76,7 @@ const NoticeCard = ({ icon: Icon, title, description }: InfoCard) => (
   <div className="bg-primary-99 rounded-lg flex gap-4 p-6 mb-8 items-center shadow-md">
     <Icon className="w-8 h-8 text-primary-75 flex-shrink-0" />
     <div>
-      <h2 className="font-semibold text-grey-20 mb-2">{title}</h2>
+      <h2 className="font-semibold text-grey-20 mb-2 text-xl">{title}</h2>
       <p className="text-grey-35">{description}</p>
     </div>
   </div>
@@ -211,21 +211,6 @@ export default function RefundPolicyPage() {
         ],
       },
     },
-    {
-      value: "processing-time",
-      title: "Refund Processing Time",
-      content: {
-        highlightIcon: Calendar,
-        highlightTitle: "30 Working Days",
-        highlightText:
-          "All approved refunds will be processed and credited within a specified timeframe.",
-        listItems: [
-          "Refunds will be processed and credited within 30 working days from the date of approval",
-          "Processing time may vary based on payment method used",
-          "You will receive email confirmation once the refund is processed and credited",
-        ],
-      },
-    },
   ];
 
   const webinarCards: InfoCard[] = [
@@ -340,7 +325,6 @@ export default function RefundPolicyPage() {
               title="Refund Processing Time"
               description="All approved refunds will be processed and credited within 30 working days from the date of approval. You will receive a confirmation email once your refund has been processed."
             />
-
 
             {/* Additional Terms */}
             <Card className="mb-8">

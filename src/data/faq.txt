@@ -1,102 +1,3 @@
-Your Career Journey Starts Here
-Accelerate Your Career.
-Eliminate the Skill Gap
-Looking to elevate your career with the RIGHT JOB and enhance your skills with the PERFECT PROGRAM
-Expert-Led Programs Job-Ready Skills
-Upskill and transform your career in latest
-technologies and domains
-Discover curated programs designed with industry experts to make you job‑ready.
-View All Programs
-AI & Machine Learning
-Artificial Intelligence
-Data Science
-Data Analytics
-Cloud Computing
-Cyber Security
-DevOps
-Full Stack Development
-Professional Programs
-Business Analytics
-Generative AI
-
-Why Students Choose Us
-Benefits That Set Us Apart
-One-Stop Solution
-Find everything you need for your educational journey in one place
-Curated Premier Courses
-Hand-picked courses from top institutions and industry leaders
-Simplify Learning Choices
-Clear guidance to help you make the right educational decisions
-Trusted Partners
-Collaborate with recognized educational institutions and companies
-End-to-End Support
-Comprehensive assistance from enrollment to course completion
-Career-Focused Approach
-Programs designed to enhance your professional growth
-
-What Our Students Say
-Akshay Khare
-DevOps Consultant
-TCS
-“My journey with Eduwise has been truly life-changing. The mentors not only taught me with clarity but also guided me with constant support until I got placed. I’m deeply grateful to the entire Eduwise team for helping me achieve this milestone.”
-
-Connect on LinkedIn
-Kushal Sahu
-Kushal Sahu
-Client Analyst
-Giva
-“I never thought a short course could have such a big impact. Eduwise taught me the skills I wish college had. More importantly, they taught me how to use them.”
-
-Connect on LinkedIn
-Tathagata Bhattacharjee
-Tathagata Bhattacharjee
-Sr. Relationship Manager
-Assettrust Services Pvt Ltd
-“When I joined Eduwise, I had zero confidence and no idea how to approach the job market. Now I walk into interviews with clarity, purpose, and skills that speak for me.”
-
-
-Tathagata Bhattacharjee
-Sr. Relationship Manager
-Assettrust Services Pvt Ltd
-“When I joined Eduwise, I had zero confidence and no idea how to approach the job market. Now I walk into interviews with clarity, purpose, and skills that speak for me.”
-
-Connect on LinkedIn
-Varshitha BM
-Varshitha BM
-Senior assistant manager
-SOBHA
-“I used to feel invisible in interviews. After the program, I finally understood how to present my skills. I got hired, and now I feel like I finally belong somewhere.”
-
-Connect on LinkedIn
-Shraddha Dey
-Shraddha Dey
-Customer Support
-Saarthi IAS
-“As a fresh graduate, I was anxious about my career. Eduwise helped me build confidence, polish my resume, and create a strong LinkedIn profile. Their guidance landed me a remote job that fit perfectly. Thank you, Eduwise!”
-
-M Pavithra
-Key accounts manager
-Myntra
-“I applied to over 50 jobs with no response. After joining Eduwise, I fixed my resume, improved my communication, and cracked an interview within 5 weeks. It changed everything.”
-
-
-contact@eduwise.solutions
-+91 91487 74540
-235, Binnamangala, 2nd Floor, 13th Cross Road, 2nd Stage, Indira Nagar, Bengaluru - 560038
-
-Programs
-Artificial Intelligence
-DevOps with Cloud & AI
-Cyber Security
-Data Science
-Full Stack Web Developer
-Professional Certification
-Legal
-Privacy Policy
-Terms of Service
-Refund Policy
-
-Welcome to Eduwise
 About Eduwise
 At Eduwise Solutions, we believe that every graduate deserves strong start to their career. Whether you are a final-year student preparing for the job market or a recent graduate looking for your first job, we are here to bridge the gap between your potential and your dream job.
 
@@ -138,34 +39,153 @@ We offer a 15-day intensive program that builds essential job skills, enhances p
 Our Process
 A structured approach to prepare you for success
 
-1
-Skill Development
+1 Skill Development
 We train candidates in resume building, LinkedIn optimization, business communication, interview techniques, Excel, call pitching, and more.
 
-2
-Job Placements
+2 Job Placements
 We partner with leading MNCs to place candidates in high-demand entry-level roles.
 
-3
-Career Guidance
+3 Career Guidance
 We provide personalized counseling to help students choose the right job path and maximize their career opportunities.
 
 Why Choose Eduwise Solutions?
 Your success is our priority
 
-Guaranteed Job Opportunities
+1 Guaranteed Job Opportunities
 We have real jobs waiting for skilled candidates.
 
-Industry-Driven Training
+2 Industry-Driven Training
 Practical learning that helps you crack interviews.
 
-MNC Partnerships
+3 MNC Partnerships
 Direct access to recruiters from top companies.
 
-Affordable & Effective
+4 Affordable & Effective
 High-quality training at competitive prices.
 
 At Eduwise Solutions, your success is our priority. Let us help you unlock your potential and confidently land your first job!
+
+
+Our Program or Course
+
+1.	AI & ML Program
+AI & Machine Learning Course
+Build your future with AI & ML skills
+
+A comprehensive program designed to make you industry-ready in Artificial Intelligence and Machine Learning. Learn from experts, work on real projects, and get certified.
+
+500+ Students Trained
+3 Months Program
+30+ Industry Projects
+100% Placement Support
+
+Why Choose This Program
+⦁	Key Features
+⦁	Foundation to advanced-level machine learning
+⦁	Practical approach to AI model building
+⦁	Project-driven methodology
+⦁	Target Audience
+
+Who Can Join
+⦁	Pursuing Technical Degrees
+⦁	Data science enthusiasts
+⦁	Professionals transitioning into AI/ML roles
+*Anyone with a passion for AI & ML can enroll!*
+
+What You'll Get
+Classes
+⦁	Live & Recorded Sessions
+⦁	Flexible Timing
+⦁	Lifetime Content Access
+
+Projects
+⦁	Capstone Project
+⦁	Multiple Mini-Projects
+⦁	Industry Case Studies
+
+Support
+⦁	1-1 Mentorship
+⦁	Doubt Clearing Sessions
+⦁	Peer Learning Groups
+
+Certification
+⦁	Industry-Recognized Certificate
+⦁	Project Showcase
+⦁	LinkedIn Endorsement
+
+
+Program Structure
+Curriculum Overview
+A step-by-step journey from basics to advanced AI & ML concepts, with hands-on projects and real-world applications.
+
+Module 1: Introduction to AI/ML & Python Basics(Foundational concepts and Python programming essentials).
+Key Focus Areas:
+⦁	Python Syntax & Data Structures
+⦁	AI/ML Overview
+⦁	Basic Programming Exercises
+
+2. Module 2: Data Handling & Visualization(Learn to process, clean, and visualize data for ML).
+Key Focus Areas:
+⦁	Numpy & Pandas
+⦁	Data Cleaning
+⦁	Matplotlib & Seaborn
+
+3. Module 3: Machine Learning Algorithms(Core ML algorithms and their applications).
+Key Focus Areas:
+Regression & Classification
+Clustering
+Model Evaluation
+
+4. Module 4: Deep Learning & NLP(Neural networks, deep learning, and natural language processing).
+Key Focus Areas:
+⦁	Neural Networks
+⦁	CNNs & RNNs
+⦁	NLP Basics
+
+5. Module 5:Deployment & Capstone(Model deployment and final project).
+Key Focus Areas:
+⦁	Model Deployment
+⦁	MLOps Basics
+⦁	Capstone Project
+
+Tools & Libraries You Will Learn
+Essential Tools & Libraries
+Programming Languages & Frameworks
+⦁	Python
+⦁	NumPy
+⦁	Pandas
+⦁	PyTorch
+⦁	TensorFlow
+⦁	Scikit-learn
+
+2. Development Environments & Tools
+⦁	Jupyter Notebook
+⦁	Google Colab
+⦁	Git & GitHub
+
+3. Database & Big Data
+⦁	MySQL
+⦁	MongoDB
+⦁	Spark
+
+4. Cloud & Deployment
+⦁	Amazon Web Services
+⦁	Microsoft Azure
+⦁	GCP (Google Cloud Platform)
+⦁	Docker
+⦁	Kubernetes
+
+⦁	Career Opportunities
+⦁	Machine Learning Engineer
+⦁	Data Scientist
+⦁	AI Developer
+⦁	NLP Specialist
+
+Program Fees
+Upfront Payment ₹6,000
+72% OFF ₹21,000 • One-time payment Special discount for early birds!
+
+---------------------------------------------------------------------
 
 DevOps with Cloud & AI
 Master DevOps with Cloud & AI
@@ -174,978 +194,506 @@ Become a DevOps Engineer with 100% Placement Support
 Learn modern DevOps practices with Jenkins, Docker, Kubernetes, Terraform, Ansible, AWS, and monitoring tools. Build industry-grade projects and get job-ready.
 
 DevOps & Cloud Computing
-
 Admissions Open
-
-600+ Students Enrolled
-
-Students Trained 600+
-
-
-Months Program 3.5
-
-Industry Projects 25+
-
-100%
-
-Placement Support
+600+ Students Trained
+3.5 Months Program
+Program Fees Affordable pricing with flexible payment options One-time Payment ₹10,000, ₹25,000 60% OFF
+25+ Industry Projects
+100% Placement Support
 
 Why Choose This Program
-Program Highlights
-Comprehensive training designed to make you job-ready with industry-relevant skills and hands-on experience.
+Program Highlights Comprehensive training designed to make you job-ready with industry-relevant skills and hands-on experience.
 
-100% Job Assistance
-Comprehensive placement support with resume building and interview preparation
+⦁	100% Job Assistance (Comprehensive placement support with resume building and interview preparation)
 
-Industry Projects
-Real-world projects that showcase your skills to potential employers
+⦁	Industry Projects (Real-world projects that showcase your skills to potential employers)
 
-Expert Mentors
-Learn from industry professionals with years of DevOps experience
+⦁	Expert Mentors(Learn from industry professionals with years of DevOps experience)
 
-Lifetime Access
-Access to course content and updates even after completion
+⦁	Lifetime Access(Access to course content and updates even after completion)
 
-Target Audience
 Who Can Join
 This program is designed for individuals from various backgrounds who want to build a career in DevOps.
 
-Engineering Students
-3-year degree holders
-
-Perfect for students looking to enter the tech industry
-
-Career Changers
-From any background
-
-Transform your career with in-demand DevOps skills
-
-Working Professionals
-IT & Non-IT backgrounds
-
-Upskill and advance your career in DevOps
+⦁	Engineering Students: (3-year degree holders) Perfect for students looking to enter the tech industry
+⦁	Career Changers: From any background(Transform your career with in-demand DevOps skills)
+⦁	Working Professionals: IT & Non-IT backgrounds(Upskill and advance your career in DevOps)
 
 Companies Hiring for DevOps & it's various roles
 This EduWise DevOps Training will help you become job-ready and build a strong foundation for high-demand roles. EduWise's in-house DevOps training empowers you to start a high-paying career as a DevOps Engineer.
 
-Accenture logo
-Amazon logo
-Capgemini logo
-HCL logo
-IBM logo
-Infosys logo
-Samsung logo
-TCS logo
-Tech Mahindra logo
-Wipro logo
-Accenture logo
-Amazon logo
-Capgemini logo
-HCL logo
-IBM logo
-Infosys logo
-Samsung logo
-TCS logo
-Tech Mahindra logo
-Wipro logo
-What You'll Get
-Program Benefits
-Live Classes
-Interactive Live Sessions
-Flexible Timing Options
-Recorded Sessions Access
-Q&A with Experts
-Hands-on Projects
-Capstone Project
-Multiple Mini-Projects
-Industry Case Studies
-Portfolio Building
-24/7 Support
-1-1 Mentorship
-Doubt Clearing Sessions
-Peer Learning Groups
-Technical Support
-Certification
-Industry-Recognized Certificate
-Project Showcase
-LinkedIn Endorsement
-Career Guidance
-Comprehensive Curriculum
-What You'll Learn
-A comprehensive curriculum designed to take you from basics to advanced DevOps practices with real-world projects
+What You'll Get (DevOps Benefits)
+1.	Live Classes
+⦁	Interactive Live Sessions
+⦁	Flexible Timing Options
+⦁	Recorded Sessions Access
+⦁	Q&A with Experts
 
-1
-Course Curriculum
+2. Hands-on Projects
+⦁	Capstone Project
+⦁	Multiple Mini-Projects
+⦁	Industry Case Studies
+⦁	Portfolio Building
+
+3. 24/7 Support
+⦁	1-1 Mentorship
+⦁	Doubt Clearing Sessions
+⦁	Peer Learning Groups
+⦁	Technical Support
+
+4. Certification
+⦁	Industry-Recognized Certificate
+⦁	Project Showcase
+⦁	LinkedIn Endorsement
+⦁	Career Guidance
+
+
+Comprehensive Curriculum
+What You'll Learn (A comprehensive curriculum designed to take you from basics to advanced DevOps practices with real-world projects)
+
+1.	Course Curriculum
 Our course is designed by industry experts for excellent academic and industrial experience. We have a balanced combination of theoretical, technical, and practical knowledge for you to get the best training experience for everyone regardless of their background.
 
-📅 3.5 Months
-Module 1
-Linux | Shell | Bash | Python
-⏱️ 2 weeks
-Module 2
-DevOps Overview
-⏱️ 1 week
-Module 3
-Managing Source Code – Git and GitHub
-⏱️ 1 week
-Module 4
-Continuous Integration Using Jenkins
-⏱️ 2 weeks
-Module 5
-Containerization, Docker, and Docker Hub
-⏱️ 2 weeks
-Module 6
-Container Orchestration Tool - Kubernetes
-⏱️ 3 weeks
-Module 7
-Configuration Automation using Ansible
-⏱️ 2 weeks
-Module 8
-Terraform Overview
-⏱️ 2 weeks
-Module 9
-Monitoring, Logging, and Observability
-⏱️ 2 weeks
-Module 10
-DevOps with AI
-⏱️ 1 week
-Linux | Shell | Bash | Python
-Duration: 2 weeks
+⦁	Module 1: (Linux | Shell | Bash | Python)  2 weeks
+⦁	Module 2 : DevOps Overview 1 weeks
+⦁	Module 3 : Managing Source Code – Git and GitHub 1 week
+⦁	Module 4: Continuous Integration Using Jenkins 2 weeks
+⦁	Module 5: Containerization, Docker, and Docker Hub 2 weeks
+⦁	Module 6: Container Orchestration Tool - Kubernetes 3 weeks
+⦁	Module 7: Configuration Automation using Ansible 2 weeks
+⦁	Module 8: Terraform Overview 2 weeks
+⦁	Module 9: Monitoring, Logging, and Observability 2 weeks
+⦁	Module 10: DevOps with AI 1 week
 
-Topics Covered:
-•
-Overview of Linux
-•
-Linux Architecture
-•
-Linux Distributions
-•
-Basic Linux Commands
-•
-File Permission Management
-•
-User Creation
-•
-Shell Scripts
-•
-SSH and VI Utility
-•
-Creation of User
-•
-Establishing SSH Connection to the Server
-•
-File creation and Manipulation using the VI editor
-•
-Managing permissions
-•
-Basic commands execution
-•
-Shell Scripting - History and Introduction
-•
-Types of shells
-•
-Shebang line in shell
-•
-Command line arguments
-•
-Creating first shell script
-•
-How to run a shell script
-•
-Variables and Types of Operators
-•
-If-else in shell script
-•
-For loop in shell script
-•
-While loop in shell script
-•
-Functions in shell script
-•
-Python - File Handling
-•
-Reading and writing files (text and binary)
-•
-File handling modes (r, w, a, r+)
-•
-Exception Handling
-•
-Types of exceptions and errors
-•
-try, except, finally, else blocks
-•
-Raising and handling exceptions
-•
-Working with System and OS Modules
-•
-os (file operations, environment variables, process management)
-•
-sys (command-line arguments, exit codes)
-•
-subprocess (executing shell commands from Python)
-•
-Object-Oriented Programming (OOP) overview
-•
-Classes and objects
-•
-Inheritance
-•
-Polymorphism
-•
-Encapsulation
-•
-Abstraction
-2
-Placement Readiness Test (PRT)
+2. Placement Readiness Test (PRT)
 To become eligible for our Job Guarantee Program, every learner must complete the following Placement Readiness Test (PRT) milestones:
 
-1
-Complete Your Learning Journey
-Finish 100% of the DevOps Course Curriculum
-
-2
-Build Real-World Experience
-Successfully complete a minimum of 3 hands-on projects
-
-3
-Demonstrate Your Expertise
-🎯
-Clear the 1:1 Virtual Interview Round with our DevOps Experts
-
-✨ Complete all 3 steps to unlock your Job Guarantee Program eligibility! ✨
+⦁	Complete Your Learning Journey(Finish 100% of the DevOps Course Curriculum)
+⦁	Build Real-World Experience(Successfully complete a minimum of 3 hands-on projects)
+⦁	Demonstrate Your Expertise(Clear the 1:1 Virtual Interview Round with our DevOps Experts)
+Complete all 3 steps to unlock your Job Guarantee Program eligibility! ✨
 
 Our team will guide you through each milestone to ensure your success
 
-3
-Sign ISA Agreement
+3. Sign ISA Agreement
 The students need to pay after they get placed. They need to pay INR 20,000 to Eduwise Solutions as a career services fee which can be paid in easy EMIs.
 
-📄
-Sign ISA
+⦁	Sign ISA
+⦁	You are eligible(for placement program)
+⦁	Pay the career services(fee of INR (20,000) INR)
 
-👤
-✓
-You are eligible
-
-for placement program
-
-💰
-Pay the career services
-
-fee of INR (20,000) INR
-
-4
-Career Track
+4. Career Track
 Once you have enrolled for the program then you will have access to a wide range of resources which will help you in becoming a Job-Ready Candidate. We have a dedicated placement team of professionals who excel in their individual domains committed to assist you in your journey.
 
-Profile and Resume Building
-Create a professional profile that stands out to recruiters
-Business Communication
-Master professional communication skills for the workplace
-Competency Test
-Assess and improve your technical and soft skills
-Mock Interviews
-Practice with industry experts to ace your interviews
-Job Application Strategy
-Learn how to effectively search and apply for jobs
-Interview Preparation
-Comprehensive preparation for all interview rounds
-Placement Assistance
-Dedicated support to help you land your dream job
-Profile and Resume Building
-Create a professional profile that stands out to recruiters
+⦁	Profile and Resume Building(Create a professional profile that stands out to recruiters)
+⦁	Business Communication(Master professional communication skills for the workplace)
+⦁	Competency Test(Assess and improve your technical and soft skills)
+⦁	Mock Interviews(Practice with industry experts to ace your interviews)
+⦁	Job Application Strategy(Learn how to effectively search and apply for jobs)
+⦁	Interview Preparation(Comprehensive preparation for all interview rounds)
+⦁	Placement Assistance(Dedicated support to help you land your dream job)
 
-What You‘ll Learn:
-•
-Profile and Resume building
-•
-Portfolio Building
-•
-Build highly optimized Resumes and Cover Letters
-•
-Build your LinkedIn Profile
-•
-GitHub Profile Optimization
-•
-Personal Branding Strategies
-•
-ATS-Friendly Resume Creation
-•
-Resume Review and Feedback Sessions
-5
 Pay Career Services Fee
 Pay ₹20,000/- (Career Services Fee) Only after Getting Offer Letter
 
-QualiTlabs
-Ola
-Novature Tech
-CIMCON Software
-Techify
-Thoughtworks
-RevInfotech
-HDFC Bank
-Meesho
-First Source
-Mihup
-FastPix Logo
-People Tech
-QualiTlabs
-Ola
-Novature Tech
-CIMCON Software
-Techify
-Thoughtworks
-RevInfotech
-HDFC Bank
-Meesho
-First Source
-Mihup
-FastPix Logo
-People Tech
-QualiTlabs
-Ola
-Novature Tech
-CIMCON Software
-Techify
-Thoughtworks
-RevInfotech
-HDFC Bank
-Meesho
-First Source
-Mihup
-FastPix Logo
-People Tech
-QualiTlabs
-Ola
-Novature Tech
-CIMCON Software
-Techify
-Thoughtworks
-RevInfotech
-HDFC Bank
-Meesho
-First Source
-Mihup
-FastPix Logo
-People Tech
-eClerx
-FatakPay
-Kartoffel Logo
-Rummy Verse Logo
-Latent View
-Blinkit
-Nvest Solution
-Onward Logo
-Cricbuzz Logo
-HealthSignz
-eClerx
-FatakPay
-Kartoffel Logo
-Rummy Verse Logo
-Latent View
-Blinkit
-Nvest Solution
-Onward Logo
-Cricbuzz Logo
-HealthSignz
-eClerx
-FatakPay
-Kartoffel Logo
-Rummy Verse Logo
-Latent View
-Blinkit
-Nvest Solution
-Onward Logo
-Cricbuzz Logo
-HealthSignz
-eClerx
-FatakPay
-Kartoffel Logo
-Rummy Verse Logo
-Latent View
-Blinkit
-Nvest Solution
-Onward Logo
-Cricbuzz Logo
-HealthSignz
-Hitachi
-RapiPay
-CIMCON Digital
-Ease my Trip
-Mindteck
-Thoughts
-Trigent Logo
-CarDekho
-Coolberg
-HappyMonk.AI
-Hitachi
-RapiPay
-CIMCON Digital
-Ease my Trip
-Mindteck
-Thoughts
-Trigent Logo
-CarDekho
-Coolberg
-HappyMonk.AI
-Hitachi
-RapiPay
-CIMCON Digital
-Ease my Trip
-Mindteck
-Thoughts
-Trigent Logo
-CarDekho
-Coolberg
-HappyMonk.AI
-Hitachi
-RapiPay
-CIMCON Digital
-Ease my Trip
-Mindteck
-Thoughts
-Trigent Logo
-CarDekho
-Coolberg
-HappyMonk.AI
 Tools Covered
-Git
-Git
-GitOps
-GitOps
-Argo CD
-Argo CD
-Jenkins
-Jenkins
-Docker
-Docker
-Kubernetes
-Kubernetes
-EKS
-EKS
-GKE
-GKE
-Rancher
-Rancher
-Terraform
-Terraform
-Ansible
-Ansible
-CloudFormation
-CloudFormation
-AWS
-AWS
-Azure
-Azure
-Lambda
-Lambda
-Prometheus
-Prometheus
-Grafana
-Grafana
-TensorFlow
-TensorFlow
-PyTorch
-PyTorch
+⦁	Git
+⦁	GitOps
+⦁	Argo CD
+⦁	Jenkins
+⦁	Docker
+⦁	Kubernetes
+⦁	EKS
+⦁	GKE
+⦁	Rancher
+⦁	Terraform
+⦁	Ansible
+⦁	CloudFormation
+⦁	AWS
+⦁	Azure
+⦁	Lambda
+⦁	Prometheus
+⦁	Grafana
+⦁	TensorFlow
+⦁	PyTorch
+
 Industry-Leading Comparison
 DevOps & Cloud with AI (Eduwise) vs Traditional Platforms
 Discover why thousands of students choose Eduwise for their DevOps journey
 
 Comparison Aspect
-Eduwise Solutions
-Other Platforms
-Curriculum
-Modern DevOps + Cloud + AI integration (GitOps, ArgoCD, Flux, AI-driven automation, predictive monitoring)
+ 
+1.	Curriculum Modern:
+⦁	Eduwise Solutions: DevOps + Cloud + AI integration (GitOps, ArgoCD, Flux, AI-driven automation, predictive monitoring)
+⦁	Other Platforms: Limited to basic DevOps tools (Jenkins, Docker, AWS free tier) without AI focus
 
-Limited to basic DevOps tools (Jenkins, Docker, AWS free tier) without AI focus
+2. Industry Relevance
+Eduwise Solutions: Designed with MNC requirements in mind → ensures graduates are job-ready from day one
+Other Platforms: Often outdated syllabus, not aligned with current industry demand
 
-Industry Relevance
-Designed with MNC requirements in mind → ensures graduates are job-ready from day one
+3. Projects
+Eduwise Solutions: Enterprise-grade live projects using Cloud + AI for automation, monitoring, and CI/CD optimization.
+Other Platforms: Educational/demo projects with no direct industry impact
 
-Often outdated syllabus, not aligned with current industry demand
+4. Problem-Solving
+Eduwise Solutions:AI-powered case studies — predictive analysis, automated root cause detection, anomaly detection in DevOps pipelines
+Other Platforms: Mostly manual case studies, limited exposure to automation
 
-Projects
-Enterprise-grade live projects using Cloud + AI for automation, monitoring, and CI/CD optimization
+5. Faculty
+Eduwise Solutions: Industry leaders (20+ yrs exp) who have implemented Cloud + AI in real projects
+Other Platforms: Regular trainers with only academic or limited professional exposure
 
-Educational/demo projects with no direct industry impact
+6. Career Advantage
+Eduwise Solutions: Future-proof skills → Cloud + AI + DevOps = high-demand career path with global opportunities
+Other Platforms: Basic DevOps alone → increasingly becoming entry-level, high competition
 
-Problem-Solving
-AI-powered case studies — predictive analysis, automated root cause detection, anomaly detection in DevOps pipelines
+7. Placement
+Eduwise Solutions: 100% Job Assistance + Interview Assurance with direct MNC tie-ups
+Other Platforms: Only job assistance, no placement assurance
 
-Mostly manual case studies, limited exposure to automation
+8. Fee Model
+Eduwise Solutions: Pay Minimum Fees Now, Remaining After Placement → Risk-free learning
+Other Platforms: Full fees upfront with no placement guarantee
 
-Faculty
-Industry leaders (20+ yrs exp) who have implemented Cloud + AI in real projects
-
-Regular trainers with only academic or limited professional exposure
-
-Career Advantage
-Future-proof skills → Cloud + AI + DevOps = high-demand career path with global opportunities
-
-Basic DevOps alone → increasingly becoming entry-level, high competition
-
-Placement
-100% Job Assistance + Interview Assurance with direct MNC tie-ups
-
-Only job assistance, no placement assurance
-
-Fee Model
-Pay Minimum Fees Now, Remaining After Placement → Risk-free learning
-
-Full fees upfront with no placement guarantee
-
-LMS Access
-Lifetime LMS Access → learn, revise, and upgrade skills anytime
-
-Access only till course validity expires
-
-Career Opportunities
-High-paying roles in the booming DevOps industry
-
-DevOps Engineer
-₹8-15 LPA
-
-Cloud Architect
-₹12-25 LPA
-
-Site Reliability Engineer
-₹10-20 LPA
-
-Release Manager
-₹8-18 LPA
-
-Security Engineer
-₹10-22 LPA
-
-Cloud Engineer
-₹8-16 LPA
-
-Program Investment
-Affordable pricing with flexible payment options
-
-One-time Payment
-
-₹10,000
-
-₹25,000
-
-60% OFF
-Limited Time Offer - Save ₹15,000!
-Enroll Now
-Career Transformation
-Accelerate Your
-Professional Journey
-Unlock a world of opportunities with our cutting-edge Online Masters Program. Designed for ambitious professionals who want to stay ahead in a rapidly evolving job market.
-
-Expert Curriculum
-Industry-aligned learning paths
-
-Flexible Learning
-Learn on your schedule
-
-Transform Your Potential
-Join a community of 10,000+ professionals advancing their careers through innovative online learning.
+9. LMS Access
+Eduwise Solutions: Lifetime LMS Access → learn, revise, and upgrade skills anytime
+Other Platforms: Access only till course validity expires
 
 
-Data Science Program
-Data Science Course - Batch 2025
-Unlock the Power of Data
+⦁	Career Opportunities
+1.	High-paying roles in the booming DevOps industry (DevOps Engineer ₹8-15 LPA)
+2.	Cloud Architect(₹12-25 LPA)
+3.	Site Reliability Engineer(₹10-20 LPA)
+4.	Release Manager(₹8-18 LPA)
+5.	Security Engineer(₹10-22 LPA)
+6.	Cloud Engineer(₹8-16 LPA)
 
-Become a data-driven professional with hands-on projects, expert mentorship, and industry-recognized certification. Get job-ready for the data revolution.
+----------------------------------------------------------
 
-Data Science
-Batch 2025
+Cyber Security Program
+Defend the Digital World
+Master the art of cyber defense with hands-on labs, real-world scenarios, and expert mentorship. Become job-ready for the booming cybersecurity industry.
 
 Admissions Open
 
-400+
-
-Students Trained
-
-3
-
-Months Program
-
-25+
-
-Projects & Labs
-
-100%
-
-Placement Support
+300+ Students Trained
+3 Months Program
+20+ Lab Exercises
+100% Placement Support
 
 Why Choose This Program
 Key Features
-Beginner-friendly Python modules
-Real-time visualization with Matplotlib & Seaborn
-Industry-relevant Machine Learning algorithms
-End-to-end capstone project
-Target Audience
+1.	Real-world hacking and security labs
+2.	System and Network Security
+3.	Red, Blue, and Purple team simulations
+4.	SOC & SIEM tool training
+
 Who Can Join
-Engineering students (CS/IT/Data Science)
-Budding analysts and statisticians
-Professionals transitioning into data roles
-*Anyone with a passion for data science can enroll!*
-Program Highlights
-What You'll Get
-Classes
-Live & Recorded Sessions
-Flexible Timing
-Lifetime Content Access
-Projects
-Capstone Project
-Multiple Mini-Projects
-Industry Case Studies
-Support
-1-1 Mentorship
-Doubt Clearing Sessions
-Peer Learning Groups
-Certification
-Industry-Recognized Certificate
-Project Showcase
-LinkedIn Endorsement
-Program Structure
-Curriculum Overview
-A step-by-step journey from basics to advanced data science concepts, with hands-on projects and real-world applications.
-
-Module 1
-Introduction to Data Science & Python
-Foundational concepts and Python programming essentials.
-
-Key Focus Areas:
-Python Basics
-Data Structures
-Data Science Overview
-Module 2
-Data Analysis & Visualization
-Learn to process, clean, and visualize data for insights.
-
-Key Focus Areas:
-Numpy & Pandas
-Data Cleaning
-Matplotlib & Seaborn
-Module 3
-Statistics & Machine Learning
-Core statistics and ML algorithms for data-driven decisions.
-
-Key Focus Areas:
-Descriptive & Inferential Stats
-Regression & Classification
-Model Evaluation
-Module 4
-Deep Learning & Big Data
-Neural networks, deep learning, and big data tools.
-
-Key Focus Areas:
-Neural Networks
-Deep Learning Frameworks
-Big Data Basics
-Module 5
-Deployment & Capstone
-Model deployment and final project.
-
-Key Focus Areas:
-Model Deployment
-MLOps Basics
-Capstone Project
-Tools & Libraries You Will Learn
-Essential Data Science Tools & Libraries
-Programming & Libraries
-Python
-Python
-NumPy
-NumPy
-Pandas
-Pandas
-Matplotlib
-Matplotlib
-Seaborn
-Seaborn
-Scikit-learn
-Scikit-learn
-Data Tools
-SQL
-SQL
-Power BI
-Power BI
-Tableau
-Career Opportunities
-Data Scientist
-Data Analyst
-Machine Learning Engineer
-Business Analyst
-Data Engineer
-BI Developer
-Program Investment
-Upfront Payment
-
-₹6,000
-
-72% OFF
-₹21,000 • One-time payment
-
-Special discount for early birds!
-
-Enroll Now
-Career Transformation
-Accelerate Your
-Professional Journey
-Unlock a world of opportunities with our cutting-edge Online Masters Program. Designed for ambitious professionals who want to stay ahead in a rapidly evolving job market.
-
-
-
-
-Full Stack Program
-Full Stack Development Course - Batch 2025
-Build Modern Web Apps
-
-Master both frontend and backend development with hands-on projects, expert mentorship, and industry-recognized certification. Become a job-ready full stack developer.
-
-Full Stack Development
-
-Admissions Open 350+
-
-Students Trained 3
-
-Months Program 20+
-
-Projects & Labs 100%
-
-Placement Support
-
-Why Choose This Program
-Key Features
-Covers frontend, backend, and databases
-React & Node.js-based full-stack development
-Real-world projects (CRUD, authentication)
-GitHub and deployment workflows
-Target Audience
-Who Can Join
-Entry Level Developers
-Designers
-Entrepreneurs
-*Anyone with a passion for web development can enroll!*
-Program Highlights
-What You'll Get
-Classes
-Live & Recorded Sessions
-Flexible Timing
-Lifetime Content Access
-Projects
-Capstone Project
-Multiple Mini-Projects
-Industry Case Studies
-Support
-1-1 Mentorship
-Doubt Clearing Sessions
-Peer Learning Groups
-Certification
-Industry-Recognized Certificate
-Project Showcase
-LinkedIn Endorsement
-Program Structure
-Curriculum Overview
-A step-by-step journey from basics to advanced full stack development, with hands-on projects and real-world applications.
-
-Module 1
-Frontend Development
-HTML, CSS, JavaScript, and modern frameworks.
-
-Key Focus Areas:
-HTML & CSS Basics
-JavaScript Essentials
-React Fundamentals
-Module 2
-Backend Development
-Node.js, Express, and RESTful APIs.
-
-Key Focus Areas:
-Node.js & Express
-API Development
-Authentication & Security
-Module 3
-Databases & DevOps
-SQL, NoSQL, and deployment pipelines.
-
-Key Focus Areas:
-SQL & NoSQL Basics
-Database Design
-CI/CD & Deployment
-Module 4
-Full Stack Projects
-Build and deploy complete web applications.
-
-Key Focus Areas:
-Project Planning
-Implementation
-Deployment & Monitoring
-Module 5
-Capstone & Career Prep
-Final project and job readiness training.
-
-Key Focus Areas:
-Capstone Project
-Resume & Interview Prep
-Career Guidance
-Tools & Libraries You Will Learn
-Essential Tools & Libraries
-Frontend
-HTML
-HTML
-CSS
-CSS
-JavaScript
-JavaScript
-React
-React
-Backend
-Node.js
-Node.js
-Express.js
-Express.js
-Databases
-MySQL
-MySQL
-MongoDB
-MongoDB
-Version Control
-Git & GitHub
-Git & GitHub
-Authentication
-JWT (JSON Web Tokens)
-JWT (JSON Web Tokens)
-Career Opportunities
-Full Stack Developer
-Frontend Developer
-Backend Developer
-Web Application Engineer
-DevOps Engineer
-Software Engineer
-Program Investment
-Upfront Payment
-
-₹6,000
-
-72% OFF
-₹21,000 • One-time payment
-
-Special discount for early birds!
-
-
-Cyber Security Program
-Cyber Security Course - Batch 2025
-Defend the Digital World
-
-Master the art of cyber defense with hands-on labs, real-world scenarios, and expert mentorship. Become job-ready for the booming cybersecurity industry.
-
-Cyber Security
-Admissions Open 
-
-Students Trained 300+
-
-Months Program 3 
-
-Lab Exercises 20+
-
-Placement Support 100%
-
-
-Why Choose This Program
-Key Features
-Real-world hacking and security labs
-System and Network Security
-Red, Blue, and Purple team simulations
-SOC & SIEM tool training
-Target Audience
-Who Can Join
-System Admin
-Security Enthusiasts
-CS / IT Professionals
-CEH / CISSP Prep Students
+⦁	System Admin
+⦁	Security Enthusiasts
+⦁	CS / IT Professionals
+⦁	CEH / CISSP Prep Students
 *Anyone with a passion for cyber security can enroll!*
-Program Highlights
+
 What You'll Get
-Classes
-Live & Recorded Sessions
-Flexible Timing
-Lifetime Content Access
-Labs
-Virtual Lab Access
-Red Team/Blue Team Exercises
-Capture The Flag Challenges
-Support
-1-1 Mentorship
-Doubt Clearing Sessions
-Peer Learning Groups
-Certification
-Industry-Recognized Certificate
-Project Showcase
-LinkedIn Endorsement
+1.	Classes
+⦁	Live & Recorded Sessions
+⦁	Flexible Timing
+⦁	Lifetime Content Access
+
+2. Labs
+⦁	Virtual Lab Access
+⦁	Red Team/Blue Team Exercises
+⦁	Capture The Flag Challenges
+
+3. Support
+⦁	1-1 Mentorship
+⦁	Doubt Clearing Sessions
+⦁	Peer Learning Groups
+
+4. Certification
+⦁	Industry-Recognized Certificate
+⦁	Project Showcase
+⦁	LinkedIn Endorsement
+
 Program Structure
 Curriculum Overview
 A step-by-step journey from basics to advanced cyber security concepts, with hands-on labs and real-world applications.
 
-Module 1
-Introduction to Cyber Security
-Basics of cyber security, threat landscape, and security principles.
-
+1.	Module 1 : Introduction to Cyber Security (Basics of cyber security, threat landscape, and security principles).
 Key Focus Areas:
-Cyber Security Fundamentals
-Types of Threats
-Security Best Practices
-Module 2
-Network Security & Cryptography
-Securing networks and understanding cryptographic techniques.
+⦁	Cyber Security Fundamentals
+⦁	Types of Threats
+⦁	Security Best Practices
 
+2. Module 2:  Network Security & Cryptography (Securing networks and understanding cryptographic techniques).
 Key Focus Areas:
-Network Protocols
-Firewalls & IDS
-Encryption & Hashing
-Module 3
-Ethical Hacking & Penetration Testing
-Tools and techniques for ethical hacking and penetration testing.
+⦁	Network Protocols
+⦁	Firewalls & IDS
+⦁	Encryption & Hashing
 
+3. Module 3: Ethical Hacking & Penetration Testing(Tools and techniques for ethical hacking and penetration testing).
 Key Focus Areas:
-Reconnaissance
-Vulnerability Assessment
-Exploitation & Reporting
-Module 4
-Application & Cloud Security
-Securing web applications and cloud environments.
+⦁	Reconnaissance
+⦁	Vulnerability Assessment
+⦁	Exploitation & Reporting
 
+4. Module 4: Application & Cloud Security(Securing web applications and cloud environments).
 Key Focus Areas:
-OWASP Top 10
-Cloud Security Basics
-Incident Response
-Module 5
-Capstone Project & Career Prep
-Final project and job readiness training.
+⦁	OWASP Top 10
+⦁	Cloud Security Basics
+⦁	Incident Response
 
+5. Module 5: Capstone Project & Career Prep(Final project and job readiness training).
 Key Focus Areas:
-Capstone Project
-Resume & Interview Prep
-Career Guidance
+⦁	Capstone Project
+⦁	Resume & Interview Prep
+⦁	Career Guidance
+
 Tools & Libraries You Will Learn
 Essential Cyber Security Tools & Platforms
-Operating Systems & Commands
-Linux
-Linux
-Networking & Security Tools
-Wireshark
-Wireshark
-Burp Suite
-Burp Suite
-SIEM
-SIEM
-Firewalls
-Firewalls
-Program Investment
-Upfront Payment
 
-₹6,000
+1.	Operating Systems & Commands
+⦁	Linux
 
-72% OFF
-₹21,000 • One-time payment
+2. Networking & Security Tools
+⦁	Wireshark
+⦁	Burp Suite
+⦁	SIEM
+⦁	Firewalls
+
+Program Fees: Upfront Payment ₹6,000 72% OFF ₹21,000 One-time payment
+Special discount for early birds!
+
+----------------------------------------------------------------------------
+
+Data Science Program
+Become a data-driven professional with hands-on projects, expert mentorship, and industry-recognized certification. Get job-ready for the data revolution.
+
+Admissions Open
+400+ Students Trained
+3 Months Program
+25+ Projects & Labs
+100% Placement Support
+
+Why Choose This Program
+⦁	Key Features
+⦁	Beginner-friendly Python modules
+⦁	Real-time visualization with Matplotlib & Seaborn
+⦁	Industry-relevant Machine Learning algorithms
+⦁	End-to-end capstone project
+⦁	Target Audience
+
+Who Can Join
+⦁	Engineering students (CS/IT/Data Science)
+⦁	Budding analysts and statisticians
+⦁	Professionals transitioning into data roles
+*Anyone with a passion for data science can enroll!*
+
+
+What You'll Get
+1.	Classes
+⦁	Live & Recorded Sessions
+⦁	Flexible Timing
+⦁	Lifetime Content Access
+
+2. Projects
+⦁	Capstone Project
+⦁	Multiple Mini-Projects
+⦁	Industry Case Studies
+
+3. Support
+⦁	1-1 Mentorship
+⦁	Doubt Clearing Sessions
+⦁	Peer Learning Groups
+
+Certification
+⦁	Industry-Recognized Certificate
+⦁	Project Showcase
+⦁	LinkedIn Endorsement
+
+Program Structure
+Curriculum Overview
+A step-by-step journey from basics to advanced data science concepts, with hands-on projects and real-world applications.
+
+1.	Module 1: Introduction to Data Science & Python (Foundational concepts and Python programming essentials).
+Key Focus Areas:
+⦁	Python Basics
+⦁	Data Structures
+⦁	Data Science Overview
+
+2. Module 2: Data Analysis & Visualization(Learn to process, clean, and visualize data for insights).
+Key Focus Areas:
+⦁	Numpy & Pandas
+⦁	Data Cleaning
+⦁	Matplotlib & Seaborn
+
+3. Module 3: Statistics & Machine Learning(Core statistics and ML algorithms for data-driven decisions).
+Key Focus Areas:
+⦁	Descriptive & Inferential Stats
+⦁	Regression & Classification
+⦁	Model Evaluation
+
+4. Module 4:Deep Learning & Big Data(Neural networks, deep learning, and big data tools).
+Key Focus Areas:
+⦁	Neural Networks
+⦁	Deep Learning Frameworks
+⦁	Big Data Basics
+
+5. Module 5: Deployment & Capstone(Model deployment and final project).
+Key Focus Areas:
+⦁	Model Deployment
+⦁	MLOps Basics
+⦁	Capstone Project
+
+
+Tools & Libraries You Will Learn (Essential Data Science Tools & Libraries)
+1.	Programming & Libraries
+⦁	Python
+⦁	NumPy
+⦁	Pandas
+⦁	Matplotlib
+⦁	Seaborn
+⦁	Scikit-learn
+
+2. Data Tools
+⦁	SQL
+⦁	Power BI
+⦁	Tableau
+
+
+Career Opportunities
+⦁	Data Scientist
+⦁	Data Analyst
+⦁	Machine Learning Engineer
+⦁	Business Analyst
+⦁	Data Engineer
+⦁	BI Developer
+
+Program Fees: Upfront Payment ₹6,000 72% OFF ₹21,000 • One-time payment
+Special discount for early birds!
+
+-----------------------------------------------------------------------------------------------------------------------
+
+Full Stack Program
+Build Modern Web Apps
+Master both frontend and backend development with hands-on projects, expert mentorship, and industry-recognized certification. Become a job-ready full stack developer.
+
+Full Stack Development
+Admissions Open
+
+350+ Students Trained
+3 Months Program
+20+ Projects & Labs
+100% Placement Support
+
+Why Choose This Program
+Key Features
+⦁	Covers frontend, backend, and databases
+⦁	React & Node.js-based full-stack development
+⦁	Real-world projects (CRUD, authentication)
+⦁	GitHub and deployment workflows
+⦁	Target Audience
+
+Who Can Join
+⦁	Entry Level Developers
+⦁	Designers
+⦁	Entrepreneurs
+*Anyone with a passion for web development can enroll!*
+
+
+What You'll Get
+1.	Classes
+⦁	Live & Recorded Sessions
+⦁	Flexible Timing
+⦁	Lifetime Content Access
+
+2. Projects
+⦁	Capstone Project
+⦁	Multiple Mini-Projects
+⦁	Industry Case Studies
+
+3. Support
+⦁	1-1 Mentorship
+⦁	Doubt Clearing Sessions
+⦁	Peer Learning Groups
+
+4. Certification
+⦁	Industry-Recognized Certificate
+⦁	Project Showcase
+⦁	LinkedIn Endorsement
+
+
+Program Structure
+Curriculum Overview
+A step-by-step journey from basics to advanced full stack development, with hands-on projects and real-world applications.
+
+1.	Module 1: Frontend Development(HTML, CSS, JavaScript, and modern frameworks).
+Key Focus Areas:
+⦁	HTML & CSS Basics
+⦁	JavaScript Essentials
+⦁	React Fundamentals
+
+2. Module 2: Backend Development(Node.js, Express, and RESTful APIs).
+Key Focus Areas:
+⦁	Node.js & Express
+⦁	API Development
+⦁	Authentication & Security
+
+3. Module 3: Databases & DevOps(SQL, NoSQL, and deployment pipelines).
+Key Focus Areas:
+⦁	SQL & NoSQL Basics
+⦁	Database Design
+⦁	CI/CD & Deployment
+
+4. Module 4: Full Stack Projects(Build and deploy complete web applications).
+Key Focus Areas:
+Project Planning
+⦁	Implementation
+⦁	Deployment & Monitoring
+
+5. Module 5: Capstone & Career Prep(Final project and job readiness training).
+Key Focus Areas:
+⦁	Capstone Project
+⦁	Resume & Interview Prep
+⦁	Career Guidance
+
+Tools & Libraries You Will Learn
+Essential Tools & Libraries
+1.	Frontend
+⦁	HTML
+⦁	CSS
+⦁	JavaScript
+⦁	React
+
+2. Backend
+⦁	Node.js
+⦁	Express.js
+
+3. Databases
+⦁	MySQL
+⦁	MongoDB
+
+4. Version Control
+⦁	Git & GitHub
+
+5. Authentication
+JWT (JSON Web Tokens)
+
+
+Career Opportunities
+⦁	Full Stack Developer
+⦁	Frontend Developer
+⦁	Backend Developer
+⦁	Web Application Engineer
+⦁	DevOps Engineer
+⦁	Software Engineer
+
+Program Fees: Upfront Payment ₹6,000, 72% OFF ₹21,000 • One-time payment
+Special discount for early birds!
+
+
+--------------------------------------------------------------------------------------
 
 Professional Program
 15-Day Master Program with Job Guarantee
@@ -1155,220 +703,211 @@ At Eduwise Solutions, we specialize in empowering individuals with the skills an
 
 Students learning
 100% Job Guarantee
-
 15-day program
-
-1000+
-
-Successful Placements
-
-15
-
-Days Program
-
-150
-
-Industry Partners
-
-100%
-
-Job Guarantee
+1000+ Successful Placements
+15 Days Program
+150 Industry Partners
+100% Job Guarantee
 
 Why Choose Us
 Key Features of Our Program
-100% Job Placement Guarantee
-Your success is our priority.
-
-Top Industry Connections
-Work with leading companies in IT and Non-IT domains.
-
-Experienced Trainers
-Learn from the best to become the best.
-
-Fast-Track Career Growth
-15-day intensive program designed to get you job-ready quickly.
+⦁	100% Job Placement Guarantee(Your success is our priority).
+⦁	Top Industry Connections(Work with leading companies in IT and Non-IT domains).
+⦁	Experienced Trainers(Learn from the best to become the best).
+⦁	Fast-Track Career Growth(15-day intensive program designed to get you job-ready quickly).
 
 Why Students Choose Us
 Benefits That Set Us Apart
-One-Stop Solution
-Find everything you need for your educational journey in one place
+1.	One-Stop Solution(Find everything you need for your educational journey in one place)
+2.	Curated Premier Courses(Hand-picked courses from top institutions and industry leaders)
+3.	Simplify Learning Choices(Clear guidance to help you make the right educational decisions)
+4.	Trusted Partners(Collaborate with recognized educational institutions and companies)
+5.	End-to-End Support(Comprehensive assistance from enrollment to course completion)
+6.	Career-Focused Approach(Programs designed to enhance your professional growth)
 
-Curated Premier Courses
-Hand-picked courses from top institutions and industry leaders
-
-Simplify Learning Choices
-Clear guidance to help you make the right educational decisions
-
-Trusted Partners
-Collaborate with recognized educational institutions and companies
-
-End-to-End Support
-Comprehensive assistance from enrollment to course completion
-
-Career-Focused Approach
-Programs designed to enhance your professional growth
-
-Target Audience
 Who Can Join
 Course Completers Only
 Only learners who have successfully completed our courses are eligible to apply for this professional program.
 
 Program Features
-Program Highlights
-Classes
-100% Live Session
-Instructor Led Classes
-Flexible Timing
-Unlimited Class Access
-Lifetime Content Access
-Handson Learning
-Live Projects
-Hands on skill
-Multiple Projects for each topics
-Case study based program
-Support
-1-1 doubt clearing session
-Real Time session
-Placements
-Resume Building
-Multiple Mock Interviews
-Placement Assurance
-Multiple Job Interviews
-Industry Experts
-Experience Instructor
-Certified Professional
-Proven Track Records
-Real World Expertise
+1.	Classes
+⦁	100% Live Session
+⦁	Instructor Led Classes
+⦁	Flexible Timing
+⦁	Unlimited Class Access
+⦁	Lifetime Content Access
+
+2. Handson Learning
+⦁	Live Projects
+⦁	Hands on skill
+⦁	Multiple Projects for each topics
+⦁	Case study based program
+
+3. Support
+⦁	1-1 doubt clearing session
+⦁	Real Time session
+
+4. Placements
+⦁	Resume Building
+⦁	Multiple Mock Interviews
+⦁	Placement Assurance
+⦁	Multiple Job Interviews
+
+5. Industry Experts
+⦁	Experience Instructor
+⦁	Certified Professional
+⦁	Proven Track Records
+⦁	Real World Expertise
+
 Career Assurance Workflow
 A structured, end-to-end process to transform graduates into job-ready professionals.
 
-Job Roles Understanding
-We'll understand your job role requirements and recommend the role based on experience and the market.
+1. Job Roles Understanding :We'll understand your job role requirements and recommend the role based on experience and the market.
+2. Resume Building : We will help to build Resumes tailored to specific to job roles and keywords for easy shortlisting.
+3. LinkedIn Preparation: Improving your LinkedIn profile and visibility with relevant keywords, highlighted projects and case studies.
+4. Personal Branding & Thought Leadership: Teaching candidates how to showcase their expertise through LinkedIn articles, blogs, and industry discussions.
+5. Conducting Initial Mock Interviews: Conducting initial mock interviews to evaluate candidates' technical skills.
+6. Interpersonal Skills: Conducting tests and mock interviews to assess candidates' skills and personality.
+7. Advanced Mock Interviews: Inviting candidates who passed prior stages for further mock interviews as per Job description provided for the role
+8. Job Interviews: Referring to job interview opportunities through our onboarded companies and job portals
+9. Compensation Negotiations: Receive expert guidance on negotiating compensation to match market rates
 
-Resume Building
-We will help to build Resumes tailored to specific to job roles and keywords for easy shortlisting.
-
-LinkedIn Preparation
-Improving your LinkedIn profile and visibility with relevant keywords, highlighted projects and case studies.
-
-Personal Branding & Thought Leadership
-Teaching candidates how to showcase their expertise through LinkedIn articles, blogs, and industry discussions.
-
-Conducting Initial Mock Interviews
-Conducting initial mock interviews to evaluate candidates' technical skills.
-
-Interpersonal Skills
-Conducting tests and mock interviews to assess candidates' skills and personality.
-
-Advanced Mock Interviews
-Inviting candidates who passed prior stages for further mock interviews as per Job description provided for the role
-
-Job Interviews
-Referring to job interview opportunities through our onboarded companies and job portals
-
-Compensation Negotiations
-Receive expert guidance on negotiating compensation to match market rates
-
-
+Hurray!! You are ready for your new opportunities in real world.
 
 Program Structure
 Comprehensive Career Program
 Our 15-day Master Program combines essential skills training with practical experience to make you job-ready
 
-Module 1
-Personal Branding, Resume Building & Networking
-Create a compelling professional identity and network effectively
-
+1.	Module 1: Personal Branding, Resume Building & Networking(Create a compelling professional identity and network effectively)
 Key Focus Areas:
-Personal Branding & Resume Mastery
-LinkedIn Optimization & Networking
+⦁	Personal Branding & Resume Mastery
+⦁	LinkedIn Optimization & Networking
 
-Module 2
-Fundamentals & Business Communication
-Master professional communication and interview skills
-
+2. Module 2:Fundamentals & Business Communication(Master professional communication and interview skills)
 Key Focus Areas:
-Business Communication & Hiring Insights
-Module 3
-Job Specific Skills & AI Abilities
-Develop practical skills needed for today's workplace
+⦁	Business Communication & Hiring Insights
 
+3. Module 3: Job Specific Skills & AI Abilities(Develop practical skills needed for today's workplace)
 Key Focus Areas:
-Operational & Job-Specific Skills
-Client Communication
-Final Preparation & Job Readiness
+⦁	Operational & Job-Specific Skills
+⦁	Client Communication
+⦁	Final Preparation & Job Readiness
+
 Career Opportunities
-Business Development
-Customer Support Analyst
-Data Associate
-Data and Risk Management Analyst
-Finance Analyst
-HR Specialist
-Operations Executive
-Product Compliance Specialist
+⦁	Business Development
+⦁	Customer Support Analyst
+⦁	Data Associate
+⦁	Data and Risk Management Analyst
+⦁	Finance Analyst
+⦁	HR Specialist
+⦁	Operations Executive
+⦁	Product Compliance Specialist
+
+
+---------------------------------------------------------------------------------------------------
+What Our Students Say
+
+1.	Akshay Khare(DevOps Consultant TCS)
+“My journey with Eduwise has been truly life-changing. The mentors not only taught me with clarity but also guided me with constant support until I got placed. I’m deeply grateful to the entire Eduwise team for helping me achieve this milestone.”
+
+2. Kushal Sahu(Client Analyst Giva)
+“I never thought a short course could have such a big impact. Eduwise taught me the skills I wish college had. More importantly, they taught me how to use them.”
+
+3. Tathagata Bhattacharjee(Sr. Relationship Manager Assettrust Services Pvt Ltd)
+“When I joined Eduwise, I had zero confidence and no idea how to approach the job market. Now I walk into interviews with clarity, purpose, and skills that speak for me.”
+
+4. Varshitha BM(Senior assistant manager SOBHA
+“I used to feel invisible in interviews. After the program, I finally understood how to present my skills. I got hired, and now I feel like I finally belong somewhere.”
+
+5. Arvind Sharma(Cloud Infrastructure Engineer Kyndryl India)
+“It was a great journey with eduwise solutions, step by step they have guided me with training and doubt clearing session, and special thanks to placement team for supporting me for opportunities in the market... Highly recommended, the best platform value for money and time”
+
+6. Shraddha Dey Customer Support Saarthi IAS
+“As a fresh graduate, I was anxious about my career. Eduwise helped me build confidence, polish my resume, and create a strong LinkedIn profile. Their guidance landed me a remote job that fit perfectly. Thank you, Eduwise!”
+
+7. M Pavithra Key accounts manager Myntra
+“I applied to over 50 jobs with no response. After joining Eduwise, I fixed my resume, improved my communication, and cracked an interview within 5 weeks. It changed everything.”
+
+
+---------------------------------------------------------------------------------------------------
 
 Privacy Policy
 Your data privacy and security are our top priorities
 
 Last updated: January 15, 2025
 
-Overview
-Details
-Your Rights
 Our Commitment
 At Eduwise Solutions, we are committed to protecting your privacy through transparent data practices, robust security measures, and respectful information handling.
 
 Data We Collect
-Personal Details
-Contact Information
-Technical Usage Data
+⦁	Personal Details
+⦁	Contact Information
+⦁	Technical Usage Data
+
 Data Protection
-End-to-End Encryption
-Regular Security Audits
-Strict Access Controls
+⦁	End-to-End Encryption
+⦁	Regular Security Audits
+⦁	Strict Access Controls
+
+Your Privacy Rights
+Your Control, Your Data
+We believe in empowering you with complete control over your personal information.
+
+⦁	Access and review your personal information
+⦁	Request corrections to your data
+⦁	Request deletion of your data
+⦁	Object to specific data processing activities
+⦁	Request data portability
+
 Contact Our Privacy Team
 For any privacy-related inquiries or concerns, reach out to us:
-
 contact@eduwise.solutions
 
+------------------------------------------------------------------------------------
 
 Terms of Service
 Last updated: January 15, 2025
 
-Agreement to Terms
+1.	Agreement to Terms
 By accessing or using Eduwise Solutions services, you agree to be bound by these Terms of Service. If you disagree with any part of these terms, you may not access our services.
 
-User Accounts
+2. User Accounts
 When creating an account, you must:
 
-Provide accurate and complete information
-Maintain the security of your account
-Promptly update any changes to your information
-Accept responsibility for all activities under your account
-Course Policies
-Enrollment:
-Course access is granted after successful payment
-Enrollment is non-transferable
-Course materials are for personal use only
-Course Content:
-All materials are protected by copyright
-Sharing or redistributing content is prohibited
-Course content may be updated periodically
-Prohibited Activities
-Users are prohibited from:
+⦁	Provide accurate and complete information
+⦁	Maintain the security of your account
+⦁	Promptly update any changes to your information
+⦁	Accept responsibility for all activities under your account
 
-Sharing account credentials
-Copying or redistributing course materials
-Engaging in disruptive behavior
-Using services for illegal purposes
-Attempting to access unauthorized areas
-Intellectual Property
+3. Course Policies
+⦁	Enrollment:
+1.	Course access is granted after successful payment
+2.	Enrollment is non-transferable
+3.	Course materials are for personal use only
+
+⦁	Course Content:
+1.	All materials are protected by copyright
+2.	Sharing or redistributing content is prohibited
+3.	Course content may be updated periodically
+
+4. Prohibited Activities
+Users are prohibited from:
+⦁	Sharing account credentials
+⦁	Copying or redistributing course materials
+⦁	Engaging in disruptive behavior
+⦁	Using services for illegal purposes
+⦁	Attempting to access unauthorized areas
+
+5. Intellectual Property
 All content, including but not limited to courses, materials, logos, and trademarks, are the exclusive property of Eduwise Solutions. Users agree not to reproduce, distribute, or create derivative works without explicit permission.
 
-Termination
+6. Termination
 We reserve the right to terminate or suspend accounts for violations of these terms, inappropriate behavior, or at our discretion. Upon termination, your right to access our services will immediately cease.
 
+Contact Us
+For questions about these Terms of Service, please contact us at: contact@eduwise.solutions
 
+---------------------------------------------------------------------------------------------------
 
 Refund Policy
 Fair, Transparent, and Customer-Centric Approach
@@ -1376,19 +915,33 @@ Fair, Transparent, and Customer-Centric Approach
 Important Notice
 This policy is designed to ensure fairness for both participants and Eduwise Solutions, in full compliance with Indian laws.
 
-Course Refunds
-Webinar Policy
-Course Refund Guidelines
+1.	Course Refund Guidelines
 Refund Eligibility
-7-Day Window
-Refunds are available within the first 3 sessions (approximately 7 days).
+⦁	7-Day Window (Refunds are available within the first 3 sessions (approximately 7 days).
+⦁	Must attend and actively participate in all first 3 sessions
+⦁	Complete and submit all assignments during this period
+⦁	Provide a valid reason for the refund request
 
-Must attend and actively participate in all first 3 sessions
-Complete and submit all assignments during this period
-Provide a valid reason for the refund request
-Partial Refund Details
-Non-Refundable Scenarios
-Refund Processing Time
+2. Partial Refund Details
+Prorated Refund(Partial refunds calculated after deducting fees for initial sessions).
+⦁	Refund amount based on participation and resources used
+⦁	First 3 sessions fees will be deducted
+⦁	Remaining balance eligible for partial refund
+
+3. Non-Refundable Scenarios
+Refund Restrictions(Certain conditions void refund eligibility).
+⦁	Missing all 3 initial sessions
+⦁	Incomplete assignment submission
+⦁	Refund request after initial 3 sessions
+⦁	Invalid reason per review board
+
+4. Refund Processing Time
+30 Working Days(All approved refunds will be processed and credited within a specified timeframe).
+⦁	Refunds will be processed and credited within 30 working days from the date of approval
+⦁	Processing time may vary based on payment method used
+⦁	You will receive email confirmation once the refund is processed and credited
+
+
 Refund Processing Time
 All approved refunds will be processed and credited within 30 working days from the date of approval. You will receive a confirmation email once your refund has been processed.
 
@@ -1399,3 +952,104 @@ If a course is canceled or postponed, you'll receive a full refund or free trans
 Policy Updates
 We reserve the right to modify this policy. Continued service use indicates acceptance of changes.
 
+Webinar Refund Policy
+1.	No Refunds: Webinar purchases are non-refundable, regardless of attendance or satisfaction.
+2.	Recording Access: Missed live webinars may have recording access upon request, subject to availability.
+3.	Refund Processing Time: All approved refunds will be processed and credited within 30 working days from the date of approval. You will receive a confirmation email once your refund has been processed.
+
+Additional Terms
+Cancellation by Eduwise Solutions
+If a course is canceled or postponed, you'll receive a full refund or free transfer to another cohort.
+
+Policy Updates
+We reserve the right to modify this policy. Continued service use indicates acceptance of changes.
+
+Contact Our Support Team
+Questions about our refund policy? Reach out to us:contact@eduwise.solutions
+
+---------------------------------------------------------------------------
+Contact Information
+Email : contact@eduwise.solutions
+
+Phone +91 91487 74540
+
+Location :235, Binnamangala, 2nd Floor, 13th Cross Road, 2nd Stage, Indira Nagar, Bengaluru - 560038
+
+Operating Hours
+Monday - Friday: 9:00 AM - 6:00 PM
+Saturday: 10:00 AM - 4:00 PM
+Sunday Closed
+
+-----------------------------------------------------------------------------
+
+How can we help you?
+Find answers to all your questions about Eduwise Solutions
+
+1. About Eduwise Solutions
+
+⦁	What is Eduwise Solutions?
+Eduwise Solutions is a career guidance and student placement platform that helps learners choose the right skill-based programs, job-guaranteed training, and professional courses. We specialize in supporting final-year students and fresh graduates in securing entry-level jobs across top companies.
+
+⦁	What makes Eduwise Solutions different from others?
+We go beyond selling courses. We offer: personalized counseling, handpicked course guidance, exclusive course discounts, and job placement support with real MNC connections.
+⦁	Where is Eduwise Solutions based, and do you support students from across India?
+Eduwise Solutions is an India-based company. We serve students and job seekers from all over the country, regardless of your city or state.
+
+2. Program Structure & Delivery
+⦁	How are the classes conducted?
+All sessions are conducted live by industry experts. You will also have access to recorded sessions, hands-on live projects, and weekly mock interviews for consistent progress.
+
+⦁	Can I continue my current job or studies while doing this course?
+Yes! Our sessions are flexible and come with recordings. You can learn at your own pace and balance your current work or academic schedule.
+ 
+⦁	What is the main mode of communication during the program?
+We communicate through: WhatsApp, Email, Video call sessions, and regular follow-up calls by our counselor team.
+
+3. Support & Career Services
+⦁	Do you provide one-on-one counseling?
+Yes! Our career counselors offer personalized guidance to help you identify the right course or training program aligned with your goals.
+
+⦁	Do you help with resume and LinkedIn optimization?
+Yes, we provide: ATS-optimized resume building, keyword enhancement for visibility, LinkedIn profile makeover, and portfolio & cover letter support.
+
+⦁	What kind of support is offered during and after the program?
+We provide: live instructor-led sessions, real-time projects, one-on-one doubt-clearing sessions, interview prep and mock rounds, and dedicated placement support.
+
+⦁	How long will it take to get placed, and how long does placement support last?
+Most learners are placed within 30 to 60 days of completing the program. Placement assistance continues for up to 6 months. If you're not placed within 6 months, you're eligible for a 100% refund, subject to our Terms & Conditions.
+
+4. Job-Guaranteed Program
+
+⦁	What is the 15-Day 100% Job-Guaranteed Program?
+Our 15-day flagship training program is designed to make you job-ready. It includes training in resume building, business communication, LinkedIn optimization, Excel, interview preparation, hiring techniques, and job-specific skills.
+
+⦁	What kind of job roles can I expect after completing the program?
+Upon successful completion, learners can apply for roles such as: Business Development Executive, Customer Support Analyst, HR Executive, Operations Associate, Finance Executive, Data Associate, and Process Specialist.
+
+⦁	Do you really guarantee a job?
+Yes. If you complete the 15-day program and meet the eligibility criteria, we guarantee interview opportunities and offer full placement support till 4 months or else your money refund.
+
+⦁	Who is eligible for the Job-Guaranteed Program?
+This program is ideal for: final-year students, fresh graduates, job seekers seeking a career restart, and individuals looking to switch into entry-level corporate roles.
+
+⦁	Can I apply even if I have no prior experience or technical background?
+Absolutely. Our programs are designed for beginners and are suitable for anyone looking to build a strong foundation for an entry-level job.
+
+
+5. Payments & Fees
+
+⦁	How much does the program cost?
+We offer two simple payment options: ₹5,000 upfront & ₹20,000 Pay After Placement (zero risk if you're not placed).
+
+⦁	Is your counseling really free?
+Yes. All career counseling sessions and guidance are completely free of charge. You only pay if you choose to enroll in a program.
+
+⦁	What if I don't get placed even after completing the course?
+If you actively participate in the program, follow all guidelines, and still don't get placed within 6 months, we provide a 100% refund as per our refund policy outlined in the Terms & Conditions.
+
+6. Industries & Placement
+⦁	What industries do your hiring partners come from?
+Our hiring partners span multiple industries, including: Information Technology (IT), E-commerce, Customer Service, Finance, Business Development, Human Resources & Operations.
+
+⦁	How do I enroll in a program?
+Simply visit www.Eduwise Solutions, fill out the contact form, or reach out via WhatsApp. Our team will guide you through the next steps.

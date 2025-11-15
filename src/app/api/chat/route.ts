@@ -28,6 +28,7 @@ interface ChatResponse {
   answer: string;
   pdf?: string;
   needsAdvisor?: boolean;
+  whatsappLink?: string;
 }
 
 interface SimilarityResult {
@@ -42,6 +43,32 @@ interface MessageContent {
 }
 
 type MessageContentType = string | MessageContent | MessageContent[];
+
+function generateWhatsAppLink(
+  question: string,
+  userData?: { name?: string; phone?: string; email?: string }
+): string {
+  const phoneNumber = process.env.WHATSAPP_SUPPORT_NUMBER;
+
+  let message = `Hi Eduwise Team! 👋\n\n`;
+
+  if (userData?.name) {
+    message += `My name is ${userData.name}.\n`;
+  }
+
+  if (userData?.phone) {
+    message += `Phone: ${userData.phone}\n`;
+  }
+
+  if (userData?.email) {
+    message += `Email: ${userData.email}\n`;
+  }
+
+  message += `\nI have a question:\n${question}\n\nCould you please help me with this?`;
+
+  const encodedMessage = encodeURIComponent(message);
+  return `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+}
 
 class VectorStoreManager {
   private static instance: VectorStoreManager;
@@ -85,8 +112,8 @@ class VectorStoreManager {
     const text = await this.loadTextFromFile(filePath);
 
     const splitter = new RecursiveCharacterTextSplitter({
-      chunkSize: 1000,
-      chunkOverlap: 100,
+      chunkSize: 1500,
+      chunkOverlap: 200,
     });
 
     const chunks = await splitter.splitText(text);
@@ -115,7 +142,7 @@ class VectorStoreManager {
 
   async searchRelevantDocuments(
     query: string,
-    k: number = 3
+    k: number = 5
   ): Promise<string[]> {
     if (!this.vectorStore || !this.embeddings) {
       throw new Error("Vector store not initialized");
@@ -147,7 +174,7 @@ class VectorStoreManager {
 
 class KnowledgeBaseService {
   private static readonly POSSIBLE_FILE_PATHS = [
-    path.join(process.cwd(), "data", "website_data.txt"),
+    path.join(process.cwd(), "data", "faq.txt"),
     path.join(process.cwd(), "data", "faq.md"),
     path.join(process.cwd(), "src", "data", "faq.txt"),
     path.join(process.cwd(), "src", "data", "faq.md"),
@@ -203,7 +230,7 @@ class KnowledgeBaseService {
     await vectorStoreManager.loadKnowledgeBase(knowledgeBasePath);
     const relevantDocs = await vectorStoreManager.searchRelevantDocuments(
       question,
-      3
+      5
     );
 
     if (!relevantDocs || relevantDocs.length === 0) {
@@ -232,10 +259,13 @@ CONTEXT (from our FAQ):
 ${context}
 
 INSTRUCTIONS:
-1. Answer the user's question using ONLY the information from the context above
-2. Be friendly, clear, and concise
-3. If the answer is not in the context, say: "I don't have that information in my knowledge base, but I'd be happy to connect you with an advisor who can help."
-4. Keep your answer under 150 words
+1. Answer the user's question using the information from the context above
+2. If you find pricing or fee information in the context, present it clearly with all details
+3. Be friendly, clear, and concise
+4. If the exact answer is not in the context but related information exists, provide what you can find
+5. If NO relevant information exists in the context, respond EXACTLY with: "NEED_ADVISOR"
+6. For fee-related questions, include the full pricing structure if available in context
+7. Keep your answer under 50 words unless providing detailed pricing
 
 USER QUESTION: ${question}
 
@@ -250,7 +280,6 @@ YOUR ANSWER:`;
       throw new Error("Empty response from Gemini");
     }
 
-    // Fix: pass the correct type to parseMessageContent
     const content = typeof result.content === "string" ? result.content : "";
     const answer = this.parseMessageContent(content);
 
@@ -464,19 +493,43 @@ async function handleChatRequest(body: ChatRequest): Promise<ChatResponse> {
   }
 
   let answer: string | null = null;
+  let needsAdvisor = false;
+  let whatsappLink: string | undefined;
   const pdf: string = "/data/faq.pdf";
 
   if (question) {
     try {
-      answer = await KnowledgeBaseService.generateAnswer(question);
+      const generatedAnswer = await KnowledgeBaseService.generateAnswer(
+        question
+      );
+
+      if (
+        generatedAnswer === "NEED_ADVISOR" ||
+        generatedAnswer.trim() === "NEED_ADVISOR" ||
+        generatedAnswer.toLowerCase().includes("i don't have that information")
+      ) {
+        needsAdvisor = true;
+        whatsappLink = generateWhatsAppLink(question, userData);
+
+        answer =
+          "I don't have that specific information in my knowledge base right now. But don't worry! Our expert advisors are here to help you. Click the WhatsApp button below to chat with us directly and get instant assistance! 💬";
+
+        console.log(`🔗 WhatsApp link generated for unanswered question`);
+      } else {
+        answer = generatedAnswer;
+      }
     } catch (error) {
       if (error instanceof Error) {
         console.error("Processing error:", error.message);
       } else {
         console.error("Processing error:", String(error));
       }
+
+      needsAdvisor = true;
+      whatsappLink = generateWhatsAppLink(question, userData);
+
       answer =
-        "I apologize, but I'm having trouble accessing information right now. Please try asking your question again, or I can connect you with an advisor for immediate assistance.";
+        "I apologize, but I'm having trouble accessing information right now. Please connect with our advisors on WhatsApp for immediate assistance!";
     }
   }
 
@@ -493,6 +546,7 @@ async function handleChatRequest(body: ChatRequest): Promise<ChatResponse> {
     answer: answer || "I'm ready to help! What would you like to know?",
     pdf,
     needsAdvisor: !answer,
+    whatsappLink,
   };
 }
 

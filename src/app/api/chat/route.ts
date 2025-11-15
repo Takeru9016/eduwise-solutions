@@ -493,7 +493,6 @@ async function handleChatRequest(body: ChatRequest): Promise<ChatResponse> {
   }
 
   let answer: string | null = null;
-  let needsAdvisor = false;
   let whatsappLink: string | undefined;
   const pdf: string = "/data/faq.pdf";
 
@@ -508,7 +507,6 @@ async function handleChatRequest(body: ChatRequest): Promise<ChatResponse> {
         generatedAnswer.trim() === "NEED_ADVISOR" ||
         generatedAnswer.toLowerCase().includes("i don't have that information")
       ) {
-        needsAdvisor = true;
         whatsappLink = generateWhatsAppLink(question, userData);
 
         answer =
@@ -525,7 +523,6 @@ async function handleChatRequest(body: ChatRequest): Promise<ChatResponse> {
         console.error("Processing error:", String(error));
       }
 
-      needsAdvisor = true;
       whatsappLink = generateWhatsAppLink(question, userData);
 
       answer =
@@ -545,7 +542,7 @@ async function handleChatRequest(body: ChatRequest): Promise<ChatResponse> {
   return {
     answer: answer || "I'm ready to help! What would you like to know?",
     pdf,
-    needsAdvisor: !answer,
+    needsAdvisor: !!whatsappLink,
     whatsappLink,
   };
 }

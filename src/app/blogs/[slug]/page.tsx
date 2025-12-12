@@ -6,6 +6,7 @@ import { ArrowLeft } from "lucide-react";
 
 import { Navbar, Footer } from "@/components";
 import { Badge } from "@/components/ui/badge";
+import { portableTextComponents } from "@/components/portable-text-components";
 import { client } from "@/sanity/lib/client";
 import { POST_BY_SLUG_QUERY } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
@@ -27,7 +28,11 @@ type Post = {
 
 export const revalidate = 60;
 
-export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function BlogPostPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const post = await client.fetch<Post>(POST_BY_SLUG_QUERY, {
     slug,
@@ -82,7 +87,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           )}
 
           <div className="prose prose-slate max-w-none mt-10">
-            <PortableText value={(post.body ?? ([] as TypedObject[]))} />
+            <PortableText
+              value={post.body ?? ([] as TypedObject[])}
+              components={portableTextComponents}
+            />
           </div>
         </article>
       </main>

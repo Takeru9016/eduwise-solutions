@@ -5,6 +5,7 @@ export const postType = defineType({
   name: 'post',
   title: 'Post',
   type: 'document',
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   icon: DocumentTextIcon as any,
   fields: [
     defineField({

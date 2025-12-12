@@ -3,6 +3,11 @@ import Link from "next/link";
 import { PortableTextComponents } from "next-sanity";
 import { urlFor } from "@/sanity/lib/image";
 
+type TableRow = {
+  cells?: string[];
+  _key?: string;
+};
+
 export const portableTextComponents: PortableTextComponents = {
   block: {
     // Headings
@@ -134,7 +139,7 @@ export const portableTextComponents: PortableTextComponents = {
         <div className="my-8 overflow-x-auto">
           <table className="min-w-full border-collapse border border-slate-300">
             <tbody>
-              {value.rows.map((row: any, rowIndex: number) => (
+              {value.rows.map((row: TableRow, rowIndex: number) => (
                 <tr
                   key={rowIndex}
                   className={rowIndex % 2 === 0 ? "bg-white" : "bg-slate-50"}

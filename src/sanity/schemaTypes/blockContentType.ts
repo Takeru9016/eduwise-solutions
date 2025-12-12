@@ -68,6 +68,7 @@ export const blockContentType = defineType({
     // as a block type.
     defineArrayMember({
       type: 'image',
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       icon: ImageIcon as any,
       options: { hotspot: true },
       fields: [

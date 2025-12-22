@@ -3,10 +3,10 @@ import Image from "next/image";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 import { Navbar, Footer } from "@/components";
-import { client } from "@/sanity/lib/client";
-import { POSTS_QUERY } from "@/sanity/lib/queries";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { client } from "@/sanity/lib/client";
+import { POSTS_QUERY } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 
 type Category = { _id: string; title: string; slug?: { current: string } };
@@ -22,7 +22,7 @@ type Post = {
   author?: Author;
 };
 
-export const revalidate = 60;
+export const revalidate = 10; // Revalidate every 10 seconds
 
 export default async function BlogsPage() {
   const posts = await client.fetch<Post[]>(POSTS_QUERY);
@@ -33,8 +33,12 @@ export default async function BlogsPage() {
       <main className="min-h-screen">
         <section className="container mx-auto px-4 py-12">
           <div className="mb-10">
-            <h1 className="text-3xl md:text-4xl font-bold text-slate-900">Blogs</h1>
-            <p className="text-slate-600 mt-2">Latest updates, guides and insights.</p>
+            <h1 className="text-3xl md:text-4xl font-bold text-slate-900">
+              Blogs
+            </h1>
+            <p className="text-slate-600 mt-2">
+              Latest updates, guides and insights.
+            </p>
           </div>
 
           {posts.length === 0 ? (
@@ -47,10 +51,10 @@ export default async function BlogsPage() {
                     {post.mainImage && (
                       <div className="relative w-full aspect-[16/10] overflow-hidden rounded-t-lg">
                         <Image
-                          src={urlFor(post.mainImage).width(800).height(500).url()}
+                          src={urlFor(post.mainImage).url()}
                           alt={post.mainImage.alt || post.title}
                           fill
-                          className="object-cover"
+                          className="object-contain"
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         />
                       </div>
@@ -83,5 +87,3 @@ export default async function BlogsPage() {
     </>
   );
 }
-
-

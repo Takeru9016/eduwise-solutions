@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { PortableTextComponents } from "next-sanity";
 import { urlFor } from "@/sanity/lib/image";
+import { Flowchart } from "./flowchart";
 
 type TableRow = {
   cells?: string[];
@@ -111,19 +112,31 @@ export const portableTextComponents: PortableTextComponents = {
     image: ({ value }) => {
       if (!value?.asset) return null;
 
+      // Get alignment from value (defaults to center)
+      const alignment =
+        (value.alignment as "left" | "center" | "right") || "center";
+
+      // Map alignment to Tailwind classes
+      const alignmentClasses: Record<string, string> = {
+        left: "mr-auto",
+        center: "mx-auto",
+        right: "ml-auto",
+      };
+
       return (
-        <figure className="my-8">
-          <div className="relative w-full aspect-video rounded-lg overflow-hidden bg-slate-100">
+        <figure className={`my-8 ${alignmentClasses[alignment]}`}>
+          <div className="relative w-full rounded-lg overflow-hidden">
             <Image
-              src={urlFor(value).width(1200).height(675).url()}
+              src={urlFor(value).url()}
               alt={value.alt || "Blog image"}
-              fill
-              className="object-cover"
+              width={800}
+              height={600}
+              className="w-full h-auto"
               sizes="(max-width: 768px) 100vw, 800px"
             />
           </div>
           {value.alt && (
-            <figcaption className="text-sm text-slate-500 text-center mt-3 italic">
+            <figcaption className="text-sm text-slate-600 text-center mt-2 italic">
               {value.alt}
             </figcaption>
           )}
@@ -157,6 +170,19 @@ export const portableTextComponents: PortableTextComponents = {
             </tbody>
           </table>
         </div>
+      );
+    },
+
+    // Flowchart
+    flowchart: ({ value }) => {
+      if (!value?.steps || !Array.isArray(value.steps)) return null;
+
+      return (
+        <Flowchart
+          title={value.title}
+          steps={value.steps}
+          direction={value.direction || "vertical"}
+        />
       );
     },
   },

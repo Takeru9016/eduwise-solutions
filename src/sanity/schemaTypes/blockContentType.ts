@@ -84,5 +84,10 @@ export const blockContentType = defineType({
       type: 'table',
       title: 'Table',
     }),
+    // Flowchart support
+    defineArrayMember({
+      type: 'flowchart',
+      title: 'Flowchart',
+    }),
   ],
 })

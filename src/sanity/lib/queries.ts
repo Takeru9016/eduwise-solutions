@@ -23,4 +23,10 @@ export const POST_BY_SLUG_QUERY = `
   }
 `;
 
-
+export const CATEGORIES_QUERY = `
+  *[_type == "category"]|order(title asc){
+    _id,
+    title,
+    slug
+  }
+`;

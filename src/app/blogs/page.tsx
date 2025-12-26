@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
@@ -6,7 +9,7 @@ import { Navbar, Footer } from "@/components";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { client } from "@/sanity/lib/client";
-import { POSTS_QUERY } from "@/sanity/lib/queries";
+import { POSTS_QUERY, CATEGORIES_QUERY } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 
 type Category = { _id: string; title: string; slug?: { current: string } };
@@ -22,10 +25,44 @@ type Post = {
   author?: Author;
 };
 
-export const revalidate = 10; // Revalidate every 10 seconds
+export default function BlogsPage() {
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [isLoading, setIsLoading] = useState(true);
 
-export default async function BlogsPage() {
-  const posts = await client.fetch<Post[]>(POSTS_QUERY);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const [postsData, categoriesData] = await Promise.all([
+          client.fetch<Post[]>(POSTS_QUERY),
+          client.fetch<Category[]>(CATEGORIES_QUERY),
+        ]);
+        setPosts(postsData);
+        setCategories(categoriesData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    // Initial fetch
+    fetchData();
+
+    // Set up polling to refetch every 10 seconds (matching previous revalidate setting)
+    const interval = setInterval(fetchData, 10000);
+
+    // Cleanup interval on unmount
+    return () => clearInterval(interval);
+  }, []);
+
+  const filteredPosts =
+    selectedCategory === "all"
+      ? posts
+      : posts.filter((post) =>
+          post.categories?.some((cat) => cat._id === selectedCategory)
+        );
 
   return (
     <>
@@ -41,11 +78,45 @@ export default async function BlogsPage() {
             </p>
           </div>
 
-          {posts.length === 0 ? (
-            <p className="text-slate-600">No posts yet.</p>
+          {/* Category Tabs */}
+          <div className="mb-8 overflow-x-auto">
+            <div className="flex gap-2 min-w-max pb-2">
+              <button
+                onClick={() => setSelectedCategory("all")}
+                className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                  selectedCategory === "all"
+                    ? "bg-primary-75 text-white shadow-md"
+                    : "bg-primary-99 text-primary-75 hover:bg-primary-95"
+                }`}
+              >
+                All
+              </button>
+              {categories.map((category) => (
+                <button
+                  key={category._id}
+                  onClick={() => setSelectedCategory(category._id)}
+                  className={`px-4 py-2 rounded-lg font-medium transition-all whitespace-nowrap ${
+                    selectedCategory === category._id
+                      ? "bg-primary-75 text-white shadow-md"
+                      : "bg-primary-99 text-primary-75 hover:bg-primary-95"
+                  }`}
+                >
+                  {category.title}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {isLoading ? (
+            <p className="text-slate-600">Loading posts...</p>
+          ) : filteredPosts.length === 0 ? (
+            <p className="text-slate-600">
+              No posts found
+              {selectedCategory !== "all" && " in this category"}.
+            </p>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {posts.map((post) => (
+              {filteredPosts.map((post) => (
                 <Link key={post._id} href={`/blogs/${post.slug.current}`}>
                   <Card className="h-full hover:shadow-md transition-shadow">
                     {post.mainImage && (

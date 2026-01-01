@@ -2,6 +2,8 @@
 import { NextResponse } from "next/server";
 import { google } from "googleapis";
 
+import { createLeadFromContactForm } from "@/lib/odoo";
+
 // Utility function to validate environment variables
 function validateEnvVariables() {
   const requiredVars = {
@@ -148,6 +150,30 @@ export async function POST(req: Request) {
       });
 
       console.log("Successfully appended data to sheet");
+
+      // Create lead in Odoo CRM (non-blocking - errors won't fail the request)
+      try {
+        const odooResult = await createLeadFromContactForm({
+          firstName: body.firstName,
+          lastName: body.lastName,
+          email: body.email,
+          mobile: body.mobile,
+          subject: body.subject,
+          message: body.message,
+        });
+
+        if (odooResult.success) {
+          console.log("Odoo lead created successfully, ID:", odooResult.leadId);
+        } else {
+          console.warn(
+            "Odoo lead creation skipped or failed:",
+            odooResult.error
+          );
+        }
+      } catch (odooError) {
+        console.error("Odoo integration error (non-fatal):", odooError);
+      }
+
       return NextResponse.json({
         success: true,
         message: "Form submission saved successfully",

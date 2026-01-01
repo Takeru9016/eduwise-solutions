@@ -2,6 +2,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
+import { createLeadFromBookingForm } from "@/lib/odoo";
+
 // Initialize Resend with your API key
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -148,6 +150,27 @@ export async function POST(request: NextRequest) {
       Eduwise Solutions Team</p>
       `,
     });
+
+    // Create lead in Odoo CRM (non-blocking - errors won't fail the request)
+    try {
+      const odooResult = await createLeadFromBookingForm({
+        fullName,
+        email,
+        phoneNumber,
+        course,
+        sessionDate: formattedDate,
+        sessionTime,
+        message,
+      });
+
+      if (odooResult.success) {
+        console.log("Odoo lead created for booking, ID:", odooResult.leadId);
+      } else {
+        console.warn("Odoo lead creation skipped or failed:", odooResult.error);
+      }
+    } catch (odooError) {
+      console.error("Odoo integration error (non-fatal):", odooError);
+    }
 
     return NextResponse.json(
       {

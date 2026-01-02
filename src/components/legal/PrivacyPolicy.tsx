@@ -59,7 +59,7 @@ const InfoSection = ({ title, items }: { title: string; items: string[] }) => (
 );
 
 export default function PrivacyPolicyPage() {
-  const lastUpdated = "January 15, 2025";
+  const lastUpdated = "January 1, 2026";
 
   const tabContents: TabContent[] = [
     { value: "overview", label: "Overview" },

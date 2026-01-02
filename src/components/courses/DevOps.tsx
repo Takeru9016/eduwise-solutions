@@ -252,7 +252,7 @@ export default function DevOpsPage() {
                     </div>
                     <div>
                       <p className="font-vietnam font-bold text-grey-15 text-sm sm:text-base">
-                        Batch 2025
+                        Batch 2026
                       </p>
                       <p className="text-xs sm:text-sm text-grey-35">
                         Admissions Open
@@ -273,7 +273,7 @@ export default function DevOpsPage() {
                     </div>
                     <div className="text-center">
                       <p className="font-vietnam font-bold text-grey-15 text-sm">
-                        Batch 2025 - Admissions Open
+                        Batch 2026 - Admissions Open
                       </p>
                       <div className="flex items-center justify-center gap-1 text-xs text-grey-35 mt-1">
                         <TrendingUp className="w-3 h-3 text-green-500" />

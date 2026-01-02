@@ -170,7 +170,7 @@ export default function FullStackPage() {
                 Full Stack Program
               </div>
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-vietnam font-bold text-grey-15 mb-6 leading-tight">
-                Full Stack Development Course - Batch 2025
+                Full Stack Development Course - Batch 2026
               </h1>
               <p className="text-xl text-primary-75 font-semibold mb-6">
                 Build Modern Web Apps
@@ -199,7 +199,7 @@ export default function FullStackPage() {
                     </div>
                     <div>
                       <p className="font-vietnam font-bold text-grey-15">
-                        Batch 2025
+                        Batch 2026
                       </p>
                       <p className="text-sm text-grey-35">Admissions Open</p>
                     </div>

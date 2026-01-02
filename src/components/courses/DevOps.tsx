@@ -176,7 +176,7 @@ export default function DevOpsPage() {
       <PaymentModal
         isOpen={isPaymentModalOpen}
         onClose={closePaymentModal}
-        amount={10000}
+        amount={15000}
         programName="DevOps & Cloud Computing Program"
       />
 
@@ -599,13 +599,13 @@ export default function DevOpsPage() {
                       One-time Payment
                     </p>
                     <div className="flex flex-col items-center justify-center gap-4 mb-6">
-                      <p className="text-6xl font-vietnam font-bold">₹10,000</p>
+                      <p className="text-6xl font-vietnam font-bold">₹15,000</p>
                       <div className="text-left">
                         <p className="text-white/70 line-through text-2xl">
-                          ₹25,000
+                          ₹30,000
                         </p>
                         <p className="text-primary-99 font-bold text-2xl">
-                          60% OFF
+                          50% OFF
                         </p>
                       </div>
                     </div>

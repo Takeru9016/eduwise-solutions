@@ -523,7 +523,7 @@ export default function DevOpsPage() {
       <DevOpsToolsSection />
 
       {/* Comparison Table Section */}
-      <DevOpsComparisonTable />
+      {/* <DevOpsComparisonTable /> */}
 
       {/* Career Opportunities & Pricing Section */}
       <section className="py-20 bg-gradient-to-br from-slate-50 via-white to-blue-50 relative overflow-hidden">

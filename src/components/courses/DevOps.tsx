@@ -33,6 +33,7 @@ import DevOpsToolsSection from "../common/DevOpsTools";
 import DevOpsBenefits from "./DevOpsBenefits";
 // import DevOpsComparisonTable from "./DevOpsComparisonTable";
 import DevOpsCurriculum from "./DevOps_Curriculum";
+import PlacementSection from "./PlacementSection";
 
 const stats = [
   { icon: Users, value: "600+", label: "Students Trained" },
@@ -521,6 +522,9 @@ export default function DevOpsPage() {
 
       {/* Tools & Platforms Section */}
       <DevOpsToolsSection />
+
+      {/* Placement Section */}
+      <PlacementSection categorySlug="devops" />
 
       {/* Comparison Table Section */}
       {/* <DevOpsComparisonTable /> */}

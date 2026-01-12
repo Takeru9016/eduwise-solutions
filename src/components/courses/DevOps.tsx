@@ -31,7 +31,7 @@ import PaymentStatusModal from "../payment/PaymentStatusModal";
 import PaymentModal from "../payment/PaymentModal";
 import DevOpsToolsSection from "../common/DevOpsTools";
 import DevOpsBenefits from "./DevOpsBenefits";
-import DevOpsComparisonTable from "./DevOpsComparisonTable";
+// import DevOpsComparisonTable from "./DevOpsComparisonTable";
 import DevOpsCurriculum from "./DevOps_Curriculum";
 
 const stats = [

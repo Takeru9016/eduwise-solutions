@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ArrowRight, Briefcase, User, Clock, Loader2 } from "lucide-react";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image"; // Assuming this is where it is
@@ -10,10 +11,10 @@ import { urlFor } from "@/sanity/lib/image"; // Assuming this is where it is
 interface PlacedStudent {
   _id: string;
   name: string;
-  image?: any;
+  image?: SanityImageSource;
   previousRole?: string;
   newRole: string;
-  companyLogo: any;
+  companyLogo: SanityImageSource;
   placedAt?: string;
 }
 

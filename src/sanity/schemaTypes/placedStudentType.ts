@@ -23,10 +23,24 @@ export const placedStudentType = defineType({
       },
     }),
     defineField({
+      name: 'experience',
+      title: 'Years of Experience',
+      type: 'string',
+      description: 'e.g., "5 Years of Experience"',
+    }),
+    defineField({
       name: 'previousRole',
       title: 'Previous Role',
       type: 'string',
       // validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'previousCompanyLogo',
+      title: 'Previous Company Logo',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
     }),
     defineField({
         name: 'newRole',
@@ -36,7 +50,7 @@ export const placedStudentType = defineType({
     }),
     defineField({
       name: 'companyLogo',
-      title: 'Company Logo',
+      title: 'New Company Logo',
       type: 'image',
       options: {
         hotspot: true,

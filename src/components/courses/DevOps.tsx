@@ -36,18 +36,18 @@ import DevOpsCurriculum from "./DevOps_Curriculum";
 import PlacementSection from "./PlacementSection";
 
 const stats = [
-  { icon: Users, value: "600+", label: "Students Trained" },
+  { icon: Users, value: "2000+", label: "Students Trained" },
   { icon: Clock, value: "3.5", label: "Months Program" },
   { icon: Target, value: "25+", label: "Industry Projects" },
-  { icon: Award, value: "100%", label: "Placement Support" },
+  { icon: Award, value: "100%", label: "Placement Assurance" },
 ];
 
 const features = [
   {
     icon: Sparkles,
-    title: "100% Job Assistance",
+    title: "100% Job Assurance",
     description:
-      "Comprehensive placement support with resume building and interview preparation",
+      "Comprehensive Placement Assurance with resume building and interview preparation",
   },
   {
     icon: Laptop,
@@ -206,7 +206,7 @@ export default function DevOpsPage() {
               </h1>
 
               <p className="text-lg sm:text-xl lg:text-2xl text-primary-75 font-semibold mb-4 sm:mb-6 px-2 sm:px-0">
-                Become a DevOps Engineer with 100% Placement Support
+                Become a DevOps Engineer with 100% Placement Assurance
               </p>
 
               <p className="text-grey-35 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8 max-w-2xl mx-auto lg:mx-0 px-4 sm:px-0">
@@ -262,7 +262,7 @@ export default function DevOpsPage() {
                   </div>
                   <div className="flex items-center gap-2 text-xs sm:text-sm text-grey-35">
                     <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 text-green-500" />
-                    <span>600+ Students Enrolled</span>
+                    <span>2000+ Students Enrolled</span>
                   </div>
                 </div>
 
@@ -278,7 +278,7 @@ export default function DevOpsPage() {
                       </p>
                       <div className="flex items-center justify-center gap-1 text-xs text-grey-35 mt-1">
                         <TrendingUp className="w-3 h-3 text-green-500" />
-                        <span>600+ Students Enrolled</span>
+                        <span>2000+ Students Enrolled</span>
                       </div>
                     </div>
                   </div>

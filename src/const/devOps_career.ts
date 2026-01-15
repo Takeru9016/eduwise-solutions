@@ -102,7 +102,7 @@ export interface CareerTrackItem {
     },
     {
       id: 7,
-      title: 'Placement Assistance',
+      title: 'Placement Assurance',
       description: 'Dedicated support to help you land your dream job',
       details: [
         'Direct Company Referrals',

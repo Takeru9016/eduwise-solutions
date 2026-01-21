@@ -24,6 +24,11 @@ const nextConfig: NextConfig = {
         hostname: "d1qnndbrfkpp2h.cloudfront.net",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "upload.wikimedia.org",
+        pathname: "/**",
+      },
     ],
   },
 };

@@ -34,6 +34,7 @@ import DevOpsBenefits from "./DevOpsBenefits";
 // import DevOpsComparisonTable from "./DevOpsComparisonTable";
 import DevOpsCurriculum from "./DevOps_Curriculum";
 import PlacementSection from "./PlacementSection";
+import GoogleReviews from "../common/GoogleReviews";
 
 const stats = [
   { icon: Users, value: "2000+", label: "Students Trained" },
@@ -525,6 +526,9 @@ export default function DevOpsPage() {
 
       {/* Placement Section */}
       <PlacementSection categorySlug="devops" />
+
+      {/* Google Reviews Section */}
+      <GoogleReviews categorySlug="devops" />
 
       {/* Comparison Table Section */}
       {/* <DevOpsComparisonTable /> */}

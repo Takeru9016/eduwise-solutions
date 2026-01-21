@@ -38,8 +38,8 @@ interface ChatWidgetProps {
 
 const CONSTANTS = {
   USER_AVATAR: "/user-logo.png",
-  BOT_AVATAR: "/logo.png",
-  NOTIFICATION_SOUND: "/notification.wav",
+  BOT_AVATAR: "/home/logo.png",
+  NOTIFICATION_SOUND: "/home/notification.wav",
   BOT_NAME: "Eduwise Solutions",
   SESSION_STORAGE_KEY: "chat_session_id",
   AUTO_OPEN_DELAY: 2000,
@@ -91,7 +91,7 @@ const createMessage = (
   sender: "user" | "bot",
   text: string,
   pdf?: string,
-  whatsappLink?: string
+  whatsappLink?: string,
 ): Message => ({
   id: `${Date.now()}-${Math.random()}`,
   sender,
@@ -191,7 +191,7 @@ const MessageBubble = ({
     <div
       className={cn(
         "flex gap-2 animate-in fade-in slide-in-from-bottom-2 duration-300",
-        isBot ? "justify-start items-start" : "justify-end items-start"
+        isBot ? "justify-start items-start" : "justify-end items-start",
       )}
     >
       {isBot && (
@@ -207,16 +207,16 @@ const MessageBubble = ({
       <div
         className={cn(
           "max-w-[75%] rounded-2xl px-4 py-2.5 shadow-sm",
-          isBot
-            ? "bg-white border border-grey-70 text-grey-10"
-            : "bg-gradient-to-r from-primary-75 to-primary-70 text-white"
+          isBot ?
+            "bg-white border border-grey-70 text-grey-10"
+          : "bg-gradient-to-r from-primary-75 to-primary-70 text-white",
         )}
       >
         <div className="flex items-center gap-2 mb-1">
           <span
             className={cn(
               "text-xs font-semibold",
-              isBot ? "text-primary-70" : "text-white/90"
+              isBot ? "text-primary-70" : "text-white/90",
             )}
           >
             {isBot ? botName : "You"}
@@ -256,7 +256,7 @@ const MessageBubble = ({
         <time
           className={cn(
             "text-[10px] mt-1 block",
-            isBot ? "text-grey-60" : "text-white/70"
+            isBot ? "text-grey-60" : "text-white/70",
           )}
         >
           {formatTimestamp(message.timestamp)}
@@ -345,7 +345,7 @@ const ChatInput = ({
             "flex-1 px-3 py-2.5 rounded-lg border border-grey-70",
             "focus:ring-2 focus:ring-primary-75 focus:border-transparent",
             "focus:outline-none text-sm text-grey-10 placeholder-grey-60",
-            "transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            "transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed",
           )}
         />
         <Button
@@ -355,7 +355,7 @@ const ChatInput = ({
           className={cn(
             "p-2.5 rounded-lg bg-gradient-to-r from-primary-75 to-primary-70",
             "text-white hover:shadow-md transition-all duration-200",
-            "disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none"
+            "disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none",
           )}
           aria-label="Send message"
         >
@@ -380,7 +380,7 @@ const TeaserTooltip = ({
       "fixed bottom-24 right-6 w-72 z-40",
       "bg-white shadow-xl rounded-2xl border border-grey-70",
       "animate-in slide-in-from-bottom-4 duration-300",
-      "overflow-hidden"
+      "overflow-hidden",
     )}
   >
     <div className="p-4 flex gap-3 items-start">
@@ -466,12 +466,12 @@ export default function ChatWidget({
         throw error;
       }
     },
-    [sessionId]
+    [sessionId],
   );
 
   const sendQuestion = useCallback(
     async (
-      question: string
+      question: string,
     ): Promise<{
       answer: string;
       pdf?: string;
@@ -501,7 +501,7 @@ export default function ChatWidget({
         throw error;
       }
     },
-    [sessionId, userData]
+    [sessionId, userData],
   );
 
   const addMessage = useCallback(
@@ -511,7 +511,7 @@ export default function ChatWidget({
         playNotification();
       }
     },
-    [playNotification]
+    [playNotification],
   );
 
   const handleOnboarding = useCallback(
@@ -522,8 +522,8 @@ export default function ChatWidget({
         addMessage(
           createMessage(
             "bot",
-            "Please enter a valid phone number (at least 10 digits)."
-          )
+            "Please enter a valid phone number (at least 10 digits).",
+          ),
         );
         return;
       }
@@ -572,7 +572,7 @@ export default function ChatWidget({
       setOnboardingStep(nextStep);
       addMessage(createMessage("bot", botResponse));
     },
-    [onboardingStep, userData, addMessage, saveUserData]
+    [onboardingStep, userData, addMessage, saveUserData],
   );
 
   const handleChatMessage = useCallback(
@@ -589,14 +589,14 @@ export default function ChatWidget({
         addMessage(
           createMessage(
             "bot",
-            `I'm sorry, I encountered an error: ${errorMessage}. Please try again or contact support.`
-          )
+            `I'm sorry, I encountered an error: ${errorMessage}. Please try again or contact support.`,
+          ),
         );
       } finally {
         setIsLoading(false);
       }
     },
-    [addMessage, sendQuestion]
+    [addMessage, sendQuestion],
   );
 
   const handleSubmit = useCallback(() => {
@@ -654,15 +654,13 @@ export default function ChatWidget({
           "flex items-center justify-center",
           "transform transition-all duration-300",
           "hover:scale-110 active:scale-95",
-          "focus:outline-none focus:ring-4 focus:ring-primary-90"
+          "focus:outline-none focus:ring-4 focus:ring-primary-90",
         )}
         aria-label={isOpen ? "Close chat" : "Open chat"}
       >
-        {isOpen ? (
+        {isOpen ?
           <Minimize2 size={24} className="text-white" />
-        ) : (
-          <MessageCircle size={24} className="text-white" />
-        )}
+        : <MessageCircle size={24} className="text-white" />}
       </Button>
 
       {isOpen && (
@@ -672,7 +670,7 @@ export default function ChatWidget({
             "bg-white shadow-2xl rounded-2xl",
             "flex flex-col overflow-hidden z-50",
             "animate-in slide-in-from-bottom-4 duration-300",
-            "border border-grey-70"
+            "border border-grey-70",
           )}
         >
           <ChatHeader

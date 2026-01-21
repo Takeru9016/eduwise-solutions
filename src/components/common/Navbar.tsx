@@ -77,7 +77,7 @@ const NAV_LINKS: NavLink[] = [
   {
     href: "/blogs",
     label: "Blogs",
-  }
+  },
 ];
 
 const CONTACT_INFO = {
@@ -179,7 +179,7 @@ const NavLink = ({
 const Logo = ({ className = "" }: LogoProps) => (
   <Link href="/" className={`relative ${className}`}>
     <Image
-      src="/eduwise.png"
+      src="/home/eduwise.png"
       alt="Eduwise Solutions"
       width={160}
       height={48}
@@ -326,7 +326,7 @@ export default function Navbar() {
       `w-full py-4 sticky top-0 bg-white/80 backdrop-blur-md z-50 transition-all duration-300 ${
         scrolled ? "shadow-md border-b border-light-90" : ""
       }`,
-    [scrolled]
+    [scrolled],
   );
 
   return (

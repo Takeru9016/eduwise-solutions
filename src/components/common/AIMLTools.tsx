@@ -49,7 +49,7 @@ const toolsData = [
       },
       {
         name: "Google Colab",
-        image: "/colab.svg",
+        image: "/tech/colab.svg",
       },
       {
         name: "Git & GitHub",
@@ -85,8 +85,7 @@ const toolsData = [
     items: [
       {
         name: "Amazon Web Services",
-        image:
-          "/aws.svg",
+        image: "/tech/aws.svg",
       },
       {
         name: "Microsoft Azure",

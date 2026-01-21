@@ -119,7 +119,7 @@ export default function Footer() {
           <div className="space-y-6">
             <Link href="/" className="block w-[160px]">
               <Image
-                src="/eduwise.png"
+                src="/home/eduwise.png"
                 alt="Eduwise Solutions"
                 width={200}
                 height={60}
@@ -188,7 +188,7 @@ export default function Footer() {
             <p className="text-grey-35 text-sm text-center flex items-center gap-2">
               Made in India
               <Image
-                src="/indian_flag.svg"
+                src="/home/indian_flag.svg"
                 alt="India Flag"
                 width={20}
                 height={15}

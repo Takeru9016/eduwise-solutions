@@ -25,6 +25,8 @@ import { Badge } from "@/components/ui/badge";
 import PaymentStatusModal from "../payment/PaymentStatusModal";
 import PaymentModal from "../payment/PaymentModal";
 import ToolsSection from "../common/AIMLTools";
+import PlacementSection from "./PlacementSection";
+import GoogleReviews from "../common/GoogleReviews";
 
 // Placeholder data for AIML course
 const aimlFeatures = [
@@ -484,6 +486,12 @@ export default function AIMLPage() {
           </div>
         </div>
       </section>
+
+      {/* Placement Section */}
+      <PlacementSection categorySlug="aiml" />
+
+      {/* Google Reviews Section */}
+      <GoogleReviews categorySlug="aiml" />
     </main>
   );
 }

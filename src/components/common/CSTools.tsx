@@ -19,23 +19,19 @@ const toolsData = [
     items: [
       {
         name: "Wireshark",
-        image:
-          "/wireshark.svg",
+        image: "/tech/wireshark.svg",
       },
       {
         name: "Burp Suite",
-        image:
-          "/burpsuite.svg",
+        image: "/tech/burpsuite.svg",
       },
       {
         name: "SIEM",
-        image:
-          "/siem.png",
+        image: "/tech/siem.png",
       },
       {
         name: "Firewalls",
-        image:
-          "/firewall.png",
+        image: "/tech/firewall.png",
       },
     ],
   },

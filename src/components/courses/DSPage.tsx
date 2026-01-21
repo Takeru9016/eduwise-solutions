@@ -21,6 +21,8 @@ import { Badge } from "@/components/ui/badge";
 import PaymentStatusModal from "../payment/PaymentStatusModal";
 import PaymentModal from "../payment/PaymentModal";
 import DSToolsSection from "../common/DSTools";
+import PlacementSection from "./PlacementSection";
+import GoogleReviews from "../common/GoogleReviews";
 
 const features = [
   {
@@ -473,6 +475,12 @@ export default function DSPage() {
           </div>
         </div>
       </section>
+
+      {/* Placement Section */}
+      <PlacementSection categorySlug="datascience" />
+
+      {/* Google Reviews Section */}
+      <GoogleReviews categorySlug="datascience" />
     </main>
   );
 }

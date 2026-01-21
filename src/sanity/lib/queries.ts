@@ -30,3 +30,29 @@ export const CATEGORIES_QUERY = `
     slug
   }
 `;
+
+export const GOOGLE_REVIEWS_QUERY = `
+  *[_type == "googleReview"] | order(publishedAt desc) {
+    _id,
+    reviewerName,
+    reviewerImage,
+    reviewText,
+    rating,
+    isVerified,
+    "category": category->slug.current,
+    publishedAt
+  }
+`;
+
+export const GOOGLE_REVIEWS_BY_CATEGORY_QUERY = `
+  *[_type == "googleReview" && category->slug.current == $categorySlug] | order(publishedAt desc) {
+    _id,
+    reviewerName,
+    reviewerImage,
+    reviewText,
+    rating,
+    isVerified,
+    "category": category->slug.current,
+    publishedAt
+  }
+`;

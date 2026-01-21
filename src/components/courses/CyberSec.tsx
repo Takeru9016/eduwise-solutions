@@ -21,6 +21,8 @@ import { Badge } from "@/components/ui/badge";
 import PaymentStatusModal from "../payment/PaymentStatusModal";
 import PaymentModal from "../payment/PaymentModal";
 import CSToolsSection from "../common/CSTools";
+import PlacementSection from "./PlacementSection";
+import GoogleReviews from "../common/GoogleReviews";
 
 const features = [
   {
@@ -481,6 +483,12 @@ export default function CyberSecPage() {
           </div>
         </div>
       </section>
+
+      {/* Placement Section */}
+      <PlacementSection categorySlug="cybersecurity" />
+
+      {/* Google Reviews Section */}
+      <GoogleReviews categorySlug="cybersecurity" />
     </main>
   );
 }

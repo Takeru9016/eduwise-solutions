@@ -20,6 +20,8 @@ import { Badge } from "@/components/ui/badge";
 import PaymentStatusModal from "../payment/PaymentStatusModal";
 import PaymentModal from "../payment/PaymentModal";
 import FSDToolsSection from "../common/FSDTools";
+import PlacementSection from "./PlacementSection";
+import GoogleReviews from "../common/GoogleReviews";
 
 const features = [
   {
@@ -471,6 +473,12 @@ export default function FullStackPage() {
           </div>
         </div>
       </section>
+
+      {/* Placement Section */}
+      <PlacementSection categorySlug="fullstack" />
+
+      {/* Google Reviews Section */}
+      <GoogleReviews categorySlug="fullstack" />
     </main>
   );
 }

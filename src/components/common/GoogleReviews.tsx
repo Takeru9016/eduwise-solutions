@@ -14,6 +14,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { Button } from "../ui/button";
 
 interface GoogleReview {
   _id: string;
@@ -74,6 +75,35 @@ const GoogleBadge = () => (
     </div>
   </div>
 );
+
+const CHAR_LIMIT = 180;
+
+const ReviewText = ({ text }: { text: string }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const shouldTruncate = text.length > CHAR_LIMIT;
+
+  const displayText =
+    shouldTruncate && !isExpanded ? text.slice(0, CHAR_LIMIT) + "..." : text;
+
+  return (
+    <div className="relative mb-5">
+      <Quote className="absolute -top-1 -left-1 w-6 h-6 sm:w-8 sm:h-8 text-primary-90/30" />
+      <p className="text-grey-35 text-sm sm:text-base leading-relaxed pl-5 sm:pl-6">
+        {displayText}
+      </p>
+      {shouldTruncate && (
+        <Button
+          size="default"
+          variant="outline"
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="text-primary-75 text-sm font-medium pl-5 sm:pl-6 mt-2 hover:text-primary-60 transition-colors border border-primary-90 flex items-center justify-center"
+        >
+          {isExpanded ? "Read less" : "Read more"}
+        </Button>
+      )}
+    </div>
+  );
+};
 
 export default function GoogleReviews({
   categorySlug,
@@ -249,12 +279,7 @@ export default function GoogleReviews({
                       </div>
 
                       {/* Review text */}
-                      <div className="relative mb-5">
-                        <Quote className="absolute -top-1 -left-1 w-6 h-6 sm:w-8 sm:h-8 text-primary-90/30" />
-                        <p className="text-grey-35 text-sm sm:text-base leading-relaxed pl-5 sm:pl-6 line-clamp-4">
-                          {review.reviewText}
-                        </p>
-                      </div>
+                      <ReviewText text={review.reviewText} />
 
                       {/* Rating */}
                       <div className="flex items-center justify-between pt-4 border-t border-slate-100">

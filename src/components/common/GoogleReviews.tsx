@@ -294,33 +294,6 @@ export default function GoogleReviews({
             <CarouselNext className="hidden md:flex -right-6 lg:-right-10 bg-white shadow-lg border-slate-200 hover:bg-primary-75 hover:text-white hover:border-primary-75 transition-all duration-300 w-10 h-10" />
           </Carousel>
         </div>
-
-        {/* Overall rating summary */}
-        <div className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
-          <div className="flex items-center gap-2">
-            <span className="text-2xl sm:text-3xl font-vietnam font-bold text-grey-15">
-              {reviews.reduce((total, review) => total + review.rating, 0) /
-                reviews.length}
-            </span>
-            <div className="flex">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <Star
-                  key={star}
-                  className="w-5 h-5 sm:w-6 sm:h-6 text-amber-400 fill-amber-400"
-                />
-              ))}
-            </div>
-          </div>
-          <div className="h-6 w-px bg-slate-200 hidden sm:block" />
-          <p className="text-grey-35 text-sm sm:text-base">
-            Based on{" "}
-            <span className="font-semibold text-grey-15">
-              {reviews.length}+ verified reviews
-            </span>
-          </p>
-          <div className="h-6 w-px bg-slate-200 hidden sm:block" />
-          <GoogleBadge />
-        </div>
       </div>
     </section>
   );

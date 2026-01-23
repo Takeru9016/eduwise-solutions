@@ -148,16 +148,16 @@ export default function FAQsPage() {
         questions: [
           {
             q: "How much does the program cost?",
-            a: "We offer two simple payment options: ₹5,000 upfront & ₹20,000 Pay After Placement (zero risk if you're not placed).",
+            a: "The programme cost varies depending on the course you choose. For some courses, we offer flexible payment options including an upfront fee and a pay-after-placement model. We recommend speaking with our counselors to get the exact pricing and payment structure for your chosen course.",
           },
           {
             q: "Is your counseling really free?",
             a: "Yes. All career counseling sessions and guidance are completely free of charge. You only pay if you choose to enroll in a program.",
           },
-          {
-            q: "What if I don't get placed even after completing the course?",
-            a: "If you actively participate in the program, follow all guidelines, and still don't get placed within 6 months, we provide a 100% refund as per our refund policy outlined in the Terms & Conditions.",
-          },
+          // {
+          //   q: "What if I don't get placed even after completing the course?",
+          //   a: "If you actively participate in the program, follow all guidelines, and still don't get placed within 6 months, we provide a 100% refund as per our refund policy outlined in the Terms & Conditions.",
+          // },
         ],
       },
       {
@@ -197,7 +197,7 @@ export default function FAQsPage() {
         ],
       },
     ],
-    []
+    [],
   );
 
   // Memoize filtered categories to avoid unnecessary recalculations
@@ -210,7 +210,7 @@ export default function FAQsPage() {
         questions: category.questions.filter(
           (item) =>
             item.q.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            item.a.toLowerCase().includes(searchTerm.toLowerCase())
+            item.a.toLowerCase().includes(searchTerm.toLowerCase()),
         ),
       }))
       .filter((category) => category.questions.length > 0);
@@ -236,14 +236,13 @@ export default function FAQsPage() {
       {/* FAQ Categories Grid */}
       <section className="py-12 md:py-20">
         <div className="container mx-auto">
-          {filteredCategories.length > 0 ? (
+          {filteredCategories.length > 0 ?
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
               {filteredCategories.map((category, idx) => (
                 <CategoryCard key={idx} category={category} />
               ))}
             </div>
-          ) : (
-            <div className="text-center py-12">
+          : <div className="text-center py-12">
               <h3 className="text-2xl font-vietnam font-semibold text-grey-20 mb-4">
                 No results found
               </h3>
@@ -258,7 +257,7 @@ export default function FAQsPage() {
                 Clear Search
               </button>
             </div>
-          )}
+          }
         </div>
       </section>
     </div>

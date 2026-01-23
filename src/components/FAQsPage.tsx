@@ -192,7 +192,7 @@ export default function FAQsPage() {
           },
           {
             q: "How do I enroll in a program?",
-            a: "Simply visit www.Eduwise Solutions, fill out the contact form, or reach out via WhatsApp. Our team will guide you through the next steps.",
+            a: "Simply visit www.eduwise.solutions, fill out the contact form, or reach out via WhatsApp. Our team will guide you through the next steps.",
           },
         ],
       },

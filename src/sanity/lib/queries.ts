@@ -56,3 +56,32 @@ export const GOOGLE_REVIEWS_BY_CATEGORY_QUERY = `
     publishedAt
   }
 `;
+
+export const TESTIMONIALS_QUERY = `
+  *[_type == "testimonial"] | order(order asc) {
+    _id,
+    name,
+    role,
+    company,
+    content,
+    avatar,
+    "avatarPath": coalesce(avatarPath, avatar),
+    rating,
+    linkedinUrl,
+    order
+  }
+`;
+
+export const FAQ_CATEGORIES_QUERY = `
+  *[_type == "faqCategory"] | order(order asc) {
+    _id,
+    title,
+    icon,
+    order,
+    questions[] {
+      _key,
+      question,
+      answer
+    }
+  }
+`;

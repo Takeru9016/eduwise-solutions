@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, Phone, Mail, ChevronDown } from "lucide-react";
+import AWSPartnerBanner from "./AWSPartnerBadge";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -330,18 +331,21 @@ export default function Navbar() {
   );
 
   return (
-    <nav className={navClasses}>
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center">
-          <Logo />
-          <DesktopNavigation pathname={pathname} />
-          <MobileNavigation
-            isOpen={isOpen}
-            onOpenChange={setIsOpen}
-            pathname={pathname}
-          />
+    <>
+      <nav className={navClasses}>
+        <div className="container mx-auto px-4">
+          <div className="flex justify-between items-center">
+            <Logo />
+            <DesktopNavigation pathname={pathname} />
+            <MobileNavigation
+              isOpen={isOpen}
+              onOpenChange={setIsOpen}
+              pathname={pathname}
+            />
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+      <AWSPartnerBanner />
+    </>
   );
 }

@@ -7,6 +7,8 @@ import { authorType } from "./authorType";
 import { flowchart } from "./flowchart";
 import { placedStudentType } from "./placedStudentType";
 import { googleReviewType } from "./googleReviewType";
+import { testimonialType } from "./testimonialType";
+import { faqCategoryType } from "./faqCategoryType";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -17,5 +19,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     flowchart,
     placedStudentType,
     googleReviewType,
+    testimonialType,
+    faqCategoryType,
   ],
 };

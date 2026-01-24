@@ -30,9 +30,9 @@ const FeatureCard = ({
     <div
       className={`
         ${
-          isDefault
-            ? "bg-white hover:shadow-lg transform hover:-translate-y-1 group"
-            : "bg-light-97 hover:border-primary-90"
+          isDefault ?
+            "bg-white hover:shadow-lg transform hover:-translate-y-1 group"
+          : "bg-light-97 hover:border-primary-90"
         }
         rounded-xl p-8 shadow-sm transition-all duration-300 border border-light-90
       `}
@@ -133,19 +133,19 @@ export default function AboutUs() {
       icon: Award,
       title: "Your Trusted Education Partner",
       description:
-        "We act as a bridge between learners and reputed institutions, ensuring access to high-quality courses across diverse domains.",
+        "At Eduwise Solutions, we are passionate about empowering students and early-career professionals to take confident steps toward successful careers. More than an education platform, we are a career success partner—committed to guiding individuals from learning to meaningful, long-term professional outcomes.",
     },
     {
       icon: GraduationCap,
       title: "Expert Collaborators",
       description:
-        "We collaborate with industry-leading companies and universities to offer courses in fields like Data Science, Web Development, Online MBA, and more.",
+        "At Eduwise Solutions, our programs are delivered in collaboration with industry-leading organizations and reputed universities. These partnerships ensure learners gain access to credible, industry-aligned courses across domains, including Data Science, Web Development, Online MBA, and beyond.",
     },
     {
       icon: Users,
       title: "Passionate Counsellors",
       description:
-        "Our experts bring years of experience and industry knowledge to help you set right career path.",
+        "Our dedicated counsellors leverage extensive industry knowledge and professional experience to provide tailored guidance—helping you define, refine, and achieve your long-term career goals",
     },
     {
       icon: BarChart3,
@@ -249,11 +249,13 @@ export default function AboutUs() {
             </div>
             <div className="bg-white/50 backdrop-blur-sm rounded-xl p-6 md:p-8 shadow-sm border border-light-90">
               <p className="text-grey-35 text-lg leading-relaxed">
-                At Eduwise Solutions, we believe that every graduate deserves
-                strong start to their career. Whether you are a final-year
-                student preparing for the job market or a recent graduate
-                looking for your first job, we are here to bridge the gap
-                between your potential and your dream job.
+                At Eduwise Solutions, our mission is to empower graduates with
+                the skills, confidence, and direction needed to succeed in
+                todays competitive job market. Whether you are a final-year
+                student preparing for placements or a recent graduate taking
+                your first step into the professional world, we bridge the gap
+                between academic learning and real-world excellence—guiding you
+                at every stage and turning ambition into achievement.
               </p>
             </div>
           </div>
@@ -265,7 +267,7 @@ export default function AboutUs() {
         <div className="container">
           <SectionHeader
             title="Who We Are"
-            subtitle="At Eduwise.solutions, we are passionate about empowering students and graduates to take confident steps toward successful careers. We are not just another education platform — we are your career success partner."
+            subtitle="At Eduwise Solutions, we are passionate about empowering students and early-career professionals to take confident steps toward successful careers. More than an education platform, we are a career success partner—committed to guiding individuals from learning to meaningful, long-term professional outcomes."
           />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

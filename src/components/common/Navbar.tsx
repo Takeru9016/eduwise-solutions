@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, Phone, Mail, ChevronDown } from "lucide-react";
-import AWSPartnerBanner from "./AWSPartnerBadge";
+// import AWSPartnerBanner from "./AWSPartnerBadge";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -345,7 +345,7 @@ export default function Navbar() {
           </div>
         </div>
       </nav>
-      <AWSPartnerBanner />
+      {/* <AWSPartnerBanner /> */}
     </>
   );
 }

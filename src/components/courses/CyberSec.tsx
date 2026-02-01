@@ -168,7 +168,7 @@ export default function CyberSecPage() {
       <PaymentModal
         isOpen={isPaymentModalOpen}
         onClose={closePaymentModal}
-        amount={6000}
+        amount={10000}
         programName="Cyber Security Program"
       />
       {/* Hero Section */}
@@ -441,15 +441,15 @@ export default function CyberSecPage() {
                     <p className="text-grey-20 font-bold">Upfront Payment</p>
                     <div className="flex items-center gap-2 mt-1">
                       <p className="text-3xl font-vietnam font-bold text-primary-75">
-                        ₹6,000
+                        ₹10,000
                       </p>
                       <Badge className="bg-green-500 text-white text-sm px-3 py-1 animate-pulse">
-                        72% OFF
+                        60% OFF
                       </Badge>
                     </div>
                     <div className="mt-1">
                       <p className="text-sm text-grey-35">
-                        <span className="line-through text-lg">₹21,000</span> •
+                        <span className="line-through text-lg">₹25,000</span> •
                         One-time payment
                       </p>
                       <div className="mt-2 bg-green-50 border border-green-200 rounded-md p-2 inline-block">

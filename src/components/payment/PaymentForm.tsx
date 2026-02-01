@@ -147,7 +147,7 @@ export default function PaymentForm({ amount, programName }: PaymentFormProps) {
 
       // Initialize Razorpay
       const options: RazorpayOptions = {
-        key: process.env.RAZORPAY_KEY_ID!,
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
         amount: data.order.amount,
         currency: data.order.currency,
         name: "Eduwise Solutions",
@@ -345,14 +345,12 @@ export default function PaymentForm({ amount, programName }: PaymentFormProps) {
             disabled={isLoading}
             className="w-full bg-primary-75 text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-85 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
-            {isLoading ? (
+            {isLoading ?
               <>
                 <Loader2 className="w-5 h-5 animate-spin" />
                 Processing...
               </>
-            ) : (
-              <>Pay Now ₹{amount}</>
-            )}
+            : <>Pay Now ₹{amount}</>}
           </button>
         </div>
       </div>

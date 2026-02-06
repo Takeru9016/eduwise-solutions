@@ -83,7 +83,7 @@ export default function Footer() {
     { label: "Cyber Security", href: "/cyber-sec" },
     { label: "Data Science", href: "/data-science" },
     { label: "Full Stack Web Developer", href: "/full-stack" },
-    { label: "Professional Certification", href: "/professional" },
+    { label: "Placement Accelerator", href: "/professional" },
   ];
 
   const legalLinks: FooterLink[] = [

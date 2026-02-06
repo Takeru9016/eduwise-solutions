@@ -97,16 +97,15 @@ const FormInputField = ({
     name={name}
     render={({ field }) => (
       <FormItem className="space-y-2">
-        {required ? (
+        {required ?
           <RequiredLabel>{label}</RequiredLabel>
-        ) : (
-          <FormLabel className="text-grey-35">
+        : <FormLabel className="text-grey-35">
             {label}
             <span className="ml-2 text-sm text-primary-75 font-medium">
               (Optional)
             </span>
           </FormLabel>
-        )}
+        }
         <FormControl>
           <Input
             {...field}
@@ -137,7 +136,7 @@ export default function ContactUsSection() {
     { value: "cybersec", label: "Cyber Security" },
     {
       value: "professional_certification",
-      label: "Professional Certification",
+      label: "Placement Accelerator",
     },
     { value: "fulstack", label: "Full Stack Web Development" },
     { value: "other", label: "Other" },
@@ -183,9 +182,9 @@ export default function ContactUsSection() {
       console.error("Form submission error:", error);
       setIsSuccess(false);
       setErrorMessage(
-        error instanceof Error
-          ? error.message
-          : "Failed to submit form - please try again"
+        error instanceof Error ?
+          error.message
+        : "Failed to submit form - please try again",
       );
       setShowDialog(true);
     } finally {
@@ -339,14 +338,13 @@ export default function ContactUsSection() {
                       className="w-full md:w-auto bg-primary-75 hover:bg-primary-70 text-white h-12 px-8 flex items-center gap-2 text-base"
                       disabled={isSubmitting}
                     >
-                      {isSubmitting ? (
+                      {isSubmitting ?
                         "Sending..."
-                      ) : (
-                        <>
+                      : <>
                           Send Message
                           <Send size={18} />
                         </>
-                      )}
+                      }
                     </Button>
                   </form>
                 </Form>
@@ -366,23 +364,23 @@ export default function ContactUsSection() {
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 text-xl">
-              {isSuccess ? (
+              {isSuccess ?
                 <>
                   <CheckCircle2 className="w-6 h-6 text-green-500" />
                   Message Sent Successfully!
                 </>
-              ) : (
-                <>
+              : <>
                   <XCircle className="w-6 h-6 text-red-500" />
                   Error Sending Message
                 </>
-              )}
+              }
             </DialogTitle>
             <DialogDescription className="text-grey-35 mt-2">
-              {isSuccess
-                ? "Thank you for reaching out! We'll get back to you soon."
-                : errorMessage ||
-                  "There was an error sending your message. Please try again."}
+              {isSuccess ?
+                "Thank you for reaching out! We'll get back to you soon."
+              : errorMessage ||
+                "There was an error sending your message. Please try again."
+              }
             </DialogDescription>
           </DialogHeader>
           <div className="mt-6">

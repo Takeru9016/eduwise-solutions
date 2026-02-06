@@ -80,7 +80,7 @@ const COURSES = [
     label: "MSc in Artificial Intelligence and Data Science",
   },
   { value: "msc_in_cc", label: "MSc in Cloud Computing" },
-  { value: "professional_certification", label: "Professional Certification" },
+  { value: "professional_certification", label: "Placement Accelerator" },
   { value: "certification_programme", label: "Certification Programme" },
   { value: "other", label: "Other" },
 ];
@@ -177,9 +177,9 @@ export default function BookFormDialog({
 
       toast.error("Booking failed", {
         description:
-          error instanceof Error
-            ? error.message
-            : "There was a problem booking your session. Please try again.",
+          error instanceof Error ?
+            error.message
+          : "There was a problem booking your session. Please try again.",
         duration: 5000,
         className: "bg-white border border-gray-100 shadow-lg rounded-lg",
         descriptionClassName: "text-gray-600 text-sm",
@@ -276,7 +276,7 @@ export default function BookFormDialog({
                             const countryCode = `+${data.dialCode}`;
                             const phoneWithoutCode = phone.replace(
                               countryCode,
-                              ""
+                              "",
                             );
                             form.setValue("countryCode", countryCode);
                             form.setValue("phoneNumber", phoneWithoutCode);
@@ -360,14 +360,12 @@ export default function BookFormDialog({
                               variant={"outline"}
                               className={cn(
                                 "w-full h-10 pl-3 text-left font-normal border",
-                                !field.value && "text-muted-foreground"
+                                !field.value && "text-muted-foreground",
                               )}
                             >
-                              {field.value ? (
+                              {field.value ?
                                 format(field.value, "EEE, MMM d, yyyy")
-                              ) : (
-                                <span>Select a date</span>
-                              )}
+                              : <span>Select a date</span>}
                               <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                             </Button>
                           </FormControl>
@@ -405,14 +403,12 @@ export default function BookFormDialog({
                               variant="outline"
                               className={cn(
                                 "w-full h-10 pl-3 text-left font-normal border",
-                                !field.value && "text-muted-foreground"
+                                !field.value && "text-muted-foreground",
                               )}
                             >
-                              {field.value ? (
+                              {field.value ?
                                 <span>{getTimeSlotLabel(field.value)}</span>
-                              ) : (
-                                <span>Select a time</span>
-                              )}
+                              : <span>Select a time</span>}
                               <Clock className="ml-auto h-4 w-4 opacity-50" />
                             </Button>
                           </FormControl>
@@ -428,18 +424,18 @@ export default function BookFormDialog({
                                   className={cn(
                                     "justify-start font-normal",
                                     field.value === slot.value &&
-                                      "bg-primary-100 text-primary-600 font-medium"
+                                      "bg-primary-100 text-primary-600 font-medium",
                                   )}
                                   onClick={() => {
                                     field.onChange(slot.value);
                                     document
                                       .querySelector(
-                                        '[data-state="open"][role="dialog"]'
+                                        '[data-state="open"][role="dialog"]',
                                       )
                                       ?.dispatchEvent(
                                         new KeyboardEvent("keydown", {
                                           key: "Escape",
-                                        })
+                                        }),
                                       );
                                   }}
                                 >

@@ -13,6 +13,7 @@ import {
   SheetHeader,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { Separator } from "@/components/ui/separator";
 import AWSPartnerBanner from "./AWSPartnerBadge";
 import BookButton from "./BookButton";
 
@@ -72,7 +73,7 @@ const NAV_LINKS: NavLink[] = [
       { label: "Cyber Security", href: "/cyber-sec" },
       { label: "Data Science", href: "/data-science" },
       { label: "Full Stack Web Developer", href: "/full-stack" },
-      { label: "Professional Certification", href: "/professional" },
+      { label: "Placement Accelerator", href: "/professional" },
     ],
   },
   {
@@ -253,6 +254,16 @@ const MobileNavigation = ({
 
             <BookButton />
 
+            <Link href="https://learner.eduwise.solutions/" target="_blank">
+              <Button
+                variant="outline"
+                className="w-full mt-4 border-primary-75 text-primary-75 hover:bg-primary-75 hover:text-white transition-colors duration-300"
+                onClick={handleClose}
+              >
+                LMS Login
+              </Button>
+            </Link>
+
             <Link href="/contact">
               <Button
                 variant="default"
@@ -276,6 +287,7 @@ const DesktopNavigation = ({ pathname }: DesktopNavigationProps) => (
     {NAV_LINKS.map((link) => (
       <NavLink key={link.label} link={link} pathname={pathname} />
     ))}
+    <Separator orientation="vertical" className="h-6" />
     <BookButton />
     <Link href="/contact">
       <Button
@@ -283,6 +295,15 @@ const DesktopNavigation = ({ pathname }: DesktopNavigationProps) => (
         className="bg-primary-75 hover:bg-primary-70 transition-all duration-200 hover:-translate-y-0.5"
       >
         Contact Us
+      </Button>
+    </Link>
+    <Separator orientation="vertical" className="h-6" />
+    <Link href="https://learner.eduwise.solutions/" target="_blank">
+      <Button
+        variant="outline"
+        className="border-primary-75 text-primary-75 hover:bg-primary-75 hover:text-white transition-all duration-300 font-semibold"
+      >
+        LMS Login
       </Button>
     </Link>
   </div>

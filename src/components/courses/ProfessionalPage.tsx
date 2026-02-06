@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import {
-  Check,
+  // Check,
   Briefcase,
   Sparkles,
   Target,
@@ -10,17 +10,17 @@ import {
   Building,
   Trophy,
   Award,
-  BookOpen,
+  // BookOpen,
   Laptop,
-  Zap,
+  // Zap,
   LifeBuoy,
   Presentation,
   Medal,
   ChevronRight,
 } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
-import BenefitSection from "../common/BenefitSection";
+// import { Badge } from "@/components/ui/badge";
+// import BenefitSection from "../common/BenefitSection";
 
 const features = [
   {
@@ -46,115 +46,115 @@ const features = [
   },
 ];
 
-const careerOpportunities = [
-  {
-    title: "Business Development",
-  },
-  {
-    title: "Customer Support Analyst",
-  },
-  {
-    title: "Data Associate",
-  },
-  {
-    title: "Data and Risk Management Analyst",
-  },
-  {
-    title: "Finance Analyst",
-  },
-  {
-    title: "HR Specialist",
-  },
-  {
-    title: "Operations Executive",
-  },
-  {
-    title: "Product Compliance Specialist",
-  },
-];
+// const careerOpportunities = [
+//   {
+//     title: "Business Development",
+//   },
+//   {
+//     title: "Customer Support Analyst",
+//   },
+//   {
+//     title: "Data Associate",
+//   },
+//   {
+//     title: "Data and Risk Management Analyst",
+//   },
+//   {
+//     title: "Finance Analyst",
+//   },
+//   {
+//     title: "HR Specialist",
+//   },
+//   {
+//     title: "Operations Executive",
+//   },
+//   {
+//     title: "Product Compliance Specialist",
+//   },
+// ];
 
-const programModules = [
-  {
-    title: "Personal Branding, Resume Building & Networking",
-    duration: "15 days",
-    description:
-      "Create a compelling professional identity and network effectively",
-    weeks: [
-      {
-        title: "Week 1: Personal Branding & Resume Mastery",
-        days: [
-          "Day 1-2: Understanding Resume Types & ATS (Applicant Tracking System)",
-          "Day 3-4: Writing a Resume with High ATS Score",
-          "Day 5-6: Using Keywords & Customizing Resumes for Different Roles",
-          "Day 7: Resume Review & Feedback Session",
-        ],
-      },
-      {
-        title: "Week 2: LinkedIn Optimization & Networking",
-        days: [
-          "Day 8-9: Creating a Professional LinkedIn Profile",
-          "Day 10-11: Optimizing LinkedIn for Recruiters & Job Search Strategies",
-          "Day 12: Engaging with Recruiters & Building a Professional Network",
-          "Day 13: LinkedIn Content & Personal Branding",
-          "Day 14: LinkedIn Profile Review & Q&A",
-        ],
-      },
-    ],
-  },
-  {
-    title: "Fundamentals & Business Communication",
-    duration: "15 days",
-    description: "Master professional communication and interview skills",
-    weeks: [
-      {
-        title: "Week 3: Business Communication & Hiring Insights",
-        days: [
-          "Day 15-16: Email Etiquette & Professional Writing",
-          "Day 17-18: Interview Preparation & Behavioral Questions",
-          "Day 19-20: Common Hiring Tricks & Understanding HR Perspectives",
-          "Day 21: Mock Interview Round",
-        ],
-      },
-    ],
-  },
-  {
-    title: "Job Specific Skills & AI Abilities",
-    duration: "15 days",
-    description: "Develop practical skills needed for today's workplace",
-    weeks: [
-      {
-        title: "Week 4: Operational & Job-Specific Skills",
-        days: [
-          "Day 22-23: Excel Basics for Office & Data Entry Tasks",
-          "Day 24-25: Advanced Excel (Pivot Tables, VLOOKUP, etc.)",
-          "Day 26-27: Accounts-Related Work Fundamentals",
-          "Day 28: Practical Hands-on Tasks & Case Studies",
-        ],
-      },
-      {
-        title: "Week 5: Client Communication",
-        days: [
-          "Day 29-30: Understanding Sales & Call Pitching Techniques",
-          "Day 31-32: Live Call Pitching Practice & Role Plays",
-          "Day 33-34: Handling Objections & Negotiation Skills",
-          "Day 35: Assessment & Feedback",
-        ],
-      },
-      {
-        title: "Week 6: Final Preparation & Job Readiness",
-        days: [
-          "Day 36-37: Interview Simulations & HR Round Preparation",
-          "Day 38-39: Final Resume & LinkedIn Review",
-          "Day 40-41: Salary Negotiation & Offer Letter Guidance",
-          "Day 42: Final Mock Interviews with Industry Experts",
-          "Day 43: Personalized Career Roadmap & Job Search Strategy",
-          "Day 44: Final Q&A, Doubt Clearing & Feedback Session",
-          "Day 45: Graduation & Job Assistance",
-        ],
-      },
-    ],
-  },
-];
+// const programModules = [
+//   {
+//     title: "Personal Branding, Resume Building & Networking",
+//     duration: "15 days",
+//     description:
+//       "Create a compelling professional identity and network effectively",
+//     weeks: [
+//       {
+//         title: "Week 1: Personal Branding & Resume Mastery",
+//         days: [
+//           "Day 1-2: Understanding Resume Types & ATS (Applicant Tracking System)",
+//           "Day 3-4: Writing a Resume with High ATS Score",
+//           "Day 5-6: Using Keywords & Customizing Resumes for Different Roles",
+//           "Day 7: Resume Review & Feedback Session",
+//         ],
+//       },
+//       {
+//         title: "Week 2: LinkedIn Optimization & Networking",
+//         days: [
+//           "Day 8-9: Creating a Professional LinkedIn Profile",
+//           "Day 10-11: Optimizing LinkedIn for Recruiters & Job Search Strategies",
+//           "Day 12: Engaging with Recruiters & Building a Professional Network",
+//           "Day 13: LinkedIn Content & Personal Branding",
+//           "Day 14: LinkedIn Profile Review & Q&A",
+//         ],
+//       },
+//     ],
+//   },
+//   {
+//     title: "Fundamentals & Business Communication",
+//     duration: "15 days",
+//     description: "Master professional communication and interview skills",
+//     weeks: [
+//       {
+//         title: "Week 3: Business Communication & Hiring Insights",
+//         days: [
+//           "Day 15-16: Email Etiquette & Professional Writing",
+//           "Day 17-18: Interview Preparation & Behavioral Questions",
+//           "Day 19-20: Common Hiring Tricks & Understanding HR Perspectives",
+//           "Day 21: Mock Interview Round",
+//         ],
+//       },
+//     ],
+//   },
+//   {
+//     title: "Job Specific Skills & AI Abilities",
+//     duration: "15 days",
+//     description: "Develop practical skills needed for today's workplace",
+//     weeks: [
+//       {
+//         title: "Week 4: Operational & Job-Specific Skills",
+//         days: [
+//           "Day 22-23: Excel Basics for Office & Data Entry Tasks",
+//           "Day 24-25: Advanced Excel (Pivot Tables, VLOOKUP, etc.)",
+//           "Day 26-27: Accounts-Related Work Fundamentals",
+//           "Day 28: Practical Hands-on Tasks & Case Studies",
+//         ],
+//       },
+//       {
+//         title: "Week 5: Client Communication",
+//         days: [
+//           "Day 29-30: Understanding Sales & Call Pitching Techniques",
+//           "Day 31-32: Live Call Pitching Practice & Role Plays",
+//           "Day 33-34: Handling Objections & Negotiation Skills",
+//           "Day 35: Assessment & Feedback",
+//         ],
+//       },
+//       {
+//         title: "Week 6: Final Preparation & Job Readiness",
+//         days: [
+//           "Day 36-37: Interview Simulations & HR Round Preparation",
+//           "Day 38-39: Final Resume & LinkedIn Review",
+//           "Day 40-41: Salary Negotiation & Offer Letter Guidance",
+//           "Day 42: Final Mock Interviews with Industry Experts",
+//           "Day 43: Personalized Career Roadmap & Job Search Strategy",
+//           "Day 44: Final Q&A, Doubt Clearing & Feedback Session",
+//           "Day 45: Graduation & Job Assistance",
+//         ],
+//       },
+//     ],
+//   },
+// ];
 
 const careerAssuranceSteps = [
   {
@@ -218,54 +218,54 @@ const careerAssuranceSteps = [
   },
 ];
 
-const programHighlights = [
-  {
-    category: "Classes",
-    icon: Presentation,
-    points: [
-      "100% Live Session",
-      "Instructor Led Classes",
-      "Flexible Timing",
-      "Unlimited Class Access",
-      "Lifetime Content Access",
-    ],
-  },
-  {
-    category: "Handson Learning",
-    icon: Laptop,
-    points: [
-      "Live Projects",
-      "Hands on skill",
-      "Multiple Projects for each topics",
-      "Case study based program",
-    ],
-  },
-  {
-    category: "Support",
-    icon: LifeBuoy,
-    points: ["1-1 doubt clearing session", "Real Time session"],
-  },
-  {
-    category: "Placements",
-    icon: Briefcase,
-    points: [
-      "Resume Building",
-      "Multiple Mock Interviews",
-      "Placement Assurance",
-      "Multiple Job Interviews",
-    ],
-  },
-  {
-    category: "Industry Experts",
-    icon: Medal,
-    points: [
-      "Experience Instructor",
-      "Certified Professional",
-      "Proven Track Records",
-      "Real World Expertise",
-    ],
-  },
-];
+// const programHighlights = [
+//   {
+//     category: "Classes",
+//     icon: Presentation,
+//     points: [
+//       "100% Live Session",
+//       "Instructor Led Classes",
+//       "Flexible Timing",
+//       "Unlimited Class Access",
+//       "Lifetime Content Access",
+//     ],
+//   },
+//   {
+//     category: "Handson Learning",
+//     icon: Laptop,
+//     points: [
+//       "Live Projects",
+//       "Hands on skill",
+//       "Multiple Projects for each topics",
+//       "Case study based program",
+//     ],
+//   },
+//   {
+//     category: "Support",
+//     icon: LifeBuoy,
+//     points: ["1-1 doubt clearing session", "Real Time session"],
+//   },
+//   {
+//     category: "Placements",
+//     icon: Briefcase,
+//     points: [
+//       "Resume Building",
+//       "Multiple Mock Interviews",
+//       "Placement Assurance",
+//       "Multiple Job Interviews",
+//     ],
+//   },
+//   {
+//     category: "Industry Experts",
+//     icon: Medal,
+//     points: [
+//       "Experience Instructor",
+//       "Certified Professional",
+//       "Proven Track Records",
+//       "Real World Expertise",
+//     ],
+//   },
+// ];
 
 export default function ProfessionalPage() {
   return (
@@ -282,24 +282,25 @@ export default function ProfessionalPage() {
             <div className="w-full md:w-1/2 text-center md:text-left">
               <div className="inline-flex items-center gap-2 bg-white text-primary-75 px-4 py-2 rounded-full text-sm font-medium mb-6 shadow-sm">
                 <Sparkles size={16} className="text-primary-75" />
-                Professional Program
+                Placement Assurance Program
               </div>
 
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-vietnam font-bold text-grey-15 mb-6 leading-tight">
-                15-Day Master Program with Job Guarantee
+                15-Day Career Launch Program
               </h1>
 
               <p className="text-xl text-primary-75 font-semibold mb-6">
-                Your Career, Our Commitment!
+                Exclusively for Eduwise Solutions enrolled learners
               </p>
 
               <p className="text-grey-35 text-base md:text-lg leading-relaxed mb-8">
-                At Eduwise Solutions, we specialize in empowering individuals
-                with the skills and opportunities needed to thrive in
-                today&apos;s competitive job market. Our comprehensive 15-day
-                program is designed to equip you with fundamental skills to
-                crack entry-level job interviews and secure employment with a
-                guaranteed job placement.
+                At Eduwise Solutions, we go beyond training — we prepare you for
+                real-world success. Our intensive 15-day placement-focused
+                program is built to make you job-ready through hands-on skill
+                refinement, interview preparation, and real industry exposure.
+                Supported by our dedicated placement team, you&apos;ll gain the
+                confidence, clarity, and opportunities needed to secure roles
+                across multiple domains and experience levels.
               </p>
             </div>
 
@@ -333,13 +334,7 @@ export default function ProfessionalPage() {
           </div>
 
           {/* Stats Section */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 bg-white rounded-xl shadow-lg p-6">
-            <div className="text-center">
-              <p className="text-3xl font-vietnam font-bold text-primary-75">
-                1000+
-              </p>
-              <p className="text-grey-35">Successful Placements</p>
-            </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-16 bg-white rounded-xl shadow-lg p-6">
             <div className="text-center">
               <p className="text-3xl font-vietnam font-bold text-primary-75">
                 15
@@ -348,15 +343,15 @@ export default function ProfessionalPage() {
             </div>
             <div className="text-center">
               <p className="text-3xl font-vietnam font-bold text-primary-75">
-                150
+                100%
               </p>
-              <p className="text-grey-35">Industry Partners</p>
+              <p className="text-grey-35">Success Rate</p>
             </div>
             <div className="text-center">
               <p className="text-3xl font-vietnam font-bold text-primary-75">
-                100%
+                1500+
               </p>
-              <p className="text-grey-35">Job Guarantee</p>
+              <p className="text-grey-35">Industry Partners</p>
             </div>
           </div>
         </div>
@@ -394,7 +389,7 @@ export default function ProfessionalPage() {
         </div>
       </section>
 
-      <BenefitSection />
+      {/* <BenefitSection /> */}
 
       {/* Who Can Join Section */}
       <section className="py-16 bg-white">
@@ -427,7 +422,7 @@ export default function ProfessionalPage() {
       </section>
 
       {/* Program Highlights Section */}
-      <section className="py-16 bg-light-97">
+      {/* <section className="py-16 bg-light-97">
         <div className="container mx-auto">
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 bg-primary-99 text-primary-75 px-4 py-2 rounded-full text-sm font-medium mb-4 shadow-sm">
@@ -467,7 +462,7 @@ export default function ProfessionalPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Career Assurance Service Section - Enhanced */}
       <section className="py-16 bg-white">
@@ -509,7 +504,7 @@ export default function ProfessionalPage() {
       </section>
 
       {/* Program Overview Section - Redesigned */}
-      <section
+      {/* <section
         id="curriculum"
         className="py-16 bg-gradient-to-b from-light-97 to-white"
       >
@@ -592,7 +587,7 @@ export default function ProfessionalPage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </main>
   );
 }

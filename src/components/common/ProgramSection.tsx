@@ -58,7 +58,7 @@ const programCategories: ProgramCategory[] = [
   },
   {
     id: "professional-cert",
-    title: "Professional Certification",
+    title: "Placement Accelerator",
     subtitle: "100% Job Guarantee",
     description:
       "Get a 100% job guarantee with our 45-day programme! Learn resume building, LinkedIn optimization, business communication, and more.",

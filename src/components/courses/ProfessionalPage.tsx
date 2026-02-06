@@ -2,20 +2,12 @@
 
 import Image from "next/image";
 import {
-  // Check,
-  Briefcase,
   Sparkles,
   Target,
   Users,
   Building,
   Trophy,
   Award,
-  // BookOpen,
-  Laptop,
-  // Zap,
-  LifeBuoy,
-  Presentation,
-  Medal,
   ChevronRight,
 } from "lucide-react";
 

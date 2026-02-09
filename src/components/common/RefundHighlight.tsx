@@ -38,7 +38,7 @@ export default function RefundHighlight() {
                 75% Refund Guarantee
               </h3>
               <p className="text-grey-40 text-sm md:text-base mt-1">
-                We're confident in our placement success
+                We&apos;re confident in our placement success
               </p>
             </div>
           </div>

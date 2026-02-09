@@ -85,3 +85,15 @@ export const FAQ_CATEGORIES_QUERY = `
     }
   }
 `;
+
+export const DEVOPS_FAQ_QUERY = `
+  *[_type == "devopsFAQ"][0] {
+    _id,
+    title,
+    questions[] {
+      _key,
+      question,
+      answer
+    }
+  }
+`;

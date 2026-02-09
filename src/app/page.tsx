@@ -7,6 +7,8 @@ import {
   ProgramSection,
   Testimonials,
   DomainsShowcase,
+  HowItWorks,
+  RefundHighlight,
   // LearningJourney,
 } from "@/components";
 
@@ -17,8 +19,10 @@ export default function Home() {
       <main className="min-h-screen">
         <HeroSection />
         <DomainsShowcase />
+        <HowItWorks />
         <ProgramSection />
         <BenefitSection />
+        <RefundHighlight />
         {/* <LearningJourney /> */}
         <Testimonials />
         <FAQs />

@@ -35,6 +35,7 @@ import DevOpsBenefits from "./DevOpsBenefits";
 import DevOpsCurriculum from "./DevOps_Curriculum";
 import PlacementSection from "./PlacementSection";
 import GoogleReviews from "../common/GoogleReviews";
+import DevOpsFAQ from "./DevOpsFAQ";
 
 const stats = [
   { icon: Users, value: "2000+", label: "Students Trained" },
@@ -46,71 +47,71 @@ const stats = [
 const features = [
   {
     icon: Sparkles,
-    title: "100% Job Assurance",
+    title: "Structured Learning Roadmap",
     description:
-      "Comprehensive Placement Assurance with resume building and interview preparation",
+      "A clear step-by-step curriculum designed to take you from basics to job-ready DevOps skills.",
   },
   {
     icon: Laptop,
-    title: "Industry Projects",
+    title: " Real-World Skill Validation",
     description:
-      "Real-world projects that showcase your skills to potential employers",
+      "Assignments and projects aligned with real industry requirements.",
   },
   {
     icon: Users,
-    title: "Expert Mentors",
+    title: " Course Fee Refund Eligibility",
     description:
-      "Learn from industry professionals with years of DevOps experience",
+      "Complete the course and assignments successfully to become eligible for a 100% course fee refund as per policy.",
   },
   {
     icon: Shield,
-    title: "Lifetime Access",
-    description: "Access to course content and updates even after completion",
+    title: "Lifetime Learning Access",
+    description:
+      "Access course materials and updates even after course completion.",
   },
 ];
 
 const highlights = [
   {
-    category: "Live Classes",
+    category: "Live Interactive Classes",
     icon: BookOpen,
     color: "from-blue-500 to-blue-600",
     points: [
-      "Interactive Live Sessions",
-      "Flexible Timing Options",
-      "Recorded Sessions Access",
-      "Q&A with Experts",
+      "Instructor-led Live Sessions",
+      "Flexible Batch Options",
+      "Recorded Sessions for Revision",
+      "Expert-led Q&A Discussions",
     ],
   },
   {
-    category: "Hands-on Projects",
+    category: "Hands-on Learning & Projects",
     icon: Laptop,
     color: "from-green-500 to-green-600",
     points: [
-      "Capstone Project",
-      "Multiple Mini-Projects",
-      "Industry Case Studies",
-      "Portfolio Building",
+      "Practical DevOps Assignments",
+      "End-to-End Capstone Projects",
+      "Industry-Based Case Studies",
+      "Portfolio Ready Project Work",
     ],
   },
   {
-    category: "24/7 Support",
+    category: "Continuous Support",
     icon: LifeBuoy,
     color: "from-purple-500 to-purple-600",
     points: [
-      "1-1 Mentorship",
-      "Doubt Clearing Sessions",
-      "Peer Learning Groups",
+      "1-on-1 Mentorship",
+      "Regular Doubt Clearing Sessions",
+      "Peer Learning",
       "Technical Support",
     ],
   },
   {
-    category: "Certification",
+    category: "Certification & Career Support",
     icon: Medal,
     color: "from-orange-500 to-orange-600",
     points: [
-      "Industry-Recognized Certificate",
-      "Project Showcase",
-      "LinkedIn Endorsement",
+      "Course Completion Certificate",
+      "Project Showcase Guidance",
       "Career Guidance",
     ],
   },
@@ -146,7 +147,18 @@ const careers = [
   { title: "Cloud Engineer", salary: "₹8-16 LPA", icon: Cloud },
 ];
 
-export default function DevOpsPage() {
+interface DevOpsPageProps {
+  faqData?: {
+    _id: string;
+    title: string;
+    questions: {
+      _key: string;
+      question: string;
+      answer: string;
+    }[];
+  } | null;
+}
+export default function DevOpsPage({ faqData }: DevOpsPageProps) {
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [paymentStatus, setPaymentStatus] = useState<{
     isOpen: boolean;
@@ -529,6 +541,9 @@ export default function DevOpsPage() {
 
       {/* Google Reviews Section */}
       <GoogleReviews categorySlug="devops" />
+
+      {/* FAQ Section */}
+      <DevOpsFAQ faqData={faqData ?? null} />
 
       {/* Comparison Table Section */}
       {/* <DevOpsComparisonTable /> */}

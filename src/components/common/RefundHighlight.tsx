@@ -6,7 +6,7 @@ import Link from "next/link";
 const highlights = [
   "Complete the full course & assignments",
   "Apply for jobs with our placement support",
-  "Not placed? Claim your 75% refund",
+  "Not placed? Claim your 100% refund",
 ];
 
 export default function RefundHighlight() {
@@ -35,7 +35,7 @@ export default function RefundHighlight() {
                 </span>
               </div>
               <h3 className="text-2xl md:text-3xl font-vietnam font-bold text-grey-15">
-                75% Refund Guarantee
+                100% Refund Guarantee
               </h3>
               <p className="text-grey-40 text-sm md:text-base mt-1">
                 We&apos;re confident in our placement success

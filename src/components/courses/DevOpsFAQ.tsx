@@ -1,10 +1,11 @@
+import { HelpCircle } from "lucide-react";
+
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { HelpCircle, Plus } from "lucide-react";
 
 interface DevOpsFAQProps {
   faqData: {
@@ -73,7 +74,7 @@ export default function DevOpsFAQ({ faqData }: DevOpsFAQProps) {
         {/* Simple bottom CTA */}
         <div className="text-center mt-16">
           <p className="text-grey-30 text-lg mb-6">
-            Still have questions? We're here to help!
+            Still have questions? We&apos;re here to help!
           </p>
           <a
             href="/contact"

@@ -30,8 +30,6 @@ import { Button } from "@/components/ui/button";
 import PaymentStatusModal from "../payment/PaymentStatusModal";
 import PaymentModal from "../payment/PaymentModal";
 import DevOpsToolsSection from "../common/DevOpsTools";
-import DevOpsBenefits from "./DevOpsBenefits";
-// import DevOpsComparisonTable from "./DevOpsComparisonTable";
 import DevOpsCurriculum from "./DevOps_Curriculum";
 import PlacementSection from "./PlacementSection";
 import GoogleReviews from "../common/GoogleReviews";

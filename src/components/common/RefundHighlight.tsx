@@ -5,8 +5,8 @@ import Link from "next/link";
 
 const highlights = [
   "Complete the full course & assignments",
-  "Apply for jobs with our placement support",
-  "Not placed? Claim your 100% refund",
+  "Must have overall attendance of 90% in Live Classes",
+  "Not placed? Claim your 100% Fee Refund",
 ];
 
 export default function RefundHighlight() {
@@ -35,7 +35,7 @@ export default function RefundHighlight() {
                 </span>
               </div>
               <h3 className="text-2xl md:text-3xl font-vietnam font-bold text-grey-15">
-                100% Refund Guarantee
+                100% Placement Guarantee
               </h3>
               <p className="text-grey-40 text-sm md:text-base mt-1">
                 We&apos;re confident in our placement success
@@ -61,6 +61,46 @@ export default function RefundHighlight() {
             Learn More
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
+        </div>
+
+        {/* Note Section */}
+        <div className="w-full bg-gradient-to-r from-amber-50 to-orange-50 border-l-4 border-amber-400 rounded-lg px-6 py-4 mt-8 shadow-sm">
+          <div className="flex items-start gap-3">
+            <div className="flex-shrink-0 mt-0.5">
+              <svg
+                className="w-5 h-5 text-amber-600"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </div>
+            <div className="flex-1">
+              <p className="text-sm md:text-base text-amber-900 font-bold mb-3">
+                Important Policy Information
+              </p>
+              <ul className="space-y-2 text-xs md:text-sm text-amber-800">
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-600 mt-1 flex-shrink-0">•</span>
+                  <span>
+                    If you are changing batch, you will not be eligible for
+                    refund as per policy.
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-600 mt-1 flex-shrink-0">•</span>
+                  <span>
+                    Course duration will start from the date of allotment of
+                    Batch.
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </section>

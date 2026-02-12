@@ -36,6 +36,7 @@ import DevOpsCurriculum from "./DevOps_Curriculum";
 import PlacementSection from "./PlacementSection";
 import GoogleReviews from "../common/GoogleReviews";
 import DevOpsFAQ from "./DevOpsFAQ";
+import RefundHighlight from "../common/RefundHighlight";
 
 const stats = [
   { icon: Users, value: "2000+", label: "Students Trained" },
@@ -322,6 +323,8 @@ export default function DevOpsPage({ faqData }: DevOpsPageProps) {
         </div>
       </section>
 
+      <RefundHighlight />
+
       {/* Features Section */}
       <section className="py-20 bg-light-97">
         <div className="container mx-auto">
@@ -400,9 +403,6 @@ export default function DevOpsPage({ faqData }: DevOpsPageProps) {
           </div>
         </div>
       </section>
-
-      {/* Benefits Section */}
-      <DevOpsBenefits />
 
       {/* Program Highlights Section */}
       <section className="py-20 bg-light-97">
@@ -542,12 +542,6 @@ export default function DevOpsPage({ faqData }: DevOpsPageProps) {
       {/* Google Reviews Section */}
       <GoogleReviews categorySlug="devops" />
 
-      {/* FAQ Section */}
-      <DevOpsFAQ faqData={faqData ?? null} />
-
-      {/* Comparison Table Section */}
-      {/* <DevOpsComparisonTable /> */}
-
       {/* Career Opportunities & Pricing Section */}
       <section className="py-20 bg-gradient-to-br from-slate-50 via-white to-blue-50 relative overflow-hidden">
         {/* Background Elements */}
@@ -652,6 +646,9 @@ export default function DevOpsPage({ faqData }: DevOpsPageProps) {
           </div>
         </div>
       </section>
+
+      {/* FAQ Section */}
+      <DevOpsFAQ faqData={faqData ?? null} />
     </main>
   );
 }

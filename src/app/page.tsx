@@ -8,7 +8,6 @@ import {
   Testimonials,
   DomainsShowcase,
   HowItWorks,
-  RefundHighlight,
   // LearningJourney,
 } from "@/components";
 
@@ -22,7 +21,6 @@ export default function Home() {
         <HowItWorks />
         <ProgramSection />
         <BenefitSection />
-        <RefundHighlight />
         {/* <LearningJourney /> */}
         <Testimonials />
         <FAQs />

@@ -6,6 +6,11 @@ import {
   Mail,
   Clock,
   Calendar,
+  CheckCircle2,
+  Trophy,
+  BookOpen,
+  Target,
+  Users,
 } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -29,7 +34,7 @@ interface AccordionSection {
   content: {
     highlightTitle: string;
     highlightIcon: React.ElementType;
-    highlightText: string;
+    highlightText?: string;
     listItems: string[];
   };
 }
@@ -171,11 +176,11 @@ export default function RefundPolicyPage() {
       title: "Refund Eligibility",
       content: {
         highlightIcon: Clock,
-        highlightTitle: "7-Day Window",
+        highlightTitle: "30-Day Window",
         highlightText:
-          "Refunds are available within the first 3 sessions (approximately 7 days).",
+          "Refunds are available within 30 days.",
         listItems: [
-          "Must attend and actively participate in all first 3 sessions",
+          "Must attend and actively participate in all sessions",
           "Complete and submit all assignments during this period",
           "Provide a valid reason for the refund request",
         ],
@@ -272,11 +277,206 @@ export default function RefundPolicyPage() {
               </TabsList>
 
               <TabsContent value="courses">
+                {/* 100% Refund Eligibility Section */}
+                <Card className="mb-8 border-2 border-primary-75/30 shadow-xl">
+                  <CardHeader className="bg-gradient-to-r from-primary-99 to-white pb-6">
+                    <CardTitle className="flex items-center gap-3 text-2xl">
+                      <Trophy className="w-8 h-8 text-primary-75" />
+                      100% Course Fee Refund Eligibility
+                    </CardTitle>
+                    <p className="text-grey-35 mt-2 text-base">
+                      Complete the program successfully and qualify for a full
+                      refund if not placed
+                    </p>
+                  </CardHeader>
+                  <CardContent className="pt-6">
+                    {/* Main Requirement */}
+                    <div className="bg-gradient-to-br from-primary-75 to-primary-90 text-white rounded-xl p-6 mb-6 shadow-lg">
+                      <div className="flex items-start gap-4">
+                        <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center flex-shrink-0">
+                          <CheckCircle2 className="w-7 h-7" />
+                        </div>
+                        <div>
+                          <h3 className="text-xl font-bold mb-2">
+                            Main Requirement
+                          </h3>
+                          <p className="text-white/90 text-base leading-relaxed">
+                            To qualify for the refund, you must complete{" "}
+                            <strong>100% of the course content</strong> within
+                            the duration of the course from the date of
+                            purchase.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Detailed Requirements */}
+                    <div className="space-y-6">
+                      <h3 className="text-xl font-vietnam font-bold text-grey-15 mb-4">
+                        Content Coverage Requirements:
+                      </h3>
+
+                      {/* Chapter & Practice */}
+                      <div className="bg-gradient-to-br from-blue-50 to-white rounded-xl p-6 border border-blue-200 shadow-md hover:shadow-lg transition-shadow duration-300">
+                        <div className="flex items-start gap-4 mb-4">
+                          <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <BookOpen className="w-6 h-6 text-white" />
+                          </div>
+                          <div className="flex-1">
+                            <h4 className="text-lg font-bold text-grey-15 mb-2">
+                              1. Chapter & Practice
+                            </h4>
+                            <div className="bg-white rounded-lg p-4 border border-blue-100">
+                              <p className="text-grey-35 mb-3">
+                                <strong className="text-blue-600">
+                                  100% completion required
+                                </strong>{" "}
+                                including:
+                              </p>
+                              <ul className="space-y-2 ml-4">
+                                <li className="flex items-start gap-2 text-grey-35">
+                                  <CheckCircle2 className="w-4 h-4 text-blue-500 mt-1 flex-shrink-0" />
+                                  <span>All Videos</span>
+                                </li>
+                                <li className="flex items-start gap-2 text-grey-35">
+                                  <CheckCircle2 className="w-4 h-4 text-blue-500 mt-1 flex-shrink-0" />
+                                  <span>All Articles</span>
+                                </li>
+                                <li className="flex items-start gap-2 text-grey-35">
+                                  <CheckCircle2 className="w-4 h-4 text-blue-500 mt-1 flex-shrink-0" />
+                                  <span>All Problems</span>
+                                </li>
+                                <li className="flex items-start gap-2 text-grey-35">
+                                  <CheckCircle2 className="w-4 h-4 text-blue-500 mt-1 flex-shrink-0" />
+                                  <span>All Quizzes</span>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Contest */}
+                      <div className="bg-gradient-to-br from-purple-50 to-white rounded-xl p-6 border border-purple-200 shadow-md hover:shadow-lg transition-shadow duration-300">
+                        <div className="flex items-start gap-4 mb-4">
+                          <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <Trophy className="w-6 h-6 text-white" />
+                          </div>
+                          <div className="flex-1">
+                            <h4 className="text-lg font-bold text-grey-15 mb-2">
+                              2. Contest Participation
+                            </h4>
+                            <div className="bg-white rounded-lg p-4 border border-purple-100">
+                              <p className="text-grey-35 mb-2">
+                                <strong className="text-purple-600">
+                                  Minimum 90% of Contests
+                                </strong>{" "}
+                                must be solved
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Problems */}
+                      <div className="bg-gradient-to-br from-green-50 to-white rounded-xl p-6 border border-green-200 shadow-md hover:shadow-lg transition-shadow duration-300">
+                        <div className="flex items-start gap-4 mb-4">
+                          <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <Target className="w-6 h-6 text-white" />
+                          </div>
+                          <div className="flex-1">
+                            <h4 className="text-lg font-bold text-grey-15 mb-2">
+                              3. Problem Solving
+                            </h4>
+                            <div className="bg-white rounded-lg p-4 border border-green-100 space-y-3">
+                              <p className="text-grey-35">
+                                <strong className="text-green-600">
+                                  90% completion required
+                                </strong>
+                              </p>
+                              <div className="bg-green-50 rounded-lg p-3 border border-green-200">
+                                <p className="text-sm text-grey-35">
+                                  <strong>Important:</strong> Marks are awarded
+                                  only for the{" "}
+                                  <strong>first correct attempt</strong>.
+                                  Subsequent attempts won&apos;t earn marks. An
+                                  incorrect first attempt will increase your
+                                  progress but not marks.
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Live Class */}
+                      <div className="bg-gradient-to-br from-orange-50 to-white rounded-xl p-6 border border-orange-200 shadow-md hover:shadow-lg transition-shadow duration-300">
+                        <div className="flex items-start gap-4 mb-4">
+                          <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <Users className="w-6 h-6 text-white" />
+                          </div>
+                          <div className="flex-1">
+                            <h4 className="text-lg font-bold text-grey-15 mb-2">
+                              4. Live Class Attendance
+                            </h4>
+                            <div className="bg-white rounded-lg p-4 border border-orange-100 space-y-3">
+                              <p className="text-grey-35">
+                                <strong className="text-orange-600">
+                                  90% overall attendance required
+                                </strong>
+                              </p>
+                              <div className="bg-orange-50 rounded-lg p-3 border border-orange-200">
+                                <p className="text-sm text-grey-35 mb-2">
+                                  <strong>Attendance Criteria:</strong>
+                                </p>
+                                <ul className="space-y-1 ml-4">
+                                  <li className="flex items-start gap-2 text-sm text-grey-35">
+                                    <CheckCircle2 className="w-4 h-4 text-orange-500 mt-0.5 flex-shrink-0" />
+                                    <span>
+                                      Attendance is awarded if you attend more
+                                      than 90% of a single class
+                                    </span>
+                                  </li>
+                                  <li className="flex items-start gap-2 text-sm text-grey-35">
+                                    <CheckCircle2 className="w-4 h-4 text-orange-500 mt-0.5 flex-shrink-0" />
+                                    <span>
+                                      You must maintain 90% overall attendance
+                                      across all batch classes
+                                    </span>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Important Note */}
+                    <div className="mt-8 bg-red-50 border-l-4 border-red-500 rounded-lg p-6">
+                      <div className="flex items-start gap-3">
+                        <AlertCircle className="w-6 h-6 text-red-500 flex-shrink-0 mt-0.5" />
+                        <div>
+                          <h4 className="font-bold text-red-900 mb-2 text-lg">
+                            Important Note
+                          </h4>
+                          <p className="text-red-800">
+                            If you are changing batches, we{" "}
+                            <strong>do not provide a refund</strong> on the
+                            course.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Regular Refund Guidelines */}
                 <Card className="mb-6">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-3">
                       <ShieldCheck className="w-7 h-7 text-primary-75" />
-                      Course Refund Guidelines
+                      Standard Course Refund Guidelines
                     </CardTitle>
                   </CardHeader>
                   <CardContent>

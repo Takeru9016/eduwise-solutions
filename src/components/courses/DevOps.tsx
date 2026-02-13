@@ -261,12 +261,6 @@ const TargetCard = ({
   </div>
 );
 
-interface CareerCardProps {
-  icon: React.ComponentType<{ className?: string }>;
-  title: string;
-  salary: string;
-}
-
 // ============================================================================
 // MAIN COMPONENT
 // ============================================================================

@@ -8,7 +8,7 @@ import {
   Testimonials,
   DomainsShowcase,
   HowItWorks,
-  // LearningJourney,
+  FeaturedPress,
 } from "@/components";
 
 export default function Home() {
@@ -19,9 +19,9 @@ export default function Home() {
         <HeroSection />
         <DomainsShowcase />
         <HowItWorks />
+        <FeaturedPress />
         <ProgramSection />
         <BenefitSection />
-        {/* <LearningJourney /> */}
         <Testimonials />
         <FAQs />
       </main>

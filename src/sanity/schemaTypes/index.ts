@@ -10,6 +10,7 @@ import { googleReviewType } from "./googleReviewType";
 import { testimonialType } from "./testimonialType";
 import { faqCategoryType } from "./faqCategoryType";
 import { devopsFAQType } from "./devopsFAQ";
+import { pressFeatureType } from "./pressFeatureType";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -23,5 +24,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     testimonialType,
     faqCategoryType,
     devopsFAQType,
+    pressFeatureType,
   ],
 };

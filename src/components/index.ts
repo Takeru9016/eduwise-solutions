@@ -21,6 +21,7 @@ export { default as LearningJourney } from "./common/LearningJourney";
 export { default as HowItWorks } from "./common/HowItWorks";
 export { default as AWSPartnerBadge } from "./common/AWSPartnerBadge";
 export { default as RefundHighlight } from "./common/RefundHighlight";
+export { default as FeaturedPress } from "./common/FeaturedPress";
 
 export { default as OurCourse } from "./courses/OurCourse";
 export { default as ProfessionalPage } from "./courses/ProfessionalPage";

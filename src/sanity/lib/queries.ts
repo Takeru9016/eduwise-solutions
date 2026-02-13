@@ -97,3 +97,17 @@ export const DEVOPS_FAQ_QUERY = `
     }
   }
 `;
+
+export const PRESS_FEATURES_QUERY = `
+  *[_type == "pressFeature"] | order(order asc) {
+    _id,
+    publicationName,
+    "publicationLogoUrl": publicationLogo.asset->url,
+    headline,
+    description,
+    articleUrl,
+    publishedAt,
+    order,
+    featured
+  }
+`;

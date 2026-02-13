@@ -267,18 +267,6 @@ interface CareerCardProps {
   salary: string;
 }
 
-const CareerCard = ({ icon: Icon, title, salary }: CareerCardProps) => (
-  <div className="group flex flex-col items-center text-center p-4 rounded-xl bg-gradient-to-br from-slate-50 to-white hover:from-primary-75/5 hover:to-primary-90/5 transition-all duration-300 border border-slate-100 hover:border-primary-75/20 hover:shadow-lg">
-    <div className="w-12 h-12 bg-gradient-to-br from-primary-75/20 to-primary-90/20 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
-      <Icon className="w-6 h-6 text-primary-75" />
-    </div>
-    <h4 className="font-vietnam font-bold text-grey-15 text-base mb-1">
-      {title}
-    </h4>
-    <p className="text-primary-75 font-semibold text-sm">{salary}</p>
-  </div>
-);
-
 // ============================================================================
 // MAIN COMPONENT
 // ============================================================================
@@ -775,7 +763,7 @@ export default function DevOpsPage({ faqData }: DevOpsPageProps) {
                   {/* What's Included */}
                   <div className="mb-6 space-y-3">
                     <p className="text-white/90 font-semibold text-sm uppercase tracking-wide mb-3">
-                      What's Included:
+                      What&apos;s Included:
                     </p>
                     {[
                       "3.5 Months Live Training",

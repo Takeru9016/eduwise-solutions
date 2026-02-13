@@ -2,7 +2,6 @@ import { ArrowRight, Newspaper } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Skeleton } from "@/components/ui/skeleton";
 import { client } from "@/sanity/lib/client";
 import { PRESS_FEATURES_QUERY } from "@/sanity/lib/queries";
 
@@ -19,27 +18,10 @@ interface SanityPressFeature {
   featured?: boolean;
 }
 
-// Loading skeleton component
-function PressFeatureSkeleton() {
-  return (
-    <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-light-90">
-      <div className="mb-6 h-16 flex items-center">
-        <Skeleton className="h-12 w-40" />
-      </div>
-      <Skeleton className="h-6 w-full mb-2" />
-      <Skeleton className="h-6 w-3/4 mb-4" />
-      <Skeleton className="h-4 w-full mb-2" />
-      <Skeleton className="h-4 w-full mb-2" />
-      <Skeleton className="h-4 w-2/3 mb-6" />
-      <Skeleton className="h-5 w-32" />
-    </div>
-  );
-}
-
 // Main component - Server Component
 export default async function FeaturedPress() {
   let pressFeatures: SanityPressFeature[] = [];
-  let loading = false;
+  const loading = false;
 
   try {
     pressFeatures =

@@ -10,7 +10,7 @@ import {
   Sparkles,
   Laptop,
   LifeBuoy,
-  Briefcase,
+  // Briefcase,
   Medal,
   Zap,
   IndianRupee,
@@ -116,26 +116,26 @@ const highlights = [
   },
 ];
 
-const targets = [
-  {
-    title: "Engineering Students",
-    subtitle: "3-year degree holders",
-    icon: Users,
-    description: "Perfect for students looking to enter the tech industry",
-  },
-  {
-    title: "Career Changers",
-    subtitle: "From any background",
-    icon: Settings2,
-    description: "Transform your career with in-demand DevOps skills",
-  },
-  {
-    title: "Working Professionals",
-    subtitle: "IT & Non-IT backgrounds",
-    icon: Briefcase,
-    description: "Upskill and advance your career in DevOps",
-  },
-];
+// const targets = [
+//   {
+//     title: "Engineering Students",
+//     subtitle: "3-year degree holders",
+//     icon: Users,
+//     description: "Perfect for students looking to enter the tech industry",
+//   },
+//   {
+//     title: "Career Changers",
+//     subtitle: "From any background",
+//     icon: Settings2,
+//     description: "Transform your career with in-demand DevOps skills",
+//   },
+//   {
+//     title: "Working Professionals",
+//     subtitle: "IT & Non-IT backgrounds",
+//     icon: Briefcase,
+//     description: "Upskill and advance your career in DevOps",
+//   },
+// ];
 
 const careers = [
   { title: "DevOps Engineer", salary: "₹8-15 LPA", icon: ServerCog },
@@ -146,10 +146,7 @@ const careers = [
   { title: "Cloud Engineer", salary: "₹8-16 LPA", icon: Cloud },
 ];
 
-// ============================================================================
 // HELPER COMPONENTS
-// ============================================================================
-
 interface SectionHeaderProps {
   badge: {
     icon: React.ComponentType<{ size?: number; className?: string }>;
@@ -236,35 +233,32 @@ const FeatureCard = ({ icon: Icon, title, description }: FeatureCardProps) => (
   </div>
 );
 
-interface TargetCardProps {
-  icon: React.ComponentType<{ className?: string }>;
-  title: string;
-  subtitle: string;
-  description: string;
-}
+// interface TargetCardProps {
+//   icon: React.ComponentType<{ className?: string }>;
+//   title: string;
+//   subtitle: string;
+//   description: string;
+// }
 
-const TargetCard = ({
-  icon: Icon,
-  title,
-  subtitle,
-  description,
-}: TargetCardProps) => (
-  <div className="bg-gradient-to-br from-primary-99 to-white rounded-2xl p-8 shadow-lg border border-primary-95 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 text-center group">
-    <div className="w-20 h-20 bg-gradient-to-r from-primary-75 to-primary-90 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-      <Icon className="h-10 w-10 text-white" />
-    </div>
-    <h3 className="text-2xl font-vietnam font-bold text-grey-15 mb-2">
-      {title}
-    </h3>
-    <p className="text-primary-75 font-semibold mb-3">{subtitle}</p>
-    <p className="text-grey-35 leading-relaxed">{description}</p>
-  </div>
-);
+// const TargetCard = ({
+//   icon: Icon,
+//   title,
+//   subtitle,
+//   description,
+// }: TargetCardProps) => (
+//   <div className="bg-gradient-to-br from-primary-99 to-white rounded-2xl p-8 shadow-lg border border-primary-95 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 text-center group">
+//     <div className="w-20 h-20 bg-gradient-to-r from-primary-75 to-primary-90 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+//       <Icon className="h-10 w-10 text-white" />
+//     </div>
+//     <h3 className="text-2xl font-vietnam font-bold text-grey-15 mb-2">
+//       {title}
+//     </h3>
+//     <p className="text-primary-75 font-semibold mb-3">{subtitle}</p>
+//     <p className="text-grey-35 leading-relaxed">{description}</p>
+//   </div>
+// );
 
-// ============================================================================
 // MAIN COMPONENT
-// ============================================================================
-
 interface DevOpsPageProps {
   faqData?: {
     _id: string;
@@ -430,7 +424,7 @@ export default function DevOpsPage({ faqData }: DevOpsPageProps) {
       </section>
 
       {/* Who Can Join Section */}
-      <section className="py-20 bg-white">
+      {/* <section className="py-20 bg-white">
         <div className="container mx-auto">
           <SectionHeader
             badge={{ icon: Users, text: "Target Audience" }}
@@ -444,7 +438,7 @@ export default function DevOpsPage({ faqData }: DevOpsPageProps) {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Program Benefits Section - Modern Split Design */}
       <section className="py-24 bg-gradient-to-br from-primary-99/40 via-white to-primary-95/30 relative overflow-hidden">

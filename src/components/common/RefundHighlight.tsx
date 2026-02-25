@@ -4,9 +4,9 @@ import { ShieldCheck, ArrowRight, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 
 const highlights = [
-  "Complete the full course & assignments",
+  "Complete the 100% Course",
   "Must have overall attendance of 90% in Live Classes",
-  "Not placed? Claim your 100% Fee Refund",
+  "Complete all Assignments and Projects",
 ];
 
 export default function RefundHighlight() {

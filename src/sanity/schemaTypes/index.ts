@@ -11,6 +11,7 @@ import { testimonialType } from "./testimonialType";
 import { faqCategoryType } from "./faqCategoryType";
 import { devopsFAQType } from "./devopsFAQ";
 import { pressFeatureType } from "./pressFeatureType";
+import { courseType } from "./courseType";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -25,5 +26,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     faqCategoryType,
     devopsFAQType,
     pressFeatureType,
+    courseType,
   ],
 };

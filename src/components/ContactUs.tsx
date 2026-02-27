@@ -12,6 +12,7 @@ import { submitWithRetry } from "@/utils/api";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useSanityCourses } from "@/hooks/useSanityCourses";
 import {
   Select,
   SelectContent,
@@ -48,11 +49,6 @@ const contactFormSchema = z.object({
 });
 
 type ContactFormValues = z.infer<typeof contactFormSchema>;
-
-interface SubjectOption {
-  value: string;
-  label: string;
-}
 
 interface FormFieldProps {
   name: keyof ContactFormValues;
@@ -126,21 +122,8 @@ export default function ContactUsSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const subjects: SubjectOption[] = [
-    { value: "devops", label: "DevOps & Cloud Computing" },
-    { value: "aiml", label: "Artificial Intelligence & Machine Learning" },
-    {
-      value: "ds",
-      label: "Data Science",
-    },
-    { value: "cybersec", label: "Cyber Security" },
-    {
-      value: "professional_certification",
-      label: "Placement Accelerator",
-    },
-    { value: "fulstack", label: "Full Stack Web Development" },
-    { value: "other", label: "Other" },
-  ];
+  const { courses: subjects, isLoading: isLoadingSubjects } =
+    useSanityCourses();
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
@@ -289,7 +272,13 @@ export default function ContactUsSection() {
                           >
                             <FormControl>
                               <SelectTrigger className="h-12 bg-light-97 border-light-90">
-                                <SelectValue placeholder="Select a subject" />
+                                <SelectValue
+                                  placeholder={
+                                    isLoadingSubjects ? "Loading courses..." : (
+                                      "Select a subject"
+                                    )
+                                  }
+                                />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>

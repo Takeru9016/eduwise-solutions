@@ -9,6 +9,10 @@ interface PaymentModalProps {
   onClose: () => void;
   amount: number;
   programName: string;
+  onPaymentComplete?: (
+    status: "success" | "failure" | "cancelled",
+    message: string,
+  ) => void;
 }
 
 export default function PaymentModal({
@@ -16,6 +20,7 @@ export default function PaymentModal({
   onClose,
   amount,
   programName,
+  onPaymentComplete,
 }: PaymentModalProps) {
   if (!isOpen) return null;
 
@@ -44,9 +49,13 @@ export default function PaymentModal({
         </div>
 
         <div className="mt-2">
-          <PaymentForm amount={amount} programName={programName} />
+          <PaymentForm
+            amount={amount}
+            programName={programName}
+            onPaymentComplete={onPaymentComplete}
+          />
         </div>
       </div>
     </div>
   );
-} 
+}

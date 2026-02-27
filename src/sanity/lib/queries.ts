@@ -111,3 +111,69 @@ export const PRESS_FEATURES_QUERY = `
     featured
   }
 `;
+
+// Course Queries
+export const COURSE_BY_SLUG_QUERY = `
+  *[_type == "course" && slug.current == $slug][0] {
+    _id,
+    title,
+    slug,
+    subtitle,
+    description,
+    category,
+    "heroImageUrl": heroImage.asset->url,
+    accentColor,
+    emoji,
+    duration,
+    featured,
+    stats,
+    features,
+    highlights,
+    modules,
+    price,
+    originalPrice,
+    emiOption,
+    whatsIncluded,
+    careerPaths,
+    targetAudience,
+    tools[] {
+      name,
+      "logoUrl": logo.asset->url
+    },
+    prtSteps,
+    isaSteps,
+    careerTrack,
+    hiringPartners[] {
+      name,
+      "logoUrl": logo.asset->url
+    },
+    careerServiceFee,
+    faq,
+    batchInfo,
+    industryGrowth,
+    seoTitle,
+    seoDescription
+  }
+`;
+
+export const ALL_COURSE_SLUGS_QUERY = `
+  *[_type == "course" && defined(slug.current)] {
+    "slug": slug.current
+  }
+`;
+
+export const COURSES_LIST_QUERY = `
+  *[_type == "course"] | order(category asc, title asc) {
+    _id,
+    title,
+    slug,
+    subtitle,
+    category,
+    "heroImageUrl": heroImage.asset->url,
+    emoji,
+    duration,
+    price,
+    originalPrice,
+    featured
+  }
+`;

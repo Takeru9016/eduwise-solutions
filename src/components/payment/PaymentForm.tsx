@@ -3,8 +3,6 @@
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 
-import PaymentStatusModal from "./PaymentStatusModal";
-
 // Add Razorpay types
 interface RazorpayResponse {
   razorpay_payment_id: string;
@@ -48,10 +46,19 @@ declare global {
 interface PaymentFormProps {
   amount: number;
   programName: string;
+  onPaymentComplete?: (
+    status: "success" | "failure" | "cancelled",
+    message: string,
+  ) => void;
 }
 
-export default function PaymentForm({ amount, programName }: PaymentFormProps) {
+export default function PaymentForm({
+  amount,
+  programName,
+  onPaymentComplete,
+}: PaymentFormProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const [isVerifying, setIsVerifying] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -61,14 +68,6 @@ export default function PaymentForm({ amount, programName }: PaymentFormProps) {
     fullName: "",
     email: "",
     mobile: "",
-  });
-  const [paymentStatus, setPaymentStatus] = useState<{
-    isOpen: boolean;
-    status: "success" | "failure" | "cancelled";
-    message?: string;
-  }>({
-    isOpen: false,
-    status: "success",
   });
 
   const validateForm = () => {
@@ -155,6 +154,7 @@ export default function PaymentForm({ amount, programName }: PaymentFormProps) {
         order_id: data.order.id,
         handler: async function (response: RazorpayResponse) {
           try {
+            setIsVerifying(true);
             // Verify payment
             const verifyResponse = await fetch("/api/verify-payment", {
               method: "POST",
@@ -174,34 +174,40 @@ export default function PaymentForm({ amount, programName }: PaymentFormProps) {
               // Store user data in Google Sheets
               await storeUserData(response.razorpay_payment_id);
 
-              setPaymentStatus({
-                isOpen: true,
-                status: "success",
-                message: `Your payment was successful! Welcome to our ${programName}.`,
-              });
+              if (onPaymentComplete) {
+                onPaymentComplete(
+                  "success",
+                  `Your payment was successful! Welcome to our ${programName}.`,
+                );
+              }
             } else {
-              setPaymentStatus({
-                isOpen: true,
-                status: "failure",
-                message: "Payment verification failed. Please contact support.",
-              });
+              if (onPaymentComplete) {
+                onPaymentComplete(
+                  "failure",
+                  "Payment verification failed. Please contact support.",
+                );
+              }
             }
           } catch (error) {
             console.error("Payment verification error:", error);
-            setPaymentStatus({
-              isOpen: true,
-              status: "failure",
-              message: "Payment verification failed. Please contact support.",
-            });
+            if (onPaymentComplete) {
+              onPaymentComplete(
+                "failure",
+                "Payment verification failed. Please contact support.",
+              );
+            }
+          } finally {
+            setIsVerifying(false);
           }
         },
         modal: {
           ondismiss: function () {
-            setPaymentStatus({
-              isOpen: true,
-              status: "cancelled",
-              message: "You have cancelled the payment process.",
-            });
+            if (onPaymentComplete) {
+              onPaymentComplete(
+                "cancelled",
+                "You have cancelled the payment process.",
+              );
+            }
           },
         },
         prefill: {
@@ -218,11 +224,12 @@ export default function PaymentForm({ amount, programName }: PaymentFormProps) {
       razorpay.open();
     } catch (error) {
       console.error("Payment error:", error);
-      setPaymentStatus({
-        isOpen: true,
-        status: "failure",
-        message: "Failed to initiate payment. Please try again.",
-      });
+      if (onPaymentComplete) {
+        onPaymentComplete(
+          "failure",
+          "Failed to initiate payment. Please try again.",
+        );
+      }
     } finally {
       setIsLoading(false);
     }
@@ -261,12 +268,20 @@ export default function PaymentForm({ amount, programName }: PaymentFormProps) {
     }
   };
 
-  const handleCloseModal = () => {
-    setPaymentStatus((prev) => ({ ...prev, isOpen: false }));
-  };
-
   return (
-    <div className="bg-white rounded-lg p-4">
+    <div className="bg-white rounded-lg p-4 relative">
+      {isVerifying && (
+        <div className="absolute inset-0 bg-white/80 backdrop-blur-sm z-10 flex flex-col items-center justify-center rounded-lg">
+          <Loader2 className="w-10 h-10 animate-spin text-primary-75 mb-4" />
+          <p className="text-gray-900 font-semibold text-lg">
+            Verifying payment...
+          </p>
+          <p className="text-sm text-gray-500 mt-2 text-center px-4">
+            Please do not close this window
+          </p>
+        </div>
+      )}
+
       <h3 className="text-xl font-semibold mb-4">Complete Your Enrollment</h3>
 
       <div className="space-y-4">
@@ -354,14 +369,6 @@ export default function PaymentForm({ amount, programName }: PaymentFormProps) {
           </button>
         </div>
       </div>
-
-      {/* Payment Status Modal */}
-      <PaymentStatusModal
-        isOpen={paymentStatus.isOpen}
-        onClose={handleCloseModal}
-        status={paymentStatus.status}
-        message={paymentStatus.message}
-      />
     </div>
   );
 }

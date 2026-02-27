@@ -24,22 +24,9 @@ export { default as RefundHighlight } from "./common/RefundHighlight";
 export { default as FeaturedPress } from "./common/FeaturedPress";
 
 export { default as OurCourse } from "./courses/OurCourse";
-export { default as ProfessionalPage } from "./courses/ProfessionalPage";
-export { default as AIMLPage } from "./courses/AIMLPage";
-export { default as CyberSecPage } from "./courses/CyberSec";
-export { default as DSPage } from "./courses/DSPage";
-export { default as FullStackPage } from "./courses/FullStack";
-export { default as DevOpsPage } from "./courses/DevOps";
-
-export { default as MastersPage } from "./masters/MastersPage";
-export { default as MBA } from "./masters/MBA";
-export { default as MSc_in_CC } from "./masters/MSc_in_CC";
-export { default as MSc_in_DS } from "./masters/MSc_in_DS";
 
 export { default as PrivacyPolicy } from "./legal/PrivacyPolicy";
 export { default as RefundPage } from "./legal/RefundPage";
 export { default as TermsOfService } from "./legal/TermsOfService";
-export { default as DevOpsBenefits } from "./courses/DevOpsBenefits";
-export { default as DevOpsComparisonTable } from "./courses/DevOpsComparisonTable";
 
 export { default as Chatbot } from "./chatbot/Chatbot";

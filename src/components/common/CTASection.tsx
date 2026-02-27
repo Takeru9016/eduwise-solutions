@@ -37,9 +37,9 @@ const CTAButton = ({ text, href, variant, icon: Icon }: CTAButton) => {
       variant={isPrimary ? "default" : "outline"}
       className={`
         ${
-          isPrimary
-            ? "bg-primary-70 hover:bg-primary-75 text-white group"
-            : "border-primary-70 text-primary-70 hover:bg-primary-95/50"
+          isPrimary ?
+            "bg-primary-70 hover:bg-primary-75 text-white group"
+          : "border-primary-70 text-primary-70 hover:bg-primary-95/50"
         } 
         px-8 py-3 rounded-lg transition-all duration-300
       `}
@@ -108,8 +108,8 @@ export default function CTASection() {
 
             <p className="text-lg text-grey-45 max-w-xl">
               Unlock a world of opportunities with our cutting-edge Online
-              Masters Program. Designed for ambitious professionals who want to
-              stay ahead in a rapidly evolving job market.
+              Professional Programs. Designed for ambitious professionals who
+              want to stay ahead in a rapidly evolving job market.
             </p>
 
             {/* Key Features */}

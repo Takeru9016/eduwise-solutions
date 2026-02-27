@@ -93,12 +93,12 @@ export default function FAQsSection() {
   //   {
   //     question: "Can I earn while learning?",
   //     answer:
-  //       "Absolutely! Our Online Masters and select professional programs are designed to let you balance work and studies.",
+  //       "Absolutely! Our professional programs are designed to let you balance work and studies.",
   //   },
   //   {
   //     question: "What types of courses are available?",
   //     answer:
-  //       "We offer a wide range of programs, including Online Masters, Skill Development courses, Job Guaranteed courses, MBA programs, and more.",
+  //       "We offer a wide range of programs, including Skill Development courses, Job Guaranteed courses, and more.",
   //   },
   //   {
   //     question: "Do you offer payment plans?",
@@ -144,7 +144,7 @@ export default function FAQsSection() {
 
           {/* Right Column - FAQ Accordion */}
           <div className="bg-white rounded-2xl p-8 shadow-lg border border-light-90">
-          <SupportCard />
+            <SupportCard />
             {/* <Accordion type="single" collapsible className="w-full space-y-4">
               {homepageFaqs.map((faq, index) => (
                 <FAQItem key={index} faq={faq} index={index} />

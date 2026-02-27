@@ -44,6 +44,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
+import { useSanityCourses } from "@/hooks/useSanityCourses";
 
 // Form schema with validation rules
 const formSchema = z.object({
@@ -70,20 +71,6 @@ interface BookFormDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
-
-// Course options
-const COURSES = [
-  { value: "devops", label: "DevOps & Cloud Computing" },
-  { value: "mba", label: "Master in Business Administration (MBA)" },
-  {
-    value: "msc_in_ds",
-    label: "MSc in Artificial Intelligence and Data Science",
-  },
-  { value: "msc_in_cc", label: "MSc in Cloud Computing" },
-  { value: "professional_certification", label: "Placement Accelerator" },
-  { value: "certification_programme", label: "Certification Programme" },
-  { value: "other", label: "Other" },
-];
 
 // Time slot generator
 const generateTimeSlots = () => {
@@ -116,6 +103,7 @@ export default function BookFormDialog({
 }: BookFormDialogProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [phoneValue, setPhoneValue] = useState("");
+  const { courses, isLoading: isLoadingCourses } = useSanityCourses();
 
   // Initialize form with react-hook-form
   const form = useForm<FormValues>({
@@ -318,7 +306,13 @@ export default function BookFormDialog({
                     >
                       <FormControl>
                         <SelectTrigger className="h-10">
-                          <SelectValue placeholder="Select a course" />
+                          <SelectValue
+                            placeholder={
+                              isLoadingCourses ? "Loading courses..." : (
+                                "Select a course"
+                              )
+                            }
+                          />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent
@@ -326,7 +320,7 @@ export default function BookFormDialog({
                         align="start"
                         sideOffset={8}
                       >
-                        {COURSES.map((course) => (
+                        {courses.map((course) => (
                           <SelectItem
                             key={course.value}
                             value={course.label}

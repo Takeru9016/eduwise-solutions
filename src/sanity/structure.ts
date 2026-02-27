@@ -18,6 +18,15 @@ export const structure: StructureResolver = (S) =>
             ]),
         ),
       S.divider(),
+      // Courses section
+      S.listItem()
+        .title("Courses")
+        .child(
+          S.documentTypeList("course")
+            .title("All Courses")
+            .defaultOrdering([{ field: "category", direction: "asc" }]),
+        ),
+      S.divider(),
       // Website Content section
       S.listItem()
         .title("Website Content")
@@ -44,6 +53,7 @@ export const structure: StructureResolver = (S) =>
             "faqCategory",
             "placedStudent",
             "googleReview",
+            "course",
           ].includes(item.getId()!),
       ),
     ]);

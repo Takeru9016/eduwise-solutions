@@ -99,7 +99,7 @@ export const COURSES: Course[] = [
     subtitle: "Build modern web experiences",
     description:
       "Learn HTML, CSS, JavaScript, and modern frameworks to create stunning, responsive websites and web applications.",
-    slug: "/web-development",
+    slug: "/courses/web-development",
     category: "development",
     emoji: "🌐",
     accentColor: "from-sky-500 to-blue-600",
@@ -114,7 +114,7 @@ export const COURSES: Course[] = [
     subtitle: "Build dynamic web apps",
     description:
       "Master front-end and back-end development using React, Node.js, databases, and modern deployment workflows.",
-    slug: "/full-stack",
+    slug: "/courses/full-stack",
     category: "development",
     emoji: "🧩",
     accentColor: "from-orange-500 to-amber-500",
@@ -129,7 +129,7 @@ export const COURSES: Course[] = [
     subtitle: "Master enterprise development",
     description:
       "Learn Core Java, OOPs, Collections, and Exception Handling to build robust enterprise applications.",
-    slug: "/java",
+    slug: "/courses/java",
     category: "development",
     emoji: "☕",
     accentColor: "from-red-500 to-orange-500",
@@ -144,7 +144,7 @@ export const COURSES: Course[] = [
     subtitle: "Code smarter, build faster",
     description:
       "Learn Python from fundamentals to advanced topics including data structures, file handling, and NumPy for data analysis.",
-    slug: "/python",
+    slug: "/courses/python",
     category: "development",
     emoji: "🐍",
     accentColor: "from-yellow-500 to-green-500",
@@ -159,7 +159,7 @@ export const COURSES: Course[] = [
     subtitle: "Design delightful experiences",
     description:
       "Master user interface and experience design principles, prototyping, wireframing, and industry-standard design tools.",
-    slug: "/ui-ux",
+    slug: "/courses/ui-ux",
     category: "development",
     emoji: "🎨",
     accentColor: "from-pink-500 to-violet-500",
@@ -176,7 +176,7 @@ export const COURSES: Course[] = [
     subtitle: "Master the future of tech",
     description:
       "Dive into AI and machine learning with hands-on projects — from neural networks to deep learning and real-world applications.",
-    slug: "/ai-ml",
+    slug: "/courses/ai-ml",
     category: "ai-data",
     emoji: "🤖",
     accentColor: "from-violet-500 to-purple-600",
@@ -191,7 +191,7 @@ export const COURSES: Course[] = [
     subtitle: "Turn data into insights",
     description:
       "Explore data analysis, visualization, and predictive modeling using Python, Pandas, NumPy, and industry-standard tools.",
-    slug: "/data-science",
+    slug: "/courses/data-science",
     category: "ai-data",
     emoji: "📊",
     accentColor: "from-emerald-500 to-teal-600",
@@ -206,7 +206,7 @@ export const COURSES: Course[] = [
     subtitle: "Hands-on machine learning",
     description:
       "Focused, practical machine learning course using Python — covering ML algorithms, model building, and deployment.",
-    slug: "/ml-python",
+    slug: "/courses/ml-python",
     category: "ai-data",
     emoji: "🧠",
     accentColor: "from-indigo-500 to-blue-600",
@@ -223,7 +223,7 @@ export const COURSES: Course[] = [
     subtitle: "Automate, ship, and scale",
     description:
       "Learn DevOps with Jenkins, Docker, Kubernetes, Terraform, Ansible, AWS, Prometheus & Grafana.",
-    slug: "/devops",
+    slug: "/courses/devops",
     category: "cloud-devops-security",
     emoji: "🚀",
     accentColor: "from-blue-500 to-cyan-500",
@@ -238,7 +238,7 @@ export const COURSES: Course[] = [
     subtitle: "Scale with the cloud",
     description:
       "Master cloud fundamentals, Azure services, networking, compute, and storage to build scalable cloud solutions.",
-    slug: "/azure-cloud",
+    slug: "/courses/azure-cloud",
     category: "cloud-devops-security",
     emoji: "☁️",
     accentColor: "from-blue-600 to-indigo-600",
@@ -253,7 +253,7 @@ export const COURSES: Course[] = [
     subtitle: "Connect the physical world",
     description:
       "Learn IoT architecture, Arduino, NodeMCU, sensors, communication protocols, and Node-RED for real-world projects.",
-    slug: "/iot",
+    slug: "/courses/iot",
     category: "cloud-devops-security",
     emoji: "📡",
     accentColor: "from-teal-500 to-emerald-500",
@@ -268,7 +268,7 @@ export const COURSES: Course[] = [
     subtitle: "Defend against digital threats",
     description:
       "Learn ethical hacking, network defense, Linux/Windows security, and web application security to become a cybersecurity expert.",
-    slug: "/cyber-sec",
+    slug: "/courses/cyber-sec",
     category: "cloud-devops-security",
     emoji: "🛡️",
     accentColor: "from-red-500 to-rose-600",
@@ -285,7 +285,7 @@ export const COURSES: Course[] = [
     subtitle: "Design with precision",
     description:
       "Master 2D and 3D design using AutoCAD — from drafting fundamentals to professional-grade engineering drawings.",
-    slug: "/autocad",
+    slug: "/courses/autocad",
     category: "engineering",
     emoji: "📐",
     accentColor: "from-amber-500 to-orange-600",
@@ -300,7 +300,7 @@ export const COURSES: Course[] = [
     subtitle: "Program the hardware",
     description:
       "Learn microcontrollers (8051/ARM), Embedded C, RTOS fundamentals, and IoT integration for embedded applications.",
-    slug: "/embedded-systems",
+    slug: "/courses/embedded-systems",
     category: "engineering",
     emoji: "🔌",
     accentColor: "from-slate-500 to-zinc-600",
@@ -315,7 +315,7 @@ export const COURSES: Course[] = [
     subtitle: "Drive the green revolution",
     description:
       "Understand EV batteries, vehicle modelling, battery management systems, motors, and the future of sustainable mobility.",
-    slug: "/hev",
+    slug: "/courses/hev",
     category: "engineering",
     emoji: "🔋",
     accentColor: "from-green-500 to-lime-500",
@@ -330,7 +330,7 @@ export const COURSES: Course[] = [
     subtitle: "Explore the nanoscale world",
     description:
       "Dive into nanomaterials, fabrication techniques, characterization methods, and cutting-edge nanotechnology applications.",
-    slug: "/nanotechnology",
+    slug: "/courses/nanotechnology",
     category: "engineering",
     emoji: "🔬",
     accentColor: "from-cyan-500 to-blue-500",
@@ -347,7 +347,7 @@ export const COURSES: Course[] = [
     subtitle: "Grow brands online",
     description:
       "Master SEO, social media marketing, content marketing, analytics, and paid advertising to drive digital growth.",
-    slug: "/digital-marketing",
+    slug: "/courses/digital-marketing",
     category: "business",
     emoji: "📱",
     accentColor: "from-fuchsia-500 to-pink-500",
@@ -362,7 +362,7 @@ export const COURSES: Course[] = [
     subtitle: "Master the money game",
     description:
       "Learn financial statements, ratio analysis, cash flow management, valuation techniques, and strategic financial planning.",
-    slug: "/finance",
+    slug: "/courses/finance",
     category: "business",
     emoji: "💰",
     accentColor: "from-emerald-500 to-green-600",
@@ -377,7 +377,7 @@ export const COURSES: Course[] = [
     subtitle: "Lead people, lead growth",
     description:
       "Cover strategic HRM, job evaluation, recruitment, selection processes, and organizational development.",
-    slug: "/hr",
+    slug: "/courses/hr",
     category: "business",
     emoji: "👥",
     accentColor: "from-blue-500 to-violet-500",
@@ -392,7 +392,7 @@ export const COURSES: Course[] = [
     subtitle: "Invest with confidence",
     description:
       "Learn stock analysis, trading strategies, technical and fundamental analysis, portfolio management, and risk assessment.",
-    slug: "/stock-market",
+    slug: "/courses/stock-market",
     category: "business",
     emoji: "📈",
     accentColor: "from-green-500 to-emerald-500",
@@ -407,7 +407,7 @@ export const COURSES: Course[] = [
     subtitle: "Understand the human mind",
     description:
       "Explore cognitive psychology, behavioral science, mental health fundamentals, and applied psychological research methods.",
-    slug: "/psychology",
+    slug: "/courses/psychology",
     category: "business",
     emoji: "🧠",
     accentColor: "from-purple-500 to-indigo-500",
@@ -424,7 +424,7 @@ export const COURSES: Course[] = [
     subtitle: "100% Job Guarantee",
     description:
       "Get a 100% job guarantee with our comprehensive programme! Learn resume building, LinkedIn optimization, business communication, and more.",
-    slug: "/professional",
+    slug: "/courses/professional",
     category: "career",
     emoji: "🎯",
     accentColor: "from-pink-500 to-fuchsia-600",

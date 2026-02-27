@@ -139,7 +139,7 @@ export default function AboutUs() {
       icon: GraduationCap,
       title: "Expert Collaborators",
       description:
-        "At Eduwise Solutions, our programs are delivered in collaboration with industry-leading organizations and reputed universities. These partnerships ensure learners gain access to credible, industry-aligned courses across domains, including Data Science, Web Development, Online MBA, and beyond.",
+        "At Eduwise Solutions, our programs are delivered in collaboration with industry-leading organizations and reputed universities. These partnerships ensure learners gain access to credible, industry-aligned courses across domains, including Data Science, Web Development, Cloud Computing, and beyond.",
     },
     {
       icon: Users,

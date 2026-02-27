@@ -4,7 +4,14 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, Phone, Mail, ChevronDown } from "lucide-react";
+import {
+  Menu,
+  Phone,
+  Mail,
+  ChevronDown,
+  ChevronRight,
+  ArrowRight,
+} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -16,24 +23,14 @@ import {
 import { Separator } from "@/components/ui/separator";
 import AWSPartnerBanner from "./AWSPartnerBadge";
 import BookButton from "./BookButton";
+import { getCategoriesWithCourses } from "@/data/courses";
+import type { CourseCategoryId } from "@/data/courses";
 
-// Type definitions
-interface NavChild {
-  label: string;
-  href: string;
-}
+// Types
 
-interface NavLink {
+interface SimpleNavLink {
   href: string;
   label: string;
-  children?: NavChild[];
-}
-
-interface NavLinkProps {
-  link: NavLink;
-  pathname: string;
-  isMobile?: boolean;
-  onClose?: () => void;
 }
 
 interface LogoProps {
@@ -54,32 +51,15 @@ interface DesktopNavigationProps {
   pathname: string;
 }
 
-// Constants moved outside component to prevent recreation
-const NAV_LINKS: NavLink[] = [
-  {
-    href: "/",
-    label: "Home",
-  },
-  {
-    href: "/about",
-    label: "About Us",
-  },
-  {
-    href: "/courses",
-    label: "Courses",
-    children: [
-      { label: "Artificial Intelligence", href: "/ai-ml" },
-      { label: "DevOps with Cloud & AI", href: "/devops" },
-      { label: "Cyber Security", href: "/cyber-sec" },
-      { label: "Data Science", href: "/data-science" },
-      { label: "Full Stack Web Developer", href: "/full-stack" },
-      { label: "Placement Accelerator", href: "/professional" },
-    ],
-  },
-  {
-    href: "/blogs",
-    label: "Blogs",
-  },
+// Constants
+
+const SIMPLE_NAV_LINKS: SimpleNavLink[] = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About Us" },
+];
+
+const SIMPLE_NAV_LINKS_AFTER: SimpleNavLink[] = [
+  { href: "/blogs", label: "Blogs" },
 ];
 
 const CONTACT_INFO = {
@@ -89,94 +69,7 @@ const CONTACT_INFO = {
 
 const SCROLL_THRESHOLD = 20;
 
-// Extracted components for better organization
-const NavLink = ({
-  link,
-  pathname,
-  isMobile = false,
-  onClose,
-}: NavLinkProps) => {
-  const isActive = pathname === link.href;
-  const baseClasses = `text-grey-30 hover:text-primary-75 transition-colors ${
-    isActive ? "text-primary-75" : ""
-  }`;
-
-  const handleClick = useCallback(() => {
-    if (isMobile && !link.children) {
-      onClose?.();
-    }
-  }, [isMobile, link.children, onClose]);
-
-  if (isMobile) {
-    return (
-      <div className="space-y-2">
-        <Link
-          href={link.href}
-          className={`${baseClasses} text-lg flex items-center justify-between`}
-          onClick={handleClick}
-        >
-          {link.label}
-          {link.children && <ChevronDown size={16} />}
-        </Link>
-
-        {link.children && (
-          <div className="pl-4 space-y-2">
-            {link.children.map((child) => (
-              <Link
-                key={child.label}
-                href={child.href}
-                className="block text-grey-35 hover:text-primary-75 transition-colors"
-                onClick={onClose}
-              >
-                {child.label}
-              </Link>
-            ))}
-          </div>
-        )}
-      </div>
-    );
-  }
-
-  return (
-    <div className="relative group">
-      <Link
-        href={link.href}
-        className={`${baseClasses} py-2 flex items-center gap-1`}
-      >
-        {link.label}
-        {link.children && (
-          <ChevronDown
-            size={16}
-            className="group-hover:rotate-180 transition-transform duration-200"
-          />
-        )}
-      </Link>
-
-      {link.children && (
-        <div className="absolute top-full left-0 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-          <div className="bg-white rounded-lg shadow-lg border border-light-90 min-w-[240px] py-2">
-            {link.children.map((child) => (
-              <Link
-                key={child.label}
-                href={child.href}
-                className="block px-4 py-2 text-grey-30 hover:text-primary-75 hover:bg-primary-99 transition-colors"
-              >
-                <span className="inline-flex items-center gap-2">
-                  {child.label}
-                  {/* {child.href === "/devops" && (
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-primary-95 text-primary-75 border border-primary-90">
-                      New
-                    </span>
-                  )} */}
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
+// Sub-components
 
 const Logo = ({ className = "" }: LogoProps) => (
   <Link href="/" className={`relative ${className}`}>
@@ -212,14 +105,165 @@ const ContactInfo = ({ onClose }: ContactInfoProps) => (
   </div>
 );
 
+// Desktop Mega-Menu
+
+const DesktopMegaMenu = () => {
+  const categoriesWithCourses = useMemo(() => getCategoriesWithCourses(), []);
+
+  return (
+    <div className="relative group/courses">
+      <Link
+        href="/courses"
+        className="text-grey-30 hover:text-primary-75 transition-colors py-2 flex items-center gap-1"
+      >
+        Courses
+        <ChevronDown
+          size={16}
+          className="group-hover/courses:rotate-180 transition-transform duration-200"
+        />
+      </Link>
+
+      {/* Mega-menu panel */}
+      <div className="absolute top-full -left-[340px] pt-4 opacity-0 invisible group-hover/courses:opacity-100 group-hover/courses:visible transition-all duration-200 z-50">
+        <div className="bg-white rounded-xl shadow-2xl border border-light-90 w-[860px] overflow-hidden">
+          {/* Header */}
+          <div className="bg-gradient-to-r from-primary-99 to-white px-6 py-4 border-b border-light-90 flex items-center justify-between">
+            <div>
+              <h3 className="text-grey-15 font-semibold text-base">
+                Explore Our Courses
+              </h3>
+              <p className="text-grey-50 text-xs mt-0.5">
+                22+ industry-ready programs to accelerate your career
+              </p>
+            </div>
+            <Link
+              href="/courses"
+              className="text-primary-75 text-sm font-medium hover:text-primary-60 transition-colors flex items-center gap-1"
+            >
+              View All
+              <ArrowRight size={14} />
+            </Link>
+          </div>
+
+          {/* Course categories grid */}
+          <div className="grid grid-cols-3 gap-0 divide-x divide-light-90">
+            {categoriesWithCourses.map((category) => (
+              <div key={category.id} className="p-4">
+                {/* Category header */}
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-sm">{category.emoji}</span>
+                  <h4 className="text-xs font-semibold text-grey-40 uppercase tracking-wider">
+                    {category.label}
+                  </h4>
+                </div>
+
+                {/* Course links */}
+                <div className="space-y-0.5">
+                  {category.courses.map((course) => (
+                    <Link
+                      key={course.id}
+                      href={course.slug}
+                      className="group/item flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-primary-99 transition-colors"
+                    >
+                      <span className="text-sm">{course.emoji}</span>
+                      <span className="text-sm text-grey-30 group-hover/item:text-primary-75 transition-colors flex-1">
+                        {course.title}
+                      </span>
+                      <ChevronRight
+                        size={12}
+                        className="text-grey-60 opacity-0 group-hover/item:opacity-100 transition-opacity"
+                      />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Footer CTA */}
+          <div className="bg-gradient-to-r from-primary-99 to-primary-98 px-6 py-3 border-t border-light-90 flex items-center justify-between">
+            <span className="text-grey-40 text-xs">
+              Not sure which course to pick?
+            </span>
+            <BookButton />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Desktop Navigation
+
+const DesktopNavigation = ({ pathname }: DesktopNavigationProps) => (
+  <div className="hidden lg:flex items-center space-x-8">
+    {SIMPLE_NAV_LINKS.map((link) => (
+      <Link
+        key={link.label}
+        href={link.href}
+        className={`text-grey-30 hover:text-primary-75 transition-colors py-2 ${
+          pathname === link.href ? "text-primary-75" : ""
+        }`}
+      >
+        {link.label}
+      </Link>
+    ))}
+
+    {/* Mega-menu for courses */}
+    <DesktopMegaMenu />
+
+    {SIMPLE_NAV_LINKS_AFTER.map((link) => (
+      <Link
+        key={link.label}
+        href={link.href}
+        className={`text-grey-30 hover:text-primary-75 transition-colors py-2 ${
+          pathname === link.href ? "text-primary-75" : ""
+        }`}
+      >
+        {link.label}
+      </Link>
+    ))}
+
+    <Separator orientation="vertical" className="h-6" />
+    <BookButton />
+    <Link href="/contact">
+      <Button
+        variant="default"
+        className="bg-primary-75 hover:bg-primary-70 transition-all duration-200 hover:-translate-y-0.5"
+      >
+        Contact Us
+      </Button>
+    </Link>
+    <Separator orientation="vertical" className="h-6" />
+    <Link href="https://learner.eduwise.solutions/" target="_blank">
+      <Button
+        variant="outline"
+        className="border-primary-75 text-primary-75 hover:bg-primary-75 hover:text-white transition-all duration-300 font-semibold"
+      >
+        LMS Login
+      </Button>
+    </Link>
+  </div>
+);
+
+// Mobile Navigation
+
 const MobileNavigation = ({
   isOpen,
   onOpenChange,
   pathname,
 }: MobileNavigationProps) => {
+  const [expandedCategory, setExpandedCategory] =
+    useState<CourseCategoryId | null>(null);
+  const categoriesWithCourses = useMemo(() => getCategoriesWithCourses(), []);
+
   const handleClose = useCallback(() => {
     onOpenChange(false);
   }, [onOpenChange]);
+
+  const toggleCategory = useCallback((catId: CourseCategoryId) => {
+    setExpandedCategory((prev) => (prev === catId ? null : catId));
+  }, []);
 
   return (
     <Sheet open={isOpen} onOpenChange={onOpenChange}>
@@ -240,16 +284,90 @@ const MobileNavigation = ({
           </div>
         </SheetHeader>
 
-        <div className="p-6">
-          <div className="flex flex-col gap-4">
-            {NAV_LINKS.map((link) => (
-              <NavLink
+        <div className="p-6 overflow-y-auto max-h-[calc(100vh-120px)]">
+          <div className="flex flex-col gap-3">
+            {/* Simple links before Courses */}
+            {SIMPLE_NAV_LINKS.map((link) => (
+              <Link
                 key={link.label}
-                link={link}
-                pathname={pathname}
-                isMobile={true}
-                onClose={handleClose}
-              />
+                href={link.href}
+                className={`text-lg text-grey-30 hover:text-primary-75 transition-colors ${
+                  pathname === link.href ? "text-primary-75" : ""
+                }`}
+                onClick={handleClose}
+              >
+                {link.label}
+              </Link>
+            ))}
+
+            {/* Courses accordion section */}
+            <div className="space-y-2">
+              <Link
+                href="/courses"
+                className={`text-lg text-grey-30 hover:text-primary-75 transition-colors flex items-center justify-between ${
+                  pathname === "/courses" ? "text-primary-75" : ""
+                }`}
+                onClick={handleClose}
+              >
+                Courses
+              </Link>
+
+              {/* Category accordions */}
+              <div className="pl-2 space-y-1">
+                {categoriesWithCourses.map((category) => (
+                  <div key={category.id}>
+                    {/* Category toggle button */}
+                    <button
+                      onClick={() => toggleCategory(category.id)}
+                      className="w-full flex items-center justify-between py-2 px-2 rounded-lg hover:bg-primary-99 transition-colors"
+                    >
+                      <span className="flex items-center gap-2 text-sm font-medium text-grey-35">
+                        <span>{category.emoji}</span>
+                        {category.label}
+                      </span>
+                      <ChevronDown
+                        size={14}
+                        className={`text-grey-50 transition-transform duration-200 ${
+                          expandedCategory === category.id ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+
+                    {/* Expanded course list */}
+                    {expandedCategory === category.id && (
+                      <div className="pl-6 pb-2 space-y-1">
+                        {category.courses.map((course) => (
+                          <Link
+                            key={course.id}
+                            href={course.slug}
+                            className="block py-1.5 px-2 text-sm text-grey-40 hover:text-primary-75 transition-colors rounded-lg hover:bg-primary-99"
+                            onClick={handleClose}
+                          >
+                            <span className="flex items-center gap-2">
+                              <span>{course.emoji}</span>
+                              {course.title}
+                            </span>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Simple links after Courses */}
+            {SIMPLE_NAV_LINKS_AFTER.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                className={`text-lg text-grey-30 hover:text-primary-75 transition-colors ${
+                  pathname === link.href ? "text-primary-75" : ""
+                }`}
+                onClick={handleClose}
+              >
+                {link.label}
+              </Link>
             ))}
 
             <BookButton />
@@ -282,54 +400,26 @@ const MobileNavigation = ({
   );
 };
 
-const DesktopNavigation = ({ pathname }: DesktopNavigationProps) => (
-  <div className="hidden lg:flex items-center space-x-8">
-    {NAV_LINKS.map((link) => (
-      <NavLink key={link.label} link={link} pathname={pathname} />
-    ))}
-    <Separator orientation="vertical" className="h-6" />
-    <BookButton />
-    <Link href="/contact">
-      <Button
-        variant="default"
-        className="bg-primary-75 hover:bg-primary-70 transition-all duration-200 hover:-translate-y-0.5"
-      >
-        Contact Us
-      </Button>
-    </Link>
-    <Separator orientation="vertical" className="h-6" />
-    <Link href="https://learner.eduwise.solutions/" target="_blank">
-      <Button
-        variant="outline"
-        className="border-primary-75 text-primary-75 hover:bg-primary-75 hover:text-white transition-all duration-300 font-semibold"
-      >
-        LMS Login
-      </Button>
-    </Link>
-  </div>
-);
+// Main Navbar
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
-  // Optimize scroll handler with useCallback
   const handleScroll = useCallback(() => {
     setScrolled(window.scrollY > SCROLL_THRESHOLD);
   }, []);
 
-  // Optimize scroll event listener
   useEffect(() => {
     let timeoutId: NodeJS.Timeout | null = null;
 
     const throttledHandleScroll = () => {
       if (timeoutId) return;
-
       timeoutId = setTimeout(() => {
         handleScroll();
         timeoutId = null;
-      }, 16); // ~60fps
+      }, 16);
     };
 
     window.addEventListener("scroll", throttledHandleScroll, { passive: true });
@@ -342,7 +432,6 @@ export default function Navbar() {
     };
   }, [handleScroll]);
 
-  // Memoize navbar classes to prevent unnecessary re-renders
   const navClasses = useMemo(
     () =>
       `w-full py-4 sticky top-0 bg-white/80 backdrop-blur-md z-50 transition-all duration-300 ${

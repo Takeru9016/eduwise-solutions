@@ -5,90 +5,34 @@ import { ArrowRight, Sparkles } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { getFeaturedCourses } from "@/data/courses";
+import type { Course } from "@/data/courses";
 
-interface ProgramCategory {
-  id: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  viewLink: string;
-}
+const programCategories = getFeaturedCourses();
 
-// Enhanced data structure with more programs and unique IDs
-const programCategories: ProgramCategory[] = [
-  {
-    id: "ai-cert",
-    title: "Artificial Intelligence",
-    subtitle: "Master the future of tech",
-    description:
-      "Dive into AI and machine learning with hands-on projects and real-world applications.",
-    viewLink: "/ai-ml",
-  },
-  {
-    id: "devops-cert",
-    title: "DevOps with Cloud & AI",
-    subtitle: "Automate, ship, and scale",
-    description:
-      "Master CI/CD, Docker, Kubernetes, Terraform, Ansible, AWS, and monitoring with real projects.",
-    viewLink: "/devops",
-  },
-  {
-    id: "cyber-security-cert",
-    title: "Cyber Security",
-    subtitle: "Defend against digital threats",
-    description:
-      "Learn ethical hacking, network defense, and more to become a cybersecurity expert.",
-    viewLink: "/cyber-sec",
-  },
-  {
-    id: "data-science-cert",
-    title: "Data Science",
-    subtitle: "Turn data into insights",
-    description:
-      "Explore data analysis, visualization, and predictive modeling using industry-standard tools.",
-    viewLink: "/data-science",
-  },
-  {
-    id: "full-stack-cert",
-    title: "Full Stack Web Developer",
-    subtitle: "Build dynamic web apps",
-    description:
-      "Master front-end and back-end development using modern technologies like React, Node.js, and more.",
-    viewLink: "/full-stack",
-  },
-  {
-    id: "professional-cert",
-    title: "Placement Accelerator",
-    subtitle: "100% Job Guarantee",
-    description:
-      "Get a 100% job guarantee with our 45-day programme! Learn resume building, LinkedIn optimization, business communication, and more.",
-    viewLink: "/professional",
-  },
-];
-
-const ProgramCard = ({ program }: { program: ProgramCategory }) => {
+const ProgramCard = ({ program }: { program: Course }) => {
   const themeById: Record<string, { gradient: string; blob: string }> = {
-    "ai-cert": {
+    "ai-ml": {
       gradient: "from-violet-500 via-fuchsia-500 to-pink-500",
       blob: "from-violet-300 via-fuchsia-300 to-pink-300",
     },
-    "devops-cert": {
+    devops: {
       gradient: "from-emerald-500 via-teal-500 to-cyan-500",
       blob: "from-emerald-300 via-teal-300 to-cyan-300",
     },
-    "cyber-security-cert": {
+    "cyber-sec": {
       gradient: "from-sky-500 via-blue-500 to-indigo-500",
       blob: "from-sky-300 via-blue-300 to-indigo-300",
     },
-    "data-science-cert": {
+    "data-science": {
       gradient: "from-amber-500 via-orange-500 to-rose-500",
       blob: "from-amber-300 via-orange-300 to-rose-300",
     },
-    "full-stack-cert": {
+    "full-stack": {
       gradient: "from-fuchsia-500 via-rose-500 to-red-500",
       blob: "from-fuchsia-300 via-rose-300 to-red-300",
     },
-    "professional-cert": {
+    "placement-accelerator": {
       gradient: "from-yellow-500 via-amber-500 to-orange-500",
       blob: "from-yellow-300 via-amber-300 to-orange-300",
     },
@@ -133,15 +77,7 @@ const ProgramCard = ({ program }: { program: ProgramCategory }) => {
 
           {/* Action Buttons */}
           <div className="flex gap-3 pt-4">
-            {/* <Button
-              variant="default"
-              className="bg-black hover:bg-gray-800 text-white px-6 py-2 rounded-full flex items-center gap-2 transition-all duration-300"
-            >
-              <Download size={16} />
-              Brochure
-            </Button> */}
-
-            <Link href={program.viewLink}>
+            <Link href={program.slug}>
               <Button
                 variant="outline"
                 className={`border-2 border-transparent bg-gradient-to-r ${theme.gradient} p-[1px] rounded-full`}

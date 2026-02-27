@@ -1,19 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
   Sparkles,
-  BookCheck,
-  CheckCircle,
-  Clock,
-  Users,
-  Infinity,
-  Building,
-  Award,
   GraduationCap,
+  Users,
+  Award,
+  Building,
   Phone,
   ShieldCheck,
   HeartHandshake,
@@ -22,151 +18,13 @@ import {
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-
-// Types
-
-interface CourseStat {
-  label?: string;
-  value?: string;
-  icon: React.ElementType;
-}
-
-interface CourseCategory {
-  title: string;
-  subtitle: string;
-  description: string;
-  mainImage: string;
-  viewLink: string;
-  icon: React.ElementType;
-  stats: CourseStat[];
-  tags: string[];
-  accentColor: string;
-}
+import { COURSES, COURSE_FILTER_TABS } from "@/data/courses";
+import type { Course } from "@/data/courses";
 
 // Data
 
-const FILTER_TABS = [
-  { label: "All Programs", value: "all" },
-  { label: "AI & Data", value: "ai-data" },
-  { label: "Development", value: "development" },
-  { label: "Security", value: "security" },
-  { label: "Career", value: "career" },
-];
-
-const courseCategories: CourseCategory[] = [
-  {
-    title: "Artificial Intelligence",
-    subtitle: "Master the future of tech",
-    description:
-      "Dive into AI and machine learning with hands-on projects and real-world applications.",
-    mainImage: "/courses/artificial-intelligence.png",
-    viewLink: "/ai-ml",
-    icon: BookCheck,
-    accentColor: "from-violet-500 to-purple-600",
-    tags: ["ai-data"],
-    stats: [
-      { label: "Duration", value: "3 Months", icon: Clock },
-      { label: "Live Session", value: "100%", icon: CheckCircle },
-      { label: "Doubt Clearing", value: "1:1", icon: Users },
-      { label: "Companies", value: "250+", icon: Building },
-      { label: "Placement", value: "100%", icon: Award },
-    ],
-  },
-  {
-    title: "DevOps with Cloud & AI",
-    subtitle: "Automate, ship, and scale",
-    description:
-      "Learn DevOps with Jenkins, Docker, Kubernetes, Terraform, Ansible, AWS, Prometheus & Grafana.",
-    mainImage: "/courses/devops.png",
-    viewLink: "/devops",
-    icon: BookCheck,
-    accentColor: "from-blue-500 to-cyan-500",
-    tags: ["development"],
-    stats: [
-      { label: "Duration", value: "3.5 Months", icon: Clock },
-      { label: "Live Session", value: "100%", icon: CheckCircle },
-      { label: "Doubt Clearing", value: "1:1", icon: Users },
-      { label: "Companies", value: "250+", icon: Building },
-      { label: "Placement", value: "100%", icon: Award },
-    ],
-  },
-  {
-    title: "Data Science",
-    subtitle: "Turn data into insights",
-    description:
-      "Explore data analysis, visualization, and predictive modeling using industry-standard tools.",
-    mainImage: "/courses/data-science.png",
-    viewLink: "/data-science",
-    icon: BookCheck,
-    accentColor: "from-emerald-500 to-teal-600",
-    tags: ["ai-data"],
-    stats: [
-      { label: "Duration", value: "3 Months", icon: Clock },
-      { label: "Live Session", value: "100%", icon: CheckCircle },
-      { label: "Doubt Clearing", value: "1:1", icon: Users },
-      { label: "Companies", value: "250+", icon: Building },
-      { label: "Placement", value: "100%", icon: Award },
-    ],
-  },
-  {
-    title: "Full Stack Web Development",
-    subtitle: "Build dynamic web apps",
-    description:
-      "Master front-end and back-end development using modern technologies like React, Node.js, and more.",
-    mainImage: "/courses/full-stack.png",
-    viewLink: "/full-stack",
-    icon: BookCheck,
-    accentColor: "from-orange-500 to-amber-500",
-    tags: ["development"],
-    stats: [
-      { label: "Duration", value: "3 Months", icon: Clock },
-      { label: "Live Session", value: "100%", icon: CheckCircle },
-      { label: "Doubt Clearing", value: "1:1", icon: Users },
-      { label: "Companies", value: "250+", icon: Building },
-      { label: "Placement", value: "100%", icon: Award },
-    ],
-  },
-  {
-    title: "Cyber Security",
-    subtitle: "Defend against digital threats",
-    description:
-      "Learn ethical hacking, network defense, and more to become a cybersecurity expert.",
-    mainImage: "/courses/cyber-security.png",
-    viewLink: "/cyber-sec",
-    icon: BookCheck,
-    accentColor: "from-red-500 to-rose-600",
-    tags: ["security"],
-    stats: [
-      { label: "Duration", value: "3 Months", icon: Clock },
-      { label: "Live Session", value: "100%", icon: CheckCircle },
-      { label: "Doubt Clearing", value: "1:1", icon: Users },
-      { label: "Companies", value: "250+", icon: Building },
-      { label: "Placement", value: "100%", icon: Award },
-    ],
-  },
-  {
-    title: "Placement Accelerator",
-    subtitle: "100% Job Guarantee",
-    description:
-      "Get a 100% job guarantee with our 15-day programme! Learn resume building, LinkedIn optimization, business communication, and more.",
-    mainImage: "/courses/professional.png",
-    viewLink: "/professional",
-    icon: BookCheck,
-    accentColor: "from-pink-500 to-fuchsia-600",
-    tags: ["career"],
-    stats: [
-      { label: "Duration", value: "15 Days", icon: Clock },
-      { label: "Live Session", value: "100%", icon: CheckCircle },
-      { label: "Doubt Clearing", value: "1:1", icon: Users },
-      { label: "Access", value: "Lifetime", icon: Infinity },
-      { label: "Companies", value: "250+", icon: Building },
-      { label: "Placement", value: "100%", icon: Award },
-    ],
-  },
-];
-
 const heroStats = [
-  { value: "6+", label: "Programs", icon: GraduationCap },
+  { value: "22+", label: "Programs", icon: GraduationCap },
   { value: "2000+", label: "Students", icon: Users },
   { value: "100%", label: "Placements", icon: Award },
   { value: "250+", label: "Hiring Partners", icon: Building },
@@ -213,7 +71,7 @@ function FilterTabs({
 }) {
   return (
     <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-2 scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap sm:justify-center">
-      {FILTER_TABS.map((tab) => (
+      {COURSE_FILTER_TABS.map((tab) => (
         <button
           key={tab.value}
           onClick={() => onFilterChange(tab.value)}
@@ -230,15 +88,8 @@ function FilterTabs({
   );
 }
 
-function CourseCard({
-  category,
-  index,
-}: {
-  category: CourseCategory;
-  index: number;
-}) {
-  // Show only first 3 stats on the card to keep it compact
-  const displayStats = category.stats.slice(0, 3);
+function CourseCard({ course, index }: { course: Course; index: number }) {
+  const displayStats = course.stats.slice(0, 3);
 
   return (
     <div
@@ -250,8 +101,8 @@ function CourseCard({
       {/* Image Section */}
       <div className="relative h-44 sm:h-52 overflow-hidden">
         <Image
-          src={category.mainImage}
-          alt={category.title}
+          src={course.image}
+          alt={course.title}
           fill
           className="object-cover transition-transform duration-700 group-hover:scale-110"
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -262,10 +113,10 @@ function CourseCard({
         {/* Accent tag on image */}
         <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4">
           <span
-            className={`inline-flex items-center gap-1.5 bg-gradient-to-r ${category.accentColor} text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg backdrop-blur-sm`}
+            className={`inline-flex items-center gap-1.5 bg-gradient-to-r ${course.accentColor} text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg backdrop-blur-sm`}
           >
-            <category.icon className="w-3 h-3" />
-            {category.subtitle}
+            <course.icon className="w-3 h-3" />
+            {course.subtitle}
           </span>
         </div>
       </div>
@@ -274,12 +125,12 @@ function CourseCard({
       <div className="p-5 sm:p-6 flex flex-col flex-1">
         {/* Title */}
         <h3 className="text-lg sm:text-xl font-vietnam font-bold text-grey-15 mb-2 group-hover:text-primary-75 transition-colors duration-300">
-          {category.title}
+          {course.title}
         </h3>
 
         {/* Description */}
         <p className="text-grey-40 text-sm leading-relaxed mb-4 line-clamp-2 flex-1">
-          {category.description}
+          {course.description}
         </p>
 
         {/* Stats Row */}
@@ -308,7 +159,7 @@ function CourseCard({
           className="w-full rounded-xl border-primary-90 text-primary-75 hover:bg-primary-99 hover:border-primary-75 transition-all duration-300 group/btn"
         >
           <Link
-            href={category.viewLink}
+            href={course.slug}
             className="flex items-center justify-center gap-2 py-5"
           >
             View Program Details
@@ -439,10 +290,13 @@ function BottomCTA() {
 export default function CoursesPage() {
   const [activeFilter, setActiveFilter] = useState("all");
 
-  const filteredCourses =
-    activeFilter === "all" ? courseCategories : (
-      courseCategories.filter((c) => c.tags.includes(activeFilter))
-    );
+  const filteredCourses = useMemo(
+    () =>
+      activeFilter === "all" ? COURSES : (
+        COURSES.filter((c) => c.category === activeFilter)
+      ),
+    [activeFilter],
+  );
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
@@ -533,12 +387,8 @@ export default function CoursesPage() {
 
           {/* Course Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {filteredCourses.map((category, index) => (
-              <CourseCard
-                key={category.title}
-                category={category}
-                index={index}
-              />
+            {filteredCourses.map((course, index) => (
+              <CourseCard key={course.id} course={course} index={index} />
             ))}
           </div>
 

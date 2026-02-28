@@ -10,6 +10,8 @@ import { Navbar, Footer } from "@/components";
 import CourseTemplate from "@/components/courses/CourseTemplate";
 import type { CourseContent } from "@/types/course";
 
+export const revalidate = 60; // revalidate every 60 seconds
+
 interface PageProps {
   params: Promise<{ slug: string }>;
 }

@@ -727,31 +727,6 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
             </p>
           </div>
 
-          {/* Stepper Progress Bar */}
-          <div className="hidden lg:flex items-center justify-center gap-0 mb-16 max-w-4xl mx-auto">
-            {[
-              "Course Curriculum",
-              "Placement Test",
-              "ISA Agreement",
-              "Career Track",
-              "Hiring Partners",
-            ].map((label, i) => (
-              <div key={i} className="flex items-center">
-                <div className="flex flex-col items-center">
-                  <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-md">
-                    {i + 1}
-                  </div>
-                  <span className="text-xs font-semibold text-grey-40 mt-2 whitespace-nowrap">
-                    {label}
-                  </span>
-                </div>
-                {i < 4 && (
-                  <div className="w-16 xl:w-24 h-0.5 bg-gradient-to-r from-emerald-300 to-teal-300 mx-2 mt-[-18px]" />
-                )}
-              </div>
-            ))}
-          </div>
-
           <div className="space-y-8 max-w-6xl mx-auto">
             {/* ── Section 1: Course Curriculum ── */}
             <div className="rounded-3xl overflow-hidden shadow-lg">

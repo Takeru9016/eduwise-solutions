@@ -228,6 +228,15 @@ export const courseType = defineType({
 
     // Curriculum Journey (Sections 2-5)
     defineField({
+      name: "isJobGuaranteeProgram",
+      title: "Is Job Guarantee Program?",
+      type: "boolean",
+      group: "curriculum",
+      description:
+        "Enable to show Placement Readiness Test, ISA Agreement, and Career Track sections.",
+      initialValue: false,
+    }),
+    defineField({
       name: "prtSteps",
       title: "Placement Readiness Test Steps",
       type: "array",
@@ -249,6 +258,7 @@ export const courseType = defineType({
           preview: { select: { title: "title", subtitle: "description" } },
         },
       ],
+      hidden: ({ document }) => !document?.isJobGuaranteeProgram,
     }),
     defineField({
       name: "isaSteps",
@@ -271,6 +281,7 @@ export const courseType = defineType({
           preview: { select: { title: "title", subtitle: "description" } },
         },
       ],
+      hidden: ({ document }) => !document?.isJobGuaranteeProgram,
     }),
     defineField({
       name: "careerTrack",
@@ -299,6 +310,7 @@ export const courseType = defineType({
           preview: { select: { title: "title", subtitle: "description" } },
         },
       ],
+      hidden: ({ document }) => !document?.isJobGuaranteeProgram,
     }),
     defineField({
       name: "hiringPartners",
@@ -328,6 +340,7 @@ export const courseType = defineType({
       type: "number",
       group: "curriculum",
       description: "Fee payable after placement, in INR. E.g. 20000",
+      hidden: ({ document }) => !document?.isJobGuaranteeProgram,
     }),
 
     // Pricing Group

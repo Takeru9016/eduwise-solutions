@@ -52,7 +52,7 @@ import PaymentModal from "../payment/PaymentModal";
 import PlacementSection from "./PlacementSection";
 import GoogleReviews from "../common/GoogleReviews";
 import RefundHighlight from "../common/RefundHighlight";
-import type { CourseContent, CourseTool } from "@/types/course";
+import type { CourseContent } from "@/types/course";
 
 // Icon Map
 // Maps string icon names from Sanity to Lucide components
@@ -919,432 +919,362 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
             </div>
 
             {/* ── Section 2: Placement Readiness Test (PRT) ── */}
-            <div className="rounded-3xl overflow-hidden shadow-lg">
-              <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-6 sm:px-8 py-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white font-bold text-xl">
-                    2
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-vietnam font-bold text-white">
-                      Placement Readiness Test (PRT)
-                    </h3>
-                    <p className="text-emerald-100 text-sm mt-1">
-                      To become eligible for our Job Guarantee Program, complete
-                      these milestones:
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-gradient-to-b from-emerald-50 to-white p-6 sm:p-8">
-                {(() => {
-                  const prtDefaults = [
-                    {
-                      title: "Complete Your Learning Journey",
-                      description: `Finish 100% of the ${course.title} Course Curriculum`,
-                    },
-                    {
-                      title: "Build Real-World Experience",
-                      description:
-                        "Successfully complete a minimum of 3 hands-on projects",
-                    },
-                    {
-                      title: "Demonstrate Your Expertise",
-                      description: `Clear the 1:1 Virtual Interview Round with our ${course.title} Experts`,
-                    },
-                  ];
-                  const prtSteps =
-                    course.prtSteps && course.prtSteps.length > 0 ?
-                      course.prtSteps
-                    : prtDefaults;
-                  const prtColors = [
-                    "from-emerald-500 to-teal-500",
-                    "from-blue-500 to-indigo-500",
-                    "from-violet-500 to-purple-500",
-                  ];
-                  const prtIcons = [Check, Target, Award];
-                  return (
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-                      {prtSteps.map((step, idx) => (
-                        <div
-                          key={idx}
-                          className="bg-white rounded-2xl p-6 text-center shadow-sm border border-slate-100 hover:shadow-md transition-shadow"
-                        >
-                          <div
-                            className={`w-14 h-14 bg-gradient-to-br ${prtColors[idx % prtColors.length]} rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-xl shadow-md`}
-                          >
-                            {idx + 1}
-                          </div>
-                          <h4 className="font-vietnam font-bold text-grey-15 text-lg mb-3">
-                            {step.title}
-                          </h4>
-                          <div className="bg-emerald-50 rounded-xl p-3 border border-emerald-100">
-                            {(() => {
-                              const Icon = prtIcons[idx % prtIcons.length];
-                              return (
-                                <Icon className="w-5 h-5 text-emerald-600 mx-auto mb-2" />
-                              );
-                            })()}
-                            <p className="text-sm text-grey-35 leading-relaxed">
-                              {step.description}
-                            </p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  );
-                })()}
-              </div>
-
-              <div className="bg-gradient-to-r from-emerald-500 to-teal-500 flex justify-center py-3">
-                <ChevronDown className="w-6 h-6 text-white animate-bounce" />
-              </div>
-            </div>
-
-            {/* ── Section 3: Sign ISA Agreement ── */}
-            <div className="rounded-3xl overflow-hidden shadow-lg">
-              <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-6 sm:px-8 py-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white font-bold text-xl">
-                    3
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-vietnam font-bold text-white">
-                      Sign ISA Agreement
-                    </h3>
-                    <p className="text-emerald-100 text-sm mt-1">
-                      Pay INR{" "}
-                      {(course.careerServiceFee || 20000).toLocaleString(
-                        "en-IN",
-                      )}{" "}
-                      to Eduwise Solutions as a career services fee after
-                      placement.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-gradient-to-b from-emerald-50 to-white p-6 sm:p-8">
-                {(() => {
-                  const isaDefaults = [
-                    {
-                      title: "Sign ISA",
-                      description:
-                        "Income Share Agreement with Eduwise Solutions",
-                    },
-                    {
-                      title: "You are eligible",
-                      description: "For the placement program",
-                    },
-                    {
-                      title: "Pay the career services",
-                      description: `Fee of INR ${(course.careerServiceFee || 20000).toLocaleString("en-IN")}`,
-                    },
-                  ];
-                  const isaSteps =
-                    course.isaSteps && course.isaSteps.length > 0 ?
-                      course.isaSteps
-                    : isaDefaults;
-                  const isaColors = [
-                    "from-emerald-500 to-teal-500",
-                    "from-blue-500 to-indigo-500",
-                    "from-violet-500 to-purple-500",
-                  ];
-                  const isaIcons = [FileText, UserCheck, Banknote];
-                  return (
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-                      {isaSteps.map((step, idx) => (
-                        <div
-                          key={idx}
-                          className="bg-white rounded-2xl p-6 text-center shadow-sm border border-slate-100 hover:shadow-md transition-shadow"
-                        >
-                          <div
-                            className={`w-16 h-16 bg-gradient-to-br ${isaColors[idx % isaColors.length]} bg-opacity-10 rounded-2xl flex items-center justify-center mx-auto mb-4`}
-                          >
-                            {(() => {
-                              const Icon = isaIcons[idx % isaIcons.length];
-                              return <Icon className="w-8 h-8 text-white" />;
-                            })()}
-                          </div>
-                          <h4 className="font-vietnam font-bold text-grey-15 text-lg mb-1">
-                            {step.title}
-                          </h4>
-                          <p className="text-sm text-grey-40">
-                            {step.description}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                  );
-                })()}
-              </div>
-
-              <div className="bg-gradient-to-r from-emerald-500 to-teal-500 flex justify-center py-3">
-                <ChevronDown className="w-6 h-6 text-white animate-bounce" />
-              </div>
-            </div>
-
-            {/* ── Section 4: Career Track ── */}
-            <div className="rounded-3xl overflow-hidden shadow-lg">
-              <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-6 sm:px-8 py-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white font-bold text-xl">
-                    4
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-vietnam font-bold text-white">
-                      Career Track
-                    </h3>
-                    <p className="text-emerald-100 text-sm mt-1">
-                      Access a wide range of resources to become a Job-Ready
-                      Candidate with our dedicated placement team.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-white">
-                {(() => {
-                  const careerTrackDefaults = [
-                    {
-                      title: "Profile and Resume Building",
-                      description:
-                        "Create a professional profile that stands out to recruiters",
-                      topics: [
-                        "Profile and Resume building",
-                        "LinkedIn profile optimization",
-                        "Portfolio development",
-                        "Professional branding",
-                      ],
-                    },
-                    {
-                      title: "Business Communication",
-                      description:
-                        "Master professional communication skills for the workplace",
-                      topics: [
-                        "Email writing",
-                        "Interview preparation",
-                        "Presentation skills",
-                        "Workplace communication",
-                      ],
-                    },
-                    {
-                      title: "Competency Test",
-                      description:
-                        "Demonstrate your readiness for the industry",
-                      topics: [
-                        "Technical assessment",
-                        "Aptitude evaluation",
-                        "Mock interviews",
-                        "Performance review",
-                      ],
-                    },
-                  ];
-                  const careerTrackItems =
-                    course.careerTrack && course.careerTrack.length > 0 ?
-                      course.careerTrack
-                    : careerTrackDefaults;
-
-                  return (
-                    <>
-                      {/* Desktop: sidebar tabs */}
-                      <div className="hidden md:grid md:grid-cols-[320px_1fr] min-h-[600px]">
-                        <div className="border-r border-slate-100 py-4">
-                          {careerTrackItems.map((item, i) => (
-                            <button
-                              key={i}
-                              onClick={() => setActiveCareerTrackTab(i)}
-                              className={`w-full flex items-center justify-between px-5 py-4 text-left transition-all duration-200 border-l-[3px] ${
-                                activeCareerTrackTab === i ?
-                                  "bg-emerald-50/60 border-l-emerald-500"
-                                : "border-l-transparent hover:bg-slate-50"
-                              }`}
-                            >
-                              <div className="flex-1 min-w-0">
-                                <p
-                                  className={`font-vietnam font-bold text-sm ${
-                                    activeCareerTrackTab === i ?
-                                      "text-emerald-700"
-                                    : "text-grey-25"
-                                  }`}
-                                >
-                                  {item.title}
-                                </p>
-                                <p className="text-xs text-grey-50 mt-0.5 truncate">
-                                  {item.description}
-                                </p>
-                              </div>
-                              {activeCareerTrackTab === i && (
-                                <ChevronRight className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-                              )}
-                            </button>
-                          ))}
-                        </div>
-
-                        <div className="p-8">
-                          {careerTrackItems[activeCareerTrackTab] && (
-                            <div key={activeCareerTrackTab}>
-                              <h4 className="text-xl font-vietnam font-bold text-grey-15 mb-1">
-                                {careerTrackItems[activeCareerTrackTab].title}
-                              </h4>
-                              <p className="text-sm text-grey-40 mb-6">
-                                {
-                                  careerTrackItems[activeCareerTrackTab]
-                                    .description
-                                }
-                              </p>
-                              <div className="border-t border-slate-100 pt-6">
-                                <p className="text-sm font-bold text-grey-30 uppercase tracking-wider mb-4">
-                                  What You&apos;ll Learn:
-                                </p>
-                                <ul className="space-y-3">
-                                  {careerTrackItems[
-                                    activeCareerTrackTab
-                                  ].topics.map((topic, j) => (
-                                    <li
-                                      key={j}
-                                      className="flex items-start gap-3"
-                                    >
-                                      <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full mt-2 flex-shrink-0" />
-                                      <span className="text-grey-35 leading-relaxed text-[15px]">
-                                        {topic}
-                                      </span>
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
-                            </div>
-                          )}
-                        </div>
+            {course.isJobGuaranteeProgram &&
+              course.prtSteps &&
+              course.prtSteps.length > 0 && (
+                <div className="rounded-3xl overflow-hidden shadow-lg">
+                  <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-6 sm:px-8 py-6">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white font-bold text-xl">
+                        2
                       </div>
-
-                      {/* Mobile: stacked cards */}
-                      <div className="md:hidden p-4 space-y-3">
-                        {careerTrackItems.map((item, i) => (
-                          <details
-                            key={i}
-                            className="group bg-slate-50 rounded-xl border border-slate-100 overflow-hidden"
-                          >
-                            <summary className="flex items-center gap-3 p-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-                              <Briefcase className="w-5 h-5 text-emerald-600 flex-shrink-0" />
-                              <span className="font-vietnam font-bold text-sm text-grey-15 flex-1">
-                                {item.title}
-                              </span>
-                              <ChevronDown className="w-4 h-4 text-grey-40 transition-transform group-open:rotate-180" />
-                            </summary>
-                            <div className="px-4 pb-4">
-                              <ul className="space-y-2 ml-8">
-                                {item.topics.map((topic, j) => (
-                                  <li
-                                    key={j}
-                                    className="flex items-start gap-2 text-grey-35 text-sm"
-                                  >
-                                    <Check className="w-3.5 h-3.5 text-emerald-500 mt-0.5 flex-shrink-0" />
-                                    <span>{topic}</span>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          </details>
-                        ))}
-                      </div>
-                    </>
-                  );
-                })()}
-              </div>
-
-              <div className="bg-gradient-to-r from-emerald-500 to-teal-500 flex justify-center py-3">
-                <ChevronDown className="w-6 h-6 text-white animate-bounce" />
-              </div>
-            </div>
-
-            {/* ── Section 5: Pay Career Services Fee & Hiring Partners ── */}
-            <div className="rounded-3xl overflow-hidden shadow-lg">
-              <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-6 sm:px-8 py-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white font-bold text-xl">
-                    5
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-vietnam font-bold text-white">
-                      Pay Career Services Fee
-                    </h3>
-                    <p className="text-emerald-100 text-sm mt-1">
-                      Only pay after you receive an offer letter. Our hiring
-                      partners are waiting for you!
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-gradient-to-b from-emerald-50 to-white p-6 sm:p-10">
-                <p className="text-center text-grey-35 mb-8 text-lg font-medium">
-                  Our Hiring Partners
-                </p>
-                {(() => {
-                  const defaultPartners: CourseTool[] = [
-                    { name: "Meesho" },
-                    { name: "Blinkit" },
-                    { name: "Techify" },
-                    { name: "FastPix" },
-                    { name: "PeopleTech" },
-                    { name: "eClerx" },
-                    { name: "CarDekho" },
-                    { name: "Hitachi" },
-                    { name: "Cricbuzz" },
-                    { name: "RapiPay" },
-                    { name: "RevInfoTech" },
-                    { name: "Nvert Solutions" },
-                  ];
-                  const partners =
-                    course.hiringPartners && course.hiringPartners.length > 0 ?
-                      course.hiringPartners
-                    : defaultPartners;
-                  return (
-                    <>
-                      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4">
-                        {partners.map((partner, i) => (
-                          <div
-                            key={i}
-                            className="bg-white rounded-xl border border-slate-100 p-4 flex flex-col items-center justify-center h-20 shadow-sm hover:shadow-md transition-shadow hover:border-emerald-200 group"
-                          >
-                            {partner.logoUrl ?
-                              <Image
-                                src={partner.logoUrl}
-                                alt={partner.name}
-                                width={120}
-                                height={40}
-                                className="object-contain h-full w-full group-hover:scale-110 transition-transform"
-                                unoptimized
-                              />
-                            : <>
-                                <Building className="w-5 h-5 text-slate-300 group-hover:text-emerald-500 transition-colors mb-1" />
-                                <span className="text-xs font-bold text-grey-30 text-center leading-tight">
-                                  {partner.name}
-                                </span>
-                              </>
-                            }
-                          </div>
-                        ))}
-                      </div>
-                      <div className="text-center mt-8">
-                        <p className="text-sm text-grey-40">
-                          Career services fee:{" "}
-                          <span className="font-bold text-emerald-700">
-                            INR{" "}
-                            {(course.careerServiceFee || 20000).toLocaleString(
-                              "en-IN",
-                            )}
-                          </span>{" "}
-                          (payable after placement, EMI available)
+                      <div>
+                        <h3 className="text-2xl font-vietnam font-bold text-white">
+                          Placement Readiness Test (PRT)
+                        </h3>
+                        <p className="text-emerald-100 text-sm mt-1">
+                          To become eligible for our Job Guarantee Program,
+                          complete these milestones:
                         </p>
                       </div>
-                    </>
-                  );
-                })()}
-              </div>
-            </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-gradient-to-b from-emerald-50 to-white p-6 sm:p-8">
+                    {(() => {
+                      const prtSteps = course.prtSteps!;
+                      const prtColors = [
+                        "from-emerald-500 to-teal-500",
+                        "from-blue-500 to-indigo-500",
+                        "from-violet-500 to-purple-500",
+                      ];
+                      const prtIcons = [Check, Target, Award];
+                      return (
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                          {prtSteps.map((step, idx) => (
+                            <div
+                              key={idx}
+                              className="bg-white rounded-2xl p-6 text-center shadow-sm border border-slate-100 hover:shadow-md transition-shadow"
+                            >
+                              <div
+                                className={`w-14 h-14 bg-gradient-to-br ${prtColors[idx % prtColors.length]} rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-xl shadow-md`}
+                              >
+                                {idx + 1}
+                              </div>
+                              <h4 className="font-vietnam font-bold text-grey-15 text-lg mb-3">
+                                {step.title}
+                              </h4>
+                              <div className="bg-emerald-50 rounded-xl p-3 border border-emerald-100">
+                                {(() => {
+                                  const Icon = prtIcons[idx % prtIcons.length];
+                                  return (
+                                    <Icon className="w-5 h-5 text-emerald-600 mx-auto mb-2" />
+                                  );
+                                })()}
+                                <p className="text-sm text-grey-35 leading-relaxed">
+                                  {step.description}
+                                </p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      );
+                    })()}
+                  </div>
+
+                  <div className="bg-gradient-to-r from-emerald-500 to-teal-500 flex justify-center py-3">
+                    <ChevronDown className="w-6 h-6 text-white animate-bounce" />
+                  </div>
+                </div>
+              )}
+
+            {/* ── Section 3: Sign ISA Agreement ── */}
+            {course.isJobGuaranteeProgram &&
+              course.isaSteps &&
+              course.isaSteps.length > 0 && (
+                <div className="rounded-3xl overflow-hidden shadow-lg">
+                  <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-6 sm:px-8 py-6">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white font-bold text-xl">
+                        3
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-vietnam font-bold text-white">
+                          Sign ISA Agreement
+                        </h3>
+                        <p className="text-emerald-100 text-sm mt-1">
+                          Pay INR{" "}
+                          {(course.careerServiceFee || 20000).toLocaleString(
+                            "en-IN",
+                          )}{" "}
+                          to Eduwise Solutions as a career services fee after
+                          placement.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-gradient-to-b from-emerald-50 to-white p-6 sm:p-8">
+                    {(() => {
+                      const isaSteps = course.isaSteps!;
+                      const isaColors = [
+                        "from-emerald-500 to-teal-500",
+                        "from-blue-500 to-indigo-500",
+                        "from-violet-500 to-purple-500",
+                      ];
+                      const isaIcons = [FileText, UserCheck, Banknote];
+                      return (
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                          {isaSteps.map((step, idx) => (
+                            <div
+                              key={idx}
+                              className="bg-white rounded-2xl p-6 text-center shadow-sm border border-slate-100 hover:shadow-md transition-shadow"
+                            >
+                              <div
+                                className={`w-16 h-16 bg-gradient-to-br ${isaColors[idx % isaColors.length]} bg-opacity-10 rounded-2xl flex items-center justify-center mx-auto mb-4`}
+                              >
+                                {(() => {
+                                  const Icon = isaIcons[idx % isaIcons.length];
+                                  return (
+                                    <Icon className="w-8 h-8 text-white" />
+                                  );
+                                })()}
+                              </div>
+                              <h4 className="font-vietnam font-bold text-grey-15 text-lg mb-1">
+                                {step.title}
+                              </h4>
+                              <p className="text-sm text-grey-40">
+                                {step.description}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                      );
+                    })()}
+                  </div>
+
+                  <div className="bg-gradient-to-r from-emerald-500 to-teal-500 flex justify-center py-3">
+                    <ChevronDown className="w-6 h-6 text-white animate-bounce" />
+                  </div>
+                </div>
+              )}
+
+            {/* ── Section 4: Career Track ── */}
+            {course.isJobGuaranteeProgram &&
+              course.careerTrack &&
+              course.careerTrack.length > 0 && (
+                <div className="rounded-3xl overflow-hidden shadow-lg">
+                  <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-6 sm:px-8 py-6">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white font-bold text-xl">
+                        4
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-vietnam font-bold text-white">
+                          Career Track
+                        </h3>
+                        <p className="text-emerald-100 text-sm mt-1">
+                          Access a wide range of resources to become a Job-Ready
+                          Candidate with our dedicated placement team.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-white">
+                    {(() => {
+                      const careerTrackItems = course.careerTrack!;
+
+                      return (
+                        <>
+                          {/* Desktop: sidebar tabs */}
+                          <div className="hidden md:grid md:grid-cols-[320px_1fr] min-h-[600px]">
+                            <div className="border-r border-slate-100 py-4">
+                              {careerTrackItems.map((item, i) => (
+                                <button
+                                  key={i}
+                                  onClick={() => setActiveCareerTrackTab(i)}
+                                  className={`w-full flex items-center justify-between px-5 py-4 text-left transition-all duration-200 border-l-[3px] ${
+                                    activeCareerTrackTab === i ?
+                                      "bg-emerald-50/60 border-l-emerald-500"
+                                    : "border-l-transparent hover:bg-slate-50"
+                                  }`}
+                                >
+                                  <div className="flex-1 min-w-0">
+                                    <p
+                                      className={`font-vietnam font-bold text-sm ${
+                                        activeCareerTrackTab === i ?
+                                          "text-emerald-700"
+                                        : "text-grey-25"
+                                      }`}
+                                    >
+                                      {item.title}
+                                    </p>
+                                    <p className="text-xs text-grey-50 mt-0.5 truncate">
+                                      {item.description}
+                                    </p>
+                                  </div>
+                                  {activeCareerTrackTab === i && (
+                                    <ChevronRight className="w-4 h-4 text-emerald-500 flex-shrink-0" />
+                                  )}
+                                </button>
+                              ))}
+                            </div>
+
+                            <div className="p-8">
+                              {careerTrackItems[activeCareerTrackTab] && (
+                                <div key={activeCareerTrackTab}>
+                                  <h4 className="text-xl font-vietnam font-bold text-grey-15 mb-1">
+                                    {
+                                      careerTrackItems[activeCareerTrackTab]
+                                        .title
+                                    }
+                                  </h4>
+                                  <p className="text-sm text-grey-40 mb-6">
+                                    {
+                                      careerTrackItems[activeCareerTrackTab]
+                                        .description
+                                    }
+                                  </p>
+                                  <div className="border-t border-slate-100 pt-6">
+                                    <p className="text-sm font-bold text-grey-30 uppercase tracking-wider mb-4">
+                                      What You&apos;ll Learn:
+                                    </p>
+                                    <ul className="space-y-3">
+                                      {careerTrackItems[
+                                        activeCareerTrackTab
+                                      ].topics.map((topic, j) => (
+                                        <li
+                                          key={j}
+                                          className="flex items-start gap-3"
+                                        >
+                                          <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full mt-2 flex-shrink-0" />
+                                          <span className="text-grey-35 leading-relaxed text-[15px]">
+                                            {topic}
+                                          </span>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+
+                          {/* Mobile: stacked cards */}
+                          <div className="md:hidden p-4 space-y-3">
+                            {careerTrackItems.map((item, i) => (
+                              <details
+                                key={i}
+                                className="group bg-slate-50 rounded-xl border border-slate-100 overflow-hidden"
+                              >
+                                <summary className="flex items-center gap-3 p-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                                  <Briefcase className="w-5 h-5 text-emerald-600 flex-shrink-0" />
+                                  <span className="font-vietnam font-bold text-sm text-grey-15 flex-1">
+                                    {item.title}
+                                  </span>
+                                  <ChevronDown className="w-4 h-4 text-grey-40 transition-transform group-open:rotate-180" />
+                                </summary>
+                                <div className="px-4 pb-4">
+                                  <ul className="space-y-2 ml-8">
+                                    {item.topics.map((topic, j) => (
+                                      <li
+                                        key={j}
+                                        className="flex items-start gap-2 text-grey-35 text-sm"
+                                      >
+                                        <Check className="w-3.5 h-3.5 text-emerald-500 mt-0.5 flex-shrink-0" />
+                                        <span>{topic}</span>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              </details>
+                            ))}
+                          </div>
+                        </>
+                      );
+                    })()}
+                  </div>
+
+                  <div className="bg-gradient-to-r from-emerald-500 to-teal-500 flex justify-center py-3">
+                    <ChevronDown className="w-6 h-6 text-white animate-bounce" />
+                  </div>
+                </div>
+              )}
+
+            {/* ── Section 5: Pay Career Services Fee & Hiring Partners ── */}
+            {course.isJobGuaranteeProgram &&
+              course.hiringPartners &&
+              course.hiringPartners.length > 0 && (
+                <div className="rounded-3xl overflow-hidden shadow-lg">
+                  <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-6 sm:px-8 py-6">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white font-bold text-xl">
+                        5
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-vietnam font-bold text-white">
+                          Pay Career Services Fee
+                        </h3>
+                        <p className="text-emerald-100 text-sm mt-1">
+                          Only pay after you receive an offer letter. Our hiring
+                          partners are waiting for you!
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-gradient-to-b from-emerald-50 to-white p-6 sm:p-10">
+                    <p className="text-center text-grey-35 mb-8 text-lg font-medium">
+                      Our Hiring Partners
+                    </p>
+                    {(() => {
+                      const partners = course.hiringPartners!;
+                      return (
+                        <>
+                          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4">
+                            {partners.map((partner, i) => (
+                              <div
+                                key={i}
+                                className="bg-white rounded-xl border border-slate-100 p-4 flex flex-col items-center justify-center h-20 shadow-sm hover:shadow-md transition-shadow hover:border-emerald-200 group"
+                              >
+                                {partner.logoUrl ?
+                                  <Image
+                                    src={partner.logoUrl}
+                                    alt={partner.name}
+                                    width={120}
+                                    height={40}
+                                    className="object-contain h-full w-full group-hover:scale-110 transition-transform"
+                                    unoptimized
+                                  />
+                                : <>
+                                    <Building className="w-5 h-5 text-slate-300 group-hover:text-emerald-500 transition-colors mb-1" />
+                                    <span className="text-xs font-bold text-grey-30 text-center leading-tight">
+                                      {partner.name}
+                                    </span>
+                                  </>
+                                }
+                              </div>
+                            ))}
+                          </div>
+                          <div className="text-center mt-8">
+                            <p className="text-sm text-grey-40">
+                              Career services fee:{" "}
+                              <span className="font-bold text-emerald-700">
+                                INR{" "}
+                                {(
+                                  course.careerServiceFee || 20000
+                                ).toLocaleString("en-IN")}
+                              </span>{" "}
+                              (payable after placement, EMI available)
+                            </p>
+                          </div>
+                        </>
+                      );
+                    })()}
+                  </div>
+                </div>
+              )}
           </div>
         </div>
       </section>

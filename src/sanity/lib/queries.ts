@@ -136,6 +136,7 @@ export const COURSE_BY_SLUG_QUERY = `
     whatsIncluded,
     careerPaths,
     targetAudience,
+    isJobGuaranteeProgram,
     tools[] {
       name,
       "logoUrl": logo.asset->url

@@ -98,6 +98,7 @@ export interface CourseContent {
   whatsIncluded: string[];
 
   // Curriculum journey (sections 2-5)
+  isJobGuaranteeProgram?: boolean;
   prtSteps?: PRTStep[];
   isaSteps?: ISAStep[];
   careerTrack?: CareerTrackItem[];

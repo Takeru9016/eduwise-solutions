@@ -358,7 +358,7 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
       </section>
 
       {/* 2. REFUND HIGHLIGHT */}
-      <RefundHighlight />
+      {course.slug.current.toLowerCase() === "devops" && <RefundHighlight />}
 
       {/* 3. FEATURES — Bento Grid */}
       <section className="pt-28 pb-20 bg-gradient-to-b from-slate-50 to-white">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const BASE = "https://api.iconify.design";
 
@@ -253,9 +253,6 @@ function DomainRow({
 }
 
 export default function DomainsShowcase() {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-
   return (
     <section
       aria-label="Technologies and Domains"
@@ -537,12 +534,12 @@ export default function DomainsShowcase() {
           24 Domains &amp; Counting
         </div>
         <h2 className="ds-title">
-          Upskill in the world's most{" "}
+          Upskill in the world&apos;s most{" "}
           <span className="ds-title-accent">in-demand technologies</span>
         </h2>
         <p className="ds-subtitle">
           Curated programs designed with industry experts to make you job‑ready
-          in tomorrow's most sought-after fields.
+          in tomorrow&apos;s most sought-after fields.
         </p>
       </div>
 

@@ -5,7 +5,7 @@ import { Analytics } from "@vercel/analytics/next";
 
 import "./globals.css";
 import { Toaster } from "sonner";
-import { PopupForm, MetaPixel, Chatbot } from "@/components";
+import { PopupForm, MetaPixel } from "@/components";
 
 const beVietnamPro = Be_Vietnam_Pro({
   subsets: ["latin"],
@@ -15,7 +15,8 @@ const beVietnamPro = Be_Vietnam_Pro({
 
 export const metadata: Metadata = {
   title: "Eduwise Solutions - Your Path to Success",
-  description: "Whether you're interested in IT Jobs or professional courses that get you job-ready, we're here to support you every step of the way!",
+  description:
+    "Whether you're interested in IT Jobs or professional courses that get you job-ready, we're here to support you every step of the way!",
   manifest: "/favicon/site.webmanifest",
   icons: {
     icon: [
@@ -68,7 +69,6 @@ export default function RootLayout({
         />
         <SpeedInsights />
         <Analytics />
-        <Chatbot />
       </body>
     </html>
   );

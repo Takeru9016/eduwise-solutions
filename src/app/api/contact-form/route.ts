@@ -2,8 +2,6 @@
 import { NextResponse } from "next/server";
 import { google } from "googleapis";
 
-import { createLeadFromContactForm } from "@/lib/odoo";
-
 // Utility function to validate environment variables
 function validateEnvVariables() {
   const requiredVars = {
@@ -18,7 +16,7 @@ function validateEnvVariables() {
 
   if (missingVars.length > 0) {
     throw new Error(
-      `Missing required environment variables: ${missingVars.join(", ")}`
+      `Missing required environment variables: ${missingVars.join(", ")}`,
     );
   }
 
@@ -34,7 +32,7 @@ function validateEnvVariables() {
 async function initializeGoogleSheets() {
   const privateKey = process.env.GOOGLE_SHEETS_PRIVATE_KEY?.replace(
     /\\n/g,
-    "\n"
+    "\n",
   )?.replace(/\n/g, "\n");
 
   const auth = new google.auth.GoogleAuth({
@@ -56,7 +54,7 @@ async function initializeGoogleSheets() {
 
     // Verify the required sheet exists
     const sheetExists = spreadsheet.data.sheets?.some(
-      (sheet) => sheet.properties?.title === "Inquiry Data"
+      (sheet) => sheet.properties?.title === "Website Lead",
     );
 
     if (!sheetExists) {
@@ -68,7 +66,7 @@ async function initializeGoogleSheets() {
             {
               addSheet: {
                 properties: {
-                  title: "Inquiry Data",
+                  title: "Website Lead",
                   gridProperties: {
                     rowCount: 1000,
                     columnCount: 6,
@@ -83,7 +81,7 @@ async function initializeGoogleSheets() {
       // Add headers to the new sheet
       await sheets.spreadsheets.values.update({
         spreadsheetId: process.env.SPREADSHEET_ID,
-        range: "Inquiry Data!A1:F1",
+        range: "Website Lead!A1:F1",
         valueInputOption: "RAW",
         requestBody: {
           values: [
@@ -99,11 +97,11 @@ async function initializeGoogleSheets() {
         },
       });
 
-      console.log("Created new sheet 'Inquiry Data' with headers");
+      console.log("Created new sheet 'Website Lead' with headers");
     }
 
     console.log(
-      "Successfully connected to spreadsheet and verified sheet exists"
+      "Successfully connected to spreadsheet and verified sheet exists",
     );
     return sheets;
   } catch (error) {
@@ -133,7 +131,7 @@ export async function POST(req: Request) {
     try {
       await sheets.spreadsheets.values.append({
         spreadsheetId: process.env.SPREADSHEET_ID,
-        range: "Inquiry Data",
+        range: "Website Lead",
         valueInputOption: "USER_ENTERED",
         requestBody: {
           values: [
@@ -151,29 +149,6 @@ export async function POST(req: Request) {
 
       console.log("Successfully appended data to sheet");
 
-      // Create lead in Odoo CRM (non-blocking - errors won't fail the request)
-      try {
-        const odooResult = await createLeadFromContactForm({
-          firstName: body.firstName,
-          lastName: body.lastName,
-          email: body.email,
-          mobile: body.mobile,
-          subject: body.subject,
-          message: body.message,
-        });
-
-        if (odooResult.success) {
-          console.log("Odoo lead created successfully, ID:", odooResult.leadId);
-        } else {
-          console.warn(
-            "Odoo lead creation skipped or failed:",
-            odooResult.error
-          );
-        }
-      } catch (odooError) {
-        console.error("Odoo integration error (non-fatal):", odooError);
-      }
-
       return NextResponse.json({
         success: true,
         message: "Form submission saved successfully",
@@ -184,11 +159,11 @@ export async function POST(req: Request) {
         {
           error: "Failed to save form submission",
           details:
-            appendError instanceof Error
-              ? appendError.message
-              : "Unknown error",
+            appendError instanceof Error ?
+              appendError.message
+            : "Unknown error",
         },
-        { status: 503 }
+        { status: 503 },
       );
     }
   } catch (error) {
@@ -196,10 +171,12 @@ export async function POST(req: Request) {
 
     // Determine appropriate status code based on error type
     const statusCode =
-      error instanceof Error &&
-      error.message.includes("Missing required environment variables")
-        ? 500 // Server configuration error
-        : 503; // Service unavailable (e.g., Google Sheets API issues)
+      (
+        error instanceof Error &&
+        error.message.includes("Missing required environment variables")
+      ) ?
+        500 // Server configuration error
+      : 503; // Service unavailable (e.g., Google Sheets API issues)
 
     return NextResponse.json(
       {
@@ -207,7 +184,7 @@ export async function POST(req: Request) {
         details:
           error instanceof Error ? error.message : "Unknown error occurred",
       },
-      { status: statusCode }
+      { status: statusCode },
     );
   }
 }

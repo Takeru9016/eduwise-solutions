@@ -22,7 +22,6 @@ import {
 } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
 import AWSPartnerBanner from "./AWSPartnerBadge";
-import BookButton from "./BookButton";
 import { getCategoriesWithCourses } from "@/data/courses";
 import type { CourseCategoryId } from "@/data/courses";
 
@@ -179,14 +178,6 @@ const DesktopMegaMenu = () => {
               </div>
             ))}
           </div>
-
-          {/* Footer CTA */}
-          <div className="bg-gradient-to-r from-primary-99 to-primary-98 px-6 py-3 border-t border-light-90 flex items-center justify-between">
-            <span className="text-grey-40 text-xs">
-              Not sure which course to pick?
-            </span>
-            <BookButton />
-          </div>
         </div>
       </div>
     </div>
@@ -225,7 +216,6 @@ const DesktopNavigation = ({ pathname }: DesktopNavigationProps) => (
     ))}
 
     <Separator orientation="vertical" className="h-6" />
-    <BookButton />
     <Link href="/contact">
       <Button
         variant="default"
@@ -369,8 +359,6 @@ const MobileNavigation = ({
                 {link.label}
               </Link>
             ))}
-
-            <BookButton />
 
             <Link href="https://learner.eduwise.solutions/" target="_blank">
               <Button

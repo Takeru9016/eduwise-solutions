@@ -19,11 +19,17 @@ export interface CourseHighlight {
   points: string[];
 }
 
+export interface CourseSubModule {
+  title: string;
+  subtopics: string[];
+  handsOn: string[];
+}
+
 export interface CourseModule {
   title: string;
   description: string;
   duration?: string;
-  topics: string[];
+  submodules: CourseSubModule[];
 }
 
 export interface PRTStep {

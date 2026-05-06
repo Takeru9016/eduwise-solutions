@@ -4,8 +4,6 @@ export { default as FAQsPage } from "./FAQsPage";
 export { default as HeroSection } from "./HeroSection";
 export { default as TestimonialPage } from "./TestimonialPage";
 
-export { default as BookFormDialog } from "./common/BookFormDialog";
-export { default as BookButton } from "./common/BookButton";
 export { default as BenefitSection } from "./common/BenefitSection";
 export { default as ComingSoonPage } from "./common/ComingSoon";
 export { default as CTASection } from "./common/CTASection";

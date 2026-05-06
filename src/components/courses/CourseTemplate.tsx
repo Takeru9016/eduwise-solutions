@@ -815,26 +815,59 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
                             </h4>
                             {(mod.duration || mod.description) && (
                               <p className="text-sm text-grey-40 mb-6">
-                                Duration: {mod.duration || mod.description}
+                                Description: {mod.description}
                               </p>
                             )}
-                            <div className="border-t border-slate-100 pt-6">
-                              <p className="text-sm font-bold text-grey-30 uppercase tracking-wider mb-4">
-                                Topics Covered:
-                              </p>
-                              <ul className="space-y-3">
-                                {mod.topics.map((topic, j) => (
-                                  <li
-                                    key={j}
-                                    className="flex items-start gap-3"
-                                  >
-                                    <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full mt-2 flex-shrink-0" />
-                                    <span className="text-grey-35 leading-relaxed text-[15px]">
-                                      {topic}
-                                    </span>
-                                  </li>
-                                ))}
-                              </ul>
+                            <div className="border-t border-slate-100 pt-6 space-y-6">
+                              {mod.submodules?.map((submod, idx) => (
+                                <div key={idx}>
+                                  <h5 className="font-vietnam font-bold text-lg text-grey-15 mb-3">
+                                    {submod.title}
+                                  </h5>
+
+                                  {submod.subtopics?.length > 0 && (
+                                    <div className="mb-4">
+                                      <p className="text-sm font-bold text-grey-30 uppercase tracking-wider mb-2">
+                                        Topics:
+                                      </p>
+                                      <ul className="space-y-2">
+                                        {submod.subtopics.map((topic, j) => (
+                                          <li
+                                            key={j}
+                                            className="flex items-start gap-3"
+                                          >
+                                            <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full mt-2 flex-shrink-0" />
+                                            <span className="text-grey-35 leading-relaxed text-[15px]">
+                                              {topic}
+                                            </span>
+                                          </li>
+                                        ))}
+                                      </ul>
+                                    </div>
+                                  )}
+
+                                  {submod.handsOn?.length > 0 && (
+                                    <div>
+                                      <p className="text-sm font-bold text-emerald-600 uppercase tracking-wider mb-2">
+                                        Hands-on:
+                                      </p>
+                                      <ul className="space-y-2">
+                                        {submod.handsOn.map((item, j) => (
+                                          <li
+                                            key={j}
+                                            className="flex items-start gap-3"
+                                          >
+                                            <div className="w-1.5 h-1.5 bg-emerald-600 rounded-full mt-2 flex-shrink-0" />
+                                            <span className="text-grey-35 leading-relaxed text-[15px]">
+                                              {item}
+                                            </span>
+                                          </li>
+                                        ))}
+                                      </ul>
+                                    </div>
+                                  )}
+                                </div>
+                              ))}
                             </div>
                           </div>
                         );
@@ -869,17 +902,48 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
                           </div>
                         </AccordionTrigger>
                         <AccordionContent className="px-4 pb-4">
-                          <ul className="space-y-2 ml-11">
-                            {mod.topics.map((topic, j) => (
-                              <li
-                                key={j}
-                                className="flex items-start gap-2 text-grey-35 text-sm"
-                              >
-                                <Check className="w-3.5 h-3.5 text-emerald-500 mt-0.5 flex-shrink-0" />
-                                <span>{topic}</span>
-                              </li>
+                          <div className="space-y-4 ml-11">
+                            {mod.submodules?.map((submod, idx) => (
+                              <div key={idx}>
+                                <h5 className="font-vietnam font-bold text-sm text-grey-15 mb-2">
+                                  {submod.title}
+                                </h5>
+
+                                {submod.subtopics?.length > 0 && (
+                                  <ul className="space-y-1 mb-2">
+                                    {submod.subtopics.map((topic, j) => (
+                                      <li
+                                        key={j}
+                                        className="flex items-start gap-2 text-grey-35 text-sm"
+                                      >
+                                        <Check className="w-3.5 h-3.5 text-emerald-500 mt-0.5 flex-shrink-0" />
+                                        <span>{topic}</span>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                )}
+
+                                {submod.handsOn?.length > 0 && (
+                                  <ul className="space-y-1">
+                                    {submod.handsOn.map((item, j) => (
+                                      <li
+                                        key={`ho-${j}`}
+                                        className="flex items-start gap-2 text-grey-35 text-sm"
+                                      >
+                                        <Code className="w-3.5 h-3.5 text-emerald-600 mt-0.5 flex-shrink-0" />
+                                        <span>
+                                          <strong className="font-medium text-grey-30">
+                                            Hands-on:
+                                          </strong>{" "}
+                                          {item}
+                                        </span>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                )}
+                              </div>
                             ))}
-                          </ul>
+                          </div>
                         </AccordionContent>
                       </AccordionItem>
                     ))}

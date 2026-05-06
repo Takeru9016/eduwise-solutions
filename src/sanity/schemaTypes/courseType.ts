@@ -214,10 +214,30 @@ export const courseType = defineType({
               type: "string",
             },
             {
-              name: "topics",
-              title: "Topics",
+              name: "submodules",
+              title: "Sub Modules",
               type: "array",
-              of: [{ type: "string" }],
+              of: [
+                {
+                  type: "object",
+                  fields: [
+                    { name: "title", title: "Sub Module Name", type: "string" },
+                    {
+                      name: "subtopics",
+                      title: "Subtopics",
+                      type: "array",
+                      of: [{ type: "string" }],
+                    },
+                    {
+                      name: "handsOn",
+                      title: "Hands-on",
+                      type: "array",
+                      of: [{ type: "string" }],
+                    },
+                  ],
+                  preview: { select: { title: "title" } },
+                },
+              ],
             },
           ],
           preview: { select: { title: "title", subtitle: "description" } },

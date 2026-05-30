@@ -8,7 +8,9 @@ import {
   GraduationCap,
   Sparkles,
 } from "lucide-react";
-import { getCategoriesWithCourses } from "@/data/courses";
+import { client } from "@/sanity/lib/client";
+import { COURSES_NAV_QUERY } from "@/sanity/lib/queries";
+import { CATEGORIES } from "@/data/courses";
 
 // Types
 interface FooterLink {
@@ -20,6 +22,14 @@ interface SocialLink {
   label: string;
   href: string;
   icon: string;
+}
+
+interface SanityCourseNav {
+  _id: string;
+  title: string;
+  slug: string;
+  category: string;
+  emoji: string | null;
 }
 
 // Data
@@ -56,9 +66,31 @@ const socialLinks: SocialLink[] = [
   },
 ];
 
-export default function Footer() {
+export default async function Footer() {
   const currentYear = new Date().getFullYear();
-  const categoriesWithCourses = getCategoriesWithCourses();
+
+  // Fetch courses from Sanity
+  let categoriesWithCourses: { id: string; label: string; courses: { id: string; title: string; href: string }[] }[] = [];
+  try {
+    const courses = await client.fetch<SanityCourseNav[]>(
+      COURSES_NAV_QUERY,
+      {},
+      { next: { revalidate: 60 } },
+    );
+    categoriesWithCourses = CATEGORIES.map((cat) => ({
+      id: cat.id,
+      label: cat.label,
+      courses: courses
+        .filter((c) => c.category === cat.id)
+        .map((c) => ({
+          id: c._id,
+          title: c.title,
+          href: `/courses/${c.slug}`,
+        })),
+    })).filter((cat) => cat.courses.length > 0);
+  } catch (err) {
+    console.error("[Footer] Failed to fetch courses from Sanity:", err);
+  }
 
   return (
     <footer className="relative bg-gradient-to-b from-white via-primary-99 to-primary-97 overflow-hidden">
@@ -200,7 +232,7 @@ export default function Footer() {
                       {cat.courses.map((course) => (
                         <li key={course.id}>
                           <Link
-                            href={course.slug}
+                            href={course.href}
                             className="text-grey-40 hover:text-primary-75 text-sm transition-colors duration-200 block leading-snug"
                           >
                             {course.title}
@@ -210,6 +242,7 @@ export default function Footer() {
                     </ul>
                   </div>
                 ))}
+
               </div>
             </div>
 

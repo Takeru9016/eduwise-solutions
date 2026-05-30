@@ -112,6 +112,17 @@ export const PRESS_FEATURES_QUERY = `
   }
 `;
 
+// Lightweight course list for Navbar mega-menu and Footer links
+export const COURSES_NAV_QUERY = `
+  *[_type == "course"] | order(category asc, title asc) {
+    _id,
+    title,
+    "slug": slug.current,
+    category,
+    emoji
+  }
+`;
+
 // Course Queries
 export const COURSE_BY_SLUG_QUERY = `
   *[_type == "course" && slug.current == $slug][0] {

@@ -787,14 +787,6 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
                           >
                             {mod.title}
                           </p>
-                          {(mod.duration || mod.description) && (
-                            <div className="flex items-center gap-1 mt-1">
-                              <Clock className="w-3 h-3 text-grey-50" />
-                              <span className="text-xs text-grey-50">
-                                {mod.duration || mod.description}
-                              </span>
-                            </div>
-                          )}
                         </div>
                         {activeCurriculumTab === i && (
                           <ChevronRight className="w-4 h-4 text-emerald-500 flex-shrink-0" />
@@ -893,11 +885,6 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
                               <p className="font-vietnam font-bold text-sm text-grey-15">
                                 {mod.title}
                               </p>
-                              {(mod.duration || mod.description) && (
-                                <p className="text-xs text-grey-50 mt-0.5">
-                                  {mod.duration || mod.description}
-                                </p>
-                              )}
                             </div>
                           </div>
                         </AccordionTrigger>

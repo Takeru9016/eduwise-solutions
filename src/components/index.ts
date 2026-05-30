@@ -10,7 +10,9 @@ export { default as CTASection } from "./common/CTASection";
 export { default as FAQs } from "./common/FAQs";
 export { default as Footer } from "./common/Footer";
 export { default as MetaPixel } from "./common/MetaPixel";
-export { default as Navbar } from "./common/Navbar";
+export { default as Navbar } from "./common/NavbarServer";
+export { default as NavbarClient } from "./common/Navbar";
+
 export { default as ProgramSection } from "./common/ProgramSection";
 export { default as PopupForm } from "./common/PopupForm";
 export { default as Testimonials } from "./common/Testimonials";

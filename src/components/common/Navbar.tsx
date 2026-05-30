@@ -22,8 +22,24 @@ import {
 } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
 import AWSPartnerBanner from "./AWSPartnerBadge";
-import { getCategoriesWithCourses } from "@/data/courses";
-import type { CourseCategoryId } from "@/data/courses";
+
+// Types for Sanity-powered course navigation
+export interface NavCourseItem {
+  id: string;
+  title: string;
+  slug: string;
+  emoji: string;
+}
+
+export interface NavCategory {
+  id: string;
+  label: string;
+  emoji: string;
+  courses: NavCourseItem[];
+}
+
+// Keep CourseCategoryId as a string for mobile accordion
+type CourseCategoryId = string;
 
 // Types
 
@@ -40,15 +56,6 @@ interface ContactInfoProps {
   onClose?: () => void;
 }
 
-interface MobileNavigationProps {
-  isOpen: boolean;
-  onOpenChange: (open: boolean) => void;
-  pathname: string;
-}
-
-interface DesktopNavigationProps {
-  pathname: string;
-}
 
 // Constants
 
@@ -106,8 +113,11 @@ const ContactInfo = ({ onClose }: ContactInfoProps) => (
 
 // Desktop Mega-Menu
 
-const DesktopMegaMenu = () => {
-  const categoriesWithCourses = useMemo(() => getCategoriesWithCourses(), []);
+const DesktopMegaMenu = ({ categoriesWithCourses }: { categoriesWithCourses: NavCategory[] }) => {
+  const totalCourses = useMemo(
+    () => categoriesWithCourses.reduce((acc, cat) => acc + cat.courses.length, 0),
+    [categoriesWithCourses],
+  );
 
   return (
     <div className="relative group/courses">
@@ -132,7 +142,7 @@ const DesktopMegaMenu = () => {
                 Explore Our Courses
               </h3>
               <p className="text-grey-50 text-xs mt-0.5">
-                22+ industry-ready programs to accelerate your career
+                {totalCourses}+ industry-ready programs to accelerate your career
               </p>
             </div>
             <Link
@@ -186,7 +196,12 @@ const DesktopMegaMenu = () => {
 
 // Desktop Navigation
 
-const DesktopNavigation = ({ pathname }: DesktopNavigationProps) => (
+interface DesktopNavigationProps {
+  pathname: string;
+  categoriesWithCourses: NavCategory[];
+}
+
+const DesktopNavigation = ({ pathname, categoriesWithCourses }: DesktopNavigationProps) => (
   <div className="hidden lg:flex items-center space-x-8">
     {SIMPLE_NAV_LINKS.map((link) => (
       <Link
@@ -201,7 +216,7 @@ const DesktopNavigation = ({ pathname }: DesktopNavigationProps) => (
     ))}
 
     {/* Mega-menu for courses */}
-    <DesktopMegaMenu />
+    <DesktopMegaMenu categoriesWithCourses={categoriesWithCourses} />
 
     {SIMPLE_NAV_LINKS_AFTER.map((link) => (
       <Link
@@ -238,14 +253,21 @@ const DesktopNavigation = ({ pathname }: DesktopNavigationProps) => (
 
 // Mobile Navigation
 
+interface MobileNavigationProps {
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
+  pathname: string;
+  categoriesWithCourses: NavCategory[];
+}
+
 const MobileNavigation = ({
   isOpen,
   onOpenChange,
   pathname,
+  categoriesWithCourses,
 }: MobileNavigationProps) => {
   const [expandedCategory, setExpandedCategory] =
     useState<CourseCategoryId | null>(null);
-  const categoriesWithCourses = useMemo(() => getCategoriesWithCourses(), []);
 
   const handleClose = useCallback(() => {
     onOpenChange(false);
@@ -388,9 +410,15 @@ const MobileNavigation = ({
   );
 };
 
+// Types removed – defined above inline for sub-components
+
+interface NavbarProps {
+  categoriesWithCourses: NavCategory[];
+}
+
 // Main Navbar
 
-export default function Navbar() {
+export default function Navbar({ categoriesWithCourses }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
@@ -434,11 +462,15 @@ export default function Navbar() {
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center">
             <Logo />
-            <DesktopNavigation pathname={pathname} />
+            <DesktopNavigation
+              pathname={pathname}
+              categoriesWithCourses={categoriesWithCourses}
+            />
             <MobileNavigation
               isOpen={isOpen}
               onOpenChange={setIsOpen}
               pathname={pathname}
+              categoriesWithCourses={categoriesWithCourses}
             />
           </div>
         </div>

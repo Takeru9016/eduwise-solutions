@@ -14,17 +14,40 @@ import {
   ShieldCheck,
   HeartHandshake,
   Compass,
+  Clock,
+  CheckCircle,
+  BookCheck,
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { COURSES, COURSE_FILTER_TABS } from "@/data/courses";
-import type { Course } from "@/data/courses";
+import { CATEGORIES } from "@/data/courses";
+
+// Types
+export interface SanityCourseListItem {
+  _id: string;
+  title: string;
+  subtitle: string | null;
+  slug: { current: string };
+  category: string;
+  heroImageUrl: string | null;
+  duration: string | null;
+  price: number | null;
+  originalPrice: number | null;
+  featured: boolean;
+}
+
+export interface FilterTab {
+  label: string;
+  value: string;
+}
+
+interface OurCourseProps {
+  courses: SanityCourseListItem[];
+}
 
 // Data
-
 const heroStats = [
-  { value: "22+", label: "Programs", icon: GraduationCap },
   { value: "2000+", label: "Students", icon: Users },
   { value: "100%", label: "Placements", icon: Award },
   { value: "250+", label: "Hiring Partners", icon: Building },
@@ -65,13 +88,15 @@ function HeroStatPill({
 function FilterTabs({
   activeFilter,
   onFilterChange,
+  tabs,
 }: {
   activeFilter: string;
   onFilterChange: (value: string) => void;
+  tabs: FilterTab[];
 }) {
   return (
     <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-2 scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap sm:justify-center">
-      {COURSE_FILTER_TABS.map((tab) => (
+      {tabs.map((tab) => (
         <button
           key={tab.value}
           onClick={() => onFilterChange(tab.value)}
@@ -88,8 +113,17 @@ function FilterTabs({
   );
 }
 
-function CourseCard({ course, index }: { course: Course; index: number }) {
-  const displayStats = course.stats.slice(0, 3);
+function CourseCard({
+  course,
+  index,
+}: {
+  course: SanityCourseListItem;
+  index: number;
+}) {
+  const imageUrl = course.heroImageUrl ?? "/courses/placeholder.png";
+  const subtitle = course.subtitle ?? "Industry-ready program";
+  const duration = course.duration ?? "Flexible";
+  const courseSlug = `/courses/${course.slug.current}`;
 
   return (
     <div
@@ -101,7 +135,7 @@ function CourseCard({ course, index }: { course: Course; index: number }) {
       {/* Image Section */}
       <div className="relative h-44 sm:h-52 overflow-hidden">
         <Image
-          src={course.image}
+          src={imageUrl}
           alt={course.title}
           fill
           className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -112,11 +146,9 @@ function CourseCard({ course, index }: { course: Course; index: number }) {
 
         {/* Accent tag on image */}
         <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4">
-          <span
-            className={`inline-flex items-center gap-1.5 bg-gradient-to-r ${course.accentColor} text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg backdrop-blur-sm`}
-          >
-            <course.icon className="w-3 h-3" />
-            {course.subtitle}
+          <span className="inline-flex items-center gap-1.5 bg-gradient-to-r from-primary-75 to-primary-90 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg backdrop-blur-sm">
+            <BookCheck className="w-3 h-3" />
+            {subtitle}
           </span>
         </div>
       </div>
@@ -128,38 +160,32 @@ function CourseCard({ course, index }: { course: Course; index: number }) {
           {course.title}
         </h3>
 
-        {/* Description */}
-        <p className="text-grey-40 text-sm leading-relaxed mb-4 line-clamp-2 flex-1">
-          {course.description}
-        </p>
-
-        {/* Stats Row */}
+        {/* Quick stats */}
         <div className="flex flex-wrap gap-2 mb-5">
-          {displayStats.map((stat, i) => {
-            const StatIcon = stat.icon;
-            return (
-              <div
-                key={i}
-                className="flex items-center gap-1.5 bg-primary-99 px-2.5 py-1.5 rounded-lg text-xs sm:text-sm"
-              >
-                <StatIcon className="w-3.5 h-3.5 text-primary-75 flex-shrink-0" />
-                <span className="font-semibold text-grey-15">{stat.value}</span>
-                <span className="text-grey-40 hidden xs:inline">
-                  {stat.label}
-                </span>
-              </div>
-            );
-          })}
+          <div className="flex items-center gap-1.5 bg-primary-99 px-2.5 py-1.5 rounded-lg text-xs sm:text-sm">
+            <Clock className="w-3.5 h-3.5 text-primary-75 flex-shrink-0" />
+            <span className="font-semibold text-grey-15">{duration}</span>
+          </div>
+          <div className="flex items-center gap-1.5 bg-primary-99 px-2.5 py-1.5 rounded-lg text-xs sm:text-sm">
+            <CheckCircle className="w-3.5 h-3.5 text-primary-75 flex-shrink-0" />
+            <span className="font-semibold text-grey-15">100%</span>
+            <span className="text-grey-40 hidden xs:inline">Live</span>
+          </div>
+          <div className="flex items-center gap-1.5 bg-primary-99 px-2.5 py-1.5 rounded-lg text-xs sm:text-sm">
+            <Award className="w-3.5 h-3.5 text-primary-75 flex-shrink-0" />
+            <span className="font-semibold text-grey-15">100%</span>
+            <span className="text-grey-40 hidden xs:inline">Placement</span>
+          </div>
         </div>
 
         {/* CTA Button */}
         <Button
           asChild
           variant="outline"
-          className="w-full rounded-xl border-primary-90 text-primary-75 hover:bg-primary-99 hover:border-primary-75 transition-all duration-300 group/btn"
+          className="w-full rounded-xl border-primary-90 text-primary-75 hover:bg-primary-99 hover:border-primary-75 transition-all duration-300 group/btn mt-auto"
         >
           <Link
-            href={course.slug}
+            href={courseSlug}
             className="flex items-center justify-center gap-2 py-5"
           >
             View Program Details
@@ -287,16 +313,31 @@ function BottomCTA() {
 
 // Main Component
 
-export default function CoursesPage() {
+export default function CoursesPage({ courses }: OurCourseProps) {
   const [activeFilter, setActiveFilter] = useState("all");
+
+  // Build filter tabs from actual Sanity data
+  const filterTabs = useMemo<FilterTab[]>(() => {
+    const categoriesInData = new Set(courses.map((c) => c.category));
+    return [
+      { label: "All Programs", value: "all" },
+      ...CATEGORIES.filter((cat) => categoriesInData.has(cat.id)).map(
+        (cat) => ({ label: cat.label, value: cat.id }),
+      ),
+    ];
+  }, [courses]);
 
   const filteredCourses = useMemo(
     () =>
-      activeFilter === "all" ? COURSES : (
-        COURSES.filter((c) => c.category === activeFilter)
+      activeFilter === "all" ? courses : (
+        courses.filter((c) => c.category === activeFilter)
       ),
-    [activeFilter],
+    [activeFilter, courses],
   );
+
+  const totalPrograms = courses.length;
+
+
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
@@ -354,6 +395,20 @@ export default function CoursesPage() {
 
             {/* Hero stat pills */}
             <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
+              <div
+                className="flex items-center gap-2 sm:gap-3 bg-white/90 backdrop-blur-md px-3 py-2 sm:px-5 sm:py-3 rounded-full shadow-lg border border-white/40 hover:shadow-xl transition-all duration-300 hover:scale-105 opacity-0"
+                style={{ animation: `fadeInUp 0.6s ease-out 0.65s forwards` }}
+              >
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary-90 to-primary-75 rounded-full flex items-center justify-center flex-shrink-0">
+                  <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                </div>
+                <div className="text-left">
+                  <p className="font-vietnam font-bold text-grey-15 text-sm sm:text-base leading-tight">
+                    {totalPrograms}+
+                  </p>
+                  <p className="text-grey-40 text-[10px] sm:text-xs leading-tight">Programs</p>
+                </div>
+              </div>
               {heroStats.map((stat, i) => (
                 <HeroStatPill key={i} stat={stat} index={i} />
               ))}
@@ -382,13 +437,14 @@ export default function CoursesPage() {
             <FilterTabs
               activeFilter={activeFilter}
               onFilterChange={setActiveFilter}
+              tabs={filterTabs}
             />
           </div>
 
           {/* Course Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {filteredCourses.map((course, index) => (
-              <CourseCard key={course.id} course={course} index={index} />
+              <CourseCard key={course._id} course={course} index={index} />
             ))}
           </div>
 

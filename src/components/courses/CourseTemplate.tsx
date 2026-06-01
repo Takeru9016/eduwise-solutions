@@ -52,6 +52,7 @@ import PaymentModal from "../payment/PaymentModal";
 import PlacementSection from "./PlacementSection";
 import GoogleReviews from "../common/GoogleReviews";
 import RefundHighlight from "../common/RefundHighlight";
+import CourseLeadForm from "./CourseLeadForm";
 import type { CourseContent } from "@/types/course";
 
 // Icon Map
@@ -219,62 +220,9 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
               </p>
             </div>
 
-            {/* Right — hero image */}
+            {/* Right — lead capture form */}
             <div className="relative order-1 lg:order-2">
-              <div className="relative z-10">
-                {course.heroImageUrl && (
-                  <Image
-                    src={course.heroImageUrl}
-                    alt={course.title}
-                    width={600}
-                    height={400}
-                    className="rounded-2xl shadow-2xl w-full h-auto object-cover"
-                    priority
-                  />
-                )}
-
-                {/* Floating batch info card */}
-                {course.batchInfo && (
-                  <>
-                    <div className="hidden md:block absolute -bottom-6 -right-6 bg-white rounded-xl shadow-xl p-6 max-w-xs border border-grey-90/50">
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="w-12 h-12 bg-gradient-to-r from-primary-75 to-primary-90 rounded-full flex items-center justify-center">
-                          <Star className="w-6 h-6 text-white" />
-                        </div>
-                        <div>
-                          <p className="font-vietnam font-bold text-grey-15">
-                            {course.batchInfo.label}
-                          </p>
-                          <p className="text-sm text-grey-35">
-                            {course.batchInfo.status}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-2 text-sm text-grey-35">
-                        <TrendingUp className="w-4 h-4 text-green-500" />
-                        <span>{course.batchInfo.enrolledCount}</span>
-                      </div>
-                    </div>
-
-                    <div className="md:hidden mt-4 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-4">
-                      <div className="flex items-center justify-center gap-3">
-                        <div className="w-10 h-10 bg-gradient-to-r from-primary-75 to-primary-90 rounded-full flex items-center justify-center">
-                          <Star className="w-5 h-5 text-white" />
-                        </div>
-                        <div className="text-center">
-                          <p className="font-vietnam font-bold text-grey-15 text-sm">
-                            {course.batchInfo.label} — {course.batchInfo.status}
-                          </p>
-                          <div className="flex items-center justify-center gap-1 text-xs text-grey-35 mt-1">
-                            <TrendingUp className="w-3 h-3 text-green-500" />
-                            <span>{course.batchInfo.enrolledCount}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </>
-                )}
-              </div>
+              <CourseLeadForm courseTitle={course.title} />
             </div>
           </div>
 

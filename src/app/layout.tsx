@@ -5,7 +5,7 @@ import { Analytics } from "@vercel/analytics/next";
 
 import "./globals.css";
 import { Toaster } from "sonner";
-import { PopupForm, MetaPixel } from "@/components";
+import { PopupForm, MetaPixel, LinkedInInsight } from "@/components";
 
 const beVietnamPro = Be_Vietnam_Pro({
   subsets: ["latin"],
@@ -47,6 +47,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${beVietnamPro.variable} font-vietnam antialiased`}>
         <MetaPixel />
+        <LinkedInInsight />
         {children}
         <PopupForm />
         <Toaster

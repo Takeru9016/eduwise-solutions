@@ -47,6 +47,13 @@ const TRUST_BADGES = [
   { icon: Zap, label: "Free Counselling" },
 ];
 
+// Extend Window to include LinkedIn Insight lintrk function
+declare global {
+  interface Window {
+    lintrk?: (action: string, params: { conversion_id: number }) => void;
+  }
+}
+
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function CourseLeadForm({
   courseTitle,
@@ -93,6 +100,8 @@ export default function CourseLeadForm({
       }
 
       setStatus("success");
+      // Fire LinkedIn conversion event
+      window.lintrk?.('track', { conversion_id: 26490044 });
       reset();
     } catch (err) {
       setStatus("error");
@@ -167,8 +176,8 @@ export default function CourseLeadForm({
               type="text"
               placeholder="Enter your full name"
               className={`w-full h-12 pl-10 pr-4 rounded-xl border text-grey-15 placeholder:text-grey-50 text-sm bg-light-97 focus:outline-none focus:ring-2 transition-all ${errors.name
-                  ? "border-red-400 focus:ring-red-200"
-                  : "border-grey-80 focus:border-primary-75 focus:ring-primary-90/30"
+                ? "border-red-400 focus:ring-red-200"
+                : "border-grey-80 focus:border-primary-75 focus:ring-primary-90/30"
                 }`}
             />
           </div>
@@ -189,8 +198,8 @@ export default function CourseLeadForm({
               type="email"
               placeholder="Enter your email"
               className={`w-full h-12 pl-10 pr-4 rounded-xl border text-grey-15 placeholder:text-grey-50 text-sm bg-light-97 focus:outline-none focus:ring-2 transition-all ${errors.email
-                  ? "border-red-400 focus:ring-red-200"
-                  : "border-grey-80 focus:border-primary-75 focus:ring-primary-90/30"
+                ? "border-red-400 focus:ring-red-200"
+                : "border-grey-80 focus:border-primary-75 focus:ring-primary-90/30"
                 }`}
             />
           </div>
@@ -216,8 +225,8 @@ export default function CourseLeadForm({
                 maxLength={10}
                 placeholder="Enter your mobile number"
                 className={`w-full h-12 pl-10 pr-4 rounded-r-xl border text-grey-15 placeholder:text-grey-50 text-sm bg-light-97 focus:outline-none focus:ring-2 transition-all ${errors.mobile
-                    ? "border-red-400 focus:ring-red-200"
-                    : "border-grey-80 focus:border-primary-75 focus:ring-primary-90/30"
+                  ? "border-red-400 focus:ring-red-200"
+                  : "border-grey-80 focus:border-primary-75 focus:ring-primary-90/30"
                   }`}
               />
             </div>
@@ -238,8 +247,8 @@ export default function CourseLeadForm({
               <select
                 {...register("course")}
                 className={`w-full h-12 pl-10 pr-10 rounded-xl border text-grey-15 text-sm bg-light-97 focus:outline-none focus:ring-2 appearance-none transition-all cursor-pointer ${errors.course
-                    ? "border-red-400 focus:ring-red-200"
-                    : "border-grey-80 focus:border-primary-75 focus:ring-primary-90/30"
+                  ? "border-red-400 focus:ring-red-200"
+                  : "border-grey-80 focus:border-primary-75 focus:ring-primary-90/30"
                   }`}
               >
                 <option value="">Select a course*</option>
@@ -280,8 +289,8 @@ export default function CourseLeadForm({
               />
               <div
                 className={`w-5 h-5 rounded border-2 transition-all flex items-center justify-center ${errors.consent
-                    ? "border-red-400"
-                    : "border-grey-70 peer-checked:border-primary-75 peer-checked:bg-primary-75"
+                  ? "border-red-400"
+                  : "border-grey-70 peer-checked:border-primary-75 peer-checked:bg-primary-75"
                   } group-hover:border-primary-75`}
               >
                 <svg

@@ -34,6 +34,13 @@ const INITIAL_POPUP_DELAY = 10000; // 10 seconds
 const RECURRING_POPUP_DELAY = 60000; // 1 minute
 const SUCCESS_MESSAGE_DURATION = 2000; // 2 seconds
 
+// Extend Window to include LinkedIn Insight lintrk function
+declare global {
+  interface Window {
+    lintrk?: (action: string, params: { conversion_id: number }) => void;
+  }
+}
+
 export default function PopupForm() {
   // State management
   const [isOpen, setIsOpen] = useState(false);
@@ -93,6 +100,9 @@ export default function PopupForm() {
 
       setIsSuccess(true);
       form.reset();
+
+      // Fire LinkedIn conversion event
+      window.lintrk?.('track', { conversion_id: 26490052 });
 
       // Close popup after successful submission
       setTimeout(() => setIsOpen(false), SUCCESS_MESSAGE_DURATION);

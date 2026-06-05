@@ -114,7 +114,7 @@ export const COURSES: Course[] = [
     subtitle: "Build dynamic web apps",
     description:
       "Master front-end and back-end development using React, Node.js, databases, and modern deployment workflows.",
-    slug: "/courses/full-stack",
+    slug: "/courses/full-stack-development",
     category: "development",
     emoji: "🧩",
     accentColor: "from-orange-500 to-amber-500",
@@ -268,7 +268,7 @@ export const COURSES: Course[] = [
     subtitle: "Defend against digital threats",
     description:
       "Learn ethical hacking, network defense, Linux/Windows security, and web application security to become a cybersecurity expert.",
-    slug: "/courses/cyber-sec",
+    slug: "/courses/cyber-security",
     category: "cloud-devops-security",
     emoji: "🛡️",
     accentColor: "from-red-500 to-rose-600",
@@ -424,7 +424,7 @@ export const COURSES: Course[] = [
     subtitle: "100% Job Guarantee",
     description:
       "Get a 100% job guarantee with our comprehensive programme! Learn resume building, LinkedIn optimization, business communication, and more.",
-    slug: "/courses/professional",
+    slug: "/courses/placement-accelerator",
     category: "career",
     emoji: "🎯",
     accentColor: "from-pink-500 to-fuchsia-600",

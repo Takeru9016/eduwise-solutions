@@ -31,3 +31,14 @@ export { default as RefundPage } from "./legal/RefundPage";
 export { default as TermsOfService } from "./legal/TermsOfService";
 
 export { default as Chatbot } from "./chatbot/Chatbot";
+
+export { default as AWSEnquiryForm } from "./certifications/AWSEnquiryForm";
+export { default as AWSHero } from "./certifications/aws/AWSHero";
+export { default as AWSStatsBar } from "./certifications/aws/AWSStatsBar";
+export { default as AWSCertGrid } from "./certifications/aws/AWSCertGrid";
+export { default as AWSCategories } from "./certifications/aws/AWSCategories";
+export { default as AWSCareerTable } from "./certifications/aws/AWSCareerTable";
+export { default as AWSVoucherSteps } from "./certifications/aws/AWSVoucherSteps";
+export { default as AWSScheduleSteps } from "./certifications/aws/AWSScheduleSteps";
+export { default as AWSFaqAccordion } from "./certifications/aws/AWSFaqAccordion";
+export { default as AWSConclusion } from "./certifications/aws/AWSConclusion";

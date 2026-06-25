@@ -232,6 +232,17 @@ export default function HeroSection() {
                 </ModernCTAButton>
 
                 <ModernCTAButton
+                  href="/certifications/aws"
+                  variant="secondary"
+                  className="group !border-[#FF9900] !text-[#FF9900] hover:!bg-[#FF9900]/10"
+                >
+                  <span className="flex items-center gap-2 sm:gap-3">
+                    AWS Certifications
+                    <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 group-hover:scale-110 transition-transform duration-300" />
+                  </span>
+                </ModernCTAButton>
+
+                <ModernCTAButton
                   href="/contact"
                   variant="secondary"
                   className="group"

@@ -9,14 +9,15 @@ interface FormData {
 
 export async function submitWithRetry(
   data: FormData,
-  retries = 3
+  retries = 3,
+  endpoint = "/api/contact-form",
 ): Promise<Response> {
   for (let i = 0; i < retries; i++) {
     try {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 10000); // Increased timeout to 10s
 
-      const response = await fetch("/api/contact-form", {
+      const response = await fetch(endpoint, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -49,7 +50,7 @@ export async function submitWithRetry(
 
       // Wait longer between each retry
       await new Promise((resolve) =>
-        setTimeout(resolve, 1000 * Math.pow(2, i))
+        setTimeout(resolve, 1000 * Math.pow(2, i)),
       );
     }
   }

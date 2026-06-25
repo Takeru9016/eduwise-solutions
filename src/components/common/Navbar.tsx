@@ -56,12 +56,12 @@ interface ContactInfoProps {
   onClose?: () => void;
 }
 
-
 // Constants
 
 const SIMPLE_NAV_LINKS: SimpleNavLink[] = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About Us" },
+  { href: "/certifications/aws", label: "Certifications" },
 ];
 
 const SIMPLE_NAV_LINKS_AFTER: SimpleNavLink[] = [
@@ -113,9 +113,14 @@ const ContactInfo = ({ onClose }: ContactInfoProps) => (
 
 // Desktop Mega-Menu
 
-const DesktopMegaMenu = ({ categoriesWithCourses }: { categoriesWithCourses: NavCategory[] }) => {
+const DesktopMegaMenu = ({
+  categoriesWithCourses,
+}: {
+  categoriesWithCourses: NavCategory[];
+}) => {
   const totalCourses = useMemo(
-    () => categoriesWithCourses.reduce((acc, cat) => acc + cat.courses.length, 0),
+    () =>
+      categoriesWithCourses.reduce((acc, cat) => acc + cat.courses.length, 0),
     [categoriesWithCourses],
   );
 
@@ -142,7 +147,8 @@ const DesktopMegaMenu = ({ categoriesWithCourses }: { categoriesWithCourses: Nav
                 Explore Our Courses
               </h3>
               <p className="text-grey-50 text-xs mt-0.5">
-                {totalCourses}+ industry-ready programs to accelerate your career
+                {totalCourses}+ industry-ready programs to accelerate your
+                career
               </p>
             </div>
             <Link
@@ -201,7 +207,10 @@ interface DesktopNavigationProps {
   categoriesWithCourses: NavCategory[];
 }
 
-const DesktopNavigation = ({ pathname, categoriesWithCourses }: DesktopNavigationProps) => (
+const DesktopNavigation = ({
+  pathname,
+  categoriesWithCourses,
+}: DesktopNavigationProps) => (
   <div className="hidden lg:flex items-center space-x-8">
     {SIMPLE_NAV_LINKS.map((link) => (
       <Link

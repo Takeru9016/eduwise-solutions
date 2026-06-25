@@ -19,10 +19,10 @@ export default function AWSPartnerBanner() {
         <span>Cloud-powered training & certifications</span>
       </span>
       <Link
-        href="/courses"
+        href="/certifications/aws"
         className="inline-flex items-center gap-1.5 px-3 py-1 ml-2 rounded-full bg-[#FF9900] text-[#232F3E] text-xs font-semibold hover:bg-[#FFB74D] transition-colors whitespace-nowrap flex-shrink-0"
       >
-        Explore Courses
+        AWS Certifications
         <svg
           className="w-3 h-3"
           fill="none"

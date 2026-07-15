@@ -6,6 +6,7 @@ import {
   AWSHero,
   AWSStatsBar,
   AWSCertGrid,
+  AWSCertSyllabus,
   AWSCategories,
   AWSCareerTable,
   AWSVoucherSteps,
@@ -29,6 +30,7 @@ export default function AWSCertificationsPage() {
         <AWSHero />
         <AWSStatsBar />
         <AWSCertGrid />
+        <AWSCertSyllabus />
         <AWSCategories />
         <AWSCareerTable />
         <AWSVoucherSteps />

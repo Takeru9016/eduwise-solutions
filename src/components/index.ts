@@ -36,6 +36,7 @@ export { default as AWSEnquiryForm } from "./certifications/AWSEnquiryForm";
 export { default as AWSHero } from "./certifications/aws/AWSHero";
 export { default as AWSStatsBar } from "./certifications/aws/AWSStatsBar";
 export { default as AWSCertGrid } from "./certifications/aws/AWSCertGrid";
+export { default as AWSCertSyllabus } from "./certifications/aws/AWSCertSyllabus";
 export { default as AWSCategories } from "./certifications/aws/AWSCategories";
 export { default as AWSCareerTable } from "./certifications/aws/AWSCareerTable";
 export { default as AWSVoucherSteps } from "./certifications/aws/AWSVoucherSteps";

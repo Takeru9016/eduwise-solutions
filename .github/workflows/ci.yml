@@ -21,7 +21,14 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        # pnpm-workspace.yaml is intentionally not committed (see .gitignore) —
+        # it broke Vercel, which pins an older pnpm that can't read the
+        # allowBuilds field. Approve the known build scripts for this
+        # ephemeral runner only, then install for real.
+        run: |
+          pnpm install --frozen-lockfile || true
+          pnpm approve-builds --all
+          pnpm install --frozen-lockfile
 
       - name: Lint
         run: pnpm lint

@@ -48,3 +48,10 @@ yarn-error.log*
 next-env.d.ts
 
 certificates
+
+# pnpm's build-script approval file. Do NOT commit this: on Vercel's older
+# pnpm (9.x, auto-selected by project age) it errors with "packages field
+# missing or empty" because pnpm 9.x only understands pnpm-workspace.yaml as
+# monorepo config, not pnpm 11's newer allowBuilds/onlyBuiltDependencies use.
+# Run `pnpm approve-builds --all` locally if pnpm warns about ignored builds.
+pnpm-workspace.yaml

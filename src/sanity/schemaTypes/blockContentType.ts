@@ -1,5 +1,5 @@
-import { defineType, defineArrayMember } from 'sanity'
-import { ImageIcon } from '@sanity/icons'
+import { ImageIcon } from "@sanity/icons";
+import { defineArrayMember, defineType } from "sanity";
 
 /**
  * This is the schema type for block content used in the post document type
@@ -13,81 +13,81 @@ import { ImageIcon } from '@sanity/icons'
  */
 
 export const blockContentType = defineType({
-  title: 'Block Content',
-  name: 'blockContent',
-  type: 'array',
+  name: "blockContent",
   of: [
     defineArrayMember({
-      type: 'block',
+      lists: [
+        { title: "Bullet", value: "bullet" },
+        { title: "Numbered", value: "number" },
+      ],
+      // Marks let you mark up inline text in the Portable Text Editor
+      marks: {
+        // Annotations can be any object structure – e.g. a link or a footnote.
+        annotations: [
+          {
+            fields: [
+              {
+                name: "href",
+                title: "URL",
+                type: "url",
+              },
+            ],
+            name: "link",
+            title: "URL",
+            type: "object",
+          },
+        ],
+        // Decorators usually describe a single property – e.g. a typographic
+        // preference or highlighting
+        decorators: [
+          { title: "Strong", value: "strong" },
+          { title: "Emphasis", value: "em" },
+          { title: "Code", value: "code" },
+          { title: "Underline", value: "underline" },
+          { title: "Strike", value: "strike-through" },
+        ],
+      },
       // Styles let you define what blocks can be marked up as. The default
       // set corresponds with HTML tags, but you can set any title or value
       // you want, and decide how you want to deal with it where you want to
       // use your content.
       styles: [
-        { title: 'Normal', value: 'normal' },
-        { title: 'H1', value: 'h1' },
-        { title: 'H2', value: 'h2' },
-        { title: 'H3', value: 'h3' },
-        { title: 'H4', value: 'h4' },
-        { title: 'Quote', value: 'blockquote' },
+        { title: "Normal", value: "normal" },
+        { title: "H1", value: "h1" },
+        { title: "H2", value: "h2" },
+        { title: "H3", value: "h3" },
+        { title: "H4", value: "h4" },
+        { title: "Quote", value: "blockquote" },
       ],
-      lists: [
-        { title: 'Bullet', value: 'bullet' },
-        { title: 'Numbered', value: 'number' },
-      ],
-      // Marks let you mark up inline text in the Portable Text Editor
-      marks: {
-        // Decorators usually describe a single property – e.g. a typographic
-        // preference or highlighting
-        decorators: [
-          { title: 'Strong', value: 'strong' },
-          { title: 'Emphasis', value: 'em' },
-          { title: 'Code', value: 'code' },
-          { title: 'Underline', value: 'underline' },
-          { title: 'Strike', value: 'strike-through' },
-        ],
-        // Annotations can be any object structure – e.g. a link or a footnote.
-        annotations: [
-          {
-            title: 'URL',
-            name: 'link',
-            type: 'object',
-            fields: [
-              {
-                title: 'URL',
-                name: 'href',
-                type: 'url',
-              },
-            ],
-          },
-        ],
-      },
+      type: "block",
     }),
     // You can add additional types here. Note that you can't use
     // primitive types such as 'string' and 'number' in the same array
     // as a block type.
     defineArrayMember({
-      type: 'image',
+      fields: [
+        {
+          name: "alt",
+          title: "Alternative Text",
+          type: "string",
+        },
+      ],
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       icon: ImageIcon as any,
       options: { hotspot: true },
-      fields: [
-        {
-          name: 'alt',
-          type: 'string',
-          title: 'Alternative Text',
-        }
-      ]
+      type: "image",
     }),
     // Table support
     defineArrayMember({
-      type: 'table',
-      title: 'Table',
+      title: "Table",
+      type: "table",
     }),
     // Flowchart support
     defineArrayMember({
-      type: 'flowchart',
-      title: 'Flowchart',
+      title: "Flowchart",
+      type: "flowchart",
     }),
   ],
-})
+  title: "Block Content",
+  type: "array",
+});

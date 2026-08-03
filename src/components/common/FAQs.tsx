@@ -1,5 +1,5 @@
+import { ArrowRight, MessageCircle, Sparkles } from "lucide-react";
 import Link from "next/link";
-import { ArrowRight, Sparkles, MessageCircle } from "lucide-react";
 
 // import {
 //   Accordion,
@@ -23,8 +23,8 @@ const SectionBadge = ({
   icon: React.ElementType;
   text: string;
 }) => (
-  <div className="inline-flex items-center gap-2 bg-primary-99 text-primary-75 px-4 py-2 rounded-full text-sm font-medium">
-    <Icon size={16} className="text-primary-75" />
+  <div className="inline-flex items-center gap-2 rounded-full bg-primary-99 px-4 py-2 font-medium text-primary-75 text-sm">
+    <Icon className="text-primary-75" size={16} />
     {text}
   </div>
 );
@@ -46,15 +46,15 @@ const SectionBadge = ({
 // );
 
 const SupportCard = () => (
-  <div className="bg-gradient-to-br from-primary-99 to-light-97 rounded-xl p-8 border border-primary-95">
+  <div className="rounded-xl border border-primary-95 bg-gradient-to-br from-primary-99 to-light-97 p-8">
     <div className="flex items-start gap-4">
       <div className="flex-shrink-0">
-        <div className="w-12 h-12 rounded-full bg-primary-95 flex items-center justify-center">
-          <MessageCircle className="w-6 h-6 text-primary-75" />
+        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-95">
+          <MessageCircle className="h-6 w-6 text-primary-75" />
         </div>
       </div>
       <div className="space-y-3">
-        <h3 className="font-vietnam font-semibold text-grey-20 text-xl">
+        <h3 className="font-semibold font-vietnam text-grey-20 text-xl">
           Need More Help?
         </h3>
         <p className="text-grey-35">
@@ -64,12 +64,12 @@ const SupportCard = () => (
         <div className="pt-2">
           <Button
             asChild
+            className="bg-primary-75 transition-all duration-200 hover:translate-y-[-2px] hover:bg-primary-70"
             variant="default"
-            className="bg-primary-75 hover:bg-primary-70 transition-all duration-200 hover:translate-y-[-2px]"
           >
-            <Link href="/faq" className="flex items-center gap-2">
+            <Link className="flex items-center gap-2" href="/faq">
               View All FAQs
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="h-4 w-4" />
             </Link>
           </Button>
         </div>
@@ -108,15 +108,15 @@ export default function FAQsSection() {
   // ];
 
   return (
-    <section className="relative py-16 md:py-24 bg-gradient-to-b from-white to-light-97">
+    <section className="relative bg-gradient-to-b from-white to-light-97 py-16 md:py-24">
       {/* Decorative background elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-primary-95 rounded-full opacity-20 blur-3xl" />
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-primary-97 rounded-full opacity-20 blur-3xl" />
+        <div className="absolute top-20 left-20 h-72 w-72 rounded-full bg-primary-95 opacity-20 blur-3xl" />
+        <div className="absolute right-20 bottom-20 h-96 w-96 rounded-full bg-primary-97 opacity-20 blur-3xl" />
       </div>
 
-      <div className="container mx-auto relative">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+      <div className="container relative mx-auto">
+        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2">
           {/* Left Column - Main Content */}
           <div className="lg:sticky lg:top-24">
             <div className="space-y-6">
@@ -124,7 +124,7 @@ export default function FAQsSection() {
               <SectionBadge icon={Sparkles} text="Get Quick Answers" />
 
               {/* Main Heading */}
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-vietnam font-bold text-grey-15">
+              <h2 className="font-bold font-vietnam text-3xl text-grey-15 md:text-4xl lg:text-5xl">
                 Common Questions
               </h2>
 
@@ -143,7 +143,7 @@ export default function FAQsSection() {
           </div>
 
           {/* Right Column - FAQ Accordion */}
-          <div className="bg-white rounded-2xl p-8 shadow-lg border border-light-90">
+          <div className="rounded-2xl border border-light-90 bg-white p-8 shadow-lg">
             <SupportCard />
             {/* <Accordion type="single" collapsible className="w-full space-y-4">
               {homepageFaqs.map((faq, index) => (

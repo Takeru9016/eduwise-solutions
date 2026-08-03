@@ -1,9 +1,6 @@
 import { defineField, defineType } from "sanity";
 
 export const testimonialType = defineType({
-  name: "testimonial",
-  title: "Testimonial",
-  type: "document",
   fields: [
     defineField({
       name: "name",
@@ -28,28 +25,28 @@ export const testimonialType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      description:
+        "Profile photo of the person. Leave empty to use public folder path.",
       name: "avatar",
-      title: "Avatar Image",
-      type: "image",
       options: {
         hotspot: true,
       },
-      description:
-        "Profile photo of the person. Leave empty to use public folder path.",
+      title: "Avatar Image",
+      type: "image",
     }),
     defineField({
+      description:
+        "Path to avatar in public folder, e.g., /testimonials/john.jpeg",
       name: "avatarPath",
       title: "Avatar Path (Public Folder)",
       type: "string",
-      description:
-        "Path to avatar in public folder, e.g., /testimonials/john.jpeg",
     }),
     defineField({
+      initialValue: 5,
       name: "rating",
       title: "Rating",
       type: "number",
       validation: (Rule) => Rule.min(1).max(5),
-      initialValue: 5,
     }),
     defineField({
       name: "linkedinUrl",
@@ -57,24 +54,27 @@ export const testimonialType = defineType({
       type: "url",
     }),
     defineField({
+      description: "Lower numbers appear first",
       name: "order",
       title: "Display Order",
       type: "number",
-      description: "Lower numbers appear first",
     }),
+  ],
+  name: "testimonial",
+  orderings: [
+    {
+      by: [{ direction: "asc", field: "order" }],
+      name: "orderAsc",
+      title: "Display Order",
+    },
   ],
   preview: {
     select: {
-      title: "name",
-      subtitle: "company",
       media: "avatar",
+      subtitle: "company",
+      title: "name",
     },
   },
-  orderings: [
-    {
-      title: "Display Order",
-      name: "orderAsc",
-      by: [{ field: "order", direction: "asc" }],
-    },
-  ],
+  title: "Testimonial",
+  type: "document",
 });

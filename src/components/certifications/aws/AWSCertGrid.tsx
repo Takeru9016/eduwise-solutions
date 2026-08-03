@@ -1,11 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
-import { CERTIFICATIONS, CATEGORY_STYLES, type CertCategory } from "./aws-data";
+import { CATEGORY_STYLES, CERTIFICATIONS, type CertCategory } from "./aws-data";
 
 function CategoryBadge({ cat }: { cat: CertCategory }) {
   const s = CATEGORY_STYLES[cat];
   return (
     <span
-      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider border ${s.bg} ${s.text} ${s.border}`}
+      className={`inline-flex items-center rounded-full border px-2.5 py-0.5 font-bold text-xs uppercase tracking-wider ${s.bg} ${s.text} ${s.border}`}
     >
       {cat}
     </span>
@@ -14,50 +14,50 @@ function CategoryBadge({ cat }: { cat: CertCategory }) {
 
 function CertCard({ cert }: { cert: (typeof CERTIFICATIONS)[number] }) {
   return (
-    <article className="group flex flex-col h-full bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-xl hover:border-emerald-200 hover:-translate-y-1 transition-all duration-300">
+    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-emerald-200 hover:shadow-xl">
       {/* Badge image area */}
-      <div className="relative bg-gradient-to-br from-slate-50 to-gray-100 flex items-center justify-center h-44 p-6 border-b border-gray-100 group-hover:from-emerald-50 group-hover:to-teal-50 transition-colors duration-300">
+      <div className="relative flex h-44 items-center justify-center border-gray-100 border-b bg-gradient-to-br from-slate-50 to-gray-100 p-6 transition-colors duration-300 group-hover:from-emerald-50 group-hover:to-teal-50">
         <img
-          src={cert.img}
           alt={`${cert.title} badge`}
-          className="h-28 w-auto object-contain drop-shadow-sm group-hover:scale-105 transition-transform duration-300"
+          className="h-28 w-auto object-contain drop-shadow-sm transition-transform duration-300 group-hover:scale-105"
           loading="lazy"
+          src={cert.img}
         />
       </div>
 
       {/* Content */}
-      <div className="flex flex-col flex-grow p-5 gap-3">
+      <div className="flex flex-grow flex-col gap-3 p-5">
         <CategoryBadge cat={cert.cat} />
 
         <div>
-          <h3 className="font-bold text-gray-900 text-base leading-snug group-hover:text-emerald-700 transition-colors duration-200">
+          <h3 className="font-bold text-base text-gray-900 leading-snug transition-colors duration-200 group-hover:text-emerald-700">
             {cert.title}
           </h3>
-          <p className="text-xs font-mono text-gray-400 mt-0.5">{cert.code}</p>
+          <p className="mt-0.5 font-mono text-gray-400 text-xs">{cert.code}</p>
         </div>
 
-        <p className="text-sm text-gray-600 leading-relaxed flex-grow">
+        <p className="flex-grow text-gray-600 text-sm leading-relaxed">
           {cert.desc}
         </p>
 
         <a
-          href="#enquiry-form-section"
-          className="mt-auto inline-flex items-center justify-center gap-2 w-full bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white text-sm font-semibold py-3 px-4 rounded-xl transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
           aria-label={`Enquire about ${cert.title}`}
+          className="mt-auto inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 py-3 font-semibold text-sm text-white transition-colors duration-200 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 active:bg-emerald-800"
+          href="#enquiry-form-section"
         >
           Enquire Now
           <svg
-            className="w-4 h-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
             aria-hidden="true"
+            className="h-4 w-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
           >
             <path
+              d="M17 8l4 4m0 0l-4 4m4-4H3"
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
-              d="M17 8l4 4m0 0l-4 4m4-4H3"
             />
           </svg>
         </a>
@@ -75,17 +75,17 @@ export default function AWSCertGrid() {
   ];
 
   return (
-    <section id="certifications" className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4 max-w-7xl">
+    <section className="bg-gray-50 py-20" id="certifications">
+      <div className="container mx-auto max-w-7xl px-4">
         {/* Section header */}
-        <div className="text-center mb-14">
-          <span className="inline-block text-emerald-600 font-semibold text-sm uppercase tracking-widest mb-3">
+        <div className="mb-14 text-center">
+          <span className="mb-3 inline-block font-semibold text-emerald-600 text-sm uppercase tracking-widest">
             All Certification Tracks
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
+          <h2 className="mb-4 font-extrabold text-3xl text-gray-900 sm:text-4xl">
             Available AWS Certifications
           </h2>
-          <p className="text-gray-500 max-w-2xl mx-auto text-base leading-relaxed">
+          <p className="mx-auto max-w-2xl text-base text-gray-500 leading-relaxed">
             AWS offers certifications for learners and professionals at
             different stages of their cloud journey. Choose the track that
             aligns with your career goals.
@@ -95,26 +95,28 @@ export default function AWSCertGrid() {
         {/* Render by category */}
         {categories.map((cat) => {
           const certs = CERTIFICATIONS.filter((c) => c.cat === cat);
-          if (!certs.length) return null;
+          if (!certs.length) {
+            return null;
+          }
           const s = CATEGORY_STYLES[cat];
           return (
-            <div key={cat} className="mb-14">
+            <div className="mb-14" key={cat}>
               {/* Category label */}
-              <div className="flex items-center gap-3 mb-6">
+              <div className="mb-6 flex items-center gap-3">
                 <span
-                  className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border ${s.bg} ${s.text} ${s.border}`}
+                  className={`rounded-full border px-3 py-1 font-bold text-xs uppercase tracking-wider ${s.bg} ${s.text} ${s.border}`}
                 >
                   {cat}
                 </span>
-                <div className="flex-1 h-px bg-gray-200" />
-                <span className="text-sm text-gray-400">
+                <div className="h-px flex-1 bg-gray-200" />
+                <span className="text-gray-400 text-sm">
                   {certs.length} cert{certs.length > 1 ? "s" : ""}
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {certs.map((cert) => (
-                  <CertCard key={cert.code} cert={cert} />
+                  <CertCard cert={cert} key={cert.code} />
                 ))}
               </div>
             </div>

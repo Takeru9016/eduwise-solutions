@@ -2,77 +2,77 @@
 
 export interface CourseStat {
   icon: string;
-  value: string;
   label: string;
+  value: string;
 }
 
 export interface CourseFeature {
+  description: string;
   icon: string;
   title: string;
-  description: string;
 }
 
 export interface CourseHighlight {
   category: string;
-  icon: string;
   color: string;
+  icon: string;
   points: string[];
 }
 
 export interface CourseSubModule {
-  title: string;
-  subtopics: string[];
   handsOn: string[];
+  subtopics: string[];
+  title: string;
 }
 
 export interface CourseModule {
-  title: string;
   description: string;
   duration?: string;
   submodules: CourseSubModule[];
+  title: string;
 }
 
 export interface PRTStep {
-  title: string;
   description: string;
+  title: string;
 }
 
 export interface ISAStep {
-  title: string;
   description: string;
+  title: string;
 }
 
 export interface CareerTrackItem {
-  title: string;
   description: string;
+  title: string;
   topics: string[];
 }
 
 export interface CareerPath {
-  title: string;
-  salary?: string;
   icon?: string;
+  salary?: string;
+  title: string;
 }
 
 export interface TargetAudience {
-  title: string;
   icon?: string;
+  title: string;
 }
 
 export interface CourseTool {
-  name: string;
   logoUrl?: string;
+  name: string;
 }
 
 export interface CourseFAQ {
-  question: string;
   answer: string;
+  question: string;
 }
 
 export interface BatchInfo {
+  enrolledCount: string;
   label: string;
   status: string;
-  enrolledCount: string;
 }
 
 /**
@@ -80,48 +80,48 @@ export interface BatchInfo {
  */
 export interface CourseContent {
   _id: string;
-  title: string;
-  slug: { current: string };
-  subtitle: string;
-  description: string;
-  category: string;
-  heroImageUrl: string;
   accentColor: string;
-  emoji: string;
-  duration: string;
-  featured: boolean;
-
-  // Required sections
-  stats: CourseStat[];
-  features: CourseFeature[];
-  highlights: CourseHighlight[];
-  modules: CourseModule[];
-
-  // Pricing (required)
-  price: number;
-  originalPrice: number;
-  emiOption?: string;
-  whatsIncluded: string[];
-
-  // Curriculum journey (sections 2-5)
-  isJobGuaranteeProgram?: boolean;
-  prtSteps?: PRTStep[];
-  isaSteps?: ISAStep[];
-  careerTrack?: CareerTrackItem[];
-  hiringPartners?: CourseTool[];
-  careerServiceFee?: number;
+  batchInfo?: BatchInfo;
 
   // Optional sections
   careerPaths?: CareerPath[];
-  targetAudience?: TargetAudience[];
-  tools?: CourseTool[];
+  careerServiceFee?: number;
+  careerTrack?: CareerTrackItem[];
+  category: string;
+  description: string;
+  duration: string;
+  emiOption?: string;
+  emoji: string;
   faq?: CourseFAQ[];
-  batchInfo?: BatchInfo;
+  featured: boolean;
+  features: CourseFeature[];
+  heroImageUrl: string;
+  highlights: CourseHighlight[];
+  hiringPartners?: CourseTool[];
   industryGrowth?: string;
+  isaSteps?: ISAStep[];
+
+  // Curriculum journey (sections 2-5)
+  isJobGuaranteeProgram?: boolean;
+  modules: CourseModule[];
+  originalPrice: number;
+
+  // Pricing (required)
+  price: number;
+  prtSteps?: PRTStep[];
+  seoDescription?: string;
 
   // SEO
   seoTitle?: string;
-  seoDescription?: string;
+  slug: { current: string };
+
+  // Required sections
+  stats: CourseStat[];
+  subtitle: string;
+  targetAudience?: TargetAudience[];
+  title: string;
+  tools?: CourseTool[];
+  whatsIncluded: string[];
 }
 
 /**
@@ -129,14 +129,14 @@ export interface CourseContent {
  */
 export interface CourseListItem {
   _id: string;
-  title: string;
+  category: string;
+  duration: string;
+  emoji: string;
+  featured: boolean;
+  heroImageUrl: string;
+  originalPrice: number;
+  price: number;
   slug: { current: string };
   subtitle: string;
-  category: string;
-  heroImageUrl: string;
-  emoji: string;
-  duration: string;
-  price: number;
-  originalPrice: number;
-  featured: boolean;
+  title: string;
 }

@@ -1,34 +1,34 @@
 "use client";
 
+import { motion, useAnimation, useInView } from "framer-motion";
+import { ChevronLeft, ChevronRight, Linkedin, Quote, Star } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
-import { ChevronLeft, ChevronRight, Quote, Star, Linkedin } from "lucide-react";
-import { motion, useAnimation, useInView } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
 
 export interface Testimonial {
-  id: number;
-  name: string;
-  role: string;
+  avatar: string;
   company: string;
   content: string;
-  rating: number;
-  avatar: string;
+  id: number;
   linkedinUrl?: string;
+  name: string;
+  rating: number;
+  role: string;
 }
 
 export interface TestimonialsSectionProps {
-  title?: string;
+  autoRotateInterval?: number;
+  className?: string;
+  showVerifiedBadge?: boolean;
   subtitle?: string;
   testimonials?: Testimonial[];
-  autoRotateInterval?: number;
-  showVerifiedBadge?: boolean;
+  title?: string;
   trustedCompanies?: string[];
   trustedCompaniesTitle?: string;
-  className?: string;
 }
 
 export function TestimonialsSection({
@@ -46,12 +46,14 @@ export function TestimonialsSection({
 
   // Refs for scroll animations
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
+  const isInView = useInView(sectionRef, { amount: 0.2, once: true });
   const controls = useAnimation();
 
   // Automatically cycle through testimonials
   useEffect(() => {
-    if (autoRotateInterval <= 0 || testimonials.length <= 1) return;
+    if (autoRotateInterval <= 0 || testimonials.length <= 1) {
+      return;
+    }
 
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % testimonials.length);
@@ -84,8 +86,8 @@ export function TestimonialsSection({
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
         delayChildren: 0.2,
+        staggerChildren: 0.1,
       },
     },
   };
@@ -94,11 +96,11 @@ export function TestimonialsSection({
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
-      y: 0,
       transition: {
         duration: 0.5,
         ease: "easeOut",
       },
+      y: 0,
     },
   };
 
@@ -108,41 +110,41 @@ export function TestimonialsSection({
 
   return (
     <section
-      ref={sectionRef}
-      id="testimonials-alt"
       className={cn(
-        "py-16 md:py-32 relative overflow-hidden flex justify-center",
+        "relative flex justify-center overflow-hidden py-16 md:py-32",
         className
       )}
+      id="testimonials-alt"
+      ref={sectionRef}
     >
       <div className="container items-center px-4 md:px-6">
         <motion.div
-          initial="hidden"
           animate={controls}
+          className="mb-12 space-y-4 text-center"
+          initial="hidden"
           variants={containerVariants}
-          className="text-center mb-12 space-y-4"
         >
           <motion.h2
+            className="font-bold text-3xl tracking-tighter sm:text-4xl md:text-5xl"
             variants={itemVariants}
-            className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl"
           >
             {title}
           </motion.h2>
           <motion.p
+            className="mx-auto max-w-[700px] text-muted-foreground md:text-xl/relaxed"
             variants={itemVariants}
-            className="text-muted-foreground max-w-[700px] mx-auto md:text-xl/relaxed"
           >
             {subtitle}
           </motion.p>
         </motion.div>
 
         <motion.div
-          initial="hidden"
           animate={controls}
+          className="max-w-[1200px] items-center gap-8 md:grid md:grid-cols-[1fr_auto]"
+          initial="hidden"
           variants={containerVariants}
-          className="md:grid md:grid-cols-[1fr_auto] gap-8 items-center max-w-[1200px]"
         >
-          <motion.div variants={itemVariants} className="relative">
+          <motion.div className="relative" variants={itemVariants}>
             <div className="absolute -top-6 -left-6 z-10">
               <Quote className="h-12 w-12 text-primary-80" strokeWidth={1} />
             </div>
@@ -151,21 +153,21 @@ export function TestimonialsSection({
             <div className="relative h-[320px] md:h-[280px]">
               {testimonials.map((testimonial, index) => (
                 <Card
-                  key={testimonial.id}
                   className={cn(
-                    "absolute inset-0 transition-all duration-500 border",
+                    "absolute inset-0 border transition-all duration-500",
                     index === activeIndex
-                      ? "opacity-100 translate-x-0 shadow-lg"
-                      : "opacity-0 translate-x-[100px] pointer-events-none"
+                      ? "translate-x-0 opacity-100 shadow-lg"
+                      : "pointer-events-none translate-x-[100px] opacity-0"
                   )}
+                  key={testimonial.id}
                 >
-                  <CardContent className="p-6 md:p-8 h-full flex flex-col">
-                    <div className="flex justify-between items-start mb-4">
+                  <CardContent className="flex h-full flex-col p-6 md:p-8">
+                    <div className="mb-4 flex items-start justify-between">
                       <div className="flex items-center gap-4">
                         <Avatar className="h-12 w-12 border-2 border-primary/10">
                           <AvatarImage
-                            src={testimonial.avatar}
                             alt={testimonial.name}
+                            src={testimonial.avatar}
                           />
                           <AvatarFallback>
                             {testimonial.name.charAt(0)}
@@ -173,16 +175,16 @@ export function TestimonialsSection({
                         </Avatar>
                         <div className="text-left">
                           <h4 className="font-semibold">{testimonial.name}</h4>
-                          <p className="text-sm text-muted-foreground">
+                          <p className="text-muted-foreground text-sm">
                             {testimonial.role}, {testimonial.company}
                           </p>
                         </div>
                       </div>
                       <div className="flex">
-                        {[...Array(testimonial.rating)].map((_, i) => (
+                        {[...new Array(testimonial.rating)].map((_, i) => (
                           <Star
-                            key={i}
                             className="h-4 w-4 fill-yellow-500 text-yellow-500"
+                            key={i}
                           />
                         ))}
                       </div>
@@ -190,7 +192,7 @@ export function TestimonialsSection({
 
                     <Separator className="my-4" />
 
-                    <p className="flex-1 italic text-base/relaxed">
+                    <p className="flex-1 text-base/relaxed italic">
                       &quot;{testimonial.content}&quot;
                     </p>
 
@@ -198,12 +200,12 @@ export function TestimonialsSection({
                       <div className="mt-4">
                         <a
                           href={testimonial.linkedinUrl}
-                          target="_blank"
                           rel="noopener noreferrer"
+                          target="_blank"
                         >
                           <Button
-                            variant="outline"
                             className="rounded-full hover:bg-blue-600 hover:text-white"
+                            variant="outline"
                           >
                             <Linkedin className="mr-2 h-4 w-4" />
                             View on LinkedIn
@@ -213,7 +215,7 @@ export function TestimonialsSection({
                     )}
 
                     {showVerifiedBadge && (
-                      <div className="mt-4 text-xs text-right text-muted-foreground">
+                      <div className="mt-4 text-right text-muted-foreground text-xs">
                         Verified Customer
                       </div>
                     )}
@@ -225,48 +227,48 @@ export function TestimonialsSection({
 
           {/* Navigation buttons */}
           <motion.div
+            className="mt-8 flex justify-center gap-4 md:mt-0 md:flex-col"
             variants={itemVariants}
-            className="flex md:flex-col gap-4 justify-center mt-8 md:mt-0"
           >
             <Button
-              variant="outline"
-              size="icon"
-              onClick={handlePrev}
-              className="rounded-full h-10 w-10"
               aria-label="Previous testimonial"
+              className="h-10 w-10 rounded-full"
+              onClick={handlePrev}
+              size="icon"
+              variant="outline"
             >
               <ChevronLeft className="h-4 w-4 text-primary-75" />
             </Button>
 
-            <div className="flex md:flex-col gap-2 items-center justify-center">
+            <div className="flex items-center justify-center gap-2 md:flex-col">
               {testimonials.map((_, index) => (
                 <div
-                  key={index}
+                  aria-label={`Go to testimonial ${index + 1}`}
                   className={cn(
-                    "w-2 h-2 rounded-full transition-colors",
+                    "h-2 w-2 rounded-full transition-colors",
                     index === activeIndex
                       ? "bg-primary"
                       : "bg-muted-foreground/20"
                   )}
-                  role="button"
-                  tabIndex={0}
+                  key={index}
                   onClick={() => setActiveIndex(index)}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" || e.key === " ") {
                       setActiveIndex(index);
                     }
                   }}
-                  aria-label={`Go to testimonial ${index + 1}`}
+                  role="button"
+                  tabIndex={0}
                 />
               ))}
             </div>
 
             <Button
-              variant="outline"
-              size="icon"
-              onClick={handleNext}
-              className="rounded-full h-10 w-10"
               aria-label="Next testimonial"
+              className="h-10 w-10 rounded-full"
+              onClick={handleNext}
+              size="icon"
+              variant="outline"
             >
               <ChevronRight className="h-4 w-4 text-primary-75" />
             </Button>
@@ -275,15 +277,15 @@ export function TestimonialsSection({
 
         {/* Logo cloud - Updated to match TestimonialsSection */}
         {trustedCompanies.length > 0 && (
-          <motion.div variants={itemVariants} className="mt-20 pt-10 border-t">
-            <h3 className="text-sm font-medium text-muted-foreground text-center mb-8">
+          <motion.div className="mt-20 border-t pt-10" variants={itemVariants}>
+            <h3 className="mb-8 text-center font-medium text-muted-foreground text-sm">
               {trustedCompaniesTitle}
             </h3>
             <div className="flex flex-wrap justify-center gap-x-12 gap-y-8">
               {trustedCompanies.map((company) => (
                 <div
+                  className="font-semibold text-2xl text-muted-foreground/50"
                   key={company}
-                  className="text-2xl font-semibold text-muted-foreground/50"
                 >
                   {company}
                 </div>

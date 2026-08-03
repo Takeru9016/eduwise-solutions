@@ -1,29 +1,35 @@
+import {
+  ArrowRight,
+  BookOpen,
+  Clock,
+  type LucideIcon,
+  Target,
+} from "lucide-react";
 import Link from "next/link";
-import { ArrowRight, BookOpen, Target, Clock, LucideIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
 // Types
 interface FeatureItem {
+  description: string;
   icon: LucideIcon;
   title: string;
-  description: string;
 }
 
 interface CTAButton {
-  text: string;
   href: string;
-  variant: "primary" | "secondary";
   icon?: LucideIcon;
+  text: string;
+  variant: "primary" | "secondary";
 }
 
 // Reusable components
 const FeatureCard = ({ icon: Icon, title, description }: FeatureItem) => (
-  <div className="flex items-start gap-3 bg-primary-99/50 p-4 rounded-lg">
-    <Icon className="w-6 h-6 text-primary-70 mt-1" />
+  <div className="flex items-start gap-3 rounded-lg bg-primary-99/50 p-4">
+    <Icon className="mt-1 h-6 w-6 text-primary-70" />
     <div>
-      <h3 className="font-semibold text-grey-20 mb-1">{title}</h3>
-      <p className="text-sm text-grey-45">{description}</p>
+      <h3 className="mb-1 font-semibold text-grey-20">{title}</h3>
+      <p className="text-grey-45 text-sm">{description}</p>
     </div>
   </div>
 );
@@ -34,20 +40,18 @@ const CTAButton = ({ text, href, variant, icon: Icon }: CTAButton) => {
   return (
     <Button
       asChild
-      variant={isPrimary ? "default" : "outline"}
       className={`
         ${
-          isPrimary ?
-            "bg-primary-70 hover:bg-primary-75 text-white group"
-          : "border-primary-70 text-primary-70 hover:bg-primary-95/50"
-        } 
-        px-8 py-3 rounded-lg transition-all duration-300
-      `}
+          isPrimary
+            ? "group bg-primary-70 text-white hover:bg-primary-75"
+            : "border-primary-70 text-primary-70 hover:bg-primary-95/50"
+        } rounded-lg px-8 py-3 transition-all duration-300`}
+      variant={isPrimary ? "default" : "outline"}
     >
-      <Link href={href} className={isPrimary ? "flex items-center gap-2" : ""}>
+      <Link className={isPrimary ? "flex items-center gap-2" : ""} href={href}>
         {text}
         {Icon && (
-          <Icon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          <Icon className="h-5 w-5 transition-transform group-hover:translate-x-1" />
         )}
       </Link>
     </Button>
@@ -57,102 +61,102 @@ const CTAButton = ({ text, href, variant, icon: Icon }: CTAButton) => {
 export default function CTASection() {
   const features: FeatureItem[] = [
     {
+      description: "Industry-aligned learning paths",
       icon: BookOpen,
       title: "Expert Curriculum",
-      description: "Industry-aligned learning paths",
     },
     {
+      description: "Learn on your schedule",
       icon: Clock,
       title: "Flexible Learning",
-      description: "Learn on your schedule",
     },
   ];
 
   const ctaButtons: CTAButton[] = [
     {
-      text: "Start Your Journey",
       href: "/contact",
-      variant: "primary",
       icon: ArrowRight,
+      text: "Start Your Journey",
+      variant: "primary",
     },
     {
-      text: "Explore Programs",
       href: "/courses",
+      text: "Explore Programs",
       variant: "secondary",
     },
   ];
 
   return (
-    <section className="relative py-24 bg-gradient-to-br from-primary-99 to-white overflow-hidden">
+    <section className="relative overflow-hidden bg-gradient-to-br from-primary-99 to-white py-24">
       {/* Subtle Background Decorations */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-primary-95 rounded-full opacity-10 blur-3xl" />
-        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-primary-90 rounded-full opacity-10 blur-3xl" />
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute top-1/4 -left-20 h-96 w-96 rounded-full bg-primary-95 opacity-10 blur-3xl" />
+        <div className="absolute -right-20 bottom-1/4 h-96 w-96 rounded-full bg-primary-90 opacity-10 blur-3xl" />
       </div>
 
       <div className="container relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid items-center gap-12 lg:grid-cols-2">
           {/* Content Section */}
           <div className="space-y-6">
-            <div className="inline-flex items-center gap-2 bg-primary-95 text-primary-70 px-4 py-2 rounded-full">
-              <Target size={16} className="text-primary-70" />
-              <span className="text-sm font-medium">Career Transformation</span>
+            <div className="inline-flex items-center gap-2 rounded-full bg-primary-95 px-4 py-2 text-primary-70">
+              <Target className="text-primary-70" size={16} />
+              <span className="font-medium text-sm">Career Transformation</span>
             </div>
 
-            <h2 className="text-4xl lg:text-5xl font-bold text-grey-15 leading-tight">
+            <h2 className="font-bold text-4xl text-grey-15 leading-tight lg:text-5xl">
               Accelerate Your
-              <span className="text-primary-70 block">
+              <span className="block text-primary-70">
                 Professional Journey
               </span>
             </h2>
 
-            <p className="text-lg text-grey-45 max-w-xl">
+            <p className="max-w-xl text-grey-45 text-lg">
               Unlock a world of opportunities with our cutting-edge Online
               Professional Programs. Designed for ambitious professionals who
               want to stay ahead in a rapidly evolving job market.
             </p>
 
             {/* Key Features */}
-            <div className="grid sm:grid-cols-2 gap-4">
+            <div className="grid gap-4 sm:grid-cols-2">
               {features.map((feature) => (
                 <FeatureCard
-                  key={feature.title}
-                  icon={feature.icon}
-                  title={feature.title}
                   description={feature.description}
+                  icon={feature.icon}
+                  key={feature.title}
+                  title={feature.title}
                 />
               ))}
             </div>
 
             {/* Call-to-Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col gap-4 sm:flex-row">
               {ctaButtons.map((button) => (
                 <CTAButton
+                  href={button.href}
+                  icon={button.icon}
                   key={button.text}
                   text={button.text}
-                  href={button.href}
                   variant={button.variant}
-                  icon={button.icon}
                 />
               ))}
             </div>
           </div>
 
           {/* Decorative Image/Section */}
-          <div className="hidden lg:block relative">
-            <div className="bg-gradient-to-br from-primary-95 to-primary-99 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
+          <div className="relative hidden lg:block">
+            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary-95 to-primary-99 p-8 shadow-2xl">
               <div className="absolute inset-0 bg-gradient-to-br from-primary-75/10 to-transparent opacity-50 blur-2xl" />
 
               <div className="relative z-10 text-center">
-                <div className="inline-flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-lg mb-6 mx-auto">
-                  <Target className="w-10 h-10 text-primary-70" />
+                <div className="mx-auto mb-6 inline-flex h-20 w-20 items-center justify-center rounded-full bg-white shadow-lg">
+                  <Target className="h-10 w-10 text-primary-70" />
                 </div>
 
-                <h3 className="text-3xl font-bold text-grey-15 mb-4">
+                <h3 className="mb-4 font-bold text-3xl text-grey-15">
                   Transform Your Potential
                 </h3>
 
-                <p className="text-grey-45 max-w-md mx-auto">
+                <p className="mx-auto max-w-md text-grey-45">
                   Join a community of 10,000+ professionals advancing their
                   careers through innovative online learning.
                 </p>

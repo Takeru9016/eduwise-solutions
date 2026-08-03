@@ -1,0 +1,89 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "extends": [
+    "ultracite/biome/core",
+    "ultracite/biome/react",
+    "ultracite/biome/next"
+  ],
+  "files": {
+    "includes": [
+      "!public",
+      "!playwright-report",
+      "!test-results",
+      "!schema.json"
+    ]
+  },
+  "linter": {
+    "rules": {
+      "correctness": {
+        // Dependency-array fixes can change runtime behavior (extra
+        // re-renders, stale closures), unlike the rest of the rules here.
+        "useExhaustiveDependencies": "warn",
+        "useImageSize": "warn",
+        "noNestedComponentDefinitions": "warn"
+      },
+      "suspicious": {
+        "noArrayIndexKey": "warn",
+        "noLeakedRender": "warn",
+        "noShadow": "warn",
+        "noUnnecessaryConditions": "warn",
+        "noUnknownAttribute": "warn",
+        "noUnknownAtRules": "warn",
+        "useAwait": "warn",
+        "noExplicitAny": "warn",
+        "useIterableCallbackReturn": "warn",
+        "noShadowRestrictedNames": "warn",
+        "noDocumentCookie": "warn"
+      },
+      "performance": {
+        // `import * as z from "zod"` and `import * as XPrimitive from
+        // "@radix-ui/react-*"` are each library's own idiomatic pattern,
+        // not an anti-pattern this codebase introduced. Will never be
+        // "fixed", so it's off rather than a permanent warning.
+        "noNamespaceImport": "off",
+        "noJsxPropsBind": "warn",
+        "useTopLevelRegex": "warn",
+        // Parity with the pre-migration ESLint setup, where this was also
+        // a warning (MetaPixel/LinkedInInsight tracking pixels).
+        "noImgElement": "warn",
+        "noBarrelFile": "warn",
+        "noAwaitInLoops": "warn"
+      },
+      "style": {
+        // Wants kebab-case; this codebase's established, working convention
+        // is PascalCase component filenames matching their export name.
+        // Renaming ~75 files would break every import for no real gain.
+        "useFilenamingConvention": "off",
+        "noNonNullAssertion": "warn",
+        "useDestructuring": "warn",
+        "useDefaultSwitchClause": "warn",
+        "noNestedTernary": "warn",
+        "noSubstr": "warn",
+        "noIncrementDecrement": "warn"
+      },
+      "complexity": {
+        "noForEach": "warn",
+        "noStaticOnlyClass": "warn"
+      },
+      "a11y": {
+        // Genuine accessibility debt, consistent with the gaps already
+        // noted in the pre-migration audit (missing alt text, ARIA, etc).
+        "noSvgWithoutTitle": "warn",
+        "useButtonType": "warn",
+        "useSemanticElements": "warn",
+        "noStaticElementInteractions": "warn",
+        "noNoninteractiveElementInteractions": "warn",
+        "useKeyWithClickEvents": "warn",
+        "useFocusableInteractive": "warn",
+        "useAriaPropsForRole": "warn"
+      },
+      "security": {
+        // Reviewed: builds a <style> tag from developer-authored chart
+        // config/theme data, not user input. Standard shadcn/ui charts
+        // boilerplate (src/components/ui/chart.tsx). Low real XSS risk,
+        // kept visible rather than silenced.
+        "noDangerouslySetInnerHtml": "warn"
+      }
+    }
+  }
+}

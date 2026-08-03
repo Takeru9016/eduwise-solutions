@@ -1,12 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import { CheckCircle, Loader2, Quote, Star } from "lucide-react";
 import Image from "next/image";
-import { Star, Quote, CheckCircle, Loader2 } from "lucide-react";
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
-
-import { client } from "@/sanity/lib/client";
-import { urlFor } from "@/sanity/lib/image";
+import { useEffect, useState } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -14,44 +11,44 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { client } from "@/sanity/lib/client";
+import { urlFor } from "@/sanity/lib/image";
 import { Button } from "../ui/button";
 
 interface GoogleReview {
   _id: string;
-  reviewerName: string;
-  reviewerImage?: SanityImageSource;
-  reviewText: string;
-  rating: number;
-  isVerified: boolean;
   category?: string;
+  isVerified: boolean;
   publishedAt: string;
+  rating: number;
+  reviewerImage?: SanityImageSource;
+  reviewerName: string;
+  reviewText: string;
 }
 
 interface GoogleReviewsProps {
   categorySlug: string;
-  title?: string;
   subtitle?: string;
+  title?: string;
 }
 
-const StarRating = ({ rating }: { rating: number }) => {
-  return (
-    <div className="flex items-center gap-0.5">
-      {[1, 2, 3, 4, 5].map((star) => (
-        <Star
-          key={star}
-          className={`w-4 h-4 sm:w-5 sm:h-5 transition-all duration-300 ${
-            star <= rating ? "text-amber-400 fill-amber-400" : "text-gray-300"
-          }`}
-        />
-      ))}
-    </div>
-  );
-};
+const StarRating = ({ rating }: { rating: number }) => (
+  <div className="flex items-center gap-0.5">
+    {[1, 2, 3, 4, 5].map((star) => (
+      <Star
+        className={`h-4 w-4 transition-all duration-300 sm:h-5 sm:w-5 ${
+          star <= rating ? "fill-amber-400 text-amber-400" : "text-gray-300"
+        }`}
+        key={star}
+      />
+    ))}
+  </div>
+);
 
 const GoogleBadge = () => (
   <div className="flex items-center gap-2">
     <div className="flex items-center gap-1.5">
-      <svg viewBox="0 0 24 24" className="w-5 h-5 sm:w-6 sm:h-6">
+      <svg className="h-5 w-5 sm:h-6 sm:w-6" viewBox="0 0 24 24">
         <path
           d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
           fill="#4285F4"
@@ -69,7 +66,7 @@ const GoogleBadge = () => (
           fill="#EA4335"
         />
       </svg>
-      <span className="text-xs sm:text-sm font-semibold text-grey-30">
+      <span className="font-semibold text-grey-30 text-xs sm:text-sm">
         Customer Reviews
       </span>
     </div>
@@ -83,20 +80,20 @@ const ReviewText = ({ text }: { text: string }) => {
   const shouldTruncate = text.length > CHAR_LIMIT;
 
   const displayText =
-    shouldTruncate && !isExpanded ? text.slice(0, CHAR_LIMIT) + "..." : text;
+    shouldTruncate && !isExpanded ? `${text.slice(0, CHAR_LIMIT)}...` : text;
 
   return (
     <div className="relative mb-5">
-      <Quote className="absolute -top-1 -left-1 w-6 h-6 sm:w-8 sm:h-8 text-primary-90/30" />
-      <p className="text-grey-35 text-sm sm:text-base leading-relaxed pl-5 sm:pl-6">
+      <Quote className="absolute -top-1 -left-1 h-6 w-6 text-primary-90/30 sm:h-8 sm:w-8" />
+      <p className="pl-5 text-grey-35 text-sm leading-relaxed sm:pl-6 sm:text-base">
         {displayText}
       </p>
       {shouldTruncate && (
         <Button
+          className="mt-2 flex items-center justify-center border border-primary-90 pl-5 font-medium text-primary-75 text-sm transition-colors hover:text-primary-60 sm:pl-6"
+          onClick={() => setIsExpanded(!isExpanded)}
           size="default"
           variant="outline"
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="text-primary-75 text-sm font-medium pl-5 sm:pl-6 mt-2 hover:text-primary-60 transition-colors border border-primary-90 flex items-center justify-center"
         >
           {isExpanded ? "Read less" : "Read more"}
         </Button>
@@ -141,10 +138,10 @@ export default function GoogleReviews({
 
   if (loading) {
     return (
-      <section className="py-16 sm:py-20 bg-gradient-to-br from-slate-50 via-white to-primary-99">
+      <section className="bg-gradient-to-br from-slate-50 via-white to-primary-99 py-16 sm:py-20">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-center gap-3 py-12">
-            <Loader2 className="w-6 h-6 animate-spin text-primary-75" />
+            <Loader2 className="h-6 w-6 animate-spin text-primary-75" />
             <span className="text-grey-35">Loading reviews...</span>
           </div>
         </div>
@@ -154,20 +151,20 @@ export default function GoogleReviews({
 
   if (!loading && reviews.length === 0) {
     return (
-      <section className="py-16 sm:py-20 bg-gradient-to-br from-slate-50 via-white to-primary-99 border-t border-light-90">
+      <section className="border-light-90 border-t bg-gradient-to-br from-slate-50 via-white to-primary-99 py-16 sm:py-20">
         <div className="container mx-auto px-4 text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-99 rounded-full mb-6">
-            <Star className="w-8 h-8 text-primary-75" />
+          <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-primary-99">
+            <Star className="h-8 w-8 text-primary-75" />
           </div>
-          <h2 className="text-2xl lg:text-3xl font-vietnam font-bold text-grey-15 mb-3">
+          <h2 className="mb-3 font-bold font-vietnam text-2xl text-grey-15 lg:text-3xl">
             Reviews Coming Soon
           </h2>
-          <p className="text-grey-35 text-lg max-w-2xl mx-auto mb-6">
+          <p className="mx-auto mb-6 max-w-2xl text-grey-35 text-lg">
             Our students are currently completing their courses. Authentic
             Google verified reviews will be added here as they share their
             experiences!
           </p>
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-lg text-sm text-grey-35 border border-slate-200 shadow-sm">
+          <div className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-grey-35 text-sm shadow-sm">
             <GoogleBadge />
             <span className="text-grey-40">•</span>
             <span>Collecting Feedback</span>
@@ -178,73 +175,74 @@ export default function GoogleReviews({
   }
 
   return (
-    <section className="py-16 sm:py-20 bg-white border-y border-slate-200 relative overflow-hidden">
+    <section className="relative overflow-hidden border-slate-200 border-y bg-white py-16 sm:py-20">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary-99/50 via-white to-amber-50/30">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-primary-75/10 to-transparent rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-tl from-amber-500/10 to-transparent rounded-full blur-3xl" />
+        <div className="absolute top-20 left-10 h-72 w-72 rounded-full bg-gradient-to-br from-primary-75/10 to-transparent blur-3xl" />
+        <div className="absolute right-10 bottom-20 h-96 w-96 rounded-full bg-gradient-to-tl from-amber-500/10 to-transparent blur-3xl" />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container relative z-10 mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm text-grey-30 px-4 py-2 rounded-full text-sm font-semibold mb-6 shadow-lg border border-slate-200">
+        <div className="mb-12 text-center sm:mb-16">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-4 py-2 font-semibold text-grey-30 text-sm shadow-lg backdrop-blur-sm">
             <GoogleBadge />
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-vietnam font-bold text-grey-15 mb-4 sm:mb-6">
+          <h2 className="mb-4 font-bold font-vietnam text-3xl text-grey-15 sm:mb-6 sm:text-4xl lg:text-5xl">
             {title}
           </h2>
-          <p className="text-grey-35 text-base sm:text-lg lg:text-xl max-w-3xl mx-auto">
+          <p className="mx-auto max-w-3xl text-base text-grey-35 sm:text-lg lg:text-xl">
             {subtitle}
           </p>
         </div>
 
         {/* Reviews Carousel */}
-        <div className="py-4 px-0 md:px-16 lg:px-20">
+        <div className="px-0 py-4 md:px-16 lg:px-20">
           <Carousel
+            className="w-full"
             opts={{
               align: "start",
               loop: true,
             }}
-            className="w-full"
           >
             <CarouselContent className="-ml-6">
               {reviews.map((review) => (
                 <CarouselItem
+                  className="py-4 pl-6 md:basis-1/2 lg:basis-1/3"
                   key={review._id}
-                  className="pl-6 md:basis-1/2 lg:basis-1/3 py-4"
                 >
-                  <div className="h-full bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-xl border border-white/50 hover:shadow-2xl hover:border-primary-90 transition-all duration-500 hover:-translate-y-2 group relative overflow-hidden">
+                  <div className="group relative h-full overflow-hidden rounded-2xl border border-white/50 bg-white/80 p-6 shadow-xl backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:border-primary-90 hover:shadow-2xl sm:rounded-3xl sm:p-8">
                     {/* Decorative gradient border on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary-75/0 via-transparent to-amber-400/0 group-hover:from-primary-75/5 group-hover:to-amber-400/5 transition-all duration-500 rounded-2xl sm:rounded-3xl" />
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary-75/0 via-transparent to-amber-400/0 transition-all duration-500 group-hover:from-primary-75/5 group-hover:to-amber-400/5 sm:rounded-3xl" />
 
                     <div className="relative z-10">
                       {/* Header with reviewer info and Google badge */}
-                      <div className="flex items-start justify-between mb-5">
+                      <div className="mb-5 flex items-start justify-between">
                         <div className="flex items-center gap-3 sm:gap-4">
                           {/* Avatar */}
-                          <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden border-2 border-primary-90 bg-gradient-to-br from-primary-95 to-primary-99 flex items-center justify-center flex-shrink-0 shadow-lg">
-                            {review.reviewerImage ?
+                          <div className="relative flex h-12 w-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-primary-90 bg-gradient-to-br from-primary-95 to-primary-99 shadow-lg sm:h-14 sm:w-14">
+                            {review.reviewerImage ? (
                               <Image
-                                src={urlFor(review.reviewerImage).url()}
                                 alt={review.reviewerName}
-                                fill
                                 className="object-cover"
+                                fill
+                                src={urlFor(review.reviewerImage).url()}
                               />
-                            : <span className="text-lg sm:text-xl font-bold text-primary-75">
+                            ) : (
+                              <span className="font-bold text-lg text-primary-75 sm:text-xl">
                                 {review.reviewerName.charAt(0).toUpperCase()}
                               </span>
-                            }
+                            )}
                           </div>
                           {/* Name and verified badge */}
                           <div>
-                            <h3 className="text-base sm:text-lg font-vietnam font-bold text-grey-15">
+                            <h3 className="font-bold font-vietnam text-base text-grey-15 sm:text-lg">
                               {review.reviewerName}
                             </h3>
                             {review.isVerified && (
                               <div className="flex items-center gap-1 text-primary-75">
-                                <CheckCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                                <span className="text-xs sm:text-sm font-medium">
+                                <CheckCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                                <span className="font-medium text-xs sm:text-sm">
                                   Verified Learner
                                 </span>
                               </div>
@@ -253,10 +251,10 @@ export default function GoogleReviews({
                         </div>
 
                         {/* Google logo */}
-                        <div className="flex-shrink-0 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+                        <div className="flex-shrink-0 opacity-70 transition-opacity duration-300 group-hover:opacity-100">
                           <svg
+                            className="h-6 w-6 sm:h-7 sm:w-7"
                             viewBox="0 0 24 24"
-                            className="w-6 h-6 sm:w-7 sm:h-7"
                           >
                             <path
                               d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -282,7 +280,7 @@ export default function GoogleReviews({
                       <ReviewText text={review.reviewText} />
 
                       {/* Rating */}
-                      <div className="flex items-center justify-between pt-4 border-t border-slate-100">
+                      <div className="flex items-center justify-between border-slate-100 border-t pt-4">
                         <StarRating rating={review.rating} />
                       </div>
                     </div>
@@ -290,8 +288,8 @@ export default function GoogleReviews({
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="hidden md:flex -left-6 lg:-left-10 bg-white shadow-lg border-slate-200 hover:bg-primary-75 hover:text-white hover:border-primary-75 transition-all duration-300 w-10 h-10" />
-            <CarouselNext className="hidden md:flex -right-6 lg:-right-10 bg-white shadow-lg border-slate-200 hover:bg-primary-75 hover:text-white hover:border-primary-75 transition-all duration-300 w-10 h-10" />
+            <CarouselPrevious className="-left-6 hidden h-10 w-10 border-slate-200 bg-white shadow-lg transition-all duration-300 hover:border-primary-75 hover:bg-primary-75 hover:text-white md:flex lg:-left-10" />
+            <CarouselNext className="-right-6 hidden h-10 w-10 border-slate-200 bg-white shadow-lg transition-all duration-300 hover:border-primary-75 hover:bg-primary-75 hover:text-white md:flex lg:-right-10" />
           </Carousel>
         </div>
       </div>

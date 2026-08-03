@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
-import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
+import fs from "node:fs";
+import path from "node:path";
 import { HuggingFaceInferenceEmbeddings } from "@langchain/community/embeddings/hf";
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
+import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 import { google } from "googleapis";
+import { type NextRequest, NextResponse } from "next/server";
 
 interface VectorDocument {
   content: string;
@@ -12,34 +12,34 @@ interface VectorDocument {
 }
 
 interface ChatRequest {
-  sessionId: string;
   question?: string;
+  sessionId: string;
   userData?: UserData;
 }
 
 interface UserData {
+  email?: string;
   name?: string;
   phone?: string;
   qualification?: string;
-  email?: string;
 }
 
 interface ChatResponse {
   answer: string;
-  pdf?: string;
   needsAdvisor?: boolean;
+  pdf?: string;
   whatsappLink?: string;
 }
 
 interface SimilarityResult {
-  index: number;
   content: string;
+  index: number;
   similarity: number;
 }
 
 interface MessageContent {
-  text?: string;
   content?: string;
+  text?: string;
 }
 
 type MessageContentType = string | MessageContent | MessageContent[];
@@ -50,7 +50,7 @@ function generateWhatsAppLink(
 ): string {
   const phoneNumber = process.env.WHATSAPP_SUPPORT_NUMBER;
 
-  let message = `Hi Eduwise Team! 👋\n\n`;
+  let message = "Hi Eduwise Team! 👋\n\n";
 
   if (userData?.name) {
     message += `My name is ${userData.name}.\n`;
@@ -112,8 +112,8 @@ class VectorStoreManager {
     const text = await this.loadTextFromFile(filePath);
 
     const splitter = new RecursiveCharacterTextSplitter({
-      chunkSize: 1500,
       chunkOverlap: 200,
+      chunkSize: 1500,
     });
 
     const chunks = await splitter.splitText(text);
@@ -121,8 +121,8 @@ class VectorStoreManager {
 
     if (!this.embeddings) {
       this.embeddings = new HuggingFaceInferenceEmbeddings({
-        model: "sentence-transformers/all-MiniLM-L6-v2",
         apiKey: process.env.HUGGINGFACE_API_KEY,
+        model: "sentence-transformers/all-MiniLM-L6-v2",
       });
     }
 
@@ -140,11 +140,8 @@ class VectorStoreManager {
     return this.vectorStore;
   }
 
-  async searchRelevantDocuments(
-    query: string,
-    k: number = 5
-  ): Promise<string[]> {
-    if (!this.vectorStore || !this.embeddings) {
+  async searchRelevantDocuments(query: string, k = 5): Promise<string[]> {
+    if (!(this.vectorStore && this.embeddings)) {
       throw new Error("Vector store not initialized");
     }
 
@@ -154,8 +151,8 @@ class VectorStoreManager {
 
     const similarities: SimilarityResult[] = this.vectorStore.map(
       (doc, index) => ({
-        index,
         content: doc.content,
+        index,
         similarity: this.cosineSimilarity(queryEmbedding, doc.embedding),
       })
     );
@@ -182,7 +179,7 @@ class KnowledgeBaseService {
   ];
 
   static findKnowledgeBasePath(): string | null {
-    for (const filePath of this.POSSIBLE_FILE_PATHS) {
+    for (const filePath of KnowledgeBaseService.POSSIBLE_FILE_PATHS) {
       if (fs.existsSync(filePath)) {
         console.log(`Found FAQ file: ${path.basename(filePath)}`);
         return filePath;
@@ -190,7 +187,9 @@ class KnowledgeBaseService {
     }
 
     console.error("FAQ file not found in any of these locations:");
-    this.POSSIBLE_FILE_PATHS.forEach((f) => console.error(`  - ${f}`));
+    KnowledgeBaseService.POSSIBLE_FILE_PATHS.forEach((f) =>
+      console.error(`  - ${f}`)
+    );
     return null;
   }
 
@@ -202,7 +201,9 @@ class KnowledgeBaseService {
     if (Array.isArray(content)) {
       return content
         .map((part) => {
-          if (typeof part === "string") return part;
+          if (typeof part === "string") {
+            return part;
+          }
           return part.text || part.content || "";
         })
         .join("")
@@ -218,7 +219,7 @@ class KnowledgeBaseService {
   }
 
   static async generateAnswer(question: string): Promise<string> {
-    const knowledgeBasePath = this.findKnowledgeBasePath();
+    const knowledgeBasePath = KnowledgeBaseService.findKnowledgeBasePath();
 
     if (!knowledgeBasePath) {
       throw new Error("Knowledge base not found");
@@ -248,7 +249,7 @@ class KnowledgeBaseService {
     console.log("API Key configured:", !!apiKey);
 
     const llm = new ChatGoogleGenerativeAI({
-      apiKey: apiKey,
+      apiKey,
       model: "gemini-2.5-flash",
       temperature: 0.7,
     });
@@ -276,12 +277,12 @@ YOUR ANSWER:`;
     const result = await llm.invoke(prompt);
     console.log("Raw result:", JSON.stringify(result, null, 2));
 
-    if (!result || !result.content) {
+    if (!result?.content) {
       throw new Error("Empty response from Gemini");
     }
 
     const content = typeof result.content === "string" ? result.content : "";
-    const answer = this.parseMessageContent(content);
+    const answer = KnowledgeBaseService.parseMessageContent(content);
 
     if (!answer || answer.length === 0) {
       throw new Error("Empty answer generated");
@@ -317,7 +318,7 @@ class GoogleSheetsLogger {
       scopes: ["https://www.googleapis.com/auth/spreadsheets"],
     });
 
-    return google.sheets({ version: "v4", auth });
+    return google.sheets({ auth, version: "v4" });
   }
 
   private static async findExistingRow(
@@ -326,8 +327,8 @@ class GoogleSheetsLogger {
     sessionId: string
   ): Promise<number | null> {
     const read = await sheets.spreadsheets.values.get({
-      spreadsheetId,
       range: "Sheet1!A2:G",
+      spreadsheetId,
     });
 
     const rows = read.data.values || [];
@@ -342,7 +343,7 @@ class GoogleSheetsLogger {
     sheets: ReturnType<typeof google.sheets>,
     spreadsheetId: string,
     rowNum: number,
-    sessionId: string,
+    _sessionId: string,
     userData?: UserData,
     question?: string,
     answer?: string
@@ -351,9 +352,7 @@ class GoogleSheetsLogger {
 
     if (userData) {
       await sheets.spreadsheets.values.update({
-        spreadsheetId,
         range: `Sheet1!C${rowNum}:F${rowNum}`,
-        valueInputOption: "RAW",
         requestBody: {
           values: [
             [
@@ -364,13 +363,15 @@ class GoogleSheetsLogger {
             ],
           ],
         },
+        spreadsheetId,
+        valueInputOption: "RAW",
       });
     }
 
     if (question && answer) {
       const read = await sheets.spreadsheets.values.get({
-        spreadsheetId,
         range: `Sheet1!G${rowNum}`,
+        spreadsheetId,
       });
 
       const existingConversation = (read.data.values?.[0]?.[0] as string) || "";
@@ -380,18 +381,18 @@ class GoogleSheetsLogger {
         : newEntry;
 
       await sheets.spreadsheets.values.update({
-        spreadsheetId,
         range: `Sheet1!G${rowNum}`,
-        valueInputOption: "RAW",
         requestBody: { values: [[updatedConversation]] },
+        spreadsheetId,
+        valueInputOption: "RAW",
       });
     }
 
     await sheets.spreadsheets.values.update({
-      spreadsheetId,
       range: `Sheet1!B${rowNum}`,
-      valueInputOption: "RAW",
       requestBody: { values: [[timestamp]] },
+      spreadsheetId,
+      valueInputOption: "RAW",
     });
   }
 
@@ -406,9 +407,7 @@ class GoogleSheetsLogger {
     const timestamp = new Date().toISOString();
 
     await sheets.spreadsheets.values.append({
-      spreadsheetId,
       range: "Sheet1!A2:G",
-      valueInputOption: "RAW",
       requestBody: {
         values: [
           [
@@ -422,6 +421,8 @@ class GoogleSheetsLogger {
           ],
         ],
       },
+      spreadsheetId,
+      valueInputOption: "RAW",
     });
   }
 
@@ -431,23 +432,23 @@ class GoogleSheetsLogger {
     question?: string,
     answer?: string
   ): Promise<void> {
-    if (!this.isConfigured()) {
+    if (!GoogleSheetsLogger.isConfigured()) {
       console.log("Google Sheets logging not configured, skipping...");
       return;
     }
 
     try {
-      const sheets = await this.getAuthenticatedSheets();
+      const sheets = await GoogleSheetsLogger.getAuthenticatedSheets();
       const spreadsheetId = process.env.CHATBOT_GOOGLE_SHEET_ID!;
 
-      const rowNum = await this.findExistingRow(
+      const rowNum = await GoogleSheetsLogger.findExistingRow(
         sheets,
         spreadsheetId,
         sessionId
       );
 
       if (rowNum) {
-        await this.updateExistingRow(
+        await GoogleSheetsLogger.updateExistingRow(
           sheets,
           spreadsheetId,
           rowNum,
@@ -457,7 +458,7 @@ class GoogleSheetsLogger {
           answer
         );
       } else {
-        await this.appendNewRow(
+        await GoogleSheetsLogger.appendNewRow(
           sheets,
           spreadsheetId,
           sessionId,
@@ -488,7 +489,7 @@ async function handleChatRequest(body: ChatRequest): Promise<ChatResponse> {
     throw new Error("Session ID required");
   }
 
-  if (!question && !userData) {
+  if (!(question || userData)) {
     throw new Error("Question or userData required");
   }
 
@@ -498,9 +499,8 @@ async function handleChatRequest(body: ChatRequest): Promise<ChatResponse> {
 
   if (question) {
     try {
-      const generatedAnswer = await KnowledgeBaseService.generateAnswer(
-        question
-      );
+      const generatedAnswer =
+        await KnowledgeBaseService.generateAnswer(question);
 
       if (
         generatedAnswer === "NEED_ADVISOR" ||
@@ -512,7 +512,7 @@ async function handleChatRequest(body: ChatRequest): Promise<ChatResponse> {
         answer =
           "I don't have that specific information in my knowledge base right now. But don't worry! Our expert advisors are here to help you. Click the WhatsApp button below to chat with us directly and get instant assistance! 💬";
 
-        console.log(`🔗 WhatsApp link generated for unanswered question`);
+        console.log("🔗 WhatsApp link generated for unanswered question");
       } else {
         answer = generatedAnswer;
       }
@@ -541,8 +541,8 @@ async function handleChatRequest(body: ChatRequest): Promise<ChatResponse> {
 
   return {
     answer: answer || "I'm ready to help! What would you like to know?",
-    pdf,
     needsAdvisor: !!whatsappLink,
+    pdf,
     whatsappLink,
   };
 }
@@ -561,10 +561,10 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(
       {
-        error: "Failed to process request",
         answer:
           "I apologize, but I'm experiencing technical difficulties. Please try again in a moment.",
         details: errorMessage,
+        error: "Failed to process request",
         needsAdvisor: true,
       },
       { status: statusCode }

@@ -1,30 +1,30 @@
 "use client";
 
-import { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { useState } from "react";
 import { FAQS } from "./aws-data";
 
 function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border border-gray-200 rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow">
+    <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md">
       <button
-        onClick={() => setOpen((prev) => !prev)}
         aria-expanded={open}
-        className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-inset"
+        className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-inset"
+        onClick={() => setOpen((prev) => !prev)}
       >
         <div className="flex items-center gap-4">
-          <span className="shrink-0 w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 text-xs font-bold flex items-center justify-center">
+          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-emerald-100 font-bold text-emerald-700 text-xs">
             {String(index + 1).padStart(2, "0")}
           </span>
-          <span className="font-semibold text-gray-900 text-sm sm:text-base leading-snug">
+          <span className="font-semibold text-gray-900 text-sm leading-snug sm:text-base">
             {q}
           </span>
         </div>
         <ChevronDown
-          className={`w-5 h-5 text-emerald-600 shrink-0 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
           aria-hidden="true"
+          className={`h-5 w-5 shrink-0 text-emerald-600 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
         />
       </button>
 
@@ -33,8 +33,8 @@ function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
           open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="px-6 pb-5 pt-0 border-t border-gray-100">
-          <p className="text-gray-600 text-sm leading-relaxed mt-4">{a}</p>
+        <div className="border-gray-100 border-t px-6 pt-0 pb-5">
+          <p className="mt-4 text-gray-600 text-sm leading-relaxed">{a}</p>
         </div>
       </div>
     </div>
@@ -43,14 +43,14 @@ function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
 
 export default function AWSFaqAccordion() {
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4 max-w-4xl">
+    <section className="bg-gray-50 py-20">
+      <div className="container mx-auto max-w-4xl px-4">
         {/* Header */}
-        <div className="text-center mb-12">
-          <span className="inline-block text-emerald-600 font-semibold text-sm uppercase tracking-widest mb-3">
+        <div className="mb-12 text-center">
+          <span className="mb-3 inline-block font-semibold text-emerald-600 text-sm uppercase tracking-widest">
             Have Questions?
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
+          <h2 className="mb-4 font-extrabold text-3xl text-gray-900 sm:text-4xl">
             Frequently Asked Questions
           </h2>
           <p className="text-gray-500">
@@ -61,7 +61,7 @@ export default function AWSFaqAccordion() {
 
         <div className="space-y-3">
           {FAQS.map((faq, i) => (
-            <FaqItem key={i} q={faq.q} a={faq.a} index={i} />
+            <FaqItem a={faq.a} index={i} key={i} q={faq.q} />
           ))}
         </div>
       </div>

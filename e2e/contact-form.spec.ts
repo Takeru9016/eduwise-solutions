@@ -7,9 +7,9 @@ test("contact form submits successfully and shows a confirmation dialog", async 
   // credentials or write test data into the production lead sheet.
   await page.route("**/api/contact-form", async (route) => {
     await route.fulfill({
-      status: 200,
+      body: JSON.stringify({ message: "ok", success: true }),
       contentType: "application/json",
-      body: JSON.stringify({ success: true, message: "ok" }),
+      status: 200,
     });
   });
 
@@ -27,9 +27,9 @@ test("contact form submits successfully and shows a confirmation dialog", async 
 
   await page.getByRole("button", { name: /send message/i }).click();
 
-  await expect(
-    page.getByText("Message Sent Successfully!"),
-  ).toBeVisible({ timeout: 10_000 });
+  await expect(page.getByText("Message Sent Successfully!")).toBeVisible({
+    timeout: 10_000,
+  });
 });
 
 test("contact form surfaces an error dialog when submission fails", async ({
@@ -37,9 +37,9 @@ test("contact form surfaces an error dialog when submission fails", async ({
 }) => {
   await page.route("**/api/contact-form", async (route) => {
     await route.fulfill({
-      status: 503,
-      contentType: "application/json",
       body: JSON.stringify({ error: "Failed to save form submission" }),
+      contentType: "application/json",
+      status: 503,
     });
   });
 

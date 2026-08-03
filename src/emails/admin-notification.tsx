@@ -12,13 +12,13 @@ import {
 import { format } from "date-fns";
 
 interface AdminEmailProps {
-  fullName: string;
-  email: string;
-  phoneNumber: string;
   course: string;
+  email: string;
+  fullName: string;
+  message?: string;
+  phoneNumber: string;
   sessionDate: Date;
   sessionTime: string;
-  message?: string;
   whatsappUpdates: boolean;
 }
 
@@ -51,7 +51,7 @@ export default function AdminNotificationEmail({
           >
             Client Details:
           </Heading>
-          <table style={{ borderSpacing: 0, borderCollapse: "collapse" }}>
+          <table style={{ borderCollapse: "collapse", borderSpacing: 0 }}>
             <tbody>
               <tr>
                 <td style={{ padding: "8px 0" }}>
@@ -99,9 +99,9 @@ export default function AdminNotificationEmail({
               </Heading>
               <Text
                 style={{
-                  padding: "10px",
                   backgroundColor: "#f9f9f9",
                   borderLeft: "4px solid #ddd",
+                  padding: "10px",
                 }}
               >
                 {message}
@@ -111,12 +111,12 @@ export default function AdminNotificationEmail({
 
           <Hr
             style={{
-              marginTop: "30px",
-              marginBottom: "30px",
               borderTop: "1px solid #ddd",
+              marginBottom: "30px",
+              marginTop: "30px",
             }}
           />
-          <Text style={{ fontSize: "12px", color: "#666" }}>
+          <Text style={{ color: "#666", fontSize: "12px" }}>
             This is an automated notification from your booking system.
           </Text>
         </Container>

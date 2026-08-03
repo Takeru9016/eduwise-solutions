@@ -1,11 +1,7 @@
-import { defineField, defineType } from "sanity";
 import { StarIcon } from "@sanity/icons";
+import { defineField, defineType } from "sanity";
 
 export const googleReviewType = defineType({
-  name: "googleReview",
-  title: "Google Review",
-  type: "document",
-  icon: StarIcon,
   fields: [
     defineField({
       name: "reviewerName",
@@ -14,27 +10,25 @@ export const googleReviewType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      description: "Profile picture of the reviewer (optional)",
       name: "reviewerImage",
-      title: "Reviewer Image",
-      type: "image",
       options: {
         hotspot: true,
       },
-      description: "Profile picture of the reviewer (optional)",
+      title: "Reviewer Image",
+      type: "image",
     }),
     defineField({
+      description: "The review content (20-500 characters)",
       name: "reviewText",
+      rows: 4,
       title: "Review Text",
       type: "text",
-      rows: 4,
       validation: (Rule) => Rule.required().min(20).max(500),
-      description: "The review content (20-500 characters)",
     }),
     defineField({
+      initialValue: 5,
       name: "rating",
-      title: "Rating",
-      type: "number",
-      validation: (Rule) => Rule.required().min(1).max(5).integer(),
       options: {
         list: [
           { title: "1 Star", value: 1 },
@@ -44,54 +38,60 @@ export const googleReviewType = defineType({
           { title: "5 Stars", value: 5 },
         ],
       },
-      initialValue: 5,
+      title: "Rating",
+      type: "number",
+      validation: (Rule) => Rule.required().min(1).max(5).integer(),
     }),
     defineField({
+      description: "Show verified learner badge",
+      initialValue: true,
       name: "isVerified",
       title: "Verified Learner",
       type: "boolean",
-      initialValue: true,
-      description: "Show verified learner badge",
     }),
     defineField({
+      description: "Which course/category this review belongs to",
       name: "category",
       title: "Category",
-      type: "reference",
       to: [{ type: "category" }],
+      type: "reference",
       validation: (Rule) => Rule.required(),
-      description: "Which course/category this review belongs to",
     }),
     defineField({
+      initialValue: () => new Date().toISOString(),
       name: "publishedAt",
       title: "Published At",
       type: "datetime",
-      initialValue: () => new Date().toISOString(),
     }),
   ],
-  preview: {
-    select: {
-      title: "reviewerName",
-      subtitle: "rating",
-      media: "reviewerImage",
-    },
-    prepare({ title, subtitle, media }) {
-      return {
-        title,
-        subtitle: `${"★".repeat(subtitle as number)}${"☆".repeat(5 - (subtitle as number))}`,
-        media,
-      };
-    },
-  },
+  icon: StarIcon,
+  name: "googleReview",
   orderings: [
     {
-      title: "Published Date, New",
+      by: [{ direction: "desc", field: "publishedAt" }],
       name: "publishedAtDesc",
-      by: [{ field: "publishedAt", direction: "desc" }],
+      title: "Published Date, New",
     },
     {
-      title: "Rating, High to Low",
+      by: [{ direction: "desc", field: "rating" }],
       name: "ratingDesc",
-      by: [{ field: "rating", direction: "desc" }],
+      title: "Rating, High to Low",
     },
   ],
+  preview: {
+    prepare({ title, subtitle, media }) {
+      return {
+        media,
+        subtitle: `${"★".repeat(subtitle as number)}${"☆".repeat(5 - (subtitle as number))}`,
+        title,
+      };
+    },
+    select: {
+      media: "reviewerImage",
+      subtitle: "rating",
+      title: "reviewerName",
+    },
+  },
+  title: "Google Review",
+  type: "document",
 });

@@ -1,33 +1,32 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import {
-  Search,
+  BookOpen,
+  Building2,
   ChevronDown,
+  CreditCard,
+  GraduationCap,
   HelpCircle,
   MessageCircle,
+  Search,
   Sparkles,
-  GraduationCap,
-  CreditCard,
   Users,
-  Building2,
-  BookOpen,
 } from "lucide-react";
-
-import { cn } from "@/lib/utils";
+import { useMemo, useState } from "react";
 import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 
 // Types
 interface Question {
-  q: string;
   a: string;
+  q: string;
 }
 
 interface Category {
-  title: string;
   icon: string;
   questions: Question[];
+  title: string;
 }
 
 interface FAQsClientProps {
@@ -36,12 +35,12 @@ interface FAQsClientProps {
 
 // Icon mapping for categories
 const categoryIcons: Record<string, React.ReactNode> = {
-  "🚀": <Sparkles className="w-5 h-5" />,
-  "🏆": <GraduationCap className="w-5 h-5" />,
-  "📚": <BookOpen className="w-5 h-5" />,
-  "💳": <CreditCard className="w-5 h-5" />,
-  "🤝": <Users className="w-5 h-5" />,
-  "💼": <Building2 className="w-5 h-5" />,
+  "🏆": <GraduationCap className="h-5 w-5" />,
+  "💳": <CreditCard className="h-5 w-5" />,
+  "💼": <Building2 className="h-5 w-5" />,
+  "📚": <BookOpen className="h-5 w-5" />,
+  "🚀": <Sparkles className="h-5 w-5" />,
+  "🤝": <Users className="h-5 w-5" />,
 };
 
 // Individual FAQ Item with smooth animation
@@ -59,52 +58,52 @@ const FAQItem = ({
   index: number;
 }) => (
   <motion.div
-    initial={{ opacity: 0, y: 10 }}
     animate={{ opacity: 1, y: 0 }}
-    transition={{ delay: index * 0.05, duration: 0.3 }}
     className="group"
+    initial={{ opacity: 0, y: 10 }}
+    transition={{ delay: index * 0.05, duration: 0.3 }}
   >
     <button
-      onClick={onToggle}
       className={cn(
-        "w-full text-left p-5 rounded-2xl transition-all duration-300",
+        "w-full rounded-2xl p-5 text-left transition-all duration-300",
         "border border-transparent",
         "hover:border-primary/20",
-        isOpen && "border-primary/20",
+        isOpen && "border-primary/20"
       )}
+      onClick={onToggle}
     >
       <div className="flex items-start justify-between gap-4">
         <span
           className={cn(
-            "text-base md:text-lg font-medium transition-colors duration-200",
-            isOpen ? "text-primary" : "text-grey-15 group-hover:text-grey-10",
+            "font-medium text-base transition-colors duration-200 md:text-lg",
+            isOpen ? "text-primary" : "text-grey-15 group-hover:text-grey-10"
           )}
         >
           {question}
         </span>
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
           className={cn(
-            "flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-300",
-            isOpen ?
-              "bg-primary text-white"
-            : "bg-light-95 text-grey-40 group-hover:text-primary",
+            "flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full transition-colors duration-300",
+            isOpen
+              ? "bg-primary text-white"
+              : "bg-light-95 text-grey-40 group-hover:text-primary"
           )}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
         >
-          <ChevronDown className="w-4 h-4" />
+          <ChevronDown className="h-4 w-4" />
         </motion.div>
       </div>
       <AnimatePresence mode="wait">
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            animate={{ height: "auto", opacity: 1 }}
             className="overflow-hidden"
+            exit={{ height: 0, opacity: 0 }}
+            initial={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
           >
-            <p className="pt-4 text-grey-40 leading-relaxed text-sm md:text-base">
+            <p className="pt-4 text-grey-40 text-sm leading-relaxed md:text-base">
               {answer}
             </p>
           </motion.div>
@@ -127,25 +126,25 @@ const CategorySection = ({
   toggleItem: (key: string) => void;
 }) => {
   const icon = categoryIcons[category.icon] || (
-    <HelpCircle className="w-5 h-5" />
+    <HelpCircle className="h-5 w-5" />
   );
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
       className="relative"
+      initial={{ opacity: 0, y: 30 }}
+      transition={{ delay: categoryIndex * 0.1, duration: 0.5 }}
+      viewport={{ margin: "-50px", once: true }}
+      whileInView={{ opacity: 1, y: 0 }}
     >
       {/* Category header */}
-      <div className="sticky top-20 z-10 bg-light-97/80 backdrop-blur-xl py-4 mb-2">
+      <div className="sticky top-20 z-10 mb-2 bg-light-97/80 py-4 backdrop-blur-xl">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-70 text-white flex items-center justify-center shadow-lg shadow-primary/20">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary-70 text-white shadow-lg shadow-primary/20">
             {icon}
           </div>
           <div>
-            <h2 className="text-lg md:text-xl font-bold text-grey-10">
+            <h2 className="font-bold text-grey-10 text-lg md:text-xl">
               {category.title}
             </h2>
           </div>
@@ -158,12 +157,12 @@ const CategorySection = ({
           const key = `${categoryIndex}-${idx}`;
           return (
             <FAQItem
-              key={key}
-              question={item.q}
               answer={item.a}
-              isOpen={openItems.has(key)}
-              onToggle={() => toggleItem(key)}
               index={idx}
+              isOpen={openItems.has(key)}
+              key={key}
+              onToggle={() => toggleItem(key)}
+              question={item.q}
             />
           );
         })}
@@ -185,33 +184,33 @@ const SearchResults = ({
   toggleItem: (key: string) => void;
 }) => (
   <motion.div
-    initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     className="space-y-4"
+    initial={{ opacity: 0, y: 20 }}
   >
-    <div className="flex items-center gap-2 text-grey-40 mb-6">
-      <Search className="w-4 h-4" />
+    <div className="mb-6 flex items-center gap-2 text-grey-40">
+      <Search className="h-4 w-4" />
       <span className="text-sm">
         Found{" "}
         <span className="font-semibold text-grey-20">{results.length}</span>{" "}
         result
-        {results.length !== 1 ? "s" : ""} for &ldquo;{searchTerm}&rdquo;
+        {results.length === 1 ? "" : "s"} for &ldquo;{searchTerm}&rdquo;
       </span>
     </div>
     <div className="space-y-2">
       {results.map((result, idx) => (
         <div key={result.key}>
-          <div className="flex items-center gap-2 mb-1 px-5">
-            <span className="text-xs text-primary font-medium uppercase tracking-wide">
+          <div className="mb-1 flex items-center gap-2 px-5">
+            <span className="font-medium text-primary text-xs uppercase tracking-wide">
               {result.categoryTitle}
             </span>
           </div>
           <FAQItem
-            question={result.question.q}
             answer={result.question.a}
+            index={idx}
             isOpen={openItems.has(result.key)}
             onToggle={() => toggleItem(result.key)}
-            index={idx}
+            question={result.question.q}
           />
         </div>
       ))}
@@ -238,7 +237,9 @@ export default function FAQsClient({ categories }: FAQsClientProps) {
 
   // Flat search results
   const searchResults = useMemo(() => {
-    if (!searchTerm.trim()) return null;
+    if (!searchTerm.trim()) {
+      return null;
+    }
 
     const results: {
       categoryTitle: string;
@@ -253,8 +254,8 @@ export default function FAQsClient({ categories }: FAQsClientProps) {
         ) {
           results.push({
             categoryTitle: category.title,
-            question: q,
             key: `search-${catIdx}-${qIdx}`,
+            question: q,
           });
         }
       });
@@ -271,74 +272,74 @@ export default function FAQsClient({ categories }: FAQsClientProps) {
 
         {/* Decorative elements */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-1/2 -right-1/4 w-[600px] h-[600px] rounded-full bg-white/5 blur-3xl" />
-          <div className="absolute -bottom-1/2 -left-1/4 w-[500px] h-[500px] rounded-full bg-primary-50/10 blur-3xl" />
+          <div className="absolute -top-1/2 -right-1/4 h-[600px] w-[600px] rounded-full bg-white/5 blur-3xl" />
+          <div className="absolute -bottom-1/2 -left-1/4 h-[500px] w-[500px] rounded-full bg-primary-50/10 blur-3xl" />
           <motion.div
             animate={{
-              y: [0, -20, 0],
               rotate: [0, 5, 0],
+              y: [0, -20, 0],
             }}
+            className="absolute top-20 right-[15%] h-16 w-16 rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm"
             transition={{
               duration: 6,
-              repeat: Infinity,
               ease: "easeInOut",
+              repeat: Number.POSITIVE_INFINITY,
             }}
-            className="absolute top-20 right-[15%] w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20"
           />
           <motion.div
             animate={{
-              y: [0, 15, 0],
               rotate: [0, -5, 0],
+              y: [0, 15, 0],
             }}
+            className="absolute bottom-32 left-[10%] h-12 w-12 rounded-full border border-white/20 bg-white/10 backdrop-blur-sm"
             transition={{
-              duration: 5,
-              repeat: Infinity,
-              ease: "easeInOut",
               delay: 1,
+              duration: 5,
+              ease: "easeInOut",
+              repeat: Number.POSITIVE_INFINITY,
             }}
-            className="absolute bottom-32 left-[10%] w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20"
           />
         </div>
 
         {/* Content */}
-        <div className="relative container mx-auto py-16 md:py-28">
-          <div className="max-w-3xl mx-auto text-center">
+        <div className="container relative mx-auto py-16 md:py-28">
+          <div className="mx-auto max-w-3xl text-center">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
+              className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm text-white/90 backdrop-blur-sm"
+              initial={{ opacity: 0, y: 20 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-sm mb-6"
             >
-              <MessageCircle className="w-4 h-4" />
+              <MessageCircle className="h-4 w-4" />
               <span>Got questions? We&apos;ve got answers</span>
             </motion.div>
 
             <motion.h1
-              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-4xl md:text-6xl font-vietnam font-bold text-white mb-6"
+              className="mb-6 font-bold font-vietnam text-4xl text-white md:text-6xl"
+              initial={{ opacity: 0, y: 20 }}
+              transition={{ delay: 0.1, duration: 0.5 }}
             >
               How can we help
-              <span className="block mt-2">you today?</span>
+              <span className="mt-2 block">you today?</span>
             </motion.h1>
 
             {/* Search bar */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="relative max-w-xl mx-auto"
+              className="relative mx-auto max-w-xl"
+              initial={{ opacity: 0, y: 20 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
             >
-              <div className="absolute inset-0 bg-white rounded-2xl shadow-2xl shadow-black/10" />
+              <div className="absolute inset-0 rounded-2xl bg-white shadow-2xl shadow-black/10" />
               <div className="relative flex items-center">
-                <Search className="absolute left-5 w-5 h-5 text-grey-40" />
+                <Search className="absolute left-5 h-5 w-5 text-grey-40" />
                 <Input
-                  type="text"
-                  placeholder="Search for answers..."
-                  className="w-full h-14 pl-14 pr-6 text-base border-0 rounded-2xl bg-transparent focus-visible:ring-2 focus-visible:ring-primary/50 placeholder:text-grey-40"
-                  value={searchTerm}
+                  className="h-14 w-full rounded-2xl border-0 bg-transparent pr-6 pl-14 text-base placeholder:text-grey-40 focus-visible:ring-2 focus-visible:ring-primary/50"
                   onChange={(e) => setSearchTerm(e.target.value)}
+                  placeholder="Search for answers..."
+                  type="text"
+                  value={searchTerm}
                 />
               </div>
             </motion.div>
@@ -346,13 +347,13 @@ export default function FAQsClient({ categories }: FAQsClientProps) {
         </div>
 
         {/* Wave separator */}
-        <div className="absolute bottom-0 left-0 right-0">
+        <div className="absolute right-0 bottom-0 left-0">
           <svg
-            viewBox="0 0 1440 100"
+            className="h-auto w-full"
             fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-auto"
             preserveAspectRatio="none"
+            viewBox="0 0 1440 100"
+            xmlns="http://www.w3.org/2000/svg"
           >
             <path
               d="M0 100V60C240 20 480 0 720 20C960 40 1200 80 1440 60V100H0Z"
@@ -365,60 +366,60 @@ export default function FAQsClient({ categories }: FAQsClientProps) {
       {/* FAQ Content */}
       <section className="py-12 md:py-20">
         <div className="container mx-auto">
-          <div className="max-w-4xl mx-auto">
+          <div className="mx-auto max-w-4xl">
             <AnimatePresence mode="wait">
-              {searchResults !== null ?
-                searchResults.length > 0 ?
-                  <SearchResults
-                    key="search-results"
-                    results={searchResults}
-                    searchTerm={searchTerm}
-                    openItems={openItems}
-                    toggleItem={toggleItem}
-                  />
-                : <motion.div
-                    key="no-results"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    className="text-center py-20"
-                  >
-                    <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-light-95 flex items-center justify-center">
-                      <Search className="w-8 h-8 text-grey-40" />
-                    </div>
-                    <h3 className="text-2xl font-vietnam font-bold text-grey-15 mb-3">
-                      No results found
-                    </h3>
-                    <p className="text-grey-40 mb-6 max-w-md mx-auto">
-                      We couldn&apos;t find any questions matching &ldquo;
-                      {searchTerm}&rdquo;. Try a different search term.
-                    </p>
-                    <button
-                      onClick={() => setSearchTerm("")}
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-white font-medium hover:bg-primary-70 transition-colors shadow-lg shadow-primary/25"
-                    >
-                      Clear search
-                    </button>
-                  </motion.div>
-
-              : <motion.div
-                  key="categories"
-                  initial={{ opacity: 0 }}
+              {searchResults === null ? (
+                <motion.div
                   animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
                   className="space-y-12"
+                  exit={{ opacity: 0 }}
+                  initial={{ opacity: 0 }}
+                  key="categories"
                 >
                   {categories.map((category, idx) => (
                     <CategorySection
-                      key={idx}
                       category={category}
                       categoryIndex={idx}
+                      key={idx}
                       openItems={openItems}
                       toggleItem={toggleItem}
                     />
                   ))}
                 </motion.div>
-              }
+              ) : searchResults.length > 0 ? (
+                <SearchResults
+                  key="search-results"
+                  openItems={openItems}
+                  results={searchResults}
+                  searchTerm={searchTerm}
+                  toggleItem={toggleItem}
+                />
+              ) : (
+                <motion.div
+                  animate={{ opacity: 1, y: 0 }}
+                  className="py-20 text-center"
+                  exit={{ opacity: 0, y: -20 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  key="no-results"
+                >
+                  <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-light-95">
+                    <Search className="h-8 w-8 text-grey-40" />
+                  </div>
+                  <h3 className="mb-3 font-bold font-vietnam text-2xl text-grey-15">
+                    No results found
+                  </h3>
+                  <p className="mx-auto mb-6 max-w-md text-grey-40">
+                    We couldn&apos;t find any questions matching &ldquo;
+                    {searchTerm}&rdquo;. Try a different search term.
+                  </p>
+                  <button
+                    className="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 font-medium text-white shadow-lg shadow-primary/25 transition-colors hover:bg-primary-70"
+                    onClick={() => setSearchTerm("")}
+                  >
+                    Clear search
+                  </button>
+                </motion.div>
+              )}
             </AnimatePresence>
           </div>
         </div>
@@ -428,31 +429,31 @@ export default function FAQsClient({ categories }: FAQsClientProps) {
       <section className="pb-20">
         <div className="container mx-auto">
           <motion.div
+            className="mx-auto max-w-4xl"
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="max-w-4xl mx-auto"
+            whileInView={{ opacity: 1, y: 0 }}
           >
             <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary via-primary-70 to-primary-80 p-8 md:p-12">
               {/* Decorative */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
-              <div className="absolute bottom-0 left-0 w-48 h-48 bg-primary-50/20 rounded-full blur-3xl" />
+              <div className="absolute top-0 right-0 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
+              <div className="absolute bottom-0 left-0 h-48 w-48 rounded-full bg-primary-50/20 blur-3xl" />
 
-              <div className="relative flex flex-col md:flex-row items-center justify-between gap-8">
+              <div className="relative flex flex-col items-center justify-between gap-8 md:flex-row">
                 <div className="text-center md:text-left">
-                  <h3 className="text-2xl md:text-3xl font-vietnam font-bold text-white mb-3">
+                  <h3 className="mb-3 font-bold font-vietnam text-2xl text-white md:text-3xl">
                     Still have questions?
                   </h3>
-                  <p className="text-white/80 max-w-md">
+                  <p className="max-w-md text-white/80">
                     Can&apos;t find what you&apos;re looking for? Our team is
                     here to help you 24/7.
                   </p>
                 </div>
                 <a
+                  className="inline-flex items-center gap-2 rounded-xl bg-white px-8 py-4 font-semibold text-primary shadow-xl transition-colors hover:bg-light-95"
                   href="/contact"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-white text-primary font-semibold hover:bg-light-95 transition-colors shadow-xl"
                 >
-                  <MessageCircle className="w-5 h-5" />
+                  <MessageCircle className="h-5 w-5" />
                   Contact Support
                 </a>
               </div>

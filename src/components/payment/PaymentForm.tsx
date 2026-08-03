@@ -1,26 +1,26 @@
 "use client";
 
-import { useState } from "react";
 import { Loader2 } from "lucide-react";
+import { useState } from "react";
 
 // Add Razorpay types
 interface RazorpayResponse {
-  razorpay_payment_id: string;
   razorpay_order_id: string;
+  razorpay_payment_id: string;
   razorpay_signature: string;
 }
 
 interface RazorpayOptions {
-  key: string;
   amount: number;
   currency: string;
-  name: string;
   description: string;
-  order_id: string;
   handler: (response: RazorpayResponse) => void;
+  key: string;
   modal: {
     ondismiss: () => void;
   };
+  name: string;
+  order_id: string;
   prefill: {
     name: string;
     email: string;
@@ -32,9 +32,9 @@ interface RazorpayOptions {
 }
 
 interface RazorpayInstance {
-  open: () => void;
   close: () => void;
   on: (event: string, handler: (response: RazorpayResponse) => void) => void;
+  open: () => void;
 }
 
 declare global {
@@ -45,11 +45,11 @@ declare global {
 
 interface PaymentFormProps {
   amount: number;
-  programName: string;
   onPaymentComplete?: (
     status: "success" | "failure" | "cancelled",
-    message: string,
+    message: string
   ) => void;
+  programName: string;
 }
 
 export default function PaymentForm({
@@ -60,21 +60,21 @@ export default function PaymentForm({
   const [isLoading, setIsLoading] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);
   const [formData, setFormData] = useState({
-    fullName: "",
     email: "",
+    fullName: "",
     mobile: "",
   });
   const [errors, setErrors] = useState({
-    fullName: "",
     email: "",
+    fullName: "",
     mobile: "",
   });
 
   const validateForm = () => {
     let isValid = true;
     const newErrors = {
-      fullName: "",
       email: "",
+      fullName: "",
       mobile: "",
     };
 
@@ -131,11 +131,11 @@ export default function PaymentForm({
 
       // Create order
       const response = await fetch("/api/create-order", {
-        method: "POST",
+        body: JSON.stringify({ amount }),
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ amount }),
+        method: "POST",
       });
 
       const data = await response.json();
@@ -146,26 +146,23 @@ export default function PaymentForm({
 
       // Initialize Razorpay
       const options: RazorpayOptions = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
         amount: data.order.amount,
         currency: data.order.currency,
-        name: "Eduwise Solutions",
         description: `${programName} Payment`,
-        order_id: data.order.id,
-        handler: async function (response: RazorpayResponse) {
+        async handler(response: RazorpayResponse) {
           try {
             setIsVerifying(true);
             // Verify payment
             const verifyResponse = await fetch("/api/verify-payment", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
               body: JSON.stringify({
                 razorpay_order_id: response.razorpay_order_id,
                 razorpay_payment_id: response.razorpay_payment_id,
                 razorpay_signature: response.razorpay_signature,
               }),
+              headers: {
+                "Content-Type": "application/json",
+              },
+              method: "POST",
             });
 
             const verifyData = await verifyResponse.json();
@@ -177,43 +174,44 @@ export default function PaymentForm({
               if (onPaymentComplete) {
                 onPaymentComplete(
                   "success",
-                  `Your payment was successful! Welcome to our ${programName}.`,
+                  `Your payment was successful! Welcome to our ${programName}.`
                 );
               }
-            } else {
-              if (onPaymentComplete) {
-                onPaymentComplete(
-                  "failure",
-                  "Payment verification failed. Please contact support.",
-                );
-              }
+            } else if (onPaymentComplete) {
+              onPaymentComplete(
+                "failure",
+                "Payment verification failed. Please contact support."
+              );
             }
           } catch (error) {
             console.error("Payment verification error:", error);
             if (onPaymentComplete) {
               onPaymentComplete(
                 "failure",
-                "Payment verification failed. Please contact support.",
+                "Payment verification failed. Please contact support."
               );
             }
           } finally {
             setIsVerifying(false);
           }
         },
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
         modal: {
-          ondismiss: function () {
+          ondismiss() {
             if (onPaymentComplete) {
               onPaymentComplete(
                 "cancelled",
-                "You have cancelled the payment process.",
+                "You have cancelled the payment process."
               );
             }
           },
         },
+        name: "Eduwise Solutions",
+        order_id: data.order.id,
         prefill: {
-          name: formData.fullName,
-          email: formData.email,
           contact: formData.mobile,
+          email: formData.email,
+          name: formData.fullName,
         },
         theme: {
           color: "#04956A",
@@ -227,7 +225,7 @@ export default function PaymentForm({
       if (onPaymentComplete) {
         onPaymentComplete(
           "failure",
-          "Failed to initiate payment. Please try again.",
+          "Failed to initiate payment. Please try again."
         );
       }
     } finally {
@@ -244,18 +242,18 @@ export default function PaymentForm({
 
       // Store data in Google Sheets
       const response = await fetch("/api/contact-form", {
-        method: "POST",
+        body: JSON.stringify({
+          email: formData.email,
+          firstName,
+          lastName,
+          message: `Payment ID: ${paymentId}`,
+          mobile: formData.mobile, // This will be stored in "Mobile Number" column
+          subject: programName,
+        }),
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          firstName,
-          lastName,
-          email: formData.email,
-          mobile: formData.mobile, // This will be stored in "Mobile Number" column
-          subject: programName,
-          message: `Payment ID: ${paymentId}`,
-        }),
+        method: "POST",
       });
 
       const data = await response.json();
@@ -269,103 +267,105 @@ export default function PaymentForm({
   };
 
   return (
-    <div className="bg-white rounded-lg p-4 relative">
+    <div className="relative rounded-lg bg-white p-4">
       {isVerifying && (
-        <div className="absolute inset-0 bg-white/80 backdrop-blur-sm z-10 flex flex-col items-center justify-center rounded-lg">
-          <Loader2 className="w-10 h-10 animate-spin text-primary-75 mb-4" />
-          <p className="text-gray-900 font-semibold text-lg">
+        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center rounded-lg bg-white/80 backdrop-blur-sm">
+          <Loader2 className="mb-4 h-10 w-10 animate-spin text-primary-75" />
+          <p className="font-semibold text-gray-900 text-lg">
             Verifying payment...
           </p>
-          <p className="text-sm text-gray-500 mt-2 text-center px-4">
+          <p className="mt-2 px-4 text-center text-gray-500 text-sm">
             Please do not close this window
           </p>
         </div>
       )}
 
-      <h3 className="text-xl font-semibold mb-4">Complete Your Enrollment</h3>
+      <h3 className="mb-4 font-semibold text-xl">Complete Your Enrollment</h3>
 
       <div className="space-y-4">
         <div>
           <label
+            className="mb-1 block font-medium text-gray-700 text-sm"
             htmlFor="fullName"
-            className="block text-sm font-medium text-gray-700 mb-1"
           >
             Full Name
           </label>
           <input
-            type="text"
-            id="fullName"
-            name="fullName"
-            value={formData.fullName}
-            onChange={handleInputChange}
-            className={`w-full px-3 py-2 border rounded-md ${
+            className={`w-full rounded-md border px-3 py-2 ${
               errors.fullName ? "border-red-500" : "border-gray-300"
             }`}
+            id="fullName"
+            name="fullName"
+            onChange={handleInputChange}
             placeholder="Enter your full name"
+            type="text"
+            value={formData.fullName}
           />
           {errors.fullName && (
-            <p className="mt-1 text-sm text-red-500">{errors.fullName}</p>
+            <p className="mt-1 text-red-500 text-sm">{errors.fullName}</p>
           )}
         </div>
 
         <div>
           <label
+            className="mb-1 block font-medium text-gray-700 text-sm"
             htmlFor="email"
-            className="block text-sm font-medium text-gray-700 mb-1"
           >
             Email Address
           </label>
           <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-            className={`w-full px-3 py-2 border rounded-md ${
+            className={`w-full rounded-md border px-3 py-2 ${
               errors.email ? "border-red-500" : "border-gray-300"
             }`}
+            id="email"
+            name="email"
+            onChange={handleInputChange}
             placeholder="Enter your email address"
+            type="email"
+            value={formData.email}
           />
           {errors.email && (
-            <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+            <p className="mt-1 text-red-500 text-sm">{errors.email}</p>
           )}
         </div>
 
         <div>
           <label
+            className="mb-1 block font-medium text-gray-700 text-sm"
             htmlFor="mobile"
-            className="block text-sm font-medium text-gray-700 mb-1"
           >
             Mobile Number
           </label>
           <input
-            type="tel"
-            id="mobile"
-            name="mobile"
-            value={formData.mobile}
-            onChange={handleInputChange}
-            className={`w-full px-3 py-2 border rounded-md ${
+            className={`w-full rounded-md border px-3 py-2 ${
               errors.mobile ? "border-red-500" : "border-gray-300"
             }`}
+            id="mobile"
+            name="mobile"
+            onChange={handleInputChange}
             placeholder="Enter your 10-digit mobile number"
+            type="tel"
+            value={formData.mobile}
           />
           {errors.mobile && (
-            <p className="mt-1 text-sm text-red-500">{errors.mobile}</p>
+            <p className="mt-1 text-red-500 text-sm">{errors.mobile}</p>
           )}
         </div>
 
         <div className="pt-4">
           <button
-            onClick={handlePayment}
+            className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary-75 px-6 py-3 font-semibold text-white transition-colors hover:bg-primary-85 disabled:cursor-not-allowed disabled:opacity-50"
             disabled={isLoading}
-            className="w-full bg-primary-75 text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-85 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            onClick={handlePayment}
           >
-            {isLoading ?
+            {isLoading ? (
               <>
-                <Loader2 className="w-5 h-5 animate-spin" />
+                <Loader2 className="h-5 w-5 animate-spin" />
                 Processing...
               </>
-            : <>Pay Now ₹{amount}</>}
+            ) : (
+              <>Pay Now ₹{amount}</>
+            )}
           </button>
         </div>
       </div>

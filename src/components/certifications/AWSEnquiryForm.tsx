@@ -1,21 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import { Control, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { CheckCircle2, Send, XCircle } from "lucide-react";
+import { useState } from "react";
+import { type Control, useForm } from "react-hook-form";
 import * as z from "zod";
-import { CheckCircle2, XCircle, Send } from "lucide-react";
-
-import { submitWithRetry } from "@/utils/api";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   Dialog,
   DialogContent,
@@ -31,31 +21,40 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { submitWithRetry } from "@/utils/api";
 
 const contactFormSchema = z.object({
+  email: z.string().email("Please enter a valid email"),
   firstName: z.string().min(2, "First name should be at least 2 characters"),
   lastName: z.string().min(2, "Last name should be at least 2 characters"),
-  email: z.string().email("Please enter a valid email"),
+  message: z.string().optional(),
   mobile: z
     .string()
     .regex(/^\+?[0-9]{10,14}$/, "Please enter a valid mobile number"),
   subject: z.string().min(1, "Please select a certification"),
-  message: z.string().optional(),
 });
 
 type ContactFormValues = z.infer<typeof contactFormSchema>;
 
 interface FormFieldProps {
-  name: keyof ContactFormValues;
-  label: string;
-  placeholder: string;
-  type?: string;
-  required?: boolean;
   control: Control<ContactFormValues>;
+  label: string;
+  name: keyof ContactFormValues;
+  placeholder: string;
+  required?: boolean;
+  type?: string;
 }
 
 const RequiredLabel = ({ children }: { children: React.ReactNode }) => (
-  <FormLabel className="text-grey-35 flex items-center gap-1">
+  <FormLabel className="flex items-center gap-1 text-grey-35">
     {children}
     <span className="text-red-500">*</span>
   </FormLabel>
@@ -79,7 +78,7 @@ const FormInputField = ({
         ) : (
           <FormLabel className="text-grey-35">
             {label}
-            <span className="ml-2 text-sm text-primary-75 font-medium">
+            <span className="ml-2 font-medium text-primary-75 text-sm">
               (Optional)
             </span>
           </FormLabel>
@@ -87,9 +86,9 @@ const FormInputField = ({
         <FormControl>
           <Input
             {...field}
-            type={type}
+            className="h-12 border-light-90 bg-light-97 focus:border-primary-75 focus:ring-primary-75"
             placeholder={placeholder}
-            className="h-12 bg-light-97 border-light-90 focus:border-primary-75 focus:ring-primary-75"
+            type={type}
           />
         </FormControl>
         <FormMessage className="text-red-500" />
@@ -116,15 +115,15 @@ export default function AWSEnquiryForm() {
   const [errorMessage, setErrorMessage] = useState("");
 
   const form = useForm<ContactFormValues>({
-    resolver: zodResolver(contactFormSchema),
     defaultValues: {
+      email: "",
       firstName: "",
       lastName: "",
-      email: "",
+      message: "",
       mobile: "",
       subject: "",
-      message: "",
     },
+    resolver: zodResolver(contactFormSchema),
   });
 
   const onSubmit = async (data: ContactFormValues) => {
@@ -139,7 +138,7 @@ export default function AWSEnquiryForm() {
           message: data.message || "",
         },
         3,
-        "/api/aws-enquiry",
+        "/api/aws-enquiry"
       );
 
       if (!response) {
@@ -161,7 +160,7 @@ export default function AWSEnquiryForm() {
       setErrorMessage(
         error instanceof Error
           ? error.message
-          : "Failed to submit form - please try again",
+          : "Failed to submit form - please try again"
       );
       setShowDialog(true);
     } finally {
@@ -170,39 +169,39 @@ export default function AWSEnquiryForm() {
   };
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-lg border border-light-90 sticky top-24 w-full max-w-[400px] mx-auto">
-      <h3 className="text-xl font-vietnam font-bold text-grey-15 mb-6 text-center">
+    <div className="sticky top-24 mx-auto w-full max-w-[400px] rounded-xl border border-light-90 bg-white p-6 shadow-lg">
+      <h3 className="mb-6 text-center font-bold font-vietnam text-grey-15 text-xl">
         Enquire Now
       </h3>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
           <FormInputField
             control={form.control}
-            name="firstName"
             label="First Name"
+            name="firstName"
             placeholder="Full Name"
           />
 
           <FormInputField
             control={form.control}
-            name="lastName"
             label="Last Name"
+            name="lastName"
             placeholder="Last Name"
           />
 
           <FormInputField
             control={form.control}
-            name="email"
             label="Email"
+            name="email"
             placeholder="Email ID"
             type="email"
           />
 
           <FormInputField
             control={form.control}
-            name="mobile"
             label="Mobile Number"
+            name="mobile"
             placeholder="Phone Number"
           />
 
@@ -214,20 +213,20 @@ export default function AWSEnquiryForm() {
               <FormItem className="space-y-2">
                 <RequiredLabel>Certification of Interest</RequiredLabel>
                 <Select
-                  onValueChange={field.onChange}
                   defaultValue={field.value}
+                  onValueChange={field.onChange}
                 >
                   <FormControl>
-                    <SelectTrigger className="h-12 bg-light-97 border-light-90">
+                    <SelectTrigger className="h-12 border-light-90 bg-light-97">
                       <SelectValue placeholder="Select a certification" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
                     {AWS_CERTIFICATIONS.map((cert) => (
                       <SelectItem
+                        className="text-grey-35"
                         key={cert}
                         value={cert}
-                        className="text-grey-35"
                       >
                         {cert}
                       </SelectItem>
@@ -240,9 +239,9 @@ export default function AWSEnquiryForm() {
           />
 
           <Button
-            type="submit"
-            className="w-full bg-primary-75 hover:bg-primary-70 text-white h-12 flex items-center justify-center gap-2 text-base"
+            className="flex h-12 w-full items-center justify-center gap-2 bg-primary-75 text-base text-white hover:bg-primary-70"
             disabled={isSubmitting}
+            type="submit"
           >
             {isSubmitting ? (
               "Sending..."
@@ -257,23 +256,23 @@ export default function AWSEnquiryForm() {
       </Form>
 
       {/* Success/Error Dialog */}
-      <Dialog open={showDialog} onOpenChange={setShowDialog}>
+      <Dialog onOpenChange={setShowDialog} open={showDialog}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 text-xl">
               {isSuccess ? (
                 <>
-                  <CheckCircle2 className="w-6 h-6 text-green-500" />
+                  <CheckCircle2 className="h-6 w-6 text-green-500" />
                   Message Sent Successfully!
                 </>
               ) : (
                 <>
-                  <XCircle className="w-6 h-6 text-red-500" />
+                  <XCircle className="h-6 w-6 text-red-500" />
                   Error Sending Message
                 </>
               )}
             </DialogTitle>
-            <DialogDescription className="text-grey-35 mt-2">
+            <DialogDescription className="mt-2 text-grey-35">
               {isSuccess
                 ? "Thank you for reaching out! We'll get back to you soon regarding AWS certifications."
                 : errorMessage ||
@@ -282,7 +281,7 @@ export default function AWSEnquiryForm() {
           </DialogHeader>
           <div className="mt-6">
             <Button
-              className="w-full bg-primary-75 hover:bg-primary-70 text-white h-12"
+              className="h-12 w-full bg-primary-75 text-white hover:bg-primary-70"
               onClick={() => setShowDialog(false)}
             >
               {isSuccess ? "Close" : "Try Again"}

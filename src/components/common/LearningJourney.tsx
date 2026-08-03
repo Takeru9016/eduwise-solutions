@@ -1,108 +1,108 @@
 "use client";
 
 import {
-  CheckCircle,
-  BookOpen,
-  Users,
   Award,
-  Linkedin,
-  Briefcase,
-  MessageCircle,
+  BookOpen,
   Brain,
+  Briefcase,
+  CheckCircle,
+  Linkedin,
+  MessageCircle,
   Target,
+  Users,
 } from "lucide-react";
 
 export default function LearningJourney() {
   const journeySteps = [
     {
-      step: 1,
-      title: "Choose your Programs",
+      color: "from-blue-500 to-blue-600",
       description:
         "Select from our curated programs designed by industry experts",
       icon: BookOpen,
-      color: "from-blue-500 to-blue-600",
+      step: 1,
+      title: "Choose your Programs",
     },
     {
-      step: 2,
-      title: "Learn from field experts",
+      color: "from-green-500 to-green-600",
       description: "Get mentored by professionals with real-world experience",
       icon: Users,
-      color: "from-green-500 to-green-600",
+      step: 2,
+      title: "Learn from field experts",
     },
     {
-      step: 3,
-      title: "Complete Capstone Projects",
+      color: "from-purple-500 to-purple-600",
       description: "Build portfolio-worthy projects that showcase your skills",
       icon: Target,
-      color: "from-purple-500 to-purple-600",
+      step: 3,
+      title: "Complete Capstone Projects",
     },
     {
-      step: 4,
-      title: "Ask Questions in Doubt Sessions",
+      color: "from-orange-500 to-orange-600",
       description:
         "Get your queries resolved in dedicated doubt clearing sessions",
       icon: MessageCircle,
-      color: "from-orange-500 to-orange-600",
+      step: 4,
+      title: "Ask Questions in Doubt Sessions",
     },
     {
-      step: 5,
-      title: "Master Interview Skills",
+      color: "from-red-500 to-red-600",
       description:
         "Practice Aptitude, Reasoning, Quants, and English for interviews",
       icon: Brain,
-      color: "from-red-500 to-red-600",
+      step: 5,
+      title: "Master Interview Skills",
     },
     {
-      step: 6,
-      title: "Join Group Sessions",
+      color: "from-indigo-500 to-indigo-600",
       description:
         "Collaborate and learn with peers in interactive group sessions",
       icon: Users,
-      color: "from-indigo-500 to-indigo-600",
+      step: 6,
+      title: "Join Group Sessions",
     },
     {
-      step: 7,
-      title: "Receive Your Certificates",
+      color: "from-yellow-500 to-yellow-600",
       description: "Earn industry-recognized certificates upon completion",
       icon: Award,
-      color: "from-yellow-500 to-yellow-600",
+      step: 7,
+      title: "Receive Your Certificates",
     },
     {
-      step: 8,
-      title: "Enhance Your LinkedIn Profile",
+      color: "from-blue-600 to-blue-700",
       description: "Build a professional online presence to attract recruiters",
       icon: Linkedin,
-      color: "from-blue-600 to-blue-700",
+      step: 8,
+      title: "Enhance Your LinkedIn Profile",
     },
     {
-      step: 9,
-      title: "Practice Mock Interviews",
+      color: "from-teal-500 to-teal-600",
       description:
         "Hone your interview skills with our AI-powered mock interviews",
       icon: MessageCircle,
-      color: "from-teal-500 to-teal-600",
+      step: 9,
+      title: "Practice Mock Interviews",
     },
     {
-      step: 10,
-      title: "Apply for Jobs",
+      color: "from-emerald-500 to-emerald-600",
       description: "Access our job portal and apply to relevant opportunities",
       icon: Briefcase,
-      color: "from-emerald-500 to-emerald-600",
+      step: 10,
+      title: "Apply for Jobs",
     },
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-primary-99">
+    <section className="bg-gradient-to-b from-white to-primary-99 py-20">
       <div className="container">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-grey-15 mb-6">
+        <div className="mb-16 text-center">
+          <h2 className="mb-6 font-bold text-3xl text-grey-15 md:text-4xl lg:text-5xl">
             How Your Learning Journey Would Be at{" "}
             <span className="bg-gradient-to-r from-primary-75 to-primary-90 bg-clip-text text-transparent">
               eduwise
             </span>
           </h2>
-          <p className="text-lg text-grey-40 max-w-3xl mx-auto">
+          <p className="mx-auto max-w-3xl text-grey-40 text-lg">
             At eduwise, your learning journey is personalized, hands-on, and
             supported by a vibrant community of learners and industry experts.
           </p>
@@ -111,7 +111,7 @@ export default function LearningJourney() {
         {/* Journey Steps */}
         <div className="relative">
           {/* Connection Line */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-primary-75 via-primary-90 to-primary-75 transform -translate-x-1/2 hidden lg:block" />
+          <div className="absolute top-0 bottom-0 left-1/2 hidden w-1 -translate-x-1/2 transform bg-gradient-to-b from-primary-75 via-primary-90 to-primary-75 lg:block" />
 
           <div className="space-y-8 lg:space-y-12">
             {journeySteps.map((step, index) => {
@@ -120,10 +120,10 @@ export default function LearningJourney() {
 
               return (
                 <div
-                  key={step.step}
-                  className={`relative flex items-center lg:items-start gap-6 lg:gap-8 ${
+                  className={`relative flex items-center gap-6 lg:items-start lg:gap-8 ${
                     isEven ? "lg:flex-row" : "lg:flex-row-reverse"
                   }`}
+                  key={step.step}
                 >
                   {/* Step Content */}
                   <div
@@ -132,27 +132,27 @@ export default function LearningJourney() {
                     }`}
                   >
                     <div
-                      className={`bg-white rounded-2xl p-6 lg:p-8 shadow-lg border border-primary-95/50 hover:shadow-xl transition-all duration-500 hover:-translate-y-1 ${
+                      className={`rounded-2xl border border-primary-95/50 bg-white p-6 shadow-lg transition-all duration-500 hover:-translate-y-1 hover:shadow-xl lg:p-8 ${
                         isEven ? "lg:mr-8" : "lg:ml-8"
                       }`}
                     >
                       <div className="flex items-start gap-4">
                         {/* Icon */}
                         <div
-                          className={`w-12 h-12 rounded-full bg-gradient-to-r ${step.color} flex items-center justify-center flex-shrink-0`}
+                          className={`h-12 w-12 rounded-full bg-gradient-to-r ${step.color} flex flex-shrink-0 items-center justify-center`}
                         >
-                          <IconComponent className="w-6 h-6 text-white" />
+                          <IconComponent className="h-6 w-6 text-white" />
                         </div>
 
                         {/* Content */}
                         <div className="flex-1">
-                          <div className="flex items-center gap-3 mb-2">
-                            <span className="text-sm font-semibold text-primary-75 bg-primary-95 px-3 py-1 rounded-full">
+                          <div className="mb-2 flex items-center gap-3">
+                            <span className="rounded-full bg-primary-95 px-3 py-1 font-semibold text-primary-75 text-sm">
                               Step {step.step}
                             </span>
-                            <CheckCircle className="w-5 h-5 text-green-500" />
+                            <CheckCircle className="h-5 w-5 text-green-500" />
                           </div>
-                          <h3 className="text-xl font-bold text-grey-15 mb-2">
+                          <h3 className="mb-2 font-bold text-grey-15 text-xl">
                             {step.title}
                           </h3>
                           <p className="text-grey-40 leading-relaxed">
@@ -164,15 +164,15 @@ export default function LearningJourney() {
                   </div>
 
                   {/* Step Number Circle (Desktop) */}
-                  <div className="hidden lg:flex w-16 h-16 bg-white rounded-full border-4 border-primary-75 items-center justify-center flex-shrink-0 z-10 shadow-lg">
-                    <span className="text-xl font-bold text-primary-75">
+                  <div className="z-10 hidden h-16 w-16 flex-shrink-0 items-center justify-center rounded-full border-4 border-primary-75 bg-white shadow-lg lg:flex">
+                    <span className="font-bold text-primary-75 text-xl">
                       {step.step}
                     </span>
                   </div>
 
                   {/* Step Number Circle (Mobile) */}
-                  <div className="lg:hidden w-12 h-12 bg-gradient-to-r from-primary-75 to-primary-90 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-lg font-bold text-white">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-primary-75 to-primary-90 lg:hidden">
+                    <span className="font-bold text-lg text-white">
                       {step.step}
                     </span>
                   </div>
@@ -182,16 +182,16 @@ export default function LearningJourney() {
           </div>
 
           {/* Bottom CTA */}
-          <div className="text-center mt-16">
-            <div className="bg-gradient-to-r from-primary-75 to-primary-90 rounded-2xl p-8 lg:p-12 text-white">
-              <h3 className="text-2xl lg:text-3xl font-bold mb-4">
+          <div className="mt-16 text-center">
+            <div className="rounded-2xl bg-gradient-to-r from-primary-75 to-primary-90 p-8 text-white lg:p-12">
+              <h3 className="mb-4 font-bold text-2xl lg:text-3xl">
                 Ready to Start Your Journey?
               </h3>
-              <p className="text-lg mb-6 opacity-90">
+              <p className="mb-6 text-lg opacity-90">
                 Join thousands of learners who have transformed their careers
                 with eduwise
               </p>
-              <button className="bg-white text-primary-75 px-8 py-4 rounded-full font-semibold hover:bg-primary-95 transition-all duration-300 hover:scale-105 shadow-lg">
+              <button className="rounded-full bg-white px-8 py-4 font-semibold text-primary-75 shadow-lg transition-all duration-300 hover:scale-105 hover:bg-primary-95">
                 Explore Programs
               </button>
             </div>

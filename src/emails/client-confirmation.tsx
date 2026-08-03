@@ -13,8 +13,8 @@ import {
 import { format } from "date-fns";
 
 interface ClientEmailProps {
-  fullName: string;
   course: string;
+  fullName: string;
   sessionDate: Date;
   sessionTime: string;
 }
@@ -33,19 +33,19 @@ export default function ClientConfirmationEmail({
       <Preview>Your Counselling Session is Confirmed</Preview>
       <Body
         style={{
+          backgroundColor: "#f7f7f7",
           fontFamily: "Arial, sans-serif",
           padding: "20px",
-          backgroundColor: "#f7f7f7",
         }}
       >
         <Container
           style={{
-            maxWidth: "600px",
-            margin: "0 auto",
             backgroundColor: "#ffffff",
-            padding: "30px",
             borderRadius: "8px",
             boxShadow: "0 2px 8px rgba(0, 0, 0, 0.05)",
+            margin: "0 auto",
+            maxWidth: "600px",
+            padding: "30px",
           }}
         >
           <Heading
@@ -53,17 +53,17 @@ export default function ClientConfirmationEmail({
             style={{
               color: "#333",
               fontSize: "28px",
-              textAlign: "center",
               margin: "10px 0 30px",
+              textAlign: "center",
             }}
           >
             Your Booking is Confirmed!
           </Heading>
 
-          <Text style={{ fontSize: "16px", lineHeight: "1.6", color: "#444" }}>
+          <Text style={{ color: "#444", fontSize: "16px", lineHeight: "1.6" }}>
             Dear {fullName},
           </Text>
-          <Text style={{ fontSize: "16px", lineHeight: "1.6", color: "#444" }}>
+          <Text style={{ color: "#444", fontSize: "16px", lineHeight: "1.6" }}>
             Thank you for booking a private counselling session with us. We have
             received your request and are looking forward to speaking with you.
           </Text>
@@ -71,19 +71,19 @@ export default function ClientConfirmationEmail({
           <Section
             style={{
               backgroundColor: "#f9f9f9",
-              padding: "20px",
+              border: "1px solid #eee",
               borderRadius: "5px",
               margin: "25px 0",
-              border: "1px solid #eee",
+              padding: "20px",
             }}
           >
             <Heading
               as="h2"
               style={{
+                borderBottom: "1px solid #eee",
                 color: "#333",
                 fontSize: "20px",
                 margin: "0 0 15px",
-                borderBottom: "1px solid #eee",
                 paddingBottom: "10px",
               }}
             >
@@ -91,24 +91,24 @@ export default function ClientConfirmationEmail({
             </Heading>
             <table
               style={{
-                borderSpacing: 0,
                 borderCollapse: "collapse",
+                borderSpacing: 0,
                 width: "100%",
               }}
             >
               <tbody>
                 <tr>
-                  <td style={{ padding: "10px 0", color: "#555" }}>
+                  <td style={{ color: "#555", padding: "10px 0" }}>
                     <strong>Date:</strong> {formattedDate}
                   </td>
                 </tr>
                 <tr>
-                  <td style={{ padding: "10px 0", color: "#555" }}>
+                  <td style={{ color: "#555", padding: "10px 0" }}>
                     <strong>Time:</strong> {sessionTime}
                   </td>
                 </tr>
                 <tr>
-                  <td style={{ padding: "10px 0", color: "#555" }}>
+                  <td style={{ color: "#555", padding: "10px 0" }}>
                     <strong>Course Interest:</strong> {course}
                   </td>
                 </tr>
@@ -116,22 +116,22 @@ export default function ClientConfirmationEmail({
             </table>
           </Section>
 
-          <Text style={{ fontSize: "16px", lineHeight: "1.6", color: "#444" }}>
+          <Text style={{ color: "#444", fontSize: "16px", lineHeight: "1.6" }}>
             Our counselor will contact you at the scheduled time. If you need to
             reschedule, please click the button below or contact us directly.
           </Text>
 
-          <Section style={{ textAlign: "center", margin: "30px 0" }}>
+          <Section style={{ margin: "30px 0", textAlign: "center" }}>
             <Button
               href="mailto:support@knowledgehut.com"
               style={{
                 backgroundColor: "#000000",
-                color: "#ffffff",
-                padding: "12px 30px",
                 borderRadius: "5px",
-                textDecoration: "none",
+                color: "#ffffff",
                 fontSize: "16px",
                 fontWeight: "bold",
+                padding: "12px 30px",
+                textDecoration: "none",
               }}
             >
               Contact Support
@@ -142,8 +142,8 @@ export default function ClientConfirmationEmail({
 
           <Text
             style={{
-              fontSize: "14px",
               color: "#666",
+              fontSize: "14px",
               marginTop: "20px",
               textAlign: "center",
             }}

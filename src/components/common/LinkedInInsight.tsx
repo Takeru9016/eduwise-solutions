@@ -3,10 +3,10 @@
 import Script from "next/script";
 
 export default function LinkedInInsight() {
-    return (
-        <>
-            <Script id="linkedin-insight" strategy="afterInteractive">
-                {`
+  return (
+    <>
+      <Script id="linkedin-insight" strategy="afterInteractive">
+        {`
           _linkedin_partner_id = "9444676";
           window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
           window._linkedin_data_partner_ids.push(_linkedin_partner_id);
@@ -27,17 +27,17 @@ export default function LinkedInInsight() {
             s.parentNode.insertBefore(b, s);
           })(window.lintrk);
         `}
-            </Script>
+      </Script>
 
-            <noscript>
-                <img
-                    height="1"
-                    width="1"
-                    style={{ display: "none" }}
-                    alt=""
-                    src="https://px.ads.linkedin.com/collect/?pid=9444676&fmt=gif"
-                />
-            </noscript>
-        </>
-    );
+      <noscript>
+        <img
+          alt=""
+          height="1"
+          src="https://px.ads.linkedin.com/collect/?pid=9444676&fmt=gif"
+          style={{ display: "none" }}
+          width="1"
+        />
+      </noscript>
+    </>
+  );
 }

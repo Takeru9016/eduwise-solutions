@@ -15,7 +15,7 @@ export const structure: StructureResolver = (S) =>
               S.documentTypeListItem("post").title("Posts"),
               S.documentTypeListItem("category").title("Categories"),
               S.documentTypeListItem("author").title("Authors"),
-            ]),
+            ])
         ),
       S.divider(),
       // Courses section
@@ -24,7 +24,7 @@ export const structure: StructureResolver = (S) =>
         .child(
           S.documentTypeList("course")
             .title("All Courses")
-            .defaultOrdering([{ field: "category", direction: "asc" }]),
+            .defaultOrdering([{ direction: "asc", field: "category" }])
         ),
       S.divider(),
       // Website Content section
@@ -38,7 +38,7 @@ export const structure: StructureResolver = (S) =>
               S.documentTypeListItem("faqCategory").title("FAQ Categories"),
               S.documentTypeListItem("placedStudent").title("Placed Students"),
               S.documentTypeListItem("googleReview").title("Google Reviews"),
-            ]),
+            ])
         ),
       S.divider(),
       // Other items
@@ -54,6 +54,6 @@ export const structure: StructureResolver = (S) =>
             "placedStudent",
             "googleReview",
             "course",
-          ].includes(item.getId()!),
+          ].includes(item.getId()!)
       ),
     ]);

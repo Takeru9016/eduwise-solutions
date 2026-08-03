@@ -5,27 +5,27 @@ import FAQsClient from "./FAQsClient";
 // Sanity FAQ types
 interface SanityFAQQuestion {
   _key: string;
-  question: string;
   answer: string;
+  question: string;
 }
 
 interface SanityFAQCategory {
   _id: string;
-  title: string;
   icon?: string;
   order?: number;
   questions: SanityFAQQuestion[];
+  title: string;
 }
 
 // Transform Sanity data to component format
 function transformCategories(sanityData: SanityFAQCategory[]) {
   return sanityData.map((category) => ({
-    title: category.title,
     icon: category.icon || "📌",
     questions: category.questions.map((q) => ({
-      q: q.question,
       a: q.answer,
+      q: q.question,
     })),
+    title: category.title,
   }));
 }
 

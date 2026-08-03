@@ -10,8 +10,8 @@ vi.mock("razorpay", () => ({
 
 function makeRequest(body: unknown) {
   return new Request("http://localhost/api/create-order", {
-    method: "POST",
     body: JSON.stringify(body),
+    method: "POST",
   });
 }
 
@@ -23,17 +23,17 @@ describe("POST /api/create-order", () => {
   });
 
   it("converts the rupee amount to paise before calling Razorpay", async () => {
-    ordersCreateMock.mockResolvedValue({ id: "order_abc", amount: 150000 });
+    ordersCreateMock.mockResolvedValue({ amount: 150_000, id: "order_abc" });
 
     const { POST } = await import("./route");
     const response = await POST(makeRequest({ amount: 1500 }));
     const json = await response.json();
 
     expect(ordersCreateMock).toHaveBeenCalledWith(
-      expect.objectContaining({ amount: 150000, currency: "INR" }),
+      expect.objectContaining({ amount: 150_000, currency: "INR" })
     );
     expect(response.status).toBe(200);
-    expect(json.order).toEqual({ id: "order_abc", amount: 150000 });
+    expect(json.order).toEqual({ amount: 150_000, id: "order_abc" });
   });
 
   it("returns a 500 when Razorpay order creation fails", async () => {

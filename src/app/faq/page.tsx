@@ -1,4 +1,6 @@
-import { Footer, Navbar, FAQsPage } from "@/components";
+import { FAQsPage, Footer, Navbar } from "@/components";
+
+export const revalidate = 60;
 
 export default function MastersProgram() {
   return (

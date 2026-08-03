@@ -21,11 +21,11 @@ export default function MetaPixel() {
       </Script>
       <noscript>
         <img
-          height="1"
-          width="1"
-          style={{ display: "none" }}
-          src="https://www.facebook.com/tr?id=1418034529539829&ev=PageView&noscript=1"
           alt=""
+          height="1"
+          src="https://www.facebook.com/tr?id=1418034529539829&ev=PageView&noscript=1"
+          style={{ display: "none" }}
+          width="1"
         />
       </noscript>
     </>

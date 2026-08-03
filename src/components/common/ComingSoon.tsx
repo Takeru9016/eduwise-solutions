@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
-import { BookOpen, Award, Target, Zap, ArrowRight, Play } from "lucide-react";
+import { ArrowRight, Award, BookOpen, Play, Target, Zap } from "lucide-react";
 import Link from "next/link";
+import type React from "react";
+import { useEffect, useMemo, useState } from "react";
 
 // FeatureCard subcomponent
 const FeatureCard = ({
@@ -26,26 +27,26 @@ const FeatureCard = ({
     onClick={onClick}
   >
     <div
-      className={`relative overflow-hidden rounded-2xl p-8 h-full transition-all duration-500 ${
+      className={`relative h-full overflow-hidden rounded-2xl p-8 transition-all duration-500 ${
         active
-          ? "bg-gradient-to-br from-grey-20 to-grey-30 shadow-2xl shadow-primary-75/20 border-2 border-primary-75/50"
-          : "bg-gradient-to-br from-grey-20/50 to-grey-30/50 hover:from-grey-20 hover:to-grey-30 border border-grey-40/30"
+          ? "border-2 border-primary-75/50 bg-gradient-to-br from-grey-20 to-grey-30 shadow-2xl shadow-primary-75/20"
+          : "border border-grey-40/30 bg-gradient-to-br from-grey-20/50 to-grey-30/50 hover:from-grey-20 hover:to-grey-30"
       }`}
     >
       <div
-        className={`inline-flex items-center justify-center w-16 h-16 rounded-xl mb-6 transition-all duration-500 bg-gradient-to-r ${
+        className={`mb-6 inline-flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-r transition-all duration-500 ${
           feature.color
         } ${active ? "shadow-lg" : "shadow-md"}`}
       >
         {feature.icon}
       </div>
-      <h3 className="text-xl font-semibold mb-4 text-light-95">
+      <h3 className="mb-4 font-semibold text-light-95 text-xl">
         {feature.title}
       </h3>
       <p className="text-grey-60 leading-relaxed">{feature.description}</p>
       {active && (
-        <div className="absolute bottom-4 right-4 opacity-50">
-          <Play className="w-6 h-6 text-primary-75" />
+        <div className="absolute right-4 bottom-4 opacity-50">
+          <Play className="h-6 w-6 text-primary-75" />
         </div>
       )}
     </div>
@@ -54,9 +55,9 @@ const FeatureCard = ({
 
 // StatCard subcomponent
 const StatCard = ({ stat }: { stat: { number: string; label: string } }) => (
-  <div className="text-center group">
-    <div className="bg-gradient-to-br from-grey-20/50 to-grey-30/50 rounded-xl p-6 hover:from-grey-20 hover:to-grey-30 transition-all duration-300 border border-grey-40/30">
-      <div className="text-3xl md:text-4xl font-bold text-primary-75 mb-2 group-hover:scale-110 transition-transform duration-300">
+  <div className="group text-center">
+    <div className="rounded-xl border border-grey-40/30 bg-gradient-to-br from-grey-20/50 to-grey-30/50 p-6 transition-all duration-300 hover:from-grey-20 hover:to-grey-30">
+      <div className="mb-2 font-bold text-3xl text-primary-75 transition-transform duration-300 group-hover:scale-110 md:text-4xl">
         {stat.number}
       </div>
       <div className="text-grey-60 text-sm md:text-base">{stat.label}</div>
@@ -79,24 +80,24 @@ export default function ComingSoonPage() {
   const features = useMemo(
     () => [
       {
-        icon: <Award className="w-8 h-8" />,
-        title: "Certification Program",
-        description: "Earn recognized certificates upon successful completion",
         color: "from-blue-500 to-cyan-500",
+        description: "Earn recognized certificates upon successful completion",
+        icon: <Award className="h-8 w-8" />,
+        title: "Certification Program",
       },
       {
-        icon: <Target className="w-8 h-8" />,
-        title: "Industry-Focused Content",
+        color: "from-purple-500 to-pink-500",
         description:
           "Curriculum designed with industry experts to ensure real-world relevance",
-        color: "from-purple-500 to-pink-500",
+        icon: <Target className="h-8 w-8" />,
+        title: "Industry-Focused Content",
       },
       {
-        icon: <Zap className="w-8 h-8" />,
-        title: "Interactive Workshops",
+        color: "from-emerald-500 to-teal-500",
         description:
           "Live coding sessions, project-based learning, and hands-on experiences",
-        color: "from-emerald-500 to-teal-500",
+        icon: <Zap className="h-8 w-8" />,
+        title: "Interactive Workshops",
       },
     ],
     []
@@ -104,40 +105,40 @@ export default function ComingSoonPage() {
 
   const stats = useMemo(
     () => [
-      { number: "50+", label: "Expert Instructors" },
-      { number: "100+", label: "Courses Planned" },
-      { number: "24/7", label: "Learning Support" },
-      { number: "∞", label: "Career Growth" },
+      { label: "Expert Instructors", number: "50+" },
+      { label: "Courses Planned", number: "100+" },
+      { label: "Learning Support", number: "24/7" },
+      { label: "Career Growth", number: "∞" },
     ],
     []
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-grey-10 via-grey-15 to-grey-20 text-white overflow-hidden">
+    <div className="min-h-screen overflow-hidden bg-gradient-to-br from-grey-10 via-grey-15 to-grey-20 text-white">
       {/* Animated Background Elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-primary-75/20 to-primary-90/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full blur-3xl animate-pulse delay-2000"></div>
+        <div className="absolute top-20 left-10 h-72 w-72 animate-pulse rounded-full bg-gradient-to-r from-primary-75/20 to-primary-90/20 blur-3xl" />
+        <div className="absolute right-10 bottom-20 h-96 w-96 animate-pulse rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 blur-3xl delay-1000" />
+        <div className="absolute top-1/2 left-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 transform animate-pulse rounded-full bg-gradient-to-r from-cyan-500/20 to-blue-500/20 blur-3xl delay-2000" />
       </div>
 
       {/* Grid Pattern Overlay */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 py-12">
+      <div className="container relative z-10 mx-auto px-4 py-12">
         {/* Hero Section */}
         <div
-          className={`text-center mb-20 transition-all duration-1000 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          className={`mb-20 text-center transition-all duration-1000 ${
+            isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
           }`}
         >
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-primary-75 to-primary-90 rounded-2xl mb-8 shadow-2xl shadow-primary-75/50">
-            <BookOpen className="w-10 h-10 text-white" />
+          <div className="mb-8 inline-flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-r from-primary-75 to-primary-90 shadow-2xl shadow-primary-75/50">
+            <BookOpen className="h-10 w-10 text-white" />
           </div>
 
-          <h1 className="text-6xl md:text-8xl font-bold mb-6 tracking-tight">
+          <h1 className="mb-6 font-bold text-6xl tracking-tight md:text-8xl">
             <span className="bg-gradient-to-r from-primary-75 via-primary-90 to-cyan-400 bg-clip-text text-transparent">
               Eduwise
             </span>
@@ -145,31 +146,31 @@ export default function ComingSoonPage() {
             <span className="text-light-95">Solutions</span>
           </h1>
 
-          <p className="text-xl md:text-2xl text-grey-60 max-w-3xl mx-auto leading-relaxed mb-8">
+          <p className="mx-auto mb-8 max-w-3xl text-grey-60 text-xl leading-relaxed md:text-2xl">
             Revolutionizing education through innovative technology and
             personalized learning experiences
           </p>
 
-          <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary-75/20 to-primary-90/20 rounded-full border border-primary-75/30 backdrop-blur-sm">
-            <div className="w-3 h-3 bg-primary-75 rounded-full mr-3 animate-pulse"></div>
-            <span className="text-primary-90 font-medium">
+          <div className="inline-flex items-center rounded-full border border-primary-75/30 bg-gradient-to-r from-primary-75/20 to-primary-90/20 px-6 py-3 backdrop-blur-sm">
+            <div className="mr-3 h-3 w-3 animate-pulse rounded-full bg-primary-75" />
+            <span className="font-medium text-primary-90">
               This Course is in Development
             </span>
           </div>
         </div>
 
         {/* Interactive Features Showcase */}
-        <div className="max-w-6xl mx-auto mb-20">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-light-95">
+        <div className="mx-auto mb-20 max-w-6xl">
+          <h2 className="mb-16 text-center font-bold text-3xl text-light-95 md:text-4xl">
             What Makes Us Different
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid gap-8 md:grid-cols-3">
             {features.map((feature, index) => (
               <FeatureCard
-                key={index}
-                feature={feature}
                 active={activeFeature === index}
+                feature={feature}
+                key={index}
                 onClick={() => setActiveFeature(index)}
               />
             ))}
@@ -177,8 +178,8 @@ export default function ComingSoonPage() {
         </div>
 
         {/* Stats Section */}
-        <div className="max-w-4xl mx-auto mb-20">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="mx-auto mb-20 max-w-4xl">
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
             {stats.map((stat, index) => (
               <StatCard key={index} stat={stat} />
             ))}
@@ -186,29 +187,29 @@ export default function ComingSoonPage() {
         </div>
 
         {/* Vision Statement */}
-        <div className="max-w-4xl mx-auto text-center mb-20">
-          <div className="bg-gradient-to-r from-grey-20/30 to-grey-30/30 rounded-3xl p-12 border border-grey-40/20 backdrop-blur-sm">
-            <h3 className="text-2xl md:text-3xl font-bold mb-6 text-light-95">
+        <div className="mx-auto mb-20 max-w-4xl text-center">
+          <div className="rounded-3xl border border-grey-40/20 bg-gradient-to-r from-grey-20/30 to-grey-30/30 p-12 backdrop-blur-sm">
+            <h3 className="mb-6 font-bold text-2xl text-light-95 md:text-3xl">
               Our Vision
             </h3>
-            <p className="text-lg md:text-xl text-grey-60 leading-relaxed mb-8">
+            <p className="mb-8 text-grey-60 text-lg leading-relaxed md:text-xl">
               To become a trusted career-launch platform that transforms the
               lives of graduates by making job readiness accessible, practical,
               and result-driven—one job at a time.
             </p>
-            <div className="flex flex-row items-center justify-center gap-4 mt-8">
+            <div className="mt-8 flex flex-row items-center justify-center gap-4">
               {/* Primary filled button */}
-              <div className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-75 to-primary-90 rounded-full text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group">
-                <Link href="/contact" className="flex items-center w-full">
+              <div className="group inline-flex items-center rounded-full bg-gradient-to-r from-primary-75 to-primary-90 px-8 py-4 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
+                <Link className="flex w-full items-center" href="/contact">
                   <span>Join the Revolution</span>
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Link>
               </div>
               {/* Outlined/lighter button */}
-              <div className="inline-flex items-center px-8 py-4 border-2 border-primary-75 text-black bg-white/90 rounded-full font-semibold shadow hover:shadow-lg transition-all duration-300 hover:scale-105 group">
-                <Link href="/" className="flex items-center w-full">
+              <div className="group inline-flex items-center rounded-full border-2 border-primary-75 bg-white/90 px-8 py-4 font-semibold text-black shadow transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                <Link className="flex w-full items-center" href="/">
                   <span>Go Back to Homepage</span>
-                  <ArrowRight className="ml-2 w-5 h-5 text-black group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="ml-2 h-5 w-5 text-black transition-transform group-hover:translate-x-1" />
                 </Link>
               </div>
             </div>

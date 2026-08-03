@@ -1,28 +1,27 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
 import { ChevronLeft, ChevronRight, Linkedin, Quote } from "lucide-react";
-
-import { cn } from "@/lib/utils";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 
 export interface TestimonialThreeUp {
-  id: number;
-  name: string;
-  role: string;
+  avatar: string;
   company: string;
   content: string;
-  avatar: string;
-  rating?: number;
+  id: number;
   linkedinUrl?: string;
+  name: string;
+  rating?: number;
+  role: string;
 }
 
 interface TestimonialsThreeProps {
-  testimonials: TestimonialThreeUp[];
   className?: string;
+  testimonials: TestimonialThreeUp[];
 }
 
 export function TestimonialsThree({
@@ -45,7 +44,6 @@ export function TestimonialsThree({
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-
   const handlePrev = () => {
     setIndex((prev) => (prev - 1 + sorted.length) % sorted.length);
   };
@@ -56,7 +54,9 @@ export function TestimonialsThree({
 
   // Compute 3 visible items with wrap-around
   const visible = useMemo(() => {
-    if (sorted.length === 0) return [] as TestimonialThreeUp[];
+    if (sorted.length === 0) {
+      return [] as TestimonialThreeUp[];
+    }
     const visibleCount = isSmall ? 1 : 3;
     const items: TestimonialThreeUp[] = [];
     for (let i = 0; i < Math.min(visibleCount, sorted.length); i++) {
@@ -65,31 +65,33 @@ export function TestimonialsThree({
     return items;
   }, [sorted, index, isSmall]);
 
-  if (sorted.length === 0) return null;
+  if (sorted.length === 0) {
+    return null;
+  }
 
   return (
     <div className={cn("relative w-full", className)}>
       <div className="relative mx-auto max-w-7xl px-4 md:px-8">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70">
+        <div className="mb-8 flex items-center justify-between">
+          <h2 className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text font-bold text-3xl text-transparent tracking-tight md:text-4xl">
             What Our Students Say
           </h2>
-          <div className="hidden md:flex gap-3">
+          <div className="hidden gap-3 md:flex">
             <Button
-              variant="outline"
-              size="icon"
+              aria-label="Previous"
               className="rounded-full shadow-sm"
               onClick={handlePrev}
-              aria-label="Previous"
+              size="icon"
+              variant="outline"
             >
               <ChevronLeft className="h-5 w-5" />
             </Button>
             <Button
-              variant="outline"
-              size="icon"
+              aria-label="Next"
               className="rounded-full shadow-sm"
               onClick={handleNext}
-              aria-label="Next"
+              size="icon"
+              variant="outline"
             >
               <ChevronRight className="h-5 w-5" />
             </Button>
@@ -98,40 +100,40 @@ export function TestimonialsThree({
 
         {/* Mobile arrows moved below cards; overlay removed to avoid being hidden behind content */}
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-8">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-8">
           {visible.map((t) => (
             <Card
+              className="relative flex h-full flex-col rounded-xl border border-border/80 p-6 shadow-sm transition-shadow duration-300 hover:shadow-lg md:p-8"
               key={t.id}
-              className="relative p-6 md:p-8 h-full flex flex-col rounded-xl border border-border/80 shadow-sm hover:shadow-lg transition-shadow duration-300"
             >
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/5 via-transparent to-primary/5 opacity-60 pointer-events-none" />
+              <div className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-br from-primary/5 via-transparent to-primary/5 opacity-60" />
               <div className="relative flex items-center gap-4 md:gap-5">
-                <div className="relative h-16 w-16 md:h-20 md:w-20 rounded-full overflow-hidden border-2 border-primary/20 shadow-sm">
+                <div className="relative h-16 w-16 overflow-hidden rounded-full border-2 border-primary/20 shadow-sm md:h-20 md:w-20">
                   <Image
-                    src={t.avatar}
                     alt={t.name}
-                    fill
                     className="object-cover"
+                    fill
+                    src={t.avatar}
                   />
                 </div>
                 <div className="flex flex-col">
                   <span className="font-semibold text-base md:text-xl">
                     {t.name}
                   </span>
-                  <span className="text-sm md:text-base text-muted-foreground">
+                  <span className="text-muted-foreground text-sm md:text-base">
                     {t.role}
                   </span>
                   {t.company && (
-                    <span className="text-xs md:text-sm text-primary/80 mt-1">
+                    <span className="mt-1 text-primary/80 text-xs md:text-sm">
                       {t.company}
                     </span>
                   )}
                 </div>
               </div>
 
-              <div className="relative mt-5 md:mt-6 flex-1">
-                <Quote className="absolute -top-2 -left-1 h-6 w-6 md:h-7 md:w-7 text-primary-50 rotate-180" />
-                <p className="text-base md:text-lg leading-relaxed pt-6 pl-6 md:pl-8">
+              <div className="relative mt-5 flex-1 md:mt-6">
+                <Quote className="absolute -top-2 -left-1 h-6 w-6 rotate-180 text-primary-50 md:h-7 md:w-7" />
+                <p className="pt-6 pl-6 text-base leading-relaxed md:pl-8 md:text-lg">
                   &ldquo;{t.content}&rdquo;
                 </p>
               </div>
@@ -139,12 +141,12 @@ export function TestimonialsThree({
               {t.linkedinUrl && (
                 <div className="relative mt-auto pt-5 md:pt-6">
                   <Link
-                    href={t.linkedinUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
                     aria-label={`View ${t.name} on LinkedIn`}
+                    href={t.linkedinUrl}
+                    rel="noopener noreferrer"
+                    target="_blank"
                   >
-                    <Button className="group w-full md:w-auto rounded-full px-5 py-5 h-10 md:h-11 bg-gradient-to-r from-blue-700 to-blue-700/90 text-white shadow hover:shadow-md hover:from-blue-700/90 hover:to-blue-700 transition-all duration-200 ring-1 ring-blue-700/30">
+                    <Button className="group h-10 w-full rounded-full bg-gradient-to-r from-blue-700 to-blue-700/90 px-5 py-5 text-white shadow ring-1 ring-blue-700/30 transition-all duration-200 hover:from-blue-700/90 hover:to-blue-700 hover:shadow-md md:h-11 md:w-auto">
                       <Linkedin className="mr-2 h-4 w-4 transition-transform group-hover:scale-110" />
                       Connect on LinkedIn
                     </Button>
@@ -155,37 +157,37 @@ export function TestimonialsThree({
           ))}
         </div>
 
-        <div className="flex justify-center gap-2 mt-8">
+        <div className="mt-8 flex justify-center gap-2">
           {sorted.map((_, i) => (
             <button
-              key={i}
+              aria-label={`Go to slide ${i + 1}`}
               className={cn(
                 "h-2 rounded-full transition-all duration-300",
-                i === index ? "bg-primary w-6" : "bg-primary/30 w-2"
+                i === index ? "w-6 bg-primary" : "w-2 bg-primary/30"
               )}
+              key={i}
               onClick={() => setIndex(i)}
-              aria-label={`Go to slide ${i + 1}`}
             />
           ))}
         </div>
 
         {/* Mobile navigation controls below cards */}
-        <div className="flex md:hidden justify-center gap-3 mt-6">
+        <div className="mt-6 flex justify-center gap-3 md:hidden">
           <Button
-            variant="outline"
-            size="icon"
+            aria-label="Previous"
             className="rounded-full shadow-sm"
             onClick={handlePrev}
-            aria-label="Previous"
+            size="icon"
+            variant="outline"
           >
             <ChevronLeft className="h-5 w-5" />
           </Button>
           <Button
-            variant="outline"
-            size="icon"
+            aria-label="Next"
             className="rounded-full shadow-sm"
             onClick={handleNext}
-            aria-label="Next"
+            size="icon"
+            variant="outline"
           >
             <ChevronRight className="h-5 w-5" />
           </Button>

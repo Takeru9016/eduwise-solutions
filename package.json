@@ -3,15 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "build": "next build",
     "dev": "next dev --turbopack  --experimental-https",
     "dev:e2e": "next dev --turbopack -p 3100",
-    "build": "next build",
+    "format": "ultracite fix",
+    "lint": "ultracite check",
     "start": "next start",
-    "lint": "next lint",
-    "typecheck": "tsc --noEmit",
     "test": "vitest run",
+    "test:e2e": "playwright test",
     "test:watch": "vitest",
-    "test:e2e": "playwright test"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -65,13 +66,13 @@
     "googleapis": "^144.0.0",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.469.0",
-    "next": "15.2.6",
+    "next": "16.2.12",
     "next-sanity": "11",
     "next-themes": "^0.4.4",
     "razorpay": "^2.9.6",
-    "react": "^19.0.0",
+    "react": "^19.2.8",
     "react-day-picker": "8.10.1",
-    "react-dom": "^19.0.0",
+    "react-dom": "^19.2.8",
     "react-hook-form": "^7.54.2",
     "react-phone-input-2": "^2.15.1",
     "react-resizable-panels": "^2.1.7",
@@ -85,21 +86,20 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
+    "@biomejs/biome": "2.5.6",
     "@playwright/test": "^1.62.1",
     "@testing-library/jest-dom": "^7.0.0",
     "@testing-library/react": "^16.3.2",
     "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
     "@vitejs/plugin-react": "^6.0.5",
-    "eslint": "^9",
-    "eslint-config-next": "15.1.4",
     "jsdom": "^30.0.1",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5",
+    "ultracite": "7.10.0",
     "vitest": "^4.1.10"
   }
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useLiveQuery } from "@sanity/preview-kit";
-import { type QueryParams } from "next-sanity";
+import type { QueryParams } from "next-sanity";
 
 export function PreviewProvider<T>({
   children,

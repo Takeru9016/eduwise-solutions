@@ -1,32 +1,32 @@
 import type { Metadata } from "next";
 
 import {
-  Footer,
-  Navbar,
-  AWSHero,
-  AWSStatsBar,
+  AWSCareerTable,
+  AWSCategories,
   AWSCertGrid,
   AWSCertSyllabus,
-  AWSCategories,
-  AWSCareerTable,
-  AWSVoucherSteps,
-  AWSScheduleSteps,
-  AWSFaqAccordion,
   AWSConclusion,
+  AWSFaqAccordion,
+  AWSHero,
+  AWSScheduleSteps,
+  AWSStatsBar,
+  AWSVoucherSteps,
+  Footer,
+  Navbar,
 } from "@/components";
 
 export const metadata: Metadata = {
-  title:
-    "AWS Certification Exam Vouchers – A Complete Guide | Eduwise Solutions",
   description:
     "Get AWS Certification Exam Vouchers for Cloud Practitioner, AI Practitioner, Solutions Architect, Developer, SysOps, Data Engineer, and Machine Learning Engineer certifications. Expert guidance from Eduwise Solutions.",
+  title:
+    "AWS Certification Exam Vouchers – A Complete Guide | Eduwise Solutions",
 };
 
 export default function AWSCertificationsPage() {
   return (
     <>
       <Navbar />
-      <main role="main">
+      <main>
         <AWSHero />
         <AWSStatsBar />
         <AWSCertGrid />

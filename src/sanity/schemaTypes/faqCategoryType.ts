@@ -1,9 +1,6 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 
 export const faqCategoryType = defineType({
-  name: "faqCategory",
-  title: "FAQ Category",
-  type: "document",
   fields: [
     defineField({
       name: "title",
@@ -12,26 +9,21 @@ export const faqCategoryType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      description: "Emoji icon for the category, e.g., 🚀",
       name: "icon",
       title: "Icon (Emoji)",
       type: "string",
-      description: "Emoji icon for the category, e.g., 🚀",
     }),
     defineField({
+      description: "Lower numbers appear first",
       name: "order",
       title: "Display Order",
       type: "number",
-      description: "Lower numbers appear first",
     }),
     defineField({
       name: "questions",
-      title: "Questions",
-      type: "array",
       of: [
         defineArrayMember({
-          type: "object",
-          name: "faqQuestion",
-          title: "FAQ Question",
           fields: [
             defineField({
               name: "question",
@@ -46,34 +38,42 @@ export const faqCategoryType = defineType({
               validation: (Rule) => Rule.required(),
             }),
           ],
+          name: "faqQuestion",
           preview: {
             select: {
               title: "question",
             },
           },
+          title: "FAQ Question",
+          type: "object",
         }),
       ],
+      title: "Questions",
+      type: "array",
     }),
   ],
-  preview: {
-    select: {
-      title: "title",
-      icon: "icon",
-      questions: "questions",
+  name: "faqCategory",
+  orderings: [
+    {
+      by: [{ direction: "asc", field: "order" }],
+      name: "orderAsc",
+      title: "Display Order",
     },
+  ],
+  preview: {
     prepare({ title, icon, questions }) {
       const questionCount = questions?.length || 0;
       return {
+        subtitle: `${questionCount} question${questionCount === 1 ? "" : "s"}`,
         title: `${icon || ""} ${title}`,
-        subtitle: `${questionCount} question${questionCount !== 1 ? "s" : ""}`,
       };
     },
-  },
-  orderings: [
-    {
-      title: "Display Order",
-      name: "orderAsc",
-      by: [{ field: "order", direction: "asc" }],
+    select: {
+      icon: "icon",
+      questions: "questions",
+      title: "title",
     },
-  ],
+  },
+  title: "FAQ Category",
+  type: "document",
 });

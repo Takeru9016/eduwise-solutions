@@ -1,30 +1,33 @@
-import { Be_Vietnam_Pro } from "next/font/google";
-import type { Metadata } from "next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import type { Metadata } from "next";
+import { Be_Vietnam_Pro } from "next/font/google";
 
 import "./globals.css";
 import { Toaster } from "sonner";
-import { PopupForm, MetaPixel, LinkedInInsight } from "@/components";
+import { LinkedInInsight, MetaPixel, PopupForm } from "@/components";
 
 const beVietnamPro = Be_Vietnam_Pro({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
   variable: "--font-vietnam",
+  weight: ["400", "500", "600", "700"],
 });
 
+// Sitewide default for Server Components fetching Sanity data (e.g. Navbar,
+// Footer) that don't declare their own revalidate. Matches the 60s interval
+// already used on courses/blogs pages.
+export const revalidate = 60;
+
 export const metadata: Metadata = {
-  title: "Eduwise Solutions - Your Path to Success",
   description:
     "Whether you're interested in IT Jobs or professional courses that get you job-ready, we're here to support you every step of the way!",
-  manifest: "/favicon/site.webmanifest",
   icons: {
+    apple: [{ url: "/favicon/apple-touch-icon.png" }],
     icon: [
       { url: "/favicon/favicon.ico" },
-      { url: "/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { sizes: "16x16", type: "image/png", url: "/favicon/favicon-16x16.png" },
+      { sizes: "32x32", type: "image/png", url: "/favicon/favicon-32x32.png" },
     ],
-    apple: [{ url: "/favicon/apple-touch-icon.png" }],
     other: [
       {
         rel: "android-chrome-192x192",
@@ -36,6 +39,8 @@ export const metadata: Metadata = {
       },
     ],
   },
+  manifest: "/favicon/site.webmanifest",
+  title: "Eduwise Solutions - Your Path to Success",
 };
 
 export default function RootLayout({
@@ -51,20 +56,20 @@ export default function RootLayout({
         {children}
         <PopupForm />
         <Toaster
-          richColors
           position="top-center"
+          richColors
           toastOptions={{
             classNames: {
-              toast:
-                "group toast group flex w-full items-center border-l-4 border-green-500 p-4 pr-10 shadow-lg",
-              title: "font-medium text-gray-900",
-              description: "text-sm text-gray-600 mt-1",
               actionButton:
                 "bg-gray-900 text-white px-3 py-1 rounded-md text-sm",
               cancelButton:
                 "bg-gray-200 text-gray-800 px-3 py-1 rounded-md ml-2 text-sm",
+              description: "text-sm text-gray-600 mt-1",
               error: "border-l-4 border-red-500",
               success: "border-l-4 border-green-500",
+              title: "font-medium text-gray-900",
+              toast:
+                "group toast group flex w-full items-center border-l-4 border-green-500 p-4 pr-10 shadow-lg",
             },
           }}
         />

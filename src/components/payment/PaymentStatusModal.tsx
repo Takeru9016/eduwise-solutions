@@ -1,19 +1,19 @@
-import { useEffect, useCallback } from "react";
-import { CheckCircle2, XCircle, AlertCircle } from "lucide-react";
+import { AlertCircle, CheckCircle2, XCircle } from "lucide-react";
+import { useCallback, useEffect } from "react";
 
 interface PaymentStatusModalProps {
   isOpen: boolean;
+  message?: string;
   onClose: () => void;
   status: "success" | "failure" | "cancelled";
-  message?: string;
 }
 
 interface StatusDetails {
+  bgColor: string;
+  color: string;
+  description: string;
   icon: typeof CheckCircle2;
   title: string;
-  description: string;
-  color: string;
-  bgColor: string;
 }
 
 export default function PaymentStatusModal({
@@ -25,7 +25,9 @@ export default function PaymentStatusModal({
   // Handle escape key press
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        onClose();
+      }
     },
     [onClose]
   );
@@ -43,36 +45,38 @@ export default function PaymentStatusModal({
     };
   }, [isOpen, handleKeyDown]);
 
-  if (!isOpen) return null;
+  if (!isOpen) {
+    return null;
+  }
 
   const getStatusDetails = (): StatusDetails => {
     switch (status) {
       case "success":
         return {
-          icon: CheckCircle2,
-          title: "Payment Successful!",
+          bgColor: "bg-green-50",
+          color: "text-green-500",
           description:
             message || "Thank you for enrolling in our Professional Program.",
-          color: "text-green-500",
-          bgColor: "bg-green-50",
+          icon: CheckCircle2,
+          title: "Payment Successful!",
         };
       case "failure":
         return {
-          icon: XCircle,
-          title: "Payment Failed",
+          bgColor: "bg-red-50",
+          color: "text-red-500",
           description:
             message ||
             "There was an error processing your payment. Please try again.",
-          color: "text-red-500",
-          bgColor: "bg-red-50",
+          icon: XCircle,
+          title: "Payment Failed",
         };
       case "cancelled":
         return {
+          bgColor: "bg-yellow-50",
+          color: "text-yellow-500",
+          description: message || "You have cancelled the payment process.",
           icon: AlertCircle,
           title: "Payment Cancelled",
-          description: message || "You have cancelled the payment process.",
-          color: "text-yellow-500",
-          bgColor: "bg-yellow-50",
         };
     }
   };
@@ -82,36 +86,36 @@ export default function PaymentStatusModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center"
       aria-modal="true"
+      className="fixed inset-0 z-50 flex items-center justify-center"
       role="dialog"
     >
       {/* Backdrop */}
       <div
+        aria-hidden="true"
         className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
         onClick={onClose}
-        aria-hidden="true"
       />
 
       {/* Modal */}
-      <div className="relative bg-white rounded-lg p-8 max-w-md w-full mx-4 shadow-xl transform transition-all duration-300 ease-in-out">
+      <div className="relative mx-4 w-full max-w-md transform rounded-lg bg-white p-8 shadow-xl transition-all duration-300 ease-in-out">
         <div
-          className={`${details.bgColor} rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4`}
+          className={`${details.bgColor} mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full`}
         >
-          <Icon className={`w-8 h-8 ${details.color}`} />
+          <Icon className={`h-8 w-8 ${details.color}`} />
         </div>
 
-        <h3 className="text-2xl font-vietnam font-bold text-grey-15 text-center mb-2">
+        <h3 className="mb-2 text-center font-bold font-vietnam text-2xl text-grey-15">
           {details.title}
         </h3>
 
-        <p className="text-grey-35 text-center mb-6">{details.description}</p>
+        <p className="mb-6 text-center text-grey-35">{details.description}</p>
 
         <div className="flex justify-center">
           <button
-            onClick={onClose}
-            className="bg-primary-75 text-white px-6 py-2 rounded-lg font-semibold hover:bg-primary-85 transition-colors"
             aria-label={status === "success" ? "Continue" : "Try Again Later"}
+            className="rounded-lg bg-primary-75 px-6 py-2 font-semibold text-white transition-colors hover:bg-primary-85"
+            onClick={onClose}
           >
             {status === "success" ? "Continue" : "Try Again Later"}
           </button>

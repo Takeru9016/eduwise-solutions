@@ -7,33 +7,33 @@ export default function AWSPartnerBanner() {
   const BannerContent = () => (
     <div className="flex items-center gap-4 pr-12">
       <Image
-        src="/partners/aws.svg"
         alt="AWS"
-        width={48}
+        className="flex-shrink-0 object-contain brightness-0 invert"
         height={28}
-        className="object-contain brightness-0 invert flex-shrink-0"
+        src="/partners/aws.svg"
+        width={48}
       />
-      <span className="text-sm font-medium whitespace-nowrap">
+      <span className="whitespace-nowrap font-medium text-sm">
         <span className="text-[#FF9900]">Official AWS Partner</span>
         <span className="mx-2 text-white/40">•</span>
         <span>Cloud-powered training & certifications</span>
       </span>
       <Link
+        className="ml-2 inline-flex flex-shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-[#FF9900] px-3 py-1 font-semibold text-[#232F3E] text-xs transition-colors hover:bg-[#FFB74D]"
         href="/certifications/aws"
-        className="inline-flex items-center gap-1.5 px-3 py-1 ml-2 rounded-full bg-[#FF9900] text-[#232F3E] text-xs font-semibold hover:bg-[#FFB74D] transition-colors whitespace-nowrap flex-shrink-0"
       >
         AWS Certifications
         <svg
-          className="w-3 h-3"
+          className="h-3 w-3"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
         >
           <path
+            d="M9 5l7 7-7 7"
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={2}
-            d="M9 5l7 7-7 7"
           />
         </svg>
       </Link>
@@ -41,7 +41,7 @@ export default function AWSPartnerBanner() {
   );
 
   return (
-    <div className="relative bg-gradient-to-r from-[#232F3E] via-[#1A242F] to-[#232F3E] text-white overflow-hidden">
+    <div className="relative overflow-hidden bg-gradient-to-r from-[#232F3E] via-[#1A242F] to-[#232F3E] text-white">
       {/* Animated background pattern */}
       <div className="absolute inset-0 opacity-10">
         <div
@@ -52,7 +52,7 @@ export default function AWSPartnerBanner() {
         />
       </div>
 
-      <div className="relative py-2.5 flex items-center">
+      <div className="relative flex items-center py-2.5">
         {/* Marquee container */}
         <div className="flex-1 overflow-hidden">
           <div className="marquee-wrapper">

@@ -1,81 +1,81 @@
 import { defineField, defineType } from "sanity";
 
 export const pressFeatureType = defineType({
-  name: "pressFeature",
-  title: "Press Feature",
-  type: "document",
   fields: [
     defineField({
+      description: "Name of the news platform (e.g., Daily Hunt, Medium)",
       name: "publicationName",
       title: "Publication Name",
       type: "string",
       validation: (Rule) => Rule.required(),
-      description: "Name of the news platform (e.g., Daily Hunt, Medium)",
     }),
     defineField({
+      description: "Upload the publication logo",
       name: "publicationLogo",
-      title: "Publication Logo",
-      type: "image",
       options: {
         hotspot: true,
       },
+      title: "Publication Logo",
+      type: "image",
       validation: (Rule) => Rule.required(),
-      description: "Upload the publication logo",
     }),
     defineField({
+      description: "Main headline or title of the article",
       name: "headline",
       title: "Article Headline",
       type: "string",
       validation: (Rule) => Rule.required().max(120),
-      description: "Main headline or title of the article",
     }),
     defineField({
+      description: "Brief description or excerpt from the article",
       name: "description",
       title: "Description",
       type: "text",
       validation: (Rule) => Rule.required().max(200),
-      description: "Brief description or excerpt from the article",
     }),
     defineField({
+      description: "Link to the full article",
       name: "articleUrl",
       title: "Article URL",
       type: "url",
       validation: (Rule) => Rule.required(),
-      description: "Link to the full article",
     }),
     defineField({
+      description: "When the article was published",
       name: "publishedAt",
       title: "Published Date",
       type: "date",
-      description: "When the article was published",
     }),
     defineField({
+      description: "Lower numbers appear first",
       name: "order",
       title: "Display Order",
       type: "number",
-      description: "Lower numbers appear first",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      description: "Mark as featured/highlighted",
+      initialValue: false,
       name: "featured",
       title: "Featured",
       type: "boolean",
-      description: "Mark as featured/highlighted",
-      initialValue: false,
     }),
+  ],
+  name: "pressFeature",
+  orderings: [
+    {
+      by: [{ direction: "asc", field: "order" }],
+      name: "orderAsc",
+      title: "Display Order",
+    },
   ],
   preview: {
     select: {
-      title: "publicationName",
-      subtitle: "headline",
       media: "publicationLogo",
+      subtitle: "headline",
+      title: "publicationName",
     },
   },
-  orderings: [
-    {
-      title: "Display Order",
-      name: "orderAsc",
-      by: [{ field: "order", direction: "asc" }],
-    },
-  ],
+  title: "Press Feature",
+  type: "document",
 });

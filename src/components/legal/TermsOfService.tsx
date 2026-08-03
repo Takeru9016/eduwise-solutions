@@ -1,19 +1,19 @@
 import {
-  FileText,
-  UserCheck,
-  ShieldAlert,
   Ban,
-  Scale,
+  FileText,
   Mail,
+  Scale,
+  ShieldAlert,
+  UserCheck,
 } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 // Types
 interface TermsSection {
+  content: React.ReactNode;
   icon: React.ElementType;
   title: string;
-  content: React.ReactNode;
 }
 
 interface ListItem {
@@ -21,8 +21,8 @@ interface ListItem {
 }
 
 interface SubSection {
-  title: string;
   items: ListItem[];
+  title: string;
 }
 
 // Reusable components
@@ -33,10 +33,10 @@ const PageHeader = ({
   title: string;
   lastUpdated: string;
 }) => (
-  <section className="py-12 md:py-16 lg:py-20 bg-primary-99">
+  <section className="bg-primary-99 py-12 md:py-16 lg:py-20">
     <div className="container mx-auto px-4">
-      <div className="max-w-3xl mx-auto">
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-vietnam font-bold text-grey-15 mb-6">
+      <div className="mx-auto max-w-3xl">
+        <h1 className="mb-6 font-bold font-vietnam text-3xl text-grey-15 md:text-4xl lg:text-5xl">
           {title}
         </h1>
         <p className="text-grey-35 text-lg">Last updated: {lastUpdated}</p>
@@ -52,7 +52,7 @@ const TermsCard = ({ section }: { section: TermsSection }) => {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <Icon className="w-6 h-6 text-primary-75" />
+          <Icon className="h-6 w-6 text-primary-75" />
           {title}
         </CardTitle>
       </CardHeader>
@@ -70,7 +70,7 @@ const ListSection = ({
 }) => (
   <div className="space-y-4">
     {intro && <p>{intro}</p>}
-    <ul className="list-disc pl-6 space-y-2">
+    <ul className="list-disc space-y-2 pl-6">
       {items.map((item, index) => (
         <li key={index}>{item.text}</li>
       ))}
@@ -81,9 +81,9 @@ const ListSection = ({
 const SubSectionList = ({ sections }: { sections: SubSection[] }) => (
   <div className="space-y-4">
     {sections.map((section, index) => (
-      <div key={index} className="space-y-2">
+      <div className="space-y-2" key={index}>
         <h3 className="font-semibold text-grey-20">{section.title}</h3>
-        <ul className="list-disc pl-6 space-y-2">
+        <ul className="list-disc space-y-2 pl-6">
           {section.items.map((item, itemIndex) => (
             <li key={itemIndex}>{item.text}</li>
           ))}
@@ -97,7 +97,7 @@ const ContactSection = ({ email }: { email: string }) => (
   <div>
     <p>For questions about these Terms of Service, please contact us at:</p>
     <div className="mt-4">
-      <p className="text-primary-50 font-bold">{email}</p>
+      <p className="font-bold text-primary-50">{email}</p>
     </div>
   </div>
 );
@@ -116,20 +116,20 @@ export default function TermsOfServicePage() {
 
   const coursePolicySections: SubSection[] = [
     {
-      title: "Enrollment:",
       items: [
         { text: "Course access is granted after successful payment" },
         { text: "Enrollment is non-transferable" },
         { text: "Course materials are for personal use only" },
       ],
+      title: "Enrollment:",
     },
     {
-      title: "Course Content:",
       items: [
         { text: "All materials are protected by copyright" },
         { text: "Sharing or redistributing content is prohibited" },
         { text: "Course content may be updated periodically" },
       ],
+      title: "Course Content:",
     },
   ];
 
@@ -144,8 +144,6 @@ export default function TermsOfServicePage() {
   // Sections data
   const termsSections: TermsSection[] = [
     {
-      icon: FileText,
-      title: "Agreement to Terms",
       content: (
         <p>
           By accessing or using Eduwise Solutions services, you agree to be
@@ -153,35 +151,35 @@ export default function TermsOfServicePage() {
           these terms, you may not access our services.
         </p>
       ),
+      icon: FileText,
+      title: "Agreement to Terms",
     },
     {
-      icon: UserCheck,
-      title: "User Accounts",
       content: (
         <ListSection
           intro="When creating an account, you must:"
           items={accountRequirements}
         />
       ),
+      icon: UserCheck,
+      title: "User Accounts",
     },
     {
+      content: <SubSectionList sections={coursePolicySections} />,
       icon: Scale,
       title: "Course Policies",
-      content: <SubSectionList sections={coursePolicySections} />,
     },
     {
-      icon: Ban,
-      title: "Prohibited Activities",
       content: (
         <ListSection
           intro="Users are prohibited from:"
           items={prohibitedActivities}
         />
       ),
+      icon: Ban,
+      title: "Prohibited Activities",
     },
     {
-      icon: ShieldAlert,
-      title: "Intellectual Property",
       content: (
         <p>
           All content, including but not limited to courses, materials, logos,
@@ -190,10 +188,10 @@ export default function TermsOfServicePage() {
           explicit permission.
         </p>
       ),
+      icon: ShieldAlert,
+      title: "Intellectual Property",
     },
     {
-      icon: Ban,
-      title: "Termination",
       content: (
         <p>
           We reserve the right to terminate or suspend accounts for violations
@@ -201,23 +199,25 @@ export default function TermsOfServicePage() {
           termination, your right to access our services will immediately cease.
         </p>
       ),
+      icon: Ban,
+      title: "Termination",
     },
     {
+      content: <ContactSection email={legalEmail} />,
       icon: Mail,
       title: "Contact Us",
-      content: <ContactSection email={legalEmail} />,
     },
   ];
 
   return (
     <main className="min-h-screen bg-white">
       {/* Header Section */}
-      <PageHeader title="Terms of Service" lastUpdated={lastUpdated} />
+      <PageHeader lastUpdated={lastUpdated} title="Terms of Service" />
 
       {/* Main Content */}
       <section className="py-12">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto space-y-8">
+          <div className="mx-auto max-w-3xl space-y-8">
             {termsSections.map((section, index) => (
               <TermsCard key={index} section={section} />
             ))}

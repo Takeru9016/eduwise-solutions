@@ -2,22 +2,22 @@ import { Send } from "lucide-react";
 
 export default function LoadingOverlay() {
   return (
-    <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50">
-      <div className="bg-white/90 p-8 rounded-xl shadow-lg text-center max-w-sm mx-4 border border-light-90">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm">
+      <div className="mx-4 max-w-sm rounded-xl border border-light-90 bg-white/90 p-8 text-center shadow-lg">
         {/* Loading Animation Container */}
-        <div className="relative w-16 h-16 mx-auto mb-6">
+        <div className="relative mx-auto mb-6 h-16 w-16">
           {/* Outer spinning circle */}
           <div className="absolute inset-0 rounded-full border-4 border-primary-95" />
-          <div className="absolute inset-0 rounded-full border-4 border-primary-75 border-t-transparent animate-spin" />
+          <div className="absolute inset-0 animate-spin rounded-full border-4 border-primary-75 border-t-transparent" />
 
           {/* Center icon */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <Send size={20} className="text-primary-75 opacity-80" />
+            <Send className="text-primary-75 opacity-80" size={20} />
           </div>
         </div>
 
         {/* Loading Text */}
-        <h3 className="text-lg font-vietnam font-semibold text-grey-20 mb-2">
+        <h3 className="mb-2 font-semibold font-vietnam text-grey-20 text-lg">
           Sending Message
         </h3>
         <p className="text-grey-35">
@@ -25,8 +25,8 @@ export default function LoadingOverlay() {
         </p>
 
         {/* Progress Bar */}
-        <div className="mt-6 h-1 bg-light-90 rounded-full overflow-hidden">
-          <div className="h-full bg-primary-75 rounded-full animate-progress origin-left" />
+        <div className="mt-6 h-1 overflow-hidden rounded-full bg-light-90">
+          <div className="h-full origin-left animate-progress rounded-full bg-primary-75" />
         </div>
       </div>
 

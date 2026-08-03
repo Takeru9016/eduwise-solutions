@@ -1,41 +1,41 @@
 "use client";
 
-import { useState, useEffect, useCallback, useMemo } from "react";
+import {
+  ArrowRight,
+  ChevronDown,
+  ChevronRight,
+  Mail,
+  Menu,
+  Phone,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  Menu,
-  Phone,
-  Mail,
-  ChevronDown,
-  ChevronRight,
-  ArrowRight,
-} from "lucide-react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Separator } from "@/components/ui/separator";
 import AWSPartnerBanner from "./AWSPartnerBadge";
 
 // Types for Sanity-powered course navigation
 export interface NavCourseItem {
-  id: string;
-  title: string;
-  slug: string;
   emoji: string;
+  id: string;
+  slug: string;
+  title: string;
 }
 
 export interface NavCategory {
+  courses: NavCourseItem[];
+  emoji: string;
   id: string;
   label: string;
-  emoji: string;
-  courses: NavCourseItem[];
 }
 
 // Keep CourseCategoryId as a string for mobile accordion
@@ -69,8 +69,8 @@ const SIMPLE_NAV_LINKS_AFTER: SimpleNavLink[] = [
 ];
 
 const CONTACT_INFO = {
-  phone: "+91 91487 74540",
   email: "contact@eduwise.solutions",
+  phone: "+91 91487 74540",
 } as const;
 
 const SCROLL_THRESHOLD = 20;
@@ -78,34 +78,34 @@ const SCROLL_THRESHOLD = 20;
 // Sub-components
 
 const Logo = ({ className = "" }: LogoProps) => (
-  <Link href="/" className={`relative ${className}`}>
+  <Link className={`relative ${className}`} href="/">
     <Image
-      src="/home/eduwise.png"
       alt="Eduwise Solutions"
-      width={160}
+      className="w-[120px] object-contain md:w-[140px] lg:w-[160px]"
       height={48}
-      className="w-[120px] md:w-[140px] lg:w-[160px] object-contain"
       priority
+      src="/home/eduwise.png"
+      width={160}
     />
   </Link>
 );
 
 const ContactInfo = ({ onClose }: ContactInfoProps) => (
-  <div className="mt-8 pt-8 border-t border-light-90 space-y-4">
+  <div className="mt-8 space-y-4 border-light-90 border-t pt-8">
     <a
+      className="flex items-center gap-2 text-grey-35 transition-colors hover:text-primary-75"
       href={`tel:${CONTACT_INFO.phone}`}
-      className="flex items-center gap-2 text-grey-35 hover:text-primary-75 transition-colors"
       onClick={onClose}
     >
-      <Phone size={16} className="text-primary-75" />
+      <Phone className="text-primary-75" size={16} />
       <span>{CONTACT_INFO.phone}</span>
     </a>
     <a
+      className="flex items-center gap-2 text-grey-35 transition-colors hover:text-primary-75"
       href={`mailto:${CONTACT_INFO.email}`}
-      className="flex items-center gap-2 text-grey-35 hover:text-primary-75 transition-colors"
       onClick={onClose}
     >
-      <Mail size={16} className="text-primary-75" />
+      <Mail className="text-primary-75" size={16} />
       <span>{CONTACT_INFO.email}</span>
     </a>
   </div>
@@ -121,39 +121,39 @@ const DesktopMegaMenu = ({
   const totalCourses = useMemo(
     () =>
       categoriesWithCourses.reduce((acc, cat) => acc + cat.courses.length, 0),
-    [categoriesWithCourses],
+    [categoriesWithCourses]
   );
 
   return (
-    <div className="relative group/courses">
+    <div className="group/courses relative">
       <Link
+        className="flex items-center gap-1 py-2 text-grey-30 transition-colors hover:text-primary-75"
         href="/courses"
-        className="text-grey-30 hover:text-primary-75 transition-colors py-2 flex items-center gap-1"
       >
         Courses
         <ChevronDown
+          className="transition-transform duration-200 group-hover/courses:rotate-180"
           size={16}
-          className="group-hover/courses:rotate-180 transition-transform duration-200"
         />
       </Link>
 
       {/* Mega-menu panel */}
-      <div className="absolute top-full -left-[340px] pt-4 opacity-0 invisible group-hover/courses:opacity-100 group-hover/courses:visible transition-all duration-200 z-50">
-        <div className="bg-white rounded-xl shadow-2xl border border-light-90 w-[860px] overflow-hidden">
+      <div className="invisible absolute top-full -left-[340px] z-50 pt-4 opacity-0 transition-all duration-200 group-hover/courses:visible group-hover/courses:opacity-100">
+        <div className="w-[860px] overflow-hidden rounded-xl border border-light-90 bg-white shadow-2xl">
           {/* Header */}
-          <div className="bg-gradient-to-r from-primary-99 to-white px-6 py-4 border-b border-light-90 flex items-center justify-between">
+          <div className="flex items-center justify-between border-light-90 border-b bg-gradient-to-r from-primary-99 to-white px-6 py-4">
             <div>
-              <h3 className="text-grey-15 font-semibold text-base">
+              <h3 className="font-semibold text-base text-grey-15">
                 Explore Our Courses
               </h3>
-              <p className="text-grey-50 text-xs mt-0.5">
+              <p className="mt-0.5 text-grey-50 text-xs">
                 {totalCourses}+ industry-ready programs to accelerate your
                 career
               </p>
             </div>
             <Link
+              className="flex items-center gap-1 font-medium text-primary-75 text-sm transition-colors hover:text-primary-60"
               href="/courses"
-              className="text-primary-75 text-sm font-medium hover:text-primary-60 transition-colors flex items-center gap-1"
             >
               View All
               <ArrowRight size={14} />
@@ -163,11 +163,11 @@ const DesktopMegaMenu = ({
           {/* Course categories grid */}
           <div className="grid grid-cols-3 gap-0 divide-x divide-light-90">
             {categoriesWithCourses.map((category) => (
-              <div key={category.id} className="p-4">
+              <div className="p-4" key={category.id}>
                 {/* Category header */}
-                <div className="flex items-center gap-2 mb-3">
+                <div className="mb-3 flex items-center gap-2">
                   <span className="text-sm">{category.emoji}</span>
-                  <h4 className="text-xs font-semibold text-grey-40 uppercase tracking-wider">
+                  <h4 className="font-semibold text-grey-40 text-xs uppercase tracking-wider">
                     {category.label}
                   </h4>
                 </div>
@@ -176,17 +176,17 @@ const DesktopMegaMenu = ({
                 <div className="space-y-0.5">
                   {category.courses.map((course) => (
                     <Link
-                      key={course.id}
+                      className="group/item flex items-center gap-2 rounded-lg px-2 py-1.5 transition-colors hover:bg-primary-99"
                       href={course.slug}
-                      className="group/item flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-primary-99 transition-colors"
+                      key={course.id}
                     >
                       <span className="text-sm">{course.emoji}</span>
-                      <span className="text-sm text-grey-30 group-hover/item:text-primary-75 transition-colors flex-1">
+                      <span className="flex-1 text-grey-30 text-sm transition-colors group-hover/item:text-primary-75">
                         {course.title}
                       </span>
                       <ChevronRight
+                        className="text-grey-60 opacity-0 transition-opacity group-hover/item:opacity-100"
                         size={12}
-                        className="text-grey-60 opacity-0 group-hover/item:opacity-100 transition-opacity"
                       />
                     </Link>
                   ))}
@@ -203,22 +203,22 @@ const DesktopMegaMenu = ({
 // Desktop Navigation
 
 interface DesktopNavigationProps {
-  pathname: string;
   categoriesWithCourses: NavCategory[];
+  pathname: string;
 }
 
 const DesktopNavigation = ({
   pathname,
   categoriesWithCourses,
 }: DesktopNavigationProps) => (
-  <div className="hidden lg:flex items-center space-x-8">
+  <div className="hidden items-center space-x-8 lg:flex">
     {SIMPLE_NAV_LINKS.map((link) => (
       <Link
-        key={link.label}
-        href={link.href}
-        className={`text-grey-30 hover:text-primary-75 transition-colors py-2 ${
+        className={`py-2 text-grey-30 transition-colors hover:text-primary-75 ${
           pathname === link.href ? "text-primary-75" : ""
         }`}
+        href={link.href}
+        key={link.label}
       >
         {link.label}
       </Link>
@@ -229,30 +229,30 @@ const DesktopNavigation = ({
 
     {SIMPLE_NAV_LINKS_AFTER.map((link) => (
       <Link
-        key={link.label}
-        href={link.href}
-        className={`text-grey-30 hover:text-primary-75 transition-colors py-2 ${
+        className={`py-2 text-grey-30 transition-colors hover:text-primary-75 ${
           pathname === link.href ? "text-primary-75" : ""
         }`}
+        href={link.href}
+        key={link.label}
       >
         {link.label}
       </Link>
     ))}
 
-    <Separator orientation="vertical" className="h-6" />
+    <Separator className="h-6" orientation="vertical" />
     <Link href="/contact">
       <Button
+        className="bg-primary-75 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary-70"
         variant="default"
-        className="bg-primary-75 hover:bg-primary-70 transition-all duration-200 hover:-translate-y-0.5"
       >
         Contact Us
       </Button>
     </Link>
-    <Separator orientation="vertical" className="h-6" />
+    <Separator className="h-6" orientation="vertical" />
     <Link href="https://learner.eduwise.solutions/" target="_blank">
       <Button
+        className="border-primary-75 font-semibold text-primary-75 transition-all duration-300 hover:bg-primary-75 hover:text-white"
         variant="outline"
-        className="border-primary-75 text-primary-75 hover:bg-primary-75 hover:text-white transition-all duration-300 font-semibold"
       >
         LMS Login
       </Button>
@@ -263,10 +263,10 @@ const DesktopNavigation = ({
 // Mobile Navigation
 
 interface MobileNavigationProps {
+  categoriesWithCourses: NavCategory[];
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
   pathname: string;
-  categoriesWithCourses: NavCategory[];
 }
 
 const MobileNavigation = ({
@@ -287,34 +287,34 @@ const MobileNavigation = ({
   }, []);
 
   return (
-    <Sheet open={isOpen} onOpenChange={onOpenChange}>
+    <Sheet onOpenChange={onOpenChange} open={isOpen}>
       <SheetTrigger asChild className="lg:hidden">
         <Button
-          variant="ghost"
-          size="icon"
-          className="hover:bg-primary-99"
           aria-label="Open navigation menu"
+          className="hover:bg-primary-99"
+          size="icon"
+          variant="ghost"
         >
           <Menu className="h-6 w-6 text-grey-30" />
         </Button>
       </SheetTrigger>
-      <SheetContent side="right" className="w-[300px] sm:w-[400px] p-0">
-        <SheetHeader className="p-6 border-b border-light-90">
-          <div className="flex justify-between items-center">
+      <SheetContent className="w-[300px] p-0 sm:w-[400px]" side="right">
+        <SheetHeader className="border-light-90 border-b p-6">
+          <div className="flex items-center justify-between">
             <Logo className="w-[120px]" />
           </div>
         </SheetHeader>
 
-        <div className="p-6 overflow-y-auto max-h-[calc(100vh-120px)]">
+        <div className="max-h-[calc(100vh-120px)] overflow-y-auto p-6">
           <div className="flex flex-col gap-3">
             {/* Simple links before Courses */}
             {SIMPLE_NAV_LINKS.map((link) => (
               <Link
-                key={link.label}
-                href={link.href}
-                className={`text-lg text-grey-30 hover:text-primary-75 transition-colors ${
+                className={`text-grey-30 text-lg transition-colors hover:text-primary-75 ${
                   pathname === link.href ? "text-primary-75" : ""
                 }`}
+                href={link.href}
+                key={link.label}
                 onClick={handleClose}
               >
                 {link.label}
@@ -324,44 +324,44 @@ const MobileNavigation = ({
             {/* Courses accordion section */}
             <div className="space-y-2">
               <Link
-                href="/courses"
-                className={`text-lg text-grey-30 hover:text-primary-75 transition-colors flex items-center justify-between ${
+                className={`flex items-center justify-between text-grey-30 text-lg transition-colors hover:text-primary-75 ${
                   pathname === "/courses" ? "text-primary-75" : ""
                 }`}
+                href="/courses"
                 onClick={handleClose}
               >
                 Courses
               </Link>
 
               {/* Category accordions */}
-              <div className="pl-2 space-y-1">
+              <div className="space-y-1 pl-2">
                 {categoriesWithCourses.map((category) => (
                   <div key={category.id}>
                     {/* Category toggle button */}
                     <button
+                      className="flex w-full items-center justify-between rounded-lg px-2 py-2 transition-colors hover:bg-primary-99"
                       onClick={() => toggleCategory(category.id)}
-                      className="w-full flex items-center justify-between py-2 px-2 rounded-lg hover:bg-primary-99 transition-colors"
                     >
-                      <span className="flex items-center gap-2 text-sm font-medium text-grey-35">
+                      <span className="flex items-center gap-2 font-medium text-grey-35 text-sm">
                         <span>{category.emoji}</span>
                         {category.label}
                       </span>
                       <ChevronDown
-                        size={14}
                         className={`text-grey-50 transition-transform duration-200 ${
                           expandedCategory === category.id ? "rotate-180" : ""
                         }`}
+                        size={14}
                       />
                     </button>
 
                     {/* Expanded course list */}
                     {expandedCategory === category.id && (
-                      <div className="pl-6 pb-2 space-y-1">
+                      <div className="space-y-1 pb-2 pl-6">
                         {category.courses.map((course) => (
                           <Link
-                            key={course.id}
+                            className="block rounded-lg px-2 py-1.5 text-grey-40 text-sm transition-colors hover:bg-primary-99 hover:text-primary-75"
                             href={course.slug}
-                            className="block py-1.5 px-2 text-sm text-grey-40 hover:text-primary-75 transition-colors rounded-lg hover:bg-primary-99"
+                            key={course.id}
                             onClick={handleClose}
                           >
                             <span className="flex items-center gap-2">
@@ -380,11 +380,11 @@ const MobileNavigation = ({
             {/* Simple links after Courses */}
             {SIMPLE_NAV_LINKS_AFTER.map((link) => (
               <Link
-                key={link.label}
-                href={link.href}
-                className={`text-lg text-grey-30 hover:text-primary-75 transition-colors ${
+                className={`text-grey-30 text-lg transition-colors hover:text-primary-75 ${
                   pathname === link.href ? "text-primary-75" : ""
                 }`}
+                href={link.href}
+                key={link.label}
                 onClick={handleClose}
               >
                 {link.label}
@@ -393,9 +393,9 @@ const MobileNavigation = ({
 
             <Link href="https://learner.eduwise.solutions/" target="_blank">
               <Button
-                variant="outline"
-                className="w-full mt-4 border-primary-75 text-primary-75 hover:bg-primary-75 hover:text-white transition-colors duration-300"
+                className="mt-4 w-full border-primary-75 text-primary-75 transition-colors duration-300 hover:bg-primary-75 hover:text-white"
                 onClick={handleClose}
+                variant="outline"
               >
                 LMS Login
               </Button>
@@ -403,9 +403,9 @@ const MobileNavigation = ({
 
             <Link href="/contact">
               <Button
-                variant="default"
-                className="bg-primary-75 hover:bg-primary-70 w-full mt-4"
+                className="mt-4 w-full bg-primary-75 hover:bg-primary-70"
                 onClick={handleClose}
+                variant="default"
               >
                 Contact Us
               </Button>
@@ -440,7 +440,9 @@ export default function Navbar({ categoriesWithCourses }: NavbarProps) {
     let timeoutId: NodeJS.Timeout | null = null;
 
     const throttledHandleScroll = () => {
-      if (timeoutId) return;
+      if (timeoutId) {
+        return;
+      }
       timeoutId = setTimeout(() => {
         handleScroll();
         timeoutId = null;
@@ -462,24 +464,24 @@ export default function Navbar({ categoriesWithCourses }: NavbarProps) {
       `w-full py-4 sticky top-0 bg-white/80 backdrop-blur-md z-50 transition-all duration-300 ${
         scrolled ? "shadow-md border-b border-light-90" : ""
       }`,
-    [scrolled],
+    [scrolled]
   );
 
   return (
     <>
       <nav className={navClasses}>
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center">
+          <div className="flex items-center justify-between">
             <Logo />
             <DesktopNavigation
-              pathname={pathname}
               categoriesWithCourses={categoriesWithCourses}
+              pathname={pathname}
             />
             <MobileNavigation
+              categoriesWithCourses={categoriesWithCourses}
               isOpen={isOpen}
               onOpenChange={setIsOpen}
               pathname={pathname}
-              categoriesWithCourses={categoriesWithCourses}
             />
           </div>
         </div>

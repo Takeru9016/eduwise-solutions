@@ -1,12 +1,12 @@
-import { NextResponse } from "next/server";
 import { google } from "googleapis";
+import { NextResponse } from "next/server";
 
 const SHEET_NAME = "LinkedIn";
 
 async function initSheets() {
   const privateKey = process.env.GOOGLE_SHEETS_PRIVATE_KEY?.replace(
     /\\n/g,
-    "\n",
+    "\n"
   );
 
   const auth = new google.auth.GoogleAuth({
@@ -17,7 +17,7 @@ async function initSheets() {
     scopes: ["https://www.googleapis.com/auth/spreadsheets"],
   });
 
-  const sheets = google.sheets({ version: "v4", auth });
+  const sheets = google.sheets({ auth, version: "v4" });
 
   // Ensure the "LinkedIn" sheet exists
   const spreadsheet = await sheets.spreadsheets.get({
@@ -25,36 +25,44 @@ async function initSheets() {
   });
 
   const exists = spreadsheet.data.sheets?.some(
-    (s) => s.properties?.title === SHEET_NAME,
+    (s) => s.properties?.title === SHEET_NAME
   );
 
   if (!exists) {
     await sheets.spreadsheets.batchUpdate({
-      spreadsheetId: process.env.SPREADSHEET_ID,
       requestBody: {
         requests: [
           {
             addSheet: {
               properties: {
+                gridProperties: { columnCount: 7, rowCount: 1000 },
                 title: SHEET_NAME,
-                gridProperties: { rowCount: 1000, columnCount: 7 },
               },
             },
           },
         ],
       },
+      spreadsheetId: process.env.SPREADSHEET_ID,
     });
 
     // Add header row
     await sheets.spreadsheets.values.update({
-      spreadsheetId: process.env.SPREADSHEET_ID,
       range: `${SHEET_NAME}!A1:G1`,
-      valueInputOption: "RAW",
       requestBody: {
         values: [
-          ["Name", "Email", "Mobile", "Course Interest", "Source", "Timestamp", "Consent"],
+          [
+            "Name",
+            "Email",
+            "Mobile",
+            "Course Interest",
+            "Source",
+            "Timestamp",
+            "Consent",
+          ],
         ],
       },
+      spreadsheetId: process.env.SPREADSHEET_ID,
+      valueInputOption: "RAW",
     });
   }
 
@@ -66,19 +74,17 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { name, email, mobile, course, consent } = body;
 
-    if (!name || !email || !mobile) {
+    if (!(name && email && mobile)) {
       return NextResponse.json(
         { error: "Name, email and mobile are required" },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
     const sheets = await initSheets();
 
     await sheets.spreadsheets.values.append({
-      spreadsheetId: process.env.SPREADSHEET_ID,
       range: SHEET_NAME,
-      valueInputOption: "USER_ENTERED",
       requestBody: {
         values: [
           [
@@ -92,6 +98,8 @@ export async function POST(req: Request) {
           ],
         ],
       },
+      spreadsheetId: process.env.SPREADSHEET_ID,
+      valueInputOption: "USER_ENTERED",
     });
 
     return NextResponse.json({ success: true });
@@ -99,7 +107,7 @@ export async function POST(req: Request) {
     console.error("[linkedin-lead] Error:", error);
     return NextResponse.json(
       { error: "Failed to submit. Please try again." },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

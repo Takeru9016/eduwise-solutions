@@ -6,124 +6,124 @@ const BASE = "https://api.iconify.design";
 
 const domains = [
   {
+    color: "#ff6d00",
     iconSrc: `${BASE}/logos/tensorflow.svg`,
     label: "AI & Machine Learning",
-    color: "#ff6d00",
   },
   {
+    color: "#f37626",
     iconSrc: `${BASE}/logos/jupyter.svg`,
     label: "Data Science",
-    color: "#f37626",
   },
   {
+    color: "#7c3aed",
     iconSrc: `${BASE}/logos/apache-spark.svg`,
     label: "Data Analytics",
-    color: "#7c3aed",
   },
   {
+    color: "#4285f4",
     iconSrc: `${BASE}/logos/google-cloud.svg`,
     label: "Cloud Computing",
-    color: "#4285f4",
   },
   {
+    color: "#ef4444",
     iconSrc: `${BASE}/carbon/security.svg?color=%23ef4444`,
     label: "Cyber Security",
-    color: "#ef4444",
   },
   {
+    color: "#326ce5",
     iconSrc: `${BASE}/logos/kubernetes.svg`,
     label: "DevOps",
-    color: "#326ce5",
   },
   {
+    color: "#10b981",
     iconSrc: `${BASE}/logos/react.svg`,
     label: "Full Stack Development",
-    color: "#10b981",
   },
   {
+    color: "#f89820",
     iconSrc: `${BASE}/logos/java.svg`,
     label: "Java Programming",
-    color: "#f89820",
   },
   {
+    color: "#3776ab",
     iconSrc: `${BASE}/logos/python.svg`,
     label: "Python Programming",
-    color: "#3776ab",
   },
   {
+    color: "#e44d26",
     iconSrc: `${BASE}/logos/html-5.svg`,
     label: "Web Development",
-    color: "#e44d26",
   },
   {
+    color: "#f24e1e",
     iconSrc: `${BASE}/logos/figma.svg`,
     label: "UI/UX Design",
-    color: "#f24e1e",
   },
   {
+    color: "#a855f7",
     iconSrc: `${BASE}/simple-icons/scikitlearn.svg?color=%23a855f7`,
     label: "ML with Python",
-    color: "#a855f7",
   },
   {
+    color: "#0078d4",
     iconSrc: `${BASE}/logos/microsoft-azure.svg`,
     label: "Azure Cloud",
-    color: "#0078d4",
   },
   {
+    color: "#22d3ee",
     iconSrc: `${BASE}/carbon/iot-platform.svg?color=%2322d3ee`,
     label: "IoT",
-    color: "#22d3ee",
   },
   {
+    color: "#f43f5e",
     iconSrc: `${BASE}/carbon/chip.svg?color=%23f43f5e`,
     label: "Embedded Systems",
-    color: "#f43f5e",
   },
   {
+    color: "#34d399",
     iconSrc: `${BASE}/carbon/car.svg?color=%2334d399`,
     label: "Hybrid Electric Vehicles",
-    color: "#34d399",
   },
   {
+    color: "#818cf8",
     iconSrc: `${BASE}/carbon/chemistry.svg?color=%23818cf8`,
     label: "Nanotechnology",
-    color: "#818cf8",
   },
   {
+    color: "#fbbf24",
     iconSrc: `${BASE}/simple-icons/autodesk.svg?color=%23fbbf24`,
     label: "AutoCAD",
-    color: "#fbbf24",
   },
   {
+    color: "#f472b6",
     iconSrc: `${BASE}/carbon/growth.svg?color=%23f472b6`,
     label: "Digital Marketing",
-    color: "#f472b6",
   },
   {
+    color: "#4ade80",
     iconSrc: `${BASE}/carbon/chart-line.svg?color=%234ade80`,
     label: "Stock Market",
-    color: "#4ade80",
   },
   {
+    color: "#60a5fa",
     iconSrc: `${BASE}/carbon/currency.svg?color=%2360a5fa`,
     label: "Finance",
-    color: "#60a5fa",
   },
   {
+    color: "#fb923c",
     iconSrc: `${BASE}/carbon/group.svg?color=%23fb923c`,
     label: "HR Management",
-    color: "#fb923c",
   },
   {
+    color: "#c084fc",
     iconSrc: `${BASE}/carbon/user-profile.svg?color=%23c084fc`,
     label: "Psychology",
-    color: "#c084fc",
   },
   {
+    color: "#2dd4bf",
     iconSrc: `${BASE}/carbon/result.svg?color=%232dd4bf`,
     label: "Placement Programs",
-    color: "#2dd4bf",
   },
 ];
 
@@ -148,9 +148,9 @@ function IsometricTile({
   return (
     <div
       className="isometric-tile"
-      style={{ animationDelay: `${delay}s` }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      style={{ animationDelay: `${delay}s` }}
     >
       {/* The 3D tile face */}
       <div
@@ -158,9 +158,8 @@ function IsometricTile({
         style={
           {
             "--tile-color": color,
-            transform:
-              hovered ?
-                "translateZ(20px) scale(1.08)"
+            transform: hovered
+              ? "translateZ(20px) scale(1.08)"
               : "translateZ(0px) scale(1)",
           } as React.CSSProperties
         }
@@ -172,8 +171,8 @@ function IsometricTile({
         <div
           className="tile-glow"
           style={{
-            opacity: hovered ? 1 : 0,
             boxShadow: `0 0 30px ${color}, 0 0 60px ${color}40`,
+            opacity: hovered ? 1 : 0,
           }}
         />
 
@@ -189,13 +188,13 @@ function IsometricTile({
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={iconSrc}
               alt=""
               aria-hidden="true"
-              width={22}
               height={22}
-              style={{ objectFit: "contain", display: "block" }}
               loading="lazy"
+              src={iconSrc}
+              style={{ display: "block", objectFit: "contain" }}
+              width={22}
             />
           </div>
           <span
@@ -240,11 +239,11 @@ function DomainRow({
       >
         {items.map((d, i) => (
           <IsometricTile
-            key={`${i}-${d.label}`}
-            iconSrc={d.iconSrc}
-            label={d.label}
             color={d.color}
             delay={(i % domains.length) * 0.1}
+            iconSrc={d.iconSrc}
+            key={`${i}-${d.label}`}
+            label={d.label}
           />
         ))}
       </div>
@@ -545,9 +544,9 @@ export default function DomainsShowcase() {
 
       {/* ── Isometric Cascade Rows ── */}
       <div className="ds-rows">
-        <DomainRow domains={row1} direction="left" speed={38} />
-        <DomainRow domains={row2} direction="right" speed={45} />
-        <DomainRow domains={row3} direction="left" speed={32} />
+        <DomainRow direction="left" domains={row1} speed={38} />
+        <DomainRow direction="right" domains={row2} speed={45} />
+        <DomainRow direction="left" domains={row3} speed={32} />
       </div>
     </section>
   );

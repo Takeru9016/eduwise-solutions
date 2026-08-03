@@ -1,10 +1,14 @@
-import { Navbar, Footer } from "@/components";
+import { Footer, Navbar } from "@/components";
 import { client } from "@/sanity/lib/client";
-import { POSTS_QUERY, CATEGORIES_QUERY } from "@/sanity/lib/queries";
-import BlogsClient from "./BlogsClient";
+import { CATEGORIES_QUERY, POSTS_QUERY } from "@/sanity/lib/queries";
 import type { Post } from "./BlogsClient";
+import BlogsClient from "./BlogsClient";
 
-type Category = { _id: string; title: string; slug?: { current: string } };
+interface Category {
+  _id: string;
+  slug?: { current: string };
+  title: string;
+}
 
 export const revalidate = 60;
 
@@ -25,7 +29,7 @@ export default async function BlogsPage() {
     <>
       <Navbar />
       <main className="min-h-screen">
-        <BlogsClient posts={posts} categories={categories} />
+        <BlogsClient categories={categories} posts={posts} />
       </main>
       <Footer />
     </>

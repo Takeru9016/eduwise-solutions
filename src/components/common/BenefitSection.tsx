@@ -1,22 +1,22 @@
 import {
-  Compass,
-  GraduationCap,
-  LayoutGrid,
   Building2,
-  HeartHandshake,
+  Compass,
   Focus,
+  GraduationCap,
+  HeartHandshake,
+  LayoutGrid,
+  type LucideIcon,
   Sparkles,
-  LucideIcon,
 } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
 
 // Types for better type safety
 interface Benefit {
+  category?: string;
+  description: string;
   icon: LucideIcon;
   title: string;
-  description: string;
-  category?: string;
 }
 
 // Reusable components
@@ -27,8 +27,8 @@ const SectionBadge = ({
   icon: LucideIcon;
   text: string;
 }) => (
-  <div className="inline-flex items-center gap-2 bg-primary-99 text-primary-75 px-4 py-2 rounded-full text-sm font-medium mb-6">
-    <Icon size={16} className="text-primary-75" />
+  <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-primary-99 px-4 py-2 font-medium text-primary-75 text-sm">
+    <Icon className="text-primary-75" size={16} />
     {text}
   </div>
 );
@@ -37,20 +37,20 @@ const BenefitCard = ({ benefit }: { benefit: Benefit }) => {
   const { icon: Icon, title, description } = benefit;
 
   return (
-    <Card className="group border-none bg-white hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+    <Card className="group transform border-none bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
       <CardContent className="p-6 md:p-8">
         <div className="space-y-6">
           {/* Icon Container */}
           <div className="relative">
-            <div className="w-12 h-12 flex items-center justify-center bg-primary-99 rounded-xl group-hover:bg-primary-95 transition-colors duration-300">
-              <Icon size={24} className="text-primary-75" strokeWidth={1.5} />
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-99 transition-colors duration-300 group-hover:bg-primary-95">
+              <Icon className="text-primary-75" size={24} strokeWidth={1.5} />
             </div>
-            <div className="absolute -bottom-1 left-2 w-8 h-1 bg-primary-90 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="absolute -bottom-1 left-2 h-1 w-8 rounded-full bg-primary-90 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           </div>
 
           {/* Content */}
           <div className="space-y-3">
-            <h3 className="text-lg font-vietnam font-semibold text-grey-20">
+            <h3 className="font-semibold font-vietnam text-grey-20 text-lg">
               {title}
             </h3>
             <p className="text-grey-35 text-sm leading-relaxed">
@@ -68,69 +68,69 @@ export default function BenefitSection() {
   // Organized benefits by category for future flexibility
   const benefits: Benefit[] = [
     {
-      icon: Compass,
-      title: "One-Stop Solution",
+      category: "convenience",
       description:
         "Find everything you need for your educational journey in one place",
-      category: "convenience",
+      icon: Compass,
+      title: "One-Stop Solution",
     },
     {
-      icon: GraduationCap,
-      title: "Curated Premier Courses",
+      category: "quality",
       description:
         "Hand-picked courses from top institutions and industry leaders",
-      category: "quality",
+      icon: GraduationCap,
+      title: "Curated Premier Courses",
     },
     {
-      icon: LayoutGrid,
-      title: "Simplify Learning Choices",
+      category: "convenience",
       description:
         "Clear guidance to help you make the right educational decisions",
-      category: "convenience",
+      icon: LayoutGrid,
+      title: "Simplify Learning Choices",
     },
     {
-      icon: Building2,
-      title: "Trusted Partners",
+      category: "quality",
       description:
         "Collaborate with recognized educational institutions and companies",
-      category: "quality",
+      icon: Building2,
+      title: "Trusted Partners",
     },
     {
-      icon: HeartHandshake,
-      title: "End-to-End Support",
+      category: "support",
       description:
         "Comprehensive assistance from enrollment to course completion",
-      category: "support",
+      icon: HeartHandshake,
+      title: "End-to-End Support",
     },
     {
+      category: "career",
+      description: "Programs designed to enhance your professional growth",
       icon: Focus,
       title: "Career-Focused Approach",
-      description: "Programs designed to enhance your professional growth",
-      category: "career",
     },
   ];
 
   return (
-    <section className="relative py-16 md:py-24 bg-gradient-to-b from-light-97 to-white overflow-hidden">
+    <section className="relative overflow-hidden bg-gradient-to-b from-light-97 to-white py-16 md:py-24">
       {/* Background decorative elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-primary-95 rounded-full opacity-20 blur-3xl" />
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-primary-97 rounded-full opacity-20 blur-3xl" />
+        <div className="absolute top-20 left-20 h-72 w-72 rounded-full bg-primary-95 opacity-20 blur-3xl" />
+        <div className="absolute right-20 bottom-20 h-96 w-96 rounded-full bg-primary-97 opacity-20 blur-3xl" />
       </div>
 
-      <div className="container mx-auto relative">
+      <div className="container relative mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="mb-16 text-center">
           <SectionBadge icon={Sparkles} text="Why Students Choose Us" />
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-vietnam font-bold text-grey-15">
+          <h2 className="font-bold font-vietnam text-3xl text-grey-15 md:text-4xl lg:text-5xl">
             Benefits That Set Us Apart
           </h2>
         </div>
 
         {/* Benefits Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:gap-8 lg:grid-cols-3">
           {benefits.map((benefit) => (
-            <BenefitCard key={benefit.title} benefit={benefit} />
+            <BenefitCard benefit={benefit} key={benefit.title} />
           ))}
         </div>
       </div>

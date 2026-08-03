@@ -1,99 +1,100 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
-import Script from "next/script";
 import {
-  Check,
+  ArrowRight,
+  Award,
+  Banknote,
   BookOpen,
-  Users,
-  Sparkles,
+  Briefcase,
+  Building,
+  Calendar,
+  Check,
+  ChevronDown,
+  ChevronRight,
+  Clock,
+  Cloud,
+  Code,
+  FileText,
+  GraduationCap,
+  HelpCircle,
+  IndianRupee,
   Laptop,
   LifeBuoy,
+  Lightbulb,
+  type LucideIcon,
   Medal,
-  Zap,
-  IndianRupee,
-  Cloud,
+  Play,
+  Rocket,
   ServerCog,
   Settings2,
-  ArrowRight,
-  Clock,
-  Target,
-  Award,
-  Star,
-  TrendingUp,
   Shield,
-  ChevronDown,
-  GraduationCap,
-  Lightbulb,
-  Code,
-  Briefcase,
-  Rocket,
-  HelpCircle,
-  Play,
-  FileText,
+  Sparkles,
+  Star,
+  Target,
+  TrendingUp,
   UserCheck,
-  Banknote,
-  ChevronRight,
-  Calendar,
-  Building,
-  type LucideIcon,
+  Users,
+  Zap,
 } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import Script from "next/script";
+import { useEffect, useRef, useState } from "react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import PaymentStatusModal from "../payment/PaymentStatusModal";
-import PaymentModal from "../payment/PaymentModal";
-import PlacementSection from "./PlacementSection";
+import { Button } from "@/components/ui/button";
+import type { CourseContent } from "@/types/course";
 import GoogleReviews from "../common/GoogleReviews";
 import RefundHighlight from "../common/RefundHighlight";
+import PaymentModal from "../payment/PaymentModal";
+import PaymentStatusModal from "../payment/PaymentStatusModal";
 import CourseLeadForm from "./CourseLeadForm";
-import type { CourseContent } from "@/types/course";
+import PlacementSection from "./PlacementSection";
 
 // Icon Map
 // Maps string icon names from Sanity to Lucide components
 const ICON_MAP: Record<string, LucideIcon> = {
-  Users,
-  Clock,
-  Target,
+  ArrowRight,
   Award,
-  Star,
-  Sparkles,
-  Laptop,
-  Shield,
+  Banknote,
   BookOpen,
-  LifeBuoy,
-  Medal,
-  Zap,
+  Briefcase,
+  Calendar,
+  Check,
+  ChevronDown,
+  ChevronRight,
+  Clock,
   Cloud,
+  Code,
+  FileText,
+  GraduationCap,
+  HelpCircle,
+  IndianRupee,
+  Laptop,
+  LifeBuoy,
+  Lightbulb,
+  Medal,
+  Play,
+  Rocket,
   ServerCog,
   Settings2,
+  Shield,
+  Sparkles,
+  Star,
+  Target,
   TrendingUp,
-  GraduationCap,
-  Lightbulb,
-  Code,
-  Briefcase,
-  Rocket,
-  IndianRupee,
-  Check,
-  Play,
-  HelpCircle,
-  ArrowRight,
-  ChevronDown,
-  FileText,
   UserCheck,
-  Banknote,
-  ChevronRight,
-  Calendar,
+  Users,
+  Zap,
 };
 
 function getIcon(name?: string): LucideIcon {
-  if (!name) return Sparkles;
+  if (!name) {
+    return Sparkles;
+  }
   return ICON_MAP[name] || Sparkles;
 }
 
@@ -126,8 +127,8 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
         if (entry.isIntersecting && !statsVisible) {
           setStatsVisible(true);
           const targets = course.stats.map((stat) => {
-            const num = parseFloat(stat.value.replace(/[^0-9.]/g, ""));
-            return isNaN(num) ? 0 : num;
+            const num = Number.parseFloat(stat.value.replace(/[^0-9.]/g, ""));
+            return Number.isNaN(num) ? 0 : num;
           });
           const duration = 1500;
           const steps = 40;
@@ -136,20 +137,24 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
           const timer = setInterval(() => {
             step++;
             const progress = Math.min(step / steps, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
+            const eased = 1 - (1 - progress) ** 3;
             setAnimatedValues(
               targets.map((t) => {
                 const decimals = (String(t).split(".")[1] || "").length;
-                return parseFloat((t * eased).toFixed(decimals));
-              }),
+                return Number.parseFloat((t * eased).toFixed(decimals));
+              })
             );
-            if (step >= steps) clearInterval(timer);
+            if (step >= steps) {
+              clearInterval(timer);
+            }
           }, interval);
         }
       },
-      { threshold: 0.3 },
+      { threshold: 0.3 }
     );
-    if (statsRef.current) observer.observe(statsRef.current);
+    if (statsRef.current) {
+      observer.observe(statsRef.current);
+    }
     return () => observer.disconnect();
   }, [course.stats, statsVisible]);
 
@@ -159,7 +164,7 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
     setPaymentStatus((prev) => ({ ...prev, isOpen: false }));
 
   const discount = Math.round(
-    ((course.originalPrice - course.price) / course.originalPrice) * 100,
+    ((course.originalPrice - course.price) / course.originalPrice) * 100
   );
   const saving = course.originalPrice - course.price;
 
@@ -172,50 +177,50 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
 
       <PaymentStatusModal
         isOpen={paymentStatus.isOpen}
+        message={paymentStatus.message}
         onClose={handleCloseStatusModal}
         status={paymentStatus.status}
-        message={paymentStatus.message}
       />
       <PaymentModal
+        amount={course.price}
         isOpen={isPaymentModalOpen}
         onClose={closePaymentModal}
-        amount={course.price}
-        programName={course.title}
         onPaymentComplete={(status, message) => {
-          setPaymentStatus({ isOpen: true, status, message });
+          setPaymentStatus({ isOpen: true, message, status });
           closePaymentModal();
         }}
+        programName={course.title}
       />
 
       {/* 1. HERO SECTION */}
-      <section className="relative py-12 sm:py-16 md:py-20 lg:py-28 bg-gradient-to-br from-primary-99 via-white to-primary-97 overflow-hidden">
+      <section className="relative overflow-hidden bg-gradient-to-br from-primary-99 via-white to-primary-97 py-12 sm:py-16 md:py-20 lg:py-28">
         {/* Background decorations */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-64 sm:w-80 lg:w-96 h-64 sm:h-80 lg:h-96 bg-gradient-to-br from-primary-90/20 to-transparent rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 w-48 sm:w-64 lg:w-80 h-48 sm:h-64 lg:h-80 bg-gradient-to-tl from-primary-95/30 to-transparent rounded-full blur-2xl" />
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute top-0 left-1/4 h-64 w-64 rounded-full bg-gradient-to-br from-primary-90/20 to-transparent blur-3xl sm:h-80 sm:w-80 lg:h-96 lg:w-96" />
+          <div className="absolute right-1/4 bottom-0 h-48 w-48 rounded-full bg-gradient-to-tl from-primary-95/30 to-transparent blur-2xl sm:h-64 sm:w-64 lg:h-80 lg:w-80" />
         </div>
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+        <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-8 md:gap-12 lg:grid-cols-2">
             {/* Left — text content */}
-            <div className="text-center lg:text-left order-2 lg:order-1">
-              <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm text-primary-75 px-4 py-2 rounded-full text-sm font-semibold mb-6 shadow-lg border border-primary-90/30">
-                <Sparkles className="w-4 h-4" />
+            <div className="order-2 text-center lg:order-1 lg:text-left">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary-90/30 bg-white/90 px-4 py-2 font-semibold text-primary-75 text-sm shadow-lg backdrop-blur-sm">
+                <Sparkles className="h-4 w-4" />
                 {course.title}
               </div>
 
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-vietnam font-bold text-grey-15 mb-6 leading-tight">
+              <h1 className="mb-6 font-bold font-vietnam text-3xl text-grey-15 leading-tight sm:text-4xl md:text-5xl lg:text-6xl">
                 {course.title.split(" ").slice(0, -2).join(" ")}{" "}
                 <span className="bg-gradient-to-r from-primary-75 to-primary-90 bg-clip-text text-transparent">
                   {course.title.split(" ").slice(-2).join(" ")}
                 </span>
               </h1>
 
-              <p className="text-lg sm:text-xl lg:text-2xl text-primary-75 font-semibold mb-4">
+              <p className="mb-4 font-semibold text-lg text-primary-75 sm:text-xl lg:text-2xl">
                 {course.subtitle}
               </p>
 
-              <p className="text-grey-35 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl mx-auto lg:mx-0">
+              <p className="mx-auto mb-8 max-w-2xl text-base text-grey-35 leading-relaxed sm:text-lg lg:mx-0">
                 {course.description}
               </p>
             </div>
@@ -227,73 +232,74 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
           </div>
 
           {/* Stats strip — floating glassmorphism bar */}
-          <div ref={statsRef} className="mt-12 sm:mt-16 -mb-16 relative z-30">
-            <div className="bg-white/90 backdrop-blur-xl rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.08)] border border-grey-90/60 p-2 sm:p-3">
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
+          <div className="relative z-30 mt-12 -mb-16 sm:mt-16" ref={statsRef}>
+            <div className="rounded-2xl border border-grey-90/60 bg-white/90 p-2 shadow-[0_8px_40px_rgba(0,0,0,0.08)] backdrop-blur-xl sm:p-3">
+              <div className="grid grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-4">
                 {course.stats.map((stat, i) => {
                   const Icon = getIcon(stat.icon);
                   const colors = [
                     {
-                      border: "border-emerald-500",
                       bg: "bg-emerald-50",
-                      text: "text-emerald-600",
+                      border: "border-emerald-500",
                       icon: "from-emerald-500 to-teal-500",
+                      text: "text-emerald-600",
                     },
                     {
-                      border: "border-blue-500",
                       bg: "bg-blue-50",
-                      text: "text-blue-600",
+                      border: "border-blue-500",
                       icon: "from-blue-500 to-indigo-500",
+                      text: "text-blue-600",
                     },
                     {
-                      border: "border-amber-500",
                       bg: "bg-amber-50",
-                      text: "text-amber-600",
+                      border: "border-amber-500",
                       icon: "from-amber-500 to-orange-500",
+                      text: "text-amber-600",
                     },
                     {
-                      border: "border-violet-500",
                       bg: "bg-violet-50",
-                      text: "text-violet-600",
+                      border: "border-violet-500",
                       icon: "from-violet-500 to-purple-500",
+                      text: "text-violet-600",
                     },
                   ];
                   const c = colors[i % 4];
 
                   // Build the displayed value: replace the numeric part with animated value
                   const suffix = stat.value.replace(/[0-9.]/g, "").trim();
-                  const targetNum = parseFloat(
-                    stat.value.replace(/[^0-9.]/g, ""),
+                  const targetNum = Number.parseFloat(
+                    stat.value.replace(/[^0-9.]/g, "")
                   );
                   const decimals = (String(targetNum).split(".")[1] || "")
                     .length;
                   const displayVal =
-                    animatedValues[i] !== undefined ?
-                      `${decimals > 0 ? animatedValues[i].toFixed(decimals) : animatedValues[i].toLocaleString("en-IN")}${suffix ? " " + suffix : ""}`
-                    : stat.value;
+                    animatedValues[i] === undefined
+                      ? stat.value
+                      : `${decimals > 0 ? animatedValues[i].toFixed(decimals) : animatedValues[i].toLocaleString("en-IN")}${suffix ? ` ${suffix}` : ""}`;
 
                   return (
                     <div
+                      className={`relative rounded-xl border-[3px] p-4 text-center sm:p-6 ${c.border} group bg-gradient-to-b from-white to-slate-50/80 transition-all duration-500 hover:-translate-y-0.5 hover:shadow-lg`}
                       key={i}
-                      className={`relative rounded-xl p-4 sm:p-6 text-center border-[3px] ${c.border} bg-gradient-to-b from-white to-slate-50/80 hover:shadow-lg transition-all duration-500 hover:-translate-y-0.5 group`}
                       style={{
                         opacity: statsVisible ? 1 : 0,
-                        transform:
-                          statsVisible ? "translateY(0)" : "translateY(16px)",
+                        transform: statsVisible
+                          ? "translateY(0)"
+                          : "translateY(16px)",
                         transition: `all 0.6s cubic-bezier(0.4,0,0.2,1) ${i * 0.1}s`,
                       }}
                     >
                       <div
-                        className={`w-10 h-10 sm:w-11 sm:h-11 bg-gradient-to-br ${c.icon} rounded-xl flex items-center justify-center mx-auto mb-3 shadow-sm group-hover:scale-110 transition-transform duration-300`}
+                        className={`h-10 w-10 bg-gradient-to-br sm:h-11 sm:w-11 ${c.icon} mx-auto mb-3 flex items-center justify-center rounded-xl shadow-sm transition-transform duration-300 group-hover:scale-110`}
                       >
-                        <Icon className="w-5 h-5 text-white" />
+                        <Icon className="h-5 w-5 text-white" />
                       </div>
                       <p
-                        className={`text-2xl sm:text-3xl lg:text-4xl font-vietnam font-extrabold ${c.text} mb-1 tabular-nums`}
+                        className={`font-extrabold font-vietnam text-2xl sm:text-3xl lg:text-4xl ${c.text} mb-1 tabular-nums`}
                       >
                         {displayVal}
                       </p>
-                      <p className="text-grey-40 font-semibold text-xs sm:text-sm tracking-wide uppercase">
+                      <p className="font-semibold text-grey-40 text-xs uppercase tracking-wide sm:text-sm">
                         {stat.label}
                       </p>
                     </div>
@@ -309,56 +315,56 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
       {course.slug.current.toLowerCase() === "devops" && <RefundHighlight />}
 
       {/* 3. FEATURES — Bento Grid */}
-      <section className="pt-28 pb-20 bg-gradient-to-b from-slate-50 to-white">
+      <section className="bg-gradient-to-b from-slate-50 to-white pt-28 pb-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 px-5 py-2.5 rounded-full text-sm font-bold mb-5 border border-emerald-100">
+          <div className="mb-16 text-center">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-100 bg-emerald-50 px-5 py-2.5 font-bold text-emerald-700 text-sm">
               <Sparkles size={16} />
               Why Choose This Program
             </div>
-            <h2 className="text-3xl lg:text-5xl font-vietnam font-bold text-grey-15 mb-6">
+            <h2 className="mb-6 font-bold font-vietnam text-3xl text-grey-15 lg:text-5xl">
               Program{" "}
               <span className="bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">
                 Highlights
               </span>
             </h2>
-            <p className="text-grey-40 text-lg max-w-3xl mx-auto leading-relaxed">
+            <p className="mx-auto max-w-3xl text-grey-40 text-lg leading-relaxed">
               Comprehensive training designed to make you job-ready with
               industry-relevant skills and hands-on experience.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto auto-rows-auto">
+          <div className="mx-auto grid max-w-6xl auto-rows-auto grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
             {course.features.map((feature, i) => {
               const Icon = getIcon(feature.icon);
               const accents = [
                 {
-                  border: "border-l-emerald-500",
+                  badge: "bg-emerald-50 text-emerald-700 border-emerald-100",
                   bg: "hover:bg-emerald-50/50",
+                  border: "border-l-emerald-500",
                   iconBg: "from-emerald-500 to-teal-500",
                   shadow: "hover:shadow-emerald-100",
-                  badge: "bg-emerald-50 text-emerald-700 border-emerald-100",
                 },
                 {
-                  border: "border-l-blue-500",
+                  badge: "bg-blue-50 text-blue-700 border-blue-100",
                   bg: "hover:bg-blue-50/50",
+                  border: "border-l-blue-500",
                   iconBg: "from-blue-500 to-indigo-500",
                   shadow: "hover:shadow-blue-100",
-                  badge: "bg-blue-50 text-blue-700 border-blue-100",
                 },
                 {
-                  border: "border-l-amber-500",
+                  badge: "bg-amber-50 text-amber-700 border-amber-100",
                   bg: "hover:bg-amber-50/50",
+                  border: "border-l-amber-500",
                   iconBg: "from-amber-500 to-orange-500",
                   shadow: "hover:shadow-amber-100",
-                  badge: "bg-amber-50 text-amber-700 border-amber-100",
                 },
                 {
-                  border: "border-l-violet-500",
+                  badge: "bg-violet-50 text-violet-700 border-violet-100",
                   bg: "hover:bg-violet-50/50",
+                  border: "border-l-violet-500",
                   iconBg: "from-violet-500 to-purple-500",
                   shadow: "hover:shadow-violet-100",
-                  badge: "bg-violet-50 text-violet-700 border-violet-100",
                 },
               ];
               const a = accents[i % 4];
@@ -372,56 +378,58 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
 
               return (
                 <div
-                  key={i}
-                  className={`group relative bg-white rounded-2xl border border-slate-100 border-l-4 ${a.border} ${a.bg} ${a.shadow} shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1 ${
-                    isFeatured ?
-                      "md:col-span-2 lg:col-span-1 lg:row-span-2 p-8 flex flex-col justify-between"
-                    : isLastWide ? "md:col-span-2 lg:col-span-2 p-7"
-                    : "p-7"
+                  className={`group relative rounded-2xl border border-slate-100 border-l-4 bg-white ${a.border} ${a.bg} ${a.shadow} shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl ${
+                    isFeatured
+                      ? "flex flex-col justify-between p-8 md:col-span-2 lg:col-span-1 lg:row-span-2"
+                      : isLastWide
+                        ? "p-7 md:col-span-2 lg:col-span-2"
+                        : "p-7"
                   }`}
+                  key={i}
                 >
-                  {isFeatured ?
+                  {isFeatured ? (
                     /* Featured card — vertical layout with larger icon */
-                    <div className="flex flex-col h-full">
-                      <div className="flex items-center gap-4 mb-5">
+                    <div className="flex h-full flex-col">
+                      <div className="mb-5 flex items-center gap-4">
                         <div
-                          className={`w-16 h-16 bg-gradient-to-br ${a.iconBg} rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg`}
+                          className={`h-16 w-16 bg-gradient-to-br ${a.iconBg} flex flex-shrink-0 items-center justify-center rounded-2xl shadow-lg transition-transform duration-300 group-hover:scale-110`}
                         >
                           <Icon className="h-8 w-8 text-white" />
                         </div>
                         <span
-                          className={`text-xs font-bold px-3 py-1 rounded-full border ${a.badge}`}
+                          className={`rounded-full border px-3 py-1 font-bold text-xs ${a.badge}`}
                         >
                           Featured
                         </span>
                       </div>
-                      <h3 className="text-2xl font-vietnam font-bold text-grey-15 mb-3 group-hover:text-grey-10 transition-colors">
+                      <h3 className="mb-3 font-bold font-vietnam text-2xl text-grey-15 transition-colors group-hover:text-grey-10">
                         {feature.title}
                       </h3>
-                      <p className="text-grey-40 leading-relaxed text-[15px] flex-1">
+                      <p className="flex-1 text-[15px] text-grey-40 leading-relaxed">
                         {feature.description}
                       </p>
                       <div
-                        className={`mt-5 w-full h-1 rounded-full bg-gradient-to-r ${a.iconBg} opacity-40 group-hover:opacity-100 transition-opacity duration-300`}
+                        className={`mt-5 h-1 w-full rounded-full bg-gradient-to-r ${a.iconBg} opacity-40 transition-opacity duration-300 group-hover:opacity-100`}
                       />
                     </div>
-                  : /* Standard cards — horizontal layout */
+                  ) : (
+                    /* Standard cards — horizontal layout */
                     <div className="flex items-start gap-5">
                       <div
-                        className={`w-14 h-14 bg-gradient-to-br ${a.iconBg} rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-md`}
+                        className={`h-14 w-14 bg-gradient-to-br ${a.iconBg} flex flex-shrink-0 items-center justify-center rounded-2xl shadow-md transition-transform duration-300 group-hover:scale-110`}
                       >
                         <Icon className="h-7 w-7 text-white" />
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="text-xl font-vietnam font-bold text-grey-15 mb-2 group-hover:text-grey-10 transition-colors">
+                      <div className="min-w-0 flex-1">
+                        <h3 className="mb-2 font-bold font-vietnam text-grey-15 text-xl transition-colors group-hover:text-grey-10">
                           {feature.title}
                         </h3>
-                        <p className="text-grey-40 leading-relaxed text-[15px]">
+                        <p className="text-[15px] text-grey-40 leading-relaxed">
                           {feature.description}
                         </p>
                       </div>
                     </div>
-                  }
+                  )}
                 </div>
               );
             })}
@@ -430,31 +438,31 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
       </section>
 
       {/* 4. PROGRAM BENEFITS — Interactive Tabs */}
-      <section className="py-24 bg-white relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-gradient-to-bl from-blue-50 to-transparent rounded-full blur-3xl opacity-60" />
-          <div className="absolute bottom-20 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-violet-50 to-transparent rounded-full blur-3xl opacity-60" />
+      <section className="relative overflow-hidden bg-white py-24">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute top-20 right-0 h-[600px] w-[600px] rounded-full bg-gradient-to-bl from-blue-50 to-transparent opacity-60 blur-3xl" />
+          <div className="absolute bottom-20 left-0 h-[500px] w-[500px] rounded-full bg-gradient-to-tr from-violet-50 to-transparent opacity-60 blur-3xl" />
         </div>
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 px-5 py-2.5 rounded-full text-sm font-bold mb-5 border border-blue-100">
+        <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-16 text-center">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-5 py-2.5 font-bold text-blue-700 text-sm">
               <Zap size={16} />
               What You&apos;ll Get
             </div>
-            <h2 className="text-4xl lg:text-5xl font-vietnam font-bold text-grey-15 mb-6">
+            <h2 className="mb-6 font-bold font-vietnam text-4xl text-grey-15 lg:text-5xl">
               Program{" "}
               <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
                 Benefits
               </span>
             </h2>
-            <p className="text-grey-40 text-lg max-w-3xl mx-auto leading-relaxed">
+            <p className="mx-auto max-w-3xl text-grey-40 text-lg leading-relaxed">
               Unlock your potential with our exclusive program advantages
             </p>
           </div>
 
           {/* Desktop: sidebar tabs */}
-          <div className="hidden lg:grid lg:grid-cols-[320px_1fr] gap-8 max-w-6xl mx-auto">
+          <div className="mx-auto hidden max-w-6xl gap-8 lg:grid lg:grid-cols-[320px_1fr]">
             {/* Tab list */}
             <div className="space-y-2">
               {course.highlights.map((highlight, i) => {
@@ -482,28 +490,28 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
 
                 return (
                   <button
+                    className={`flex w-full items-center gap-4 rounded-xl px-5 py-4 text-left transition-all duration-300 ${
+                      isActive
+                        ? `bg-white shadow-lg ring-2 ${tc.ring} scale-[1.02]`
+                        : "bg-white/50 hover:bg-white hover:shadow-md"
+                    }`}
                     key={i}
                     onClick={() => setActiveBenefitTab(i)}
-                    className={`w-full flex items-center gap-4 px-5 py-4 rounded-xl text-left transition-all duration-300 ${
-                      isActive ?
-                        `bg-white shadow-lg ring-2 ${tc.ring} scale-[1.02]`
-                      : "bg-white/50 hover:bg-white hover:shadow-md"
-                    }`}
                   >
                     <div
-                      className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
-                        isActive ?
-                          `bg-gradient-to-br ${tc.active} shadow-md`
-                        : "bg-slate-100"
+                      className={`flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl transition-all duration-300 ${
+                        isActive
+                          ? `bg-gradient-to-br ${tc.active} shadow-md`
+                          : "bg-slate-100"
                       }`}
                     >
                       <Icon
-                        className={`w-5 h-5 ${isActive ? "text-white" : "text-grey-40"}`}
+                        className={`h-5 w-5 ${isActive ? "text-white" : "text-grey-40"}`}
                       />
                     </div>
-                    <div className="flex-1 min-w-0">
+                    <div className="min-w-0 flex-1">
                       <h4
-                        className={`font-vietnam font-bold text-[15px] transition-colors ${
+                        className={`font-bold font-vietnam text-[15px] transition-colors ${
                           isActive ? "text-grey-15" : "text-grey-40"
                         }`}
                       >
@@ -511,7 +519,7 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
                       </h4>
                     </div>
                     {isActive && (
-                      <ArrowRight className="w-4 h-4 text-grey-40 flex-shrink-0" />
+                      <ArrowRight className="h-4 w-4 flex-shrink-0 text-grey-40" />
                     )}
                   </button>
                 );
@@ -519,52 +527,52 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
             </div>
 
             {/* Content panel */}
-            <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-8 min-h-[320px]">
+            <div className="min-h-[320px] rounded-2xl border border-slate-100 bg-white p-8 shadow-lg">
               {course.highlights[activeBenefitTab] &&
                 (() => {
                   const h = course.highlights[activeBenefitTab];
                   const Icon = getIcon(h.icon);
                   const panelColors = [
                     {
-                      gradient: "from-emerald-500 to-teal-500",
-                      dot: "bg-emerald-500",
                       badge: "bg-emerald-50 text-emerald-700",
+                      dot: "bg-emerald-500",
+                      gradient: "from-emerald-500 to-teal-500",
                     },
                     {
-                      gradient: "from-blue-500 to-indigo-500",
-                      dot: "bg-blue-500",
                       badge: "bg-blue-50 text-blue-700",
+                      dot: "bg-blue-500",
+                      gradient: "from-blue-500 to-indigo-500",
                     },
                     {
-                      gradient: "from-amber-500 to-orange-500",
-                      dot: "bg-amber-500",
                       badge: "bg-amber-50 text-amber-700",
+                      dot: "bg-amber-500",
+                      gradient: "from-amber-500 to-orange-500",
                     },
                     {
-                      gradient: "from-violet-500 to-purple-500",
-                      dot: "bg-violet-500",
                       badge: "bg-violet-50 text-violet-700",
+                      dot: "bg-violet-500",
+                      gradient: "from-violet-500 to-purple-500",
                     },
                   ];
                   const pc = panelColors[activeBenefitTab % 4];
 
                   return (
                     <div
+                      className="fade-in slide-in-from-right-4 animate-in duration-300"
                       key={activeBenefitTab}
-                      className="animate-in fade-in slide-in-from-right-4 duration-300"
                     >
-                      <div className="flex items-center gap-4 mb-8">
+                      <div className="mb-8 flex items-center gap-4">
                         <div
-                          className={`w-14 h-14 bg-gradient-to-br ${pc.gradient} rounded-2xl flex items-center justify-center shadow-md`}
+                          className={`h-14 w-14 bg-gradient-to-br ${pc.gradient} flex items-center justify-center rounded-2xl shadow-md`}
                         >
-                          <Icon className="w-7 h-7 text-white" />
+                          <Icon className="h-7 w-7 text-white" />
                         </div>
                         <div>
-                          <h3 className="text-2xl font-vietnam font-bold text-grey-15">
+                          <h3 className="font-bold font-vietnam text-2xl text-grey-15">
                             {h.category}
                           </h3>
                           <span
-                            className={`inline-block mt-1 text-xs font-bold px-3 py-1 rounded-full ${pc.badge}`}
+                            className={`mt-1 inline-block rounded-full px-3 py-1 font-bold text-xs ${pc.badge}`}
                           >
                             {h.points.length} benefits included
                           </span>
@@ -573,13 +581,13 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
                       <ul className="space-y-4">
                         {h.points.map((point, j) => (
                           <li
+                            className="group/point flex items-start gap-3"
                             key={j}
-                            className="flex items-start gap-3 group/point"
                           >
                             <div
-                              className={`w-2 h-2 ${pc.dot} rounded-full mt-2 flex-shrink-0 group-hover/point:scale-150 transition-transform`}
+                              className={`h-2 w-2 ${pc.dot} mt-2 flex-shrink-0 rounded-full transition-transform group-hover/point:scale-150`}
                             />
-                            <span className="text-grey-35 leading-relaxed text-[15px]">
+                            <span className="text-[15px] text-grey-35 leading-relaxed">
                               {point}
                             </span>
                           </li>
@@ -592,57 +600,57 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
           </div>
 
           {/* Mobile: stacked cards */}
-          <div className="lg:hidden space-y-4 max-w-2xl mx-auto">
+          <div className="mx-auto max-w-2xl space-y-4 lg:hidden">
             {course.highlights.map((highlight, i) => {
               const Icon = getIcon(highlight.icon);
               const mobileColors = [
                 {
                   border: "border-l-emerald-500",
-                  iconBg: "from-emerald-500 to-teal-500",
                   dot: "bg-emerald-500",
+                  iconBg: "from-emerald-500 to-teal-500",
                 },
                 {
                   border: "border-l-blue-500",
-                  iconBg: "from-blue-500 to-indigo-500",
                   dot: "bg-blue-500",
+                  iconBg: "from-blue-500 to-indigo-500",
                 },
                 {
                   border: "border-l-amber-500",
-                  iconBg: "from-amber-500 to-orange-500",
                   dot: "bg-amber-500",
+                  iconBg: "from-amber-500 to-orange-500",
                 },
                 {
                   border: "border-l-violet-500",
-                  iconBg: "from-violet-500 to-purple-500",
                   dot: "bg-violet-500",
+                  iconBg: "from-violet-500 to-purple-500",
                 },
               ];
               const mc = mobileColors[i % 4];
 
               return (
                 <details
+                  className={`group rounded-xl border border-slate-100 border-l-4 bg-white ${mc.border} overflow-hidden shadow-sm`}
                   key={i}
-                  className={`group bg-white rounded-xl border border-slate-100 border-l-4 ${mc.border} shadow-sm overflow-hidden`}
                 >
-                  <summary className="flex items-center gap-3 p-5 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                  <summary className="flex cursor-pointer list-none items-center gap-3 p-5 [&::-webkit-details-marker]:hidden">
                     <div
-                      className={`w-10 h-10 bg-gradient-to-br ${mc.iconBg} rounded-xl flex items-center justify-center flex-shrink-0`}
+                      className={`h-10 w-10 bg-gradient-to-br ${mc.iconBg} flex flex-shrink-0 items-center justify-center rounded-xl`}
                     >
-                      <Icon className="w-5 h-5 text-white" />
+                      <Icon className="h-5 w-5 text-white" />
                     </div>
-                    <h4 className="font-vietnam font-bold text-grey-15 flex-1">
+                    <h4 className="flex-1 font-bold font-vietnam text-grey-15">
                       {highlight.category}
                     </h4>
-                    <ChevronDown className="w-5 h-5 text-grey-40 transition-transform group-open:rotate-180" />
+                    <ChevronDown className="h-5 w-5 text-grey-40 transition-transform group-open:rotate-180" />
                   </summary>
-                  <div className="px-5 pb-5 pt-1">
+                  <div className="px-5 pt-1 pb-5">
                     <ul className="space-y-3">
                       {highlight.points.map((point, j) => (
-                        <li key={j} className="flex items-start gap-3">
+                        <li className="flex items-start gap-3" key={j}>
                           <div
-                            className={`w-1.5 h-1.5 ${mc.dot} rounded-full mt-2 flex-shrink-0`}
+                            className={`h-1.5 w-1.5 ${mc.dot} mt-2 flex-shrink-0 rounded-full`}
                           />
-                          <span className="text-grey-35 leading-relaxed text-sm">
+                          <span className="text-grey-35 text-sm leading-relaxed">
                             {point}
                           </span>
                         </li>
@@ -657,48 +665,48 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
       </section>
 
       {/* 5. WHAT YOU'LL LEARN — 5-Section Sequential Flow */}
-      <section className="py-20 bg-gradient-to-b from-white to-slate-50 relative overflow-hidden">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 px-5 py-2.5 rounded-full text-sm font-bold mb-5 border border-emerald-100">
+      <section className="relative overflow-hidden bg-gradient-to-b from-white to-slate-50 py-20">
+        <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-16 text-center">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-100 bg-emerald-50 px-5 py-2.5 font-bold text-emerald-700 text-sm">
               <GraduationCap size={16} />
               Your Learning Journey
             </div>
-            <h2 className="text-4xl lg:text-5xl font-vietnam font-bold text-grey-15 mb-6">
+            <h2 className="mb-6 font-bold font-vietnam text-4xl text-grey-15 lg:text-5xl">
               What You&apos;ll{" "}
               <span className="bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">
                 Learn
               </span>
             </h2>
-            <p className="text-grey-35 text-lg max-w-3xl mx-auto leading-relaxed">
+            <p className="mx-auto max-w-3xl text-grey-35 text-lg leading-relaxed">
               A structured 5-step journey from learning to career placement
             </p>
           </div>
 
-          <div className="space-y-8 max-w-6xl mx-auto">
+          <div className="mx-auto max-w-6xl space-y-8">
             {/* ── Section 1: Course Curriculum ── */}
-            <div className="rounded-3xl overflow-hidden shadow-lg">
+            <div className="overflow-hidden rounded-3xl shadow-lg">
               {/* Header */}
-              <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-6 sm:px-8 py-6">
+              <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-6 py-6 sm:px-8">
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white font-bold text-xl">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/20 font-bold text-white text-xl backdrop-blur-sm">
                       1
                     </div>
                     <div>
-                      <h3 className="text-2xl font-vietnam font-bold text-white">
+                      <h3 className="font-bold font-vietnam text-2xl text-white">
                         Course Curriculum
                       </h3>
-                      <p className="text-emerald-100 text-sm mt-1 max-w-2xl">
+                      <p className="mt-1 max-w-2xl text-emerald-100 text-sm">
                         Our course is designed by industry experts for excellent
                         academic and industrial experience.
                       </p>
                     </div>
                   </div>
                   {course.duration && (
-                    <div className="hidden sm:flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
-                      <Calendar className="w-4 h-4 text-white" />
-                      <span className="text-white font-bold text-sm">
+                    <div className="hidden items-center gap-2 rounded-full bg-white/20 px-4 py-2 backdrop-blur-sm sm:flex">
+                      <Calendar className="h-4 w-4 text-white" />
+                      <span className="font-bold text-sm text-white">
                         {course.duration}
                       </span>
                     </div>
@@ -709,75 +717,75 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
               {/* Content with sidebar tabs */}
               <div className="bg-white">
                 {/* Desktop: sidebar + content */}
-                <div className="hidden md:grid md:grid-cols-[320px_1fr] h-[650px]">
+                <div className="hidden h-[650px] md:grid md:grid-cols-[320px_1fr]">
                   {/* Module sidebar */}
-                  <div className="border-r border-slate-100 py-4 overflow-y-auto scrollbar-thin scrollbar-thumb-emerald-200 scrollbar-track-transparent">
+                  <div className="scrollbar-thin scrollbar-thumb-emerald-200 scrollbar-track-transparent overflow-y-auto border-slate-100 border-r py-4">
                     {course.modules.map((mod, i) => (
                       <button
+                        className={`flex w-full items-center justify-between border-l-3 px-5 py-4 text-left transition-all duration-200 ${
+                          activeCurriculumTab === i
+                            ? "border-l-[3px] border-l-emerald-500 bg-emerald-50/60"
+                            : "border-l-[3px] border-l-transparent hover:bg-slate-50"
+                        }`}
                         key={i}
                         onClick={() => setActiveCurriculumTab(i)}
-                        className={`w-full flex items-center justify-between px-5 py-4 text-left transition-all duration-200 border-l-3 ${
-                          activeCurriculumTab === i ?
-                            "bg-emerald-50/60 border-l-emerald-500 border-l-[3px]"
-                          : "border-l-transparent hover:bg-slate-50 border-l-[3px]"
-                        }`}
                       >
-                        <div className="flex-1 min-w-0">
-                          <p className="text-xs text-grey-50 font-medium">
+                        <div className="min-w-0 flex-1">
+                          <p className="font-medium text-grey-50 text-xs">
                             Module {i + 1}
                           </p>
                           <p
-                            className={`font-vietnam font-bold text-sm mt-0.5 ${
-                              activeCurriculumTab === i ? "text-emerald-700" : (
-                                "text-grey-25"
-                              )
+                            className={`mt-0.5 font-bold font-vietnam text-sm ${
+                              activeCurriculumTab === i
+                                ? "text-emerald-700"
+                                : "text-grey-25"
                             }`}
                           >
                             {mod.title}
                           </p>
                         </div>
                         {activeCurriculumTab === i && (
-                          <ChevronRight className="w-4 h-4 text-emerald-500 flex-shrink-0" />
+                          <ChevronRight className="h-4 w-4 flex-shrink-0 text-emerald-500" />
                         )}
                       </button>
                     ))}
                   </div>
 
                   {/* Topic content */}
-                  <div className="p-8 overflow-y-auto scrollbar-thin scrollbar-thumb-emerald-200 scrollbar-track-transparent">
+                  <div className="scrollbar-thin scrollbar-thumb-emerald-200 scrollbar-track-transparent overflow-y-auto p-8">
                     {course.modules[activeCurriculumTab] &&
                       (() => {
                         const mod = course.modules[activeCurriculumTab];
                         return (
                           <div key={activeCurriculumTab}>
-                            <h4 className="text-xl font-vietnam font-bold text-grey-15 mb-1">
+                            <h4 className="mb-1 font-bold font-vietnam text-grey-15 text-xl">
                               {mod.title}
                             </h4>
                             {(mod.duration || mod.description) && (
-                              <p className="text-sm text-grey-40 mb-6">
+                              <p className="mb-6 text-grey-40 text-sm">
                                 Description: {mod.description}
                               </p>
                             )}
-                            <div className="border-t border-slate-100 pt-6 space-y-6">
+                            <div className="space-y-6 border-slate-100 border-t pt-6">
                               {mod.submodules?.map((submod, idx) => (
                                 <div key={idx}>
-                                  <h5 className="font-vietnam font-bold text-lg text-grey-15 mb-3">
+                                  <h5 className="mb-3 font-bold font-vietnam text-grey-15 text-lg">
                                     {submod.title}
                                   </h5>
 
                                   {submod.subtopics?.length > 0 && (
                                     <div className="mb-4">
-                                      <p className="text-sm font-bold text-grey-30 uppercase tracking-wider mb-2">
+                                      <p className="mb-2 font-bold text-grey-30 text-sm uppercase tracking-wider">
                                         Topics:
                                       </p>
                                       <ul className="space-y-2">
                                         {submod.subtopics.map((topic, j) => (
                                           <li
-                                            key={j}
                                             className="flex items-start gap-3"
+                                            key={j}
                                           >
-                                            <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full mt-2 flex-shrink-0" />
-                                            <span className="text-grey-35 leading-relaxed text-[15px]">
+                                            <div className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-500" />
+                                            <span className="text-[15px] text-grey-35 leading-relaxed">
                                               {topic}
                                             </span>
                                           </li>
@@ -788,17 +796,17 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
 
                                   {submod.handsOn?.length > 0 && (
                                     <div>
-                                      <p className="text-sm font-bold text-emerald-600 uppercase tracking-wider mb-2">
+                                      <p className="mb-2 font-bold text-emerald-600 text-sm uppercase tracking-wider">
                                         Hands-on:
                                       </p>
                                       <ul className="space-y-2">
                                         {submod.handsOn.map((item, j) => (
                                           <li
-                                            key={j}
                                             className="flex items-start gap-3"
+                                            key={j}
                                           >
-                                            <div className="w-1.5 h-1.5 bg-emerald-600 rounded-full mt-2 flex-shrink-0" />
-                                            <span className="text-grey-35 leading-relaxed text-[15px]">
+                                            <div className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-600" />
+                                            <span className="text-[15px] text-grey-35 leading-relaxed">
                                               {item}
                                             </span>
                                           </li>
@@ -816,42 +824,42 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
                 </div>
 
                 {/* Mobile: accordion */}
-                <div className="md:hidden p-4">
-                  <Accordion type="single" collapsible className="space-y-2">
+                <div className="p-4 md:hidden">
+                  <Accordion className="space-y-2" collapsible type="single">
                     {course.modules.map((mod, i) => (
                       <AccordionItem
+                        className="overflow-hidden rounded-xl border border-slate-100"
                         key={i}
                         value={`curriculum-${i}`}
-                        className="border border-slate-100 rounded-xl overflow-hidden"
                       >
-                        <AccordionTrigger className="px-4 py-3 hover:no-underline text-left">
+                        <AccordionTrigger className="px-4 py-3 text-left hover:no-underline">
                           <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-lg flex items-center justify-center text-white font-bold text-xs flex-shrink-0">
+                            <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-500 to-teal-500 font-bold text-white text-xs">
                               {i + 1}
                             </div>
                             <div>
-                              <p className="font-vietnam font-bold text-sm text-grey-15">
+                              <p className="font-bold font-vietnam text-grey-15 text-sm">
                                 {mod.title}
                               </p>
                             </div>
                           </div>
                         </AccordionTrigger>
                         <AccordionContent className="px-4 pb-4">
-                          <div className="space-y-4 ml-11">
+                          <div className="ml-11 space-y-4">
                             {mod.submodules?.map((submod, idx) => (
                               <div key={idx}>
-                                <h5 className="font-vietnam font-bold text-sm text-grey-15 mb-2">
+                                <h5 className="mb-2 font-bold font-vietnam text-grey-15 text-sm">
                                   {submod.title}
                                 </h5>
 
                                 {submod.subtopics?.length > 0 && (
-                                  <ul className="space-y-1 mb-2">
+                                  <ul className="mb-2 space-y-1">
                                     {submod.subtopics.map((topic, j) => (
                                       <li
-                                        key={j}
                                         className="flex items-start gap-2 text-grey-35 text-sm"
+                                        key={j}
                                       >
-                                        <Check className="w-3.5 h-3.5 text-emerald-500 mt-0.5 flex-shrink-0" />
+                                        <Check className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-emerald-500" />
                                         <span>{topic}</span>
                                       </li>
                                     ))}
@@ -862,10 +870,10 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
                                   <ul className="space-y-1">
                                     {submod.handsOn.map((item, j) => (
                                       <li
-                                        key={`ho-${j}`}
                                         className="flex items-start gap-2 text-grey-35 text-sm"
+                                        key={`ho-${j}`}
                                       >
-                                        <Code className="w-3.5 h-3.5 text-emerald-600 mt-0.5 flex-shrink-0" />
+                                        <Code className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-emerald-600" />
                                         <span>
                                           <strong className="font-medium text-grey-30">
                                             Hands-on:
@@ -887,8 +895,8 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
               </div>
 
               {/* Chevron connector */}
-              <div className="bg-gradient-to-r from-emerald-500 to-teal-500 flex justify-center py-3">
-                <ChevronDown className="w-6 h-6 text-white animate-bounce" />
+              <div className="flex justify-center bg-gradient-to-r from-emerald-500 to-teal-500 py-3">
+                <ChevronDown className="h-6 w-6 animate-bounce text-white" />
               </div>
             </div>
 
@@ -896,17 +904,17 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
             {course.isJobGuaranteeProgram &&
               course.prtSteps &&
               course.prtSteps.length > 0 && (
-                <div className="rounded-3xl overflow-hidden shadow-lg">
-                  <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-6 sm:px-8 py-6">
+                <div className="overflow-hidden rounded-3xl shadow-lg">
+                  <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-6 py-6 sm:px-8">
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white font-bold text-xl">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/20 font-bold text-white text-xl backdrop-blur-sm">
                         2
                       </div>
                       <div>
-                        <h3 className="text-2xl font-vietnam font-bold text-white">
+                        <h3 className="font-bold font-vietnam text-2xl text-white">
                           Placement Readiness Test (PRT)
                         </h3>
-                        <p className="text-emerald-100 text-sm mt-1">
+                        <p className="mt-1 text-emerald-100 text-sm">
                           To become eligible for our Job Guarantee Program,
                           complete these milestones:
                         </p>
@@ -924,28 +932,28 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
                       ];
                       const prtIcons = [Check, Target, Award];
                       return (
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                        <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
                           {prtSteps.map((step, idx) => (
                             <div
+                              className="rounded-2xl border border-slate-100 bg-white p-6 text-center shadow-sm transition-shadow hover:shadow-md"
                               key={idx}
-                              className="bg-white rounded-2xl p-6 text-center shadow-sm border border-slate-100 hover:shadow-md transition-shadow"
                             >
                               <div
-                                className={`w-14 h-14 bg-gradient-to-br ${prtColors[idx % prtColors.length]} rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-xl shadow-md`}
+                                className={`h-14 w-14 bg-gradient-to-br ${prtColors[idx % prtColors.length]} mx-auto mb-4 flex items-center justify-center rounded-full font-bold text-white text-xl shadow-md`}
                               >
                                 {idx + 1}
                               </div>
-                              <h4 className="font-vietnam font-bold text-grey-15 text-lg mb-3">
+                              <h4 className="mb-3 font-bold font-vietnam text-grey-15 text-lg">
                                 {step.title}
                               </h4>
-                              <div className="bg-emerald-50 rounded-xl p-3 border border-emerald-100">
+                              <div className="rounded-xl border border-emerald-100 bg-emerald-50 p-3">
                                 {(() => {
                                   const Icon = prtIcons[idx % prtIcons.length];
                                   return (
-                                    <Icon className="w-5 h-5 text-emerald-600 mx-auto mb-2" />
+                                    <Icon className="mx-auto mb-2 h-5 w-5 text-emerald-600" />
                                   );
                                 })()}
-                                <p className="text-sm text-grey-35 leading-relaxed">
+                                <p className="text-grey-35 text-sm leading-relaxed">
                                   {step.description}
                                 </p>
                               </div>
@@ -956,8 +964,8 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
                     })()}
                   </div>
 
-                  <div className="bg-gradient-to-r from-emerald-500 to-teal-500 flex justify-center py-3">
-                    <ChevronDown className="w-6 h-6 text-white animate-bounce" />
+                  <div className="flex justify-center bg-gradient-to-r from-emerald-500 to-teal-500 py-3">
+                    <ChevronDown className="h-6 w-6 animate-bounce text-white" />
                   </div>
                 </div>
               )}
@@ -966,20 +974,20 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
             {course.isJobGuaranteeProgram &&
               course.isaSteps &&
               course.isaSteps.length > 0 && (
-                <div className="rounded-3xl overflow-hidden shadow-lg">
-                  <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-6 sm:px-8 py-6">
+                <div className="overflow-hidden rounded-3xl shadow-lg">
+                  <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-6 py-6 sm:px-8">
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white font-bold text-xl">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/20 font-bold text-white text-xl backdrop-blur-sm">
                         3
                       </div>
                       <div>
-                        <h3 className="text-2xl font-vietnam font-bold text-white">
+                        <h3 className="font-bold font-vietnam text-2xl text-white">
                           Sign ISA Agreement
                         </h3>
-                        <p className="text-emerald-100 text-sm mt-1">
+                        <p className="mt-1 text-emerald-100 text-sm">
                           Pay INR{" "}
-                          {(course.careerServiceFee || 20000).toLocaleString(
-                            "en-IN",
+                          {(course.careerServiceFee || 20_000).toLocaleString(
+                            "en-IN"
                           )}{" "}
                           to Eduwise Solutions as a career services fee after
                           placement.
@@ -998,26 +1006,26 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
                       ];
                       const isaIcons = [FileText, UserCheck, Banknote];
                       return (
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                        <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
                           {isaSteps.map((step, idx) => (
                             <div
+                              className="rounded-2xl border border-slate-100 bg-white p-6 text-center shadow-sm transition-shadow hover:shadow-md"
                               key={idx}
-                              className="bg-white rounded-2xl p-6 text-center shadow-sm border border-slate-100 hover:shadow-md transition-shadow"
                             >
                               <div
-                                className={`w-16 h-16 bg-gradient-to-br ${isaColors[idx % isaColors.length]} bg-opacity-10 rounded-2xl flex items-center justify-center mx-auto mb-4`}
+                                className={`h-16 w-16 bg-gradient-to-br ${isaColors[idx % isaColors.length]} mx-auto mb-4 flex items-center justify-center rounded-2xl bg-opacity-10`}
                               >
                                 {(() => {
                                   const Icon = isaIcons[idx % isaIcons.length];
                                   return (
-                                    <Icon className="w-8 h-8 text-white" />
+                                    <Icon className="h-8 w-8 text-white" />
                                   );
                                 })()}
                               </div>
-                              <h4 className="font-vietnam font-bold text-grey-15 text-lg mb-1">
+                              <h4 className="mb-1 font-bold font-vietnam text-grey-15 text-lg">
                                 {step.title}
                               </h4>
-                              <p className="text-sm text-grey-40">
+                              <p className="text-grey-40 text-sm">
                                 {step.description}
                               </p>
                             </div>
@@ -1027,8 +1035,8 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
                     })()}
                   </div>
 
-                  <div className="bg-gradient-to-r from-emerald-500 to-teal-500 flex justify-center py-3">
-                    <ChevronDown className="w-6 h-6 text-white animate-bounce" />
+                  <div className="flex justify-center bg-gradient-to-r from-emerald-500 to-teal-500 py-3">
+                    <ChevronDown className="h-6 w-6 animate-bounce text-white" />
                   </div>
                 </div>
               )}
@@ -1037,17 +1045,17 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
             {course.isJobGuaranteeProgram &&
               course.careerTrack &&
               course.careerTrack.length > 0 && (
-                <div className="rounded-3xl overflow-hidden shadow-lg">
-                  <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-6 sm:px-8 py-6">
+                <div className="overflow-hidden rounded-3xl shadow-lg">
+                  <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-6 py-6 sm:px-8">
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white font-bold text-xl">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/20 font-bold text-white text-xl backdrop-blur-sm">
                         4
                       </div>
                       <div>
-                        <h3 className="text-2xl font-vietnam font-bold text-white">
+                        <h3 className="font-bold font-vietnam text-2xl text-white">
                           Career Track
                         </h3>
-                        <p className="text-emerald-100 text-sm mt-1">
+                        <p className="mt-1 text-emerald-100 text-sm">
                           Access a wide range of resources to become a Job-Ready
                           Candidate with our dedicated placement team.
                         </p>
@@ -1062,34 +1070,34 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
                       return (
                         <>
                           {/* Desktop: sidebar tabs */}
-                          <div className="hidden md:grid md:grid-cols-[320px_1fr] min-h-[600px]">
-                            <div className="border-r border-slate-100 py-4">
+                          <div className="hidden min-h-[600px] md:grid md:grid-cols-[320px_1fr]">
+                            <div className="border-slate-100 border-r py-4">
                               {careerTrackItems.map((item, i) => (
                                 <button
+                                  className={`flex w-full items-center justify-between border-l-[3px] px-5 py-4 text-left transition-all duration-200 ${
+                                    activeCareerTrackTab === i
+                                      ? "border-l-emerald-500 bg-emerald-50/60"
+                                      : "border-l-transparent hover:bg-slate-50"
+                                  }`}
                                   key={i}
                                   onClick={() => setActiveCareerTrackTab(i)}
-                                  className={`w-full flex items-center justify-between px-5 py-4 text-left transition-all duration-200 border-l-[3px] ${
-                                    activeCareerTrackTab === i ?
-                                      "bg-emerald-50/60 border-l-emerald-500"
-                                    : "border-l-transparent hover:bg-slate-50"
-                                  }`}
                                 >
-                                  <div className="flex-1 min-w-0">
+                                  <div className="min-w-0 flex-1">
                                     <p
-                                      className={`font-vietnam font-bold text-sm ${
-                                        activeCareerTrackTab === i ?
-                                          "text-emerald-700"
-                                        : "text-grey-25"
+                                      className={`font-bold font-vietnam text-sm ${
+                                        activeCareerTrackTab === i
+                                          ? "text-emerald-700"
+                                          : "text-grey-25"
                                       }`}
                                     >
                                       {item.title}
                                     </p>
-                                    <p className="text-xs text-grey-50 mt-0.5 truncate">
+                                    <p className="mt-0.5 truncate text-grey-50 text-xs">
                                       {item.description}
                                     </p>
                                   </div>
                                   {activeCareerTrackTab === i && (
-                                    <ChevronRight className="w-4 h-4 text-emerald-500 flex-shrink-0" />
+                                    <ChevronRight className="h-4 w-4 flex-shrink-0 text-emerald-500" />
                                   )}
                                 </button>
                               ))}
@@ -1098,20 +1106,20 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
                             <div className="p-8">
                               {careerTrackItems[activeCareerTrackTab] && (
                                 <div key={activeCareerTrackTab}>
-                                  <h4 className="text-xl font-vietnam font-bold text-grey-15 mb-1">
+                                  <h4 className="mb-1 font-bold font-vietnam text-grey-15 text-xl">
                                     {
                                       careerTrackItems[activeCareerTrackTab]
                                         .title
                                     }
                                   </h4>
-                                  <p className="text-sm text-grey-40 mb-6">
+                                  <p className="mb-6 text-grey-40 text-sm">
                                     {
                                       careerTrackItems[activeCareerTrackTab]
                                         .description
                                     }
                                   </p>
-                                  <div className="border-t border-slate-100 pt-6">
-                                    <p className="text-sm font-bold text-grey-30 uppercase tracking-wider mb-4">
+                                  <div className="border-slate-100 border-t pt-6">
+                                    <p className="mb-4 font-bold text-grey-30 text-sm uppercase tracking-wider">
                                       What You&apos;ll Learn:
                                     </p>
                                     <ul className="space-y-3">
@@ -1119,11 +1127,11 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
                                         activeCareerTrackTab
                                       ].topics.map((topic, j) => (
                                         <li
-                                          key={j}
                                           className="flex items-start gap-3"
+                                          key={j}
                                         >
-                                          <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full mt-2 flex-shrink-0" />
-                                          <span className="text-grey-35 leading-relaxed text-[15px]">
+                                          <div className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-500" />
+                                          <span className="text-[15px] text-grey-35 leading-relaxed">
                                             {topic}
                                           </span>
                                         </li>
@@ -1136,27 +1144,27 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
                           </div>
 
                           {/* Mobile: stacked cards */}
-                          <div className="md:hidden p-4 space-y-3">
+                          <div className="space-y-3 p-4 md:hidden">
                             {careerTrackItems.map((item, i) => (
                               <details
+                                className="group overflow-hidden rounded-xl border border-slate-100 bg-slate-50"
                                 key={i}
-                                className="group bg-slate-50 rounded-xl border border-slate-100 overflow-hidden"
                               >
-                                <summary className="flex items-center gap-3 p-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-                                  <Briefcase className="w-5 h-5 text-emerald-600 flex-shrink-0" />
-                                  <span className="font-vietnam font-bold text-sm text-grey-15 flex-1">
+                                <summary className="flex cursor-pointer list-none items-center gap-3 p-4 [&::-webkit-details-marker]:hidden">
+                                  <Briefcase className="h-5 w-5 flex-shrink-0 text-emerald-600" />
+                                  <span className="flex-1 font-bold font-vietnam text-grey-15 text-sm">
                                     {item.title}
                                   </span>
-                                  <ChevronDown className="w-4 h-4 text-grey-40 transition-transform group-open:rotate-180" />
+                                  <ChevronDown className="h-4 w-4 text-grey-40 transition-transform group-open:rotate-180" />
                                 </summary>
                                 <div className="px-4 pb-4">
-                                  <ul className="space-y-2 ml-8">
+                                  <ul className="ml-8 space-y-2">
                                     {item.topics.map((topic, j) => (
                                       <li
-                                        key={j}
                                         className="flex items-start gap-2 text-grey-35 text-sm"
+                                        key={j}
                                       >
-                                        <Check className="w-3.5 h-3.5 text-emerald-500 mt-0.5 flex-shrink-0" />
+                                        <Check className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-emerald-500" />
                                         <span>{topic}</span>
                                       </li>
                                     ))}
@@ -1170,8 +1178,8 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
                     })()}
                   </div>
 
-                  <div className="bg-gradient-to-r from-emerald-500 to-teal-500 flex justify-center py-3">
-                    <ChevronDown className="w-6 h-6 text-white animate-bounce" />
+                  <div className="flex justify-center bg-gradient-to-r from-emerald-500 to-teal-500 py-3">
+                    <ChevronDown className="h-6 w-6 animate-bounce text-white" />
                   </div>
                 </div>
               )}
@@ -1180,17 +1188,17 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
             {course.isJobGuaranteeProgram &&
               course.hiringPartners &&
               course.hiringPartners.length > 0 && (
-                <div className="rounded-3xl overflow-hidden shadow-lg">
-                  <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-6 sm:px-8 py-6">
+                <div className="overflow-hidden rounded-3xl shadow-lg">
+                  <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-6 py-6 sm:px-8">
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white font-bold text-xl">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/20 font-bold text-white text-xl backdrop-blur-sm">
                         5
                       </div>
                       <div>
-                        <h3 className="text-2xl font-vietnam font-bold text-white">
+                        <h3 className="font-bold font-vietnam text-2xl text-white">
                           Pay Career Services Fee
                         </h3>
-                        <p className="text-emerald-100 text-sm mt-1">
+                        <p className="mt-1 text-emerald-100 text-sm">
                           Only pay after you receive an offer letter. Our hiring
                           partners are waiting for you!
                         </p>
@@ -1199,45 +1207,46 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
                   </div>
 
                   <div className="bg-gradient-to-b from-emerald-50 to-white p-6 sm:p-10">
-                    <p className="text-center text-grey-35 mb-8 text-lg font-medium">
+                    <p className="mb-8 text-center font-medium text-grey-35 text-lg">
                       Our Hiring Partners
                     </p>
                     {(() => {
                       const partners = course.hiringPartners!;
                       return (
                         <>
-                          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4">
+                          <div className="grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
                             {partners.map((partner, i) => (
                               <div
+                                className="group flex h-20 flex-col items-center justify-center rounded-xl border border-slate-100 bg-white p-4 shadow-sm transition-shadow hover:border-emerald-200 hover:shadow-md"
                                 key={i}
-                                className="bg-white rounded-xl border border-slate-100 p-4 flex flex-col items-center justify-center h-20 shadow-sm hover:shadow-md transition-shadow hover:border-emerald-200 group"
                               >
-                                {partner.logoUrl ?
+                                {partner.logoUrl ? (
                                   <Image
-                                    src={partner.logoUrl}
                                     alt={partner.name}
-                                    width={120}
+                                    className="h-full w-full object-contain transition-transform group-hover:scale-110"
                                     height={40}
-                                    className="object-contain h-full w-full group-hover:scale-110 transition-transform"
+                                    src={partner.logoUrl}
                                     unoptimized
+                                    width={120}
                                   />
-                                : <>
-                                    <Building className="w-5 h-5 text-slate-300 group-hover:text-emerald-500 transition-colors mb-1" />
-                                    <span className="text-xs font-bold text-grey-30 text-center leading-tight">
+                                ) : (
+                                  <>
+                                    <Building className="mb-1 h-5 w-5 text-slate-300 transition-colors group-hover:text-emerald-500" />
+                                    <span className="text-center font-bold text-grey-30 text-xs leading-tight">
                                       {partner.name}
                                     </span>
                                   </>
-                                }
+                                )}
                               </div>
                             ))}
                           </div>
-                          <div className="text-center mt-8">
-                            <p className="text-sm text-grey-40">
+                          <div className="mt-8 text-center">
+                            <p className="text-grey-40 text-sm">
                               Career services fee:{" "}
                               <span className="font-bold text-emerald-700">
                                 INR{" "}
                                 {(
-                                  course.careerServiceFee || 20000
+                                  course.careerServiceFee || 20_000
                                 ).toLocaleString("en-IN")}
                               </span>{" "}
                               (payable after placement, EMI available)
@@ -1255,40 +1264,41 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
 
       {/* 6. TOOLS & TECHNOLOGIES (Optional) */}
       {course.tools && course.tools.length > 0 && (
-        <section className="py-20 bg-white">
+        <section className="bg-white py-20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <div className="inline-flex items-center gap-2 bg-primary-99 text-primary-75 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+            <div className="mb-16 text-center">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary-99 px-4 py-2 font-semibold text-primary-75 text-sm">
                 <Code size={16} />
                 Tech Stack
               </div>
-              <h2 className="text-3xl lg:text-5xl font-vietnam font-bold text-grey-15 mb-6">
+              <h2 className="mb-6 font-bold font-vietnam text-3xl text-grey-15 lg:text-5xl">
                 Tools & Technologies
               </h2>
-              <p className="text-grey-35 text-lg max-w-3xl mx-auto">
+              <p className="mx-auto max-w-3xl text-grey-35 text-lg">
                 Master industry-standard tools used by top companies
               </p>
             </div>
 
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-6 max-w-5xl mx-auto">
+            <div className="mx-auto grid max-w-5xl grid-cols-3 gap-6 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
               {course.tools.map((tool, i) => (
                 <div
+                  className="group flex flex-col items-center gap-3 rounded-xl p-4 shadow-md transition-colors duration-200 hover:bg-primary-99"
                   key={i}
-                  className="flex flex-col items-center gap-3 p-4 rounded-xl hover:bg-primary-99 transition-colors duration-200 group shadow-md"
                 >
-                  {tool.logoUrl ?
+                  {tool.logoUrl ? (
                     <Image
-                      src={tool.logoUrl}
                       alt={tool.name}
-                      width={48}
+                      className="h-12 w-12 object-contain shadow-none transition-transform group-hover:scale-110"
                       height={48}
-                      className="w-12 h-12 object-contain group-hover:scale-110 transition-transform shadow-none"
+                      src={tool.logoUrl}
+                      width={48}
                     />
-                  : <div className="w-12 h-12 bg-gradient-to-br from-primary-75 to-primary-90 rounded-xl flex items-center justify-center">
-                      <Code className="w-6 h-6 text-white" />
+                  ) : (
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary-75 to-primary-90">
+                      <Code className="h-6 w-6 text-white" />
                     </div>
-                  }
-                  <span className="text-xs text-grey-35 font-medium text-center">
+                  )}
+                  <span className="text-center font-medium text-grey-35 text-xs">
                     {tool.name}
                   </span>
                 </div>
@@ -1300,34 +1310,34 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
 
       {/* 7. TARGET AUDIENCE (Optional) */}
       {course.targetAudience && course.targetAudience.length > 0 && (
-        <section className="py-20 bg-light-97">
+        <section className="bg-light-97 py-20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <div className="inline-flex items-center gap-2 bg-primary-99 text-primary-75 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+            <div className="mb-16 text-center">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary-99 px-4 py-2 font-semibold text-primary-75 text-sm">
                 <Users size={16} />
                 Who Is This For
               </div>
-              <h2 className="text-3xl lg:text-5xl font-vietnam font-bold text-grey-15 mb-6">
+              <h2 className="mb-6 font-bold font-vietnam text-3xl text-grey-15 lg:text-5xl">
                 Perfect For You
               </h2>
-              <p className="text-grey-35 text-lg max-w-3xl mx-auto">
+              <p className="mx-auto max-w-3xl text-grey-35 text-lg">
                 This program is designed for individuals from various
                 backgrounds
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {course.targetAudience.map((target, i) => {
                 const Icon = getIcon(target.icon);
                 return (
                   <div
+                    className="group rounded-2xl border border-light-90 bg-white p-8 text-center shadow-lg transition-all duration-300 hover:-translate-y-2 hover:border-primary-90 hover:shadow-xl"
                     key={i}
-                    className="bg-white rounded-2xl p-8 text-center shadow-lg border border-light-90 hover:border-primary-90 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group"
                   >
-                    <div className="w-16 h-16 bg-gradient-to-br from-primary-75 to-primary-90 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-75 to-primary-90 transition-transform duration-300 group-hover:scale-110">
                       <Icon className="h-8 w-8 text-white" />
                     </div>
-                    <h3 className="text-xl font-vietnam font-bold text-grey-15">
+                    <h3 className="font-bold font-vietnam text-grey-15 text-xl">
                       {target.title}
                     </h3>
                   </div>
@@ -1346,43 +1356,43 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
 
       {/* 10A. CAREER OPPORTUNITIES (standalone) */}
       {course.careerPaths && course.careerPaths.length > 0 && (
-        <section className="py-24 bg-gradient-to-b from-white to-slate-50 relative overflow-hidden">
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-20 left-0 w-[500px] h-[500px] bg-gradient-to-br from-teal-50 to-transparent rounded-full blur-3xl opacity-60" />
-            <div className="absolute bottom-20 right-0 w-[400px] h-[400px] bg-gradient-to-tl from-emerald-50 to-transparent rounded-full blur-3xl opacity-60" />
+        <section className="relative overflow-hidden bg-gradient-to-b from-white to-slate-50 py-24">
+          <div className="pointer-events-none absolute inset-0">
+            <div className="absolute top-20 left-0 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-teal-50 to-transparent opacity-60 blur-3xl" />
+            <div className="absolute right-0 bottom-20 h-[400px] w-[400px] rounded-full bg-gradient-to-tl from-emerald-50 to-transparent opacity-60 blur-3xl" />
           </div>
 
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="text-center mb-16">
-              <div className="inline-flex items-center gap-2 bg-teal-50 text-teal-700 px-5 py-2.5 rounded-full text-sm font-bold mb-5 border border-teal-100">
+          <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="mb-16 text-center">
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-teal-100 bg-teal-50 px-5 py-2.5 font-bold text-sm text-teal-700">
                 <TrendingUp size={16} />
                 Career Paths
               </div>
-              <h2 className="text-4xl lg:text-5xl font-vietnam font-bold text-grey-15 mb-6">
+              <h2 className="mb-6 font-bold font-vietnam text-4xl text-grey-15 lg:text-5xl">
                 Career{" "}
                 <span className="bg-gradient-to-r from-teal-600 to-emerald-500 bg-clip-text text-transparent">
                   Opportunities
                 </span>
               </h2>
-              <p className="text-grey-40 text-lg max-w-3xl mx-auto leading-relaxed">
+              <p className="mx-auto max-w-3xl text-grey-40 text-lg leading-relaxed">
                 Join the fastest-growing tech domain with lucrative salary
                 packages
               </p>
 
               {course.industryGrowth && (
-                <div className="inline-flex items-center gap-2 mt-6 bg-gradient-to-r from-emerald-50 to-teal-50 px-5 py-2.5 rounded-xl border border-emerald-100">
-                  <TrendingUp className="w-5 h-5 text-emerald-600" />
-                  <span className="text-grey-40 text-sm font-medium">
+                <div className="mt-6 inline-flex items-center gap-2 rounded-xl border border-emerald-100 bg-gradient-to-r from-emerald-50 to-teal-50 px-5 py-2.5">
+                  <TrendingUp className="h-5 w-5 text-emerald-600" />
+                  <span className="font-medium text-grey-40 text-sm">
                     Industry Growth:
                   </span>
-                  <span className="text-emerald-700 font-bold text-lg">
+                  <span className="font-bold text-emerald-700 text-lg">
                     {course.industryGrowth}
                   </span>
                 </div>
               )}
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
+            <div className="mx-auto grid max-w-5xl grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {course.careerPaths.map((career, i) => {
                 const Icon = getIcon(career.icon);
                 const cardColors = [
@@ -1411,26 +1421,26 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
 
                 return (
                   <div
+                    className={`group relative rounded-2xl border border-slate-100 border-t-[3px] bg-white p-6 ${cc.border} shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl`}
                     key={i}
-                    className={`group relative bg-white rounded-2xl p-6 border border-slate-100 border-t-[3px] ${cc.border} shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1`}
                   >
-                    <div className="flex items-start justify-between mb-4">
+                    <div className="mb-4 flex items-start justify-between">
                       <div
-                        className={`w-12 h-12 bg-gradient-to-br ${cc.iconBg} rounded-xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-300`}
+                        className={`h-12 w-12 bg-gradient-to-br ${cc.iconBg} flex items-center justify-center rounded-xl shadow-sm transition-transform duration-300 group-hover:scale-110`}
                       >
-                        <Icon className="w-6 h-6 text-white" />
+                        <Icon className="h-6 w-6 text-white" />
                       </div>
-                      <span className="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full border border-emerald-100">
+                      <span className="rounded-full border border-emerald-100 bg-emerald-50 px-3 py-1 font-bold text-emerald-700 text-xs">
                         High Demand
                       </span>
                     </div>
-                    <h4 className="font-vietnam font-bold text-grey-15 text-lg mb-3 group-hover:text-grey-10 transition-colors">
+                    <h4 className="mb-3 font-bold font-vietnam text-grey-15 text-lg transition-colors group-hover:text-grey-10">
                       {career.title}
                     </h4>
                     {career.salary && (
                       <div className="flex items-center gap-2">
-                        <IndianRupee className="w-4 h-4 text-grey-40" />
-                        <p className={`text-xl font-bold ${cc.text}`}>
+                        <IndianRupee className="h-4 w-4 text-grey-40" />
+                        <p className={`font-bold text-xl ${cc.text}`}>
                           {career.salary}
                         </p>
                       </div>
@@ -1444,59 +1454,59 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
       )}
 
       {/* 10B. PRICING (standalone, full-width) */}
-      <section className="py-24 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-1/3 w-[600px] h-[600px] bg-gradient-to-br from-violet-50 to-transparent rounded-full blur-3xl opacity-50" />
-          <div className="absolute bottom-0 right-1/3 w-[500px] h-[500px] bg-gradient-to-tl from-blue-50 to-transparent rounded-full blur-3xl opacity-50" />
+      <section className="relative overflow-hidden bg-gradient-to-b from-slate-50 to-white py-24">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute top-0 left-1/3 h-[600px] w-[600px] rounded-full bg-gradient-to-br from-violet-50 to-transparent opacity-50 blur-3xl" />
+          <div className="absolute right-1/3 bottom-0 h-[500px] w-[500px] rounded-full bg-gradient-to-tl from-blue-50 to-transparent opacity-50 blur-3xl" />
         </div>
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 bg-violet-50 text-violet-700 px-5 py-2.5 rounded-full text-sm font-bold mb-5 border border-violet-100">
+        <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-12 text-center">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-violet-100 bg-violet-50 px-5 py-2.5 font-bold text-sm text-violet-700">
               <IndianRupee size={16} />
               Program Investment
             </div>
-            <h2 className="text-4xl lg:text-5xl font-vietnam font-bold text-grey-15 mb-4">
+            <h2 className="mb-4 font-bold font-vietnam text-4xl text-grey-15 lg:text-5xl">
               Invest in Your{" "}
               <span className="bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">
                 Future
               </span>
             </h2>
-            <p className="text-grey-40 text-lg max-w-2xl mx-auto">
+            <p className="mx-auto max-w-2xl text-grey-40 text-lg">
               Best value in the market with everything you need to succeed
             </p>
           </div>
 
-          <div className="max-w-xl mx-auto">
+          <div className="mx-auto max-w-xl">
             {/* Pricing card */}
             <div className="relative">
               {/* Discount badge */}
-              <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-20">
-                <div className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-2.5 rounded-full shadow-lg font-bold text-sm tracking-wide flex items-center gap-2">
-                  <Sparkles className="w-4 h-4" />
+              <div className="absolute -top-5 left-1/2 z-20 -translate-x-1/2">
+                <div className="flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 px-6 py-2.5 font-bold text-sm text-white tracking-wide shadow-lg">
+                  <Sparkles className="h-4 w-4" />
                   {discount}% OFF — Limited Time
                 </div>
               </div>
 
-              <div className="bg-white rounded-3xl shadow-[0_8px_50px_rgba(0,0,0,0.08)] border-2 border-violet-100 overflow-hidden">
+              <div className="overflow-hidden rounded-3xl border-2 border-violet-100 bg-white shadow-[0_8px_50px_rgba(0,0,0,0.08)]">
                 {/* Price hero */}
-                <div className="bg-gradient-to-br from-violet-50 via-white to-purple-50 px-8 pt-14 pb-8 text-center border-b border-violet-100">
-                  <p className="text-grey-40 font-semibold text-sm uppercase tracking-wider mb-4">
+                <div className="border-violet-100 border-b bg-gradient-to-br from-violet-50 via-white to-purple-50 px-8 pt-14 pb-8 text-center">
+                  <p className="mb-4 font-semibold text-grey-40 text-sm uppercase tracking-wider">
                     One-time Payment
                   </p>
                   <div className="mb-4">
-                    <p className="text-6xl sm:text-7xl font-vietnam font-extrabold text-grey-15">
+                    <p className="font-extrabold font-vietnam text-6xl text-grey-15 sm:text-7xl">
                       ₹{course.price.toLocaleString("en-IN")}
                     </p>
-                    <div className="flex items-center justify-center gap-3 mt-3">
-                      <p className="text-grey-50 line-through text-xl">
+                    <div className="mt-3 flex items-center justify-center gap-3">
+                      <p className="text-grey-50 text-xl line-through">
                         ₹{course.originalPrice.toLocaleString("en-IN")}
                       </p>
                     </div>
                   </div>
 
-                  <div className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-50 to-teal-50 px-5 py-2.5 rounded-xl border border-emerald-200">
-                    <span className="text-emerald-700 font-bold text-base">
+                  <div className="inline-flex items-center gap-2 rounded-xl border border-emerald-200 bg-gradient-to-r from-emerald-50 to-teal-50 px-5 py-2.5">
+                    <span className="font-bold text-base text-emerald-700">
                       🎉 You Save ₹{saving.toLocaleString("en-IN")}
                     </span>
                   </div>
@@ -1507,15 +1517,15 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
                   {/* What's included */}
                   {course.whatsIncluded && course.whatsIncluded.length > 0 && (
                     <div className="mb-6 space-y-3">
-                      <p className="text-grey-30 font-bold text-xs uppercase tracking-wider mb-4">
+                      <p className="mb-4 font-bold text-grey-30 text-xs uppercase tracking-wider">
                         What&apos;s Included
                       </p>
                       {course.whatsIncluded.map((item, i) => (
-                        <div key={i} className="flex items-center gap-3">
-                          <div className="w-5 h-5 bg-emerald-100 rounded-full flex items-center justify-center flex-shrink-0">
-                            <Check className="w-3 h-3 text-emerald-600" />
+                        <div className="flex items-center gap-3" key={i}>
+                          <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-emerald-100">
+                            <Check className="h-3 w-3 text-emerald-600" />
                           </div>
-                          <span className="text-grey-35 text-sm font-medium">
+                          <span className="font-medium text-grey-35 text-sm">
                             {item}
                           </span>
                         </div>
@@ -1525,7 +1535,7 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
 
                   {/* EMI option */}
                   {course.emiOption && (
-                    <div className="bg-blue-50 rounded-xl p-4 mb-6 text-center border border-blue-100">
+                    <div className="mb-6 rounded-xl border border-blue-100 bg-blue-50 p-4 text-center">
                       <p className="text-grey-40 text-sm">
                         EMI Available from{" "}
                         <span className="font-bold text-blue-700">
@@ -1538,20 +1548,20 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
                   {/* CTA */}
                   <div className="space-y-4">
                     <Button
+                      className="w-full rounded-2xl bg-gradient-to-r from-violet-600 to-purple-600 px-8 py-7 font-bold text-white text-xl shadow-xl transition-all duration-300 hover:scale-[1.02] hover:from-violet-700 hover:to-purple-700 hover:shadow-2xl"
                       onClick={openPaymentModal}
-                      className="w-full bg-gradient-to-r from-violet-600 to-purple-600 text-white text-xl px-8 py-7 font-bold hover:from-violet-700 hover:to-purple-700 transition-all duration-300 hover:scale-[1.02] shadow-xl hover:shadow-2xl rounded-2xl"
                     >
                       Enroll Now
-                      <ArrowRight className="ml-3 w-6 h-6" />
+                      <ArrowRight className="ml-3 h-6 w-6" />
                     </Button>
 
                     <div className="flex items-center justify-center gap-6 pt-2 text-grey-50 text-xs">
                       <div className="flex items-center gap-1.5">
-                        <Shield className="w-4 h-4" />
+                        <Shield className="h-4 w-4" />
                         <span>Secure Payment</span>
                       </div>
                       <div className="flex items-center gap-1.5">
-                        <Award className="w-4 h-4" />
+                        <Award className="h-4 w-4" />
                         <span>Certified Program</span>
                       </div>
                     </div>
@@ -1565,33 +1575,33 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
 
       {/* 11. FAQ (Optional) */}
       {course.faq && course.faq.length > 0 && (
-        <section className="py-20 bg-white">
+        <section className="bg-white py-20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <div className="inline-flex items-center gap-2 bg-primary-99 text-primary-75 px-4 py-2 rounded-full text-sm font-bold mb-6">
-                <HelpCircle className="w-4 h-4" />
+            <div className="mb-16 text-center">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-primary-99 px-4 py-2 font-bold text-primary-75 text-sm">
+                <HelpCircle className="h-4 w-4" />
                 FAQ
               </div>
-              <h2 className="text-4xl md:text-5xl font-vietnam font-bold text-grey-15 mb-4">
+              <h2 className="mb-4 font-bold font-vietnam text-4xl text-grey-15 md:text-5xl">
                 Frequently Asked Questions
               </h2>
-              <p className="text-grey-40 text-lg max-w-2xl mx-auto">
+              <p className="mx-auto max-w-2xl text-grey-40 text-lg">
                 Everything you need to know about our {course.title} course
               </p>
             </div>
 
-            <div className="max-w-6xl mx-auto">
-              <Accordion type="single" collapsible className="w-full">
-                <div className="grid md:grid-cols-2 gap-6">
+            <div className="mx-auto max-w-6xl">
+              <Accordion className="w-full" collapsible type="single">
+                <div className="grid gap-6 md:grid-cols-2">
                   {course.faq.map((item, i) => (
                     <AccordionItem
+                      className="rounded-2xl border-0 bg-grey-99 p-6 transition-all duration-300 hover:bg-primary-99 hover:shadow-lg"
                       key={i}
                       value={`faq-${i}`}
-                      className="border-0 bg-grey-99 rounded-2xl p-6 hover:bg-primary-99 transition-all duration-300 hover:shadow-lg"
                     >
-                      <AccordionTrigger className="text-left font-vietnam font-bold text-lg text-grey-15 hover:text-primary-75 transition-colors hover:no-underline [&[data-state=open]]:text-primary-75 pb-4">
-                        <div className="flex items-start gap-3 w-full pr-4">
-                          <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-primary-75 text-white flex items-center justify-center text-sm font-bold">
+                      <AccordionTrigger className="pb-4 text-left font-bold font-vietnam text-grey-15 text-lg transition-colors hover:text-primary-75 hover:no-underline [&[data-state=open]]:text-primary-75">
+                        <div className="flex w-full items-start gap-3 pr-4">
+                          <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-primary-75 font-bold text-sm text-white">
                             {i + 1}
                           </div>
                           <span className="flex-1 pt-0.5">{item.question}</span>
@@ -1609,16 +1619,16 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
             </div>
 
             {/* Contact CTA */}
-            <div className="text-center mt-16">
-              <p className="text-grey-30 text-lg mb-6">
+            <div className="mt-16 text-center">
+              <p className="mb-6 text-grey-30 text-lg">
                 Still have questions? We&apos;re here to help!
               </p>
               <a
+                className="inline-flex items-center gap-2 rounded-full bg-primary-75 px-8 py-4 font-semibold text-white transition-all duration-300 hover:bg-primary-60 hover:shadow-xl"
                 href="/contact"
-                className="inline-flex items-center gap-2 bg-primary-75 text-white px-8 py-4 rounded-full font-semibold hover:bg-primary-60 transition-all duration-300 hover:shadow-xl"
               >
                 Contact Our Team
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="h-5 w-5" />
               </a>
             </div>
           </div>

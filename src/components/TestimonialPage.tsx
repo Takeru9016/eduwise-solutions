@@ -1,29 +1,29 @@
+import { Testimonials } from "@/components/ui/testimonials";
 import { client } from "@/sanity/lib/client";
 import { TESTIMONIALS_QUERY } from "@/sanity/lib/queries";
-import { Testimonials } from "@/components/ui/testimonials";
 
 // Sanity testimonial type
 interface SanityTestimonial {
   _id: string;
-  name: string;
-  role?: string;
+  avatarPath?: string;
   company?: string;
   content: string;
-  avatarPath?: string;
-  rating?: number;
   linkedinUrl?: string;
+  name: string;
   order?: number;
+  rating?: number;
+  role?: string;
 }
 
 // Transform Sanity data to Testimonials component props format
 function transformTestimonials(sanityData: SanityTestimonial[]) {
   return sanityData.map((t) => ({
-    name: t.name,
-    username: t.role || "",
     company: t.company || "",
-    text: t.content,
     image: t.avatarPath || "/testimonials/placeholder.jpeg",
     linkedinUrl: t.linkedinUrl || "",
+    name: t.name,
+    text: t.content,
+    username: t.role || "",
   }));
 }
 

@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { NextResponse } from "next/server";
+
 import { google } from "googleapis";
+import { NextResponse } from "next/server";
 
 // Utility function to validate environment variables
 function validateEnvVariables() {
   const requiredVars = {
-    SPREADSHEET_ID: process.env.SPREADSHEET_ID,
     GOOGLE_SHEETS_CLIENT_EMAIL: process.env.GOOGLE_SHEETS_CLIENT_EMAIL,
     GOOGLE_SHEETS_PRIVATE_KEY: process.env.GOOGLE_SHEETS_PRIVATE_KEY,
+    SPREADSHEET_ID: process.env.SPREADSHEET_ID,
   };
 
   const missingVars = Object.entries(requiredVars)
@@ -16,15 +17,15 @@ function validateEnvVariables() {
 
   if (missingVars.length > 0) {
     throw new Error(
-      `Missing required environment variables: ${missingVars.join(", ")}`,
+      `Missing required environment variables: ${missingVars.join(", ")}`
     );
   }
 
   // Log environment variable status (safely)
   console.log("Environment variables check:", {
-    hasSpreadsheetId: !!process.env.SPREADSHEET_ID,
     hasClientEmail: !!process.env.GOOGLE_SHEETS_CLIENT_EMAIL,
     hasPrivateKey: !!process.env.GOOGLE_SHEETS_PRIVATE_KEY,
+    hasSpreadsheetId: !!process.env.SPREADSHEET_ID,
   });
 }
 
@@ -32,7 +33,7 @@ function validateEnvVariables() {
 async function initializeGoogleSheets() {
   const privateKey = process.env.GOOGLE_SHEETS_PRIVATE_KEY?.replace(
     /\\n/g,
-    "\n",
+    "\n"
   )?.replace(/\n/g, "\n");
 
   const auth = new google.auth.GoogleAuth({
@@ -43,7 +44,7 @@ async function initializeGoogleSheets() {
     scopes: ["https://www.googleapis.com/auth/spreadsheets"],
   });
 
-  const sheets = google.sheets({ version: "v4", auth });
+  const sheets = google.sheets({ auth, version: "v4" });
   console.log("Google Sheets client initialized for AWS Enquiry");
 
   // Test the connection
@@ -54,35 +55,33 @@ async function initializeGoogleSheets() {
 
     // Verify the required sheet exists
     const sheetExists = spreadsheet.data.sheets?.some(
-      (sheet) => sheet.properties?.title === "AWS Enquiry",
+      (sheet) => sheet.properties?.title === "AWS Enquiry"
     );
 
     if (!sheetExists) {
       // Create the sheet if it doesn't exist
       await sheets.spreadsheets.batchUpdate({
-        spreadsheetId: process.env.SPREADSHEET_ID,
         requestBody: {
           requests: [
             {
               addSheet: {
                 properties: {
-                  title: "AWS Enquiry",
                   gridProperties: {
-                    rowCount: 1000,
                     columnCount: 6,
+                    rowCount: 1000,
                   },
+                  title: "AWS Enquiry",
                 },
               },
             },
           ],
         },
+        spreadsheetId: process.env.SPREADSHEET_ID,
       });
 
       // Add headers to the new sheet
       await sheets.spreadsheets.values.update({
-        spreadsheetId: process.env.SPREADSHEET_ID,
         range: "AWS Enquiry!A1:F1",
-        valueInputOption: "RAW",
         requestBody: {
           values: [
             [
@@ -95,13 +94,15 @@ async function initializeGoogleSheets() {
             ],
           ],
         },
+        spreadsheetId: process.env.SPREADSHEET_ID,
+        valueInputOption: "RAW",
       });
 
       console.log("Created new sheet 'AWS Enquiry' with headers");
     }
 
     console.log(
-      "Successfully connected to spreadsheet and verified AWS Enquiry sheet exists",
+      "Successfully connected to spreadsheet and verified AWS Enquiry sheet exists"
     );
     return sheets;
   } catch (error) {
@@ -121,7 +122,7 @@ export async function POST(req: Request) {
     const body = await req.json();
     console.log("Parsed request body:", {
       ...body,
-      message: body.message?.slice(0, 50) + "...", // Truncate message for logging
+      message: `${body.message?.slice(0, 50)}...`, // Truncate message for logging
     });
 
     // Initialize Google Sheets
@@ -130,9 +131,7 @@ export async function POST(req: Request) {
     // Append data to sheet
     try {
       await sheets.spreadsheets.values.append({
-        spreadsheetId: process.env.SPREADSHEET_ID,
         range: "AWS Enquiry",
-        valueInputOption: "USER_ENTERED",
         requestBody: {
           values: [
             [
@@ -145,25 +144,27 @@ export async function POST(req: Request) {
             ],
           ],
         },
+        spreadsheetId: process.env.SPREADSHEET_ID,
+        valueInputOption: "USER_ENTERED",
       });
 
       console.log("Successfully appended data to AWS Enquiry sheet");
 
       return NextResponse.json({
-        success: true,
         message: "Form submission saved successfully",
+        success: true,
       });
     } catch (appendError) {
       console.error("Failed to append data to sheet:", appendError);
       return NextResponse.json(
         {
-          error: "Failed to save form submission",
           details:
             appendError instanceof Error
               ? appendError.message
               : "Unknown error",
+          error: "Failed to save form submission",
         },
-        { status: 503 },
+        { status: 503 }
       );
     }
   } catch (error) {
@@ -178,11 +179,11 @@ export async function POST(req: Request) {
 
     return NextResponse.json(
       {
-        error: "Failed to process form submission",
         details:
           error instanceof Error ? error.message : "Unknown error occurred",
+        error: "Failed to process form submission",
       },
-      { status: statusCode },
+      { status: statusCode }
     );
   }
 }

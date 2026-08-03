@@ -1,51 +1,51 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback, useMemo } from "react";
+import { FileText, MessageCircle, Minimize2, Send, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { MessageCircle, X, Send, Minimize2, FileText } from "lucide-react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 
 interface Message {
   id: string;
+  pdf?: string;
   sender: "user" | "bot";
   text: string;
   timestamp: Date;
-  pdf?: string;
   whatsappLink?: string;
 }
 
 interface UserData {
+  email?: string;
   name?: string;
   phone?: string;
   qualification?: string;
-  email?: string;
 }
 
 type OnboardingStep = 0 | 1 | 2 | 3 | 4;
 
 interface ChatWidgetProps {
   autoOpenDelay?: number;
-  enableSound?: boolean;
-  botName?: string;
   botAvatar?: string;
-  userAvatar?: string;
-  teaserMessage?: string;
+  botName?: string;
+  enableSound?: boolean;
   teaserDelay?: number;
+  teaserMessage?: string;
+  userAvatar?: string;
 }
 
 const CONSTANTS = {
-  USER_AVATAR: "/user-logo.png",
-  BOT_AVATAR: "/home/logo.png",
-  NOTIFICATION_SOUND: "/home/notification.wav",
-  BOT_NAME: "Eduwise Solutions",
-  SESSION_STORAGE_KEY: "chat_session_id",
-  AUTO_OPEN_DELAY: 2000,
-  TEASER_DELAY: 1500,
-  FOCUS_DELAY: 100,
   API_ENDPOINT: "/api/chat",
+  AUTO_OPEN_DELAY: 2000,
+  BOT_AVATAR: "/home/logo.png",
+  BOT_NAME: "Eduwise Solutions",
+  FOCUS_DELAY: 100,
+  NOTIFICATION_SOUND: "/home/notification.wav",
+  SESSION_STORAGE_KEY: "chat_session_id",
+  TEASER_DELAY: 1500,
+  USER_AVATAR: "/user-logo.png",
 } as const;
 
 const ONBOARDING_PROMPTS = {
@@ -73,31 +73,34 @@ const generateSessionId = (): string => {
 };
 
 const getOrCreateSessionId = (): string => {
-  if (typeof window === "undefined") return generateSessionId();
+  if (typeof window === "undefined") {
+    return generateSessionId();
+  }
 
   const existingId = sessionStorage.getItem(CONSTANTS.SESSION_STORAGE_KEY);
-  if (existingId) return existingId;
+  if (existingId) {
+    return existingId;
+  }
 
   const newId = generateSessionId();
   sessionStorage.setItem(CONSTANTS.SESSION_STORAGE_KEY, newId);
   return newId;
 };
 
-const formatTimestamp = (date: Date): string => {
-  return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-};
+const formatTimestamp = (date: Date): string =>
+  date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 
 const createMessage = (
   sender: "user" | "bot",
   text: string,
   pdf?: string,
-  whatsappLink?: string,
+  whatsappLink?: string
 ): Message => ({
   id: `${Date.now()}-${Math.random()}`,
+  pdf,
   sender,
   text,
   timestamp: new Date(),
-  pdf,
   whatsappLink,
 });
 
@@ -107,11 +110,11 @@ const isValidEmail = (email: string): boolean => {
 };
 
 const isValidPhone = (phone: string): boolean => {
-  const phoneRegex = /^[\d\s\-\+\(\)]{10,}$/;
+  const phoneRegex = /^[\d\s\-+()]{10,}$/;
   return phoneRegex.test(phone);
 };
 
-const useAudioNotification = (enabled: boolean = true) => {
+const useAudioNotification = (enabled = true) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
@@ -146,28 +149,28 @@ const ChatHeader = ({
   botName: string;
   botAvatar: string;
 }) => (
-  <div className="bg-gradient-to-r from-primary-75 to-primary-70 text-white px-4 py-3 flex justify-between items-center shadow-md">
+  <div className="flex items-center justify-between bg-gradient-to-r from-primary-75 to-primary-70 px-4 py-3 text-white shadow-md">
     <div className="flex items-center gap-3">
       <div className="relative">
         <Image
-          src={botAvatar}
           alt={`${botName} Logo`}
-          width={32}
-          height={32}
           className="rounded-full ring-2 ring-white/30"
+          height={32}
+          src={botAvatar}
+          width={32}
         />
-        <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-400 rounded-full border-2 border-white"></span>
+        <span className="absolute right-0 bottom-0 h-3 w-3 rounded-full border-2 border-white bg-green-400" />
       </div>
       <div>
         <h3 className="font-semibold text-base">{botName}</h3>
-        <p className="text-xs text-white/80">Online</p>
+        <p className="text-white/80 text-xs">Online</p>
       </div>
     </div>
     <Button
-      variant={"ghost"}
-      onClick={onClose}
-      className="hover:bg-white/20 p-2 rounded-lg transition-colors duration-200"
       aria-label="Close chat"
+      className="rounded-lg p-2 transition-colors duration-200 hover:bg-white/20"
+      onClick={onClose}
+      variant={"ghost"}
     >
       <X size={20} />
     </Button>
@@ -190,51 +193,51 @@ const MessageBubble = ({
   return (
     <div
       className={cn(
-        "flex gap-2 animate-in fade-in slide-in-from-bottom-2 duration-300",
-        isBot ? "justify-start items-start" : "justify-end items-start",
+        "fade-in slide-in-from-bottom-2 flex animate-in gap-2 duration-300",
+        isBot ? "items-start justify-start" : "items-start justify-end"
       )}
     >
       {isBot && (
         <Image
-          src={botAvatar}
           alt="Bot"
-          width={32}
+          className="flex-shrink-0 rounded-full"
           height={32}
-          className="rounded-full flex-shrink-0"
+          src={botAvatar}
+          width={32}
         />
       )}
 
       <div
         className={cn(
           "max-w-[75%] rounded-2xl px-4 py-2.5 shadow-sm",
-          isBot ?
-            "bg-white border border-grey-70 text-grey-10"
-          : "bg-gradient-to-r from-primary-75 to-primary-70 text-white",
+          isBot
+            ? "border border-grey-70 bg-white text-grey-10"
+            : "bg-gradient-to-r from-primary-75 to-primary-70 text-white"
         )}
       >
-        <div className="flex items-center gap-2 mb-1">
+        <div className="mb-1 flex items-center gap-2">
           <span
             className={cn(
-              "text-xs font-semibold",
-              isBot ? "text-primary-70" : "text-white/90",
+              "font-semibold text-xs",
+              isBot ? "text-primary-70" : "text-white/90"
             )}
           >
             {isBot ? botName : "You"}
           </span>
         </div>
 
-        <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">
+        <p className="whitespace-pre-wrap break-words text-sm leading-relaxed">
           {message.text}
         </p>
 
         {message.whatsappLink && (
           <a
+            className="mt-3 inline-flex transform items-center gap-2 rounded-lg bg-green-500 px-4 py-2.5 font-medium text-sm text-white shadow-md transition-all duration-200 hover:scale-105 hover:bg-green-600 hover:shadow-lg"
             href={message.whatsappLink}
-            target="_blank"
             rel="noopener noreferrer"
-            className="mt-3 inline-flex items-center gap-2 px-4 py-2.5 bg-green-500 hover:bg-green-600 text-white rounded-lg text-sm font-medium transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105"
+            target="_blank"
           >
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
             </svg>
             Chat with us on WhatsApp
@@ -243,10 +246,10 @@ const MessageBubble = ({
 
         {message.pdf && (
           <Link
+            className="mt-2 flex items-center gap-2 text-primary-70 text-xs transition-colors hover:text-primary-50"
             href={message.pdf}
-            target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 mt-2 text-xs text-primary-70 hover:text-primary-50 transition-colors"
+            target="_blank"
           >
             <FileText size={14} />
             View PDF
@@ -255,8 +258,8 @@ const MessageBubble = ({
 
         <time
           className={cn(
-            "text-[10px] mt-1 block",
-            isBot ? "text-grey-60" : "text-white/70",
+            "mt-1 block text-[10px]",
+            isBot ? "text-grey-60" : "text-white/70"
           )}
         >
           {formatTimestamp(message.timestamp)}
@@ -265,11 +268,11 @@ const MessageBubble = ({
 
       {!isBot && (
         <Image
-          src={userAvatar}
           alt="User"
-          width={32}
+          className="flex-shrink-0 rounded-full"
           height={32}
-          className="rounded-full flex-shrink-0"
+          src={userAvatar}
+          width={32}
         />
       )}
     </div>
@@ -283,23 +286,23 @@ const TypingIndicator = ({
   botAvatar: string;
   botName: string;
 }) => (
-  <div className="flex gap-2 animate-in fade-in slide-in-from-bottom-2 duration-300 items-start">
+  <div className="fade-in slide-in-from-bottom-2 flex animate-in items-start gap-2 duration-300">
     <Image
-      src={botAvatar}
       alt="Bot"
-      width={32}
+      className="flex-shrink-0 rounded-full"
       height={32}
-      className="rounded-full flex-shrink-0"
+      src={botAvatar}
+      width={32}
     />
-    <div className="bg-white border border-grey-70 rounded-2xl px-4 py-3 shadow-sm">
-      <div className="flex items-center gap-2 mb-2">
-        <span className="text-xs font-semibold text-primary-70">{botName}</span>
+    <div className="rounded-2xl border border-grey-70 bg-white px-4 py-3 shadow-sm">
+      <div className="mb-2 flex items-center gap-2">
+        <span className="font-semibold text-primary-70 text-xs">{botName}</span>
       </div>
       <div className="flex gap-1">
         {[0, 1, 2].map((i) => (
           <div
+            className="h-2 w-2 animate-bounce rounded-full bg-primary-75"
             key={i}
-            className="w-2 h-2 bg-primary-75 rounded-full animate-bounce"
             style={{ animationDelay: `${i * 0.1}s` }}
           />
         ))}
@@ -331,33 +334,33 @@ const ChatInput = ({
   };
 
   return (
-    <div className="p-3 border-t border-grey-70 bg-white">
-      <div className="flex gap-2 items-center">
+    <div className="border-grey-70 border-t bg-white p-3">
+      <div className="flex items-center gap-2">
         <input
-          ref={inputRef}
-          type="text"
-          value={value}
+          className={cn(
+            "flex-1 rounded-lg border border-grey-70 px-3 py-2.5",
+            "focus:border-transparent focus:ring-2 focus:ring-primary-75",
+            "text-grey-10 text-sm placeholder-grey-60 focus:outline-none",
+            "transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50"
+          )}
+          disabled={disabled}
           onChange={(e) => onChange(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
-          disabled={disabled}
-          className={cn(
-            "flex-1 px-3 py-2.5 rounded-lg border border-grey-70",
-            "focus:ring-2 focus:ring-primary-75 focus:border-transparent",
-            "focus:outline-none text-sm text-grey-10 placeholder-grey-60",
-            "transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed",
-          )}
+          ref={inputRef}
+          type="text"
+          value={value}
         />
         <Button
-          variant={"ghost"}
-          onClick={onSubmit}
-          disabled={disabled || !value.trim()}
-          className={cn(
-            "p-2.5 rounded-lg bg-gradient-to-r from-primary-75 to-primary-70",
-            "text-white hover:shadow-md transition-all duration-200",
-            "disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none",
-          )}
           aria-label="Send message"
+          className={cn(
+            "rounded-lg bg-gradient-to-r from-primary-75 to-primary-70 p-2.5",
+            "text-white transition-all duration-200 hover:shadow-md",
+            "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:shadow-none"
+          )}
+          disabled={disabled || !value.trim()}
+          onClick={onSubmit}
+          variant={"ghost"}
         >
           <Send size={18} />
         </Button>
@@ -377,33 +380,33 @@ const TeaserTooltip = ({
 }) => (
   <div
     className={cn(
-      "fixed bottom-24 right-6 w-72 z-40",
-      "bg-white shadow-xl rounded-2xl border border-grey-70",
-      "animate-in slide-in-from-bottom-4 duration-300",
-      "overflow-hidden",
+      "fixed right-6 bottom-24 z-40 w-72",
+      "rounded-2xl border border-grey-70 bg-white shadow-xl",
+      "slide-in-from-bottom-4 animate-in duration-300",
+      "overflow-hidden"
     )}
   >
-    <div className="p-4 flex gap-3 items-start">
+    <div className="flex items-start gap-3 p-4">
       <Image
-        src={botAvatar}
         alt="Bot"
-        width={40}
+        className="flex-shrink-0 rounded-full"
         height={40}
-        className="rounded-full flex-shrink-0"
+        src={botAvatar}
+        width={40}
       />
       <div className="flex-1">
-        <p className="text-sm text-grey-10 leading-relaxed">{message}</p>
+        <p className="text-grey-10 text-sm leading-relaxed">{message}</p>
       </div>
       <Button
-        variant={"ghost"}
-        onClick={onClose}
-        className="text-grey-60 hover:text-grey-10 transition-colors flex-shrink-0"
         aria-label="Close teaser"
+        className="flex-shrink-0 text-grey-60 transition-colors hover:text-grey-10"
+        onClick={onClose}
+        variant={"ghost"}
       >
         <X size={16} />
       </Button>
     </div>
-    <div className="h-1 bg-gradient-to-r from-primary-75 to-primary-70"></div>
+    <div className="h-1 bg-gradient-to-r from-primary-75 to-primary-70" />
   </div>
 );
 
@@ -441,7 +444,7 @@ export default function ChatWidget({
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -453,9 +456,9 @@ export default function ChatWidget({
     async (data: UserData): Promise<void> => {
       try {
         const response = await fetch(CONSTANTS.API_ENDPOINT, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ sessionId, userData: data }),
+          headers: { "Content-Type": "application/json" },
+          method: "POST",
         });
 
         if (!response.ok) {
@@ -466,12 +469,12 @@ export default function ChatWidget({
         throw error;
       }
     },
-    [sessionId],
+    [sessionId]
   );
 
   const sendQuestion = useCallback(
     async (
-      question: string,
+      question: string
     ): Promise<{
       answer: string;
       pdf?: string;
@@ -479,9 +482,9 @@ export default function ChatWidget({
     }> => {
       try {
         const response = await fetch(CONSTANTS.API_ENDPOINT, {
-          method: "POST",
+          body: JSON.stringify({ question, sessionId, userData }),
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ sessionId, question, userData }),
+          method: "POST",
         });
 
         if (!response.ok) {
@@ -501,7 +504,7 @@ export default function ChatWidget({
         throw error;
       }
     },
-    [sessionId, userData],
+    [sessionId, userData]
   );
 
   const addMessage = useCallback(
@@ -511,7 +514,7 @@ export default function ChatWidget({
         playNotification();
       }
     },
-    [playNotification],
+    [playNotification]
   );
 
   const handleOnboarding = useCallback(
@@ -522,8 +525,8 @@ export default function ChatWidget({
         addMessage(
           createMessage(
             "bot",
-            "Please enter a valid phone number (at least 10 digits).",
-          ),
+            "Please enter a valid phone number (at least 10 digits)."
+          )
         );
         return;
       }
@@ -572,7 +575,7 @@ export default function ChatWidget({
       setOnboardingStep(nextStep);
       addMessage(createMessage("bot", botResponse));
     },
-    [onboardingStep, userData, addMessage, saveUserData],
+    [onboardingStep, userData, addMessage, saveUserData]
   );
 
   const handleChatMessage = useCallback(
@@ -589,19 +592,21 @@ export default function ChatWidget({
         addMessage(
           createMessage(
             "bot",
-            `I'm sorry, I encountered an error: ${errorMessage}. Please try again or contact support.`,
-          ),
+            `I'm sorry, I encountered an error: ${errorMessage}. Please try again or contact support.`
+          )
         );
       } finally {
         setIsLoading(false);
       }
     },
-    [addMessage, sendQuestion],
+    [addMessage, sendQuestion]
   );
 
   const handleSubmit = useCallback(() => {
     const trimmedInput = input.trim();
-    if (!trimmedInput || isLoading) return;
+    if (!trimmedInput || isLoading) {
+      return;
+    }
 
     setInput("");
 
@@ -628,65 +633,70 @@ export default function ChatWidget({
     }
   }, [messages.length, playNotification]);
 
-  const placeholder = useMemo(() => {
-    return onboardingStep > 0 ? "Type your answer..." : "Ask me anything...";
-  }, [onboardingStep]);
+  const placeholder = useMemo(
+    () => (onboardingStep > 0 ? "Type your answer..." : "Ask me anything..."),
+    [onboardingStep]
+  );
 
-  if (!isChatVisible) return null;
+  if (!isChatVisible) {
+    return null;
+  }
 
   return (
     <>
       {showTeaser && !isOpen && (
         <TeaserTooltip
+          botAvatar={botAvatar}
           message={teaserMessage}
           onClose={() => setShowTeaser(false)}
-          botAvatar={botAvatar}
         />
       )}
 
       <Button
-        variant={"ghost"}
-        onClick={() => (isOpen ? setIsOpen(false) : handleOpenChat())}
+        aria-label={isOpen ? "Close chat" : "Open chat"}
         className={cn(
-          "fixed bottom-6 right-6 w-14 h-14 rounded-full z-50",
+          "fixed right-6 bottom-6 z-50 h-14 w-14 rounded-full",
           "bg-gradient-to-r from-primary-75 to-primary-70",
           "shadow-lg hover:shadow-xl",
           "flex items-center justify-center",
           "transform transition-all duration-300",
           "hover:scale-110 active:scale-95",
-          "focus:outline-none focus:ring-4 focus:ring-primary-90",
+          "focus:outline-none focus:ring-4 focus:ring-primary-90"
         )}
-        aria-label={isOpen ? "Close chat" : "Open chat"}
+        onClick={() => (isOpen ? setIsOpen(false) : handleOpenChat())}
+        variant={"ghost"}
       >
-        {isOpen ?
-          <Minimize2 size={24} className="text-white" />
-        : <MessageCircle size={24} className="text-white" />}
+        {isOpen ? (
+          <Minimize2 className="text-white" size={24} />
+        ) : (
+          <MessageCircle className="text-white" size={24} />
+        )}
       </Button>
 
       {isOpen && (
         <div
           className={cn(
-            "fixed bottom-24 right-6 w-[380px] h-[600px] max-h-[calc(100vh-120px)]",
-            "bg-white shadow-2xl rounded-2xl",
-            "flex flex-col overflow-hidden z-50",
-            "animate-in slide-in-from-bottom-4 duration-300",
-            "border border-grey-70",
+            "fixed right-6 bottom-24 h-[600px] max-h-[calc(100vh-120px)] w-[380px]",
+            "rounded-2xl bg-white shadow-2xl",
+            "z-50 flex flex-col overflow-hidden",
+            "slide-in-from-bottom-4 animate-in duration-300",
+            "border border-grey-70"
           )}
         >
           <ChatHeader
-            onClose={() => setIsOpen(false)}
-            botName={botName}
             botAvatar={botAvatar}
+            botName={botName}
+            onClose={() => setIsOpen(false)}
           />
 
-          <div className="flex-1 overflow-y-auto p-4 bg-gradient-to-b from-primary-99 to-white space-y-3 scrollbar-hide">
+          <div className="scrollbar-hide flex-1 space-y-3 overflow-y-auto bg-gradient-to-b from-primary-99 to-white p-4">
             {messages.map((message) => (
               <MessageBubble
+                botAvatar={botAvatar}
+                botName={botName}
                 key={message.id}
                 message={message}
-                botAvatar={botAvatar}
                 userAvatar={userAvatar}
-                botName={botName}
               />
             ))}
 
@@ -698,12 +708,12 @@ export default function ChatWidget({
           </div>
 
           <ChatInput
-            value={input}
+            disabled={isLoading}
+            inputRef={inputRef as React.RefObject<HTMLInputElement>}
             onChange={setInput}
             onSubmit={handleSubmit}
-            disabled={isLoading}
             placeholder={placeholder}
-            inputRef={inputRef as React.RefObject<HTMLInputElement>}
+            value={input}
           />
         </div>
       )}

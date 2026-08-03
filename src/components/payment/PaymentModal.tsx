@@ -5,14 +5,14 @@ import { X } from "lucide-react";
 import PaymentForm from "./PaymentForm";
 
 interface PaymentModalProps {
+  amount: number;
   isOpen: boolean;
   onClose: () => void;
-  amount: number;
-  programName: string;
   onPaymentComplete?: (
     status: "success" | "failure" | "cancelled",
-    message: string,
+    message: string
   ) => void;
+  programName: string;
 }
 
 export default function PaymentModal({
@@ -22,27 +22,29 @@ export default function PaymentModal({
   programName,
   onPaymentComplete,
 }: PaymentModalProps) {
-  if (!isOpen) return null;
+  if (!isOpen) {
+    return null;
+  }
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center"
       aria-modal="true"
+      className="fixed inset-0 z-50 flex items-center justify-center"
       role="dialog"
     >
       {/* Backdrop */}
       <div
+        aria-hidden="true"
         className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
         onClick={onClose}
-        aria-hidden="true"
       />
 
       {/* Modal */}
-      <div className="relative bg-white rounded-lg p-6 max-w-md w-full mx-4 shadow-xl transform transition-all duration-300 ease-in-out">
+      <div className="relative mx-4 w-full max-w-md transform rounded-lg bg-white p-6 shadow-xl transition-all duration-300 ease-in-out">
         <div className="absolute top-4 right-4">
           <button
-            onClick={onClose}
             className="text-gray-400 hover:text-gray-500 focus:outline-none"
+            onClick={onClose}
           >
             <X className="h-6 w-6" />
           </button>
@@ -51,8 +53,8 @@ export default function PaymentModal({
         <div className="mt-2">
           <PaymentForm
             amount={amount}
-            programName={programName}
             onPaymentComplete={onPaymentComplete}
+            programName={programName}
           />
         </div>
       </div>

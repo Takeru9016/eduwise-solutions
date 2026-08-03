@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { client } from "@/sanity/lib/client";
 
 export interface CourseOption {
-  value: string;
   label: string;
+  value: string;
 }
 
 export function useSanityCourses() {
@@ -17,11 +17,11 @@ export function useSanityCourses() {
         const data = await client.fetch<CourseOption[]>(query);
 
         // Add "Other" option at the end
-        setCourses([...data, { value: "other", label: "Other" }]);
+        setCourses([...data, { label: "Other", value: "other" }]);
       } catch (error) {
         console.error("Failed to fetch courses from Sanity:", error);
         // Fallback or empty if something goes wrong
-        setCourses([{ value: "other", label: "Other" }]);
+        setCourses([{ label: "Other", value: "other" }]);
       } finally {
         setIsLoading(false);
       }

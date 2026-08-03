@@ -1,25 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import { Control, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { CheckCircle2, Mail, Send, Sparkles, XCircle } from "lucide-react";
+import { useState } from "react";
+import { type Control, useForm } from "react-hook-form";
 import * as z from "zod";
-import { CheckCircle2, XCircle, Sparkles, Mail, Send } from "lucide-react";
-
-import ContactInfo from "./common/ContactInfo";
-import LoadingOverlay from "./common/LoadingOverlay";
-import { submitWithRetry } from "@/utils/api";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { useSanityCourses } from "@/hooks/useSanityCourses";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   Dialog,
   DialogContent,
@@ -35,33 +21,46 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { useSanityCourses } from "@/hooks/useSanityCourses";
+import { submitWithRetry } from "@/utils/api";
+import ContactInfo from "./common/ContactInfo";
+import LoadingOverlay from "./common/LoadingOverlay";
 
 // Schema and types
 const contactFormSchema = z.object({
+  email: z.string().email("Please enter a valid email"),
   firstName: z.string().min(2, "First name should be at least 2 characters"),
   lastName: z.string().min(2, "Last name should be at least 2 characters"),
-  email: z.string().email("Please enter a valid email"),
+  message: z.string().optional(),
   mobile: z
     .string()
     .regex(/^\+?[0-9]{10,14}$/, "Please enter a valid mobile number"),
   subject: z.string().min(1, "Please select a subject"),
-  message: z.string().optional(),
 });
 
 type ContactFormValues = z.infer<typeof contactFormSchema>;
 
 interface FormFieldProps {
-  name: keyof ContactFormValues;
-  label: string;
-  placeholder: string;
-  type?: string;
-  required?: boolean;
   control: Control<ContactFormValues>;
+  label: string;
+  name: keyof ContactFormValues;
+  placeholder: string;
+  required?: boolean;
+  type?: string;
 }
 
 // Reusable components
 const RequiredLabel = ({ children }: { children: React.ReactNode }) => (
-  <FormLabel className="text-grey-35 flex items-center gap-1">
+  <FormLabel className="flex items-center gap-1 text-grey-35">
     {children}
     <span className="text-red-500">*</span>
   </FormLabel>
@@ -74,8 +73,8 @@ const SectionBadge = ({
   icon: React.ElementType;
   text: string;
 }) => (
-  <div className="inline-flex items-center gap-2 bg-white text-primary-75 px-4 py-2 rounded-full text-sm font-medium mb-6">
-    <Icon size={16} className="text-primary-75" />
+  <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 font-medium text-primary-75 text-sm">
+    <Icon className="text-primary-75" size={16} />
     {text}
   </div>
 );
@@ -93,21 +92,22 @@ const FormInputField = ({
     name={name}
     render={({ field }) => (
       <FormItem className="space-y-2">
-        {required ?
+        {required ? (
           <RequiredLabel>{label}</RequiredLabel>
-        : <FormLabel className="text-grey-35">
+        ) : (
+          <FormLabel className="text-grey-35">
             {label}
-            <span className="ml-2 text-sm text-primary-75 font-medium">
+            <span className="ml-2 font-medium text-primary-75 text-sm">
               (Optional)
             </span>
           </FormLabel>
-        }
+        )}
         <FormControl>
           <Input
             {...field}
-            type={type}
+            className="h-12 border-light-90 bg-light-97 focus:border-primary-75 focus:ring-primary-75"
             placeholder={placeholder}
-            className="h-12 bg-light-97 border-light-90 focus:border-primary-75 focus:ring-primary-75"
+            type={type}
           />
         </FormControl>
         <FormMessage className="text-red-500" />
@@ -126,15 +126,15 @@ export default function ContactUsSection() {
     useSanityCourses();
 
   const form = useForm<ContactFormValues>({
-    resolver: zodResolver(contactFormSchema),
     defaultValues: {
+      email: "",
       firstName: "",
       lastName: "",
-      email: "",
+      message: "",
       mobile: "",
       subject: "",
-      message: "",
     },
+    resolver: zodResolver(contactFormSchema),
   });
 
   const onSubmit = async (data: ContactFormValues) => {
@@ -165,9 +165,9 @@ export default function ContactUsSection() {
       console.error("Form submission error:", error);
       setIsSuccess(false);
       setErrorMessage(
-        error instanceof Error ?
-          error.message
-        : "Failed to submit form - please try again",
+        error instanceof Error
+          ? error.message
+          : "Failed to submit form - please try again"
       );
       setShowDialog(true);
     } finally {
@@ -180,21 +180,21 @@ export default function ContactUsSection() {
       {isSubmitting && <LoadingOverlay />}
 
       {/* Hero Section */}
-      <section className="relative py-20 md:py-28 bg-gradient-to-b from-primary-99 to-white overflow-hidden">
+      <section className="relative overflow-hidden bg-gradient-to-b from-primary-99 to-white py-20 md:py-28">
         <div className="absolute inset-0">
-          <div className="absolute top-20 left-20 w-72 h-72 bg-primary-95 rounded-full opacity-20 blur-3xl" />
-          <div className="absolute bottom-20 right-20 w-96 h-96 bg-primary-97 rounded-full opacity-20 blur-3xl" />
+          <div className="absolute top-20 left-20 h-72 w-72 rounded-full bg-primary-95 opacity-20 blur-3xl" />
+          <div className="absolute right-20 bottom-20 h-96 w-96 rounded-full bg-primary-97 opacity-20 blur-3xl" />
         </div>
 
-        <div className="container mx-auto relative">
-          <div className="max-w-4xl mx-auto text-center">
+        <div className="container relative mx-auto">
+          <div className="mx-auto max-w-4xl text-center">
             <SectionBadge icon={Sparkles} text="Get in Touch with Us" />
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-vietnam font-bold text-grey-15 mb-6">
+            <h1 className="mb-6 font-bold font-vietnam text-4xl text-grey-15 md:text-5xl lg:text-6xl">
               Contact Us
             </h1>
 
-            <p className="text-grey-35 text-lg md:text-xl leading-relaxed">
+            <p className="text-grey-35 text-lg leading-relaxed md:text-xl">
               We&apos;re here to help and answer any questions you might have.
               Feel free to reach out to us using the form below.
             </p>
@@ -203,18 +203,18 @@ export default function ContactUsSection() {
       </section>
 
       {/* Contact Form Section */}
-      <section className="py-16 relative">
+      <section className="relative py-16">
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
             {/* Form */}
             <div className="lg:col-span-2">
-              <div className="bg-white p-8 rounded-xl shadow-lg border border-light-90">
-                <div className="flex items-center gap-3 mb-8">
-                  <div className="w-12 h-12 rounded-full bg-primary-99 flex items-center justify-center">
-                    <Mail className="w-6 h-6 text-primary-75" />
+              <div className="rounded-xl border border-light-90 bg-white p-8 shadow-lg">
+                <div className="mb-8 flex items-center gap-3">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-99">
+                    <Mail className="h-6 w-6 text-primary-75" />
                   </div>
                   <div>
-                    <h2 className="text-2xl font-vietnam font-bold text-grey-15">
+                    <h2 className="font-bold font-vietnam text-2xl text-grey-15">
                       Send us a Message
                     </h2>
                     <p className="text-grey-35">Fill in the form below</p>
@@ -223,38 +223,38 @@ export default function ContactUsSection() {
 
                 <Form {...form}>
                   <form
-                    onSubmit={form.handleSubmit(onSubmit)}
                     className="space-y-6"
+                    onSubmit={form.handleSubmit(onSubmit)}
                   >
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                       <FormInputField
                         control={form.control}
-                        name="firstName"
                         label="First Name"
+                        name="firstName"
                         placeholder="Enter First Name"
                       />
 
                       <FormInputField
                         control={form.control}
-                        name="lastName"
                         label="Last Name"
+                        name="lastName"
                         placeholder="Enter Last Name"
                       />
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                       <FormInputField
                         control={form.control}
-                        name="email"
                         label="Email"
+                        name="email"
                         placeholder="Enter your Email"
                         type="email"
                       />
 
                       <FormInputField
                         control={form.control}
-                        name="mobile"
                         label="Mobile Number"
+                        name="mobile"
                         placeholder="Enter Phone Number"
                       />
                     </div>
@@ -267,16 +267,16 @@ export default function ContactUsSection() {
                         <FormItem className="space-y-2">
                           <RequiredLabel>Subject</RequiredLabel>
                           <Select
-                            onValueChange={field.onChange}
                             defaultValue={field.value}
+                            onValueChange={field.onChange}
                           >
                             <FormControl>
-                              <SelectTrigger className="h-12 bg-light-97 border-light-90">
+                              <SelectTrigger className="h-12 border-light-90 bg-light-97">
                                 <SelectValue
                                   placeholder={
-                                    isLoadingSubjects ? "Loading courses..." : (
-                                      "Select a subject"
-                                    )
+                                    isLoadingSubjects
+                                      ? "Loading courses..."
+                                      : "Select a subject"
                                   }
                                 />
                               </SelectTrigger>
@@ -284,9 +284,9 @@ export default function ContactUsSection() {
                             <SelectContent>
                               {subjects.map((subject) => (
                                 <SelectItem
+                                  className="text-grey-35"
                                   key={subject.value}
                                   value={subject.label}
-                                  className="text-grey-35"
                                 >
                                   {subject.label}
                                 </SelectItem>
@@ -306,15 +306,15 @@ export default function ContactUsSection() {
                         <FormItem className="space-y-2">
                           <FormLabel className="text-grey-35">
                             Message
-                            <span className="ml-2 text-sm text-primary-75 font-medium">
+                            <span className="ml-2 font-medium text-primary-75 text-sm">
                               (Optional)
                             </span>
                           </FormLabel>
                           <FormControl>
                             <Textarea
                               {...field}
+                              className="min-h-[150px] border-light-90 bg-light-97 focus:border-primary-75 focus:ring-primary-75"
                               placeholder="Enter your Message here..."
-                              className="min-h-[150px] bg-light-97 border-light-90 focus:border-primary-75 focus:ring-primary-75"
                             />
                           </FormControl>
                           <FormMessage className="text-red-500" />
@@ -323,17 +323,18 @@ export default function ContactUsSection() {
                     />
 
                     <Button
-                      type="submit"
-                      className="w-full md:w-auto bg-primary-75 hover:bg-primary-70 text-white h-12 px-8 flex items-center gap-2 text-base"
+                      className="flex h-12 w-full items-center gap-2 bg-primary-75 px-8 text-base text-white hover:bg-primary-70 md:w-auto"
                       disabled={isSubmitting}
+                      type="submit"
                     >
-                      {isSubmitting ?
+                      {isSubmitting ? (
                         "Sending..."
-                      : <>
+                      ) : (
+                        <>
                           Send Message
                           <Send size={18} />
                         </>
-                      }
+                      )}
                     </Button>
                   </form>
                 </Form>
@@ -349,32 +350,32 @@ export default function ContactUsSection() {
       </section>
 
       {/* Success/Error Dialog */}
-      <Dialog open={showDialog} onOpenChange={setShowDialog}>
+      <Dialog onOpenChange={setShowDialog} open={showDialog}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 text-xl">
-              {isSuccess ?
+              {isSuccess ? (
                 <>
-                  <CheckCircle2 className="w-6 h-6 text-green-500" />
+                  <CheckCircle2 className="h-6 w-6 text-green-500" />
                   Message Sent Successfully!
                 </>
-              : <>
-                  <XCircle className="w-6 h-6 text-red-500" />
+              ) : (
+                <>
+                  <XCircle className="h-6 w-6 text-red-500" />
                   Error Sending Message
                 </>
-              }
+              )}
             </DialogTitle>
-            <DialogDescription className="text-grey-35 mt-2">
-              {isSuccess ?
-                "Thank you for reaching out! We'll get back to you soon."
-              : errorMessage ||
-                "There was an error sending your message. Please try again."
-              }
+            <DialogDescription className="mt-2 text-grey-35">
+              {isSuccess
+                ? "Thank you for reaching out! We'll get back to you soon."
+                : errorMessage ||
+                  "There was an error sending your message. Please try again."}
             </DialogDescription>
           </DialogHeader>
           <div className="mt-6">
             <Button
-              className="w-full bg-primary-75 hover:bg-primary-70 text-white h-12"
+              className="h-12 w-full bg-primary-75 text-white hover:bg-primary-70"
               onClick={() => setShowDialog(false)}
             >
               {isSuccess ? "Close" : "Try Again"}

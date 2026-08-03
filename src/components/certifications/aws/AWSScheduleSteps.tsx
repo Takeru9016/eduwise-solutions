@@ -2,30 +2,30 @@ import { SCHEDULE_STEPS } from "./aws-data";
 
 export default function AWSScheduleSteps() {
   return (
-    <section className="py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-950">
-      <div className="container mx-auto px-4 max-w-7xl">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-950 py-20">
+      <div className="container mx-auto max-w-7xl px-4">
+        <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
           {/* ── Steps grid visual ── */}
           <div className="order-2 lg:order-1">
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
               {SCHEDULE_STEPS.map((step, i) => {
                 const Icon = step.icon;
                 const isLast = i === SCHEDULE_STEPS.length - 1;
                 return (
                   <div
+                    className={`group relative flex cursor-default flex-col items-center rounded-2xl border border-white/10 bg-white/5 p-5 text-center transition-all duration-300 hover:border-emerald-400/40 hover:bg-emerald-500/20 ${isLast ? "col-span-2 sm:col-span-1 xl:col-span-1" : ""}`}
                     key={i}
-                    className={`group relative bg-white/5 hover:bg-emerald-500/20 border border-white/10 hover:border-emerald-400/40 rounded-2xl p-5 flex flex-col items-center text-center transition-all duration-300 cursor-default ${isLast ? "col-span-2 sm:col-span-1 xl:col-span-1" : ""}`}
                   >
-                    <div className="w-11 h-11 bg-emerald-500/20 group-hover:bg-emerald-500/30 rounded-xl flex items-center justify-center mb-3 transition-colors">
+                    <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-500/20 transition-colors group-hover:bg-emerald-500/30">
                       <Icon
-                        className="w-5 h-5 text-emerald-400"
                         aria-hidden="true"
+                        className="h-5 w-5 text-emerald-400"
                       />
                     </div>
-                    <span className="text-[10px] text-emerald-500 font-bold uppercase tracking-widest mb-1">
+                    <span className="mb-1 font-bold text-[10px] text-emerald-500 uppercase tracking-widest">
                       Step {i + 1}
                     </span>
-                    <p className="text-white text-xs font-semibold leading-tight">
+                    <p className="font-semibold text-white text-xs leading-tight">
                       {step.label}
                     </p>
                   </div>
@@ -35,17 +35,17 @@ export default function AWSScheduleSteps() {
           </div>
 
           {/* ── Text side ── */}
-          <div className="order-1 lg:order-2 text-white">
-            <span className="inline-block text-emerald-400 font-semibold text-sm uppercase tracking-widest mb-3">
+          <div className="order-1 text-white lg:order-2">
+            <span className="mb-3 inline-block font-semibold text-emerald-400 text-sm uppercase tracking-widest">
               Exam Scheduling
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold mb-4 leading-tight">
+            <h2 className="mb-4 font-extrabold text-3xl leading-tight sm:text-4xl">
               How to Schedule an AWS Exam{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">
+              <span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">
                 with a Voucher?
               </span>
             </h2>
-            <p className="text-slate-300 leading-relaxed mb-8">
+            <p className="mb-8 text-slate-300 leading-relaxed">
               Once you are ready to attempt your AWS Certification exam,
               scheduling is a straightforward 7-step process on the official AWS
               Certification portal.
@@ -55,15 +55,15 @@ export default function AWSScheduleSteps() {
               {SCHEDULE_STEPS.map((step, i) => {
                 const Icon = step.icon;
                 return (
-                  <li key={i} className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-emerald-500/20 rounded-lg flex items-center justify-center shrink-0">
+                  <li className="flex items-center gap-3" key={i}>
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-500/20">
                       <Icon
-                        className="w-4 h-4 text-emerald-400"
                         aria-hidden="true"
+                        className="h-4 w-4 text-emerald-400"
                       />
                     </div>
                     <div>
-                      <span className="text-emerald-400 text-xs font-bold mr-2">
+                      <span className="mr-2 font-bold text-emerald-400 text-xs">
                         Step {i + 1}.
                       </span>
                       <span className="text-slate-200 text-sm">

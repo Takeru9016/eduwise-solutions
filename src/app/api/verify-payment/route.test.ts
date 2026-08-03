@@ -1,4 +1,4 @@
-import crypto from "crypto";
+import crypto from "node:crypto";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { POST } from "./route";
 
@@ -13,8 +13,8 @@ function signaturePayload(orderId: string, paymentId: string) {
 
 function makeRequest(body: unknown) {
   return new Request("http://localhost/api/verify-payment", {
-    method: "POST",
     body: JSON.stringify(body),
+    method: "POST",
   });
 }
 
@@ -32,10 +32,17 @@ describe("POST /api/verify-payment", () => {
   it("accepts a request with a valid HMAC signature", async () => {
     const razorpay_order_id = "order_123";
     const razorpay_payment_id = "pay_456";
-    const razorpay_signature = signaturePayload(razorpay_order_id, razorpay_payment_id);
+    const razorpay_signature = signaturePayload(
+      razorpay_order_id,
+      razorpay_payment_id
+    );
 
     const response = await POST(
-      makeRequest({ razorpay_order_id, razorpay_payment_id, razorpay_signature }),
+      makeRequest({
+        razorpay_order_id,
+        razorpay_payment_id,
+        razorpay_signature,
+      })
     );
     const json = await response.json();
 
@@ -49,7 +56,7 @@ describe("POST /api/verify-payment", () => {
         razorpay_order_id: "order_123",
         razorpay_payment_id: "pay_456",
         razorpay_signature: "not_the_real_signature",
-      }),
+      })
     );
     const json = await response.json();
 
@@ -65,7 +72,7 @@ describe("POST /api/verify-payment", () => {
         razorpay_order_id: "order_123",
         razorpay_payment_id: "pay_DIFFERENT",
         razorpay_signature,
-      }),
+      })
     );
 
     expect(response.status).toBe(400);

@@ -1,28 +1,19 @@
-import { defineArrayMember, defineField, defineType } from "sanity";
 import { HelpCircle } from "lucide-react";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 export const devopsFAQType = defineType({
-  name: "devopsFAQ",
-  title: "DevOps FAQ",
-  type: "document",
-  icon: HelpCircle,
   fields: [
     defineField({
+      initialValue: "Frequently Asked Questions",
       name: "title",
       title: "Section Title",
       type: "string",
-      initialValue: "Frequently Asked Questions",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "questions",
-      title: "Questions",
-      type: "array",
       of: [
         defineArrayMember({
-          type: "object",
-          name: "question",
-          title: "Question",
           fields: [
             defineField({
               name: "question",
@@ -32,33 +23,42 @@ export const devopsFAQType = defineType({
             }),
             defineField({
               name: "answer",
+              rows: 4,
               title: "Answer",
               type: "text",
-              rows: 4,
               validation: (Rule) => Rule.required(),
             }),
           ],
+          name: "question",
           preview: {
             select: {
-              title: "question",
               subtitle: "answer",
+              title: "question",
             },
           },
+          title: "Question",
+          type: "object",
         }),
       ],
+      title: "Questions",
+      type: "array",
     }),
   ],
+  icon: HelpCircle,
+  name: "devopsFAQ",
   preview: {
-    select: {
-      title: "title",
-      questions: "questions",
-    },
     prepare({ title, questions }) {
       const count = questions?.length || 0;
       return {
-        title: title || "DevOps FAQ",
         subtitle: `${count} question${count === 1 ? "" : "s"}`,
+        title: title || "DevOps FAQ",
       };
     },
+    select: {
+      questions: "questions",
+      title: "title",
+    },
   },
+  title: "DevOps FAQ",
+  type: "document",
 });

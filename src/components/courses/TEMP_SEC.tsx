@@ -1,9 +1,9 @@
-import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { CheckCircle2, ChevronDown, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { careerTrackData } from "@/const/devOps_career";
 import CompanyMarquee from "../common/CompanyMarquee";
 import { Card, CardContent } from "../ui/card";
+import { ScrollArea } from "../ui/scroll-area";
 
 export default function TEMP_SEC() {
   const [selectedCareerTrack, setSelectedCareerTrack] = useState<number>(1);

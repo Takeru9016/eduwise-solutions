@@ -29,7 +29,7 @@ export default function AWSHero() {
           {/* ── Left: Headline & copy ── */}
           <div className="flex-1 text-white">
             {/* AWS Partnership Badge */}
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-sm">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-xs">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 alt="AWS Logo"
@@ -43,7 +43,7 @@ export default function AWSHero() {
 
             <h1 className="mb-6 font-extrabold text-4xl leading-tight sm:text-5xl lg:text-6xl">
               AWS Certification{" "}
-              <span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">
                 Exam Vouchers
               </span>
             </h1>
@@ -102,9 +102,9 @@ export default function AWSHero() {
           >
             {/* Glassmorphism card wrapper */}
             <div className="relative">
-              <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-emerald-400/30 to-teal-600/20 blur-md" />
+              <div className="absolute -inset-1 rounded-2xl bg-linear-to-br from-emerald-400/30 to-teal-600/20 blur-md" />
               <div className="relative overflow-hidden rounded-2xl bg-white/95 shadow-2xl backdrop-blur-xl">
-                <div className="h-1 w-full bg-gradient-to-r from-emerald-400 to-teal-500" />
+                <div className="h-1 w-full bg-linear-to-r from-emerald-400 to-teal-500" />
                 <div className="p-1">
                   <AWSEnquiryForm />
                 </div>

@@ -97,7 +97,7 @@ export default function DevOpsToolsSection() {
     <section className="bg-gray-50 py-12 lg:py-16">
       <div className="container mx-auto px-4">
         {/* Tools Covered Card */}
-        <div className="rounded-3xl bg-gradient-to-br from-primary-70 to-primary-90 p-6 shadow-2xl lg:p-12">
+        <div className="rounded-3xl bg-linear-to-br from-primary-70 to-primary-90 p-6 shadow-2xl lg:p-12">
           <h2 className="mb-8 font-bold text-2xl text-white lg:mb-12 lg:text-4xl">
             Tools Covered
           </h2>
@@ -109,7 +109,7 @@ export default function DevOpsToolsSection() {
                 className="group flex cursor-pointer items-center gap-2 rounded-xl bg-white px-3 py-3 transition-all duration-300 hover:scale-105 hover:shadow-xl lg:gap-3 lg:px-4"
                 key={`${tool.name}-${index}`}
               >
-                <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center lg:h-10 lg:w-10">
+                <div className="flex h-7 w-7 shrink-0 items-center justify-center lg:h-10 lg:w-10">
                   <Image
                     alt={tool.name}
                     className="h-full w-full object-contain transition-transform duration-200 group-hover:scale-110"

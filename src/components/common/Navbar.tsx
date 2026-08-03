@@ -138,10 +138,10 @@ const DesktopMegaMenu = ({
       </Link>
 
       {/* Mega-menu panel */}
-      <div className="invisible absolute top-full -left-[340px] z-50 pt-4 opacity-0 transition-all duration-200 group-hover/courses:visible group-hover/courses:opacity-100">
+      <div className="invisible absolute top-full left-[-340px] z-50 pt-4 opacity-0 transition-all duration-200 group-hover/courses:visible group-hover/courses:opacity-100">
         <div className="w-[860px] overflow-hidden rounded-xl border border-light-90 bg-white shadow-2xl">
           {/* Header */}
-          <div className="flex items-center justify-between border-light-90 border-b bg-gradient-to-r from-primary-99 to-white px-6 py-4">
+          <div className="flex items-center justify-between border-light-90 border-b bg-linear-to-r from-primary-99 to-white px-6 py-4">
             <div>
               <h3 className="font-semibold text-base text-grey-15">
                 Explore Our Courses

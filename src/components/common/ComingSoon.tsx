@@ -29,12 +29,12 @@ const FeatureCard = ({
     <div
       className={`relative h-full overflow-hidden rounded-2xl p-8 transition-all duration-500 ${
         active
-          ? "border-2 border-primary-75/50 bg-gradient-to-br from-grey-20 to-grey-30 shadow-2xl shadow-primary-75/20"
-          : "border border-grey-40/30 bg-gradient-to-br from-grey-20/50 to-grey-30/50 hover:from-grey-20 hover:to-grey-30"
+          ? "border-2 border-primary-75/50 bg-linear-to-br from-grey-20 to-grey-30 shadow-2xl shadow-primary-75/20"
+          : "border border-grey-40/30 bg-linear-to-br from-grey-20/50 to-grey-30/50 hover:from-grey-20 hover:to-grey-30"
       }`}
     >
       <div
-        className={`mb-6 inline-flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-r transition-all duration-500 ${
+        className={`mb-6 inline-flex h-16 w-16 items-center justify-center rounded-xl bg-linear-to-r transition-all duration-500 ${
           feature.color
         } ${active ? "shadow-lg" : "shadow-md"}`}
       >
@@ -56,7 +56,7 @@ const FeatureCard = ({
 // StatCard subcomponent
 const StatCard = ({ stat }: { stat: { number: string; label: string } }) => (
   <div className="group text-center">
-    <div className="rounded-xl border border-grey-40/30 bg-gradient-to-br from-grey-20/50 to-grey-30/50 p-6 transition-all duration-300 hover:from-grey-20 hover:to-grey-30">
+    <div className="rounded-xl border border-grey-40/30 bg-linear-to-br from-grey-20/50 to-grey-30/50 p-6 transition-all duration-300 hover:from-grey-20 hover:to-grey-30">
       <div className="mb-2 font-bold text-3xl text-primary-75 transition-transform duration-300 group-hover:scale-110 md:text-4xl">
         {stat.number}
       </div>
@@ -114,17 +114,17 @@ export default function ComingSoonPage() {
   );
 
   return (
-    <div className="min-h-screen overflow-hidden bg-gradient-to-br from-grey-10 via-grey-15 to-grey-20 text-white">
+    <div className="min-h-screen overflow-hidden bg-linear-to-br from-grey-10 via-grey-15 to-grey-20 text-white">
       {/* Animated Background Elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 h-72 w-72 animate-pulse rounded-full bg-gradient-to-r from-primary-75/20 to-primary-90/20 blur-3xl" />
-        <div className="absolute right-10 bottom-20 h-96 w-96 animate-pulse rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 blur-3xl delay-1000" />
-        <div className="absolute top-1/2 left-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 transform animate-pulse rounded-full bg-gradient-to-r from-cyan-500/20 to-blue-500/20 blur-3xl delay-2000" />
+        <div className="absolute top-20 left-10 h-72 w-72 animate-pulse rounded-full bg-linear-to-r from-primary-75/20 to-primary-90/20 blur-3xl" />
+        <div className="absolute right-10 bottom-20 h-96 w-96 animate-pulse rounded-full bg-linear-to-r from-purple-500/20 to-pink-500/20 blur-3xl delay-1000" />
+        <div className="absolute top-1/2 left-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 transform animate-pulse rounded-full bg-linear-to-r from-cyan-500/20 to-blue-500/20 blur-3xl delay-2000" />
       </div>
 
       {/* Grid Pattern Overlay */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-size-[4rem_4rem]" />
       </div>
 
       <div className="container relative z-10 mx-auto px-4 py-12">
@@ -134,12 +134,12 @@ export default function ComingSoonPage() {
             isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
           }`}
         >
-          <div className="mb-8 inline-flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-r from-primary-75 to-primary-90 shadow-2xl shadow-primary-75/50">
+          <div className="mb-8 inline-flex h-20 w-20 items-center justify-center rounded-2xl bg-linear-to-r from-primary-75 to-primary-90 shadow-2xl shadow-primary-75/50">
             <BookOpen className="h-10 w-10 text-white" />
           </div>
 
           <h1 className="mb-6 font-bold text-6xl tracking-tight md:text-8xl">
-            <span className="bg-gradient-to-r from-primary-75 via-primary-90 to-cyan-400 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-primary-75 via-primary-90 to-cyan-400 bg-clip-text text-transparent">
               Eduwise
             </span>
             <br />
@@ -151,7 +151,7 @@ export default function ComingSoonPage() {
             personalized learning experiences
           </p>
 
-          <div className="inline-flex items-center rounded-full border border-primary-75/30 bg-gradient-to-r from-primary-75/20 to-primary-90/20 px-6 py-3 backdrop-blur-sm">
+          <div className="inline-flex items-center rounded-full border border-primary-75/30 bg-linear-to-r from-primary-75/20 to-primary-90/20 px-6 py-3 backdrop-blur-xs">
             <div className="mr-3 h-3 w-3 animate-pulse rounded-full bg-primary-75" />
             <span className="font-medium text-primary-90">
               This Course is in Development
@@ -188,7 +188,7 @@ export default function ComingSoonPage() {
 
         {/* Vision Statement */}
         <div className="mx-auto mb-20 max-w-4xl text-center">
-          <div className="rounded-3xl border border-grey-40/20 bg-gradient-to-r from-grey-20/30 to-grey-30/30 p-12 backdrop-blur-sm">
+          <div className="rounded-3xl border border-grey-40/20 bg-linear-to-r from-grey-20/30 to-grey-30/30 p-12 backdrop-blur-xs">
             <h3 className="mb-6 font-bold text-2xl text-light-95 md:text-3xl">
               Our Vision
             </h3>
@@ -199,14 +199,14 @@ export default function ComingSoonPage() {
             </p>
             <div className="mt-8 flex flex-row items-center justify-center gap-4">
               {/* Primary filled button */}
-              <div className="group inline-flex items-center rounded-full bg-gradient-to-r from-primary-75 to-primary-90 px-8 py-4 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
+              <div className="group inline-flex items-center rounded-full bg-linear-to-r from-primary-75 to-primary-90 px-8 py-4 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
                 <Link className="flex w-full items-center" href="/contact">
                   <span>Join the Revolution</span>
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Link>
               </div>
               {/* Outlined/lighter button */}
-              <div className="group inline-flex items-center rounded-full border-2 border-primary-75 bg-white/90 px-8 py-4 font-semibold text-black shadow transition-all duration-300 hover:scale-105 hover:shadow-lg">
+              <div className="group inline-flex items-center rounded-full border-2 border-primary-75 bg-white/90 px-8 py-4 font-semibold text-black shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-lg">
                 <Link className="flex w-full items-center" href="/">
                   <span>Go Back to Homepage</span>
                   <ArrowRight className="ml-2 h-5 w-5 text-black transition-transform group-hover:translate-x-1" />

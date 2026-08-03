@@ -87,7 +87,7 @@ export default function CTASection() {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-primary-99 to-white py-24">
+    <section className="relative overflow-hidden bg-linear-to-br from-primary-99 to-white py-24">
       {/* Subtle Background Decorations */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute top-1/4 -left-20 h-96 w-96 rounded-full bg-primary-95 opacity-10 blur-3xl" />
@@ -144,8 +144,8 @@ export default function CTASection() {
 
           {/* Decorative Image/Section */}
           <div className="relative hidden lg:block">
-            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary-95 to-primary-99 p-8 shadow-2xl">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary-75/10 to-transparent opacity-50 blur-2xl" />
+            <div className="relative overflow-hidden rounded-2xl bg-linear-to-br from-primary-95 to-primary-99 p-8 shadow-2xl">
+              <div className="absolute inset-0 bg-linear-to-br from-primary-75/10 to-transparent opacity-50 blur-2xl" />
 
               <div className="relative z-10 text-center">
                 <div className="mx-auto mb-6 inline-flex h-20 w-20 items-center justify-center rounded-full bg-white shadow-lg">

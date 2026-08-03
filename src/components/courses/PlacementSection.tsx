@@ -137,7 +137,7 @@ export default function PlacementSection({
                 <div className="group h-full rounded-2xl border border-slate-100 bg-white p-6 shadow-md transition-all duration-300 hover:border-primary-90 hover:shadow-lg">
                   {/* Student Header */}
                   <div className="mb-5 flex items-center gap-4 border-slate-100 border-b pb-5">
-                    <div className="relative flex h-16 w-16 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-primary-90 bg-slate-100">
+                    <div className="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-primary-90 bg-slate-100">
                       {student.image ? (
                         <Image
                           alt={student.name}
@@ -175,7 +175,7 @@ export default function PlacementSection({
                           </p>
                         </div>
                         {student.previousCompanyLogo && (
-                          <div className="relative ml-2 size-14 flex-shrink-0">
+                          <div className="relative ml-2 size-14 shrink-0">
                             <Image
                               alt="Previous Company"
                               className="object-contain"
@@ -207,7 +207,7 @@ export default function PlacementSection({
                         </p>
                       </div>
                       {student.companyLogo && (
-                        <div className="relative ml-2 size-14 flex-shrink-0">
+                        <div className="relative ml-2 size-14 shrink-0">
                           <Image
                             alt={student.placedAt || "Company"}
                             className="object-contain"

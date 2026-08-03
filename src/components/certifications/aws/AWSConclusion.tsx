@@ -14,7 +14,7 @@ export default function AWSConclusion() {
 
         <h2 className="mb-6 font-extrabold text-4xl text-gray-900 leading-tight sm:text-5xl">
           Start Learning.{" "}
-          <span className="bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">
             Start Building.
           </span>{" "}
           Start Certifying.
@@ -36,7 +36,7 @@ export default function AWSConclusion() {
         {/* Dual CTA */}
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
           <a
-            className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-emerald-600 px-8 py-4 font-bold text-base text-white shadow-emerald-200 shadow-lg transition-colors duration-200 hover:bg-emerald-700 hover:shadow-emerald-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 sm:w-auto"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-emerald-600 px-8 py-4 font-bold text-base text-white shadow-emerald-200 shadow-lg transition-colors duration-200 hover:bg-emerald-700 hover:shadow-emerald-300 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 sm:w-auto"
             href="#enquiry-form-section"
           >
             Enquire Now
@@ -57,7 +57,7 @@ export default function AWSConclusion() {
           </a>
 
           <a
-            className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-gray-200 bg-white px-8 py-4 font-bold text-base text-gray-800 transition-colors duration-200 hover:border-emerald-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 sm:w-auto"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-gray-200 bg-white px-8 py-4 font-bold text-base text-gray-800 transition-colors duration-200 hover:border-emerald-300 hover:bg-gray-50 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 sm:w-auto"
             href="#certifications"
           >
             Browse Certifications

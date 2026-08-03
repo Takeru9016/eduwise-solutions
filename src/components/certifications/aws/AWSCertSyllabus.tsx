@@ -50,7 +50,7 @@ function CertTab({
   return (
     <button
       aria-selected={active}
-      className={`flex min-h-[44px] shrink-0 items-center gap-2 whitespace-nowrap rounded-xl border px-4 py-2.5 font-semibold text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 lg:w-full lg:shrink lg:justify-start ${
+      className={`flex min-h-[44px] shrink-0 items-center gap-2 whitespace-nowrap rounded-xl border px-4 py-2.5 font-semibold text-sm transition-all duration-200 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 lg:w-full lg:shrink lg:justify-start ${
         active
           ? "border-emerald-600 bg-emerald-600 text-white shadow-md"
           : `${s.bg} ${s.border} ${s.text} hover:border-emerald-200 hover:bg-white`
@@ -80,7 +80,7 @@ function SectionTab({
   return (
     <button
       aria-selected={active}
-      className={`flex min-h-[44px] shrink-0 items-center gap-2 whitespace-nowrap rounded-xl border px-4 py-2.5 font-semibold text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 ${
+      className={`flex min-h-[44px] shrink-0 items-center gap-2 whitespace-nowrap rounded-xl border px-4 py-2.5 font-semibold text-sm transition-all duration-200 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 ${
         active
           ? "border-gray-900 bg-gray-900 text-white shadow-md"
           : "border-gray-200 bg-white text-gray-600 hover:border-emerald-200 hover:text-emerald-700"
@@ -140,7 +140,7 @@ function SyllabusTable({ cert }: { cert: CertSyllabus }) {
                 {d.name}
               </td>
               <td className="px-4 py-4">
-                <span className="inline-flex min-w-[3rem] items-center justify-center rounded-lg bg-emerald-100 px-2 py-1 font-bold text-emerald-700 text-xs">
+                <span className="inline-flex min-w-12 items-center justify-center rounded-lg bg-emerald-100 px-2 py-1 font-bold text-emerald-700 text-xs">
                   {d.percent}%
                 </span>
               </td>
@@ -209,7 +209,7 @@ function QuestionCard({ q, index }: { q: SampleQuestion; index: number }) {
 
       <button
         aria-expanded={revealed}
-        className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gray-900 px-4 py-2 font-semibold text-sm text-white transition-colors hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+        className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gray-900 px-4 py-2 font-semibold text-sm text-white transition-colors hover:bg-gray-800 focus:outline-hidden focus:ring-2 focus:ring-emerald-500"
         onClick={() => setRevealed((prev) => !prev)}
         type="button"
       >
@@ -299,7 +299,7 @@ function CertTimelineChart({
             return (
               <button
                 aria-current={isSelected}
-                className={`grid w-full grid-cols-[84px_1fr_56px] items-center gap-3 rounded-lg px-2 py-1.5 text-left transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 ${
+                className={`grid w-full grid-cols-[84px_1fr_56px] items-center gap-3 rounded-lg px-2 py-1.5 text-left transition-colors focus:outline-hidden focus:ring-2 focus:ring-emerald-500 ${
                   isSelected ? "bg-emerald-50" : "hover:bg-gray-50"
                 }`}
                 key={cert.code}

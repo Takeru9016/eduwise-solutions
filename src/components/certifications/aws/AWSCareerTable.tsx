@@ -20,10 +20,10 @@ export default function AWSCareerTable() {
         </div>
 
         {/* Desktop table */}
-        <div className="hidden overflow-x-auto rounded-2xl border border-gray-200 shadow-sm md:block">
+        <div className="hidden overflow-x-auto rounded-2xl border border-gray-200 shadow-xs md:block">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-gradient-to-r from-emerald-600 to-teal-700 text-white">
+              <tr className="bg-linear-to-r from-emerald-600 to-teal-700 text-white">
                 {[
                   "Certification",
                   "Typical Roles",
@@ -74,7 +74,7 @@ export default function AWSCareerTable() {
         <div className="space-y-4 md:hidden">
           {CAREER_TABLE.map((row, i) => (
             <div
-              className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm"
+              className="rounded-2xl border border-gray-200 bg-white p-5 shadow-xs"
               key={i}
             >
               <h3 className="mb-3 font-bold text-gray-900">{row.cert}</h3>

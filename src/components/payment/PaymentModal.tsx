@@ -43,7 +43,7 @@ export default function PaymentModal({
       <div className="relative mx-4 w-full max-w-md transform rounded-lg bg-white p-6 shadow-xl transition-all duration-300 ease-in-out">
         <div className="absolute top-4 right-4">
           <button
-            className="text-gray-400 hover:text-gray-500 focus:outline-none"
+            className="text-gray-400 hover:text-gray-500 focus:outline-hidden"
             onClick={onClose}
           >
             <X className="h-6 w-6" />

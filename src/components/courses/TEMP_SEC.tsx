@@ -13,7 +13,7 @@ export default function TEMP_SEC() {
   return (
     <>
       {/* Section 2: Placement Readiness Test (PRT) */}
-      <Card className="overflow-hidden bg-gradient-to-br from-primary-70 to-primary-90 text-white">
+      <Card className="overflow-hidden bg-linear-to-br from-primary-70 to-primary-90 text-white">
         <CardContent className="p-4 lg:p-8">
           <div className="mb-4 flex flex-col items-start gap-3 sm:flex-row lg:mb-6 lg:gap-4">
             <div className="-ml-4 rounded-r-lg bg-primary-80 px-3 py-1.5 font-bold text-white text-xl lg:-ml-8 lg:px-4 lg:py-2 lg:text-2xl">
@@ -33,7 +33,7 @@ export default function TEMP_SEC() {
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:gap-6">
             {/* Step 1 */}
-            <Card className="border-none bg-white backdrop-blur-sm transition-all duration-300">
+            <Card className="border-none bg-white backdrop-blur-xs transition-all duration-300">
               <CardContent className="p-4 lg:p-6">
                 <div className="flex flex-col items-center space-y-4 text-center">
                   <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary-80 text-white lg:h-20 lg:w-20">
@@ -55,7 +55,7 @@ export default function TEMP_SEC() {
             </Card>
 
             {/* Step 2 */}
-            <Card className="border-none bg-white backdrop-blur-sm transition-all duration-300">
+            <Card className="border-none bg-white backdrop-blur-xs transition-all duration-300">
               <CardContent className="p-4 lg:p-6">
                 <div className="flex flex-col items-center space-y-4 text-center">
                   <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary-80 text-white lg:h-20 lg:w-20">
@@ -81,7 +81,7 @@ export default function TEMP_SEC() {
             </Card>
 
             {/* Step 3 */}
-            <Card className="border-none bg-white backdrop-blur-sm transition-all duration-300 md:col-span-3 lg:col-span-1">
+            <Card className="border-none bg-white backdrop-blur-xs transition-all duration-300 md:col-span-3 lg:col-span-1">
               <CardContent className="p-4 lg:p-6">
                 <div className="flex flex-col items-center space-y-4 text-center">
                   <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary-80 text-white lg:h-20 lg:w-20">
@@ -123,7 +123,7 @@ export default function TEMP_SEC() {
       </Card>
 
       {/* Section 3: Sign ISA Agreement */}
-      <Card className="overflow-hidden bg-gradient-to-br from-primary-70 to-primary-90 text-white">
+      <Card className="overflow-hidden bg-linear-to-br from-primary-70 to-primary-90 text-white">
         <CardContent className="p-4 lg:p-8">
           <div className="mb-4 flex flex-col items-start gap-3 sm:flex-row lg:mb-6 lg:gap-4">
             <div className="-ml-4 rounded-r-lg bg-primary-80 px-3 py-1.5 font-bold text-white text-xl lg:-ml-8 lg:px-4 lg:py-2 lg:text-2xl">
@@ -187,7 +187,7 @@ export default function TEMP_SEC() {
       </Card>
 
       {/* Section 4: Career Track */}
-      <Card className="overflow-hidden bg-gradient-to-br from-primary-70 to-primary-90 text-white">
+      <Card className="overflow-hidden bg-linear-to-br from-primary-70 to-primary-90 text-white">
         <CardContent className="p-4 lg:p-8">
           <div className="mb-4 flex flex-col items-start gap-3 sm:flex-row lg:mb-6 lg:gap-4">
             <div className="-ml-4 rounded-r-lg bg-primary-80 px-3 py-1.5 font-bold text-white text-xl lg:-ml-8 lg:px-4 lg:py-2 lg:text-2xl">
@@ -287,7 +287,7 @@ export default function TEMP_SEC() {
       </Card>
 
       {/* Section 5: Pay Career Services Fee */}
-      <Card className="overflow-hidden bg-gradient-to-br from-primary-70 to-primary-90 text-white">
+      <Card className="overflow-hidden bg-linear-to-br from-primary-70 to-primary-90 text-white">
         <CardContent className="p-4 lg:p-8">
           <div className="mb-4 flex flex-col items-start gap-3 sm:flex-row lg:mb-6 lg:gap-4">
             <div className="-ml-4 rounded-r-lg bg-primary-80 px-3 py-1.5 font-bold text-white text-xl lg:-ml-8 lg:px-4 lg:py-2 lg:text-2xl">

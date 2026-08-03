@@ -23,7 +23,7 @@ export function Flowchart({
   const ArrowIcon = isVertical ? ArrowDown : ArrowRight;
 
   return (
-    <div className="my-8 rounded-xl border border-slate-200 bg-gradient-to-br from-slate-50 to-slate-100 p-6">
+    <div className="my-8 rounded-xl border border-slate-200 bg-linear-to-br from-slate-50 to-slate-100 p-6">
       {title && (
         <h3 className="mb-6 text-center font-bold text-2xl text-slate-900">
           {title}

@@ -269,7 +269,7 @@ export default function PaymentForm({
   return (
     <div className="relative rounded-lg bg-white p-4">
       {isVerifying && (
-        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center rounded-lg bg-white/80 backdrop-blur-sm">
+        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center rounded-lg bg-white/80 backdrop-blur-xs">
           <Loader2 className="mb-4 h-10 w-10 animate-spin text-primary-75" />
           <p className="font-semibold text-gray-900 text-lg">
             Verifying payment...

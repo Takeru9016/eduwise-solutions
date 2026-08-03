@@ -8,7 +8,7 @@ export default function AWSPartnerBanner() {
     <div className="flex items-center gap-4 pr-12">
       <Image
         alt="AWS"
-        className="flex-shrink-0 object-contain brightness-0 invert"
+        className="shrink-0 object-contain brightness-0 invert"
         height={28}
         src="/partners/aws.svg"
         width={48}
@@ -19,7 +19,7 @@ export default function AWSPartnerBanner() {
         <span>Cloud-powered training & certifications</span>
       </span>
       <Link
-        className="ml-2 inline-flex flex-shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-[#FF9900] px-3 py-1 font-semibold text-[#232F3E] text-xs transition-colors hover:bg-[#FFB74D]"
+        className="ml-2 inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-[#FF9900] px-3 py-1 font-semibold text-[#232F3E] text-xs transition-colors hover:bg-[#FFB74D]"
         href="/certifications/aws"
       >
         AWS Certifications
@@ -41,7 +41,7 @@ export default function AWSPartnerBanner() {
   );
 
   return (
-    <div className="relative overflow-hidden bg-gradient-to-r from-[#232F3E] via-[#1A242F] to-[#232F3E] text-white">
+    <div className="relative overflow-hidden bg-linear-to-r from-[#232F3E] via-[#1A242F] to-[#232F3E] text-white">
       {/* Animated background pattern */}
       <div className="absolute inset-0 opacity-10">
         <div

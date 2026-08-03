@@ -14,19 +14,19 @@ function CategoryBadge({ cat }: { cat: CertCategory }) {
 
 function CertCard({ cert }: { cert: (typeof CERTIFICATIONS)[number] }) {
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-emerald-200 hover:shadow-xl">
+    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-emerald-200 hover:shadow-xl">
       {/* Badge image area */}
-      <div className="relative flex h-44 items-center justify-center border-gray-100 border-b bg-gradient-to-br from-slate-50 to-gray-100 p-6 transition-colors duration-300 group-hover:from-emerald-50 group-hover:to-teal-50">
+      <div className="relative flex h-44 items-center justify-center border-gray-100 border-b bg-linear-to-br from-slate-50 to-gray-100 p-6 transition-colors duration-300 group-hover:from-emerald-50 group-hover:to-teal-50">
         <img
           alt={`${cert.title} badge`}
-          className="h-28 w-auto object-contain drop-shadow-sm transition-transform duration-300 group-hover:scale-105"
+          className="h-28 w-auto object-contain drop-shadow-xs transition-transform duration-300 group-hover:scale-105"
           loading="lazy"
           src={cert.img}
         />
       </div>
 
       {/* Content */}
-      <div className="flex flex-grow flex-col gap-3 p-5">
+      <div className="flex grow flex-col gap-3 p-5">
         <CategoryBadge cat={cert.cat} />
 
         <div>
@@ -36,13 +36,13 @@ function CertCard({ cert }: { cert: (typeof CERTIFICATIONS)[number] }) {
           <p className="mt-0.5 font-mono text-gray-400 text-xs">{cert.code}</p>
         </div>
 
-        <p className="flex-grow text-gray-600 text-sm leading-relaxed">
+        <p className="grow text-gray-600 text-sm leading-relaxed">
           {cert.desc}
         </p>
 
         <a
           aria-label={`Enquire about ${cert.title}`}
-          className="mt-auto inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 py-3 font-semibold text-sm text-white transition-colors duration-200 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 active:bg-emerald-800"
+          className="mt-auto inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 py-3 font-semibold text-sm text-white transition-colors duration-200 hover:bg-emerald-700 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 active:bg-emerald-800"
           href="#enquiry-form-section"
         >
           Enquire Now

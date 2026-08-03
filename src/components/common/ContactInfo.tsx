@@ -26,11 +26,11 @@ const ContactItem = ({ detail }: { detail: ContactDetail }) => {
         className="group flex items-start gap-4 rounded-lg p-4 transition-colors hover:bg-primary-99"
         href={detail.href}
       >
-        <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-primary-99 transition-colors group-hover:bg-white">
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary-99 transition-colors group-hover:bg-white">
           <ContactIcon className="h-6 w-6 text-primary-75" />
         </div>
 
-        <div className="flex-grow">
+        <div className="grow">
           <p className="mb-1 font-medium font-vietnam text-grey-20">
             {detail.title}
           </p>
@@ -48,7 +48,7 @@ const ContactItem = ({ detail }: { detail: ContactDetail }) => {
 
   return (
     <div className="flex items-start gap-4 p-4">
-      <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-primary-99">
+      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary-99">
         <ContactIcon className="h-6 w-6 text-primary-75" />
       </div>
 

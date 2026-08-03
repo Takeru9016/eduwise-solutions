@@ -94,7 +94,7 @@ export default function BlogsClient({ posts, categories }: BlogsClientProps) {
             <Link href={`/blogs/${post.slug.current}`} key={post._id}>
               <Card className="h-full transition-shadow hover:shadow-md">
                 {post.mainImage && (
-                  <div className="relative aspect-[16/10] w-full overflow-hidden rounded-t-lg">
+                  <div className="relative aspect-16/10 w-full overflow-hidden rounded-t-lg">
                     <Image
                       alt={
                         (post.mainImage as SanityImageWithAlt).alt || post.title

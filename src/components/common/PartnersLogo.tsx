@@ -40,8 +40,8 @@ export default function PartnersLogo() {
       {/* Partners Slider */}
       <div className="relative w-full overflow-hidden bg-light-97 py-8">
         {/* Gradient Masks */}
-        <div className="absolute top-0 left-0 z-10 h-full w-32 bg-gradient-to-r from-light-97 to-transparent" />
-        <div className="absolute top-0 right-0 z-10 h-full w-32 bg-gradient-to-l from-light-97 to-transparent" />
+        <div className="absolute top-0 left-0 z-10 h-full w-32 bg-linear-to-r from-light-97 to-transparent" />
+        <div className="absolute top-0 right-0 z-10 h-full w-32 bg-linear-to-l from-light-97 to-transparent" />
 
         {/* Scrolling Container */}
         <div
@@ -54,7 +54,7 @@ export default function PartnersLogo() {
         >
           {duplicatedPartners.map((partner, idx) => (
             <div className="group relative h-24 w-48" key={idx}>
-              <div className="absolute inset-0 rounded-xl bg-white shadow-sm transition-all duration-300 group-hover:shadow-md">
+              <div className="absolute inset-0 rounded-xl bg-white shadow-xs transition-all duration-300 group-hover:shadow-md">
                 <Image
                   alt={partner.alt}
                   className="object-contain p-6 grayscale filter transition-all duration-300 hover:grayscale-0"

@@ -63,7 +63,7 @@ export function Testimonials({
     <div className={cn("px-4 py-16 md:px-8", className)}>
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 flex flex-col items-center justify-center">
-          <h2 className="mb-4 bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-center font-bold text-3xl text-transparent md:text-4xl">
+          <h2 className="mb-4 bg-linear-to-r from-primary to-primary/70 bg-clip-text text-center font-bold text-3xl text-transparent md:text-4xl">
             {title}
           </h2>
           <p className="mx-auto max-w-2xl text-center text-muted-foreground">
@@ -179,7 +179,7 @@ export function Testimonials({
                   </div>
                 ) : (
                   <>
-                    <div className="absolute -top-32 left-0 h-32 w-full bg-gradient-to-t from-background to-transparent" />
+                    <div className="absolute -top-32 left-0 h-32 w-full bg-linear-to-t from-background to-transparent" />
                     <div className="flex justify-center">
                       <Button
                         className="rounded-full px-8"

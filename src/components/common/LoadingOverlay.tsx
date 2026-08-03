@@ -2,7 +2,7 @@ import { Send } from "lucide-react";
 
 export default function LoadingOverlay() {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-xs">
       <div className="mx-4 max-w-sm rounded-xl border border-light-90 bg-white/90 p-8 text-center shadow-lg">
         {/* Loading Animation Container */}
         <div className="relative mx-auto mb-6 h-16 w-16">

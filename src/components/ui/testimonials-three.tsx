@@ -73,13 +73,13 @@ export function TestimonialsThree({
     <div className={cn("relative w-full", className)}>
       <div className="relative mx-auto max-w-7xl px-4 md:px-8">
         <div className="mb-8 flex items-center justify-between">
-          <h2 className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text font-bold text-3xl text-transparent tracking-tight md:text-4xl">
+          <h2 className="bg-linear-to-r from-primary to-primary/70 bg-clip-text font-bold text-3xl text-transparent tracking-tight md:text-4xl">
             What Our Students Say
           </h2>
           <div className="hidden gap-3 md:flex">
             <Button
               aria-label="Previous"
-              className="rounded-full shadow-sm"
+              className="rounded-full shadow-xs"
               onClick={handlePrev}
               size="icon"
               variant="outline"
@@ -88,7 +88,7 @@ export function TestimonialsThree({
             </Button>
             <Button
               aria-label="Next"
-              className="rounded-full shadow-sm"
+              className="rounded-full shadow-xs"
               onClick={handleNext}
               size="icon"
               variant="outline"
@@ -103,12 +103,12 @@ export function TestimonialsThree({
         <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-8">
           {visible.map((t) => (
             <Card
-              className="relative flex h-full flex-col rounded-xl border border-border/80 p-6 shadow-sm transition-shadow duration-300 hover:shadow-lg md:p-8"
+              className="relative flex h-full flex-col rounded-xl border border-border/80 p-6 shadow-xs transition-shadow duration-300 hover:shadow-lg md:p-8"
               key={t.id}
             >
-              <div className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-br from-primary/5 via-transparent to-primary/5 opacity-60" />
+              <div className="pointer-events-none absolute inset-0 rounded-xl bg-linear-to-br from-primary/5 via-transparent to-primary/5 opacity-60" />
               <div className="relative flex items-center gap-4 md:gap-5">
-                <div className="relative h-16 w-16 overflow-hidden rounded-full border-2 border-primary/20 shadow-sm md:h-20 md:w-20">
+                <div className="relative h-16 w-16 overflow-hidden rounded-full border-2 border-primary/20 shadow-xs md:h-20 md:w-20">
                   <Image
                     alt={t.name}
                     className="object-cover"
@@ -146,7 +146,7 @@ export function TestimonialsThree({
                     rel="noopener noreferrer"
                     target="_blank"
                   >
-                    <Button className="group h-10 w-full rounded-full bg-gradient-to-r from-blue-700 to-blue-700/90 px-5 py-5 text-white shadow ring-1 ring-blue-700/30 transition-all duration-200 hover:from-blue-700/90 hover:to-blue-700 hover:shadow-md md:h-11 md:w-auto">
+                    <Button className="group h-10 w-full rounded-full bg-linear-to-r from-blue-700 to-blue-700/90 px-5 py-5 text-white shadow-sm ring-1 ring-blue-700/30 transition-all duration-200 hover:from-blue-700/90 hover:to-blue-700 hover:shadow-md md:h-11 md:w-auto">
                       <Linkedin className="mr-2 h-4 w-4 transition-transform group-hover:scale-110" />
                       Connect on LinkedIn
                     </Button>
@@ -175,7 +175,7 @@ export function TestimonialsThree({
         <div className="mt-6 flex justify-center gap-3 md:hidden">
           <Button
             aria-label="Previous"
-            className="rounded-full shadow-sm"
+            className="rounded-full shadow-xs"
             onClick={handlePrev}
             size="icon"
             variant="outline"
@@ -184,7 +184,7 @@ export function TestimonialsThree({
           </Button>
           <Button
             aria-label="Next"
-            className="rounded-full shadow-sm"
+            className="rounded-full shadow-xs"
             onClick={handleNext}
             size="icon"
             variant="outline"

@@ -17,7 +17,7 @@ const InputOTP = ({
   <OTPInput
     className={cn("disabled:cursor-not-allowed", className)}
     containerClassName={cn(
-      "flex items-center gap-2 has-[:disabled]:opacity-50",
+      "flex items-center gap-2 has-disabled:opacity-50",
       containerClassName
     )}
     ref={ref}

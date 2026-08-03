@@ -65,7 +65,7 @@ export default function DSToolsSection() {
     <section className="bg-white py-16">
       <div className="container mx-auto">
         <div className="mb-12 text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary-99 px-4 py-2 font-medium text-primary-75 text-sm shadow-sm">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary-99 px-4 py-2 font-medium text-primary-75 text-sm shadow-xs">
             <Settings2 className="h-5 w-5 text-primary-75" />
             Tools & Libraries You Will Learn
           </div>

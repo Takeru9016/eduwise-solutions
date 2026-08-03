@@ -53,8 +53,8 @@ export default function AWSVoucherSteps() {
           <div className="hidden justify-center lg:flex">
             <div className="relative w-72">
               {/* Background decorative card */}
-              <div className="absolute inset-0 rotate-3 scale-105 rounded-3xl bg-gradient-to-br from-emerald-400/20 to-teal-600/10" />
-              <div className="relative rounded-3xl bg-gradient-to-br from-emerald-600 to-teal-700 p-8 text-white shadow-2xl">
+              <div className="absolute inset-0 rotate-3 scale-105 rounded-3xl bg-linear-to-br from-emerald-400/20 to-teal-600/10" />
+              <div className="relative rounded-3xl bg-linear-to-br from-emerald-600 to-teal-700 p-8 text-white shadow-2xl">
                 <div className="mb-8 text-center">
                   <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/20">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -95,7 +95,7 @@ export default function AWSVoucherSteps() {
                 </div>
 
                 <a
-                  className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-white py-3 font-bold text-emerald-700 text-sm transition-colors hover:bg-emerald-50 focus:outline-none focus:ring-2 focus:ring-white"
+                  className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-white py-3 font-bold text-emerald-700 text-sm transition-colors hover:bg-emerald-50 focus:outline-hidden focus:ring-2 focus:ring-white"
                   href="#enquiry-form-section"
                 >
                   Start Your Journey

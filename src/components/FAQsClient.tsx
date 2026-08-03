@@ -84,7 +84,7 @@ const FAQItem = ({
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
           className={cn(
-            "flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full transition-colors duration-300",
+            "flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-colors duration-300",
             isOpen
               ? "bg-primary text-white"
               : "bg-light-95 text-grey-40 group-hover:text-primary"
@@ -140,7 +140,7 @@ const CategorySection = ({
       {/* Category header */}
       <div className="sticky top-20 z-10 mb-2 bg-light-97/80 py-4 backdrop-blur-xl">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary-70 text-white shadow-lg shadow-primary/20">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-primary to-primary-70 text-white shadow-lg shadow-primary/20">
             {icon}
           </div>
           <div>
@@ -268,7 +268,7 @@ export default function FAQsClient({ categories }: FAQsClientProps) {
       {/* Hero Section */}
       <section className="relative overflow-hidden">
         {/* Gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary-70 to-primary-80" />
+        <div className="absolute inset-0 bg-linear-to-br from-primary via-primary-70 to-primary-80" />
 
         {/* Decorative elements */}
         <div className="absolute inset-0 overflow-hidden">
@@ -279,7 +279,7 @@ export default function FAQsClient({ categories }: FAQsClientProps) {
               rotate: [0, 5, 0],
               y: [0, -20, 0],
             }}
-            className="absolute top-20 right-[15%] h-16 w-16 rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm"
+            className="absolute top-20 right-[15%] h-16 w-16 rounded-2xl border border-white/20 bg-white/10 backdrop-blur-xs"
             transition={{
               duration: 6,
               ease: "easeInOut",
@@ -291,7 +291,7 @@ export default function FAQsClient({ categories }: FAQsClientProps) {
               rotate: [0, -5, 0],
               y: [0, 15, 0],
             }}
-            className="absolute bottom-32 left-[10%] h-12 w-12 rounded-full border border-white/20 bg-white/10 backdrop-blur-sm"
+            className="absolute bottom-32 left-[10%] h-12 w-12 rounded-full border border-white/20 bg-white/10 backdrop-blur-xs"
             transition={{
               delay: 1,
               duration: 5,
@@ -306,7 +306,7 @@ export default function FAQsClient({ categories }: FAQsClientProps) {
           <div className="mx-auto max-w-3xl text-center">
             <motion.div
               animate={{ opacity: 1, y: 0 }}
-              className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm text-white/90 backdrop-blur-sm"
+              className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm text-white/90 backdrop-blur-xs"
               initial={{ opacity: 0, y: 20 }}
               transition={{ duration: 0.5 }}
             >
@@ -434,7 +434,7 @@ export default function FAQsClient({ categories }: FAQsClientProps) {
             viewport={{ once: true }}
             whileInView={{ opacity: 1, y: 0 }}
           >
-            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary via-primary-70 to-primary-80 p-8 md:p-12">
+            <div className="relative overflow-hidden rounded-3xl bg-linear-to-br from-primary via-primary-70 to-primary-80 p-8 md:p-12">
               {/* Decorative */}
               <div className="absolute top-0 right-0 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
               <div className="absolute bottom-0 left-0 h-48 w-48 rounded-full bg-primary-50/20 blur-3xl" />

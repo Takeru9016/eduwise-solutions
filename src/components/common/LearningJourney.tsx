@@ -92,13 +92,13 @@ export default function LearningJourney() {
   ];
 
   return (
-    <section className="bg-gradient-to-b from-white to-primary-99 py-20">
+    <section className="bg-linear-to-b from-white to-primary-99 py-20">
       <div className="container">
         {/* Header */}
         <div className="mb-16 text-center">
           <h2 className="mb-6 font-bold text-3xl text-grey-15 md:text-4xl lg:text-5xl">
             How Your Learning Journey Would Be at{" "}
-            <span className="bg-gradient-to-r from-primary-75 to-primary-90 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-primary-75 to-primary-90 bg-clip-text text-transparent">
               eduwise
             </span>
           </h2>
@@ -111,7 +111,7 @@ export default function LearningJourney() {
         {/* Journey Steps */}
         <div className="relative">
           {/* Connection Line */}
-          <div className="absolute top-0 bottom-0 left-1/2 hidden w-1 -translate-x-1/2 transform bg-gradient-to-b from-primary-75 via-primary-90 to-primary-75 lg:block" />
+          <div className="absolute top-0 bottom-0 left-1/2 hidden w-1 -translate-x-1/2 transform bg-linear-to-b from-primary-75 via-primary-90 to-primary-75 lg:block" />
 
           <div className="space-y-8 lg:space-y-12">
             {journeySteps.map((step, index) => {
@@ -139,7 +139,7 @@ export default function LearningJourney() {
                       <div className="flex items-start gap-4">
                         {/* Icon */}
                         <div
-                          className={`h-12 w-12 rounded-full bg-gradient-to-r ${step.color} flex flex-shrink-0 items-center justify-center`}
+                          className={`h-12 w-12 rounded-full bg-linear-to-r ${step.color} flex shrink-0 items-center justify-center`}
                         >
                           <IconComponent className="h-6 w-6 text-white" />
                         </div>
@@ -164,14 +164,14 @@ export default function LearningJourney() {
                   </div>
 
                   {/* Step Number Circle (Desktop) */}
-                  <div className="z-10 hidden h-16 w-16 flex-shrink-0 items-center justify-center rounded-full border-4 border-primary-75 bg-white shadow-lg lg:flex">
+                  <div className="z-10 hidden h-16 w-16 shrink-0 items-center justify-center rounded-full border-4 border-primary-75 bg-white shadow-lg lg:flex">
                     <span className="font-bold text-primary-75 text-xl">
                       {step.step}
                     </span>
                   </div>
 
                   {/* Step Number Circle (Mobile) */}
-                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-primary-75 to-primary-90 lg:hidden">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-linear-to-r from-primary-75 to-primary-90 lg:hidden">
                     <span className="font-bold text-lg text-white">
                       {step.step}
                     </span>
@@ -183,7 +183,7 @@ export default function LearningJourney() {
 
           {/* Bottom CTA */}
           <div className="mt-16 text-center">
-            <div className="rounded-2xl bg-gradient-to-r from-primary-75 to-primary-90 p-8 text-white lg:p-12">
+            <div className="rounded-2xl bg-linear-to-r from-primary-75 to-primary-90 p-8 text-white lg:p-12">
               <h3 className="mb-4 font-bold text-2xl lg:text-3xl">
                 Ready to Start Your Journey?
               </h3>

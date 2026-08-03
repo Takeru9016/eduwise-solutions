@@ -54,7 +54,7 @@ const TableFooter = ({
 }) => (
   <tfoot
     className={cn(
-      "border-t bg-muted/50 font-medium [&>tr]:last:border-b-0",
+      "border-t bg-muted/50 font-medium last:[&>tr]:border-b-0",
       className
     )}
     ref={ref}
@@ -90,7 +90,7 @@ const TableHead = ({
 }) => (
   <th
     className={cn(
-      "h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0",
+      "h-12 px-4 text-left align-middle font-medium text-muted-foreground has-[[role=checkbox]]:pr-0",
       className
     )}
     ref={ref}
@@ -107,7 +107,7 @@ const TableCell = ({
   ref?: React.Ref<HTMLTableCellElement>;
 }) => (
   <td
-    className={cn("p-4 align-middle [&:has([role=checkbox])]:pr-0", className)}
+    className={cn("p-4 align-middle has-[[role=checkbox]]:pr-0", className)}
     ref={ref}
     {...props}
   />

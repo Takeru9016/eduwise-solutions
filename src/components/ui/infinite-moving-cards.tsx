@@ -72,7 +72,7 @@ export const InfiniteMovingCards = ({
   return (
     <div
       className={cn(
-        "scroller relative z-20 max-w-7xl overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
+        "scroller mask-[linear-gradient(to_right,transparent,white_20%,white_80%,transparent)] relative z-20 max-w-7xl overflow-hidden",
         className
       )}
       ref={containerRef}
@@ -81,13 +81,13 @@ export const InfiniteMovingCards = ({
         className={cn(
           "flex w-max min-w-full shrink-0 flex-nowrap gap-4 py-4",
           start && "animate-scroll",
-          pauseOnHover && "hover:[animation-play-state:paused]"
+          pauseOnHover && "hover:paused"
         )}
         ref={scrollerRef}
       >
         {items.map((item) => (
           <li
-            className="relative w-[350px] max-w-full flex-shrink-0 rounded-2xl border border-slate-700 border-b-0 px-8 py-6 md:w-[450px]"
+            className="relative w-[350px] max-w-full shrink-0 rounded-2xl border border-slate-700 border-b-0 px-8 py-6 md:w-[450px]"
             key={item.name}
             style={{
               background:
@@ -97,7 +97,7 @@ export const InfiniteMovingCards = ({
             <blockquote>
               <div
                 aria-hidden="true"
-                className="user-select-none pointer-events-none absolute -top-0.5 -left-0.5 -z-1 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
+                className="user-select-none pointer-events-none absolute -top-0.5 -left-0.5 -z-1 h-[calc(100%+4px)] w-[calc(100%+4px)]"
               />
               <span className="relative z-20 font-normal text-gray-100 text-sm leading-[1.6]">
                 {item.quote}

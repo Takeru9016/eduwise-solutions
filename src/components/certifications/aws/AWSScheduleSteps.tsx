@@ -2,7 +2,7 @@ import { SCHEDULE_STEPS } from "./aws-data";
 
 export default function AWSScheduleSteps() {
   return (
-    <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-950 py-20">
+    <section className="bg-linear-to-br from-slate-900 via-slate-800 to-emerald-950 py-20">
       <div className="container mx-auto max-w-7xl px-4">
         <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
           {/* ── Steps grid visual ── */}
@@ -41,7 +41,7 @@ export default function AWSScheduleSteps() {
             </span>
             <h2 className="mb-4 font-extrabold text-3xl leading-tight sm:text-4xl">
               How to Schedule an AWS Exam{" "}
-              <span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">
                 with a Voucher?
               </span>
             </h2>

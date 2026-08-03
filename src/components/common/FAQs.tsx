@@ -46,9 +46,9 @@ const SectionBadge = ({
 // );
 
 const SupportCard = () => (
-  <div className="rounded-xl border border-primary-95 bg-gradient-to-br from-primary-99 to-light-97 p-8">
+  <div className="rounded-xl border border-primary-95 bg-linear-to-br from-primary-99 to-light-97 p-8">
     <div className="flex items-start gap-4">
-      <div className="flex-shrink-0">
+      <div className="shrink-0">
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-95">
           <MessageCircle className="h-6 w-6 text-primary-75" />
         </div>
@@ -108,7 +108,7 @@ export default function FAQsSection() {
   // ];
 
   return (
-    <section className="relative bg-gradient-to-b from-white to-light-97 py-16 md:py-24">
+    <section className="relative bg-linear-to-b from-white to-light-97 py-16 md:py-24">
       {/* Decorative background elements */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-20 h-72 w-72 rounded-full bg-primary-95 opacity-20 blur-3xl" />

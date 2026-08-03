@@ -11,7 +11,7 @@ const highlights = [
 
 export default function RefundHighlight() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-r from-emerald-50 via-teal-50 to-cyan-50 py-12 md:py-16">
+    <section className="relative overflow-hidden bg-linear-to-r from-emerald-50 via-teal-50 to-cyan-50 py-12 md:py-16">
       {/* Background decoration */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute top-0 left-1/4 h-64 w-64 rounded-full bg-emerald-200/30 blur-3xl" />
@@ -22,7 +22,7 @@ export default function RefundHighlight() {
         <div className="flex flex-col items-center justify-between gap-8 lg:flex-row lg:gap-12">
           {/* Left: Icon and Main Message */}
           <div className="flex items-center gap-4 md:gap-6">
-            <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-emerald-500/25 shadow-lg md:h-20 md:w-20">
+            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-linear-to-br from-emerald-500 to-teal-600 shadow-emerald-500/25 shadow-lg md:h-20 md:w-20">
               <ShieldCheck
                 className="h-8 w-8 text-white md:h-10 md:w-10"
                 strokeWidth={1.5}
@@ -47,7 +47,7 @@ export default function RefundHighlight() {
           <div className="flex flex-col gap-3 sm:flex-row sm:gap-6">
             {highlights.map((item, index) => (
               <div className="flex items-center gap-2 text-grey-30" key={index}>
-                <CheckCircle2 className="h-5 w-5 flex-shrink-0 text-emerald-500" />
+                <CheckCircle2 className="h-5 w-5 shrink-0 text-emerald-500" />
                 <span className="font-medium text-sm md:text-base">{item}</span>
               </div>
             ))}
@@ -55,7 +55,7 @@ export default function RefundHighlight() {
 
           {/* Right: CTA */}
           <Link
-            className="group inline-flex flex-shrink-0 items-center gap-2 rounded-full bg-gradient-to-r from-emerald-600 to-teal-600 px-6 py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-emerald-500/25 hover:shadow-xl"
+            className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-linear-to-r from-emerald-600 to-teal-600 px-6 py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-emerald-500/25 hover:shadow-xl"
             href="/refund"
           >
             Learn More
@@ -64,9 +64,9 @@ export default function RefundHighlight() {
         </div>
 
         {/* Note Section */}
-        <div className="mt-8 w-full rounded-lg border-amber-400 border-l-4 bg-gradient-to-r from-amber-50 to-orange-50 px-6 py-4 shadow-sm">
+        <div className="mt-8 w-full rounded-lg border-amber-400 border-l-4 bg-linear-to-r from-amber-50 to-orange-50 px-6 py-4 shadow-xs">
           <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex-shrink-0">
+            <div className="mt-0.5 shrink-0">
               <svg
                 className="h-5 w-5 text-amber-600"
                 fill="currentColor"
@@ -85,14 +85,14 @@ export default function RefundHighlight() {
               </p>
               <ul className="space-y-2 text-amber-800 text-xs md:text-sm">
                 <li className="flex items-start gap-2">
-                  <span className="mt-1 flex-shrink-0 text-amber-600">•</span>
+                  <span className="mt-1 shrink-0 text-amber-600">•</span>
                   <span>
                     If you are changing batch, you will not be eligible for
                     refund as per policy.
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="mt-1 flex-shrink-0 text-amber-600">•</span>
+                  <span className="mt-1 shrink-0 text-amber-600">•</span>
                   <span>
                     Course duration will start from the date of allotment of
                     Batch.

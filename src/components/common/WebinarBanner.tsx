@@ -158,7 +158,7 @@ export default function WebinarBanner() {
       {/* Webinar Banner */}
       <motion.div
         animate={{ opacity: 1, y: 0 }}
-        className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-primary-95 via-primary-97 to-primary-95 p-8 shadow-xl md:p-12"
+        className="relative overflow-hidden rounded-2xl bg-linear-to-r from-primary-95 via-primary-97 to-primary-95 p-8 shadow-xl md:p-12"
         initial={{ opacity: 0, y: 20 }}
         transition={{ duration: 0.5 }}
       >
@@ -195,7 +195,7 @@ export default function WebinarBanner() {
             <div className="max-w-2xl text-center md:text-left">
               <motion.div
                 animate={{ opacity: 1, x: 0 }}
-                className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/50 px-4 py-2 font-medium text-primary-75 text-sm backdrop-blur-sm"
+                className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/50 px-4 py-2 font-medium text-primary-75 text-sm backdrop-blur-xs"
                 initial={{ opacity: 0, x: -20 }}
                 transition={{ delay: 0.2 }}
               >
@@ -229,7 +229,7 @@ export default function WebinarBanner() {
                 initial={{ opacity: 0, y: 20 }}
                 transition={{ delay: 0.45 }}
               >
-                <div className="inline-flex items-center gap-3 rounded-xl border border-primary-75/20 bg-white/90 px-6 py-3 backdrop-blur-sm">
+                <div className="inline-flex items-center gap-3 rounded-xl border border-primary-75/20 bg-white/90 px-6 py-3 backdrop-blur-xs">
                   <div className="flex items-center gap-2">
                     <CalendarDays className="h-5 w-5 text-primary-75" />
                     <span className="font-medium text-grey-15">
@@ -254,7 +254,7 @@ export default function WebinarBanner() {
               >
                 {webinarFeatures.map((feature, index) => (
                   <div
-                    className="flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 backdrop-blur-sm"
+                    className="flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 backdrop-blur-xs"
                     key={index}
                   >
                     <feature.icon className="h-4 w-4 text-primary-75" />
@@ -405,11 +405,11 @@ export default function WebinarBanner() {
                     <FormLabel>Mobile Number</FormLabel>
                     <FormControl>
                       <ReactPhoneInput
-                        buttonClass="!h-10 !rounded-l-md"
-                        containerClass="!w-full"
+                        buttonClass="h-10! rounded-l-md!"
+                        containerClass="w-full!"
                         country={"in"}
-                        dropdownClass="!max-h-[200px] !overflow-y-auto"
-                        inputClass="!w-full !h-10 !rounded-md !pl-[60px] focus:!ring-2 focus:!ring-primary-100"
+                        dropdownClass="max-h-[200px]! overflow-y-auto!"
+                        inputClass="w-full! h-10! rounded-md! pl-[60px]! focus:ring-2! focus:!ring-primary-100"
                         onChange={(phone, data) => {
                           setPhoneValue(phone);
                           if (data && "dialCode" in data) {

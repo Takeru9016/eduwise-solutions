@@ -32,7 +32,7 @@ interface SanityPressFeature {
 // Loading skeleton component
 function PressFeatureSkeleton() {
   return (
-    <div className="rounded-2xl border border-light-90 bg-white/60 p-6 backdrop-blur-sm md:p-8">
+    <div className="rounded-2xl border border-light-90 bg-white/60 p-6 backdrop-blur-xs md:p-8">
       <div className="mb-6 flex h-16 items-center">
         <Skeleton className="h-12 w-40" />
       </div>
@@ -69,7 +69,7 @@ export default function FeaturedPress() {
   // Empty state - no data
   if (!loading && (!pressFeatures || pressFeatures.length === 0)) {
     return (
-      <section className="relative overflow-hidden border-light-90 border-t bg-gradient-to-b from-white via-light-99 to-light-97 py-16 md:py-24">
+      <section className="relative overflow-hidden border-light-90 border-t bg-linear-to-b from-white via-light-99 to-light-97 py-16 md:py-24">
         <div className="container mx-auto px-4 text-center">
           <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-primary-99">
             <Newspaper className="h-8 w-8 text-primary-75" />
@@ -81,7 +81,7 @@ export default function FeaturedPress() {
             We&apos;re actively working with leading media outlets. Featured
             articles and press coverage will be showcased here soon!
           </p>
-          <div className="inline-flex items-center gap-2 rounded-lg border border-light-90 bg-white px-4 py-2 text-dark-40 text-sm shadow-sm">
+          <div className="inline-flex items-center gap-2 rounded-lg border border-light-90 bg-white px-4 py-2 text-dark-40 text-sm shadow-xs">
             <Newspaper className="h-4 w-4 text-primary-75" />
             <span>Building Media Presence</span>
           </div>
@@ -91,7 +91,7 @@ export default function FeaturedPress() {
   }
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-white via-light-99 to-light-97 py-16 md:py-24">
+    <section className="relative overflow-hidden bg-linear-to-b from-white via-light-99 to-light-97 py-16 md:py-24">
       {/* Decorative background elements */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute top-20 left-10 h-96 w-96 rounded-full bg-primary-90 opacity-10 blur-3xl" />
@@ -103,7 +103,7 @@ export default function FeaturedPress() {
         <div className="mb-12 text-center md:mb-16">
           <h2 className="mb-4 font-bold text-3xl md:text-4xl lg:text-5xl">
             Featured On{" "}
-            <span className="bg-gradient-to-r from-primary-75 to-primary-90 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-primary-75 to-primary-90 bg-clip-text text-transparent">
               Leading Media Platforms
             </span>
           </h2>
@@ -140,10 +140,10 @@ export default function FeaturedPress() {
                   className="pl-4 md:basis-1/2 lg:basis-1/3"
                   key={feature._id}
                 >
-                  <article className="group relative flex h-full flex-col rounded-2xl border border-light-90 bg-white/60 p-6 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl md:p-8">
+                  <article className="group relative flex h-full flex-col rounded-2xl border border-light-90 bg-white/60 p-6 shadow-xs backdrop-blur-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-xl md:p-8">
                     {/* Featured Badge */}
                     {feature.featured && (
-                      <div className="absolute top-4 right-4 rounded-full bg-gradient-to-r from-primary-50 to-secondary-50 px-3 py-1 font-semibold text-white text-xs">
+                      <div className="absolute top-4 right-4 rounded-full bg-linear-to-r from-primary-50 to-secondary-50 px-3 py-1 font-semibold text-white text-xs">
                         Featured
                       </div>
                     )}
@@ -168,12 +168,12 @@ export default function FeaturedPress() {
                     </div>
 
                     {/* Article Headline */}
-                    <h4 className="mb-3 line-clamp-2 min-h-[3.5rem] font-bold text-dark-20 text-lg md:text-xl">
+                    <h4 className="mb-3 line-clamp-2 min-h-14 font-bold text-dark-20 text-lg md:text-xl">
                       {feature.headline}
                     </h4>
 
                     {/* Description */}
-                    <p className="mb-6 line-clamp-3 min-h-[4.5rem] flex-grow text-dark-40 text-sm md:text-base">
+                    <p className="mb-6 line-clamp-3 min-h-18 grow text-dark-40 text-sm md:text-base">
                       {feature.description}
                     </p>
 
@@ -189,15 +189,15 @@ export default function FeaturedPress() {
                     </Link>
 
                     {/* Hover Glow Effect */}
-                    <div className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-br from-primary-95 to-secondary-95 opacity-0 blur-xl transition-opacity duration-300 group-hover:opacity-100" />
+                    <div className="absolute inset-0 -z-10 rounded-2xl bg-linear-to-br from-primary-95 to-secondary-95 opacity-0 blur-xl transition-opacity duration-300 group-hover:opacity-100" />
                   </article>
                 </CarouselItem>
               ))}
             </CarouselContent>
 
             {/* Navigation Buttons */}
-            <CarouselPrevious className="-left-4 hidden border-light-90 bg-white/80 text-dark-20 backdrop-blur-sm hover:border-primary-90 hover:bg-white hover:text-primary-50 md:flex lg:-left-12" />
-            <CarouselNext className="-right-4 hidden border-light-90 bg-white/80 text-dark-20 backdrop-blur-sm hover:border-primary-90 hover:bg-white hover:text-primary-50 md:flex lg:-right-12" />
+            <CarouselPrevious className="-left-4 hidden border-light-90 bg-white/80 text-dark-20 backdrop-blur-xs hover:border-primary-90 hover:bg-white hover:text-primary-50 md:flex lg:-left-12" />
+            <CarouselNext className="-right-4 hidden border-light-90 bg-white/80 text-dark-20 backdrop-blur-xs hover:border-primary-90 hover:bg-white hover:text-primary-50 md:flex lg:-right-12" />
           </Carousel>
         )}
       </div>

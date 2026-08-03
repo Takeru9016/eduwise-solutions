@@ -33,7 +33,7 @@ const FeatureCard = ({
           isDefault
             ? "group transform bg-white hover:-translate-y-1 hover:shadow-lg"
             : "bg-light-97 hover:border-primary-90"
-        }rounded-xl border border-light-90 p-8 shadow-sm transition-all duration-300`}
+        }rounded-xl border border-light-90 p-8 shadow-xs transition-all duration-300`}
     >
       <div className="relative mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-primary-99 transition-colors group-hover:bg-primary-95">
         <Icon className="h-7 w-7 text-primary-75" />
@@ -87,7 +87,7 @@ const BenefitCard = ({
 }) => (
   <div className="rounded-xl border border-light-90 bg-white p-6 transition-all hover:shadow-md">
     <div className="flex items-start gap-4">
-      <CheckCircle2 className="mt-1 h-6 w-6 flex-shrink-0 text-primary-75" />
+      <CheckCircle2 className="mt-1 h-6 w-6 shrink-0 text-primary-75" />
       <div>
         <h4 className="mb-2 font-semibold font-vietnam text-grey-15 text-lg">
           {title}
@@ -225,7 +225,7 @@ export default function AboutUs() {
   return (
     <main className="bg-white">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-primary-99 to-white py-20 md:py-24">
+      <section className="relative overflow-hidden bg-linear-to-b from-primary-99 to-white py-20 md:py-24">
         <div className="absolute inset-0">
           <div className="absolute top-20 left-20 h-72 w-72 rounded-full bg-primary-95 opacity-20 blur-3xl" />
           <div className="absolute right-20 bottom-20 h-96 w-96 rounded-full bg-primary-97 opacity-20 blur-3xl" />
@@ -241,7 +241,7 @@ export default function AboutUs() {
                 About Eduwise
               </h1>
             </div>
-            <div className="rounded-xl border border-light-90 bg-white/50 p-6 shadow-sm backdrop-blur-sm md:p-8">
+            <div className="rounded-xl border border-light-90 bg-white/50 p-6 shadow-xs backdrop-blur-xs md:p-8">
               <p className="text-grey-35 text-lg leading-relaxed">
                 At Eduwise Solutions, our mission is to empower graduates with
                 the skills, confidence, and direction needed to succeed in
@@ -309,9 +309,9 @@ export default function AboutUs() {
             title="What We Do"
           />
 
-          <div className="mx-auto max-w-4xl rounded-xl border border-light-90 bg-white/50 p-8 shadow-sm backdrop-blur-sm">
+          <div className="mx-auto max-w-4xl rounded-xl border border-light-90 bg-white/50 p-8 shadow-xs backdrop-blur-xs">
             <div className="flex items-start gap-6">
-              <Briefcase className="h-12 w-12 flex-shrink-0 text-primary-75" />
+              <Briefcase className="h-12 w-12 shrink-0 text-primary-75" />
               <div>
                 <p className="text-grey-35 text-lg leading-relaxed">
                   We offer a 15-day intensive program that builds essential job

@@ -180,7 +180,7 @@ export default function ContactUsSection() {
       {isSubmitting && <LoadingOverlay />}
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-primary-99 to-white py-20 md:py-28">
+      <section className="relative overflow-hidden bg-linear-to-b from-primary-99 to-white py-20 md:py-28">
         <div className="absolute inset-0">
           <div className="absolute top-20 left-20 h-72 w-72 rounded-full bg-primary-95 opacity-20 blur-3xl" />
           <div className="absolute right-20 bottom-20 h-96 w-96 rounded-full bg-primary-97 opacity-20 blur-3xl" />

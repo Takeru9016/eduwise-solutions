@@ -74,7 +74,7 @@ const StepCard = ({ step, isLast }: { step: Step; isLast: boolean }) => {
       <div className="relative flex min-h-[200px] w-full max-w-[220px] flex-col items-center rounded-2xl border border-grey-90 bg-white p-6 pt-8 text-center shadow-lg transition-all duration-500 hover:-translate-y-2 hover:border-primary-90 hover:shadow-2xl">
         {/* Icon Circle */}
         <div
-          className={`h-16 w-16 rounded-2xl bg-gradient-to-br ${step.color} mb-4 flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110`}
+          className={`h-16 w-16 rounded-2xl bg-linear-to-br ${step.color} mb-4 flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110`}
         >
           <Icon className="h-8 w-8 text-white" strokeWidth={1.5} />
         </div>
@@ -113,17 +113,17 @@ const StepCard = ({ step, isLast }: { step: Step; isLast: boolean }) => {
 
 export default function HowItWorks() {
   return (
-    <section className="overflow-hidden bg-gradient-to-b from-white via-primary-99 to-white py-16 md:py-24">
+    <section className="overflow-hidden bg-linear-to-b from-white via-primary-99 to-white py-16 md:py-24">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="mb-12 text-center md:mb-16">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary-95 bg-primary-99 px-4 py-2 font-semibold text-primary-75 text-sm shadow-sm">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary-95 bg-primary-99 px-4 py-2 font-semibold text-primary-75 text-sm shadow-xs">
             <Sparkles size={16} />
             Your Success Journey
           </div>
           <h2 className="mb-4 font-bold font-vietnam text-3xl text-grey-15 md:text-4xl lg:text-5xl">
             How Our Courses{" "}
-            <span className="bg-gradient-to-r from-primary-75 to-primary-90 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-primary-75 to-primary-90 bg-clip-text text-transparent">
               Work
             </span>
           </h2>

@@ -36,7 +36,7 @@ export default async function TestimonialsSectionBasic() {
   const transformedTestimonials = transformTestimonials(testimonials);
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-light-97 to-white py-16 md:py-24">
+    <section className="relative overflow-hidden bg-linear-to-b from-light-97 to-white py-16 md:py-24">
       {/* Decorative background elements */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-20 h-72 w-72 rounded-full bg-primary-95 opacity-20 blur-3xl" />

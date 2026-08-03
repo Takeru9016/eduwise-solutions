@@ -139,7 +139,7 @@ export default function CourseLeadForm({
   return (
     <div className="overflow-hidden rounded-2xl border border-grey-90/30 bg-white shadow-2xl">
       {/* Header bar */}
-      <div className="bg-gradient-to-r from-primary-75 to-primary-90 px-6 py-4">
+      <div className="bg-linear-to-r from-primary-75 to-primary-90 px-6 py-4">
         <p className="mb-0.5 font-semibold text-white/80 text-xs uppercase tracking-widest">
           Free Counselling Session
         </p>
@@ -175,7 +175,7 @@ export default function CourseLeadForm({
             <User className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-grey-50" />
             <input
               {...register("name")}
-              className={`h-12 w-full rounded-xl border bg-light-97 pr-4 pl-10 text-grey-15 text-sm transition-all placeholder:text-grey-50 focus:outline-none focus:ring-2 ${
+              className={`h-12 w-full rounded-xl border bg-light-97 pr-4 pl-10 text-grey-15 text-sm transition-all placeholder:text-grey-50 focus:outline-hidden focus:ring-2 ${
                 errors.name
                   ? "border-red-400 focus:ring-red-200"
                   : "border-grey-80 focus:border-primary-75 focus:ring-primary-90/30"
@@ -198,7 +198,7 @@ export default function CourseLeadForm({
             <Mail className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-grey-50" />
             <input
               {...register("email")}
-              className={`h-12 w-full rounded-xl border bg-light-97 pr-4 pl-10 text-grey-15 text-sm transition-all placeholder:text-grey-50 focus:outline-none focus:ring-2 ${
+              className={`h-12 w-full rounded-xl border bg-light-97 pr-4 pl-10 text-grey-15 text-sm transition-all placeholder:text-grey-50 focus:outline-hidden focus:ring-2 ${
                 errors.email
                   ? "border-red-400 focus:ring-red-200"
                   : "border-grey-80 focus:border-primary-75 focus:ring-primary-90/30"
@@ -218,14 +218,14 @@ export default function CourseLeadForm({
         {/* Mobile — with +91 prefix chip */}
         <div>
           <div className="relative flex">
-            <span className="inline-flex h-12 flex-shrink-0 select-none items-center gap-1.5 rounded-l-xl border border-grey-80 border-r-0 bg-grey-95 px-3 font-semibold text-grey-35 text-sm">
+            <span className="inline-flex h-12 shrink-0 select-none items-center gap-1.5 rounded-l-xl border border-grey-80 border-r-0 bg-grey-95 px-3 font-semibold text-grey-35 text-sm">
               🇮🇳 +91
             </span>
             <div className="relative flex-1">
               <Phone className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-grey-50" />
               <input
                 {...register("mobile")}
-                className={`h-12 w-full rounded-r-xl border bg-light-97 pr-4 pl-10 text-grey-15 text-sm transition-all placeholder:text-grey-50 focus:outline-none focus:ring-2 ${
+                className={`h-12 w-full rounded-r-xl border bg-light-97 pr-4 pl-10 text-grey-15 text-sm transition-all placeholder:text-grey-50 focus:outline-hidden focus:ring-2 ${
                   errors.mobile
                     ? "border-red-400 focus:ring-red-200"
                     : "border-grey-80 focus:border-primary-75 focus:ring-primary-90/30"
@@ -251,7 +251,7 @@ export default function CourseLeadForm({
               <BookOpen className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-grey-50" />
               <select
                 {...register("course")}
-                className={`h-12 w-full cursor-pointer appearance-none rounded-xl border bg-light-97 pr-10 pl-10 text-grey-15 text-sm transition-all focus:outline-none focus:ring-2 ${
+                className={`h-12 w-full cursor-pointer appearance-none rounded-xl border bg-light-97 pr-10 pl-10 text-grey-15 text-sm transition-all focus:outline-hidden focus:ring-2 ${
                   errors.course
                     ? "border-red-400 focus:ring-red-200"
                     : "border-grey-80 focus:border-primary-75 focus:ring-primary-90/30"
@@ -287,7 +287,7 @@ export default function CourseLeadForm({
         {/* Consent checkbox */}
         <div>
           <label className="group flex cursor-pointer items-start gap-3">
-            <div className="relative mt-0.5 flex-shrink-0">
+            <div className="relative mt-0.5 shrink-0">
               <input
                 {...register("consent")}
                 className="peer sr-only"
@@ -332,14 +332,14 @@ export default function CourseLeadForm({
         {/* Server error */}
         {status === "error" && (
           <div className="flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-red-600 text-sm">
-            <XCircle className="h-4 w-4 flex-shrink-0" />
+            <XCircle className="h-4 w-4 shrink-0" />
             {errorMsg}
           </div>
         )}
 
         {/* Submit button */}
         <button
-          className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary-75 to-primary-90 font-bold font-vietnam text-sm text-white tracking-wide shadow-lg shadow-primary-75/25 transition-all duration-200 hover:scale-[1.02] hover:shadow-primary-75/30 hover:shadow-xl active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
+          className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-linear-to-r from-primary-75 to-primary-90 font-bold font-vietnam text-sm text-white tracking-wide shadow-lg shadow-primary-75/25 transition-all duration-200 hover:scale-[1.02] hover:shadow-primary-75/30 hover:shadow-xl active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
           disabled={status === "loading"}
           type="submit"
         >

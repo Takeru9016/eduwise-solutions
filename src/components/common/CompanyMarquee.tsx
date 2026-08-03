@@ -149,7 +149,7 @@ const row3Logos: CompanyLogo[] = [
 ];
 
 const LogoCard = ({ src, alt }: CompanyLogo) => (
-  <div className="flex h-16 min-w-32 flex-shrink-0 items-center justify-center rounded-xl bg-white p-2">
+  <div className="flex h-16 min-w-32 shrink-0 items-center justify-center rounded-xl bg-white p-2">
     <Image
       alt={alt}
       className="max-h-10 max-w-28 object-contain"
@@ -167,7 +167,7 @@ const MarqueeRow = ({
   logos: CompanyLogo[];
   direction: "ltr" | "rtl";
 }) => (
-  <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+  <div className="mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] relative overflow-hidden">
     <div
       className={`flex w-fit gap-7 ${
         direction === "ltr" ? "animate-scroll-left" : "animate-scroll-right"

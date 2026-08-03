@@ -97,12 +97,12 @@ export default async function Footer() {
   }
 
   return (
-    <footer className="relative overflow-hidden bg-gradient-to-b from-white via-primary-99 to-primary-97">
+    <footer className="relative overflow-hidden bg-linear-to-b from-white via-primary-99 to-primary-97">
       {/* Decorative background elements */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -top-32 -right-32 h-72 w-72 rounded-full bg-gradient-to-br from-primary-90/20 to-transparent blur-3xl" />
-        <div className="absolute top-1/3 -left-24 h-56 w-56 rounded-full bg-gradient-to-tr from-primary-95/30 to-transparent blur-3xl" />
-        <div className="absolute right-1/4 -bottom-16 h-64 w-64 rounded-full bg-gradient-to-tl from-primary-90/15 to-transparent blur-3xl" />
+        <div className="absolute -top-32 -right-32 h-72 w-72 rounded-full bg-linear-to-br from-primary-90/20 to-transparent blur-3xl" />
+        <div className="absolute top-1/3 -left-24 h-56 w-56 rounded-full bg-linear-to-tr from-primary-95/30 to-transparent blur-3xl" />
+        <div className="absolute right-1/4 -bottom-16 h-64 w-64 rounded-full bg-linear-to-tl from-primary-90/15 to-transparent blur-3xl" />
       </div>
 
       <div className="relative z-10">
@@ -111,13 +111,13 @@ export default async function Footer() {
           <div className="container mx-auto px-4 sm:px-6">
             <div className="flex flex-col items-center justify-between gap-8 py-10 sm:py-14 lg:flex-row">
               <div className="max-w-xl text-center lg:text-left">
-                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary-90/30 bg-white/80 px-4 py-1.5 font-semibold text-primary-75 text-xs shadow-sm backdrop-blur-sm">
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary-90/30 bg-white/80 px-4 py-1.5 font-semibold text-primary-75 text-xs shadow-xs backdrop-blur-xs">
                   <Sparkles className="h-3.5 w-3.5" />
                   Start Your Journey
                 </div>
                 <h2 className="mb-2 font-bold font-vietnam text-2xl text-grey-15 leading-tight sm:text-3xl">
                   Ready to{" "}
-                  <span className="bg-gradient-to-r from-primary-75 to-primary-90 bg-clip-text text-transparent">
+                  <span className="bg-linear-to-r from-primary-75 to-primary-90 bg-clip-text text-transparent">
                     transform
                   </span>{" "}
                   your career?
@@ -130,7 +130,7 @@ export default async function Footer() {
 
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Link
-                  className="group inline-flex items-center justify-center gap-2.5 rounded-xl bg-gradient-to-r from-primary-75 to-primary-90 px-7 py-3.5 font-semibold text-sm text-white shadow-lg shadow-primary-75/20 transition-all duration-300 hover:scale-[1.03] hover:from-primary-70 hover:to-primary-80 hover:shadow-primary-75/30 hover:shadow-xl"
+                  className="group inline-flex items-center justify-center gap-2.5 rounded-xl bg-linear-to-r from-primary-75 to-primary-90 px-7 py-3.5 font-semibold text-sm text-white shadow-lg shadow-primary-75/20 transition-all duration-300 hover:scale-[1.03] hover:from-primary-70 hover:to-primary-80 hover:shadow-primary-75/30 hover:shadow-xl"
                   href="/courses"
                 >
                   <GraduationCap className="h-4.5 w-4.5" />
@@ -138,7 +138,7 @@ export default async function Footer() {
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </Link>
                 <Link
-                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-primary-90/30 bg-white/70 px-7 py-3.5 font-semibold text-grey-20 text-sm shadow-sm backdrop-blur-sm transition-all duration-300 hover:border-primary-75/40 hover:bg-white hover:shadow-md"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-primary-90/30 bg-white/70 px-7 py-3.5 font-semibold text-grey-20 text-sm shadow-xs backdrop-blur-xs transition-all duration-300 hover:border-primary-75/40 hover:bg-white hover:shadow-md"
                   href="/contact"
                 >
                   <Phone className="h-4 w-4 text-primary-75" />
@@ -174,7 +174,7 @@ export default async function Footer() {
                   className="group flex items-center gap-3 text-grey-35 text-sm transition-colors hover:text-primary-75"
                   href="mailto:contact@eduwise.solutions"
                 >
-                  <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg border border-primary-90/30 bg-primary-97 transition-colors group-hover:bg-primary-95">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-primary-90/30 bg-primary-97 transition-colors group-hover:bg-primary-95">
                     <Mail className="h-3.5 w-3.5 text-primary-75" />
                   </div>
                   contact@eduwise.solutions
@@ -183,13 +183,13 @@ export default async function Footer() {
                   className="group flex items-center gap-3 text-grey-35 text-sm transition-colors hover:text-primary-75"
                   href="tel:+919148774540"
                 >
-                  <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg border border-primary-90/30 bg-primary-97 transition-colors group-hover:bg-primary-95">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-primary-90/30 bg-primary-97 transition-colors group-hover:bg-primary-95">
                     <Phone className="h-3.5 w-3.5 text-primary-75" />
                   </div>
                   +91 91487 74540
                 </a>
                 <div className="flex items-start gap-3 text-grey-35 text-sm">
-                  <div className="mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg border border-primary-90/30 bg-primary-97">
+                  <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-primary-90/30 bg-primary-97">
                     <MapPin className="h-3.5 w-3.5 text-primary-75" />
                   </div>
                   <span className="leading-relaxed">

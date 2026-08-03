@@ -149,7 +149,7 @@ const ChatHeader = ({
   botName: string;
   botAvatar: string;
 }) => (
-  <div className="flex items-center justify-between bg-gradient-to-r from-primary-75 to-primary-70 px-4 py-3 text-white shadow-md">
+  <div className="flex items-center justify-between bg-linear-to-r from-primary-75 to-primary-70 px-4 py-3 text-white shadow-md">
     <div className="flex items-center gap-3">
       <div className="relative">
         <Image
@@ -200,7 +200,7 @@ const MessageBubble = ({
       {isBot && (
         <Image
           alt="Bot"
-          className="flex-shrink-0 rounded-full"
+          className="shrink-0 rounded-full"
           height={32}
           src={botAvatar}
           width={32}
@@ -209,10 +209,10 @@ const MessageBubble = ({
 
       <div
         className={cn(
-          "max-w-[75%] rounded-2xl px-4 py-2.5 shadow-sm",
+          "max-w-[75%] rounded-2xl px-4 py-2.5 shadow-xs",
           isBot
             ? "border border-grey-70 bg-white text-grey-10"
-            : "bg-gradient-to-r from-primary-75 to-primary-70 text-white"
+            : "bg-linear-to-r from-primary-75 to-primary-70 text-white"
         )}
       >
         <div className="mb-1 flex items-center gap-2">
@@ -226,7 +226,7 @@ const MessageBubble = ({
           </span>
         </div>
 
-        <p className="whitespace-pre-wrap break-words text-sm leading-relaxed">
+        <p className="wrap-break-word whitespace-pre-wrap text-sm leading-relaxed">
           {message.text}
         </p>
 
@@ -269,7 +269,7 @@ const MessageBubble = ({
       {!isBot && (
         <Image
           alt="User"
-          className="flex-shrink-0 rounded-full"
+          className="shrink-0 rounded-full"
           height={32}
           src={userAvatar}
           width={32}
@@ -289,12 +289,12 @@ const TypingIndicator = ({
   <div className="fade-in slide-in-from-bottom-2 flex animate-in items-start gap-2 duration-300">
     <Image
       alt="Bot"
-      className="flex-shrink-0 rounded-full"
+      className="shrink-0 rounded-full"
       height={32}
       src={botAvatar}
       width={32}
     />
-    <div className="rounded-2xl border border-grey-70 bg-white px-4 py-3 shadow-sm">
+    <div className="rounded-2xl border border-grey-70 bg-white px-4 py-3 shadow-xs">
       <div className="mb-2 flex items-center gap-2">
         <span className="font-semibold text-primary-70 text-xs">{botName}</span>
       </div>
@@ -340,7 +340,7 @@ const ChatInput = ({
           className={cn(
             "flex-1 rounded-lg border border-grey-70 px-3 py-2.5",
             "focus:border-transparent focus:ring-2 focus:ring-primary-75",
-            "text-grey-10 text-sm placeholder-grey-60 focus:outline-none",
+            "text-grey-10 text-sm placeholder-grey-60 focus:outline-hidden",
             "transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50"
           )}
           disabled={disabled}
@@ -354,7 +354,7 @@ const ChatInput = ({
         <Button
           aria-label="Send message"
           className={cn(
-            "rounded-lg bg-gradient-to-r from-primary-75 to-primary-70 p-2.5",
+            "rounded-lg bg-linear-to-r from-primary-75 to-primary-70 p-2.5",
             "text-white transition-all duration-200 hover:shadow-md",
             "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:shadow-none"
           )}
@@ -389,7 +389,7 @@ const TeaserTooltip = ({
     <div className="flex items-start gap-3 p-4">
       <Image
         alt="Bot"
-        className="flex-shrink-0 rounded-full"
+        className="shrink-0 rounded-full"
         height={40}
         src={botAvatar}
         width={40}
@@ -399,14 +399,14 @@ const TeaserTooltip = ({
       </div>
       <Button
         aria-label="Close teaser"
-        className="flex-shrink-0 text-grey-60 transition-colors hover:text-grey-10"
+        className="shrink-0 text-grey-60 transition-colors hover:text-grey-10"
         onClick={onClose}
         variant={"ghost"}
       >
         <X size={16} />
       </Button>
     </div>
-    <div className="h-1 bg-gradient-to-r from-primary-75 to-primary-70" />
+    <div className="h-1 bg-linear-to-r from-primary-75 to-primary-70" />
   </div>
 );
 
@@ -656,12 +656,12 @@ export default function ChatWidget({
         aria-label={isOpen ? "Close chat" : "Open chat"}
         className={cn(
           "fixed right-6 bottom-6 z-50 h-14 w-14 rounded-full",
-          "bg-gradient-to-r from-primary-75 to-primary-70",
+          "bg-linear-to-r from-primary-75 to-primary-70",
           "shadow-lg hover:shadow-xl",
           "flex items-center justify-center",
           "transform transition-all duration-300",
           "hover:scale-110 active:scale-95",
-          "focus:outline-none focus:ring-4 focus:ring-primary-90"
+          "focus:outline-hidden focus:ring-4 focus:ring-primary-90"
         )}
         onClick={() => (isOpen ? setIsOpen(false) : handleOpenChat())}
         variant={"ghost"}
@@ -689,7 +689,7 @@ export default function ChatWidget({
             onClose={() => setIsOpen(false)}
           />
 
-          <div className="scrollbar-hide flex-1 space-y-3 overflow-y-auto bg-gradient-to-b from-primary-99 to-white p-4">
+          <div className="scrollbar-hide flex-1 space-y-3 overflow-y-auto bg-linear-to-b from-primary-99 to-white p-4">
             {messages.map((message) => (
               <MessageBubble
                 botAvatar={botAvatar}

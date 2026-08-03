@@ -25,13 +25,13 @@ const FeatureBadge = ({
   index: number;
 }) => (
   <div
-    className="group flex items-center gap-2 rounded-full border border-white/40 bg-gradient-to-r from-white/95 to-white/80 px-3 py-2 shadow-xl backdrop-blur-md transition-all duration-500 hover:scale-105 hover:shadow-2xl sm:gap-3 sm:px-6 sm:py-3"
+    className="group flex items-center gap-2 rounded-full border border-white/40 bg-linear-to-r from-white/95 to-white/80 px-3 py-2 shadow-xl backdrop-blur-md transition-all duration-500 hover:scale-105 hover:shadow-2xl sm:gap-3 sm:px-6 sm:py-3"
     style={{
       animation: "fadeInUp 0.8s ease-out forwards",
       animationDelay: `${index * 300}ms`,
     }}
   >
-    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-primary-90 to-primary-75 transition-transform duration-300 group-hover:rotate-12 sm:h-10 sm:w-10">
+    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-linear-to-br from-primary-90 to-primary-75 transition-transform duration-300 group-hover:rotate-12 sm:h-10 sm:w-10">
       <Icon className="h-4 w-4 text-white sm:h-5 sm:w-5" />
     </div>
     <span className="font-semibold text-grey-35 text-xs sm:text-sm">
@@ -56,8 +56,8 @@ const ModernCTAButton = ({
     <Button
       className={`group relative w-full transform overflow-hidden rounded-full px-4 py-3 font-bold text-base transition-all duration-500 hover:scale-105 sm:w-auto sm:px-8 sm:py-4 sm:text-lg sm:hover:scale-110 ${
         variant === "primary"
-          ? "bg-gradient-to-r bg-size-200 from-primary-75 via-primary-70 to-primary-75 text-white shadow-2xl hover:bg-pos-100 hover:shadow-primary-75/50"
-          : "border-2 border-primary-75 bg-white/90 text-primary-75 shadow-xl backdrop-blur-sm hover:bg-primary-99 hover:shadow-2xl"
+          ? "bg-linear-to-r bg-size-200 from-primary-75 via-primary-70 to-primary-75 text-white shadow-2xl hover:bg-pos-100 hover:shadow-primary-75/50"
+          : "border-2 border-primary-75 bg-white/90 text-primary-75 shadow-xl backdrop-blur-xs hover:bg-primary-99 hover:shadow-2xl"
       }
         ${className}
       `}
@@ -66,7 +66,7 @@ const ModernCTAButton = ({
         {children}
       </span>
       {variant === "primary" && (
-        <div className="absolute inset-0 bg-gradient-to-r from-primary-70 to-primary-65 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+        <div className="absolute inset-0 bg-linear-to-r from-primary-70 to-primary-65 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       )}
     </Button>
   </Link>
@@ -95,18 +95,18 @@ export default function HeroSection() {
   ];
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-primary-99 via-white to-primary-97">
+    <section className="relative min-h-screen overflow-hidden bg-linear-to-br from-primary-99 via-white to-primary-97">
       {/* Dynamic background elements */}
       <div className="pointer-events-none absolute inset-0">
         {/* Animated mesh gradient */}
         <div className="absolute inset-0 opacity-20 sm:opacity-30">
-          <div className="absolute top-10 left-1/4 h-48 w-48 animate-pulse rounded-full bg-gradient-to-br from-primary-90/60 to-transparent blur-2xl sm:top-0 sm:h-96 sm:w-96 sm:blur-3xl" />
+          <div className="absolute top-10 left-1/4 h-48 w-48 animate-pulse rounded-full bg-linear-to-br from-primary-90/60 to-transparent blur-2xl sm:top-0 sm:h-96 sm:w-96 sm:blur-3xl" />
           <div
-            className="absolute right-1/4 bottom-10 h-40 w-40 animate-pulse rounded-full bg-gradient-to-tl from-primary-95/80 to-transparent blur-xl sm:bottom-0 sm:h-80 sm:w-80 sm:blur-2xl"
+            className="absolute right-1/4 bottom-10 h-40 w-40 animate-pulse rounded-full bg-linear-to-tl from-primary-95/80 to-transparent blur-xl sm:bottom-0 sm:h-80 sm:w-80 sm:blur-2xl"
             style={{ animationDelay: "2s" }}
           />
           <div
-            className="absolute top-1/2 left-1/2 h-32 w-32 -translate-x-1/2 -translate-y-1/2 transform animate-pulse rounded-full bg-gradient-to-r from-primary-97 to-primary-95 blur-lg sm:h-64 sm:w-64 sm:blur-xl"
+            className="absolute top-1/2 left-1/2 h-32 w-32 -translate-x-1/2 -translate-y-1/2 transform animate-pulse rounded-full bg-linear-to-r from-primary-97 to-primary-95 blur-lg sm:h-64 sm:w-64 sm:blur-xl"
             style={{ animationDelay: "1s" }}
           />
         </div>
@@ -131,7 +131,7 @@ export default function HeroSection() {
                   style={{ animation: "fadeInDown 0.8s ease-out" }}
                 >
                   <div className="relative">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-primary-95 to-primary-75 transition-transform duration-500 group-hover:rotate-180 sm:h-10 sm:w-10">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-linear-to-br from-primary-95 to-primary-75 transition-transform duration-500 group-hover:rotate-180 sm:h-10 sm:w-10">
                       <Sparkles
                         className="text-white sm:h-5 sm:w-5"
                         size={16}
@@ -178,7 +178,7 @@ export default function HeroSection() {
                   <div className="text-gray-700">
                     Looking to elevate your career with the{" "}
                     <span className="relative inline-block">
-                      <span className="rounded-lg bg-gradient-to-r from-primary-95 via-primary-90 to-primary-95 px-2 py-1 font-bold text-base text-black shadow-lg sm:rounded-xl sm:px-4 sm:py-2 sm:text-inherit">
+                      <span className="rounded-lg bg-linear-to-r from-primary-95 via-primary-90 to-primary-95 px-2 py-1 font-bold text-base text-black shadow-lg sm:rounded-xl sm:px-4 sm:py-2 sm:text-inherit">
                         RIGHT JOB
                       </span>
                       <div className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary-75 sm:-top-2 sm:-right-2 sm:h-6 sm:w-6">
@@ -187,7 +187,7 @@ export default function HeroSection() {
                     </span>{" "}
                     and enhance your skills with the{" "}
                     <span className="relative inline-block">
-                      <span className="rounded-lg bg-gradient-to-r from-primary-95 via-primary-90 to-primary-95 px-2 py-1 font-bold text-base text-black shadow-lg sm:rounded-xl sm:px-4 sm:py-2 sm:text-inherit">
+                      <span className="rounded-lg bg-linear-to-r from-primary-95 via-primary-90 to-primary-95 px-2 py-1 font-bold text-base text-black shadow-lg sm:rounded-xl sm:px-4 sm:py-2 sm:text-inherit">
                         PERFECT PROGRAM
                       </span>
                       <div className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary-75 sm:-top-2 sm:-right-2 sm:h-6 sm:w-6">
@@ -230,7 +230,7 @@ export default function HeroSection() {
                 </ModernCTAButton>
 
                 <ModernCTAButton
-                  className="group !border-[#FF9900] !text-[#FF9900] hover:!bg-[#FF9900]/10"
+                  className="group border-[#FF9900]! text-[#FF9900]! hover:bg-[#FF9900]/10!"
                   href="/certifications/aws"
                   variant="secondary"
                 >
@@ -270,7 +270,7 @@ export default function HeroSection() {
                       src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&h=300&fit=crop&auto=format&q=80"
                       width={600}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                   </div>
                 </div>
 
@@ -287,7 +287,7 @@ export default function HeroSection() {
                       src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=300&h=240&fit=crop&auto=format&q=80"
                       width={300}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                   </div>
                 </div>
 
@@ -303,7 +303,7 @@ export default function HeroSection() {
                       src="https://images.unsplash.com/photo-1581726690015-c9861fa5057f?w=300&h=240&fit=crop&auto=format&q=80"
                       width={300}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                   </div>
                 </div>
               </div>

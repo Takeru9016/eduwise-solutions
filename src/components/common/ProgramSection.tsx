@@ -50,11 +50,11 @@ const ProgramCard = ({ program }: { program: Course }) => {
     >
       {/* Decorative gradient blob */}
       <div
-        className={`pointer-events-none absolute -top-10 -right-10 h-36 w-36 rounded-full bg-gradient-to-br ${theme.blob} opacity-30 blur-2xl`}
+        className={`pointer-events-none absolute -top-10 -right-10 h-36 w-36 rounded-full bg-linear-to-br ${theme.blob} opacity-30 blur-2xl`}
       />
       <CardContent className="p-0">
         {/* Top gradient bar */}
-        <div className={`h-1 w-full bg-gradient-to-r ${theme.gradient}`} />
+        <div className={`h-1 w-full bg-linear-to-r ${theme.gradient}`} />
         {/* Content */}
         <div className="space-y-4 p-6">
           {/* Title */}
@@ -63,7 +63,7 @@ const ProgramCard = ({ program }: { program: Course }) => {
               {program.title}
             </h3>
             <span
-              className={`inline-flex items-center gap-1 rounded-full bg-gradient-to-r px-3 py-1 font-medium text-sm text-white ${theme.gradient} shadow-sm`}
+              className={`inline-flex items-center gap-1 rounded-full bg-linear-to-r px-3 py-1 font-medium text-sm text-white ${theme.gradient} shadow-xs`}
             >
               <Sparkles className="opacity-90" size={14} />
               {program.subtitle}
@@ -79,7 +79,7 @@ const ProgramCard = ({ program }: { program: Course }) => {
           <div className="flex gap-3 pt-4">
             <Link href={program.slug}>
               <Button
-                className={`border-2 border-transparent bg-gradient-to-r ${theme.gradient} rounded-full p-[1px]`}
+                className={`border-2 border-transparent bg-linear-to-r ${theme.gradient} rounded-full p-px`}
                 variant="outline"
               >
                 <span className="flex items-center gap-2 rounded-full bg-white px-6 py-2 text-slate-700 transition-colors duration-300 group-hover:bg-slate-50">
@@ -96,7 +96,7 @@ const ProgramCard = ({ program }: { program: Course }) => {
 
 export default function Programs() {
   return (
-    <section className="relative bg-gradient-to-b from-white to-slate-50 py-16 md:py-24">
+    <section className="relative bg-linear-to-b from-white to-slate-50 py-16 md:py-24">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="mb-12 flex flex-col items-center justify-between gap-6 sm:flex-row md:mb-16">

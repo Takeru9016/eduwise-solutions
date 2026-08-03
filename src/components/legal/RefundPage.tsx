@@ -43,18 +43,18 @@ function HeroSection() {
   return (
     <section className="relative overflow-hidden py-16 sm:py-20 lg:py-28">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-99 via-white to-primary-97" />
+      <div className="absolute inset-0 bg-linear-to-br from-primary-99 via-white to-primary-97" />
 
       {/* Decorative orbs */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -top-20 -right-20 h-72 w-72 rounded-full bg-gradient-to-br from-primary-90/30 to-transparent blur-3xl" />
-        <div className="absolute -bottom-16 -left-16 h-56 w-56 rounded-full bg-gradient-to-tr from-primary-75/15 to-transparent blur-3xl" />
+        <div className="absolute -top-20 -right-20 h-72 w-72 rounded-full bg-linear-to-br from-primary-90/30 to-transparent blur-3xl" />
+        <div className="absolute -bottom-16 -left-16 h-56 w-56 rounded-full bg-linear-to-tr from-primary-75/15 to-transparent blur-3xl" />
       </div>
 
       <div className="container relative z-10 mx-auto px-4 sm:px-6">
         <div className="mx-auto max-w-3xl text-center">
           {/* Badge */}
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary-90/40 bg-white/80 px-4 py-2 font-semibold text-primary-75 text-xs shadow-sm backdrop-blur-sm sm:text-sm">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary-90/40 bg-white/80 px-4 py-2 font-semibold text-primary-75 text-xs shadow-xs backdrop-blur-xs sm:text-sm">
             <Scale className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             Transparent & Fair
           </div>
@@ -62,7 +62,7 @@ function HeroSection() {
           {/* Heading */}
           <h1 className="mb-4 font-bold font-vietnam text-3xl text-grey-15 leading-tight sm:mb-5 sm:text-4xl lg:text-5xl xl:text-6xl">
             Refund{" "}
-            <span className="bg-gradient-to-r from-primary-75 to-primary-50 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-primary-75 to-primary-50 bg-clip-text text-transparent">
               Policy
             </span>
           </h1>
@@ -76,14 +76,14 @@ function HeroSection() {
           {/* Quick nav pills */}
           <div className="flex flex-wrap justify-center gap-3">
             <a
-              className="inline-flex items-center gap-2 rounded-full border border-light-90 bg-white px-4 py-2.5 font-medium text-grey-30 text-sm shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary-90 hover:text-primary-75 sm:px-5"
+              className="inline-flex items-center gap-2 rounded-full border border-light-90 bg-white px-4 py-2.5 font-medium text-grey-30 text-sm shadow-xs transition-all duration-300 hover:-translate-y-0.5 hover:border-primary-90 hover:text-primary-75 sm:px-5"
               href="#standard-policy"
             >
               <FileText className="h-4 w-4" />
               Standard Course Refund Policy
             </a>
             <a
-              className="inline-flex items-center gap-2 rounded-full border border-light-90 bg-white px-4 py-2.5 font-medium text-grey-30 text-sm shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary-90 hover:text-primary-75 sm:px-5"
+              className="inline-flex items-center gap-2 rounded-full border border-light-90 bg-white px-4 py-2.5 font-medium text-grey-30 text-sm shadow-xs transition-all duration-300 hover:-translate-y-0.5 hover:border-primary-90 hover:text-primary-75 sm:px-5"
               href="#devops-policy"
             >
               <Trophy className="h-4 w-4" />
@@ -94,7 +94,7 @@ function HeroSection() {
       </div>
 
       {/* Bottom separator */}
-      <div className="absolute right-0 bottom-0 left-0 h-px bg-gradient-to-r from-transparent via-primary-90/40 to-transparent" />
+      <div className="absolute right-0 bottom-0 left-0 h-px bg-linear-to-r from-transparent via-primary-90/40 to-transparent" />
     </section>
   );
 }
@@ -117,7 +117,7 @@ function PolicyCard({
       className={`overflow-hidden rounded-xl border bg-white transition-all duration-300 sm:rounded-2xl ${
         isOpen
           ? "border-primary-90/50 shadow-lg shadow-primary-90/5"
-          : "border-light-90 shadow-sm hover:border-primary-90/30 hover:shadow-md"
+          : "border-light-90 shadow-xs hover:border-primary-90/30 hover:shadow-md"
       }`}
     >
       <button
@@ -126,7 +126,7 @@ function PolicyCard({
       >
         {/* Number badge */}
         <div
-          className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg font-bold text-xs transition-colors duration-300 sm:h-10 sm:w-10 sm:rounded-xl sm:text-sm ${
+          className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg font-bold text-xs transition-colors duration-300 sm:h-10 sm:w-10 sm:rounded-xl sm:text-sm ${
             isOpen
               ? "bg-primary-75 text-white"
               : "bg-primary-99 text-primary-75 group-hover:bg-primary-97"
@@ -138,7 +138,7 @@ function PolicyCard({
         {/* Icon + title */}
         <div className="flex min-w-0 flex-1 items-center gap-2.5 sm:gap-3">
           <div
-            className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg sm:h-9 sm:w-9 ${section.iconBg}`}
+            className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg sm:h-9 sm:w-9 ${section.iconBg}`}
           >
             <Icon
               className={`h-4 w-4 sm:h-[18px] sm:w-[18px] ${section.iconColor}`}
@@ -151,7 +151,7 @@ function PolicyCard({
 
         {/* Chevron */}
         <ChevronDown
-          className={`h-5 w-5 flex-shrink-0 text-grey-50 transition-transform duration-300 ${
+          className={`h-5 w-5 shrink-0 text-grey-50 transition-transform duration-300 ${
             isOpen ? "rotate-180" : ""
           }`}
         />
@@ -164,7 +164,7 @@ function PolicyCard({
         } overflow-hidden`}
       >
         <div className="px-4 pt-0 pb-5 sm:px-5 sm:pb-6">
-          <div className="mb-4 h-px bg-gradient-to-r from-primary-90/20 via-primary-90/10 to-transparent sm:mb-5" />
+          <div className="mb-4 h-px bg-linear-to-r from-primary-90/20 via-primary-90/10 to-transparent sm:mb-5" />
           {section.content}
         </div>
       </div>
@@ -201,7 +201,7 @@ function StandardRefundPolicy() {
           </p>
           <div className="rounded-xl border border-emerald-100 bg-emerald-50 p-4 sm:p-5">
             <div className="flex items-start gap-3">
-              <Clock className="mt-0.5 h-5 w-5 flex-shrink-0 text-emerald-600" />
+              <Clock className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" />
               <div>
                 <p className="font-medium text-grey-20 text-sm sm:text-base">
                   The refund request must be submitted within{" "}
@@ -243,7 +243,7 @@ function StandardRefundPolicy() {
                 className="flex items-start gap-3 rounded-lg border border-amber-100 bg-amber-50/60 p-3 sm:p-3.5"
                 key={i}
               >
-                <XCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-amber-600" />
+                <XCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-600" />
                 <span className="text-grey-30 text-sm sm:text-base">
                   {item}
                 </span>
@@ -277,13 +277,13 @@ function StandardRefundPolicy() {
             </h4>
             <div className="space-y-2">
               <div className="flex items-center gap-2.5">
-                <Mail className="h-4 w-4 flex-shrink-0 text-blue-600" />
+                <Mail className="h-4 w-4 shrink-0 text-blue-600" />
                 <span className="text-grey-30 text-sm sm:text-base">
                   The official support email of Eduwise.solutions
                 </span>
               </div>
               <div className="flex items-center gap-2.5">
-                <FileText className="h-4 w-4 flex-shrink-0 text-blue-600" />
+                <FileText className="h-4 w-4 shrink-0 text-blue-600" />
                 <span className="text-grey-30 text-sm sm:text-base">
                   The Help & Support section on our website
                 </span>
@@ -307,7 +307,7 @@ function StandardRefundPolicy() {
                   className="flex items-center gap-2 text-grey-30 text-sm sm:text-base"
                   key={i}
                 >
-                  <CheckCircle2 className="h-3.5 w-3.5 flex-shrink-0 text-blue-500" />
+                  <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-blue-500" />
                   {detail}
                 </div>
               ))}
@@ -348,7 +348,7 @@ function StandardRefundPolicy() {
               className="flex items-start gap-3 rounded-lg border border-violet-100 bg-violet-50/40 p-3 sm:p-4"
               key={i}
             >
-              <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-violet-500" />
+              <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-violet-500" />
               <div>
                 <span className="font-medium text-grey-20 text-sm sm:text-base">
                   {item.label}:
@@ -387,7 +387,7 @@ function StandardRefundPolicy() {
                 className="flex items-start gap-3 rounded-lg border border-red-100 bg-red-50/40 p-2.5 sm:p-3"
                 key={i}
               >
-                <Ban className="mt-0.5 h-4 w-4 flex-shrink-0 text-red-500" />
+                <Ban className="mt-0.5 h-4 w-4 shrink-0 text-red-500" />
                 <span className="text-grey-30 text-sm sm:text-base">
                   {item}
                 </span>
@@ -410,7 +410,7 @@ function StandardRefundPolicy() {
           </p>
           <div className="space-y-2.5">
             <div className="flex items-start gap-3 rounded-lg border border-teal-100 bg-teal-50/40 p-3 sm:p-4">
-              <RefreshCcw className="mt-0.5 h-4 w-4 flex-shrink-0 text-teal-600" />
+              <RefreshCcw className="mt-0.5 h-4 w-4 shrink-0 text-teal-600" />
               <span className="text-grey-30 text-sm sm:text-base">
                 The excess amount will be refunded within{" "}
                 <strong className="text-teal-700">15 working days</strong> after
@@ -418,7 +418,7 @@ function StandardRefundPolicy() {
               </span>
             </div>
             <div className="flex items-start gap-3 rounded-lg border border-teal-100 bg-teal-50/40 p-3 sm:p-4">
-              <CreditCard className="mt-0.5 h-4 w-4 flex-shrink-0 text-teal-600" />
+              <CreditCard className="mt-0.5 h-4 w-4 shrink-0 text-teal-600" />
               <span className="text-grey-30 text-sm sm:text-base">
                 Refund will be made to the original payment source.
               </span>
@@ -502,7 +502,7 @@ function StandardRefundPolicy() {
 function DevOpsRefundPolicy() {
   return (
     <section
-      className="bg-gradient-to-b from-slate-50 to-white py-10 sm:py-14 lg:py-16"
+      className="bg-linear-to-b from-slate-50 to-white py-10 sm:py-14 lg:py-16"
       id="devops-policy"
     >
       <div className="container mx-auto px-4 sm:px-6">
@@ -515,7 +515,7 @@ function DevOpsRefundPolicy() {
             </div>
             <h2 className="mb-3 font-bold font-vietnam text-2xl text-grey-15 sm:text-3xl lg:text-4xl">
               DevOps — 100% Fee Refund{" "}
-              <span className="bg-gradient-to-r from-primary-75 to-emerald-500 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-primary-75 to-emerald-500 bg-clip-text text-transparent">
                 Guarantee
               </span>
             </h2>
@@ -527,7 +527,7 @@ function DevOpsRefundPolicy() {
           </div>
 
           {/* Main requirement card */}
-          <div className="relative mb-6 overflow-hidden rounded-2xl bg-gradient-to-br from-primary-75 to-primary-50 p-5 text-white shadow-primary-75/15 shadow-xl sm:rounded-3xl sm:p-7 lg:p-8">
+          <div className="relative mb-6 overflow-hidden rounded-2xl bg-linear-to-br from-primary-75 to-primary-50 p-5 text-white shadow-primary-75/15 shadow-xl sm:rounded-3xl sm:p-7 lg:p-8">
             {/* Decorative */}
             <div className="pointer-events-none absolute inset-0">
               <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
@@ -535,7 +535,7 @@ function DevOpsRefundPolicy() {
             </div>
 
             <div className="relative z-10 flex items-start gap-4">
-              <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-white/20 backdrop-blur-sm sm:h-14 sm:w-14 sm:rounded-2xl">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/20 backdrop-blur-xs sm:h-14 sm:w-14 sm:rounded-2xl">
                 <CheckCircle2 className="h-6 w-6 sm:h-7 sm:w-7" />
               </div>
               <div>
@@ -554,9 +554,9 @@ function DevOpsRefundPolicy() {
           {/* Requirements grid */}
           <div className="mb-6 grid gap-4 sm:grid-cols-2 sm:gap-5">
             {/* Chapter & Practice */}
-            <div className="rounded-xl border border-blue-100 bg-white p-5 shadow-sm transition-shadow duration-300 hover:shadow-md sm:rounded-2xl sm:p-6">
+            <div className="rounded-xl border border-blue-100 bg-white p-5 shadow-xs transition-shadow duration-300 hover:shadow-md sm:rounded-2xl sm:p-6">
               <div className="mb-4 flex items-center gap-3">
-                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-blue-500 to-blue-600">
                   <BookOpen className="h-5 w-5 text-white" />
                 </div>
                 <div>
@@ -585,7 +585,7 @@ function DevOpsRefundPolicy() {
                     className="flex items-center gap-1.5 text-grey-30 text-sm"
                     key={i}
                   >
-                    <CheckCircle2 className="h-3.5 w-3.5 flex-shrink-0 text-blue-500" />
+                    <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-blue-500" />
                     {item}
                   </div>
                 ))}
@@ -593,9 +593,9 @@ function DevOpsRefundPolicy() {
             </div>
 
             {/* Contest */}
-            <div className="rounded-xl border border-violet-100 bg-white p-5 shadow-sm transition-shadow duration-300 hover:shadow-md sm:rounded-2xl sm:p-6">
+            <div className="rounded-xl border border-violet-100 bg-white p-5 shadow-xs transition-shadow duration-300 hover:shadow-md sm:rounded-2xl sm:p-6">
               <div className="mb-4 flex items-center gap-3">
-                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-violet-600">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-violet-500 to-violet-600">
                   <Trophy className="h-5 w-5 text-white" />
                 </div>
                 <div>
@@ -618,9 +618,9 @@ function DevOpsRefundPolicy() {
             </div>
 
             {/* Problem Solving */}
-            <div className="rounded-xl border border-emerald-100 bg-white p-5 shadow-sm transition-shadow duration-300 hover:shadow-md sm:rounded-2xl sm:p-6">
+            <div className="rounded-xl border border-emerald-100 bg-white p-5 shadow-xs transition-shadow duration-300 hover:shadow-md sm:rounded-2xl sm:p-6">
               <div className="mb-4 flex items-center gap-3">
-                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-emerald-500 to-emerald-600">
                   <Target className="h-5 w-5 text-white" />
                 </div>
                 <div>
@@ -647,9 +647,9 @@ function DevOpsRefundPolicy() {
             </div>
 
             {/* Live Class */}
-            <div className="rounded-xl border border-orange-100 bg-white p-5 shadow-sm transition-shadow duration-300 hover:shadow-md sm:rounded-2xl sm:p-6">
+            <div className="rounded-xl border border-orange-100 bg-white p-5 shadow-xs transition-shadow duration-300 hover:shadow-md sm:rounded-2xl sm:p-6">
               <div className="mb-4 flex items-center gap-3">
-                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-orange-600">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-orange-500 to-orange-600">
                   <Users className="h-5 w-5 text-white" />
                 </div>
                 <div>
@@ -675,7 +675,7 @@ function DevOpsRefundPolicy() {
                     className="flex items-start gap-2 text-grey-40 text-xs sm:text-sm"
                     key={i}
                   >
-                    <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-orange-500" />
+                    <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-orange-500" />
                     {item}
                   </div>
                 ))}
@@ -686,7 +686,7 @@ function DevOpsRefundPolicy() {
           {/* Important Note */}
           <div className="rounded-xl border border-red-200 bg-red-50 p-4 sm:rounded-2xl sm:p-5">
             <div className="flex items-start gap-3">
-              <AlertCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-red-500" />
+              <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-red-500" />
               <div>
                 <h4 className="mb-1 font-bold text-red-900 text-sm sm:text-base">
                   Important Note
@@ -713,10 +713,10 @@ function BottomCTA() {
         <div className="mx-auto max-w-4xl">
           <div className="relative overflow-hidden rounded-2xl shadow-xl sm:rounded-3xl">
             {/* Background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-grey-10 via-grey-15 to-grey-20" />
+            <div className="absolute inset-0 bg-linear-to-br from-grey-10 via-grey-15 to-grey-20" />
             <div className="pointer-events-none absolute inset-0 overflow-hidden">
-              <div className="absolute -top-16 -right-16 h-56 w-56 rounded-full bg-gradient-to-br from-primary-75/20 to-transparent blur-3xl" />
-              <div className="absolute -bottom-12 -left-12 h-40 w-40 rounded-full bg-gradient-to-tr from-primary-90/15 to-transparent blur-3xl" />
+              <div className="absolute -top-16 -right-16 h-56 w-56 rounded-full bg-linear-to-br from-primary-75/20 to-transparent blur-3xl" />
+              <div className="absolute -bottom-12 -left-12 h-40 w-40 rounded-full bg-linear-to-tr from-primary-90/15 to-transparent blur-3xl" />
             </div>
 
             <div className="relative z-10 p-6 text-center sm:p-8 lg:p-10">
@@ -730,7 +730,7 @@ function BottomCTA() {
               </p>
               <div className="flex flex-col justify-center gap-3 sm:flex-row">
                 <Link
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary-75 to-primary-90 px-6 py-3 font-semibold text-sm text-white shadow-lg shadow-primary-75/25 transition-all duration-300 hover:scale-105 hover:from-primary-70 hover:to-primary-80 hover:shadow-xl sm:py-3.5 sm:text-base"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-linear-to-r from-primary-75 to-primary-90 px-6 py-3 font-semibold text-sm text-white shadow-lg shadow-primary-75/25 transition-all duration-300 hover:scale-105 hover:from-primary-70 hover:to-primary-80 hover:shadow-xl sm:py-3.5 sm:text-base"
                   href="/contact"
                 >
                   <Phone className="h-4 w-4" />
@@ -758,7 +758,7 @@ export default function RefundPolicyPage() {
       <HeroSection />
       <StandardRefundPolicy />
       <div className="mx-auto max-w-4xl px-4 sm:px-6">
-        <div className="h-px bg-gradient-to-r from-transparent via-light-90 to-transparent" />
+        <div className="h-px bg-linear-to-r from-transparent via-light-90 to-transparent" />
       </div>
       <DevOpsRefundPolicy />
       <BottomCTA />

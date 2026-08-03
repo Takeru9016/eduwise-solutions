@@ -138,7 +138,7 @@ export default function GoogleReviews({
 
   if (loading) {
     return (
-      <section className="bg-gradient-to-br from-slate-50 via-white to-primary-99 py-16 sm:py-20">
+      <section className="bg-linear-to-br from-slate-50 via-white to-primary-99 py-16 sm:py-20">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-center gap-3 py-12">
             <Loader2 className="h-6 w-6 animate-spin text-primary-75" />
@@ -151,7 +151,7 @@ export default function GoogleReviews({
 
   if (!loading && reviews.length === 0) {
     return (
-      <section className="border-light-90 border-t bg-gradient-to-br from-slate-50 via-white to-primary-99 py-16 sm:py-20">
+      <section className="border-light-90 border-t bg-linear-to-br from-slate-50 via-white to-primary-99 py-16 sm:py-20">
         <div className="container mx-auto px-4 text-center">
           <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-primary-99">
             <Star className="h-8 w-8 text-primary-75" />
@@ -164,7 +164,7 @@ export default function GoogleReviews({
             Google verified reviews will be added here as they share their
             experiences!
           </p>
-          <div className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-grey-35 text-sm shadow-sm">
+          <div className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-grey-35 text-sm shadow-xs">
             <GoogleBadge />
             <span className="text-grey-40">•</span>
             <span>Collecting Feedback</span>
@@ -177,15 +177,15 @@ export default function GoogleReviews({
   return (
     <section className="relative overflow-hidden border-slate-200 border-y bg-white py-16 sm:py-20">
       {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-99/50 via-white to-amber-50/30">
-        <div className="absolute top-20 left-10 h-72 w-72 rounded-full bg-gradient-to-br from-primary-75/10 to-transparent blur-3xl" />
-        <div className="absolute right-10 bottom-20 h-96 w-96 rounded-full bg-gradient-to-tl from-amber-500/10 to-transparent blur-3xl" />
+      <div className="absolute inset-0 bg-linear-to-br from-primary-99/50 via-white to-amber-50/30">
+        <div className="absolute top-20 left-10 h-72 w-72 rounded-full bg-linear-to-br from-primary-75/10 to-transparent blur-3xl" />
+        <div className="absolute right-10 bottom-20 h-96 w-96 rounded-full bg-linear-to-tl from-amber-500/10 to-transparent blur-3xl" />
       </div>
 
       <div className="container relative z-10 mx-auto px-4">
         {/* Header */}
         <div className="mb-12 text-center sm:mb-16">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-4 py-2 font-semibold text-grey-30 text-sm shadow-lg backdrop-blur-sm">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-4 py-2 font-semibold text-grey-30 text-sm shadow-lg backdrop-blur-xs">
             <GoogleBadge />
           </div>
           <h2 className="mb-4 font-bold font-vietnam text-3xl text-grey-15 sm:mb-6 sm:text-4xl lg:text-5xl">
@@ -211,16 +211,16 @@ export default function GoogleReviews({
                   className="py-4 pl-6 md:basis-1/2 lg:basis-1/3"
                   key={review._id}
                 >
-                  <div className="group relative h-full overflow-hidden rounded-2xl border border-white/50 bg-white/80 p-6 shadow-xl backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:border-primary-90 hover:shadow-2xl sm:rounded-3xl sm:p-8">
+                  <div className="group relative h-full overflow-hidden rounded-2xl border border-white/50 bg-white/80 p-6 shadow-xl backdrop-blur-xs transition-all duration-500 hover:-translate-y-2 hover:border-primary-90 hover:shadow-2xl sm:rounded-3xl sm:p-8">
                     {/* Decorative gradient border on hover */}
-                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary-75/0 via-transparent to-amber-400/0 transition-all duration-500 group-hover:from-primary-75/5 group-hover:to-amber-400/5 sm:rounded-3xl" />
+                    <div className="absolute inset-0 rounded-2xl bg-linear-to-br from-primary-75/0 via-transparent to-amber-400/0 transition-all duration-500 group-hover:from-primary-75/5 group-hover:to-amber-400/5 sm:rounded-3xl" />
 
                     <div className="relative z-10">
                       {/* Header with reviewer info and Google badge */}
                       <div className="mb-5 flex items-start justify-between">
                         <div className="flex items-center gap-3 sm:gap-4">
                           {/* Avatar */}
-                          <div className="relative flex h-12 w-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-primary-90 bg-gradient-to-br from-primary-95 to-primary-99 shadow-lg sm:h-14 sm:w-14">
+                          <div className="relative flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-primary-90 bg-linear-to-br from-primary-95 to-primary-99 shadow-lg sm:h-14 sm:w-14">
                             {review.reviewerImage ? (
                               <Image
                                 alt={review.reviewerName}
@@ -251,7 +251,7 @@ export default function GoogleReviews({
                         </div>
 
                         {/* Google logo */}
-                        <div className="flex-shrink-0 opacity-70 transition-opacity duration-300 group-hover:opacity-100">
+                        <div className="shrink-0 opacity-70 transition-opacity duration-300 group-hover:opacity-100">
                           <svg
                             className="h-6 w-6 sm:h-7 sm:w-7"
                             viewBox="0 0 24 24"

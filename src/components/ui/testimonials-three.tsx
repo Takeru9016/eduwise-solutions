@@ -1,11 +1,12 @@
 "use client";
 
-import { ChevronLeft, ChevronRight, Linkedin, Quote } from "lucide-react";
+import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Icons } from "@/components/ui/icons";
 import { cn } from "@/lib/utils";
 
 export interface TestimonialThreeUp {
@@ -147,7 +148,7 @@ export function TestimonialsThree({
                     target="_blank"
                   >
                     <Button className="group h-10 w-full rounded-full bg-linear-to-r from-blue-700 to-blue-700/90 px-5 py-5 text-white shadow-sm ring-1 ring-blue-700/30 transition-all duration-200 hover:from-blue-700/90 hover:to-blue-700 hover:shadow-md md:h-11 md:w-auto">
-                      <Linkedin className="mr-2 h-4 w-4 transition-transform group-hover:scale-110" />
+                      <Icons.linkedin className="mr-2 h-4 w-4 transition-transform group-hover:scale-110" />
                       Connect on LinkedIn
                     </Button>
                   </Link>

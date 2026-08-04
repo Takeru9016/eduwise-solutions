@@ -6,11 +6,11 @@ import {
   Brain,
   Briefcase,
   CheckCircle,
-  Linkedin,
   MessageCircle,
   Target,
   Users,
 } from "lucide-react";
+import { Icons } from "@/components/ui/icons";
 
 export default function LearningJourney() {
   const journeySteps = [
@@ -70,7 +70,7 @@ export default function LearningJourney() {
     {
       color: "from-blue-600 to-blue-700",
       description: "Build a professional online presence to attract recruiters",
-      icon: Linkedin,
+      icon: Icons.linkedin,
       step: 8,
       title: "Enhance Your LinkedIn Profile",
     },

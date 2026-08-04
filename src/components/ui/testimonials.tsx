@@ -1,11 +1,12 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronLeft, ChevronRight, Linkedin, Quote } from "lucide-react";
+import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Icons } from "@/components/ui/icons";
 import { cn } from "@/lib/utils";
 
 interface Testimonial {
@@ -153,7 +154,7 @@ export function Testimonials({
                                 className="rounded-full hover:bg-blue-600 hover:text-white"
                                 variant="outline"
                               >
-                                <Linkedin className="mr-2 h-4 w-4" />
+                                <Icons.linkedin className="mr-2 h-4 w-4" />
                                 View on LinkedIn
                               </Button>
                             </a>
@@ -253,7 +254,7 @@ export function Testimonials({
                           className="rounded-full hover:bg-blue-600 hover:text-white"
                           variant="outline"
                         >
-                          <Linkedin className="mr-2 h-4 w-4" />
+                          <Icons.linkedin className="mr-2 h-4 w-4" />
                           View on LinkedIn
                         </Button>
                       </a>

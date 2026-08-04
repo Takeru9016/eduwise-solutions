@@ -1,11 +1,12 @@
 "use client";
 
 import { motion, useAnimation, useInView } from "framer-motion";
-import { ChevronLeft, ChevronRight, Linkedin, Quote, Star } from "lucide-react";
+import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Icons } from "@/components/ui/icons";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 
@@ -102,7 +103,7 @@ export function TestimonialsSection({
       },
       y: 0,
     },
-  };
+  } as const;
 
   if (testimonials.length === 0) {
     return null;
@@ -207,7 +208,7 @@ export function TestimonialsSection({
                             className="rounded-full hover:bg-blue-600 hover:text-white"
                             variant="outline"
                           >
-                            <Linkedin className="mr-2 h-4 w-4" />
+                            <Icons.linkedin className="mr-2 h-4 w-4" />
                             View on LinkedIn
                           </Button>
                         </a>

@@ -54,7 +54,7 @@ import { cn } from "@/lib/utils";
 const formSchema = z.object({
   countryCode: z.string().default("+91"),
   dob: z.date({
-    required_error: "Date of birth is required",
+    error: "Date of birth is required",
   }),
   email: z.string().email("Please enter a valid email"),
   graduationYear: z.string().optional(),
@@ -63,7 +63,7 @@ const formSchema = z.object({
   name: z.string().min(2, "Name should be at least 2 characters"),
 });
 
-type FormValues = z.infer<typeof formSchema>;
+type FormValues = z.input<typeof formSchema>;
 
 const webinarFeatures = [
   {

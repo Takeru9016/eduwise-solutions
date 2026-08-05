@@ -1,3 +1,4 @@
+import { EarthGlobeIcon } from "@sanity/icons/EarthGlobe";
 import { defineField, defineType } from "sanity";
 
 export const pressFeatureType = defineType({
@@ -61,6 +62,7 @@ export const pressFeatureType = defineType({
       type: "boolean",
     }),
   ],
+  icon: EarthGlobeIcon,
   name: "pressFeature",
   orderings: [
     {

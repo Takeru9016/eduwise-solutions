@@ -1,3 +1,4 @@
+import { HelpCircleIcon } from "@sanity/icons/HelpCircle";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
 export const faqCategoryType = defineType({
@@ -52,6 +53,7 @@ export const faqCategoryType = defineType({
       type: "array",
     }),
   ],
+  icon: HelpCircleIcon,
   name: "faqCategory",
   orderings: [
     {

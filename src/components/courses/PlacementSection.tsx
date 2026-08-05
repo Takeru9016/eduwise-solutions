@@ -1,6 +1,6 @@
 "use client";
 
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import type { SanityImageSource } from "@sanity/image-url";
 import { ArrowRight, Briefcase, Clock, Loader2, User } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";

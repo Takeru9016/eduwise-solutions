@@ -1,4 +1,4 @@
-import { TagIcon } from "@sanity/icons";
+import { TagIcon } from "@sanity/icons/Tag";
 import { defineField, defineType } from "sanity";
 
 export const categoryType = defineType({
@@ -21,6 +21,12 @@ export const categoryType = defineType({
   ],
   icon: TagIcon,
   name: "category",
+  preview: {
+    select: {
+      subtitle: "description",
+      title: "title",
+    },
+  },
   title: "Category",
   type: "document",
 });

@@ -1,3 +1,6 @@
+import { BookIcon } from "@sanity/icons/Book";
+import { DocumentsIcon } from "@sanity/icons/Documents";
+import { HomeIcon } from "@sanity/icons/Home";
 import type { StructureResolver } from "sanity/structure";
 
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
@@ -8,6 +11,7 @@ export const structure: StructureResolver = (S) =>
       // Blog section
       S.listItem()
         .title("Blog")
+        .icon(DocumentsIcon)
         .child(
           S.list()
             .title("Blog")
@@ -21,6 +25,7 @@ export const structure: StructureResolver = (S) =>
       // Courses section
       S.listItem()
         .title("Courses")
+        .icon(BookIcon)
         .child(
           S.documentTypeList("course")
             .title("All Courses")
@@ -30,12 +35,15 @@ export const structure: StructureResolver = (S) =>
       // Website Content section
       S.listItem()
         .title("Website Content")
+        .icon(HomeIcon)
         .child(
           S.list()
             .title("Website Content")
             .items([
               S.documentTypeListItem("testimonial").title("Testimonials"),
               S.documentTypeListItem("faqCategory").title("FAQ Categories"),
+              S.documentTypeListItem("devopsFAQ").title("DevOps FAQ"),
+              S.documentTypeListItem("pressFeature").title("Press Features"),
               S.documentTypeListItem("placedStudent").title("Placed Students"),
               S.documentTypeListItem("googleReview").title("Google Reviews"),
             ])
@@ -51,6 +59,8 @@ export const structure: StructureResolver = (S) =>
             "author",
             "testimonial",
             "faqCategory",
+            "devopsFAQ",
+            "pressFeature",
             "placedStudent",
             "googleReview",
             "course",

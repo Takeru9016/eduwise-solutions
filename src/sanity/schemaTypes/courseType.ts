@@ -1,3 +1,4 @@
+import { BookIcon } from "@sanity/icons/Book";
 import { defineField, defineType } from "sanity";
 
 export const courseType = defineType({
@@ -529,6 +530,7 @@ export const courseType = defineType({
     { name: "extras", title: "Extras" },
     { name: "seo", title: "SEO" },
   ],
+  icon: BookIcon,
   name: "course",
   orderings: [
     {

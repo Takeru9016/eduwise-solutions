@@ -1,4 +1,4 @@
-import { HelpCircle } from "lucide-react";
+import { HelpCircleIcon } from "@sanity/icons/HelpCircle";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
 export const devopsFAQType = defineType({
@@ -44,7 +44,7 @@ export const devopsFAQType = defineType({
       type: "array",
     }),
   ],
-  icon: HelpCircle,
+  icon: HelpCircleIcon,
   name: "devopsFAQ",
   preview: {
     prepare({ title, questions }) {

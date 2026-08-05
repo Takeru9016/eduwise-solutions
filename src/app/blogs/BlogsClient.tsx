@@ -1,6 +1,6 @@
 "use client";
 
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import type { SanityImageSource } from "@sanity/image-url";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";

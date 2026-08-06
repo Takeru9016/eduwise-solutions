@@ -7,6 +7,7 @@ import { devopsFAQType } from "./devopsFAQ";
 import { faqCategoryType } from "./faqCategoryType";
 import { flowchart } from "./flowchart";
 import { googleReviewType } from "./googleReviewType";
+import { leadMagnetType } from "./leadMagnetType";
 import { placedStudentType } from "./placedStudentType";
 import { postType } from "./postType";
 import { pressFeatureType } from "./pressFeatureType";
@@ -26,5 +27,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     devopsFAQType,
     pressFeatureType,
     courseType,
+    leadMagnetType,
   ],
 };

@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import { Footer, Navbar } from "@/components";
 import { client } from "@/sanity/lib/client";
 import { CATEGORIES_QUERY, POSTS_QUERY } from "@/sanity/lib/queries";
@@ -9,6 +11,12 @@ interface Category {
   slug?: { current: string };
   title: string;
 }
+
+export const metadata: Metadata = {
+  description:
+    "Career advice, industry insights, and guides on AWS, DevOps, AI, web development, and more from the Eduwise Solutions team.",
+  title: "Blogs",
+};
 
 export const revalidate = 60;
 

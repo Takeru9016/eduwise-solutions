@@ -6,6 +6,7 @@ import { Be_Vietnam_Pro } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { LinkedInInsight, MetaPixel, PopupForm } from "@/components";
+import { organizationJsonLd, SITE_URL } from "@/lib/seo";
 
 const beVietnamPro = Be_Vietnam_Pro({
   subsets: ["latin"],
@@ -40,7 +41,19 @@ export const metadata: Metadata = {
     ],
   },
   manifest: "/favicon/site.webmanifest",
-  title: "Eduwise Solutions - Your Path to Success",
+  metadataBase: new URL(SITE_URL),
+  openGraph: {
+    description:
+      "Whether you're interested in IT Jobs or professional courses that get you job-ready, we're here to support you every step of the way!",
+    siteName: "Eduwise Solutions",
+    title: "Eduwise Solutions - Your Path to Success",
+    type: "website",
+    url: SITE_URL,
+  },
+  title: {
+    default: "Eduwise Solutions - Your Path to Success",
+    template: "%s | Eduwise Solutions",
+  },
 };
 
 export default function RootLayout({
@@ -51,6 +64,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${beVietnamPro.variable} font-vietnam antialiased`}>
+        <script
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: static, code-generated JSON-LD, not user input
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd()),
+          }}
+          type="application/ld+json"
+        />
         <MetaPixel />
         <LinkedInInsight />
         {children}

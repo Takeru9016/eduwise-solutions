@@ -1,5 +1,6 @@
 import type { SanityImageSource } from "@sanity/image-url";
 import { ArrowLeft } from "lucide-react";
+import type { Metadata } from "next";
 import { draftMode } from "next/headers";
 import Link from "next/link";
 import { PortableText } from "next-sanity";
@@ -10,6 +11,7 @@ import { PreviewBanner } from "@/components/preview-banner";
 import { PreviewProvider } from "@/components/preview-provider";
 import { Badge } from "@/components/ui/badge";
 import { client } from "@/sanity/lib/client";
+import { urlFor } from "@/sanity/lib/image";
 import { POST_BY_SLUG_QUERY } from "@/sanity/lib/queries";
 
 interface Category {
@@ -39,6 +41,34 @@ interface Post {
 }
 
 export const revalidate = 10; // Revalidate every 10 seconds
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await client.fetch<Post | null>(POST_BY_SLUG_QUERY, { slug });
+
+  if (!post) {
+    return { title: "Post Not Found" };
+  }
+
+  const description = post.categories?.length
+    ? `${post.title} — ${post.categories.map((c) => c.title).join(", ")} | Eduwise Solutions`
+    : post.title;
+
+  return {
+    description,
+    openGraph: {
+      description,
+      images: post.mainImage ? [{ url: urlFor(post.mainImage).url() }] : [],
+      title: post.title,
+      type: "article",
+    },
+    title: post.title,
+  };
+}
 
 function BlogPostContent({ post }: { post: Post }) {
   return (

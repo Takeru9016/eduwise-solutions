@@ -189,3 +189,73 @@ export const COURSES_LIST_QUERY = `
     featured
   }
 `;
+
+export const LEAD_MAGNETS_QUERY = `
+  *[_type == "leadMagnet" && isActive == true] | order(_createdAt desc) {
+    _id,
+    title,
+    slug,
+    description,
+    category,
+    "coverImageUrl": coverImage.asset->url
+  }
+`;
+
+export const LEAD_MAGNET_BY_SLUG_QUERY = `
+  *[_type == "leadMagnet" && slug.current == $slug && isActive == true][0] {
+    _id,
+    title,
+    slug,
+    description,
+    category,
+    "coverImageUrl": coverImage.asset->url,
+    "pdfUrl": pdfFile.asset->url,
+    "pdfFilename": pdfFile.asset->originalFilename
+  }
+`;
+
+// Chatbot knowledge base: everything needed to answer prospective-student
+// questions, sourced live from Sanity instead of a hand-maintained text file.
+export const CHATBOT_KNOWLEDGE_QUERY = `
+{
+  "courses": *[_type == "course"] | order(category asc, title asc) {
+    title,
+    subtitle,
+    description,
+    category,
+    duration,
+    price,
+    originalPrice,
+    emiOption,
+    whatsIncluded,
+    isJobGuaranteeProgram,
+    faq
+  },
+  "faqCategories": *[_type == "faqCategory"] | order(order asc) {
+    title,
+    questions[] { question, answer }
+  },
+  "devopsFaq": *[_type == "devopsFAQ"][0] {
+    title,
+    questions[] { question, answer }
+  }
+}
+`;
+
+export const PRICING_QUERY = `
+  *[_type == "course" && defined(price)] | order(category asc, title asc) {
+    _id,
+    title,
+    slug,
+    subtitle,
+    category,
+    emoji,
+    duration,
+    price,
+    originalPrice,
+    emiOption,
+    whatsIncluded,
+    featured,
+    isJobGuaranteeProgram
+  }
+`;

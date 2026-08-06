@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import {
   Body,
   Button,
@@ -9,8 +10,7 @@ import {
   Preview,
   Section,
   Text,
-} from "@react-email/components";
-import { format } from "date-fns";
+} from "react-email";
 
 interface ClientEmailProps {
   course: string;

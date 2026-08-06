@@ -18,8 +18,7 @@ import {
 export const metadata: Metadata = {
   description:
     "Get AWS Certification Exam Vouchers for Cloud Practitioner, AI Practitioner, Solutions Architect, Developer, SysOps, Data Engineer, and Machine Learning Engineer certifications. Expert guidance from Eduwise Solutions.",
-  title:
-    "AWS Certification Exam Vouchers – A Complete Guide | Eduwise Solutions",
+  title: "AWS Certification Exam Vouchers – A Complete Guide",
 };
 
 export default function AWSCertificationsPage() {

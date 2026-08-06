@@ -65,6 +65,7 @@ const SIMPLE_NAV_LINKS: SimpleNavLink[] = [
 ];
 
 const SIMPLE_NAV_LINKS_AFTER: SimpleNavLink[] = [
+  { href: "/pricing", label: "Pricing" },
   { href: "/blogs", label: "Blogs" },
 ];
 

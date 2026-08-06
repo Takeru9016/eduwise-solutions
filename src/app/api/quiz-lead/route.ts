@@ -5,21 +5,21 @@ import {
   getSheetsClient,
 } from "@/lib/google-sheets";
 
-const SHEET_NAME = "LinkedIn";
+const SHEET_NAME = "Quiz Leads";
 const HEADERS = [
   "Name",
   "Email",
   "Mobile",
-  "Course Interest",
-  "Source",
+  "Recommended Category",
+  "Wants Job Guarantee",
   "Timestamp",
-  "Consent",
 ];
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, email, mobile, course, consent } = body;
+    const { name, email, mobile, recommendedCategory, wantsJobGuarantee } =
+      body;
 
     if (!(name && email && mobile)) {
       return NextResponse.json(
@@ -34,15 +34,14 @@ export async function POST(req: Request) {
       name,
       email,
       mobile,
-      course || "Not specified",
-      "Course Hero Form",
+      recommendedCategory || "Not specified",
+      wantsJobGuarantee ? "Yes" : "No",
       new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
-      consent ? "Yes" : "No",
     ]);
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("[linkedin-lead] Error:", error);
+    console.error("[quiz-lead] Error:", error);
     return NextResponse.json(
       { error: "Failed to submit. Please try again." },
       { status: 500 }

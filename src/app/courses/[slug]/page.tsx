@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Footer, Navbar } from "@/components";
 import CourseTemplate from "@/components/courses/CourseTemplate";
+import { courseJsonLd } from "@/lib/seo";
 import { client } from "@/sanity/lib/client";
 import {
   ALL_COURSE_SLUGS_QUERY,
@@ -34,7 +35,7 @@ export async function generateMetadata({
   );
 
   if (!course) {
-    return { title: "Course Not Found | Eduwise Solutions" };
+    return { title: "Course Not Found" };
   }
 
   return {
@@ -47,7 +48,7 @@ export async function generateMetadata({
       images: course.heroImageUrl ? [{ url: course.heroImageUrl }] : [],
       title: course.seoTitle || course.title,
     },
-    title: course.seoTitle || `${course.title} | Eduwise Solutions`,
+    title: course.seoTitle || course.title,
   };
 }
 
@@ -65,6 +66,22 @@ export default async function CoursePage({ params }: PageProps) {
 
   return (
     <>
+      <script
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: static, code-generated JSON-LD, not user input
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            courseJsonLd({
+              description: course.description,
+              price: course.price,
+              seoDescription: course.seoDescription,
+              slug: course.slug.current,
+              subtitle: course.subtitle,
+              title: course.title,
+            })
+          ),
+        }}
+        type="application/ld+json"
+      />
       <Navbar />
       <CourseTemplate course={course} />
       <Footer />

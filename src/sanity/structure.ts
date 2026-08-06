@@ -44,6 +44,9 @@ export const structure: StructureResolver = (S) =>
               S.documentTypeListItem("faqCategory").title("FAQ Categories"),
               S.documentTypeListItem("devopsFAQ").title("DevOps FAQ"),
               S.documentTypeListItem("pressFeature").title("Press Features"),
+              S.documentTypeListItem("leadMagnet").title(
+                "Lead Magnets (Free Guides)"
+              ),
               S.documentTypeListItem("placedStudent").title("Placed Students"),
               S.documentTypeListItem("googleReview").title("Google Reviews"),
             ])
@@ -61,6 +64,7 @@ export const structure: StructureResolver = (S) =>
             "faqCategory",
             "devopsFAQ",
             "pressFeature",
+            "leadMagnet",
             "placedStudent",
             "googleReview",
             "course",

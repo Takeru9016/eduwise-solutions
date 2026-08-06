@@ -1,10 +1,11 @@
-import fs from "node:fs";
-import path from "node:path";
 import { HuggingFaceInferenceEmbeddings } from "@langchain/community/embeddings/hf";
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 import { google } from "googleapis";
+import { unstable_cache } from "next/cache";
 import { type NextRequest, NextResponse } from "next/server";
+import { client } from "@/sanity/lib/client";
+import { CHATBOT_KNOWLEDGE_QUERY } from "@/sanity/lib/queries";
 
 interface VectorDocument {
   content: string;
@@ -44,6 +45,31 @@ interface MessageContent {
 
 type MessageContentType = string | MessageContent | MessageContent[];
 
+interface KnowledgeCourse {
+  category: string;
+  description: string;
+  duration: string;
+  emiOption: string | null;
+  faq: { answer: string; question: string }[] | null;
+  isJobGuaranteeProgram: boolean | null;
+  originalPrice: number | null;
+  price: number;
+  subtitle: string;
+  title: string;
+  whatsIncluded: string[] | null;
+}
+
+interface KnowledgeFaqCategory {
+  questions: { answer: string; question: string }[];
+  title: string;
+}
+
+interface ChatbotKnowledge {
+  courses: KnowledgeCourse[];
+  devopsFaq: KnowledgeFaqCategory | null;
+  faqCategories: KnowledgeFaqCategory[];
+}
+
 function generateWhatsAppLink(
   question: string,
   userData?: { name?: string; phone?: string; email?: string }
@@ -70,193 +96,176 @@ function generateWhatsAppLink(
   return `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 }
 
-class VectorStoreManager {
-  private static instance: VectorStoreManager;
-  private vectorStore: VectorDocument[] | null = null;
-  private embeddings: HuggingFaceInferenceEmbeddings | null = null;
+/**
+ * Renders live Sanity content (courses, FAQs) into plain text for the
+ * chatbot's knowledge base, replacing a hand-maintained faq.txt file that
+ * drifted out of sync with the site and was eventually deleted entirely.
+ */
+function formatKnowledgeBaseText(knowledge: ChatbotKnowledge): string {
+  const sections: string[] = [];
 
-  private constructor() {}
+  for (const course of knowledge.courses) {
+    const lines = [
+      `# Course: ${course.title}`,
+      `Category: ${course.category}`,
+      `Subtitle: ${course.subtitle}`,
+      `Description: ${course.description}`,
+      `Duration: ${course.duration}`,
+      `Price: ₹${course.price.toLocaleString("en-IN")}`,
+    ];
 
-  static getInstance(): VectorStoreManager {
-    if (!VectorStoreManager.instance) {
-      VectorStoreManager.instance = new VectorStoreManager();
+    if (course.originalPrice) {
+      lines.push(
+        `Original Price: ₹${course.originalPrice.toLocaleString("en-IN")}`
+      );
     }
-    return VectorStoreManager.instance;
+    if (course.emiOption) {
+      lines.push(`EMI Option: ${course.emiOption}`);
+    }
+    if (course.isJobGuaranteeProgram) {
+      lines.push("This course includes a Job Guarantee Program.");
+    }
+    if (course.whatsIncluded?.length) {
+      lines.push(`What's Included: ${course.whatsIncluded.join(", ")}`);
+    }
+    if (course.faq?.length) {
+      lines.push("Course FAQs:");
+      for (const { question, answer } of course.faq) {
+        lines.push(`Q: ${question}\nA: ${answer}`);
+      }
+    }
+
+    sections.push(lines.join("\n"));
   }
 
-  private cosineSimilarity(a: number[], b: number[]): number {
-    const dotProduct = a.reduce((sum, val, i) => sum + val * b[i], 0);
-    const magnitudeA = Math.sqrt(a.reduce((sum, val) => sum + val * val, 0));
-    const magnitudeB = Math.sqrt(b.reduce((sum, val) => sum + val * val, 0));
-    return dotProduct / (magnitudeA * magnitudeB);
+  const allFaqCategories = [
+    ...knowledge.faqCategories,
+    ...(knowledge.devopsFaq ? [knowledge.devopsFaq] : []),
+  ];
+
+  for (const category of allFaqCategories) {
+    const lines = [`# FAQ: ${category.title}`];
+    for (const { question, answer } of category.questions) {
+      lines.push(`Q: ${question}\nA: ${answer}`);
+    }
+    sections.push(lines.join("\n"));
   }
 
-  private async loadTextFromFile(filePath: string): Promise<string> {
-    if (!fs.existsSync(filePath)) {
-      throw new Error(`File not found at: ${filePath}`);
-    }
+  return sections.join("\n\n---\n\n");
+}
 
-    console.log(`Reading file from: ${filePath}`);
-    const text = fs.readFileSync(filePath, "utf-8");
-    console.log(`Loaded ${text.length} characters`);
+function cosineSimilarity(a: number[], b: number[]): number {
+  const dotProduct = a.reduce((sum, val, i) => sum + val * b[i], 0);
+  const magnitudeA = Math.sqrt(a.reduce((sum, val) => sum + val * val, 0));
+  const magnitudeB = Math.sqrt(b.reduce((sum, val) => sum + val * val, 0));
+  return dotProduct / (magnitudeA * magnitudeB);
+}
 
-    return text;
-  }
-
-  async loadKnowledgeBase(filePath: string): Promise<VectorDocument[]> {
-    if (this.vectorStore) {
-      console.log("Using cached vector store");
-      return this.vectorStore;
-    }
-
-    const text = await this.loadTextFromFile(filePath);
+/**
+ * Builds the embedded vector store from live Sanity content. Cached for an
+ * hour via Next's data cache (persists across invocations, unlike an
+ * in-memory singleton that resets on every serverless cold start) so the
+ * knowledge base stays fresh without re-embedding on every request.
+ */
+const getVectorStore = unstable_cache(
+  async (): Promise<VectorDocument[]> => {
+    const knowledge = await client.fetch<ChatbotKnowledge>(
+      CHATBOT_KNOWLEDGE_QUERY
+    );
+    const text = formatKnowledgeBaseText(knowledge);
 
     const splitter = new RecursiveCharacterTextSplitter({
       chunkOverlap: 200,
       chunkSize: 1500,
     });
-
     const chunks = await splitter.splitText(text);
-    console.log(`Split into ${chunks.length} chunks`);
 
-    if (!this.embeddings) {
-      this.embeddings = new HuggingFaceInferenceEmbeddings({
-        apiKey: process.env.HUGGINGFACE_API_KEY,
-        model: "sentence-transformers/all-MiniLM-L6-v2",
-      });
-    }
+    const embeddings = new HuggingFaceInferenceEmbeddings({
+      apiKey: process.env.HUGGINGFACE_API_KEY,
+      model: "sentence-transformers/all-MiniLM-L6-v2",
+    });
+    const embeddingResults = await embeddings.embedDocuments(chunks);
 
-    console.log("Creating embeddings...");
-
-    const embeddingResults = await this.embeddings.embedDocuments(chunks);
-
-    this.vectorStore = chunks.map((content, i) => ({
+    return chunks.map((content, i) => ({
       content,
       embedding: embeddingResults[i],
     }));
+  },
+  ["chatbot-knowledge-base-v1"],
+  { revalidate: 3600, tags: ["chatbot-knowledge-base"] }
+);
 
-    console.log(`Vector store ready with ${this.vectorStore.length} documents`);
+async function searchRelevantDocuments(
+  query: string,
+  k = 5
+): Promise<string[]> {
+  const vectorStore = await getVectorStore();
 
-    return this.vectorStore;
-  }
+  const embeddings = new HuggingFaceInferenceEmbeddings({
+    apiKey: process.env.HUGGINGFACE_API_KEY,
+    model: "sentence-transformers/all-MiniLM-L6-v2",
+  });
+  const queryEmbedding = await embeddings.embedQuery(query);
 
-  async searchRelevantDocuments(query: string, k = 5): Promise<string[]> {
-    if (!(this.vectorStore && this.embeddings)) {
-      throw new Error("Vector store not initialized");
-    }
+  const similarities: SimilarityResult[] = vectorStore.map((doc, index) => ({
+    content: doc.content,
+    index,
+    similarity: cosineSimilarity(queryEmbedding, doc.embedding),
+  }));
 
-    console.log(`Searching for: "${query}"`);
+  similarities.sort((a, b) => b.similarity - a.similarity);
 
-    const queryEmbedding = await this.embeddings.embedQuery(query);
-
-    const similarities: SimilarityResult[] = this.vectorStore.map(
-      (doc, index) => ({
-        content: doc.content,
-        index,
-        similarity: this.cosineSimilarity(queryEmbedding, doc.embedding),
-      })
-    );
-
-    similarities.sort((a, b) => b.similarity - a.similarity);
-
-    console.log(
-      `Found ${k} relevant chunks (similarity: ${similarities[0].similarity.toFixed(
-        3
-      )})`
-    );
-
-    return similarities.slice(0, k).map((s) => s.content);
-  }
+  return similarities.slice(0, k).map((s) => s.content);
 }
 
-class KnowledgeBaseService {
-  private static readonly POSSIBLE_FILE_PATHS = [
-    path.join(process.cwd(), "data", "faq.txt"),
-    path.join(process.cwd(), "data", "faq.md"),
-    path.join(process.cwd(), "src", "data", "faq.txt"),
-    path.join(process.cwd(), "src", "data", "faq.md"),
-    path.join(process.cwd(), "public", "data", "faq.txt"),
-  ];
-
-  static findKnowledgeBasePath(): string | null {
-    for (const filePath of KnowledgeBaseService.POSSIBLE_FILE_PATHS) {
-      if (fs.existsSync(filePath)) {
-        console.log(`Found FAQ file: ${path.basename(filePath)}`);
-        return filePath;
-      }
-    }
-
-    console.error("FAQ file not found in any of these locations:");
-    KnowledgeBaseService.POSSIBLE_FILE_PATHS.forEach((f) =>
-      console.error(`  - ${f}`)
-    );
-    return null;
+function parseMessageContent(content: MessageContentType): string {
+  if (typeof content === "string") {
+    return content.trim();
   }
 
-  private static parseMessageContent(content: MessageContentType): string {
-    if (typeof content === "string") {
-      return content.trim();
-    }
-
-    if (Array.isArray(content)) {
-      return content
-        .map((part) => {
-          if (typeof part === "string") {
-            return part;
-          }
-          return part.text || part.content || "";
-        })
-        .join("")
-        .trim();
-    }
-
-    if (typeof content === "object" && content !== null) {
-      const messageContent = content as MessageContent;
-      return messageContent.text || String(content).trim();
-    }
-
-    return String(content).trim();
+  if (Array.isArray(content)) {
+    return content
+      .map((part) => {
+        if (typeof part === "string") {
+          return part;
+        }
+        return part.text || part.content || "";
+      })
+      .join("")
+      .trim();
   }
 
-  static async generateAnswer(question: string): Promise<string> {
-    const knowledgeBasePath = KnowledgeBaseService.findKnowledgeBasePath();
+  if (typeof content === "object" && content !== null) {
+    const messageContent = content as MessageContent;
+    return messageContent.text || String(content).trim();
+  }
 
-    if (!knowledgeBasePath) {
-      throw new Error("Knowledge base not found");
-    }
+  return String(content).trim();
+}
 
-    console.log(`Question: "${question}"`);
+async function generateAnswer(question: string): Promise<string> {
+  const relevantDocs = await searchRelevantDocuments(question, 5);
 
-    const vectorStoreManager = VectorStoreManager.getInstance();
-    await vectorStoreManager.loadKnowledgeBase(knowledgeBasePath);
-    const relevantDocs = await vectorStoreManager.searchRelevantDocuments(
-      question,
-      5
-    );
+  if (!relevantDocs || relevantDocs.length === 0) {
+    throw new Error("No relevant documents found");
+  }
 
-    if (!relevantDocs || relevantDocs.length === 0) {
-      throw new Error("No relevant documents found");
-    }
+  const context = relevantDocs.join("\n\n");
 
-    const context = relevantDocs.join("\n\n");
+  const apiKey = process.env.GOOGLE_API_KEY;
+  if (!apiKey || typeof apiKey !== "string" || apiKey.trim() === "") {
+    throw new Error("GOOGLE_API_KEY not configured properly");
+  }
 
-    const apiKey = process.env.GOOGLE_API_KEY;
-    if (!apiKey || typeof apiKey !== "string" || apiKey.trim() === "") {
-      throw new Error("GOOGLE_API_KEY not configured properly");
-    }
+  const llm = new ChatGoogleGenerativeAI({
+    apiKey,
+    model: "gemini-2.5-flash",
+    temperature: 0.7,
+  });
 
-    console.log("Context length:", context.length);
-    console.log("API Key configured:", !!apiKey);
+  const prompt = `You are a helpful assistant for Eduwise Solutions, an educational institution.
 
-    const llm = new ChatGoogleGenerativeAI({
-      apiKey,
-      model: "gemini-2.5-flash",
-      temperature: 0.7,
-    });
-
-    const prompt = `You are a helpful assistant for Eduwise Solutions, an educational institution.
-
-CONTEXT (from our FAQ):
+CONTEXT (from our live course catalog and FAQs):
 ${context}
 
 INSTRUCTIONS:
@@ -272,27 +281,20 @@ USER QUESTION: ${question}
 
 YOUR ANSWER:`;
 
-    console.log("Calling Gemini API...");
+  const result = await llm.invoke(prompt);
 
-    const result = await llm.invoke(prompt);
-    console.log("Raw result:", JSON.stringify(result, null, 2));
-
-    if (!result?.content) {
-      throw new Error("Empty response from Gemini");
-    }
-
-    const content = typeof result.content === "string" ? result.content : "";
-    const answer = KnowledgeBaseService.parseMessageContent(content);
-
-    if (!answer || answer.length === 0) {
-      throw new Error("Empty answer generated");
-    }
-
-    console.log(`Answer generated (${answer.length} chars)`);
-    console.log(`Answer preview: ${answer.substring(0, 100)}...`);
-
-    return answer;
+  if (!result?.content) {
+    throw new Error("Empty response from Gemini");
   }
+
+  const content = typeof result.content === "string" ? result.content : "";
+  const answer = parseMessageContent(content);
+
+  if (!answer || answer.length === 0) {
+    throw new Error("Empty answer generated");
+  }
+
+  return answer;
 }
 
 class GoogleSheetsLogger {
@@ -312,7 +314,7 @@ class GoogleSheetsLogger {
 
     const auth = new google.auth.GoogleAuth({
       credentials: {
-        client_email: process.env.CHATBOT_GOOGLE_CLIENT_EMAIL!,
+        client_email: process.env.CHATBOT_GOOGLE_CLIENT_EMAIL,
         private_key: privateKey.replace(/\\n/g, "\n"),
       },
       scopes: ["https://www.googleapis.com/auth/spreadsheets"],
@@ -343,7 +345,6 @@ class GoogleSheetsLogger {
     sheets: ReturnType<typeof google.sheets>,
     spreadsheetId: string,
     rowNum: number,
-    _sessionId: string,
     userData?: UserData,
     question?: string,
     answer?: string
@@ -433,13 +434,12 @@ class GoogleSheetsLogger {
     answer?: string
   ): Promise<void> {
     if (!GoogleSheetsLogger.isConfigured()) {
-      console.log("Google Sheets logging not configured, skipping...");
       return;
     }
 
     try {
       const sheets = await GoogleSheetsLogger.getAuthenticatedSheets();
-      const spreadsheetId = process.env.CHATBOT_GOOGLE_SHEET_ID!;
+      const spreadsheetId = process.env.CHATBOT_GOOGLE_SHEET_ID as string;
 
       const rowNum = await GoogleSheetsLogger.findExistingRow(
         sheets,
@@ -452,7 +452,6 @@ class GoogleSheetsLogger {
           sheets,
           spreadsheetId,
           rowNum,
-          sessionId,
           userData,
           question,
           answer
@@ -467,23 +466,17 @@ class GoogleSheetsLogger {
           answer
         );
       }
-
-      console.log("Logged to Google Sheets successfully");
     } catch (error) {
-      if (error instanceof Error) {
-        console.error("Sheets logging error:", error.message);
-      } else {
-        console.error("Sheets logging error:", String(error));
-      }
+      console.error(
+        "Sheets logging error:",
+        error instanceof Error ? error.message : String(error)
+      );
     }
   }
 }
 
 async function handleChatRequest(body: ChatRequest): Promise<ChatResponse> {
   const { sessionId, question, userData } = body;
-
-  console.log(`\n${"=".repeat(50)}`);
-  console.log(`New request - Session: ${sessionId?.substring(0, 8)}...`);
 
   if (!sessionId) {
     throw new Error("Session ID required");
@@ -495,12 +488,10 @@ async function handleChatRequest(body: ChatRequest): Promise<ChatResponse> {
 
   let answer: string | null = null;
   let whatsappLink: string | undefined;
-  const pdf: string = "/data/faq.pdf";
 
   if (question) {
     try {
-      const generatedAnswer =
-        await KnowledgeBaseService.generateAnswer(question);
+      const generatedAnswer = await generateAnswer(question);
 
       if (
         generatedAnswer === "NEED_ADVISOR" ||
@@ -508,23 +499,18 @@ async function handleChatRequest(body: ChatRequest): Promise<ChatResponse> {
         generatedAnswer.toLowerCase().includes("i don't have that information")
       ) {
         whatsappLink = generateWhatsAppLink(question, userData);
-
         answer =
           "I don't have that specific information in my knowledge base right now. But don't worry! Our expert advisors are here to help you. Click the WhatsApp button below to chat with us directly and get instant assistance! 💬";
-
-        console.log("🔗 WhatsApp link generated for unanswered question");
       } else {
         answer = generatedAnswer;
       }
     } catch (error) {
-      if (error instanceof Error) {
-        console.error("Processing error:", error.message);
-      } else {
-        console.error("Processing error:", String(error));
-      }
+      console.error(
+        "Processing error:",
+        error instanceof Error ? error.message : String(error)
+      );
 
       whatsappLink = generateWhatsAppLink(question, userData);
-
       answer =
         "I apologize, but I'm having trouble accessing information right now. Please connect with our advisors on WhatsApp for immediate assistance!";
     }
@@ -537,12 +523,9 @@ async function handleChatRequest(body: ChatRequest): Promise<ChatResponse> {
     answer || undefined
   );
 
-  console.log(`${"=".repeat(50)}\n`);
-
   return {
     answer: answer || "I'm ready to help! What would you like to know?",
     needsAdvisor: !!whatsappLink,
-    pdf,
     whatsappLink,
   };
 }

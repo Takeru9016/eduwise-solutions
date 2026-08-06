@@ -36,4 +36,6 @@ export { default as HeroSection } from "./HeroSection";
 export { default as PrivacyPolicy } from "./legal/PrivacyPolicy";
 export { default as RefundPage } from "./legal/RefundPage";
 export { default as TermsOfService } from "./legal/TermsOfService";
+export { default as PricingPage } from "./pricing/PricingPage";
+export { default as QuizPage } from "./quiz/QuizPage";
 export { default as TestimonialPage } from "./TestimonialPage";

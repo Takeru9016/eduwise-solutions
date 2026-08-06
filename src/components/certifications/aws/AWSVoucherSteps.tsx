@@ -61,7 +61,7 @@ export default function AWSVoucherSteps() {
                     <img
                       alt="AWS"
                       className="h-8 brightness-0 invert"
-                      src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg"
+                      src="/logos/aws-wordmark.svg"
                     />
                   </div>
                   <h3 className="font-extrabold text-lg">

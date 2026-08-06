@@ -6,33 +6,27 @@ const toolsData = [
     icon: Code2,
     items: [
       {
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+        image: "/logos/python.svg",
         name: "Python",
       },
       {
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg",
+        image: "/logos/numpy.svg",
         name: "NumPy",
       },
       {
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg",
+        image: "/logos/pandas.svg",
         name: "Pandas",
       },
       {
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg",
+        image: "/logos/pytorch.svg",
         name: "PyTorch",
       },
       {
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg",
+        image: "/logos/tensorflow.svg",
         name: "TensorFlow",
       },
       {
-        image:
-          "https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg",
+        image: "/logos/scikit-learn.svg",
         name: "Scikit-learn",
       },
     ],
@@ -42,8 +36,7 @@ const toolsData = [
     icon: Terminal,
     items: [
       {
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg",
+        image: "/logos/jupyter.svg",
         name: "Jupyter Notebook",
       },
       {
@@ -51,8 +44,7 @@ const toolsData = [
         name: "Google Colab",
       },
       {
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
+        image: "/logos/github.svg",
         name: "Git & GitHub",
       },
     ],
@@ -62,18 +54,15 @@ const toolsData = [
     icon: Database,
     items: [
       {
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
+        image: "/logos/mysql.svg",
         name: "MySQL",
       },
       {
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+        image: "/logos/mongodb.svg",
         name: "MongoDB",
       },
       {
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachespark/apachespark-original.svg",
+        image: "/logos/apache-spark.svg",
         name: "Spark",
       },
     ],
@@ -87,23 +76,19 @@ const toolsData = [
         name: "Amazon Web Services",
       },
       {
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg",
+        image: "/logos/azure.svg",
         name: "Microsoft Azure",
       },
       {
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg",
+        image: "/logos/google-cloud.svg",
         name: "GCP (Google Cloud Platform)",
       },
       {
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+        image: "/logos/docker.svg",
         name: "Docker",
       },
       {
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg",
+        image: "/logos/kubernetes.svg",
         name: "Kubernetes",
       },
     ],

@@ -34,7 +34,7 @@ export default function AWSHero() {
               <img
                 alt="AWS Logo"
                 className="h-4 brightness-0 invert"
-                src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg"
+                src="/logos/aws-wordmark.svg"
               />
               <span className="font-semibold text-emerald-300 text-sm uppercase tracking-wide">
                 Official Partner

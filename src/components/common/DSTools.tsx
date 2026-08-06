@@ -6,32 +6,27 @@ const toolsData = [
     icon: Code2,
     items: [
       {
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+        image: "/logos/python.svg",
         name: "Python",
       },
       {
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg",
+        image: "/logos/numpy.svg",
         name: "NumPy",
       },
       {
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg",
+        image: "/logos/pandas.svg",
         name: "Pandas",
       },
       {
-        image:
-          "https://upload.wikimedia.org/wikipedia/commons/8/84/Matplotlib_icon.svg",
+        image: "/logos/matplotlib.svg",
         name: "Matplotlib",
       },
       {
-        image: "https://seaborn.pydata.org/_static/logo-wide-lightbg.svg",
+        image: "/logos/seaborn.svg",
         name: "Seaborn",
       },
       {
-        image:
-          "https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg",
+        image: "/logos/scikit-learn.svg",
         name: "Scikit-learn",
       },
     ],
@@ -41,18 +36,15 @@ const toolsData = [
     icon: Terminal,
     items: [
       {
-        image:
-          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
+        image: "/logos/mysql.svg",
         name: "SQL",
       },
       {
-        image:
-          "https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg",
+        image: "/logos/power-bi.svg",
         name: "Power BI",
       },
       {
-        image:
-          "https://upload.wikimedia.org/wikipedia/commons/4/4b/Tableau_Logo.png",
+        image: "/logos/tableau.png",
         name: "Tableau",
       },
     ],

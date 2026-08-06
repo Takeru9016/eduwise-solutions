@@ -2,127 +2,125 @@
 
 import { useState } from "react";
 
-const BASE = "https://api.iconify.design";
-
 const domains = [
   {
     color: "#ff6d00",
-    iconSrc: `${BASE}/logos/tensorflow.svg`,
+    iconSrc: "/logos/domains/tensorflow.svg",
     label: "AI & Machine Learning",
   },
   {
     color: "#f37626",
-    iconSrc: `${BASE}/logos/jupyter.svg`,
+    iconSrc: "/logos/domains/jupyter.svg",
     label: "Data Science",
   },
   {
     color: "#7c3aed",
-    iconSrc: `${BASE}/logos/apache-spark.svg`,
+    iconSrc: "/logos/domains/apache-spark.svg",
     label: "Data Analytics",
   },
   {
     color: "#4285f4",
-    iconSrc: `${BASE}/logos/google-cloud.svg`,
+    iconSrc: "/logos/domains/google-cloud.svg",
     label: "Cloud Computing",
   },
   {
     color: "#ef4444",
-    iconSrc: `${BASE}/carbon/security.svg?color=%23ef4444`,
+    iconSrc: "/logos/domains/security.svg",
     label: "Cyber Security",
   },
   {
     color: "#326ce5",
-    iconSrc: `${BASE}/logos/kubernetes.svg`,
+    iconSrc: "/logos/domains/kubernetes.svg",
     label: "DevOps",
   },
   {
     color: "#10b981",
-    iconSrc: `${BASE}/logos/react.svg`,
+    iconSrc: "/logos/domains/react.svg",
     label: "Full Stack Development",
   },
   {
     color: "#f89820",
-    iconSrc: `${BASE}/logos/java.svg`,
+    iconSrc: "/logos/domains/java.svg",
     label: "Java Programming",
   },
   {
     color: "#3776ab",
-    iconSrc: `${BASE}/logos/python.svg`,
+    iconSrc: "/logos/domains/python.svg",
     label: "Python Programming",
   },
   {
     color: "#e44d26",
-    iconSrc: `${BASE}/logos/html-5.svg`,
+    iconSrc: "/logos/domains/html-5.svg",
     label: "Web Development",
   },
   {
     color: "#f24e1e",
-    iconSrc: `${BASE}/logos/figma.svg`,
+    iconSrc: "/logos/domains/figma.svg",
     label: "UI/UX Design",
   },
   {
     color: "#a855f7",
-    iconSrc: `${BASE}/simple-icons/scikitlearn.svg?color=%23a855f7`,
+    iconSrc: "/logos/domains/scikitlearn.svg",
     label: "ML with Python",
   },
   {
     color: "#0078d4",
-    iconSrc: `${BASE}/logos/microsoft-azure.svg`,
+    iconSrc: "/logos/domains/microsoft-azure.svg",
     label: "Azure Cloud",
   },
   {
     color: "#22d3ee",
-    iconSrc: `${BASE}/carbon/iot-platform.svg?color=%2322d3ee`,
+    iconSrc: "/logos/domains/iot-platform.svg",
     label: "IoT",
   },
   {
     color: "#f43f5e",
-    iconSrc: `${BASE}/carbon/chip.svg?color=%23f43f5e`,
+    iconSrc: "/logos/domains/chip.svg",
     label: "Embedded Systems",
   },
   {
     color: "#34d399",
-    iconSrc: `${BASE}/carbon/car.svg?color=%2334d399`,
+    iconSrc: "/logos/domains/car.svg",
     label: "Hybrid Electric Vehicles",
   },
   {
     color: "#818cf8",
-    iconSrc: `${BASE}/carbon/chemistry.svg?color=%23818cf8`,
+    iconSrc: "/logos/domains/chemistry.svg",
     label: "Nanotechnology",
   },
   {
     color: "#fbbf24",
-    iconSrc: `${BASE}/simple-icons/autodesk.svg?color=%23fbbf24`,
+    iconSrc: "/logos/domains/autodesk.svg",
     label: "AutoCAD",
   },
   {
     color: "#f472b6",
-    iconSrc: `${BASE}/carbon/growth.svg?color=%23f472b6`,
+    iconSrc: "/logos/domains/growth.svg",
     label: "Digital Marketing",
   },
   {
     color: "#4ade80",
-    iconSrc: `${BASE}/carbon/chart-line.svg?color=%234ade80`,
+    iconSrc: "/logos/domains/chart-line.svg",
     label: "Stock Market",
   },
   {
     color: "#60a5fa",
-    iconSrc: `${BASE}/carbon/currency.svg?color=%2360a5fa`,
+    iconSrc: "/logos/domains/currency.svg",
     label: "Finance",
   },
   {
     color: "#fb923c",
-    iconSrc: `${BASE}/carbon/group.svg?color=%23fb923c`,
+    iconSrc: "/logos/domains/group.svg",
     label: "HR Management",
   },
   {
     color: "#c084fc",
-    iconSrc: `${BASE}/carbon/user-profile.svg?color=%23c084fc`,
+    iconSrc: "/logos/domains/user-profile.svg",
     label: "Psychology",
   },
   {
     color: "#2dd4bf",
-    iconSrc: `${BASE}/carbon/result.svg?color=%232dd4bf`,
+    iconSrc: "/logos/domains/result.svg",
     label: "Placement Programs",
   },
 ];

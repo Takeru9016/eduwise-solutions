@@ -2,92 +2,79 @@ import Image from "next/image";
 
 const toolsData = [
   {
-    image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+    image: "/logos/git.svg",
     name: "Git",
   },
   {
-    image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+    image: "/logos/git.svg",
     name: "GitOps",
   },
   {
-    image: "https://www.vectorlogo.zone/logos/argoprojio/argoprojio-icon.svg",
+    image: "/logos/argocd.svg",
     name: "Argo CD",
   },
   {
-    image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg",
+    image: "/logos/jenkins.svg",
     name: "Jenkins",
   },
   {
-    image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+    image: "/logos/docker.svg",
     name: "Docker",
   },
   {
-    image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg",
+    image: "/logos/kubernetes.svg",
     name: "Kubernetes",
   },
   {
-    image: "https://www.vectorlogo.zone/logos/amazon_eks/amazon_eks-icon.svg",
+    image: "/logos/eks.svg",
     name: "EKS",
   },
   {
-    image:
-      "https://www.vectorlogo.zone/logos/google_cloud/google_cloud-icon.svg",
+    image: "/logos/gcp-icon.svg",
     name: "GKE",
   },
   {
-    image: "https://www.vectorlogo.zone/logos/rancher/rancher-icon.svg",
+    image: "/logos/rancher.svg",
     name: "Rancher",
   },
   {
-    image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg",
+    image: "/logos/terraform.svg",
     name: "Terraform",
   },
   {
-    image: "https://www.vectorlogo.zone/logos/ansible/ansible-icon.svg",
+    image: "/logos/ansible.svg",
     name: "Ansible",
   },
   {
-    image: "https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg",
+    image: "/logos/aws-icon.svg",
     name: "CloudFormation",
   },
   {
-    image: "https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg",
+    image: "/logos/aws-icon.svg",
     name: "AWS",
   },
   {
-    image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg",
+    image: "/logos/azure.svg",
     name: "Azure",
   },
   {
-    image:
-      "https://www.vectorlogo.zone/logos/amazon_awslambda/amazon_awslambda-icon.svg",
+    image: "/logos/aws-lambda.svg",
     name: "Lambda",
   },
   {
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/3/38/Prometheus_software_logo.svg",
+    image: "/logos/prometheus.svg",
     name: "Prometheus",
   },
   {
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/a/a1/Grafana_logo.svg",
+    image: "/logos/grafana.svg",
     name: "Grafana",
   },
   {
-    image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg",
+    image: "/logos/tensorflow.svg",
     name: "TensorFlow",
   },
   {
-    image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg",
+    image: "/logos/pytorch.svg",
     name: "PyTorch",
   },
 ];

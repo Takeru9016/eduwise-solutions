@@ -1,19 +1,18 @@
 import { ArrowRight, MessageCircle, Sparkles } from "lucide-react";
 import Link from "next/link";
 
-// import {
-//   Accordion,
-//   AccordionContent,
-//   AccordionItem,
-//   AccordionTrigger,
-// } from "@/components/ui/accordion";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 
-// Types
-// interface FAQ {
-//   question: string;
-//   answer: string;
-// }
+interface FAQ {
+  answer: string;
+  question: string;
+}
 
 // Reusable components
 const SectionBadge = ({
@@ -29,21 +28,21 @@ const SectionBadge = ({
   </div>
 );
 
-// const FAQItem = ({ faq, index }: { faq: FAQ; index: number }) => (
-//   <AccordionItem
-//     value={`item-${index + 1}`}
-//     className="bg-light-97 rounded-xl border border-light-90 data-[state=open]:bg-white data-[state=open]:border-primary-95 transition-all duration-200"
-//   >
-//     <AccordionTrigger className="px-6 text-left font-vietnam font-medium text-grey-20 text-lg py-4 hover:text-primary-75 [&[data-state=open]>div]:text-primary-75 hover:no-underline group">
-//       <div className="group-hover:text-primary-75 transition-colors">
-//         {faq.question}
-//       </div>
-//     </AccordionTrigger>
-//     <AccordionContent className="text-grey-35 leading-relaxed px-6 pb-6">
-//       {faq.answer}
-//     </AccordionContent>
-//   </AccordionItem>
-// );
+const FAQItem = ({ faq, index }: { faq: FAQ; index: number }) => (
+  <AccordionItem
+    className="rounded-xl border border-light-90 bg-light-97 transition-all duration-200 data-[state=open]:border-primary-95 data-[state=open]:bg-white"
+    value={`item-${index + 1}`}
+  >
+    <AccordionTrigger className="group px-6 py-4 text-left font-medium font-vietnam text-grey-20 text-lg hover:text-primary-75 hover:no-underline [&[data-state=open]>div]:text-primary-75">
+      <div className="transition-colors group-hover:text-primary-75">
+        {faq.question}
+      </div>
+    </AccordionTrigger>
+    <AccordionContent className="px-6 pb-6 text-grey-35 leading-relaxed">
+      {faq.answer}
+    </AccordionContent>
+  </AccordionItem>
+);
 
 const SupportCard = () => (
   <div className="rounded-xl border border-primary-95 bg-linear-to-br from-primary-99 to-light-97 p-8">
@@ -64,7 +63,7 @@ const SupportCard = () => (
         <div className="pt-2">
           <Button
             asChild
-            className="bg-primary-75 transition-all duration-200 hover:translate-y-[-2px] hover:bg-primary-70"
+            className="bg-primary-75 transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary-70"
             variant="default"
           >
             <Link className="flex items-center gap-2" href="/faq">
@@ -79,33 +78,33 @@ const SupportCard = () => (
 );
 
 export default function FAQsSection() {
-  // const homepageFaqs: FAQ[] = [
-  //   {
-  //     question: "What is Eduwise Solutions?",
-  //     answer:
-  //       "Eduwise Solutions is a platform that connects learners with the best educational opportunities in the ed-tech world. We offer counseling services and discounts on a variety of professional courses.",
-  //   },
-  //   {
-  //     question: "Do you provide job placement guaranteed?",
-  //     answer:
-  //       "Yes, our in-house course has job-guaranteed courses include placement guaranteed. For other courses, we offer career counseling and networking opportunities.",
-  //   },
-  //   {
-  //     question: "Can I earn while learning?",
-  //     answer:
-  //       "Absolutely! Our professional programs are designed to let you balance work and studies.",
-  //   },
-  //   {
-  //     question: "What types of courses are available?",
-  //     answer:
-  //       "We offer a wide range of programs, including Skill Development courses, Job Guaranteed courses, and more.",
-  //   },
-  //   {
-  //     question: "Do you offer payment plans?",
-  //     answer:
-  //       "Yes, many courses offer flexible payment plans. We can guide you through available options during counseling.",
-  //   },
-  // ];
+  const homepageFaqs: FAQ[] = [
+    {
+      answer:
+        "Eduwise Solutions is a platform that connects learners with the best educational opportunities in the ed-tech world. We offer counseling services and discounts on a variety of professional courses.",
+      question: "What is Eduwise Solutions?",
+    },
+    {
+      answer:
+        "Yes, our in-house course has job-guaranteed courses include placement guaranteed. For other courses, we offer career counseling and networking opportunities.",
+      question: "Do you provide job placement guaranteed?",
+    },
+    {
+      answer:
+        "Absolutely! Our professional programs are designed to let you balance work and studies.",
+      question: "Can I earn while learning?",
+    },
+    {
+      answer:
+        "We offer a wide range of programs, including Skill Development courses, Job Guaranteed courses, and more.",
+      question: "What types of courses are available?",
+    },
+    {
+      answer:
+        "Yes, many courses offer flexible payment plans. We can guide you through available options during counseling.",
+      question: "Do you offer payment plans?",
+    },
+  ];
 
   return (
     <section className="relative bg-linear-to-b from-white to-light-97 py-16 md:py-24">
@@ -136,20 +135,19 @@ export default function FAQsSection() {
               </p>
 
               {/* Help Card */}
-              {/* <div className="grid gap-6 mt-8">
+              <div className="mt-8 grid gap-6">
                 <SupportCard />
-              </div> */}
+              </div>
             </div>
           </div>
 
           {/* Right Column - FAQ Accordion */}
           <div className="rounded-2xl border border-light-90 bg-white p-8 shadow-lg">
-            <SupportCard />
-            {/* <Accordion type="single" collapsible className="w-full space-y-4">
+            <Accordion className="w-full space-y-4" collapsible type="single">
               {homepageFaqs.map((faq, index) => (
-                <FAQItem key={index} faq={faq} index={index} />
+                <FAQItem faq={faq} index={index} key={faq.question} />
               ))}
-            </Accordion> */}
+            </Accordion>
           </div>
         </div>
       </div>

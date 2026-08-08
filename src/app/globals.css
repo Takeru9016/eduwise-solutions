@@ -95,6 +95,9 @@
   --color-primary: hsl(var(--primary));
   --color-primary-foreground: hsl(var(--primary-foreground));
 
+  --color-gold: hsl(var(--gold));
+  --color-gold-90: hsl(var(--gold-90));
+
   --color-ring: hsl(var(--ring));
 
   --color-secondary: hsl(var(--secondary));
@@ -216,6 +219,9 @@
     --primary-97: 156 71% 90%; /* #D1FAE5 */
     --primary-99: 156 84% 96%; /* #ECFDF5 */
 
+    --gold: 45 88% 58%; /* #F0C333 */
+    --gold-90: 45 90% 90%; /* #FBEFCB */
+
     /* Light shades */
     --light-90: 0 0% 91%; /* #E8E8E8 */
     --light-95: 220 20% 96%; /* #F3F4F6 */
@@ -275,6 +281,9 @@
     --primary-95: 156 79% 90%;
     --primary-97: 156 71% 95%;
     --primary-99: 156 84% 98%;
+
+    --gold: 45 88% 58%;
+    --gold-90: 45 40% 20%;
 
     /* Dark mode adjustments for other colors */
     --secondary: 215 27.9% 16.9%;

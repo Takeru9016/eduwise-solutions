@@ -16,7 +16,7 @@ import { useForm } from "react-hook-form";
 import ReactPhoneInput from "react-phone-input-2";
 import * as z from "zod";
 import "react-phone-input-2/lib/style.css";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 import { Button } from "@/components/ui/button";
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";

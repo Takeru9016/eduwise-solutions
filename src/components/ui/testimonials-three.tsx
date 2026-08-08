@@ -1,13 +1,18 @@
 "use client";
 
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Quote, Sparkles, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { useEffect, useMemo, useRef } from "react";
+
 import { Icons } from "@/components/ui/icons";
 import { cn } from "@/lib/utils";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export interface TestimonialThreeUp {
   avatar: string;
@@ -25,91 +30,114 @@ interface TestimonialsThreeProps {
   testimonials: TestimonialThreeUp[];
 }
 
+const CARD_TINTS = [
+  "bg-primary-99",
+  "bg-gold-90",
+  "bg-white",
+  "bg-primary-90",
+  "bg-light-95",
+  "bg-primary-95",
+] as const;
+
 export function TestimonialsThree({
   testimonials,
   className,
 }: TestimonialsThreeProps) {
   const sorted = useMemo(
-    () => [...testimonials].sort((a, b) => a.id - b.id),
+    () =>
+      [...testimonials].sort((a, b) => {
+        const linkedinDiff = Number(!!b.linkedinUrl) - Number(!!a.linkedinUrl);
+        return linkedinDiff === 0 ? a.id - b.id : linkedinDiff;
+      }),
     [testimonials]
   );
 
-  const [index, setIndex] = useState(0);
-  const [isSmall, setIsSmall] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  // Track viewport for mobile-friendly behavior
   useEffect(() => {
-    const onResize = () => setIsSmall(window.innerWidth < 768);
-    onResize();
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+    const section = sectionRef.current;
+    const cards = cardRefs.current.filter(Boolean);
+    if (!(section && cards.length)) {
+      return;
+    }
+
+    const tween = gsap.fromTo(
+      cards,
+      { opacity: 0, y: 24 },
+      {
+        duration: 0.6,
+        ease: "power2.out",
+        opacity: 1,
+        scrollTrigger: { start: "top 80%", trigger: section },
+        stagger: 0.06,
+        y: 0,
+      }
+    );
+
+    return () => {
+      tween.scrollTrigger?.kill();
+      tween.kill();
+    };
   }, []);
-
-  const handlePrev = () => {
-    setIndex((prev) => (prev - 1 + sorted.length) % sorted.length);
-  };
-
-  const handleNext = () => {
-    setIndex((prev) => (prev + 1) % sorted.length);
-  };
-
-  // Compute 3 visible items with wrap-around
-  const visible = useMemo(() => {
-    if (sorted.length === 0) {
-      return [] as TestimonialThreeUp[];
-    }
-    const visibleCount = isSmall ? 1 : 3;
-    const items: TestimonialThreeUp[] = [];
-    for (let i = 0; i < Math.min(visibleCount, sorted.length); i++) {
-      items.push(sorted[(index + i) % sorted.length]);
-    }
-    return items;
-  }, [sorted, index, isSmall]);
 
   if (sorted.length === 0) {
     return null;
   }
 
   return (
-    <div className={cn("relative w-full", className)}>
-      <div className="relative mx-auto max-w-7xl px-4 md:px-8">
-        <div className="mb-8 flex items-center justify-between">
-          <h2 className="bg-linear-to-r from-primary to-primary/70 bg-clip-text font-bold text-3xl text-transparent tracking-tight md:text-4xl">
+    <div className={cn("relative w-full", className)} ref={sectionRef}>
+      <div className="mx-auto max-w-6xl px-4 md:px-8">
+        <div className="mb-12 text-center md:mb-16">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-99 px-4 py-2 font-semibold text-grey-15 text-sm">
+            <Sparkles className="h-4 w-4" />
+            Student Stories
+          </div>
+          <h2 className="mb-4 font-black font-vietnam text-3xl text-grey-15 tracking-tight md:text-4xl lg:text-5xl">
             What Our Students Say
           </h2>
-          <div className="hidden gap-3 md:flex">
-            <Button
-              aria-label="Previous"
-              className="rounded-full shadow-xs"
-              onClick={handlePrev}
-              size="icon"
-              variant="outline"
-            >
-              <ChevronLeft className="h-5 w-5" />
-            </Button>
-            <Button
-              aria-label="Next"
-              className="rounded-full shadow-xs"
-              onClick={handleNext}
-              size="icon"
-              variant="outline"
-            >
-              <ChevronRight className="h-5 w-5" />
-            </Button>
-          </div>
+          <p className="mx-auto max-w-xl text-grey-40 text-lg leading-relaxed">
+            Real outcomes from real students — placements, career switches, and
+            everything in between.
+          </p>
         </div>
 
-        {/* Mobile arrows moved below cards; overlay removed to avoid being hidden behind content */}
-
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-8">
-          {visible.map((t) => (
-            <Card
-              className="relative flex h-full flex-col rounded-xl border border-border/80 p-6 shadow-xs transition-shadow duration-300 hover:shadow-lg md:p-8"
+        <div className="columns-1 gap-5 sm:columns-2 lg:columns-3">
+          {sorted.map((t, index) => (
+            <div
+              className={`group mb-5 break-inside-avoid rounded-2xl border-2 border-grey-15 p-6 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)] md:p-7 ${CARD_TINTS[index % CARD_TINTS.length]}`}
               key={t.id}
+              ref={(el) => {
+                cardRefs.current[index] = el;
+              }}
             >
-              <div className="pointer-events-none absolute inset-0 rounded-xl bg-linear-to-br from-primary/5 via-transparent to-primary/5 opacity-60" />
-              <div className="relative flex items-center gap-4 md:gap-5">
-                <div className="relative h-16 w-16 overflow-hidden rounded-full border-2 border-primary/20 shadow-xs md:h-20 md:w-20">
+              <div className="flex items-start justify-between">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-grey-15 bg-white">
+                  <Quote
+                    className="h-4 w-4 text-gold"
+                    fill="var(--color-gold)"
+                  />
+                </div>
+                {t.linkedinUrl && (
+                  <Link
+                    aria-label={`View ${t.name} on LinkedIn`}
+                    className="flex items-center gap-1.5 rounded-full border-2 border-grey-15 bg-white px-3 py-1.5 font-semibold text-grey-15 text-xs transition-transform duration-200 hover:-translate-y-0.5"
+                    href={t.linkedinUrl}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    <Icons.linkedin className="h-3.5 w-3.5" />
+                    LinkedIn
+                  </Link>
+                )}
+              </div>
+
+              <p className="mt-5 text-grey-35 text-sm leading-relaxed md:text-base">
+                &ldquo;{t.content}&rdquo;
+              </p>
+
+              <div className="mt-6 flex items-center gap-3 border-grey-15/20 border-t pt-5">
+                <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full border-2 border-grey-15">
                   <Image
                     alt={t.name}
                     className="object-cover"
@@ -117,81 +145,30 @@ export function TestimonialsThree({
                     src={t.avatar}
                   />
                 </div>
-                <div className="flex flex-col">
-                  <span className="font-semibold text-base md:text-xl">
+                <div className="min-w-0 flex-1">
+                  <p className="truncate font-bold font-vietnam text-grey-15 text-sm">
                     {t.name}
-                  </span>
-                  <span className="text-muted-foreground text-sm md:text-base">
+                  </p>
+                  <p className="truncate text-grey-40 text-xs">
                     {t.role}
-                  </span>
-                  {t.company && (
-                    <span className="mt-1 text-primary/80 text-xs md:text-sm">
-                      {t.company}
-                    </span>
-                  )}
+                    {t.company ? ` · ${t.company}` : ""}
+                  </p>
                 </div>
+                {t.rating && (
+                  <div className="flex shrink-0 items-center gap-0.5">
+                    {Array.from({ length: t.rating }).map((_, i) => (
+                      <Star
+                        className="h-3.5 w-3.5 text-gold"
+                        fill="var(--color-gold)"
+                        key={`${t.id}-star-${i}`}
+                        strokeWidth={0}
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
-
-              <div className="relative mt-5 flex-1 md:mt-6">
-                <Quote className="absolute -top-2 -left-1 h-6 w-6 rotate-180 text-primary-50 md:h-7 md:w-7" />
-                <p className="pt-6 pl-6 text-base leading-relaxed md:pl-8 md:text-lg">
-                  &ldquo;{t.content}&rdquo;
-                </p>
-              </div>
-
-              {t.linkedinUrl && (
-                <div className="relative mt-auto pt-5 md:pt-6">
-                  <Link
-                    aria-label={`View ${t.name} on LinkedIn`}
-                    href={t.linkedinUrl}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <Button className="group h-10 w-full rounded-full bg-linear-to-r from-blue-700 to-blue-700/90 px-5 py-5 text-white shadow-sm ring-1 ring-blue-700/30 transition-all duration-200 hover:from-blue-700/90 hover:to-blue-700 hover:shadow-md md:h-11 md:w-auto">
-                      <Icons.linkedin className="mr-2 h-4 w-4 transition-transform group-hover:scale-110" />
-                      Connect on LinkedIn
-                    </Button>
-                  </Link>
-                </div>
-              )}
-            </Card>
+            </div>
           ))}
-        </div>
-
-        <div className="mt-8 flex justify-center gap-2">
-          {sorted.map((_, i) => (
-            <button
-              aria-label={`Go to slide ${i + 1}`}
-              className={cn(
-                "h-2 rounded-full transition-all duration-300",
-                i === index ? "w-6 bg-primary" : "w-2 bg-primary/30"
-              )}
-              key={i}
-              onClick={() => setIndex(i)}
-            />
-          ))}
-        </div>
-
-        {/* Mobile navigation controls below cards */}
-        <div className="mt-6 flex justify-center gap-3 md:hidden">
-          <Button
-            aria-label="Previous"
-            className="rounded-full shadow-xs"
-            onClick={handlePrev}
-            size="icon"
-            variant="outline"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </Button>
-          <Button
-            aria-label="Next"
-            className="rounded-full shadow-xs"
-            onClick={handleNext}
-            size="icon"
-            variant="outline"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </Button>
         </div>
       </div>
     </div>

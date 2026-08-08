@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 
 import { Badge } from "@/components/ui/badge";
@@ -314,7 +315,9 @@ function BottomCTA() {
 // Main Component
 
 export default function CoursesPage({ courses }: OurCourseProps) {
-  const [activeFilter, setActiveFilter] = useState("all");
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams.get("category");
+  const [activeFilter, setActiveFilter] = useState(categoryParam ?? "all");
 
   // Build filter tabs from actual Sanity data
   const filterTabs = useMemo<FilterTab[]>(() => {

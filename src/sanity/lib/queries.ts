@@ -190,6 +190,20 @@ export const COURSES_LIST_QUERY = `
   }
 `;
 
+export const FEATURED_PROGRAMS_QUERY = `
+  *[_type == "course" && featured == true] | order(title asc) {
+    _id,
+    title,
+    slug,
+    subtitle,
+    description,
+    category,
+    "heroImageUrl": heroImage.asset->url,
+    duration,
+    stats
+  }
+`;
+
 export const LEAD_MAGNETS_QUERY = `
   *[_type == "leadMagnet" && isActive == true] | order(_createdAt desc) {
     _id,

@@ -36,14 +36,8 @@ export default async function TestimonialsSectionBasic() {
   const transformedTestimonials = transformTestimonials(testimonials);
 
   return (
-    <section className="relative overflow-hidden bg-linear-to-b from-light-97 to-white py-16 md:py-24">
-      {/* Decorative background elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-20 h-72 w-72 rounded-full bg-primary-95 opacity-20 blur-3xl" />
-        <div className="absolute right-20 bottom-20 h-96 w-96 rounded-full bg-primary-97 opacity-20 blur-3xl" />
-      </div>
-
-      <div className="container relative mx-auto">
+    <section className="bg-white py-16 md:py-24">
+      <div className="container">
         <TestimonialsThree testimonials={transformedTestimonials} />
       </div>
     </section>

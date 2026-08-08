@@ -1,550 +1,88 @@
-"use client";
+import { ArrowUpRight, Sparkles } from "lucide-react";
+import Link from "next/link";
 
-import { useState } from "react";
+import { CATEGORIES, COURSES } from "@/data/courses";
 
-const domains = [
-  {
-    color: "#ff6d00",
-    iconSrc: "/logos/domains/tensorflow.svg",
-    label: "AI & Machine Learning",
-  },
-  {
-    color: "#f37626",
-    iconSrc: "/logos/domains/jupyter.svg",
-    label: "Data Science",
-  },
-  {
-    color: "#7c3aed",
-    iconSrc: "/logos/domains/apache-spark.svg",
-    label: "Data Analytics",
-  },
-  {
-    color: "#4285f4",
-    iconSrc: "/logos/domains/google-cloud.svg",
-    label: "Cloud Computing",
-  },
-  {
-    color: "#ef4444",
-    iconSrc: "/logos/domains/security.svg",
-    label: "Cyber Security",
-  },
-  {
-    color: "#326ce5",
-    iconSrc: "/logos/domains/kubernetes.svg",
-    label: "DevOps",
-  },
-  {
-    color: "#10b981",
-    iconSrc: "/logos/domains/react.svg",
-    label: "Full Stack Development",
-  },
-  {
-    color: "#f89820",
-    iconSrc: "/logos/domains/java.svg",
-    label: "Java Programming",
-  },
-  {
-    color: "#3776ab",
-    iconSrc: "/logos/domains/python.svg",
-    label: "Python Programming",
-  },
-  {
-    color: "#e44d26",
-    iconSrc: "/logos/domains/html-5.svg",
-    label: "Web Development",
-  },
-  {
-    color: "#f24e1e",
-    iconSrc: "/logos/domains/figma.svg",
-    label: "UI/UX Design",
-  },
-  {
-    color: "#a855f7",
-    iconSrc: "/logos/domains/scikitlearn.svg",
-    label: "ML with Python",
-  },
-  {
-    color: "#0078d4",
-    iconSrc: "/logos/domains/microsoft-azure.svg",
-    label: "Azure Cloud",
-  },
-  {
-    color: "#22d3ee",
-    iconSrc: "/logos/domains/iot-platform.svg",
-    label: "IoT",
-  },
-  {
-    color: "#f43f5e",
-    iconSrc: "/logos/domains/chip.svg",
-    label: "Embedded Systems",
-  },
-  {
-    color: "#34d399",
-    iconSrc: "/logos/domains/car.svg",
-    label: "Hybrid Electric Vehicles",
-  },
-  {
-    color: "#818cf8",
-    iconSrc: "/logos/domains/chemistry.svg",
-    label: "Nanotechnology",
-  },
-  {
-    color: "#fbbf24",
-    iconSrc: "/logos/domains/autodesk.svg",
-    label: "AutoCAD",
-  },
-  {
-    color: "#f472b6",
-    iconSrc: "/logos/domains/growth.svg",
-    label: "Digital Marketing",
-  },
-  {
-    color: "#4ade80",
-    iconSrc: "/logos/domains/chart-line.svg",
-    label: "Stock Market",
-  },
-  {
-    color: "#60a5fa",
-    iconSrc: "/logos/domains/currency.svg",
-    label: "Finance",
-  },
-  {
-    color: "#fb923c",
-    iconSrc: "/logos/domains/group.svg",
-    label: "HR Management",
-  },
-  {
-    color: "#c084fc",
-    iconSrc: "/logos/domains/user-profile.svg",
-    label: "Psychology",
-  },
-  {
-    color: "#2dd4bf",
-    iconSrc: "/logos/domains/result.svg",
-    label: "Placement Programs",
-  },
-];
+// Row 1: large card on the left (development), two small on the right.
+// Row 2: two small on the left, large card on the right (business) — the
+// large-card position alternates per row instead of repeating.
+const CARD_STYLE = [
+  { span: "lg:col-span-2", tint: "bg-primary-99" },
+  { span: "lg:col-span-1", tint: "bg-gold-90" },
+  { span: "lg:col-span-1", tint: "bg-white" },
+  { span: "lg:col-span-1", tint: "bg-primary-90" },
+  { span: "lg:col-span-2", tint: "bg-light-95" },
+  { span: "lg:col-span-1", tint: "bg-primary-95" },
+] as const;
 
-// Split into 3 rows for the diagonal cascade effect
-const row1 = domains.slice(0, 8);
-const row2 = domains.slice(8, 16);
-const row3 = domains.slice(16, 24);
-
-function IsometricTile({
-  iconSrc,
-  label,
-  color,
-  delay,
-}: {
-  iconSrc: string;
-  label: string;
-  color: string;
-  delay: number;
-}) {
-  const [hovered, setHovered] = useState(false);
-
-  return (
-    <div
-      className="isometric-tile"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{ animationDelay: `${delay}s` }}
-    >
-      {/* The 3D tile face */}
-      <div
-        className="tile-face"
-        style={
-          {
-            "--tile-color": color,
-            transform: hovered
-              ? "translateZ(20px) scale(1.08)"
-              : "translateZ(0px) scale(1)",
-          } as React.CSSProperties
-        }
-      >
-        {/* Top shine strip */}
-        <div className="tile-shine" />
-
-        {/* Neon border glow on hover */}
-        <div
-          className="tile-glow"
-          style={{
-            boxShadow: `0 0 30px ${color}, 0 0 60px ${color}40`,
-            opacity: hovered ? 1 : 0,
-          }}
-        />
-
-        {/* Content */}
-        <div className="tile-content">
-          {/* Icon badge */}
-          <div
-            className="tile-icon-badge"
-            style={{
-              background: `${color}18`,
-              border: `1px solid ${color}35`,
-            }}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              alt=""
-              aria-hidden="true"
-              height={22}
-              loading="lazy"
-              src={iconSrc}
-              style={{ display: "block", objectFit: "contain" }}
-              width={22}
-            />
-          </div>
-          <span
-            className="tile-label"
-            style={{ color: hovered ? color : undefined }}
-          >
-            {label}
-          </span>
-        </div>
-
-        {/* Bottom edge (isometric depth illusion) */}
-        <div
-          className="tile-bottom-edge"
-          style={{ background: hovered ? `${color}40` : undefined }}
-        />
-        <div
-          className="tile-right-edge"
-          style={{ background: hovered ? `${color}30` : undefined }}
-        />
-      </div>
-    </div>
-  );
-}
-
-function DomainRow({
-  domains,
-  direction,
-  speed,
-}: {
-  domains: typeof row1;
-  direction: "left" | "right";
-  speed: number;
-}) {
-  // Duplicate items for seamless looping
-  const items = [...domains, ...domains, ...domains];
-
-  return (
-    <div className="domain-row-wrapper">
-      <div
-        className={`domain-row ${direction === "right" ? "domain-row--reverse" : ""}`}
-        style={{ "--speed": `${speed}s` } as React.CSSProperties}
-      >
-        {items.map((d, i) => (
-          <IsometricTile
-            color={d.color}
-            delay={(i % domains.length) * 0.1}
-            iconSrc={d.iconSrc}
-            key={`${i}-${d.label}`}
-            label={d.label}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
+const DOMAIN_CARDS = CATEGORIES.map((category, index) => ({
+  count: COURSES.filter((course) => course.category === category.id).length,
+  ...category,
+  ...CARD_STYLE[index % CARD_STYLE.length],
+}));
 
 export default function DomainsShowcase() {
+  const totalPrograms = COURSES.length;
+
   return (
-    <section
-      aria-label="Technologies and Domains"
-      className="domains-showcase-section"
-    >
-      {/* ── Styles ── */}
-      <style>{`
-        .domains-showcase-section {
-          position: relative;
-          padding: 100px 0 80px;
-          background: #f8fafc;
-          overflow: hidden;
-        }
-
-        /* Ambient dot grid background */
-        .domains-showcase-section::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background-image:
-            radial-gradient(circle, rgba(16,185,129,0.12) 1px, transparent 1px);
-          background-size: 28px 28px;
-          pointer-events: none;
-        }
-
-        /* Radial vignette overlay */
-        .domains-showcase-section::after {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: radial-gradient(ellipse 80% 60% at 50% 50%, transparent 40%, #f8fafc 100%);
-          pointer-events: none;
-          z-index: 2;
-        }
-
-        /* ── Header ── */
-        .ds-header {
-          position: relative;
-          z-index: 10;
-          text-align: center;
-          margin-bottom: 64px;
-          padding: 0 20px;
-        }
-
-        .ds-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          background: rgba(16,185,129,0.08);
-          border: 1px solid rgba(16,185,129,0.3);
-          color: #059669;
-          font-size: 12px;
-          font-weight: 700;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          padding: 6px 16px;
-          border-radius: 999px;
-          margin-bottom: 24px;
-        }
-
-        .ds-badge-dot {
-          width: 6px;
-          height: 6px;
-          background: #10b981;
-          border-radius: 50%;
-          animation: pulse-dot 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse-dot {
-          0%, 100% { opacity: 1; transform: scale(1); }
-          50% { opacity: 0.4; transform: scale(0.7); }
-        }
-
-        .ds-title {
-          font-size: clamp(2rem, 5vw, 3.5rem);
-          font-weight: 800;
-          color: #0f172a;
-          line-height: 1.15;
-          letter-spacing: -0.02em;
-          margin: 0 0 20px;
-        }
-
-        .ds-title-accent {
-          background: linear-gradient(135deg, #10b981, #0ea5e9, #7c3aed);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-
-        .ds-subtitle {
-          font-size: 1.05rem;
-          color: #64748b;
-          max-width: 520px;
-          margin: 0 auto;
-          line-height: 1.7;
-        }
-
-        /* ── Rows container ── */
-        .ds-rows {
-          position: relative;
-          z-index: 5;
-          display: flex;
-          flex-direction: column;
-          gap: 20px;
-          /* Isometric perspective tilt on the whole block */
-          perspective: 1000px;
-        }
-
-        .domain-row-wrapper {
-          position: relative;
-        }
-
-        /* Fade edges */
-        .domain-row-wrapper::before,
-        .domain-row-wrapper::after {
-          content: '';
-          position: absolute;
-          top: 0; bottom: 0;
-          width: 120px;
-          z-index: 10;
-          pointer-events: none;
-        }
-        .domain-row-wrapper::before {
-          left: 0;
-          background: linear-gradient(90deg, #f8fafc, transparent);
-        }
-        .domain-row-wrapper::after {
-          right: 0;
-          background: linear-gradient(-90deg, #f8fafc, transparent);
-        }
-
-        .domain-row {
-          display: flex;
-          gap: 28px;
-          width: max-content;
-          animation: scroll-left var(--speed, 40s) linear infinite;
-        }
-
-        .domain-row--reverse {
-          animation-name: scroll-right;
-        }
-
-        @keyframes scroll-left {
-          from { transform: translateX(0); }
-          to   { transform: translateX(-33.333%); }
-        }
-
-        @keyframes scroll-right {
-          from { transform: translateX(-33.333%); }
-          to   { transform: translateX(0); }
-        }
-
-        /* Pause on hover of the whole row wrapper */
-        .domain-row-wrapper:hover .domain-row {
-          animation-play-state: paused;
-        }
-
-        /* ── Isometric Tile ── */
-        .isometric-tile {
-          flex-shrink: 0;
-          perspective: 600px;
-          animation: tile-float 3s ease-in-out infinite;
-        }
-
-        .tile-face {
-          position: relative;
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          padding: 14px 22px;
-          background: #ffffff;
-          border: 1px solid rgba(0,0,0,0.08);
-          border-radius: 14px;
-          cursor: pointer;
-          transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-                      border-color 0.3s ease,
-                      box-shadow 0.3s ease;
-          transform-style: preserve-3d;
-          min-width: 200px;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-          will-change: transform;
-        }
-
-        .tile-face:hover {
-          border-color: color-mix(in srgb, var(--tile-color) 60%, transparent);
-          box-shadow: 0 8px 24px color-mix(in srgb, var(--tile-color) 20%, transparent),
-                      0 2px 8px rgba(0,0,0,0.08);
-        }
-
-        /* Shine strip at the top */
-        .tile-shine {
-          position: absolute;
-          top: 0; left: 16px; right: 16px;
-          height: 1px;
-          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.9), transparent);
-          border-radius: 999px;
-        }
-
-        /* Glow border effect */
-        .tile-glow {
-          position: absolute;
-          inset: -1px;
-          border-radius: 14px;
-          pointer-events: none;
-          transition: opacity 0.3s ease;
-        }
-
-        /* Bottom depth edge (pseudo-3D illusion) */
-        .tile-bottom-edge {
-          position: absolute;
-          bottom: -6px; left: 6px; right: -6px;
-          height: 6px;
-          background: rgba(0,0,0,0.06);
-          border-radius: 0 0 4px 4px;
-          transform: skewX(-2deg);
-          transition: background 0.3s;
-        }
-
-        .tile-right-edge {
-          position: absolute;
-          right: -6px; top: 6px; bottom: -6px;
-          width: 6px;
-          background: rgba(0,0,0,0.04);
-          border-radius: 0 4px 4px 0;
-          transform: skewY(-2deg);
-          transition: background 0.3s;
-        }
-
-        /* Tile content */
-        .tile-content {
-          position: relative;
-          z-index: 2;
-          display: flex;
-          align-items: center;
-          gap: 11px;
-          pointer-events: none;
-        }
-
-        .tile-icon-badge {
-          flex-shrink: 0;
-          width: 38px;
-          height: 38px;
-          border-radius: 10px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: transform 0.3s ease;
-        }
-
-        .isometric-tile:hover .tile-icon-badge {
-          transform: scale(1.1);
-        }
-
-        .tile-label {
-          font-size: 14px;
-          font-weight: 600;
-          color: #334155;
-          white-space: nowrap;
-          letter-spacing: -0.01em;
-          transition: color 0.3s ease;
-        }
-
-        /* ── Mobile ── */
-        @media (max-width: 640px) {
-          .domains-showcase-section {
-            padding: 70px 0 60px;
-          }
-          .ds-badge { font-size: 11px; }
-          .tile-face { min-width: 170px; padding: 12px 16px; }
-          .tile-label { font-size: 13px; }
-          .tile-icon { font-size: 18px; }
-        }
-      `}</style>
-
-      {/* ── Header ── */}
-      <div className="ds-header">
-        <div className="ds-badge">
-          <span className="ds-badge-dot" />
-          24 Domains &amp; Counting
+    <section className="bg-white py-16 sm:py-20 lg:py-24">
+      <div className="container">
+        <div className="mb-12 text-center lg:mb-16">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-99 px-4 py-2 font-semibold text-grey-15 text-sm">
+            <Sparkles className="h-4 w-4" />
+            {totalPrograms}+ Career Programs
+          </div>
+          <h2 className="mb-4 font-black font-vietnam text-4xl text-grey-15 tracking-tight sm:text-5xl">
+            Pick Your Path
+          </h2>
+          <p className="mx-auto max-w-xl text-grey-40 text-lg leading-relaxed">
+            Six career domains, one goal — job-ready skills backed by industry
+            mentors.
+          </p>
         </div>
-        <h2 className="ds-title">
-          Upskill in the world&apos;s most{" "}
-          <span className="ds-title-accent">in-demand technologies</span>
-        </h2>
-        <p className="ds-subtitle">
-          Curated programs designed with industry experts to make you job‑ready
-          in tomorrow&apos;s most sought-after fields.
-        </p>
-      </div>
 
-      {/* ── Isometric Cascade Rows ── */}
-      <div className="ds-rows">
-        <DomainRow direction="left" domains={row1} speed={38} />
-        <DomainRow direction="right" domains={row2} speed={45} />
-        <DomainRow direction="left" domains={row3} speed={32} />
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {DOMAIN_CARDS.map((domain) => {
+            const isLarge = domain.span === "lg:col-span-2";
+            const Icon = domain.icon;
+
+            return (
+              <Link
+                className={`group relative flex flex-col justify-between overflow-hidden rounded-3xl border-2 border-grey-15 p-6 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)] sm:p-8 ${domain.span} ${domain.tint}`}
+                href={`/courses?category=${domain.id}`}
+                key={domain.id}
+              >
+                <div className="flex items-start justify-between">
+                  <div
+                    className={`flex items-center justify-center rounded-full border-2 border-grey-15 bg-white ${
+                      isLarge ? "h-14 w-14" : "h-12 w-12"
+                    }`}
+                  >
+                    <Icon
+                      className={isLarge ? "h-7 w-7" : "h-6 w-6"}
+                      strokeWidth={2}
+                    />
+                  </div>
+                  <ArrowUpRight className="h-5 w-5 text-grey-40 transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-grey-15" />
+                </div>
+
+                <div className="mt-8">
+                  <h3
+                    className={`font-bold font-vietnam text-grey-15 ${
+                      isLarge ? "text-2xl sm:text-3xl" : "text-xl"
+                    }`}
+                  >
+                    {domain.label}
+                  </h3>
+                  <p className="mt-1 text-grey-40 text-sm">
+                    {domain.count} Career{" "}
+                    {domain.count === 1 ? "Program" : "Programs"}
+                  </p>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

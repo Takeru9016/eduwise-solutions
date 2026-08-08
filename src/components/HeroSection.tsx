@@ -1,424 +1,202 @@
-"use client";
-
 import {
-  ArrowRight,
-  BookOpen,
+  Award,
+  Code2,
+  MessageSquare,
+  PieChart,
   Play,
+  ShieldCheck,
   Sparkles,
-  Star,
-  Target,
-  Zap,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 
-// Modern feature badge component
-const FeatureBadge = ({
-  icon: Icon,
-  text,
-  index,
-}: {
-  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-  text: string;
-  index: number;
-}) => (
-  <div
-    className="group flex items-center gap-2 rounded-full border border-white/40 bg-linear-to-r from-white/95 to-white/80 px-3 py-2 shadow-xl backdrop-blur-md transition-all duration-500 hover:scale-105 hover:shadow-2xl sm:gap-3 sm:px-6 sm:py-3"
-    style={{
-      animation: "fadeInUp 0.8s ease-out forwards",
-      animationDelay: `${index * 300}ms`,
-    }}
-  >
-    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-linear-to-br from-primary-90 to-primary-75 transition-transform duration-300 group-hover:rotate-12 sm:h-10 sm:w-10">
-      <Icon className="h-4 w-4 text-white sm:h-5 sm:w-5" />
-    </div>
-    <span className="font-semibold text-grey-35 text-xs sm:text-sm">
-      {text}
-    </span>
-  </div>
-);
+const SKILL_TAGS = [
+  { filled: true, label: "AI & Data Science" },
+  { filled: false, label: "Cloud & DevOps" },
+  { filled: false, label: "Full Stack Dev" },
+  { filled: false, label: "Cyber Security" },
+];
 
-// Enhanced CTA button
-const ModernCTAButton = ({
-  href,
-  variant,
-  children,
-  className = "",
-}: {
-  href: string;
-  variant: "primary" | "secondary";
-  children: React.ReactNode;
-  className?: string;
-}) => (
-  <Link href={href}>
-    <Button
-      className={`group relative w-full transform overflow-hidden rounded-full px-4 py-3 font-bold text-base transition-all duration-500 hover:scale-105 sm:w-auto sm:px-8 sm:py-4 sm:text-lg sm:hover:scale-110 ${
-        variant === "primary"
-          ? "bg-linear-to-r bg-size-200 from-primary-75 via-primary-70 to-primary-75 text-white shadow-2xl hover:bg-pos-100 hover:shadow-primary-75/50"
-          : "border-2 border-primary-75 bg-white/90 text-primary-75 shadow-xl backdrop-blur-xs hover:bg-primary-99 hover:shadow-2xl"
-      }
-        ${className}
-      `}
-    >
-      <span className="relative z-10 flex items-center justify-center gap-2 sm:gap-3">
-        {children}
-      </span>
-      {variant === "primary" && (
-        <div className="absolute inset-0 bg-linear-to-r from-primary-70 to-primary-65 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-      )}
-    </Button>
-  </Link>
-);
+const TOOL_ICONS = [
+  { Icon: Sparkles, label: "AI-assisted learning" },
+  { Icon: Code2, label: "Hands-on projects" },
+  { Icon: PieChart, label: "Career analytics" },
+  { Icon: MessageSquare, label: "1:1 mentorship" },
+  { Icon: Award, label: "Certification prep" },
+];
 
-// Floating decorative element
-const FloatingDecor = ({
-  className,
-  delay = "0s",
-}: {
-  className: string;
-  delay?: string;
-}) => (
-  <div
-    className={`absolute animate-float ${className}`}
-    style={{ animationDelay: delay }}
-  >
-    <div className="h-2 w-2 rounded-full bg-primary-90 opacity-40 sm:h-3 sm:w-3" />
-  </div>
-);
+// 6-lobe scalloped flower: r(theta) = 0.40 + 0.055*cos(6*theta), 36 samples
+// joined with a Catmull-Rom-fitted closed cubic-bezier for round petal tips.
+const heroBlobPath =
+  "M0.9550,0.5000 C0.9550,0.5247 0.9385,0.5530 0.9210,0.5742 C0.9035,0.5955 0.8704,0.6110 0.8500,0.6274 C0.8297,0.6438 0.8096,0.6538 0.7988,0.6725 C0.7880,0.6912 0.7893,0.7136 0.7854,0.7394 C0.7814,0.7653 0.7844,0.8017 0.7748,0.8275 C0.7651,0.8533 0.7489,0.8817 0.7275,0.8940 C0.7061,0.9064 0.6733,0.9063 0.6462,0.9017 C0.6191,0.8972 0.5891,0.8763 0.5647,0.8668 C0.5403,0.8574 0.5216,0.8450 0.5000,0.8450 C0.4784,0.8450 0.4597,0.8574 0.4353,0.8668 C0.4109,0.8763 0.3809,0.8972 0.3538,0.9017 C0.3267,0.9063 0.2939,0.9064 0.2725,0.8940 C0.2511,0.8817 0.2349,0.8533 0.2252,0.8275 C0.2156,0.8017 0.2186,0.7653 0.2146,0.7394 C0.2107,0.7136 0.2120,0.6912 0.2012,0.6725 C0.1904,0.6538 0.1703,0.6438 0.1500,0.6274 C0.1296,0.6110 0.0965,0.5955 0.0790,0.5742 C0.0615,0.5530 0.0450,0.5247 0.0450,0.5000 C0.0450,0.4753 0.0615,0.4470 0.0790,0.4258 C0.0965,0.4045 0.1296,0.3890 0.1500,0.3726 C0.1703,0.3562 0.1904,0.3462 0.2012,0.3275 C0.2120,0.3088 0.2107,0.2864 0.2146,0.2606 C0.2186,0.2347 0.2156,0.1983 0.2252,0.1725 C0.2349,0.1467 0.2511,0.1183 0.2725,0.1060 C0.2939,0.0936 0.3267,0.0937 0.3538,0.0983 C0.3809,0.1028 0.4109,0.1237 0.4353,0.1332 C0.4597,0.1426 0.4784,0.1550 0.5000,0.1550 C0.5216,0.1550 0.5403,0.1426 0.5647,0.1332 C0.5891,0.1237 0.6191,0.1028 0.6462,0.0983 C0.6733,0.0937 0.7061,0.0936 0.7275,0.1060 C0.7489,0.1183 0.7651,0.1467 0.7748,0.1725 C0.7844,0.1983 0.7814,0.2347 0.7854,0.2606 C0.7893,0.2864 0.7880,0.3088 0.7988,0.3275 C0.8096,0.3462 0.8297,0.3562 0.8500,0.3726 C0.8704,0.3890 0.9035,0.4045 0.9210,0.4258 C0.9385,0.4470 0.9550,0.4753 0.9550,0.5000 Z";
 
 export default function HeroSection() {
-  const features = [
-    { icon: BookOpen, text: "Expert-Led Programs" },
-    { icon: Target, text: "Job-Ready Skills" },
-  ];
-
   return (
-    <section className="relative min-h-screen overflow-hidden bg-linear-to-br from-primary-99 via-white to-primary-97">
-      {/* Dynamic background elements */}
-      <div className="pointer-events-none absolute inset-0">
-        {/* Animated mesh gradient */}
-        <div className="absolute inset-0 opacity-20 sm:opacity-30">
-          <div className="absolute top-10 left-1/4 h-48 w-48 animate-pulse rounded-full bg-linear-to-br from-primary-90/60 to-transparent blur-2xl sm:top-0 sm:h-96 sm:w-96 sm:blur-3xl" />
-          <div
-            className="absolute right-1/4 bottom-10 h-40 w-40 animate-pulse rounded-full bg-linear-to-tl from-primary-95/80 to-transparent blur-xl sm:bottom-0 sm:h-80 sm:w-80 sm:blur-2xl"
-            style={{ animationDelay: "2s" }}
-          />
-          <div
-            className="absolute top-1/2 left-1/2 h-32 w-32 -translate-x-1/2 -translate-y-1/2 transform animate-pulse rounded-full bg-linear-to-r from-primary-97 to-primary-95 blur-lg sm:h-64 sm:w-64 sm:blur-xl"
-            style={{ animationDelay: "1s" }}
-          />
-        </div>
+    <section className="relative overflow-hidden bg-light-97 py-14 sm:py-20 lg:py-24">
+      {/* Reusable blob clip-path, shared by the photo and its backdrop shapes */}
+      <svg aria-hidden="true" className="absolute h-0 w-0">
+        <defs>
+          <clipPath clipPathUnits="objectBoundingBox" id="hero-blob">
+            <path d={heroBlobPath} />
+          </clipPath>
+        </defs>
+      </svg>
 
-        {/* Floating decorative elements */}
-        <FloatingDecor className="top-20 right-10 sm:right-20" delay="0s" />
-        <FloatingDecor className="bottom-32 left-10 sm:left-16" delay="1.5s" />
-        <FloatingDecor className="top-1/3 left-10 sm:left-20" delay="0.5s" />
-        <FloatingDecor className="top-1/4 right-1/3" delay="2s" />
-      </div>
+      <div className="container relative">
+        <div className="grid items-start gap-16 lg:grid-cols-[1fr_1.3fr] lg:gap-8">
+          {/* Left column — copy */}
+          <div className="text-center lg:text-left">
+            <h1 className="pt-2 font-black font-vietnam text-6xl text-grey-15 leading-[1.05] tracking-tight sm:text-7xl lg:text-8xl">
+              <span className="block">Accelerate</span>
+              <span className="block">Your Tech</span>
+              <span className="block">Career</span>
+            </h1>
 
-      <div className="container relative z-10 mx-auto px-4 py-8 sm:px-6 sm:py-16">
-        {/* Main content container */}
-        <div className="mx-auto max-w-7xl">
-          <div className="grid min-h-[calc(100vh-4rem)] items-center gap-8 lg:grid-cols-2 lg:gap-12">
-            {/* Left Content */}
-            <div className="order-1 text-center lg:order-1 lg:text-left">
-              {/* Top badge section */}
-              <div className="mb-8 sm:mb-12">
+            {/* Decorative pill/dot indicator */}
+            <div className="mt-8 flex items-center justify-center gap-2 lg:justify-start">
+              <span className="h-3 w-14 rounded-full bg-grey-15" />
+              <span className="h-3 w-3 rounded-full bg-primary-75" />
+              <span className="h-3 w-3 rounded-full bg-grey-15" />
+              <span className="h-3 w-9 rounded-full bg-primary-75" />
+            </div>
+
+            <p className="mx-auto mt-6 max-w-md text-grey-35 text-lg leading-relaxed lg:mx-0">
+              Job-ready courses in AI, cloud, and development — built with
+              industry mentors to turn curiosity into a career.
+            </p>
+
+            <div className="mt-8">
+              <Link href="/courses">
+                <Button className="h-auto rounded-full border-2 border-grey-15 bg-primary-75 px-8 py-4 font-bold text-base text-grey-15 shadow-none transition-transform hover:-translate-y-0.5 hover:bg-primary-80">
+                  Explore Courses
+                </Button>
+              </Link>
+            </div>
+          </div>
+
+          {/* Right column — photo, blob backdrop, floating badges */}
+          <div className="relative mx-auto w-full max-w-md lg:mx-0 lg:max-w-none">
+            <div className="relative flex justify-center lg:justify-start">
+              <div className="relative aspect-square w-full max-w-sm lg:max-w-95">
+                {/* Shadow, green, and gold blob layers (sticker-stack effect) */}
                 <div
-                  className="group inline-flex items-center gap-3 rounded-full border border-primary-95/50 bg-white/95 px-4 py-3 font-bold text-primary-75 text-sm shadow-2xl backdrop-blur-md transition-all duration-500 hover:shadow-primary-75/20 sm:gap-4 sm:px-8 sm:py-4 sm:text-base"
-                  style={{ animation: "fadeInDown 0.8s ease-out" }}
-                >
-                  <div className="relative">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-linear-to-br from-primary-95 to-primary-75 transition-transform duration-500 group-hover:rotate-180 sm:h-10 sm:w-10">
-                      <Sparkles
-                        className="text-white sm:h-5 sm:w-5"
-                        size={16}
-                      />
-                    </div>
-                    <div className="absolute -top-1 -right-1 h-3 w-3 animate-ping rounded-full bg-primary-75 sm:h-4 sm:w-4" />
-                  </div>
-                  <span className="whitespace-nowrap">
-                    Your Career Journey Starts Here
-                  </span>
-                </div>
-              </div>
-
-              {/* Main heading */}
-              <div className="mb-8 sm:mb-12 lg:mb-16">
-                <h1 className="mb-6 font-black font-vietnam leading-tight sm:mb-8">
-                  <div className="mb-3 text-2xl sm:mb-6 sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
-                    <span
-                      className="inline-block text-primary-75 opacity-0"
-                      style={{
-                        animation: "slideInLeft 1s ease-out 0.2s forwards",
-                      }}
-                    >
-                      Accelerate Your Career.
-                    </span>
-                  </div>
-                  <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
-                    <span
-                      className="inline-block text-grey-15 opacity-0"
-                      style={{
-                        animation: "slideInRight 1s ease-out 0.6s forwards",
-                      }}
-                    >
-                      Eliminate the Skill Gap
-                    </span>
-                  </div>
-                </h1>
-
-                {/* Enhanced description */}
+                  className="absolute inset-0 translate-x-3 translate-y-4 bg-grey-15"
+                  style={{ clipPath: "url(#hero-blob)" }}
+                />
                 <div
-                  className="mx-auto max-w-2xl space-y-4 text-lg leading-relaxed opacity-0 sm:space-y-6 sm:text-xl lg:mx-0 lg:text-2xl"
-                  style={{ animation: "fadeInUp 1s ease-out 1s forwards" }}
+                  className="absolute inset-0 translate-x-2 translate-y-1 bg-primary-75"
+                  style={{ clipPath: "url(#hero-blob)" }}
+                />
+                <div
+                  className="absolute inset-0 bg-gold"
+                  style={{ clipPath: "url(#hero-blob)" }}
+                />
+                <div
+                  className="absolute inset-[6%] overflow-hidden"
+                  style={{ clipPath: "url(#hero-blob)" }}
                 >
-                  <div className="text-gray-700">
-                    Looking to elevate your career with the{" "}
-                    <span className="relative inline-block">
-                      <span className="rounded-lg bg-linear-to-r from-primary-95 via-primary-90 to-primary-95 px-2 py-1 font-bold text-base text-black shadow-lg sm:rounded-xl sm:px-4 sm:py-2 sm:text-inherit">
-                        RIGHT JOB
-                      </span>
-                      <div className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary-75 sm:-top-2 sm:-right-2 sm:h-6 sm:w-6">
-                        <Star className="h-2 w-2 text-white sm:h-3 sm:w-3" />
-                      </div>
-                    </span>{" "}
-                    and enhance your skills with the{" "}
-                    <span className="relative inline-block">
-                      <span className="rounded-lg bg-linear-to-r from-primary-95 via-primary-90 to-primary-95 px-2 py-1 font-bold text-base text-black shadow-lg sm:rounded-xl sm:px-4 sm:py-2 sm:text-inherit">
-                        PERFECT PROGRAM
-                      </span>
-                      <div className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary-75 sm:-top-2 sm:-right-2 sm:h-6 sm:w-6">
-                        <Zap className="h-2 w-2 text-white sm:h-3 sm:w-3" />
-                      </div>
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Feature badges */}
-              <div
-                className="mb-8 flex flex-wrap justify-center gap-3 opacity-0 sm:mb-12 sm:gap-6 lg:mb-16 lg:justify-start"
-                style={{ animation: "fadeInUp 1s ease-out 1.4s forwards" }}
-              >
-                {features.map((feature, index) => (
-                  <FeatureBadge
-                    icon={feature.icon}
-                    index={index}
-                    key={index}
-                    text={feature.text}
+                  <Image
+                    alt="Eduwise Solutions learner"
+                    className="h-full w-full object-cover"
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 380px, 320px"
+                    src="/home/hero/woman-portrait.jpg"
                   />
+                </div>
+              </div>
+
+              {/* Floating skill tags — stacked along the blob's upper-right edge */}
+              <div className="absolute top-4 right-0 flex flex-col items-end gap-2 lg:right-[-8%]">
+                {SKILL_TAGS.map((tag) => (
+                  <span
+                    className={`whitespace-nowrap rounded-full border-2 border-grey-15 px-4 py-2 font-semibold text-xs sm:text-sm ${
+                      tag.filled
+                        ? "bg-gold text-grey-15"
+                        : "bg-white text-grey-15"
+                    }`}
+                    key={tag.label}
+                  >
+                    {tag.label}
+                  </span>
                 ))}
               </div>
 
-              {/* CTA section */}
-              <div
-                className="flex flex-col justify-center gap-4 opacity-0 sm:flex-row sm:gap-6 lg:justify-start lg:gap-8"
-                style={{ animation: "fadeInUp 1s ease-out 1.8s forwards" }}
-              >
-                <ModernCTAButton
-                  className="group"
-                  href="/courses"
-                  variant="primary"
-                >
-                  <span className="flex items-center gap-2 sm:gap-3">
-                    Explore Courses
-                    <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 sm:h-6 sm:w-6 sm:group-hover:translate-x-2" />
-                  </span>
-                </ModernCTAButton>
+              {/* Floating info card — soft card, lower-right, overlapping the blob's bottom edge */}
+              <div className="absolute right-0 bottom-8 w-56 rounded-2xl border border-light-90 bg-white p-4 shadow-xl lg:right-[-6%] lg:bottom-0">
+                <div className="mb-2 flex items-center gap-2">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold">
+                    <ShieldCheck className="h-4 w-4 text-grey-15" />
+                  </div>
+                  <h3 className="font-bold font-vietnam text-grey-15 text-sm">
+                    Mentor-Led Learning
+                  </h3>
+                </div>
+                <p className="text-grey-40 text-xs leading-relaxed">
+                  Learn directly from industry experts with hands-on projects
+                  and real interview practice.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-                <ModernCTAButton
-                  className="group border-[#FF9900]! text-[#FF9900]! hover:bg-[#FF9900]/10!"
-                  href="/certifications/aws"
-                  variant="secondary"
-                >
-                  <span className="flex items-center gap-2 sm:gap-3">
-                    AWS Certifications
-                    <Sparkles className="h-5 w-5 transition-transform duration-300 group-hover:scale-110 sm:h-6 sm:w-6" />
-                  </span>
-                </ModernCTAButton>
+        {/* Bottom row — stats (under col 1) and course strip (under col 2), same row */}
+        <div className="mt-16 grid items-center gap-10 lg:mt-20 lg:grid-cols-[1fr_1.3fr] lg:gap-8">
+          <div className="flex items-center justify-center gap-10 lg:justify-start">
+            <div>
+              <div className="font-black font-vietnam text-4xl text-grey-15">
+                17+
+              </div>
+              <div className="text-grey-40 text-sm">Career Programs</div>
+            </div>
+            <div>
+              <div className="font-black font-vietnam text-4xl text-grey-15">
+                7+
+              </div>
+              <div className="text-grey-40 text-sm">Course Categories</div>
+            </div>
+          </div>
 
-                <ModernCTAButton
-                  className="group"
-                  href="/contact"
-                  variant="secondary"
-                >
-                  <span className="flex items-center gap-2 sm:gap-3">
-                    <Play className="h-5 w-5 transition-transform duration-300 group-hover:scale-110 sm:h-6 sm:w-6 sm:group-hover:scale-125" />
-                    Contact Us
-                  </span>
-                </ModernCTAButton>
+          <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-center">
+            <div className="relative aspect-4/3 w-full max-w-56 shrink-0 overflow-hidden rounded-[40%] border-2 border-grey-15 shadow-lg">
+              <Image
+                alt="Student learning with Eduwise Solutions"
+                className="h-full w-full object-cover"
+                fill
+                sizes="224px"
+                src="/home/hero/classroom.jpg"
+              />
+              <div className="absolute inset-0 flex items-center justify-center bg-grey-15/10">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-grey-15 bg-white">
+                  <Play className="ml-0.5 h-4 w-4 fill-grey-15 text-grey-15" />
+                </div>
               </div>
             </div>
 
-            {/* Right Images Section */}
-            <div className="relative order-2 flex w-full justify-center lg:order-2">
-              <div className="grid w-full max-w-sm grid-cols-2 gap-3 sm:max-w-md sm:gap-4 lg:max-w-lg lg:gap-6">
-                {/* Large image spanning both columns */}
-                <div
-                  className="col-span-2 opacity-0"
-                  style={{ animation: "fadeInRight 1s ease-out 0.5s forwards" }}
-                >
-                  <div className="group relative overflow-hidden rounded-xl shadow-2xl transition-all duration-500 hover:scale-105 hover:shadow-3xl sm:rounded-2xl">
-                    <Image
-                      alt="Students studying together"
-                      className="h-32 w-full object-cover transition-transform duration-500 group-hover:scale-110 sm:h-48 lg:h-64"
-                      height={300}
-                      priority
-                      src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&h=300&fit=crop&auto=format&q=80"
-                      width={600}
-                    />
-                    <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="flex-1 text-center sm:text-left">
+              <h2 className="mb-4 font-bold font-vietnam text-grey-15 text-xl leading-snug sm:text-2xl">
+                We have 17+ industry-aligned courses to fast-track your career
+              </h2>
+              <div className="flex justify-center gap-3 sm:justify-start">
+                {TOOL_ICONS.map(({ Icon, label }) => (
+                  <div
+                    aria-label={label}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-grey-15 bg-white text-grey-15"
+                    key={label}
+                    role="img"
+                    title={label}
+                  >
+                    <Icon className="h-4 w-4" />
                   </div>
-                </div>
-
-                {/* Two smaller images */}
-                <div
-                  className="opacity-0"
-                  style={{ animation: "fadeInRight 1s ease-out 0.7s forwards" }}
-                >
-                  <div className="group relative overflow-hidden rounded-lg shadow-xl transition-all duration-500 hover:scale-105 hover:shadow-2xl sm:rounded-xl">
-                    <Image
-                      alt="Students collaborating"
-                      className="h-24 w-full object-cover transition-transform duration-500 group-hover:scale-110 sm:h-36 lg:h-48"
-                      height={240}
-                      src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=300&h=240&fit=crop&auto=format&q=80"
-                      width={300}
-                    />
-                    <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                  </div>
-                </div>
-
-                <div
-                  className="opacity-0"
-                  style={{ animation: "fadeInRight 1s ease-out 0.9s forwards" }}
-                >
-                  <div className="group relative overflow-hidden rounded-lg shadow-xl transition-all duration-500 hover:scale-105 hover:shadow-2xl sm:rounded-xl">
-                    <Image
-                      alt="Student studying with laptop"
-                      className="h-24 w-full object-cover transition-transform duration-500 group-hover:scale-110 sm:h-36 lg:h-48"
-                      height={240}
-                      src="https://images.unsplash.com/photo-1581726690015-c9861fa5057f?w=300&h=240&fit=crop&auto=format&q=80"
-                      width={300}
-                    />
-                    <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                  </div>
-                </div>
+                ))}
               </div>
-
-              {/* Decorative elements (hidden on small screens) */}
-              <div className="absolute -top-2 -right-2 hidden h-6 w-6 animate-pulse rounded-full bg-primary-95 opacity-60 sm:block lg:-top-4 lg:-right-4 lg:h-8 lg:w-8" />
-              <div className="absolute -bottom-3 -left-3 hidden h-4 w-4 animate-bounce rounded-full bg-primary-90 opacity-40 sm:block lg:-bottom-6 lg:-left-6 lg:h-6 lg:w-6" />
             </div>
           </div>
         </div>
       </div>
-
-      {/* CSS Animations - Using CSS modules would be better in production */}
-      <style jsx>{`
-        @keyframes fadeInDown {
-          from {
-            opacity: 0;
-            transform: translateY(-20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes slideInLeft {
-          from {
-            opacity: 0;
-            transform: translateX(-50px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-
-        @keyframes slideInRight {
-          from {
-            opacity: 0;
-            transform: translateX(50px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-
-        @keyframes fadeInRight {
-          from {
-            opacity: 0;
-            transform: translateX(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-
-        @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-15px);
-          }
-        }
-
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-
-        .bg-size-200 {
-          background-size: 200% 200%;
-        }
-
-        .bg-pos-100 {
-          background-position: 100% 100%;
-        }
-
-        @media (max-width: 640px) {
-          @keyframes slideInLeft {
-            from {
-              opacity: 0;
-              transform: translateY(-20px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-
-          @keyframes slideInRight {
-            from {
-              opacity: 0;
-              transform: translateY(20px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-        }
-      `}</style>
     </section>
   );
 }

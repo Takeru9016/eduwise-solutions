@@ -1,6 +1,9 @@
-import { Newspaper } from "lucide-react";
-import type { SanityPressFeature } from "@/components/common/FeaturedPressCarousel";
-import { FeaturedPressCarousel } from "@/components/common/FeaturedPressCarousel";
+import { ArrowUpRight, Newspaper } from "lucide-react";
+import Link from "next/link";
+
+import { PressLogoMarquee } from "@/components/common/PressLogoMarquee";
+import type { SanityPressFeature } from "@/components/press/PressCard";
+import { PressCard } from "@/components/press/PressCard";
 import { client } from "@/sanity/lib/client";
 import { PRESS_FEATURES_QUERY } from "@/sanity/lib/queries";
 
@@ -18,50 +21,61 @@ export default async function FeaturedPress() {
   // Empty state - no data
   if (pressFeatures.length === 0) {
     return (
-      <section className="relative overflow-hidden border-light-90 border-t bg-linear-to-b from-white via-light-99 to-light-97 py-16 md:py-24">
-        <div className="container mx-auto px-4 text-center">
-          <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-primary-99">
-            <Newspaper className="h-8 w-8 text-primary-75" />
+      <section className="bg-light-97 py-16 md:py-24">
+        <div className="container text-center">
+          <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full border-2 border-grey-15 bg-white">
+            <Newspaper className="h-8 w-8 text-grey-15" />
           </div>
-          <h2 className="mb-3 font-bold text-2xl text-dark-20 lg:text-3xl">
+          <h2 className="mb-3 font-black font-vietnam text-2xl text-grey-15 lg:text-3xl">
             Press Coverage Coming Soon
           </h2>
-          <p className="mx-auto mb-6 max-w-2xl text-dark-40 text-lg">
+          <p className="mx-auto mb-6 max-w-2xl text-grey-40 text-lg">
             We&apos;re actively working with leading media outlets. Featured
             articles and press coverage will be showcased here soon!
           </p>
-          <div className="inline-flex items-center gap-2 rounded-lg border border-light-90 bg-white px-4 py-2 text-dark-40 text-sm shadow-xs">
-            <Newspaper className="h-4 w-4 text-primary-75" />
-            <span>Building Media Presence</span>
-          </div>
         </div>
       </section>
     );
   }
 
-  return (
-    <section className="relative overflow-hidden bg-linear-to-b from-white via-light-99 to-light-97 py-16 md:py-24">
-      {/* Decorative background elements */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute top-20 left-10 h-96 w-96 rounded-full bg-primary-90 opacity-10 blur-3xl" />
-        <div className="absolute right-10 bottom-20 h-125 w-125 rounded-full bg-secondary-90 opacity-10 blur-3xl" />
-      </div>
+  const featured = pressFeatures.filter((f) => f.featured).slice(0, 3);
+  const highlightIds = new Set(featured.map((f) => f._id));
+  const logos = pressFeatures
+    .filter((f) => !highlightIds.has(f._id))
+    .map((f) => ({ logoUrl: f.publicationLogoUrl, name: f.publicationName }));
 
-      <div className="container relative mx-auto px-4">
-        {/* Section Header */}
+  return (
+    <section className="bg-light-97 py-16 md:py-24">
+      <div className="container">
         <div className="mb-12 text-center md:mb-16">
-          <h2 className="mb-4 font-bold text-3xl md:text-4xl lg:text-5xl">
-            Featured On{" "}
-            <span className="bg-linear-to-r from-primary-75 to-primary-90 bg-clip-text text-transparent">
-              Leading Media Platforms
-            </span>
+          <h2 className="mb-4 font-black font-vietnam text-3xl text-grey-15 tracking-tight md:text-4xl lg:text-5xl">
+            Featured On Leading Media Platforms
           </h2>
-          <p className="mx-auto max-w-2xl text-dark-40 text-lg">
-            Trusted and recognized by India&apos;s leading media outlets
+          <p className="mx-auto max-w-2xl text-grey-40 text-lg">
+            {pressFeatures.length}+ features and mentions across India&apos;s
+            leading publications
           </p>
         </div>
 
-        <FeaturedPressCarousel pressFeatures={pressFeatures} />
+        {featured.length > 0 && (
+          <div className="mb-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {featured.map((feature) => (
+              <PressCard feature={feature} key={feature._id} />
+            ))}
+          </div>
+        )}
+
+        {logos.length > 0 && <PressLogoMarquee logos={logos} />}
+
+        <div className="mt-12 text-center">
+          <Link
+            className="group inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-white px-6 py-3 font-bold text-grey-15 transition-transform hover:-translate-y-0.5"
+            href="/press"
+          >
+            View All Press Coverage
+            <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1" />
+          </Link>
+        </div>
       </div>
     </section>
   );

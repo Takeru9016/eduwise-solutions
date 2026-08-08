@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 import { Footer, Navbar, OurCourse } from "@/components";
 import type { SanityCourseListItem } from "@/components/courses/OurCourse";
@@ -27,7 +28,9 @@ export default async function CoursePage() {
     <>
       <Navbar />
       <main className="min-h-screen">
-        <OurCourse courses={courses} />
+        <Suspense fallback={null}>
+          <OurCourse courses={courses} />
+        </Suspense>
       </main>
       <Footer />
     </>

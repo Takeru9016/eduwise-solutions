@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  BookOpen,
+  Check,
   CheckCircle2,
   Loader2,
   Mail,
@@ -17,7 +17,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-// ─── Validation Schema ────────────────────────────────────────────────────────
 const schema = z.object({
   consent: z.boolean().refine((v) => v === true, {
     message: "You must agree to be contacted",
@@ -32,33 +31,23 @@ const schema = z.object({
 
 type FormValues = z.infer<typeof schema>;
 
-// ─── Props ────────────────────────────────────────────────────────────────────
 interface CourseLeadFormProps {
-  /** List of all course names for the dropdown */
-  courseOptions?: string[];
-  /** Pre-fill the course field with the current course title */
   courseTitle?: string;
 }
 
-// ─── Trust badges shown above the form ───────────────────────────────────────
 const TRUST_BADGES = [
   { icon: Users, label: "2,000+ Enrolled" },
   { icon: Shield, label: "100% Safe" },
   { icon: Zap, label: "Free Counselling" },
 ];
 
-// Extend Window to include LinkedIn Insight lintrk function
 declare global {
   interface Window {
     lintrk?: (action: string, params: { conversion_id: number }) => void;
   }
 }
 
-// ─── Main Component ───────────────────────────────────────────────────────────
-export default function CourseLeadForm({
-  courseTitle,
-  courseOptions = [],
-}: CourseLeadFormProps) {
+export default function CourseLeadForm({ courseTitle }: CourseLeadFormProps) {
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
@@ -67,6 +56,7 @@ export default function CourseLeadForm({
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
     reset,
   } = useForm<FormValues>({
@@ -79,6 +69,8 @@ export default function CourseLeadForm({
     },
     resolver: zodResolver(schema),
   });
+
+  const consentChecked = watch("consent");
 
   const onSubmit = async (data: FormValues) => {
     setStatus("loading");
@@ -102,7 +94,6 @@ export default function CourseLeadForm({
       }
 
       setStatus("success");
-      // Fire LinkedIn conversion event
       window.lintrk?.("track", { conversion_id: 26_490_044 });
       reset();
     } catch (err) {
@@ -111,23 +102,23 @@ export default function CourseLeadForm({
     }
   };
 
-  // ─── Success State ──────────────────────────────────────────────────────────
   if (status === "success") {
     return (
-      <div className="flex min-h-[420px] flex-col items-center justify-center gap-4 rounded-2xl border border-grey-90/30 bg-white p-8 text-center shadow-2xl">
-        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-50">
-          <CheckCircle2 className="h-9 w-9 text-green-500" />
+      <div className="flex min-h-105 flex-col items-center justify-center gap-4 rounded-3xl border-2 border-grey-15 bg-white p-8 text-center shadow-[4px_4px_0_0_var(--color-grey-15)]">
+        <div className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-grey-15 bg-primary-90">
+          <CheckCircle2 className="h-9 w-9 text-grey-15" />
         </div>
         <h3 className="font-bold font-vietnam text-2xl text-grey-15">
-          You&apos;re all set! 🎉
+          You&apos;re all set!
         </h3>
         <p className="max-w-xs text-grey-40 leading-relaxed">
           Our counselor will reach out to you within 24 hours. Check your
           WhatsApp &amp; email for updates.
         </p>
         <button
-          className="mt-2 font-semibold text-primary-75 text-sm hover:underline"
+          className="mt-2 font-bold text-primary-75 text-sm hover:underline"
           onClick={() => setStatus("idle")}
+          type="button"
         >
           Submit another enquiry
         </button>
@@ -135,100 +126,93 @@ export default function CourseLeadForm({
     );
   }
 
-  // ─── Form State ─────────────────────────────────────────────────────────────
   return (
-    <div className="overflow-hidden rounded-2xl border border-grey-90/30 bg-white shadow-2xl">
-      {/* Header bar */}
-      <div className="bg-linear-to-r from-primary-75 to-primary-90 px-6 py-4">
-        <p className="mb-0.5 font-semibold text-white/80 text-xs uppercase tracking-widest">
+    <div className="overflow-hidden rounded-3xl border-2 border-grey-15 bg-white shadow-[6px_6px_0_0_var(--color-grey-15)]">
+      <div className="bg-grey-15 px-7 py-6">
+        <p className="mb-1 font-bold text-primary-90 text-xs uppercase tracking-widest">
           Free Counselling Session
         </p>
-        <h3 className="font-bold font-vietnam text-white text-xl leading-snug">
+        <h3 className="font-bold font-vietnam text-2xl text-white leading-snug">
           Get A Free Career Counselling Session
         </h3>
       </div>
 
-      {/* Trust badges */}
-      <div className="grid grid-cols-3 divide-x divide-grey-90/40 border-grey-90/40 border-b bg-primary-99">
+      <div className="grid grid-cols-3 divide-x-2 divide-grey-15/10 border-grey-15/10 border-b bg-primary-99">
         {TRUST_BADGES.map(({ icon: Icon, label }) => (
           <div
-            className="flex flex-col items-center gap-1 px-2 py-3 text-center"
+            className="flex flex-col items-center gap-1.5 px-2 py-4 text-center"
             key={label}
           >
-            <Icon className="h-4 w-4 text-primary-75" />
-            <span className="font-semibold text-[10px] text-grey-35 leading-tight sm:text-xs">
+            <Icon className="h-5 w-5 text-primary-75" />
+            <span className="font-bold text-grey-35 text-xs leading-tight sm:text-sm">
               {label}
             </span>
           </div>
         ))}
       </div>
 
-      {/* Form body */}
       <form
-        className="space-y-4 px-6 py-5"
+        className="space-y-5 px-7 py-7"
         noValidate
         onSubmit={handleSubmit(onSubmit)}
       >
-        {/* Full Name */}
         <div>
           <div className="relative">
-            <User className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-grey-50" />
+            <User className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 text-grey-40" />
             <input
               {...register("name")}
-              className={`h-12 w-full rounded-xl border bg-light-97 pr-4 pl-10 text-grey-15 text-sm transition-all placeholder:text-grey-50 focus:outline-hidden focus:ring-2 ${
+              className={`h-14 w-full rounded-xl border-2 bg-light-97 pr-4 pl-12 text-base text-grey-15 transition-all placeholder:text-grey-40 focus:outline-hidden ${
                 errors.name
-                  ? "border-red-400 focus:ring-red-200"
-                  : "border-grey-80 focus:border-primary-75 focus:ring-primary-90/30"
+                  ? "border-red-400"
+                  : "border-grey-15/20 focus:border-primary-75"
               }`}
               placeholder="Enter your full name"
               type="text"
             />
           </div>
           {errors.name && (
-            <p className="mt-1 flex items-center gap-1 text-red-500 text-xs">
+            <p className="mt-1.5 flex items-center gap-1 text-red-500 text-xs">
               <XCircle className="h-3 w-3" />
               {errors.name.message}
             </p>
           )}
         </div>
 
-        {/* Email */}
         <div>
           <div className="relative">
-            <Mail className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-grey-50" />
+            <Mail className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 text-grey-40" />
             <input
               {...register("email")}
-              className={`h-12 w-full rounded-xl border bg-light-97 pr-4 pl-10 text-grey-15 text-sm transition-all placeholder:text-grey-50 focus:outline-hidden focus:ring-2 ${
+              className={`h-14 w-full rounded-xl border-2 bg-light-97 pr-4 pl-12 text-base text-grey-15 transition-all placeholder:text-grey-40 focus:outline-hidden ${
                 errors.email
-                  ? "border-red-400 focus:ring-red-200"
-                  : "border-grey-80 focus:border-primary-75 focus:ring-primary-90/30"
+                  ? "border-red-400"
+                  : "border-grey-15/20 focus:border-primary-75"
               }`}
               placeholder="Enter your email"
               type="email"
             />
           </div>
           {errors.email && (
-            <p className="mt-1 flex items-center gap-1 text-red-500 text-xs">
+            <p className="mt-1.5 flex items-center gap-1 text-red-500 text-xs">
               <XCircle className="h-3 w-3" />
               {errors.email.message}
             </p>
           )}
         </div>
 
-        {/* Mobile — with +91 prefix chip */}
         <div>
           <div className="relative flex">
-            <span className="inline-flex h-12 shrink-0 select-none items-center gap-1.5 rounded-l-xl border border-grey-80 border-r-0 bg-grey-95 px-3 font-semibold text-grey-35 text-sm">
-              🇮🇳 +91
+            <span className="inline-flex h-14 shrink-0 select-none items-center rounded-l-xl border-2 border-grey-15/20 border-r-0 bg-light-95 px-4 font-bold text-base text-grey-35">
+              +91
             </span>
             <div className="relative flex-1">
-              <Phone className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-grey-50" />
+              <Phone className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 text-grey-40" />
               <input
                 {...register("mobile")}
-                className={`h-12 w-full rounded-r-xl border bg-light-97 pr-4 pl-10 text-grey-15 text-sm transition-all placeholder:text-grey-50 focus:outline-hidden focus:ring-2 ${
+                className={`h-14 w-full rounded-r-xl border-2 bg-light-97 pr-4 pl-12 text-base text-grey-15 transition-all placeholder:text-grey-40 focus:outline-hidden ${
                   errors.mobile
-                    ? "border-red-400 focus:ring-red-200"
-                    : "border-grey-80 focus:border-primary-75 focus:ring-primary-90/30"
+                    ? "border-red-400"
+                    : "border-grey-15/20 focus:border-primary-75"
                 }`}
                 maxLength={10}
                 placeholder="Enter your mobile number"
@@ -237,82 +221,33 @@ export default function CourseLeadForm({
             </div>
           </div>
           {errors.mobile && (
-            <p className="mt-1 flex items-center gap-1 text-red-500 text-xs">
+            <p className="mt-1.5 flex items-center gap-1 text-red-500 text-xs">
               <XCircle className="h-3 w-3" />
               {errors.mobile.message}
             </p>
           )}
         </div>
 
-        {/* Course dropdown — only shown when multiple courses available */}
-        {courseOptions.length > 1 && (
-          <div>
-            <div className="relative">
-              <BookOpen className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-grey-50" />
-              <select
-                {...register("course")}
-                className={`h-12 w-full cursor-pointer appearance-none rounded-xl border bg-light-97 pr-10 pl-10 text-grey-15 text-sm transition-all focus:outline-hidden focus:ring-2 ${
-                  errors.course
-                    ? "border-red-400 focus:ring-red-200"
-                    : "border-grey-80 focus:border-primary-75 focus:ring-primary-90/30"
-                }`}
-              >
-                <option value="">Select a course*</option>
-                {courseOptions.map((c) => (
-                  <option key={c} value={c}>
-                    {c}
-                  </option>
-                ))}
-              </select>
-              {/* Custom caret */}
-              <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
-                <svg
-                  className="h-4 w-4 text-grey-50"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M19 9l-7 7-7-7"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                  />
-                </svg>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Consent checkbox */}
         <div>
           <label className="group flex cursor-pointer items-start gap-3">
             <div className="relative mt-0.5 shrink-0">
               <input
                 {...register("consent")}
-                className="peer sr-only"
+                className="sr-only"
                 type="checkbox"
               />
               <div
                 className={`flex h-5 w-5 items-center justify-center rounded border-2 transition-all ${
                   errors.consent
                     ? "border-red-400"
-                    : "border-grey-70 peer-checked:border-primary-75 peer-checked:bg-primary-75"
+                    : consentChecked
+                      ? "border-primary-75 bg-primary-75"
+                      : "border-grey-15/30"
                 } group-hover:border-primary-75`}
               >
-                <svg
-                  className="hidden h-3 w-3 text-white peer-checked:block"
-                  fill="none"
-                  viewBox="0 0 12 10"
-                >
-                  <path
-                    d="M1 5l3.5 3.5L11 1"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                  />
-                </svg>
+                {consentChecked && (
+                  <Check className="h-3 w-3 text-white" strokeWidth={3} />
+                )}
               </div>
             </div>
             <span className="text-grey-40 text-xs leading-relaxed">
@@ -329,23 +264,21 @@ export default function CourseLeadForm({
           )}
         </div>
 
-        {/* Server error */}
         {status === "error" && (
-          <div className="flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-red-600 text-sm">
+          <div className="flex items-center gap-2 rounded-lg border-2 border-red-400 bg-red-50 px-3 py-2 text-red-600 text-sm">
             <XCircle className="h-4 w-4 shrink-0" />
             {errorMsg}
           </div>
         )}
 
-        {/* Submit button */}
         <button
-          className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-linear-to-r from-primary-75 to-primary-90 font-bold font-vietnam text-sm text-white tracking-wide shadow-lg shadow-primary-75/25 transition-all duration-200 hover:scale-[1.02] hover:shadow-primary-75/30 hover:shadow-xl active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
+          className="flex h-14 w-full items-center justify-center gap-2 rounded-full border-2 border-grey-15 bg-primary-75 font-bold font-vietnam text-base text-grey-15 tracking-wide transition-all duration-200 hover:bg-primary-90 disabled:cursor-not-allowed disabled:opacity-60"
           disabled={status === "loading"}
           type="submit"
         >
           {status === "loading" ? (
             <>
-              <Loader2 className="h-4 w-4 animate-spin" />
+              <Loader2 className="h-5 w-5 animate-spin" />
               Submitting...
             </>
           ) : (
@@ -353,8 +286,8 @@ export default function CourseLeadForm({
           )}
         </button>
 
-        <p className="text-center text-[10px] text-grey-50">
-          🔒 Your information is 100% secure and will never be shared.
+        <p className="text-center text-grey-40 text-xs">
+          Your information is 100% secure and will never be shared.
         </p>
       </form>
     </div>

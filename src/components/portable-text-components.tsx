@@ -13,49 +13,47 @@ export const portableTextComponents: PortableTextComponents = {
   block: {
     // Blockquote
     blockquote: ({ children }) => (
-      <blockquote className="my-6 border-primary-75 border-l-4 bg-slate-50 py-4 pr-4 pl-6 text-slate-700 italic">
+      <blockquote className="my-6 border-primary-75 border-l-4 bg-light-95 py-4 pr-4 pl-6 text-grey-35 italic">
         {children}
       </blockquote>
     ),
     // Headings
     h1: ({ children }) => (
-      <h1 className="mt-12 mb-6 font-bold text-4xl text-slate-900 first:mt-0">
+      <h1 className="mt-12 mb-6 font-black font-vietnam text-4xl text-grey-15 first:mt-0">
         {children}
       </h1>
     ),
     h2: ({ children }) => (
-      <h2 className="mt-10 mb-5 font-bold text-3xl text-slate-900 first:mt-0">
+      <h2 className="mt-10 mb-5 font-black font-vietnam text-3xl text-grey-15 first:mt-0">
         {children}
       </h2>
     ),
     h3: ({ children }) => (
-      <h3 className="mt-8 mb-4 font-semibold text-2xl text-slate-900 first:mt-0">
+      <h3 className="mt-8 mb-4 font-bold font-vietnam text-2xl text-grey-15 first:mt-0">
         {children}
       </h3>
     ),
     h4: ({ children }) => (
-      <h4 className="mt-6 mb-3 font-semibold text-slate-900 text-xl first:mt-0">
+      <h4 className="mt-6 mb-3 font-bold font-vietnam text-grey-15 text-xl first:mt-0">
         {children}
       </h4>
     ),
     // Normal paragraph
     normal: ({ children }) => (
-      <p className="mb-4 text-base text-slate-700 leading-relaxed">
-        {children}
-      </p>
+      <p className="mb-4 text-base text-grey-35 leading-relaxed">{children}</p>
     ),
   },
 
   list: {
     // Bullet list
     bullet: ({ children }) => (
-      <ul className="mb-6 ml-6 list-outside list-disc space-y-2 text-slate-700">
+      <ul className="mb-6 ml-6 list-outside list-disc space-y-2 text-grey-35">
         {children}
       </ul>
     ),
     // Numbered list
     number: ({ children }) => (
-      <ol className="mb-6 ml-6 list-outside list-decimal space-y-2 text-slate-700">
+      <ol className="mb-6 ml-6 list-outside list-decimal space-y-2 text-grey-35">
         {children}
       </ol>
     ),
@@ -73,7 +71,7 @@ export const portableTextComponents: PortableTextComponents = {
   marks: {
     // Inline code
     code: ({ children }) => (
-      <code className="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-primary-75 text-sm">
+      <code className="rounded bg-light-95 px-1.5 py-0.5 font-mono text-primary-75 text-sm">
         {children}
       </code>
     ),
@@ -86,7 +84,7 @@ export const portableTextComponents: PortableTextComponents = {
 
       return (
         <Link
-          className="text-primary-75 underline decoration-primary-75/30 transition-colors hover:text-primary-100 hover:decoration-primary-100"
+          className="text-primary-75 underline decoration-primary-75/30 transition-colors hover:text-primary-50 hover:decoration-primary-50"
           href={href}
           rel={isExternal ? "noopener noreferrer" : undefined}
           target={isExternal ? "_blank" : undefined}
@@ -97,11 +95,11 @@ export const portableTextComponents: PortableTextComponents = {
     },
     // Strike-through
     "strike-through": ({ children }) => (
-      <span className="text-slate-500 line-through">{children}</span>
+      <span className="text-grey-40 line-through">{children}</span>
     ),
     // Strong (bold)
     strong: ({ children }) => (
-      <strong className="font-bold text-slate-900">{children}</strong>
+      <strong className="font-bold text-grey-15">{children}</strong>
     ),
     // Underline
     underline: ({ children }) => <span className="underline">{children}</span>,
@@ -152,7 +150,7 @@ export const portableTextComponents: PortableTextComponents = {
             />
           </div>
           {value.alt && (
-            <figcaption className="mt-2 text-center text-slate-600 text-sm italic">
+            <figcaption className="mt-2 text-center text-grey-40 text-sm italic">
               {value.alt}
             </figcaption>
           )}
@@ -167,17 +165,17 @@ export const portableTextComponents: PortableTextComponents = {
       }
 
       return (
-        <div className="my-8 overflow-x-auto">
-          <table className="min-w-full border-collapse border border-slate-300">
+        <div className="my-8 overflow-x-auto rounded-xl border-2 border-grey-15">
+          <table className="min-w-full border-collapse">
             <tbody>
               {value.rows.map((row: TableRow, rowIndex: number) => (
                 <tr
-                  className={rowIndex % 2 === 0 ? "bg-white" : "bg-slate-50"}
+                  className={rowIndex % 2 === 0 ? "bg-white" : "bg-light-95"}
                   key={rowIndex}
                 >
                   {row.cells?.map((cell: string, cellIndex: number) => (
                     <td
-                      className="border border-slate-300 px-4 py-3 text-slate-700 text-sm"
+                      className="border-grey-15/10 border-t px-4 py-3 text-grey-35 text-sm"
                       key={cellIndex}
                     >
                       {cell}

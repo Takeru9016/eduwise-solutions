@@ -5,6 +5,7 @@ export const POSTS_QUERY = `
     slug,
     publishedAt,
     mainImage,
+    "excerpt": pt::text(body[0...1]),
     "categories": categories[]-> { _id, title, slug },
     "author": author-> { _id, name, image }
   }
@@ -18,6 +19,24 @@ export const POST_BY_SLUG_QUERY = `
     publishedAt,
     mainImage,
     body,
+    "categories": categories[]-> { _id, title, slug },
+    "author": author-> { _id, name, image }
+  }
+`;
+
+export const RELATED_POSTS_QUERY = `
+  *[
+    _type == "post" &&
+    defined(slug.current) &&
+    slug.current != $slug &&
+    count((categories[]->_id)[@ in $categoryIds]) > 0
+  ] | order(publishedAt desc)[0...3]{
+    _id,
+    title,
+    slug,
+    publishedAt,
+    mainImage,
+    "excerpt": pt::text(body[0...1]),
     "categories": categories[]-> { _id, title, slug },
     "author": author-> { _id, name, image }
   }

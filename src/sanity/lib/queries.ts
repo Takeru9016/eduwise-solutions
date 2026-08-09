@@ -263,7 +263,6 @@ export const PRICING_QUERY = `
     slug,
     subtitle,
     category,
-    emoji,
     duration,
     price,
     originalPrice,

@@ -8,11 +8,7 @@ import {
   Building,
   CheckCircle,
   Clock,
-  Compass,
   GraduationCap,
-  HeartHandshake,
-  Phone,
-  ShieldCheck,
   Sparkles,
   Users,
 } from "lucide-react";
@@ -162,96 +158,6 @@ function CourseCard({
         </Link>
       </div>
     </div>
-  );
-}
-
-function BottomCTA() {
-  const trustPoints = [
-    { icon: ShieldCheck, label: "Free Consultation" },
-    { icon: HeartHandshake, label: "No Commitment" },
-    { icon: Sparkles, label: "Personalized Guidance" },
-  ];
-
-  return (
-    <section className="bg-light-97 py-12 sm:py-16 lg:py-20">
-      <div className="container">
-        <div className="rounded-3xl border-2 border-grey-15 bg-primary-75 p-6 shadow-[8px_8px_0_0_var(--color-grey-15)] sm:p-10 lg:p-14">
-          <div className="grid items-center gap-8 lg:grid-cols-5 lg:gap-12">
-            {/* Left content — takes 3 cols */}
-            <div className="text-center lg:col-span-3 lg:text-left">
-              <div className="mb-5 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-white px-4 py-2 font-semibold text-grey-15 text-xs sm:text-sm">
-                <Compass className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                Need Help Choosing?
-              </div>
-
-              <h2 className="mb-3 font-black font-vietnam text-2xl text-grey-15 leading-tight sm:mb-4 sm:text-3xl lg:text-4xl">
-                Not sure which program is right for you?
-              </h2>
-
-              <p className="mx-auto mb-6 max-w-lg text-grey-20 text-sm leading-relaxed sm:mb-8 sm:text-base lg:mx-0 lg:text-lg">
-                Our career counselors will understand your background, goals,
-                and interests to recommend the perfect learning path for you.
-              </p>
-
-              <div className="flex flex-col items-center justify-center gap-4 sm:flex-row lg:justify-start">
-                <Link
-                  className="group inline-flex w-full items-center justify-center gap-2.5 rounded-full border-2 border-grey-15 bg-grey-15 px-6 py-3.5 font-bold text-sm text-white transition-transform hover:-translate-y-0.5 sm:w-auto sm:px-8 sm:text-base"
-                  href="/contact"
-                >
-                  <Phone className="h-4 w-4 sm:h-5 sm:w-5" />
-                  Talk to Our Counselor
-                  <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1 sm:h-5 sm:w-5" />
-                </Link>
-                <span className="text-grey-20 text-xs sm:text-sm">
-                  Response within 24 hours
-                </span>
-              </div>
-            </div>
-
-            {/* Right side — stat highlights + trust badges */}
-            <div className="space-y-4 sm:space-y-5 lg:col-span-2">
-              <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                <div className="rounded-2xl border-2 border-grey-15 bg-white p-4 text-center sm:p-5">
-                  <p className="mb-1 font-black font-vietnam text-2xl text-grey-15 sm:text-3xl">
-                    6K+
-                  </p>
-                  <p className="text-grey-40 text-xs sm:text-sm">
-                    Students Counseled
-                  </p>
-                </div>
-                <div className="rounded-2xl border-2 border-grey-15 bg-white p-4 text-center sm:p-5">
-                  <p className="mb-1 font-black font-vietnam text-2xl text-grey-15 sm:text-3xl">
-                    95%
-                  </p>
-                  <p className="text-grey-40 text-xs sm:text-sm">
-                    Satisfaction Rate
-                  </p>
-                </div>
-              </div>
-
-              <div className="space-y-2.5 sm:space-y-3">
-                {trustPoints.map((point) => {
-                  const TrustIcon = point.icon;
-                  return (
-                    <div
-                      className="flex items-center gap-3 rounded-full border-2 border-grey-15 bg-white px-4 py-3"
-                      key={point.label}
-                    >
-                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-grey-15 bg-primary-99 sm:h-9 sm:w-9">
-                        <TrustIcon className="h-4 w-4 text-grey-15 sm:h-4.5 sm:w-4.5" />
-                      </div>
-                      <span className="font-semibold text-grey-15 text-sm sm:text-base">
-                        {point.label}
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   );
 }
 
@@ -427,9 +333,6 @@ export default function CoursesPage({ courses }: OurCourseProps) {
           )}
         </div>
       </section>
-
-      {/* Bottom CTA */}
-      <BottomCTA />
     </main>
   );
 }

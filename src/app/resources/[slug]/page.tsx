@@ -54,11 +54,11 @@ export default async function ResourceDetail({ params }: PageProps) {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-linear-to-b from-primary-99 to-white">
-        <section className="container mx-auto grid max-w-5xl grid-cols-1 items-center gap-10 px-4 py-16 sm:py-20 lg:grid-cols-2">
+      <main className="min-h-screen bg-grey-15">
+        <section className="container grid grid-cols-1 items-center gap-10 py-16 sm:py-20 lg:grid-cols-2 lg:gap-14 lg:py-28">
           <div>
             {resource.coverImageUrl && (
-              <div className="relative mb-6 aspect-video overflow-hidden rounded-2xl shadow-lg">
+              <div className="relative mb-6 aspect-video overflow-hidden rounded-2xl border-2 border-white/15">
                 <Image
                   alt={resource.title}
                   className="object-cover"
@@ -68,10 +68,12 @@ export default async function ResourceDetail({ params }: PageProps) {
                 />
               </div>
             )}
-            <h1 className="mb-4 font-bold font-vietnam text-3xl text-grey-15 leading-tight sm:text-4xl">
+            <h1 className="mb-4 font-black font-vietnam text-3xl text-white leading-tight sm:text-4xl">
               {resource.title}
             </h1>
-            <p className="text-grey-40 text-lg">{resource.description}</p>
+            <p className="text-grey-70 text-lg leading-relaxed">
+              {resource.description}
+            </p>
           </div>
 
           <ResourceGateForm

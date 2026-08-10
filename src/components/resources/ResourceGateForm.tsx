@@ -5,6 +5,7 @@ import {
   CheckCircle2,
   DownloadCloud,
   Loader2,
+  Lock,
   Mail,
   User,
   XCircle,
@@ -12,8 +13,6 @@ import {
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-
-import { Button } from "@/components/ui/button";
 
 const gateSchema = z.object({
   email: z.string().email("Enter a valid email address"),
@@ -75,57 +74,56 @@ export default function ResourceGateForm({
 
   if (status === "success") {
     return (
-      <div className="flex flex-col items-center gap-4 rounded-2xl border border-grey-90/30 bg-white p-8 text-center shadow-2xl">
-        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-50">
-          <CheckCircle2 className="h-9 w-9 text-green-500" />
+      <div className="flex flex-col items-center gap-4 rounded-3xl border-2 border-grey-15 bg-white p-8 text-center shadow-[6px_6px_0_0_var(--color-grey-15)]">
+        <div className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-grey-15 bg-primary-90">
+          <CheckCircle2 className="h-9 w-9 text-grey-15" />
         </div>
         <h3 className="font-bold font-vietnam text-2xl text-grey-15">
-          You're all set! 🎉
+          You&apos;re all set!
         </h3>
         <p className="max-w-xs text-grey-40 leading-relaxed">
-          We've emailed your guide to you. You can also download it directly
-          below.
+          We&apos;ve emailed your guide to you. You can also download it
+          directly below.
         </p>
-        <Button asChild size="lg">
-          <a
-            download
-            href={downloadUrl}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <DownloadCloud className="mr-2 h-4 w-4" />
-            Download Now
-          </a>
-        </Button>
+        <a
+          className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full border-2 border-grey-15 bg-primary-75 font-bold text-grey-15 transition-colors hover:bg-primary-90"
+          download
+          href={downloadUrl}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <DownloadCloud className="h-4 w-4" />
+          Download Now
+        </a>
       </div>
     );
   }
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-grey-90/30 bg-white shadow-2xl">
-      <div className="bg-linear-to-r from-primary-75 to-primary-90 px-6 py-4">
-        <p className="mb-0.5 font-semibold text-white/80 text-xs uppercase tracking-widest">
+    <div className="overflow-hidden rounded-3xl border-2 border-grey-15 bg-white shadow-[6px_6px_0_0_var(--color-grey-15)]">
+      <div className="bg-grey-15 px-7 py-6">
+        <p className="mb-1 font-bold text-primary-90 text-xs uppercase tracking-widest">
           Free Download
         </p>
-        <h3 className="font-bold font-vietnam text-white text-xl leading-snug">
-          Get "{resourceTitle}"
+        <h3 className="font-bold font-vietnam text-2xl text-white leading-snug">
+          Get &ldquo;{resourceTitle}&rdquo;
         </h3>
       </div>
 
       <form
-        className="space-y-4 px-6 py-5"
+        className="space-y-4 px-7 py-7"
         noValidate
         onSubmit={handleSubmit(onSubmit)}
       >
         <div>
           <div className="relative">
-            <User className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-grey-50" />
+            <User className="absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-grey-40" />
             <input
               {...register("name")}
-              className={`h-12 w-full rounded-xl border bg-light-97 pr-4 pl-10 text-grey-15 text-sm transition-all placeholder:text-grey-50 focus:outline-hidden focus:ring-2 ${
+              className={`h-12 w-full rounded-xl border-2 bg-light-97 pr-4 pl-11 text-grey-15 text-sm transition-all placeholder:text-grey-40 focus:outline-hidden ${
                 errors.name
-                  ? "border-red-400 focus:ring-red-200"
-                  : "border-grey-80 focus:border-primary-75 focus:ring-primary-90/30"
+                  ? "border-red-400"
+                  : "border-grey-15/20 focus:border-primary-75"
               }`}
               placeholder="Enter your full name"
               type="text"
@@ -141,13 +139,13 @@ export default function ResourceGateForm({
 
         <div>
           <div className="relative">
-            <Mail className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-grey-50" />
+            <Mail className="absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-grey-40" />
             <input
               {...register("email")}
-              className={`h-12 w-full rounded-xl border bg-light-97 pr-4 pl-10 text-grey-15 text-sm transition-all placeholder:text-grey-50 focus:outline-hidden focus:ring-2 ${
+              className={`h-12 w-full rounded-xl border-2 bg-light-97 pr-4 pl-11 text-grey-15 text-sm transition-all placeholder:text-grey-40 focus:outline-hidden ${
                 errors.email
-                  ? "border-red-400 focus:ring-red-200"
-                  : "border-grey-80 focus:border-primary-75 focus:ring-primary-90/30"
+                  ? "border-red-400"
+                  : "border-grey-15/20 focus:border-primary-75"
               }`}
               placeholder="Enter your email"
               type="email"
@@ -162,33 +160,33 @@ export default function ResourceGateForm({
         </div>
 
         {status === "error" && (
-          <div className="flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-red-600 text-sm">
+          <div className="flex items-center gap-2 rounded-lg border-2 border-red-400 bg-red-50 px-3 py-2 text-red-600 text-sm">
             <XCircle className="h-4 w-4 shrink-0" />
             {errorMsg}
           </div>
         )}
 
-        <Button
-          className="w-full"
+        <button
+          className="flex h-12 w-full items-center justify-center gap-2 rounded-full border-2 border-grey-15 bg-primary-75 font-bold text-grey-15 text-sm transition-colors hover:bg-primary-90 disabled:cursor-not-allowed disabled:opacity-60"
           disabled={status === "loading"}
-          size="lg"
           type="submit"
         >
           {status === "loading" ? (
             <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              <Loader2 className="h-4 w-4 animate-spin" />
               Sending...
             </>
           ) : (
             <>
-              <DownloadCloud className="mr-2 h-4 w-4" />
+              <DownloadCloud className="h-4 w-4" />
               Send Me the Guide
             </>
           )}
-        </Button>
+        </button>
 
-        <p className="text-center text-[10px] text-grey-50">
-          🔒 Your information is 100% secure and will never be shared.
+        <p className="flex items-center justify-center gap-1.5 text-center text-grey-40 text-xs">
+          <Lock className="h-3 w-3" />
+          Your information is 100% secure and will never be shared.
         </p>
       </form>
     </div>

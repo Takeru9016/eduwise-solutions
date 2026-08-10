@@ -49,11 +49,10 @@ export default async function FeaturedPress() {
       <div className="container">
         <div className="mb-12 text-center md:mb-16">
           <h2 className="mb-4 font-black font-vietnam text-3xl text-grey-15 tracking-tight md:text-4xl lg:text-5xl">
-            Featured On Leading Media Platforms
+            As Seen In
           </h2>
           <p className="mx-auto max-w-2xl text-grey-40 text-lg">
-            {pressFeatures.length}+ features and mentions across India&apos;s
-            leading publications
+            {pressFeatures.length}+ mentions across Indian publications
           </p>
         </div>
 

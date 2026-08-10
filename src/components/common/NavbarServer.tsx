@@ -12,7 +12,7 @@ export interface SanityCourseNav {
 }
 
 // Build the same shape getCategoriesWithCourses() returned, but from Sanity data
-// IMPORTANT: Do NOT include Lucide icon components — they cannot cross the server→client boundary.
+// IMPORTANT: Do NOT include Lucide icon components - they cannot cross the server→client boundary.
 // Navbar.tsx resolves each category's icon client-side via CATEGORIES.find(id).
 function buildCategoriesWithCourses(courses: SanityCourseNav[]) {
   return CATEGORIES.map((cat) => ({

@@ -58,7 +58,7 @@ export async function generateMetadata({
   }
 
   const description = post.categories?.length
-    ? `${post.title} — ${post.categories.map((c) => c.title).join(", ")} | Eduwise Solutions`
+    ? `${post.title} - ${post.categories.map((c) => c.title).join(", ")} | Eduwise Solutions`
     : post.title;
 
   return {

@@ -10,7 +10,7 @@ import { PRESS_FEATURES_QUERY } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
   description:
-    "Eduwise Solutions in the news — browse every feature, mention, and article across India's leading media platforms.",
+    "Eduwise Solutions in the news - browse every feature, mention, and article across India's leading media platforms.",
   title: "Press Coverage",
 };
 

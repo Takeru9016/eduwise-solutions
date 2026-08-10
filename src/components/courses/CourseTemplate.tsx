@@ -455,7 +455,7 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
           </section>
         )}
 
-        {/* CURRICULUM — OPEN ROADMAP */}
+        {/* CURRICULUM - OPEN ROADMAP */}
         <section>
           <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
             <h2 className="font-black font-vietnam text-2xl text-grey-15 sm:text-3xl">
@@ -658,7 +658,7 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
               Program Investment
             </h2>
             <p className="mt-2 text-grey-40">
-              Best value in the market with everything you need to succeed.
+              One-time payment, transparent pricing, no hidden fees.
             </p>
           </div>
           <div className="mx-auto max-w-3xl">
@@ -710,7 +710,6 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
                     </h4>
                     {career.salary && (
                       <div className="flex items-center gap-1.5">
-                        <IndianRupee className="h-4 w-4 text-grey-40" />
                         <p className="font-bold text-grey-15">
                           {career.salary}
                         </p>
@@ -758,9 +757,7 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
               ))}
             </Accordion>
             <div className="mt-8 text-center">
-              <p className="mb-4 text-grey-40">
-                Still have questions? We&apos;re here to help!
-              </p>
+              <p className="mb-4 text-grey-40">Still have questions?</p>
               <Link
                 className="inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-75 px-6 py-3 font-bold text-grey-15 transition-colors hover:bg-primary-90"
                 href="/contact"
@@ -786,14 +783,17 @@ function PricingCard({
   onEnroll: () => void;
   saving: number;
 }) {
+  const hasDiscount = course.originalPrice > course.price;
+  const hasSaving = saving > 0;
+
   return (
     <div className="overflow-hidden rounded-3xl border-2 border-grey-15 shadow-[6px_6px_0_0_var(--color-grey-15)] md:grid md:grid-cols-[1fr_1.2fr]">
-      {/* Left — price panel */}
+      {/* Left - price panel */}
       <div className="relative flex flex-col justify-center bg-grey-15 p-8 sm:p-10">
         {discount > 0 && (
           <span className="mb-6 inline-flex w-fit items-center gap-1.5 rounded-full border-2 border-grey-15 bg-gold px-4 py-1.5 font-bold text-grey-15 text-xs">
             <Sparkles className="h-3 w-3" />
-            {discount}% OFF — Limited Seats
+            {discount}% OFF - Limited Seats
           </span>
         )}
         <p className="mb-2 font-bold text-primary-90 text-xs uppercase tracking-wider">
@@ -802,12 +802,12 @@ function PricingCard({
         <p className="font-black font-vietnam text-5xl text-white">
           ₹{course.price.toLocaleString("en-IN")}
         </p>
-        {course.originalPrice > course.price && (
+        {hasDiscount && (
           <p className="mt-2 text-lg text-white/50 line-through">
             ₹{course.originalPrice.toLocaleString("en-IN")}
           </p>
         )}
-        {saving > 0 && (
+        {hasSaving && (
           <p className="mt-4 font-bold text-primary-90 text-sm">
             You save ₹{saving.toLocaleString("en-IN")}
           </p>
@@ -820,7 +820,7 @@ function PricingCard({
         )}
       </div>
 
-      {/* Right — inclusions + CTA */}
+      {/* Right - inclusions + CTA */}
       <div className="bg-white p-8 sm:p-10">
         {course.whatsIncluded && course.whatsIncluded.length > 0 && (
           <div className="mb-6">

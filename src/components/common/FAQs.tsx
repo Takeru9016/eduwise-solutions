@@ -25,7 +25,7 @@ interface FAQ {
 const HOMEPAGE_FAQS: FAQ[] = [
   {
     answer:
-      "Eduwise Solutions is a platform that connects learners with the best educational opportunities in the ed-tech world. We offer counseling services and discounts on a variety of professional courses.",
+      "A Bengaluru-based training platform with 17+ mentor-led programs across development, AI & data, cloud, design, and business. We also run career counseling and placement support for enrolled students.",
     question: "What is Eduwise Solutions?",
   },
   {
@@ -35,7 +35,7 @@ const HOMEPAGE_FAQS: FAQ[] = [
   },
   {
     answer:
-      "Absolutely! Our professional programs are designed to let you balance work and studies.",
+      "Yes. Our professional programs are designed to let you balance work and studies.",
     question: "Can I earn while learning?",
   },
   {

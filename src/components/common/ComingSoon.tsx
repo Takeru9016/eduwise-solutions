@@ -195,7 +195,7 @@ export default function ComingSoonPage() {
             <p className="mb-8 text-grey-60 text-lg leading-relaxed md:text-xl">
               To become a trusted career-launch platform that transforms the
               lives of graduates by making job readiness accessible, practical,
-              and result-driven—one job at a time.
+              and result-driven-one job at a time.
             </p>
             <div className="mt-8 flex flex-row items-center justify-center gap-4">
               {/* Primary filled button */}

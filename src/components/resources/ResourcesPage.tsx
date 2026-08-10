@@ -42,7 +42,7 @@ export default function ResourcesPage({ resources }: ResourcesPageProps) {
             </h1>
 
             <p className="mx-auto max-w-2xl px-2 text-grey-40 text-lg leading-relaxed">
-              Download our free, practical guides — no strings attached beyond
+              Download our free, practical guides - no strings attached beyond
               your email.
             </p>
           </div>
@@ -99,7 +99,7 @@ export default function ResourcesPage({ resources }: ResourcesPageProps) {
           ) : (
             <div className="rounded-2xl border-2 border-grey-15 bg-light-97 py-16 text-center">
               <p className="text-grey-40 text-lg">
-                New guides are on the way — check back soon.
+                New guides are on the way - check back soon.
               </p>
             </div>
           )}

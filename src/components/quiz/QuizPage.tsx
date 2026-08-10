@@ -440,7 +440,7 @@ export default function QuizPage({ courses }: QuizPageProps) {
             ) : (
               <div className="rounded-2xl border-2 border-grey-15 bg-white p-8 text-center shadow-[4px_4px_0_0_var(--color-grey-15)]">
                 <p className="text-grey-40">
-                  We couldn&apos;t find a perfect match yet — explore all our
+                  We couldn&apos;t find a perfect match yet - explore all our
                   programs instead.
                 </p>
               </div>

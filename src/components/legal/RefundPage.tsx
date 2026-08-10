@@ -546,7 +546,7 @@ function DevOpsRefundPolicy() {
               Exclusive Offer
             </div>
             <h2 className="mb-3 font-black font-vietnam text-2xl text-grey-15 sm:text-3xl lg:text-4xl">
-              DevOps — 100% Fee Refund Guarantee
+              DevOps - 100% Fee Refund Guarantee
             </h2>
             <p className="max-w-2xl text-grey-40 leading-relaxed">
               Complete the program successfully and qualify for a full refund if

@@ -42,7 +42,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
         value: "business",
       },
       {
-        label: "Not sure yet — I just want a solid, job-ready skill",
+        label: "Not sure yet - I just want a solid, job-ready skill",
         scores: { career: 2 },
         value: "career",
       },
@@ -111,7 +111,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     id: "timeline",
     options: [
       {
-        label: "ASAP — I need a job as soon as possible",
+        label: "ASAP - I need a job as soon as possible",
         scores: { career: 1 },
         value: "urgent",
       },

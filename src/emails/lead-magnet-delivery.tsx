@@ -82,7 +82,7 @@ export default function LeadMagnetDeliveryEmail({
 
           <Text style={{ color: "#666", fontSize: "14px", lineHeight: "1.6" }}>
             Have questions after reading it? Reply to this email or reach out to
-            our team — we're happy to help you figure out the right next step in
+            our team - we're happy to help you figure out the right next step in
             your career.
           </Text>
 

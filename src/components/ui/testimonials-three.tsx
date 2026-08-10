@@ -97,8 +97,7 @@ export function TestimonialsThree({
             What Our Students Say
           </h2>
           <p className="mx-auto max-w-xl text-grey-40 text-lg leading-relaxed">
-            Real outcomes from real students — placements, career switches, and
-            everything in between.
+            Placements, career switches, and pay bumps - in their own words.
           </p>
         </div>
 

@@ -262,7 +262,7 @@ export default function BlogsClient({ posts, categories }: BlogsClientProps) {
               data-reveal
             >
               Guides, trends, and stories on AWS, DevOps, AI, and web
-              development — written to help you learn and grow.
+              development - written to help you learn and grow.
             </p>
           </div>
         </div>

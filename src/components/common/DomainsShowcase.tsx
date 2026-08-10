@@ -4,7 +4,7 @@ import Link from "next/link";
 import { CATEGORIES, COURSES } from "@/data/courses";
 
 // Row 1: large card on the left (development), two small on the right.
-// Row 2: two small on the left, large card on the right (business) — the
+// Row 2: two small on the left, large card on the right (business) - the
 // large-card position alternates per row instead of repeating.
 const CARD_STYLE = [
   { span: "lg:col-span-2", tint: "bg-primary-99" },
@@ -36,7 +36,7 @@ export default function DomainsShowcase() {
             Pick Your Path
           </h2>
           <p className="mx-auto max-w-xl text-grey-40 text-lg leading-relaxed">
-            Six career domains, one goal — job-ready skills backed by industry
+            Six career domains, one goal - job-ready skills backed by industry
             mentors.
           </p>
         </div>

@@ -126,11 +126,10 @@ export default function AboutUs() {
                 About Eduwise
               </h1>
               <p className="text-grey-40 text-lg leading-relaxed">
-                At Eduwise Solutions, our mission is to empower graduates with
-                the skills, confidence, and direction needed to succeed in
-                today&apos;s competitive job market. We bridge the gap between
-                academic learning and real-world excellence—guiding you at every
-                stage and turning ambition into achievement.
+                Eduwise Solutions runs live, mentor-led career programs out of
+                Bengaluru - 17+ tracks across development, AI & data, cloud,
+                design, and business, each one built to end in a placement, not
+                just a certificate.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-3">
@@ -193,7 +192,7 @@ export default function AboutUs() {
                 Our Story
               </div>
               <h2 className="mb-5 font-black font-vietnam text-3xl text-grey-15 tracking-tight md:text-4xl">
-                More than an education platform—a career success partner
+                More than an education platform-a career success partner
               </h2>
               <p className="mb-4 text-grey-35 text-lg leading-relaxed">
                 Eduwise Solutions was built on a simple idea: learning should
@@ -203,9 +202,9 @@ export default function AboutUs() {
                 Computing.
               </p>
               <p className="mb-8 text-grey-35 text-lg leading-relaxed">
-                Our dedicated counsellors combine deep industry knowledge with
-                genuine personal attention—helping every learner define, refine,
-                and achieve a long-term career goal, not just finish a course.
+                Our counsellors sit with every learner one-on-one to map out a
+                career goal before the first class starts, then track progress
+                against it through placement.
               </p>
 
               <div className="grid grid-cols-2 gap-4" ref={story.containerRef}>
@@ -242,15 +241,15 @@ export default function AboutUs() {
               <Rocket className="h-7 w-7 text-grey-15" />
             </div>
             <p className="mb-8 font-black font-vietnam text-2xl text-grey-15 leading-snug md:text-3xl">
-              &ldquo;To make job readiness accessible, practical, and
-              result-driven—empowering every learner to build a thriving career,
-              regardless of academic background.&rdquo;
+              &ldquo;Job readiness shouldn&apos;t depend on which college you
+              went to. It should depend on whether you showed up and did the
+              work.&rdquo;
             </p>
             <div className="mx-auto flex max-w-xl items-center justify-center gap-2 border-grey-15/20 border-t pt-6">
               <Target className="h-4 w-4 shrink-0 text-grey-15" />
               <span className="text-grey-20 text-sm">
-                <span className="font-bold">Our Vision:</span> become the most
-                trusted career-launch platform for graduates.
+                <span className="font-bold">Our Vision:</span> an Eduwise
+                graduate on every hiring shortlist that matters.
               </span>
             </div>
           </div>
@@ -319,7 +318,7 @@ export default function AboutUs() {
               Why Students Choose Eduwise
             </h2>
             <p className="text-grey-40 text-lg leading-relaxed">
-              Your success is our priority.
+              8+ years placing graduates who had no head start.
             </p>
           </div>
 

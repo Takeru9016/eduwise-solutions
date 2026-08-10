@@ -112,11 +112,11 @@ export default function Footer() {
                 Start Your Journey
               </div>
               <h2 className="mb-2 font-black font-vietnam text-2xl text-grey-15 leading-tight sm:text-3xl">
-                Ready to transform your career?
+                Pick a program, or talk it through first
               </h2>
               <p className="text-grey-20 text-sm sm:text-base">
-                Join 2000+ students who have already kickstarted their dream
-                career with industry-aligned programs.
+                2,000+ students have gone through these programs and gotten
+                placed. You can be next.
               </p>
             </div>
 
@@ -142,7 +142,7 @@ export default function Footer() {
 
         {/* Main footer grid */}
         <div className="mt-10 grid grid-cols-1 gap-10 border-grey-15/10 border-t pt-10 pb-12 sm:mt-16 sm:pt-16 sm:pb-16 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
-          {/* Brand + Contact — span 4 */}
+          {/* Brand + Contact - span 4 */}
           <div className="space-y-6 lg:col-span-4">
             <Link className="inline-block" href="/">
               <Image
@@ -210,7 +210,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Programs + Explore + Company + Legal — span 2 each */}
+          {/* Programs + Explore + Company + Legal - span 2 each */}
           <div className="lg:col-span-2">
             <LinkGroup links={programLinks} title="Programs" />
           </div>

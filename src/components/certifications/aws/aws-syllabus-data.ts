@@ -1,5 +1,5 @@
 // ─── Syllabus & Sample Q&A Data ─────────────────────────────────────────────
-// Sourced from public/deep-research-report.md — AWS official exam guides.
+// Sourced from public/deep-research-report.md - AWS official exam guides.
 
 export interface SyllabusDomain {
   keyTopics: string;
@@ -58,7 +58,7 @@ export const CERT_SYLLABUS: CertSyllabus[] = [
     ],
     level: "Foundational",
     resources: [
-      "Overview of AWS (AWS whitepaper) — cloud fundamentals",
+      "Overview of AWS (AWS whitepaper) - cloud fundamentals",
       "AWS Well-Architected Framework whitepaper",
       "AWS Shared Responsibility Model (Knowledge Center)",
       "AWS Pricing page and AWS Cost Optimization blog",
@@ -222,7 +222,7 @@ export const CERT_SYLLABUS: CertSyllabus[] = [
         answer: "Performing straightforward arithmetic calculations.",
         domain: "Fundamentals of AI/ML",
         explanation:
-          "Simple arithmetic is deterministic and doesn't require ML — ML is best for prediction, classification, and pattern recognition tasks.",
+          "Simple arithmetic is deterministic and doesn't require ML - ML is best for prediction, classification, and pattern recognition tasks.",
         options: [
           "Predicting housing prices from features (area, location).",
           "Performing straightforward arithmetic calculations.",
@@ -296,7 +296,7 @@ export const CERT_SYLLABUS: CertSyllabus[] = [
     studyTips: [
       "Do not confuse AI/ML concepts with traditional programming; know basic definitions (supervised vs unsupervised).",
       'For GenAI, focus on capabilities of AWS services (Bedrock, Q, SageMaker AI) and terminology like "foundation model".',
-      "Ethical considerations (bias, fairness) are frequently tested — think of real-world ML use cases.",
+      "Ethical considerations (bias, fairness) are frequently tested - think of real-world ML use cases.",
       "Use AWS examples (e.g., summarizing text with Comprehend) to ground abstract questions.",
     ],
     studyWeeks: "3–4",
@@ -427,11 +427,11 @@ export const CERT_SYLLABUS: CertSyllabus[] = [
       },
     ],
     studyTips: [
-      "Data Prep: ensure training data is well-processed (handle missing values, normalize, encode labels) — feeding raw data is a common trap.",
+      "Data Prep: ensure training data is well-processed (handle missing values, normalize, encode labels) - feeding raw data is a common trap.",
       "Model Tuning: watch for overfitting vs underfitting; monitor validation metrics, not just training metrics.",
       "Deployment: understand real-time vs batch options and test endpoints with sample data.",
       "Cost Management: turn off notebook/endpoint instances when not in use.",
-      'Read questions carefully — "continuous deployment" points to SageMaker Pipelines or CodePipeline, not a generic answer.',
+      'Read questions carefully - "continuous deployment" points to SageMaker Pipelines or CodePipeline, not a generic answer.',
     ],
     studyWeeks: "4–6",
     title: "AWS Certified Machine Learning Engineer – Associate",
@@ -565,7 +565,7 @@ export const CERT_SYLLABUS: CertSyllabus[] = [
     ],
     studyTips: [
       "Pay careful attention to multi-tier architecture design (correct subnet placement with NAT, IGWs).",
-      "Always verify whether failover across AZs vs Regions is needed — know RA vs HA differences.",
+      "Always verify whether failover across AZs vs Regions is needed - know RA vs HA differences.",
       "For cost questions, compare instance pricing models and storage tiers.",
       "Use the AWS console to explore sample architecture blueprints for guidance.",
     ],
@@ -637,7 +637,7 @@ export const CERT_SYLLABUS: CertSyllabus[] = [
         answer: "In AWS Secrets Manager and reference them at runtime.",
         domain: "Security",
         explanation:
-          "Use AWS Secrets Manager or Parameter Store for credentials — plaintext, local storage, or hard-coded secrets are all insecure.",
+          "Use AWS Secrets Manager or Parameter Store for credentials - plaintext, local storage, or hard-coded secrets are all insecure.",
         options: [
           "In plaintext in source code.",
           "In AWS Secrets Manager and reference them at runtime.",
@@ -695,8 +695,8 @@ export const CERT_SYLLABUS: CertSyllabus[] = [
     studyTips: [
       "Remember the difference between SQS (queue) and SNS (topic/pub-sub) to avoid confusion.",
       "Do not hard-code credentials; use IAM roles for Lambdas and Secrets Manager for secrets.",
-      "For environment-specific settings, use environment variables or Parameter Store — not source code.",
-      'Watch for answers that break least-privilege (e.g., "use root account" or "disable encryption") — these are traps.',
+      "For environment-specific settings, use environment variables or Parameter Store - not source code.",
+      'Watch for answers that break least-privilege (e.g., "use root account" or "disable encryption") - these are traps.',
     ],
     studyWeeks: "4–6",
     title: "AWS Certified Developer – Associate",
@@ -837,7 +837,7 @@ export const CERT_SYLLABUS: CertSyllabus[] = [
     studyTips: [
       "Always associate CloudWatch alarms with SNS or automated actions to remediate, not just alert.",
       "For DR, know RTO/RPO differences and AWS backup services (AWS Backup, snapshots).",
-      "Confirm route tables and NACLs when troubleshooting connectivity — a common miss.",
+      "Confirm route tables and NACLs when troubleshooting connectivity - a common miss.",
       "Use existing AWS Config managed rules for compliance checks (e.g., ensure all volumes are encrypted).",
     ],
     studyWeeks: "6–8",
@@ -969,7 +969,7 @@ export const CERT_SYLLABUS: CertSyllabus[] = [
     ],
     studyTips: [
       "On partitioning S3 data, ensure query engines (Athena/Redshift Spectrum) point to the partitioned keys for performance.",
-      "Always validate IAM roles/policies for Glue and Lambda when pipelines fail — CloudTrail is your friend for debugging access issues.",
+      "Always validate IAM roles/policies for Glue and Lambda when pipelines fail - CloudTrail is your friend for debugging access issues.",
       "Use the Glue Data Catalog (Schema Registry) to track table schemas.",
       "Remember data service limits (Kinesis throughput, Glue job size) and how to monitor/scale them.",
     ],
@@ -1029,7 +1029,7 @@ export const CERT_SYLLABUS: CertSyllabus[] = [
         answer: "CodeCommit → CodePipeline → CodeBuild → CodeDeploy.",
         domain: "SDLC Automation",
         explanation:
-          "CodePipeline orchestrates stages, CodeBuild compiles/tests, and CodeDeploy pushes to servers — option A places CodePipeline last, which is incorrect ordering.",
+          "CodePipeline orchestrates stages, CodeBuild compiles/tests, and CodeDeploy pushes to servers - option A places CodePipeline last, which is incorrect ordering.",
         options: [
           "CodeCommit → CodeBuild → CodeDeploy → CodePipeline.",
           "CodeCommit → CodePipeline → CodeBuild → CodeDeploy.",
@@ -1113,7 +1113,7 @@ export const CERT_SYLLABUS: CertSyllabus[] = [
       },
     ],
     studyTips: [
-      "Emphasize automation: manual steps risk inconsistency — always use IaC.",
+      "Emphasize automation: manual steps risk inconsistency - always use IaC.",
       "Test pipelines thoroughly (dry runs, rollback plans).",
       "Monitoring should include application-level metrics (X-Ray or custom CloudWatch metrics), not just AWS metrics.",
       "For high availability, know RDS Multi-AZ vs global clusters for multi-region designs.",
@@ -1236,7 +1236,7 @@ export const CERT_SYLLABUS: CertSyllabus[] = [
           "You can scale parts independently and deploy updates without affecting the whole app.",
         domain: "Continuous Improvement (Existing Solutions)",
         explanation:
-          "Microservices allow independent scaling and deployment of each service — polyglot implementations are allowed, and CI/CD is still needed.",
+          "Microservices allow independent scaling and deployment of each service - polyglot implementations are allowed, and CI/CD is still needed.",
         options: [
           "All components must be rewritten in the same language.",
           "You can scale parts independently and deploy updates without affecting the whole app.",
@@ -1385,10 +1385,10 @@ export const CERT_SYLLABUS: CertSyllabus[] = [
       },
     ],
     studyTips: [
-      "Master data preprocessing (roughly 80% of ML work) — know how to use AWS Glue and Pandas for cleaning.",
+      "Master data preprocessing (roughly 80% of ML work) - know how to use AWS Glue and Pandas for cleaning.",
       "Distinguish model evaluation metrics (F1 vs accuracy) based on problem context.",
       "When constructing pipelines, separate data sampling for training vs evaluation to avoid leakage.",
-      "Monitor cost of training — use spot instances for SageMaker training jobs when feasible.",
+      "Monitor cost of training - use spot instances for SageMaker training jobs when feasible.",
     ],
     studyWeeks: "6–8",
     title: "AWS Certified Machine Learning – Specialty",
@@ -1519,7 +1519,7 @@ export const CERT_SYLLABUS: CertSyllabus[] = [
     ],
     studyTips: [
       "Remember that security groups are stateful while NACLs are stateless; use both appropriately.",
-      "Don't ignore region/peer limits (e.g., max peering connections) — use Transit Gateway for complex topologies.",
+      "Don't ignore region/peer limits (e.g., max peering connections) - use Transit Gateway for complex topologies.",
       "For multi-region VPCs, use AWS Cloud WAN or multiple Transit Gateways with inter-region peering.",
       "Test your IP schema carefully to avoid collisions, especially in hybrid setups.",
     ],
@@ -1665,7 +1665,7 @@ export const CERT_SYLLABUS: CertSyllabus[] = [
       },
     ],
     studyTips: [
-      "Follow the principle of least privilege — do not grant overly broad IAM roles/policies.",
+      "Follow the principle of least privilege - do not grant overly broad IAM roles/policies.",
       "Always rotate keys and certificates regularly; AWS Config can enforce this (e.g., no root access keys).",
       "Understand the AWS Shared Responsibility Model: AWS secures the cloud, you secure what's in it.",
       "For compliance questions, reference AWS compliance programs (HIPAA, PCI DSS, etc.) as pre-modeled solutions.",

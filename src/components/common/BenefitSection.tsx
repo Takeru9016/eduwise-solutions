@@ -39,46 +39,47 @@ type Benefit = TextBenefit | ImageBenefit;
 const BENEFITS: Benefit[] = [
   {
     description:
-      "Find everything you need for your educational journey in one place",
+      "Development, AI & Data, Cloud & DevOps, Design, Business, and Placement Prep - one platform, real depth in each.",
     icon: Compass,
     tint: "bg-primary-99",
-    title: "One-Stop Solution",
+    title: "17+ Programs, 6 Career Tracks",
     type: "text",
   },
   {
     description:
-      "Hand-picked courses from top institutions and industry leaders",
+      "Every program maps to specific job titles and salary bands, not generic 'skills training'.",
     icon: GraduationCap,
     tint: "bg-gold-90",
-    title: "Curated Premier Courses",
+    title: "Curriculum Tied to Real Roles",
     type: "text",
   },
   {
     description:
-      "Clear guidance to help you make the right educational decisions",
+      "Not sure which track fits? Take the course-finder quiz or talk to a counselor.",
     icon: LayoutGrid,
     tint: "bg-white",
-    title: "Simplify Learning Choices",
-    type: "text",
-  },
-  {
-    description: "Programs designed to enhance your professional growth",
-    icon: Focus,
-    tint: "bg-primary-90",
-    title: "Career-Focused Approach",
+    title: "Clear, Guided Enrollment",
     type: "text",
   },
   {
     description:
-      "Comprehensive assistance from enrollment to course completion",
+      "Enroll, learn, practice, get certified, get placed - every program follows the same path to a job.",
+    icon: Focus,
+    tint: "bg-primary-90",
+    title: "Placement Is the End Goal",
+    type: "text",
+  },
+  {
+    description: "Mentor-led sessions, not pre-recorded videos on a timer.",
     imageUrl: "/home/benefits/mentor-support.jpg",
-    title: "End-to-End Support",
+    title: "Live Classes, Real Mentors",
     type: "image",
   },
   {
-    description: "Collaborate with recognized institutions and companies",
+    description:
+      "Cloud training and certification backed by an official partnership.",
     imageUrl: "/home/benefits/partner-handshake.jpg",
-    title: "Trusted Partners",
+    title: "Official AWS Partner",
     type: "image",
   },
 ];
@@ -185,7 +186,7 @@ export default function BenefitSection() {
               Benefits That Set Us Apart
             </h2>
             <p className="mb-8 text-grey-40 text-lg leading-relaxed">
-              Everything you need for a serious tech career — curated courses,
+              Everything you need for a serious tech career - curated courses,
               real mentors, and support that doesn&apos;t stop at enrollment.
             </p>
             <Link

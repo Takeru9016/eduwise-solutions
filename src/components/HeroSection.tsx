@@ -27,23 +27,9 @@ const TOOL_ICONS = [
   { Icon: Award, label: "Certification prep" },
 ];
 
-// 6-lobe scalloped flower: r(theta) = 0.40 + 0.055*cos(6*theta), 36 samples
-// joined with a Catmull-Rom-fitted closed cubic-bezier for round petal tips.
-const heroBlobPath =
-  "M0.9550,0.5000 C0.9550,0.5247 0.9385,0.5530 0.9210,0.5742 C0.9035,0.5955 0.8704,0.6110 0.8500,0.6274 C0.8297,0.6438 0.8096,0.6538 0.7988,0.6725 C0.7880,0.6912 0.7893,0.7136 0.7854,0.7394 C0.7814,0.7653 0.7844,0.8017 0.7748,0.8275 C0.7651,0.8533 0.7489,0.8817 0.7275,0.8940 C0.7061,0.9064 0.6733,0.9063 0.6462,0.9017 C0.6191,0.8972 0.5891,0.8763 0.5647,0.8668 C0.5403,0.8574 0.5216,0.8450 0.5000,0.8450 C0.4784,0.8450 0.4597,0.8574 0.4353,0.8668 C0.4109,0.8763 0.3809,0.8972 0.3538,0.9017 C0.3267,0.9063 0.2939,0.9064 0.2725,0.8940 C0.2511,0.8817 0.2349,0.8533 0.2252,0.8275 C0.2156,0.8017 0.2186,0.7653 0.2146,0.7394 C0.2107,0.7136 0.2120,0.6912 0.2012,0.6725 C0.1904,0.6538 0.1703,0.6438 0.1500,0.6274 C0.1296,0.6110 0.0965,0.5955 0.0790,0.5742 C0.0615,0.5530 0.0450,0.5247 0.0450,0.5000 C0.0450,0.4753 0.0615,0.4470 0.0790,0.4258 C0.0965,0.4045 0.1296,0.3890 0.1500,0.3726 C0.1703,0.3562 0.1904,0.3462 0.2012,0.3275 C0.2120,0.3088 0.2107,0.2864 0.2146,0.2606 C0.2186,0.2347 0.2156,0.1983 0.2252,0.1725 C0.2349,0.1467 0.2511,0.1183 0.2725,0.1060 C0.2939,0.0936 0.3267,0.0937 0.3538,0.0983 C0.3809,0.1028 0.4109,0.1237 0.4353,0.1332 C0.4597,0.1426 0.4784,0.1550 0.5000,0.1550 C0.5216,0.1550 0.5403,0.1426 0.5647,0.1332 C0.5891,0.1237 0.6191,0.1028 0.6462,0.0983 C0.6733,0.0937 0.7061,0.0936 0.7275,0.1060 C0.7489,0.1183 0.7651,0.1467 0.7748,0.1725 C0.7844,0.1983 0.7814,0.2347 0.7854,0.2606 C0.7893,0.2864 0.7880,0.3088 0.7988,0.3275 C0.8096,0.3462 0.8297,0.3562 0.8500,0.3726 C0.8704,0.3890 0.9035,0.4045 0.9210,0.4258 C0.9385,0.4470 0.9550,0.4753 0.9550,0.5000 Z";
-
 export default function HeroSection() {
   return (
     <section className="relative overflow-hidden bg-light-97 py-14 sm:py-20 lg:py-24">
-      {/* Reusable blob clip-path, shared by the photo and its backdrop shapes */}
-      <svg aria-hidden="true" className="absolute h-0 w-0">
-        <defs>
-          <clipPath clipPathUnits="objectBoundingBox" id="hero-blob">
-            <path d={heroBlobPath} />
-          </clipPath>
-        </defs>
-      </svg>
-
       <div className="container relative">
         <div className="grid items-start gap-16 lg:grid-cols-[1fr_1.3fr] lg:gap-8">
           {/* Left column — copy */}
@@ -76,39 +62,34 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Right column — photo, blob backdrop, floating badges */}
+          {/* Right column — photo collage, floating badges */}
           <div className="relative mx-auto w-full max-w-md lg:mx-0 lg:max-w-none">
             <div className="relative flex justify-center lg:justify-start">
               <div className="relative aspect-square w-full max-w-sm lg:max-w-95">
-                {/* Shadow, green, and gold blob layers (sticker-stack effect) */}
-                <div
-                  className="absolute inset-0 translate-x-3 translate-y-4 bg-grey-15"
-                  style={{ clipPath: "url(#hero-blob)" }}
-                />
-                <div
-                  className="absolute inset-0 translate-x-2 translate-y-1 bg-primary-75"
-                  style={{ clipPath: "url(#hero-blob)" }}
-                />
-                <div
-                  className="absolute inset-0 bg-gold"
-                  style={{ clipPath: "url(#hero-blob)" }}
-                />
-                <div
-                  className="absolute inset-[6%] overflow-hidden"
-                  style={{ clipPath: "url(#hero-blob)" }}
-                >
+                {/* Primary photo — dominant sticker frame */}
+                <div className="absolute top-0 right-0 h-4/5 w-4/5 rotate-2 overflow-hidden rounded-3xl border-2 border-grey-15 bg-white shadow-[8px_8px_0_0_var(--color-grey-15)]">
                   <Image
                     alt="Eduwise Solutions learner"
                     className="h-full w-full object-cover"
                     fill
                     priority
-                    sizes="(min-width: 1024px) 380px, 320px"
-                    src="/home/hero/woman-portrait.jpg"
+                    sizes="(min-width: 1024px) 320px, 280px"
+                    src="/testimonials/arvind.jpeg"
+                  />
+                </div>
+                {/* Secondary photo — smaller sticker frame, offset behind-left */}
+                <div className="absolute bottom-0 left-0 h-3/5 w-3/5 -rotate-6 overflow-hidden rounded-2xl border-2 border-grey-15 bg-white shadow-[6px_6px_0_0_var(--color-grey-15)]">
+                  <Image
+                    alt="Eduwise Solutions learner"
+                    className="h-full w-full object-cover"
+                    fill
+                    sizes="(min-width: 1024px) 220px, 190px"
+                    src="/testimonials/akshay.jpeg"
                   />
                 </div>
               </div>
 
-              {/* Floating skill tags — stacked along the blob's upper-right edge */}
+              {/* Floating skill tags — stacked along the top-right edge */}
               <div className="absolute top-4 right-0 flex flex-col items-end gap-2 lg:right-[-8%]">
                 {SKILL_TAGS.map((tag) => (
                   <span
@@ -124,7 +105,7 @@ export default function HeroSection() {
                 ))}
               </div>
 
-              {/* Floating info card — soft card, lower-right, overlapping the blob's bottom edge */}
+              {/* Floating info card — soft card, lower-right, overlapping the photo frame */}
               <div className="absolute right-0 bottom-8 w-56 rounded-2xl border border-light-90 bg-white p-4 shadow-xl lg:right-[-6%] lg:bottom-0">
                 <div className="mb-2 flex items-center gap-2">
                   <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold">

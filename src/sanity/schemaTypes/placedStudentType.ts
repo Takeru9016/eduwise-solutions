@@ -64,6 +64,14 @@ export const placedStudentType = defineType({
       type: "reference",
       validation: (Rule) => Rule.required(),
     }),
+    defineField({
+      description:
+        "Featured students are shown first in the placement carousel.",
+      initialValue: false,
+      name: "featured",
+      title: "Featured",
+      type: "boolean",
+    }),
   ],
   icon: UsersIcon,
   name: "placedStudent",

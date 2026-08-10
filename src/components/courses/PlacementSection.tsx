@@ -39,7 +39,7 @@ export default function PlacementSection({
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const query = `*[_type == "placedStudent" && category->slug.current == $categorySlug] | order(name asc) {
+        const query = `*[_type == "placedStudent" && category->slug.current == $categorySlug] | order(featured desc, name asc) {
           _id,
           name,
           image,

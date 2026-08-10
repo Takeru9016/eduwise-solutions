@@ -11,9 +11,6 @@ importers:
       '@hookform/resolvers':
         specifier: ^5.7.1
         version: 5.7.1(@standard-schema/spec@1.1.0)(ajv@8.20.0)(react-hook-form@7.84.0(react@19.2.8))(valibot@1.4.2(typescript@5.9.3))(zod@4.4.3)
-      '@huggingface/inference':
-        specifier: ^4.13.24
-        version: 4.13.24
       '@langchain/community':
         specifier: ^1.1.29
         version: 1.1.29(@browserbasehq/sdk@2.14.1)(@browserbasehq/stagehand@1.14.0(@playwright/test@1.62.1)(deepmerge@4.3.1)(dotenv@16.4.5)(openai@6.44.0(ws@8.21.0)(zod@4.4.3))(zod@4.4.3))(@huggingface/inference@4.13.24)(@ibm-cloud/watsonx-ai@1.7.14(supports-color@8.1.1))(@langchain/core@1.2.4(openai@6.44.0(ws@8.21.0)(zod@4.4.3))(ws@8.21.0))(google-auth-library@10.5.0(supports-color@8.1.1))(googleapis@174.0.0(supports-color@8.1.1))(html-to-text@9.0.5)(ibm-cloud-sdk-core@5.5.0(supports-color@8.1.1))(ignore@7.0.5)(jsdom@30.0.1(@noble/hashes@2.2.0))(jsonwebtoken@9.0.3)(lodash@4.18.1)(openai@6.44.0(ws@8.21.0)(zod@4.4.3))(playwright@1.62.1)(ws@8.21.0)
@@ -9262,10 +9259,13 @@ snapshots:
     dependencies:
       '@huggingface/jinja': 0.5.9
       '@huggingface/tasks': 0.21.32
+    optional: true
 
-  '@huggingface/jinja@0.5.9': {}
+  '@huggingface/jinja@0.5.9':
+    optional: true
 
-  '@huggingface/tasks@0.21.32': {}
+  '@huggingface/tasks@0.21.32':
+    optional: true
 
   '@humanfs/core@0.19.2':
     dependencies:

@@ -32,7 +32,7 @@ export default function HeroSection() {
     <section className="relative overflow-hidden bg-light-97 py-14 sm:py-20 lg:py-24">
       <div className="container relative">
         <div className="grid items-start gap-16 lg:grid-cols-[1fr_1.3fr] lg:gap-8">
-          {/* Left column — copy */}
+          {/* Left column - copy */}
           <div className="text-center lg:text-left">
             <h1 className="pt-2 font-black font-vietnam text-6xl text-grey-15 leading-[1.05] tracking-tight sm:text-7xl lg:text-8xl">
               <span className="block">Accelerate</span>
@@ -49,7 +49,7 @@ export default function HeroSection() {
             </div>
 
             <p className="mx-auto mt-6 max-w-md text-grey-35 text-lg leading-relaxed lg:mx-0">
-              Job-ready courses in AI, cloud, and development — built with
+              Job-ready courses in AI, cloud, and development - built with
               industry mentors to turn curiosity into a career.
             </p>
 
@@ -62,11 +62,11 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Right column — photo collage, floating badges */}
+          {/* Right column - photo collage, floating badges */}
           <div className="relative mx-auto w-full max-w-md lg:mx-0 lg:max-w-none">
             <div className="relative flex justify-center lg:justify-start">
               <div className="relative aspect-square w-full max-w-sm lg:max-w-95">
-                {/* Primary photo — dominant sticker frame */}
+                {/* Primary photo - dominant sticker frame */}
                 <div className="absolute top-0 right-0 h-4/5 w-4/5 rotate-2 overflow-hidden rounded-3xl border-2 border-grey-15 bg-white shadow-[8px_8px_0_0_var(--color-grey-15)]">
                   <Image
                     alt="Eduwise Solutions learner"
@@ -77,7 +77,7 @@ export default function HeroSection() {
                     src="/testimonials/arvind.jpeg"
                   />
                 </div>
-                {/* Secondary photo — smaller sticker frame, offset behind-left */}
+                {/* Secondary photo - smaller sticker frame, offset behind-left */}
                 <div className="absolute bottom-0 left-0 h-3/5 w-3/5 -rotate-6 overflow-hidden rounded-2xl border-2 border-grey-15 bg-white shadow-[6px_6px_0_0_var(--color-grey-15)]">
                   <Image
                     alt="Eduwise Solutions learner"
@@ -89,7 +89,7 @@ export default function HeroSection() {
                 </div>
               </div>
 
-              {/* Floating skill tags — stacked along the top-right edge */}
+              {/* Floating skill tags - stacked along the top-right edge */}
               <div className="absolute top-4 right-0 flex flex-col items-end gap-2 lg:right-[-8%]">
                 {SKILL_TAGS.map((tag) => (
                   <span
@@ -105,7 +105,7 @@ export default function HeroSection() {
                 ))}
               </div>
 
-              {/* Floating info card — soft card, lower-right, overlapping the photo frame */}
+              {/* Floating info card - soft card, lower-right, overlapping the photo frame */}
               <div className="absolute right-0 bottom-8 w-56 rounded-2xl border border-light-90 bg-white p-4 shadow-xl lg:right-[-6%] lg:bottom-0">
                 <div className="mb-2 flex items-center gap-2">
                   <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold">
@@ -124,7 +124,7 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Bottom row — stats (under col 1) and course strip (under col 2), same row */}
+        {/* Bottom row - stats (under col 1) and course strip (under col 2), same row */}
         <div className="mt-16 grid items-center gap-10 lg:mt-20 lg:grid-cols-[1fr_1.3fr] lg:gap-8">
           <div className="flex items-center justify-center gap-10 lg:justify-start">
             <div>
@@ -159,7 +159,7 @@ export default function HeroSection() {
 
             <div className="flex-1 text-center sm:text-left">
               <h2 className="mb-4 font-bold font-vietnam text-grey-15 text-xl leading-snug sm:text-2xl">
-                We have 17+ industry-aligned courses to fast-track your career
+                17+ programs across 6 domains - pick one and start this month
               </h2>
               <div className="flex justify-center gap-3 sm:justify-start">
                 {TOOL_ICONS.map(({ Icon, label }) => (

@@ -111,9 +111,9 @@ export default function CTASection() {
             </h2>
 
             <p className="max-w-xl text-grey-45 text-lg">
-              Unlock a world of opportunities with our cutting-edge Online
-              Professional Programs. Designed for ambitious professionals who
-              want to stay ahead in a rapidly evolving job market.
+              17+ mentor-led programs across development, AI & data, cloud,
+              design, and business - built to get you interview-ready, not just
+              certificate-ready.
             </p>
 
             {/* Key Features */}
@@ -153,12 +153,11 @@ export default function CTASection() {
                 </div>
 
                 <h3 className="mb-4 font-bold text-3xl text-grey-15">
-                  Transform Your Potential
+                  2,000+ Students Placed
                 </h3>
 
                 <p className="mx-auto max-w-md text-grey-45">
-                  Join a community of 10,000+ professionals advancing their
-                  careers through innovative online learning.
+                  Live, mentor-led classes - not pre-recorded videos on a timer.
                 </p>
               </div>
             </div>

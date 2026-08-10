@@ -1,8 +1,5 @@
 import { Clock, ExternalLink, Mail, MapPin, Phone } from "lucide-react";
 
-import { Card, CardContent } from "@/components/ui/card";
-
-// Types
 interface ContactDetail {
   href?: string;
   icon: React.ElementType;
@@ -16,25 +13,22 @@ interface OperatingHour {
   isClosed?: boolean;
 }
 
-// Reusable components
 const ContactItem = ({ detail }: { detail: ContactDetail }) => {
   const ContactIcon = detail.icon;
 
   if (detail.href) {
     return (
       <a
-        className="group flex items-start gap-4 rounded-lg p-4 transition-colors hover:bg-primary-99"
+        className="group flex items-start gap-4 rounded-2xl border-2 border-white/10 bg-white/5 p-4 transition-colors hover:border-primary-90/40 hover:bg-white/10"
         href={detail.href}
       >
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary-99 transition-colors group-hover:bg-white">
-          <ContactIcon className="h-6 w-6 text-primary-75" />
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-2 border-white/20 bg-white/10">
+          <ContactIcon className="h-5 w-5 text-primary-90" />
         </div>
 
         <div className="grow">
-          <p className="mb-1 font-medium font-vietnam text-grey-20">
-            {detail.title}
-          </p>
-          <p className="flex items-center gap-2 text-grey-35 transition-colors group-hover:text-primary-75">
+          <p className="mb-1 font-bold text-white">{detail.title}</p>
+          <p className="flex items-center gap-2 text-grey-70 text-sm transition-colors group-hover:text-primary-90">
             {detail.value}
             <ExternalLink
               className="opacity-0 transition-opacity group-hover:opacity-100"
@@ -47,25 +41,27 @@ const ContactItem = ({ detail }: { detail: ContactDetail }) => {
   }
 
   return (
-    <div className="flex items-start gap-4 p-4">
-      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary-99">
-        <ContactIcon className="h-6 w-6 text-primary-75" />
+    <div className="flex items-start gap-4 rounded-2xl border-2 border-white/10 bg-white/5 p-4">
+      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-2 border-white/20 bg-white/10">
+        <ContactIcon className="h-5 w-5 text-primary-90" />
       </div>
 
       <div>
-        <p className="mb-1 font-medium font-vietnam text-grey-20">
-          {detail.title}
-        </p>
-        <p className="text-grey-35">{detail.value}</p>
+        <p className="mb-1 font-bold text-white">{detail.title}</p>
+        <p className="text-grey-70 text-sm leading-relaxed">{detail.value}</p>
       </div>
     </div>
   );
 };
 
 const OperatingHoursItem = ({ day, hours, isClosed }: OperatingHour) => (
-  <div className="flex justify-between">
-    <span className={isClosed ? "text-primary-75" : ""}>{day}</span>
-    <span className={isClosed ? "text-primary-75" : ""}>{hours}</span>
+  <div className="flex justify-between text-sm">
+    <span className={isClosed ? "font-bold text-primary-90" : "text-grey-70"}>
+      {day}
+    </span>
+    <span className={isClosed ? "font-bold text-primary-90" : "text-grey-70"}>
+      {hours}
+    </span>
   </div>
 );
 
@@ -98,36 +94,33 @@ export default function ContactInfo() {
   ];
 
   return (
-    <Card className="border border-light-90">
-      <CardContent className="p-6">
-        <h2 className="mb-8 font-bold font-vietnam text-2xl text-grey-15">
-          Contact Information
-        </h2>
+    <div className="rounded-3xl border-2 border-grey-15 bg-grey-15 p-6 text-white shadow-[6px_6px_0_0_var(--color-grey-15)] sm:p-8">
+      <h2 className="mb-6 font-black font-vietnam text-2xl text-white">
+        Contact Information
+      </h2>
 
-        <div className="space-y-6">
-          {contactDetails.map((detail, index) => (
-            <ContactItem detail={detail} key={index} />
+      <div className="space-y-3">
+        {contactDetails.map((detail, index) => (
+          <ContactItem detail={detail} key={index} />
+        ))}
+      </div>
+
+      <div className="mt-8 border-white/10 border-t pt-6">
+        <h3 className="mb-4 flex items-center gap-2 font-bold text-white">
+          <Clock className="h-5 w-5 text-primary-90" />
+          Operating Hours
+        </h3>
+        <div className="space-y-2">
+          {operatingHours.map((item, index) => (
+            <OperatingHoursItem
+              day={item.day}
+              hours={item.hours}
+              isClosed={item.isClosed}
+              key={index}
+            />
           ))}
         </div>
-
-        {/* Operating Hours Section */}
-        <div className="mt-8 border-light-90 border-t pt-8">
-          <h3 className="mb-4 flex items-center gap-2 font-semibold font-vietnam text-grey-20">
-            <Clock className="h-5 w-5 text-primary-75" />
-            Operating Hours
-          </h3>
-          <div className="space-y-2 text-grey-35">
-            {operatingHours.map((item, index) => (
-              <OperatingHoursItem
-                day={item.day}
-                hours={item.hours}
-                isClosed={item.isClosed}
-                key={index}
-              />
-            ))}
-          </div>
-        </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

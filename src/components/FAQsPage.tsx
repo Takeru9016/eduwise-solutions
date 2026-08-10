@@ -12,7 +12,6 @@ interface SanityFAQQuestion {
 
 interface SanityFAQCategory {
   _id: string;
-  icon?: string;
   order?: number;
   questions: SanityFAQQuestion[];
   title: string;
@@ -21,7 +20,6 @@ interface SanityFAQCategory {
 // Transform Sanity data to component format
 function transformCategories(sanityData: SanityFAQCategory[]) {
   return sanityData.map((category) => ({
-    icon: category.icon || "📌",
     questions: category.questions.map((q) => ({
       a: q.answer,
       q: q.question,

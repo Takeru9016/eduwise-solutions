@@ -7,9 +7,6 @@ import {
   UserCheck,
 } from "lucide-react";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
-// Types
 interface TermsSection {
   content: React.ReactNode;
   icon: React.ElementType;
@@ -25,39 +22,19 @@ interface SubSection {
   title: string;
 }
 
-// Reusable components
-const PageHeader = ({
-  title,
-  lastUpdated,
-}: {
-  title: string;
-  lastUpdated: string;
-}) => (
-  <section className="bg-primary-99 py-12 md:py-16 lg:py-20">
-    <div className="container mx-auto px-4">
-      <div className="mx-auto max-w-3xl">
-        <h1 className="mb-6 font-bold font-vietnam text-3xl text-grey-15 md:text-4xl lg:text-5xl">
-          {title}
-        </h1>
-        <p className="text-grey-35 text-lg">Last updated: {lastUpdated}</p>
-      </div>
-    </div>
-  </section>
-);
-
 const TermsCard = ({ section }: { section: TermsSection }) => {
   const { icon: Icon, title, content } = section;
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Icon className="h-6 w-6 text-primary-75" />
-          {title}
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="text-grey-35">{content}</CardContent>
-    </Card>
+    <div className="rounded-2xl border-2 border-grey-15 bg-white p-6 shadow-[4px_4px_0_0_var(--color-grey-15)] sm:p-8">
+      <div className="mb-4 flex items-center gap-3">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-2 border-grey-15 bg-primary-90">
+          <Icon className="h-5 w-5 text-grey-15" />
+        </div>
+        <h2 className="font-bold font-vietnam text-grey-15 text-xl">{title}</h2>
+      </div>
+      <div className="text-grey-35 leading-relaxed">{content}</div>
+    </div>
   );
 };
 
@@ -70,9 +47,12 @@ const ListSection = ({
 }) => (
   <div className="space-y-4">
     {intro && <p>{intro}</p>}
-    <ul className="list-disc space-y-2 pl-6">
-      {items.map((item, index) => (
-        <li key={index}>{item.text}</li>
+    <ul className="space-y-2">
+      {items.map((item) => (
+        <li className="flex items-start gap-2" key={item.text}>
+          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-grey-15" />
+          {item.text}
+        </li>
       ))}
     </ul>
   </div>
@@ -80,12 +60,15 @@ const ListSection = ({
 
 const SubSectionList = ({ sections }: { sections: SubSection[] }) => (
   <div className="space-y-4">
-    {sections.map((section, index) => (
-      <div className="space-y-2" key={index}>
-        <h3 className="font-semibold text-grey-20">{section.title}</h3>
-        <ul className="list-disc space-y-2 pl-6">
-          {section.items.map((item, itemIndex) => (
-            <li key={itemIndex}>{item.text}</li>
+    {sections.map((section) => (
+      <div className="space-y-2" key={section.title}>
+        <h3 className="font-bold text-grey-15">{section.title}</h3>
+        <ul className="space-y-2">
+          {section.items.map((item) => (
+            <li className="flex items-start gap-2" key={item.text}>
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-grey-15" />
+              {item.text}
+            </li>
           ))}
         </ul>
       </div>
@@ -96,14 +79,16 @@ const SubSectionList = ({ sections }: { sections: SubSection[] }) => (
 const ContactSection = ({ email }: { email: string }) => (
   <div>
     <p>For questions about these Terms of Service, please contact us at:</p>
-    <div className="mt-4">
-      <p className="font-bold text-primary-50">{email}</p>
-    </div>
+    <a
+      className="mt-4 block font-bold text-primary-75 hover:underline"
+      href={`mailto:${email}`}
+    >
+      {email}
+    </a>
   </div>
 );
 
 export default function TermsOfServicePage() {
-  // Data
   const lastUpdated = "January 1, 2026";
   const legalEmail = "contact@eduwise.solutions";
 
@@ -141,7 +126,6 @@ export default function TermsOfServicePage() {
     { text: "Attempting to access unauthorized areas" },
   ];
 
-  // Sections data
   const termsSections: TermsSection[] = [
     {
       content: (
@@ -211,15 +195,34 @@ export default function TermsOfServicePage() {
 
   return (
     <main className="min-h-screen bg-white">
-      {/* Header Section */}
-      <PageHeader lastUpdated={lastUpdated} title="Terms of Service" />
+      <section className="bg-light-97 py-16 sm:py-20 lg:py-24">
+        <div className="container">
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-99 px-4 py-2 font-bold text-grey-15 text-sm sm:mb-8">
+              <Scale className="h-4 w-4" />
+              Legal
+            </div>
 
-      {/* Main Content */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-3xl space-y-8">
-            {termsSections.map((section, index) => (
-              <TermsCard key={index} section={section} />
+            <h1 className="mb-4 font-black font-vietnam text-3xl text-grey-15 tracking-tight sm:mb-6 sm:text-4xl md:text-5xl">
+              Terms of Service
+            </h1>
+
+            <p className="mx-auto max-w-2xl px-2 text-grey-40 text-lg leading-relaxed">
+              The rules and guidelines for using Eduwise Solutions&apos; website
+              and programs
+            </p>
+            <p className="mt-4 text-grey-40 text-sm">
+              Last updated: {lastUpdated}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 sm:py-20">
+        <div className="container">
+          <div className="mx-auto max-w-3xl space-y-6">
+            {termsSections.map((section) => (
+              <TermsCard key={section.title} section={section} />
             ))}
           </div>
         </div>

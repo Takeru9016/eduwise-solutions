@@ -26,64 +26,49 @@ import {
 import Link from "next/link";
 import { useState } from "react";
 
-// Types
-
 interface PolicySection {
   content: React.ReactNode;
   icon: React.ElementType;
-  iconBg: string;
-  iconColor: string;
   number: string;
   title: string;
 }
 
-// Hero Section
+const REQUIREMENT_TINTS = [
+  "bg-primary-99",
+  "bg-gold-90",
+  "bg-primary-90",
+  "bg-light-95",
+] as const;
 
 function HeroSection() {
   return (
-    <section className="relative overflow-hidden py-16 sm:py-20 lg:py-28">
-      {/* Background */}
-      <div className="absolute inset-0 bg-linear-to-br from-primary-99 via-white to-primary-97" />
-
-      {/* Decorative orbs */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -top-20 -right-20 h-72 w-72 rounded-full bg-linear-to-br from-primary-90/30 to-transparent blur-3xl" />
-        <div className="absolute -bottom-16 -left-16 h-56 w-56 rounded-full bg-linear-to-tr from-primary-75/15 to-transparent blur-3xl" />
-      </div>
-
-      <div className="container relative z-10 mx-auto px-4 sm:px-6">
+    <section className="bg-light-97 py-16 sm:py-20 lg:py-24">
+      <div className="container">
         <div className="mx-auto max-w-3xl text-center">
-          {/* Badge */}
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary-90/40 bg-white/80 px-4 py-2 font-semibold text-primary-75 text-xs shadow-xs backdrop-blur-xs sm:text-sm">
-            <Scale className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-99 px-4 py-2 font-bold text-grey-15 text-sm sm:mb-8">
+            <Scale className="h-4 w-4" />
             Transparent & Fair
           </div>
 
-          {/* Heading */}
-          <h1 className="mb-4 font-bold font-vietnam text-3xl text-grey-15 leading-tight sm:mb-5 sm:text-4xl lg:text-5xl xl:text-6xl">
-            Refund{" "}
-            <span className="bg-linear-to-r from-primary-75 to-primary-50 bg-clip-text text-transparent">
-              Policy
-            </span>
+          <h1 className="mb-4 font-black font-vietnam text-3xl text-grey-15 tracking-tight sm:mb-6 sm:text-4xl md:text-5xl">
+            Refund Policy
           </h1>
 
-          {/* Subtitle */}
-          <p className="mx-auto mb-8 max-w-xl text-base text-grey-40 leading-relaxed sm:text-lg lg:text-xl">
+          <p className="mx-auto mb-8 max-w-2xl px-2 text-grey-40 text-lg leading-relaxed">
             At Eduwise Solutions, we are committed to maintaining transparency
             and fairness in our enrollment and refund process.
           </p>
 
-          {/* Quick nav pills */}
           <div className="flex flex-wrap justify-center gap-3">
             <a
-              className="inline-flex items-center gap-2 rounded-full border border-light-90 bg-white px-4 py-2.5 font-medium text-grey-30 text-sm shadow-xs transition-all duration-300 hover:-translate-y-0.5 hover:border-primary-90 hover:text-primary-75 sm:px-5"
+              className="inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-white px-5 py-2.5 font-bold text-grey-15 text-sm transition-colors hover:bg-primary-90"
               href="#standard-policy"
             >
               <FileText className="h-4 w-4" />
               Standard Course Refund Policy
             </a>
             <a
-              className="inline-flex items-center gap-2 rounded-full border border-light-90 bg-white px-4 py-2.5 font-medium text-grey-30 text-sm shadow-xs transition-all duration-300 hover:-translate-y-0.5 hover:border-primary-90 hover:text-primary-75 sm:px-5"
+              className="inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-white px-5 py-2.5 font-bold text-grey-15 text-sm transition-colors hover:bg-primary-90"
               href="#devops-policy"
             >
               <Trophy className="h-4 w-4" />
@@ -92,14 +77,9 @@ function HeroSection() {
           </div>
         </div>
       </div>
-
-      {/* Bottom separator */}
-      <div className="absolute right-0 bottom-0 left-0 h-px bg-linear-to-r from-transparent via-primary-90/40 to-transparent" />
     </section>
   );
 }
-
-// Accordion-style Policy Card
 
 function PolicyCard({
   section,
@@ -114,65 +94,54 @@ function PolicyCard({
 
   return (
     <div
-      className={`overflow-hidden rounded-xl border bg-white transition-all duration-300 sm:rounded-2xl ${
+      className={`overflow-hidden rounded-2xl border-2 border-grey-15 bg-white transition-all duration-200 ${
         isOpen
-          ? "border-primary-90/50 shadow-lg shadow-primary-90/5"
-          : "border-light-90 shadow-xs hover:border-primary-90/30 hover:shadow-md"
+          ? "shadow-[6px_6px_0_0_var(--color-grey-15)]"
+          : "shadow-[4px_4px_0_0_var(--color-grey-15)]"
       }`}
     >
       <button
-        className="group flex w-full cursor-pointer items-center gap-3 p-4 text-left sm:gap-4 sm:p-5"
+        className="flex w-full items-center gap-3 p-4 text-left sm:gap-4 sm:p-5"
         onClick={onToggle}
+        type="button"
       >
-        {/* Number badge */}
         <div
-          className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg font-bold text-xs transition-colors duration-300 sm:h-10 sm:w-10 sm:rounded-xl sm:text-sm ${
-            isOpen
-              ? "bg-primary-75 text-white"
-              : "bg-primary-99 text-primary-75 group-hover:bg-primary-97"
+          className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-grey-15 font-bold text-xs transition-colors duration-200 sm:h-10 sm:w-10 sm:text-sm ${
+            isOpen ? "bg-primary-75 text-grey-15" : "bg-primary-99 text-grey-15"
           }`}
         >
           {section.number}
         </div>
 
-        {/* Icon + title */}
         <div className="flex min-w-0 flex-1 items-center gap-2.5 sm:gap-3">
-          <div
-            className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg sm:h-9 sm:w-9 ${section.iconBg}`}
-          >
-            <Icon
-              className={`h-4 w-4 sm:h-[18px] sm:w-[18px] ${section.iconColor}`}
-            />
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-grey-15 bg-white sm:h-10 sm:w-10">
+            <Icon className="h-4 w-4 text-grey-15 sm:h-[18px] sm:w-[18px]" />
           </div>
-          <h3 className="truncate font-semibold font-vietnam text-grey-15 text-sm sm:text-base lg:text-lg">
+          <h3 className="truncate font-bold font-vietnam text-grey-15 text-sm sm:text-base lg:text-lg">
             {section.title}
           </h3>
         </div>
 
-        {/* Chevron */}
         <ChevronDown
-          className={`h-5 w-5 shrink-0 text-grey-50 transition-transform duration-300 ${
+          className={`h-5 w-5 shrink-0 text-grey-15 transition-transform duration-200 ${
             isOpen ? "rotate-180" : ""
           }`}
         />
       </button>
 
-      {/* Content */}
       <div
-        className={`transition-all duration-300 ease-in-out ${
+        className={`overflow-hidden transition-all duration-300 ease-in-out ${
           isOpen ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
-        } overflow-hidden`}
+        }`}
       >
         <div className="px-4 pt-0 pb-5 sm:px-5 sm:pb-6">
-          <div className="mb-4 h-px bg-linear-to-r from-primary-90/20 via-primary-90/10 to-transparent sm:mb-5" />
+          <div className="mb-4 h-px bg-grey-15/10 sm:mb-5" />
           {section.content}
         </div>
       </div>
     </div>
   );
 }
-
-// Standard Refund Policy Section
 
 function StandardRefundPolicy() {
   const [openSections, setOpenSections] = useState<Set<number>>(
@@ -199,15 +168,13 @@ function StandardRefundPolicy() {
             A learner is eligible to claim a refund under the following
             condition:
           </p>
-          <div className="rounded-xl border border-emerald-100 bg-emerald-50 p-4 sm:p-5">
+          <div className="rounded-2xl border-2 border-grey-15/10 bg-light-97 p-4 sm:p-5">
             <div className="flex items-start gap-3">
-              <Clock className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" />
+              <Clock className="mt-0.5 h-5 w-5 shrink-0 text-primary-75" />
               <div>
                 <p className="font-medium text-grey-20 text-sm sm:text-base">
                   The refund request must be submitted within{" "}
-                  <strong className="text-emerald-700">
-                    3 days (72 hours)
-                  </strong>{" "}
+                  <strong className="text-grey-15">3 days (72 hours)</strong>{" "}
                   from the date of purchase/enrollment.
                 </p>
                 <p className="mt-2 text-grey-40 text-sm">
@@ -220,8 +187,6 @@ function StandardRefundPolicy() {
         </div>
       ),
       icon: CheckCircle2,
-      iconBg: "bg-emerald-50",
-      iconColor: "text-emerald-600",
       number: "01",
       title: "Refund Eligibility",
     },
@@ -230,7 +195,7 @@ function StandardRefundPolicy() {
         <div className="space-y-3">
           <p className="text-grey-35 text-sm leading-relaxed sm:text-base">
             The Money-Back Guarantee becomes{" "}
-            <strong className="text-grey-20">void</strong> under the following
+            <strong className="text-grey-15">void</strong> under the following
             circumstances:
           </p>
           <div className="space-y-2.5">
@@ -238,20 +203,20 @@ function StandardRefundPolicy() {
               "If the learner has accessed more than 2 classes from the enrolled course.",
               "If the learner has downloaded any course material (including PDFs, recordings, assignments, or other learning resources) for future reference.",
               "If the learner has actively participated in live sessions beyond 2 classes.",
-            ].map((item, i) => (
+            ].map((item) => (
               <div
-                className="flex items-start gap-3 rounded-lg border border-amber-100 bg-amber-50/60 p-3 sm:p-3.5"
-                key={i}
+                className="flex items-start gap-3 rounded-xl border-2 border-gold-90 bg-gold-90/40 p-3 sm:p-3.5"
+                key={item}
               >
-                <XCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-600" />
+                <XCircle className="mt-0.5 h-4 w-4 shrink-0 text-grey-15" />
                 <span className="text-grey-30 text-sm sm:text-base">
                   {item}
                 </span>
               </div>
             ))}
           </div>
-          <div className="mt-3 rounded-r-lg border-amber-400 border-l-4 bg-amber-50 p-3 sm:p-4">
-            <p className="text-amber-800 text-sm sm:text-base">
+          <div className="mt-3 rounded-xl border-2 border-gold-90 bg-gold-90 p-3 sm:p-4">
+            <p className="text-grey-20 text-sm sm:text-base">
               Once any of the above conditions are met, the enrollment will be
               considered fully utilized and <strong>non-refundable</strong>.
             </p>
@@ -259,8 +224,6 @@ function StandardRefundPolicy() {
         </div>
       ),
       icon: ShieldCheck,
-      iconBg: "bg-amber-50",
-      iconColor: "text-amber-600",
       number: "02",
       title: "Money-Back Guarantee Conditions",
     },
@@ -271,19 +234,19 @@ function StandardRefundPolicy() {
             To request a refund, learners must:
           </p>
 
-          <div className="space-y-3 rounded-xl border border-blue-100 bg-blue-50/50 p-4 sm:p-5">
-            <h4 className="font-semibold text-grey-20 text-sm sm:text-base">
+          <div className="space-y-3 rounded-2xl border-2 border-grey-15/10 bg-light-97 p-4 sm:p-5">
+            <h4 className="font-bold text-grey-15 text-sm sm:text-base">
               Submit a written refund request via:
             </h4>
             <div className="space-y-2">
               <div className="flex items-center gap-2.5">
-                <Mail className="h-4 w-4 shrink-0 text-blue-600" />
+                <Mail className="h-4 w-4 shrink-0 text-primary-75" />
                 <span className="text-grey-30 text-sm sm:text-base">
                   The official support email of Eduwise.solutions
                 </span>
               </div>
               <div className="flex items-center gap-2.5">
-                <FileText className="h-4 w-4 shrink-0 text-blue-600" />
+                <FileText className="h-4 w-4 shrink-0 text-primary-75" />
                 <span className="text-grey-30 text-sm sm:text-base">
                   The Help & Support section on our website
                 </span>
@@ -291,8 +254,8 @@ function StandardRefundPolicy() {
             </div>
           </div>
 
-          <div className="rounded-xl border border-blue-100 bg-white p-4 sm:p-5">
-            <h4 className="mb-3 font-semibold text-grey-20 text-sm sm:text-base">
+          <div className="rounded-2xl border-2 border-grey-15/10 bg-white p-4 sm:p-5">
+            <h4 className="mb-3 font-bold text-grey-15 text-sm sm:text-base">
               Include the following details:
             </h4>
             <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
@@ -302,12 +265,12 @@ function StandardRefundPolicy() {
                 "Course Name",
                 "Date of Purchase",
                 "Reason for Cancellation",
-              ].map((detail, i) => (
+              ].map((detail) => (
                 <div
                   className="flex items-center gap-2 text-grey-30 text-sm sm:text-base"
-                  key={i}
+                  key={detail}
                 >
-                  <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-blue-500" />
+                  <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-primary-75" />
                   {detail}
                 </div>
               ))}
@@ -319,8 +282,6 @@ function StandardRefundPolicy() {
         </div>
       ),
       icon: Mail,
-      iconBg: "bg-blue-50",
-      iconColor: "text-blue-600",
       number: "03",
       title: "Refund Request Process",
     },
@@ -343,12 +304,12 @@ function StandardRefundPolicy() {
               value:
                 "Processing time may vary depending on the payment gateway or bank.",
             },
-          ].map((item, i) => (
+          ].map((item) => (
             <div
-              className="flex items-start gap-3 rounded-lg border border-violet-100 bg-violet-50/40 p-3 sm:p-4"
-              key={i}
+              className="flex items-start gap-3 rounded-xl border-2 border-grey-15/10 bg-light-97 p-3 sm:p-4"
+              key={item.label}
             >
-              <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-violet-500" />
+              <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary-75" />
               <div>
                 <span className="font-medium text-grey-20 text-sm sm:text-base">
                   {item.label}:
@@ -362,8 +323,6 @@ function StandardRefundPolicy() {
         </div>
       ),
       icon: CalendarClock,
-      iconBg: "bg-violet-50",
-      iconColor: "text-violet-600",
       number: "04",
       title: "Refund Processing Timeline",
     },
@@ -382,10 +341,10 @@ function StandardRefundPolicy() {
               "Failure to attend classes.",
               "Change of mind after course access.",
               "EMI/loan processing charges (if applicable).",
-            ].map((item, i) => (
+            ].map((item) => (
               <div
-                className="flex items-start gap-3 rounded-lg border border-red-100 bg-red-50/40 p-2.5 sm:p-3"
-                key={i}
+                className="flex items-start gap-3 rounded-xl border-2 border-red-200 bg-red-50 p-2.5 sm:p-3"
+                key={item}
               >
                 <Ban className="mt-0.5 h-4 w-4 shrink-0 text-red-500" />
                 <span className="text-grey-30 text-sm sm:text-base">
@@ -397,8 +356,6 @@ function StandardRefundPolicy() {
         </div>
       ),
       icon: Ban,
-      iconBg: "bg-red-50",
-      iconColor: "text-red-600",
       number: "05",
       title: "Non-Refundable Situations",
     },
@@ -409,16 +366,16 @@ function StandardRefundPolicy() {
             In case of accidental duplicate payment:
           </p>
           <div className="space-y-2.5">
-            <div className="flex items-start gap-3 rounded-lg border border-teal-100 bg-teal-50/40 p-3 sm:p-4">
-              <RefreshCcw className="mt-0.5 h-4 w-4 shrink-0 text-teal-600" />
+            <div className="flex items-start gap-3 rounded-xl border-2 border-grey-15/10 bg-light-97 p-3 sm:p-4">
+              <RefreshCcw className="mt-0.5 h-4 w-4 shrink-0 text-primary-75" />
               <span className="text-grey-30 text-sm sm:text-base">
                 The excess amount will be refunded within{" "}
-                <strong className="text-teal-700">15 working days</strong> after
+                <strong className="text-grey-15">15 working days</strong> after
                 verification.
               </span>
             </div>
-            <div className="flex items-start gap-3 rounded-lg border border-teal-100 bg-teal-50/40 p-3 sm:p-4">
-              <CreditCard className="mt-0.5 h-4 w-4 shrink-0 text-teal-600" />
+            <div className="flex items-start gap-3 rounded-xl border-2 border-grey-15/10 bg-light-97 p-3 sm:p-4">
+              <CreditCard className="mt-0.5 h-4 w-4 shrink-0 text-primary-75" />
               <span className="text-grey-30 text-sm sm:text-base">
                 Refund will be made to the original payment source.
               </span>
@@ -427,8 +384,6 @@ function StandardRefundPolicy() {
         </div>
       ),
       icon: Copy,
-      iconBg: "bg-teal-50",
-      iconColor: "text-teal-600",
       number: "06",
       title: "Duplicate Payments",
     },
@@ -444,7 +399,7 @@ function StandardRefundPolicy() {
             For any refund-related queries, please contact our support team
             through the{" "}
             <Link
-              className="font-medium text-primary-75 hover:underline"
+              className="font-bold text-primary-75 hover:underline"
               href="/contact"
             >
               Help & Support
@@ -454,38 +409,34 @@ function StandardRefundPolicy() {
         </div>
       ),
       icon: AlertCircle,
-      iconBg: "bg-grey-95",
-      iconColor: "text-grey-40",
       number: "07",
       title: "Policy Updates",
     },
   ];
 
   return (
-    <section className="py-10 sm:py-14 lg:py-16" id="standard-policy">
-      <div className="container mx-auto px-4 sm:px-6">
+    <section className="py-16 sm:py-20" id="standard-policy">
+      <div className="container">
         <div className="mx-auto max-w-4xl">
-          {/* Section header */}
           <div className="mb-8 sm:mb-10">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary-90/40 bg-primary-99 px-3 py-1.5 font-semibold text-primary-75 text-xs sm:text-sm">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-99 px-4 py-2 font-bold text-grey-15 text-sm">
               <FileText className="h-3.5 w-3.5" />
               General Policy
             </div>
-            <h2 className="mb-3 font-bold font-vietnam text-2xl text-grey-15 sm:text-3xl lg:text-4xl">
+            <h2 className="mb-3 font-black font-vietnam text-2xl text-grey-15 sm:text-3xl lg:text-4xl">
               Standard Refund Policy
             </h2>
-            <p className="max-w-2xl text-grey-40 text-sm leading-relaxed sm:text-base lg:text-lg">
+            <p className="max-w-2xl text-grey-40 leading-relaxed">
               Please read our refund policy carefully before purchasing any
               course or program through our platform.
             </p>
           </div>
 
-          {/* Policy cards */}
-          <div className="space-y-3 sm:space-y-4">
+          <div className="space-y-4">
             {sections.map((section, index) => (
               <PolicyCard
                 isOpen={openSections.has(index)}
-                key={index}
+                key={section.title}
                 onToggle={() => toggleSection(index)}
                 section={section}
               />
@@ -497,194 +448,162 @@ function StandardRefundPolicy() {
   );
 }
 
-// DevOps Refund Policy Section
-
 function DevOpsRefundPolicy() {
+  const requirements = [
+    {
+      body: (
+        <>
+          <p className="mb-3 text-grey-35 text-sm">
+            <strong className="text-grey-15">100% completion required</strong>{" "}
+            including:
+          </p>
+          <div className="grid grid-cols-2 gap-2">
+            {["All Videos", "All Articles", "All Problems", "All Quizzes"].map(
+              (item) => (
+                <div
+                  className="flex items-center gap-1.5 text-grey-30 text-sm"
+                  key={item}
+                >
+                  <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-grey-15" />
+                  {item}
+                </div>
+              )
+            )}
+          </div>
+        </>
+      ),
+      icon: BookOpen,
+      label: "Requirement 1",
+      title: "Chapter & Practice",
+    },
+    {
+      body: (
+        <div className="rounded-xl border-2 border-grey-15/10 bg-white p-3">
+          <p className="text-grey-30 text-sm sm:text-base">
+            <strong className="text-grey-15">Minimum 90% of Contests</strong>{" "}
+            must be solved
+          </p>
+        </div>
+      ),
+      icon: Trophy,
+      label: "Requirement 2",
+      title: "Contest Participation",
+    },
+    {
+      body: (
+        <>
+          <p className="mb-2 text-grey-30 text-sm sm:text-base">
+            <strong className="text-grey-15">90% completion required</strong>
+          </p>
+          <div className="rounded-xl border-2 border-grey-15/10 bg-white p-3">
+            <p className="text-grey-40 text-xs sm:text-sm">
+              <strong>Important:</strong> Marks are awarded only for the{" "}
+              <strong>first correct attempt</strong>. Subsequent attempts
+              won&apos;t earn marks.
+            </p>
+          </div>
+        </>
+      ),
+      icon: Target,
+      label: "Requirement 3",
+      title: "Problem Solving",
+    },
+    {
+      body: (
+        <>
+          <p className="mb-2 text-grey-30 text-sm sm:text-base">
+            <strong className="text-grey-15">90% overall attendance</strong>
+          </p>
+          <div className="space-y-1.5">
+            {[
+              "Attend more than 90% of a single class",
+              "Maintain 90% overall attendance across all batch classes",
+            ].map((item) => (
+              <div
+                className="flex items-start gap-2 text-grey-40 text-xs sm:text-sm"
+                key={item}
+              >
+                <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-grey-15" />
+                {item}
+              </div>
+            ))}
+          </div>
+        </>
+      ),
+      icon: Users,
+      label: "Requirement 4",
+      title: "Live Class Attendance",
+    },
+  ];
+
   return (
-    <section
-      className="bg-linear-to-b from-slate-50 to-white py-10 sm:py-14 lg:py-16"
-      id="devops-policy"
-    >
-      <div className="container mx-auto px-4 sm:px-6">
+    <section className="bg-light-97 py-16 sm:py-20" id="devops-policy">
+      <div className="container">
         <div className="mx-auto max-w-4xl">
-          {/* Section header */}
           <div className="mb-8 sm:mb-10">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 font-semibold text-emerald-700 text-xs sm:text-sm">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-gold-90 px-4 py-2 font-bold text-grey-15 text-sm">
               <Trophy className="h-3.5 w-3.5" />
               Exclusive Offer
             </div>
-            <h2 className="mb-3 font-bold font-vietnam text-2xl text-grey-15 sm:text-3xl lg:text-4xl">
-              DevOps — 100% Fee Refund{" "}
-              <span className="bg-linear-to-r from-primary-75 to-emerald-500 bg-clip-text text-transparent">
-                Guarantee
-              </span>
+            <h2 className="mb-3 font-black font-vietnam text-2xl text-grey-15 sm:text-3xl lg:text-4xl">
+              DevOps — 100% Fee Refund Guarantee
             </h2>
-            <p className="max-w-2xl text-grey-40 text-sm leading-relaxed sm:text-base lg:text-lg">
+            <p className="max-w-2xl text-grey-40 leading-relaxed">
               Complete the program successfully and qualify for a full refund if
               not placed. This guarantee is exclusive to our DevOps with Cloud &
               AI program.
             </p>
           </div>
 
-          {/* Main requirement card */}
-          <div className="relative mb-6 overflow-hidden rounded-2xl bg-linear-to-br from-primary-75 to-primary-50 p-5 text-white shadow-primary-75/15 shadow-xl sm:rounded-3xl sm:p-7 lg:p-8">
-            {/* Decorative */}
-            <div className="pointer-events-none absolute inset-0">
-              <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
-              <div className="absolute -bottom-8 -left-8 h-32 w-32 rounded-full bg-white/5 blur-2xl" />
-            </div>
-
-            <div className="relative z-10 flex items-start gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/20 backdrop-blur-xs sm:h-14 sm:w-14 sm:rounded-2xl">
-                <CheckCircle2 className="h-6 w-6 sm:h-7 sm:w-7" />
+          <div className="mb-6 rounded-3xl border-2 border-grey-15 bg-grey-15 p-6 text-white shadow-[6px_6px_0_0_var(--color-grey-15)] sm:p-8">
+            <div className="flex items-start gap-4">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-white/20 bg-white/10 sm:h-14 sm:w-14">
+                <CheckCircle2 className="h-6 w-6 text-primary-90 sm:h-7 sm:w-7" />
               </div>
               <div>
                 <h3 className="mb-2 font-bold text-lg sm:text-xl">
                   Main Requirement
                 </h3>
-                <p className="text-sm text-white/90 leading-relaxed sm:text-base">
+                <p className="text-grey-70 text-sm leading-relaxed sm:text-base">
                   To qualify for the refund, you must complete{" "}
-                  <strong>100% of the course content</strong> within the
-                  duration of the course from the date of purchase.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Requirements grid */}
-          <div className="mb-6 grid gap-4 sm:grid-cols-2 sm:gap-5">
-            {/* Chapter & Practice */}
-            <div className="rounded-xl border border-blue-100 bg-white p-5 shadow-xs transition-shadow duration-300 hover:shadow-md sm:rounded-2xl sm:p-6">
-              <div className="mb-4 flex items-center gap-3">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-blue-500 to-blue-600">
-                  <BookOpen className="h-5 w-5 text-white" />
-                </div>
-                <div>
-                  <p className="font-semibold text-blue-600 text-xs uppercase tracking-wider">
-                    Requirement 1
-                  </p>
-                  <h4 className="font-bold font-vietnam text-grey-15 text-sm sm:text-base">
-                    Chapter & Practice
-                  </h4>
-                </div>
-              </div>
-              <p className="mb-3 text-grey-35 text-sm">
-                <strong className="text-blue-600">
-                  100% completion required
-                </strong>{" "}
-                including:
-              </p>
-              <div className="grid grid-cols-2 gap-2">
-                {[
-                  "All Videos",
-                  "All Articles",
-                  "All Problems",
-                  "All Quizzes",
-                ].map((item, i) => (
-                  <div
-                    className="flex items-center gap-1.5 text-grey-30 text-sm"
-                    key={i}
-                  >
-                    <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-blue-500" />
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Contest */}
-            <div className="rounded-xl border border-violet-100 bg-white p-5 shadow-xs transition-shadow duration-300 hover:shadow-md sm:rounded-2xl sm:p-6">
-              <div className="mb-4 flex items-center gap-3">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-violet-500 to-violet-600">
-                  <Trophy className="h-5 w-5 text-white" />
-                </div>
-                <div>
-                  <p className="font-semibold text-violet-600 text-xs uppercase tracking-wider">
-                    Requirement 2
-                  </p>
-                  <h4 className="font-bold font-vietnam text-grey-15 text-sm sm:text-base">
-                    Contest Participation
-                  </h4>
-                </div>
-              </div>
-              <div className="rounded-lg border border-violet-100 bg-violet-50 p-3">
-                <p className="text-grey-30 text-sm sm:text-base">
-                  <strong className="text-violet-600">
-                    Minimum 90% of Contests
+                  <strong className="text-white">
+                    100% of the course content
                   </strong>{" "}
-                  must be solved
+                  within the duration of the course from the date of purchase.
                 </p>
-              </div>
-            </div>
-
-            {/* Problem Solving */}
-            <div className="rounded-xl border border-emerald-100 bg-white p-5 shadow-xs transition-shadow duration-300 hover:shadow-md sm:rounded-2xl sm:p-6">
-              <div className="mb-4 flex items-center gap-3">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-emerald-500 to-emerald-600">
-                  <Target className="h-5 w-5 text-white" />
-                </div>
-                <div>
-                  <p className="font-semibold text-emerald-600 text-xs uppercase tracking-wider">
-                    Requirement 3
-                  </p>
-                  <h4 className="font-bold font-vietnam text-grey-15 text-sm sm:text-base">
-                    Problem Solving
-                  </h4>
-                </div>
-              </div>
-              <p className="mb-2 text-grey-30 text-sm sm:text-base">
-                <strong className="text-emerald-600">
-                  90% completion required
-                </strong>
-              </p>
-              <div className="rounded-lg border border-emerald-100 bg-emerald-50 p-3">
-                <p className="text-grey-40 text-xs sm:text-sm">
-                  <strong>Important:</strong> Marks are awarded only for the{" "}
-                  <strong>first correct attempt</strong>. Subsequent attempts
-                  won&apos;t earn marks.
-                </p>
-              </div>
-            </div>
-
-            {/* Live Class */}
-            <div className="rounded-xl border border-orange-100 bg-white p-5 shadow-xs transition-shadow duration-300 hover:shadow-md sm:rounded-2xl sm:p-6">
-              <div className="mb-4 flex items-center gap-3">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-orange-500 to-orange-600">
-                  <Users className="h-5 w-5 text-white" />
-                </div>
-                <div>
-                  <p className="font-semibold text-orange-600 text-xs uppercase tracking-wider">
-                    Requirement 4
-                  </p>
-                  <h4 className="font-bold font-vietnam text-grey-15 text-sm sm:text-base">
-                    Live Class Attendance
-                  </h4>
-                </div>
-              </div>
-              <p className="mb-2 text-grey-30 text-sm sm:text-base">
-                <strong className="text-orange-600">
-                  90% overall attendance
-                </strong>
-              </p>
-              <div className="space-y-1.5">
-                {[
-                  "Attend more than 90% of a single class",
-                  "Maintain 90% overall attendance across all batch classes",
-                ].map((item, i) => (
-                  <div
-                    className="flex items-start gap-2 text-grey-40 text-xs sm:text-sm"
-                    key={i}
-                  >
-                    <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-orange-500" />
-                    {item}
-                  </div>
-                ))}
               </div>
             </div>
           </div>
 
-          {/* Important Note */}
-          <div className="rounded-xl border border-red-200 bg-red-50 p-4 sm:rounded-2xl sm:p-5">
+          <div className="mb-6 grid gap-4 sm:grid-cols-2 sm:gap-5">
+            {requirements.map((req, i) => {
+              const Icon = req.icon;
+              const tint = REQUIREMENT_TINTS[i % REQUIREMENT_TINTS.length];
+              return (
+                <div
+                  className={`rounded-2xl border-2 border-grey-15 p-5 shadow-[4px_4px_0_0_var(--color-grey-15)] sm:p-6 ${tint}`}
+                  key={req.title}
+                >
+                  <div className="mb-4 flex items-center gap-3">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-grey-15 bg-white">
+                      <Icon className="h-5 w-5 text-grey-15" />
+                    </div>
+                    <div>
+                      <p className="font-bold text-grey-15/60 text-xs uppercase tracking-wider">
+                        {req.label}
+                      </p>
+                      <h4 className="font-bold font-vietnam text-grey-15 text-sm sm:text-base">
+                        {req.title}
+                      </h4>
+                    </div>
+                  </div>
+                  {req.body}
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="rounded-2xl border-2 border-red-200 bg-red-50 p-4 sm:p-5">
             <div className="flex items-start gap-3">
               <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-red-500" />
               <div>
@@ -704,62 +623,42 @@ function DevOpsRefundPolicy() {
   );
 }
 
-// Bottom CTA
-
 function BottomCTA() {
   return (
-    <section className="py-10 sm:py-14 lg:py-16">
-      <div className="container mx-auto px-4 sm:px-6">
-        <div className="mx-auto max-w-4xl">
-          <div className="relative overflow-hidden rounded-2xl shadow-xl sm:rounded-3xl">
-            {/* Background */}
-            <div className="absolute inset-0 bg-linear-to-br from-grey-10 via-grey-15 to-grey-20" />
-            <div className="pointer-events-none absolute inset-0 overflow-hidden">
-              <div className="absolute -top-16 -right-16 h-56 w-56 rounded-full bg-linear-to-br from-primary-75/20 to-transparent blur-3xl" />
-              <div className="absolute -bottom-12 -left-12 h-40 w-40 rounded-full bg-linear-to-tr from-primary-90/15 to-transparent blur-3xl" />
-            </div>
-
-            <div className="relative z-10 p-6 text-center sm:p-8 lg:p-10">
-              <Sparkles className="mx-auto mb-4 h-8 w-8 text-primary-90" />
-              <h3 className="mb-3 font-bold font-vietnam text-white text-xl sm:text-2xl">
-                Have questions about our refund policy?
-              </h3>
-              <p className="mx-auto mb-6 max-w-lg text-grey-60 text-sm sm:text-base">
-                Our support team is here to help. Reach out through our Help &
-                Support section for any refund-related queries.
-              </p>
-              <div className="flex flex-col justify-center gap-3 sm:flex-row">
-                <Link
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-linear-to-r from-primary-75 to-primary-90 px-6 py-3 font-semibold text-sm text-white shadow-lg shadow-primary-75/25 transition-all duration-300 hover:scale-105 hover:from-primary-70 hover:to-primary-80 hover:shadow-xl sm:py-3.5 sm:text-base"
-                  href="/contact"
-                >
-                  <Phone className="h-4 w-4" />
-                  Contact Support
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-              <p className="mt-4 text-grey-60 text-xs">
-                Thank you for choosing Eduwise.solutions. We appreciate your
-                trust and cooperation.
-              </p>
-            </div>
-          </div>
+    <section className="py-16 sm:py-20">
+      <div className="container">
+        <div className="mx-auto max-w-4xl rounded-3xl border-2 border-grey-15 bg-grey-15 p-8 text-center text-white shadow-[6px_6px_0_0_var(--color-grey-15)] sm:p-10">
+          <Sparkles className="mx-auto mb-4 h-8 w-8 text-primary-90" />
+          <h3 className="mb-3 font-black font-vietnam text-white text-xl sm:text-2xl">
+            Have questions about our refund policy?
+          </h3>
+          <p className="mx-auto mb-6 max-w-lg text-grey-70">
+            Our support team is here to help. Reach out through our Help &
+            Support section for any refund-related queries.
+          </p>
+          <Link
+            className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-grey-15 bg-primary-75 px-6 py-3.5 font-bold text-grey-15 transition-colors hover:bg-primary-90"
+            href="/contact"
+          >
+            <Phone className="h-4 w-4" />
+            Contact Support
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+          <p className="mt-4 text-grey-70 text-xs">
+            Thank you for choosing Eduwise.solutions. We appreciate your trust
+            and cooperation.
+          </p>
         </div>
       </div>
     </section>
   );
 }
 
-// Main Component
-
 export default function RefundPolicyPage() {
   return (
     <main className="min-h-screen bg-white">
       <HeroSection />
       <StandardRefundPolicy />
-      <div className="mx-auto max-w-4xl px-4 sm:px-6">
-        <div className="h-px bg-linear-to-r from-transparent via-light-90 to-transparent" />
-      </div>
       <DevOpsRefundPolicy />
       <BottomCTA />
     </main>

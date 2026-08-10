@@ -702,7 +702,7 @@ export const CERT_SYLLABUS: CertSyllabus[] = [
     title: "AWS Certified Developer – Associate",
   },
   {
-    code: "SOA-C02",
+    code: "SOA-C03",
     domains: [
       {
         keyTopics:
@@ -841,7 +841,7 @@ export const CERT_SYLLABUS: CertSyllabus[] = [
       "Use existing AWS Config managed rules for compliance checks (e.g., ensure all volumes are encrypted).",
     ],
     studyWeeks: "6–8",
-    title: "AWS Certified SysOps Administrator – Associate",
+    title: "AWS Certified CloudOps Engineer – Associate",
   },
   {
     code: "DEA-C01",

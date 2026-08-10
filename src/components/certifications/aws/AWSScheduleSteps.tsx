@@ -2,79 +2,50 @@ import { SCHEDULE_STEPS } from "./aws-data";
 
 export default function AWSScheduleSteps() {
   return (
-    <section className="bg-linear-to-br from-slate-900 via-slate-800 to-emerald-950 py-20">
-      <div className="container mx-auto max-w-7xl px-4">
-        <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
-          {/* ── Steps grid visual ── */}
-          <div className="order-2 lg:order-1">
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
-              {SCHEDULE_STEPS.map((step, i) => {
-                const Icon = step.icon;
-                const isLast = i === SCHEDULE_STEPS.length - 1;
-                return (
-                  <div
-                    className={`group relative flex cursor-default flex-col items-center rounded-2xl border border-white/10 bg-white/5 p-5 text-center transition-all duration-300 hover:border-emerald-400/40 hover:bg-emerald-500/20 ${isLast ? "col-span-2 sm:col-span-1 xl:col-span-1" : ""}`}
-                    key={i}
-                  >
-                    <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-500/20 transition-colors group-hover:bg-emerald-500/30">
-                      <Icon
-                        aria-hidden="true"
-                        className="h-5 w-5 text-emerald-400"
-                      />
-                    </div>
-                    <span className="mb-1 font-bold text-[10px] text-emerald-500 uppercase tracking-widest">
-                      Step {i + 1}
-                    </span>
-                    <p className="font-semibold text-white text-xs leading-tight">
-                      {step.label}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
+    <section className="bg-grey-15 py-16 sm:py-20">
+      <div className="container">
+        <div className="mx-auto mb-12 max-w-2xl text-center text-white">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border-2 border-white/20 bg-white/10 px-4 py-2 font-bold text-primary-90 text-sm">
+            Exam Scheduling
           </div>
+          <h2 className="mb-4 font-black font-vietnam text-3xl leading-tight sm:text-4xl">
+            How to Schedule an AWS Exam with a Voucher?
+          </h2>
+          <p className="text-grey-70 leading-relaxed">
+            Once you are ready to attempt your AWS Certification exam,
+            scheduling is a straightforward 7-step process on the official AWS
+            Certification portal.
+          </p>
+        </div>
 
-          {/* ── Text side ── */}
-          <div className="order-1 text-white lg:order-2">
-            <span className="mb-3 inline-block font-semibold text-emerald-400 text-sm uppercase tracking-widest">
-              Exam Scheduling
-            </span>
-            <h2 className="mb-4 font-extrabold text-3xl leading-tight sm:text-4xl">
-              How to Schedule an AWS Exam{" "}
-              <span className="bg-linear-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">
-                with a Voucher?
-              </span>
-            </h2>
-            <p className="mb-8 text-slate-300 leading-relaxed">
-              Once you are ready to attempt your AWS Certification exam,
-              scheduling is a straightforward 7-step process on the official AWS
-              Certification portal.
-            </p>
-
-            <ul className="space-y-3">
-              {SCHEDULE_STEPS.map((step, i) => {
-                const Icon = step.icon;
-                return (
-                  <li className="flex items-center gap-3" key={i}>
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-500/20">
-                      <Icon
-                        aria-hidden="true"
-                        className="h-4 w-4 text-emerald-400"
-                      />
-                    </div>
-                    <div>
-                      <span className="mr-2 font-bold text-emerald-400 text-xs">
-                        Step {i + 1}.
-                      </span>
-                      <span className="text-slate-200 text-sm">
-                        {step.label}
-                      </span>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+          {SCHEDULE_STEPS.map((step, i) => {
+            const Icon = step.icon;
+            const isLast = i === SCHEDULE_STEPS.length - 1;
+            return (
+              <div
+                className={`flex flex-col items-center gap-3 rounded-2xl border-2 border-white/15 bg-white/5 p-5 text-center transition-colors hover:border-primary-90/40 hover:bg-primary-90/10 ${
+                  isLast ? "col-span-2 sm:col-span-1" : ""
+                }`}
+                key={step.label}
+              >
+                <div className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-white/20 bg-white/10">
+                  <Icon
+                    aria-hidden="true"
+                    className="h-5 w-5 text-primary-90"
+                  />
+                </div>
+                <div>
+                  <span className="mb-1 block font-bold text-[10px] text-primary-90 uppercase tracking-widest">
+                    Step {i + 1}
+                  </span>
+                  <p className="font-semibold text-white text-xs leading-tight">
+                    {step.label}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

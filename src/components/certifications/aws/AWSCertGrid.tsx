@@ -1,66 +1,74 @@
 /* eslint-disable @next/next/no-img-element */
+import { ArrowRight, BookOpen } from "lucide-react";
 import { CATEGORY_STYLES, CERTIFICATIONS, type CertCategory } from "./aws-data";
 
+const CARD_TINTS = [
+  "bg-primary-99",
+  "bg-gold-90",
+  "bg-white",
+  "bg-primary-90",
+  "bg-light-95",
+  "bg-primary-95",
+] as const;
+
 function CategoryBadge({ cat }: { cat: CertCategory }) {
-  const s = CATEGORY_STYLES[cat];
   return (
-    <span
-      className={`inline-flex items-center rounded-full border px-2.5 py-0.5 font-bold text-xs uppercase tracking-wider ${s.bg} ${s.text} ${s.border}`}
-    >
+    <span className="inline-flex items-center rounded-full border-2 border-grey-15 bg-white px-3 py-1 font-bold text-grey-15 text-xs uppercase tracking-wider">
       {cat}
     </span>
   );
 }
 
-function CertCard({ cert }: { cert: (typeof CERTIFICATIONS)[number] }) {
+function CertCard({
+  cert,
+  tint,
+}: {
+  cert: (typeof CERTIFICATIONS)[number];
+  tint: string;
+}) {
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-emerald-200 hover:shadow-xl">
-      {/* Badge image area */}
-      <div className="relative flex h-44 items-center justify-center border-gray-100 border-b bg-linear-to-br from-slate-50 to-gray-100 p-6 transition-colors duration-300 group-hover:from-emerald-50 group-hover:to-teal-50">
+    <article
+      className={`group flex h-full flex-col overflow-hidden rounded-2xl border-2 border-grey-15 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)] ${tint}`}
+    >
+      <div className="flex h-40 items-center justify-center border-grey-15/10 border-b bg-white/60 p-6">
         <img
           alt={`${cert.title} badge`}
-          className="h-28 w-auto object-contain drop-shadow-xs transition-transform duration-300 group-hover:scale-105"
+          className="h-24 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
           loading="lazy"
           src={cert.img}
         />
       </div>
 
-      {/* Content */}
       <div className="flex grow flex-col gap-3 p-5">
         <CategoryBadge cat={cert.cat} />
 
         <div>
-          <h3 className="font-bold text-base text-gray-900 leading-snug transition-colors duration-200 group-hover:text-emerald-700">
+          <h3 className="font-bold font-vietnam text-base text-grey-15 leading-snug">
             {cert.title}
           </h3>
-          <p className="mt-0.5 font-mono text-gray-400 text-xs">{cert.code}</p>
+          <p className="mt-0.5 font-mono text-grey-40 text-xs">{cert.code}</p>
         </div>
 
-        <p className="grow text-gray-600 text-sm leading-relaxed">
-          {cert.desc}
-        </p>
+        <p className="grow text-grey-35 text-sm leading-relaxed">{cert.desc}</p>
 
-        <a
-          aria-label={`Enquire about ${cert.title}`}
-          className="mt-auto inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 py-3 font-semibold text-sm text-white transition-colors duration-200 hover:bg-emerald-700 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 active:bg-emerald-800"
-          href="#enquiry-form-section"
-        >
-          Enquire Now
-          <svg
-            aria-hidden="true"
-            className="h-4 w-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+        <div className="mt-auto flex flex-col gap-2">
+          <a
+            aria-label={`View syllabus for ${cert.title}`}
+            className="inline-flex w-full items-center justify-center gap-2 rounded-full border-2 border-grey-15 bg-white px-4 py-2.5 font-bold text-grey-15 text-sm transition-colors hover:bg-primary-90"
+            href="#syllabus"
           >
-            <path
-              d="M17 8l4 4m0 0l-4 4m4-4H3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-            />
-          </svg>
-        </a>
+            <BookOpen className="h-4 w-4" />
+            View Syllabus
+          </a>
+          <a
+            aria-label={`Enquire about ${cert.title}`}
+            className="inline-flex w-full items-center justify-center gap-2 rounded-full border-2 border-grey-15 bg-primary-75 px-4 py-2.5 font-bold text-grey-15 text-sm transition-colors hover:bg-primary-90"
+            href="#enquiry-form-section"
+          >
+            Enquire Now
+            <ArrowRight className="h-4 w-4" />
+          </a>
+        </div>
       </div>
     </article>
   );
@@ -74,25 +82,25 @@ export default function AWSCertGrid() {
     "Specialty",
   ];
 
+  let tintIndex = 0;
+
   return (
-    <section className="bg-gray-50 py-20" id="certifications">
-      <div className="container mx-auto max-w-7xl px-4">
-        {/* Section header */}
+    <section className="bg-light-97 py-16 sm:py-20" id="certifications">
+      <div className="container">
         <div className="mb-14 text-center">
-          <span className="mb-3 inline-block font-semibold text-emerald-600 text-sm uppercase tracking-widest">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-99 px-4 py-2 font-bold text-grey-15 text-sm">
             All Certification Tracks
-          </span>
-          <h2 className="mb-4 font-extrabold text-3xl text-gray-900 sm:text-4xl">
+          </div>
+          <h2 className="mb-4 font-black font-vietnam text-3xl text-grey-15 lg:text-5xl">
             Available AWS Certifications
           </h2>
-          <p className="mx-auto max-w-2xl text-base text-gray-500 leading-relaxed">
+          <p className="mx-auto max-w-2xl text-grey-35 text-lg">
             AWS offers certifications for learners and professionals at
             different stages of their cloud journey. Choose the track that
             aligns with your career goals.
           </p>
         </div>
 
-        {/* Render by category */}
         {categories.map((cat) => {
           const certs = CERTIFICATIONS.filter((c) => c.cat === cat);
           if (!certs.length) {
@@ -101,23 +109,24 @@ export default function AWSCertGrid() {
           const s = CATEGORY_STYLES[cat];
           return (
             <div className="mb-14" key={cat}>
-              {/* Category label */}
               <div className="mb-6 flex items-center gap-3">
                 <span
-                  className={`rounded-full border px-3 py-1 font-bold text-xs uppercase tracking-wider ${s.bg} ${s.text} ${s.border}`}
+                  className={`rounded-full border-2 border-grey-15 px-3 py-1 font-bold text-xs uppercase tracking-wider ${s.bg} text-grey-15`}
                 >
                   {cat}
                 </span>
-                <div className="h-px flex-1 bg-gray-200" />
-                <span className="text-gray-400 text-sm">
+                <div className="h-px flex-1 bg-grey-15/10" />
+                <span className="text-grey-40 text-sm">
                   {certs.length} cert{certs.length > 1 ? "s" : ""}
                 </span>
               </div>
 
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {certs.map((cert) => (
-                  <CertCard cert={cert} key={cert.code} />
-                ))}
+                {certs.map((cert) => {
+                  const tint = CARD_TINTS[tintIndex % CARD_TINTS.length];
+                  tintIndex++;
+                  return <CertCard cert={cert} key={cert.code} tint={tint} />;
+                })}
               </div>
             </div>
           );

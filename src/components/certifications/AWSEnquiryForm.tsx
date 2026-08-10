@@ -86,7 +86,7 @@ const FormInputField = ({
         <FormControl>
           <Input
             {...field}
-            className="h-12 border-light-90 bg-light-97 focus:border-primary-75 focus:ring-primary-75"
+            className="h-12 border-2 border-grey-15/20 bg-light-97 focus:border-primary-75"
             placeholder={placeholder}
             type={type}
           />
@@ -102,7 +102,7 @@ const AWS_CERTIFICATIONS = [
   "AWS Certified AI Practitioner",
   "AWS Certified Solutions Architect – Associate",
   "AWS Certified Developer – Associate",
-  "AWS Certified SysOps Administrator – Associate",
+  "AWS Certified CloudOps Engineer – Associate",
   "AWS Certified Data Engineer – Associate",
   "AWS Certified Machine Learning Engineer – Associate",
   "Other",
@@ -169,13 +169,21 @@ export default function AWSEnquiryForm() {
   };
 
   return (
-    <div className="sticky top-24 mx-auto w-full max-w-[400px] rounded-xl border border-light-90 bg-white p-6 shadow-lg">
-      <h3 className="mb-6 text-center font-bold font-vietnam text-grey-15 text-xl">
-        Enquire Now
-      </h3>
+    <div className="overflow-hidden rounded-3xl border-2 border-grey-15 bg-white shadow-[6px_6px_0_0_var(--color-grey-15)]">
+      <div className="bg-grey-15 px-7 py-6">
+        <p className="mb-1 font-bold text-primary-90 text-xs uppercase tracking-widest">
+          Free Enquiry
+        </p>
+        <h3 className="font-bold font-vietnam text-2xl text-white leading-snug">
+          Get AWS Voucher Guidance
+        </h3>
+      </div>
 
       <Form {...form}>
-        <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
+        <form
+          className="space-y-4 px-7 py-7"
+          onSubmit={form.handleSubmit(onSubmit)}
+        >
           <FormInputField
             control={form.control}
             label="First Name"
@@ -217,7 +225,7 @@ export default function AWSEnquiryForm() {
                   onValueChange={field.onChange}
                 >
                   <FormControl>
-                    <SelectTrigger className="h-12 border-light-90 bg-light-97">
+                    <SelectTrigger className="h-12 border-2 border-grey-15/20 bg-light-97">
                       <SelectValue placeholder="Select a certification" />
                     </SelectTrigger>
                   </FormControl>
@@ -239,7 +247,7 @@ export default function AWSEnquiryForm() {
           />
 
           <Button
-            className="flex h-12 w-full items-center justify-center gap-2 bg-primary-75 text-base text-white hover:bg-primary-70"
+            className="flex h-12 w-full items-center justify-center gap-2 rounded-full border-2 border-grey-15 bg-primary-75 font-bold text-grey-15 hover:bg-primary-90"
             disabled={isSubmitting}
             type="submit"
           >
@@ -281,7 +289,7 @@ export default function AWSEnquiryForm() {
           </DialogHeader>
           <div className="mt-6">
             <Button
-              className="h-12 w-full bg-primary-75 text-white hover:bg-primary-70"
+              className="h-12 w-full rounded-full border-2 border-grey-15 bg-primary-75 text-grey-15 hover:bg-primary-90"
               onClick={() => setShowDialog(false)}
             >
               {isSuccess ? "Close" : "Try Again"}

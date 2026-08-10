@@ -33,7 +33,7 @@ export default async function TestimonialPage() {
   const transformedTestimonials = transformTestimonials(testimonials);
 
   return (
-    <div className="container py-10">
+    <div className="container">
       <Testimonials testimonials={transformedTestimonials} />
     </div>
   );

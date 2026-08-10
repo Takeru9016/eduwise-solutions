@@ -1,13 +1,9 @@
 "use client";
 
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
-import { AnimatePresence, motion } from "motion/react";
+import { Sparkles } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { useState } from "react";
 import { Icons } from "@/components/ui/icons";
-import { cn } from "@/lib/utils";
 
 interface Testimonial {
   company: string;
@@ -19,8 +15,6 @@ interface Testimonial {
 }
 
 interface TestimonialsProps {
-  autoplay?: boolean;
-  autoplayInterval?: number;
   className?: string;
   description?: string;
   maxDisplayed?: number;
@@ -28,263 +22,104 @@ interface TestimonialsProps {
   title?: string;
 }
 
+const CARD_TINTS = [
+  "bg-primary-99",
+  "bg-gold-90",
+  "bg-white",
+  "bg-primary-90",
+  "bg-light-95",
+  "bg-primary-95",
+] as const;
+
 export function Testimonials({
   testimonials,
-  className,
+  className = "",
   title = "What Our Students Say",
   description = "Discover how Eduwise Solutions has transformed careers and lives.",
-  maxDisplayed = 6,
-  autoplay = true,
-  autoplayInterval = 5000,
+  maxDisplayed = 9,
 }: TestimonialsProps) {
   const [showAll, setShowAll] = useState(false);
-  const [view, setView] = useState<"grid" | "carousel">("grid");
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  useEffect(() => {
-    if (autoplay && view === "carousel") {
-      const interval = setInterval(() => {
-        setActiveIndex((prev) => (prev + 1) % testimonials.length);
-      }, autoplayInterval);
-      return () => clearInterval(interval);
-    }
-  }, [autoplay, autoplayInterval, testimonials.length, view]);
-
-  const handlePrev = () => {
-    setActiveIndex(
-      (prev) => (prev - 1 + testimonials.length) % testimonials.length
-    );
-  };
-
-  const handleNext = () => {
-    setActiveIndex((prev) => (prev + 1) % testimonials.length);
-  };
+  const visible = testimonials.slice(0, showAll ? undefined : maxDisplayed);
 
   return (
-    <div className={cn("px-4 py-16 md:px-8", className)}>
+    <div className={`py-16 ${className}`}>
       <div className="mx-auto max-w-7xl">
-        <div className="mb-12 flex flex-col items-center justify-center">
-          <h2 className="mb-4 bg-linear-to-r from-primary to-primary/70 bg-clip-text text-center font-bold text-3xl text-transparent md:text-4xl">
-            {title}
-          </h2>
-          <p className="mx-auto max-w-2xl text-center text-muted-foreground">
-            {description.split("<br />").map((line, i) => (
-              <span key={i}>
-                {line}
-                {i !== description.split("<br />").length - 1 && <br />}
-              </span>
-            ))}
-          </p>
-
-          <div className="mt-8 flex gap-2">
-            <Button
-              className="rounded-full"
-              onClick={() => setView("grid")}
-              size="sm"
-              variant={view === "grid" ? "default" : "outline"}
-            >
-              Grid View
-            </Button>
-            <Button
-              className="rounded-full"
-              onClick={() => setView("carousel")}
-              size="sm"
-              variant={view === "carousel" ? "default" : "outline"}
-            >
-              Carousel
-            </Button>
+        <div className="mb-12 text-center">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-99 px-4 py-2 font-bold text-grey-15 text-sm">
+            <Sparkles className="h-4 w-4" />
+            Student Success Stories
           </div>
+          <h1 className="mb-4 font-black font-vietnam text-3xl text-grey-15 md:text-5xl">
+            {title}
+          </h1>
+          <p className="mx-auto max-w-2xl text-grey-40 text-lg">
+            {description}
+          </p>
         </div>
 
-        {view === "grid" ? (
-          <div className="relative">
-            <div
-              className={cn(
-                "grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3",
-                !showAll &&
-                  testimonials.length > maxDisplayed &&
-                  "max-h-[800px] overflow-hidden"
-              )}
-            >
-              {testimonials
-                .slice(0, showAll ? undefined : maxDisplayed)
-                .map((testimonial, index) => (
-                  <motion.div
-                    animate={{ opacity: 1, y: 0 }}
-                    initial={{ opacity: 0, y: 20 }}
-                    key={index}
-                    transition={{ delay: index * 0.1, duration: 0.3 }}
-                  >
-                    <Card className="group h-full overflow-hidden border-l-4 border-l-primary-70/70 p-6 transition-shadow duration-300 hover:shadow-lg">
-                      <div className="flex items-center">
-                        <div className="relative h-14 w-14 overflow-hidden rounded-full border-2 border-primary/20">
-                          <Image
-                            alt={testimonial.name}
-                            className="object-cover"
-                            fill
-                            src={testimonial.image}
-                          />
-                        </div>
-                        <div className="flex flex-col pl-4">
-                          <span className="font-bold text-base">
-                            {testimonial.name}
-                          </span>
-                          <span className="text-muted-foreground text-sm">
-                            {testimonial.username}
-                          </span>
-                          {testimonial.company && (
-                            <span className="mt-1 text-primary/80 text-xs">
-                              {testimonial.company}
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                      <div className="mt-5">
-                        <p className="text-foreground leading-relaxed">
-                          &ldquo;{testimonial.text}&ldquo;
-                        </p>
-                        {testimonial.linkedinUrl && (
-                          <div className="mt-4">
-                            <a
-                              href={testimonial.linkedinUrl}
-                              rel="noopener noreferrer"
-                              target="_blank"
-                            >
-                              <Button
-                                className="rounded-full hover:bg-blue-600 hover:text-white"
-                                variant="outline"
-                              >
-                                <Icons.linkedin className="mr-2 h-4 w-4" />
-                                View on LinkedIn
-                              </Button>
-                            </a>
-                          </div>
-                        )}
-                      </div>
-                    </Card>
-                  </motion.div>
-                ))}
-            </div>
-
-            {testimonials.length > maxDisplayed && (
-              <div className="relative z-10 mt-12 pt-4">
-                {showAll ? (
-                  <div className="flex justify-center">
-                    <Button
-                      className="rounded-full px-8"
-                      onClick={() => setShowAll(false)}
-                      variant="outline"
-                    >
-                      Show Less
-                    </Button>
-                  </div>
-                ) : (
-                  <>
-                    <div className="absolute -top-32 left-0 h-32 w-full bg-linear-to-t from-background to-transparent" />
-                    <div className="flex justify-center">
-                      <Button
-                        className="rounded-full px-8"
-                        onClick={() => setShowAll(true)}
-                      >
-                        View All Testimonials
-                      </Button>
-                    </div>
-                  </>
-                )}
-              </div>
-            )}
-          </div>
-        ) : (
-          <div className="relative mx-auto mt-12 max-w-4xl px-10">
-            <Button
-              className="absolute top-1/2 left-0 z-10 -translate-y-1/2 rounded-full"
-              onClick={handlePrev}
-              size="icon"
-              variant="outline"
-            >
-              <ChevronLeft className="h-5 w-5" />
-            </Button>
-
-            <div className="overflow-hidden py-8">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  animate={{ opacity: 1, x: 0 }}
-                  className="flex flex-col items-center"
-                  exit={{ opacity: 0, x: -100 }}
-                  initial={{ opacity: 0, x: 100 }}
-                  key={activeIndex}
-                  transition={{ duration: 0.5 }}
-                >
-                  <div className="relative mb-6 h-20 w-20 overflow-hidden rounded-full border-4 border-primary/20">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {visible.map((testimonial, index) => {
+            const tint = CARD_TINTS[index % CARD_TINTS.length];
+            return (
+              <div
+                className={`flex h-full flex-col rounded-2xl border-2 border-grey-15 p-6 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)] ${tint}`}
+                key={testimonial.name}
+              >
+                <div className="flex items-center">
+                  <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full border-2 border-grey-15">
                     <Image
-                      alt={testimonials[activeIndex].name}
+                      alt={testimonial.name}
                       className="object-cover"
                       fill
-                      src={testimonials[activeIndex].image}
+                      src={testimonial.image}
                     />
                   </div>
-
-                  <div className="relative mb-6 max-w-3xl rounded-lg border border-border bg-card p-8 shadow-lg">
-                    <Quote className="absolute right-4 bottom-4 h-10 w-10 text-primary-70" />
-                    <Quote className="absolute top-4 left-4 h-10 w-10 rotate-180 text-primary-70" />
-                    <p className="px-10 py-4 text-center text-lg italic">
-                      &ldquo;{testimonials[activeIndex].text}&ldquo;
-                    </p>
+                  <div className="flex flex-col pl-4">
+                    <span className="font-bold text-grey-15">
+                      {testimonial.name}
+                    </span>
+                    <span className="text-grey-40 text-sm">
+                      {testimonial.username}
+                    </span>
+                    {testimonial.company && (
+                      <span className="mt-1 font-bold text-primary-75 text-xs">
+                        {testimonial.company}
+                      </span>
+                    )}
                   </div>
-
-                  <h3 className="font-bold text-xl">
-                    {testimonials[activeIndex].name}
-                  </h3>
-                  <p className="text-muted-foreground">
-                    {testimonials[activeIndex].username}
+                </div>
+                <div className="mt-5 grow">
+                  <p className="text-grey-35 leading-relaxed">
+                    &ldquo;{testimonial.text}&rdquo;
                   </p>
-                  {testimonials[activeIndex].company && (
-                    <p className="mt-1 text-primary/80 text-sm">
-                      {testimonials[activeIndex].company}
-                    </p>
-                  )}
-                  {testimonials[activeIndex].linkedinUrl && (
-                    <div className="mt-4">
-                      <a
-                        href={testimonials[activeIndex].linkedinUrl}
-                        rel="noopener noreferrer"
-                        target="_blank"
-                      >
-                        <Button
-                          className="rounded-full hover:bg-blue-600 hover:text-white"
-                          variant="outline"
-                        >
-                          <Icons.linkedin className="mr-2 h-4 w-4" />
-                          View on LinkedIn
-                        </Button>
-                      </a>
-                    </div>
-                  )}
-                </motion.div>
-              </AnimatePresence>
-            </div>
+                </div>
+                {testimonial.linkedinUrl && (
+                  <div className="mt-4">
+                    <a
+                      className="inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-white px-4 py-2 font-bold text-grey-15 text-sm transition-colors hover:bg-primary-90"
+                      href={testimonial.linkedinUrl}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      <Icons.linkedin className="h-4 w-4" />
+                      View on LinkedIn
+                    </a>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
 
-            <Button
-              className="absolute top-1/2 right-0 z-10 -translate-y-1/2 rounded-full"
-              onClick={handleNext}
-              size="icon"
-              variant="outline"
+        {testimonials.length > maxDisplayed && (
+          <div className="mt-12 flex justify-center">
+            <button
+              className="rounded-full border-2 border-grey-15 bg-white px-8 py-3 font-bold text-grey-15 transition-colors hover:bg-primary-90"
+              onClick={() => setShowAll((prev) => !prev)}
+              type="button"
             >
-              <ChevronRight className="h-5 w-5" />
-            </Button>
-
-            <div className="mt-6 flex justify-center gap-2">
-              {testimonials.map((_, index) => (
-                <button
-                  className={cn(
-                    "h-2 w-2 rounded-full transition-all duration-300",
-                    index === activeIndex ? "w-6 bg-primary" : "bg-primary/30"
-                  )}
-                  key={index}
-                  onClick={() => setActiveIndex(index)}
-                />
-              ))}
-            </div>
+              {showAll ? "Show Less" : "View All Testimonials"}
+            </button>
           </div>
         )}
       </div>

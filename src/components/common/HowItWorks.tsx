@@ -159,13 +159,13 @@ export default function HowItWorks() {
     >
       <div className="container">
         <div className="grid gap-16 lg:grid-cols-[0.85fr_1.15fr] lg:gap-12">
-          {/* Left — headline + illustration */}
+          {/* Left - headline + illustration */}
           <div className="lg:sticky lg:top-24 lg:self-start">
             <h2 className="font-black font-vietnam text-4xl text-grey-15 leading-[1.05] tracking-tight sm:text-5xl">
               Get Job-Ready in 5 Steps
             </h2>
             <p className="mt-5 max-w-sm text-grey-40 text-lg leading-relaxed">
-              From enrollment to placement — one guided path, backed by mentors
+              From enrollment to placement - one guided path, backed by mentors
               the whole way.
             </p>
 
@@ -237,7 +237,7 @@ export default function HowItWorks() {
             </svg>
           </div>
 
-          {/* Right — curved step timeline */}
+          {/* Right - curved step timeline */}
           <div className="relative" ref={timelineRef}>
             {svgHeight > 0 && (
               <svg

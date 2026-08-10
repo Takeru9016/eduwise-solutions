@@ -282,7 +282,7 @@ export default function CourseLeadForm({ courseTitle }: CourseLeadFormProps) {
               Submitting...
             </>
           ) : (
-            "Apply Now — It's Free"
+            "Apply Now - It's Free"
           )}
         </button>
 

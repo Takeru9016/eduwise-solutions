@@ -284,7 +284,7 @@ export default function PricingPage({ courses }: PricingPageProps) {
               Not sure which program fits you?
             </h2>
             <p className="max-w-xl text-white/70">
-              Talk to a career counselor — free consultation, no commitment.
+              Talk to a career counselor - free consultation, no commitment.
             </p>
             <Button
               asChild

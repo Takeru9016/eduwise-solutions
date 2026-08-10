@@ -174,7 +174,7 @@ export const COURSES: Course[] = [
     accentColor: "from-violet-500 to-purple-600",
     category: "ai-data",
     description:
-      "Dive into AI and machine learning with hands-on projects — from neural networks to deep learning and real-world applications.",
+      "Dive into AI and machine learning with hands-on projects - from neural networks to deep learning and real-world applications.",
     emoji: "🤖",
     featured: true,
     icon: BookCheck,
@@ -204,7 +204,7 @@ export const COURSES: Course[] = [
     accentColor: "from-indigo-500 to-blue-600",
     category: "ai-data",
     description:
-      "Focused, practical machine learning course using Python — covering ML algorithms, model building, and deployment.",
+      "Focused, practical machine learning course using Python - covering ML algorithms, model building, and deployment.",
     emoji: "🧠",
     featured: false,
     icon: BookCheck,
@@ -283,7 +283,7 @@ export const COURSES: Course[] = [
     accentColor: "from-amber-500 to-orange-600",
     category: "engineering",
     description:
-      "Master 2D and 3D design using AutoCAD — from drafting fundamentals to professional-grade engineering drawings.",
+      "Master 2D and 3D design using AutoCAD - from drafting fundamentals to professional-grade engineering drawings.",
     emoji: "📐",
     featured: false,
     icon: BookCheck,

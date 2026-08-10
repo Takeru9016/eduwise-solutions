@@ -130,7 +130,7 @@ export const courseType = defineType({
       validation: (Rule) => Rule.required().min(2).max(6),
     }),
 
-    // Features — "Why Choose This Program"
+    // Features - "Why Choose This Program"
     defineField({
       group: "content",
       name: "features",
@@ -155,7 +155,7 @@ export const courseType = defineType({
       validation: (Rule) => Rule.required().min(3).max(6),
     }),
 
-    // Highlights — "Program Benefits"
+    // Highlights - "Program Benefits"
     defineField({
       description:
         "Category-grouped benefit cards (e.g. Classes, Projects, Support, Certification).",
@@ -372,7 +372,7 @@ export const courseType = defineType({
       validation: (Rule) => Rule.required().positive(),
     }),
     defineField({
-      description: 'E.g. "₹5,000/month" — leave empty if no EMI.',
+      description: 'E.g. "₹5,000/month" - leave empty if no EMI.',
       group: "pricing",
       name: "emiOption",
       title: "EMI Option",

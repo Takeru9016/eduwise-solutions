@@ -2,7 +2,7 @@ About Eduwise
 At Eduwise Solutions, we believe that every graduate deserves strong start to their career. Whether you are a final-year student preparing for the job market or a recent graduate looking for your first job, we are here to bridge the gap between your potential and your dream job.
 
 Who We Are
-At Eduwise.solutions, we are passionate about empowering students and graduates to take confident steps toward successful careers. We are not just another education platform — we are your career success partner.
+At Eduwise.solutions, we are passionate about empowering students and graduates to take confident steps toward successful careers. We are not just another education platform - we are your career success partner.
 
 Your Trusted Education Partner
 We act as a bridge between learners and reputed institutions, ensuring access to high-quality courses across diverse domains.
@@ -17,7 +17,7 @@ Industry Experts with Real Impact
 With 8+ years of experience, we’ve trained over 2,000 learners and helped them build skills that matter in the real world.
 
 150+ Hiring Collaborations
-We’ve partnered with 150+ companies — from MNCs to startups — to connect job-ready candidates directly with hiring teams.
+We’ve partnered with 150+ companies - from MNCs to startups - to connect job-ready candidates directly with hiring teams.
 
 Personal Mentorship for Career Success
 Backed by years of industry insights, our team not only trains you, but also guides your career path toward long-term success.
@@ -26,10 +26,10 @@ Our Mission & Vision
 Empowering learners and shaping futures
 
 Our Mission
-To empower individuals with essential skills and real-world knowledge, helping them secure meaningful employment and build thriving careers—regardless of their academic background.
+To empower individuals with essential skills and real-world knowledge, helping them secure meaningful employment and build thriving careers-regardless of their academic background.
 
 Our Vision
-To become a trusted career-launch platform that transforms the lives of graduates by making job readiness accessible, practical, and result-driven—one job at a time.
+To become a trusted career-launch platform that transforms the lives of graduates by making job readiness accessible, practical, and result-driven-one job at a time.
 
 What We Do
 Connecting talent with opportunity through skill development
@@ -333,7 +333,7 @@ Eduwise Solutions: Enterprise-grade live projects using Cloud + AI for automatio
 Other Platforms: Educational/demo projects with no direct industry impact
 
 4. Problem-Solving
-Eduwise Solutions:AI-powered case studies — predictive analysis, automated root cause detection, anomaly detection in DevOps pipelines
+Eduwise Solutions:AI-powered case studies - predictive analysis, automated root cause detection, anomaly detection in DevOps pipelines
 Other Platforms: Mostly manual case studies, limited exposure to automation
 
 5. Faculty

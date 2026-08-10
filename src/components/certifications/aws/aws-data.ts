@@ -236,7 +236,7 @@ export const VOUCHER_STEPS = [
   },
   {
     detail:
-      "Invest time in learning AWS concepts — Core Services, Security, Networking — and build practical experience.",
+      "Invest time in learning AWS concepts - Core Services, Security, Networking - and build practical experience.",
     icon: BookOpen,
     label: "Prepare for the Exam",
   },

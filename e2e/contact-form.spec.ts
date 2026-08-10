@@ -20,7 +20,7 @@ test("contact form submits successfully and shows a confirmation dialog", async 
   await page.getByPlaceholder("Enter your Email").fill("test.user@example.com");
   await page.getByPlaceholder("Enter Phone Number").fill("9876543210");
 
-  // Subject is populated live from Sanity — select whatever the first
+  // Subject is populated live from Sanity - select whatever the first
   // available option is rather than hardcoding course content.
   await page.getByRole("combobox").click();
   await page.getByRole("option").first().click();

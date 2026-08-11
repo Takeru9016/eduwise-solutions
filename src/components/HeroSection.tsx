@@ -126,29 +126,41 @@ export default function HeroSection() {
 
         {/* Bottom row - stats (under col 1) and course strip (under col 2), same row */}
         <div className="mt-16 grid items-center gap-10 lg:mt-20 lg:grid-cols-[1fr_1.3fr] lg:gap-8">
-          <div className="flex items-center justify-center gap-10 lg:justify-start">
+          <div className="mx-auto grid w-fit grid-cols-2 gap-x-8 gap-y-6 text-center lg:mx-0 lg:text-left">
             <div>
               <div className="font-black font-vietnam text-4xl text-grey-15">
                 17+
               </div>
-              <div className="text-grey-40 text-sm">Career Programs</div>
+              <div className="text-grey-40 text-sm">Courses</div>
             </div>
             <div>
               <div className="font-black font-vietnam text-4xl text-grey-15">
-                7+
+                20+
               </div>
-              <div className="text-grey-40 text-sm">Course Categories</div>
+              <div className="text-grey-40 text-sm">Learners</div>
+            </div>
+            <div>
+              <div className="font-black font-vietnam text-4xl text-grey-15">
+                50+
+              </div>
+              <div className="text-grey-40 text-sm">Industry Projects</div>
+            </div>
+            <div>
+              <div className="font-black font-vietnam text-4xl text-grey-15">
+                100%
+              </div>
+              <div className="text-grey-40 text-sm">Placement Assistance</div>
             </div>
           </div>
 
           <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-center">
             <div className="relative aspect-4/3 w-full max-w-56 shrink-0 overflow-hidden rounded-[40%] border-2 border-grey-15 shadow-lg">
               <Image
-                alt="Student learning with Eduwise Solutions"
+                alt="Learners collaborating on a project with Eduwise Solutions"
                 className="h-full w-full object-cover"
                 fill
                 sizes="224px"
-                src="/home/hero/classroom.jpg"
+                src="/home/benefits/mentor-support.jpg"
               />
               <div className="absolute inset-0 flex items-center justify-center bg-grey-15/10">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-grey-15 bg-white">

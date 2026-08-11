@@ -2,7 +2,7 @@
 
 import type { SanityImageSource } from "@sanity/image-url";
 import { gsap } from "gsap";
-import { ArrowRight, Newspaper, Sparkles } from "lucide-react";
+import { ArrowRight, Newspaper } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -91,7 +91,7 @@ function FeaturedPost({ post }: { post: Post }) {
 
       <div className="flex flex-col justify-center gap-4 bg-gold-90 p-6 sm:p-10">
         <span className="inline-flex w-fit items-center gap-1.5 rounded-full border-2 border-grey-15 bg-white px-3 py-1 font-bold text-grey-15 text-xs">
-          <Sparkles className="h-3 w-3" />
+          <Newspaper className="h-3 w-3" />
           Latest Article
         </span>
 

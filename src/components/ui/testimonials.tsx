@@ -1,6 +1,6 @@
 "use client";
 
-import { Sparkles } from "lucide-react";
+import { Trophy } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import { Icons } from "@/components/ui/icons";
@@ -46,7 +46,7 @@ export function Testimonials({
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 text-center">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-99 px-4 py-2 font-bold text-grey-15 text-sm">
-            <Sparkles className="h-4 w-4" />
+            <Trophy className="h-4 w-4" />
             Student Success Stories
           </div>
           <h1 className="mb-4 font-black font-vietnam text-3xl text-grey-15 md:text-5xl">

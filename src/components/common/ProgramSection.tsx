@@ -1,4 +1,4 @@
-import { ArrowUpRight, Sparkles } from "lucide-react";
+import { ArrowUpRight, BookOpen } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -44,7 +44,7 @@ const ProgramCard = ({
   const tint = CARD_TINTS[index % CARD_TINTS.length];
   const placement = program.stats.find((s) => s.label === "Placement")?.value;
   const CategoryIcon =
-    CATEGORIES.find((c) => c.id === program.category)?.icon ?? Sparkles;
+    CATEGORIES.find((c) => c.id === program.category)?.icon ?? BookOpen;
 
   return (
     <Link

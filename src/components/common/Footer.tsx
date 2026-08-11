@@ -5,7 +5,7 @@ import {
   Mail,
   MapPin,
   Phone,
-  Sparkles,
+  Rocket,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -108,7 +108,7 @@ export default function Footer() {
           <div className="flex flex-col items-center justify-between gap-8 rounded-3xl border-2 border-grey-15 bg-primary-75 p-8 shadow-[4px_4px_0_0_var(--color-grey-15)] sm:p-10 lg:flex-row">
             <div className="max-w-xl text-center lg:text-left">
               <div className="mb-4 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-white px-4 py-1.5 font-semibold text-grey-15 text-xs">
-                <Sparkles className="h-3.5 w-3.5" />
+                <Rocket className="h-3.5 w-3.5" />
                 Start Your Journey
               </div>
               <h2 className="mb-2 font-black font-vietnam text-2xl text-grey-15 leading-tight sm:text-3xl">

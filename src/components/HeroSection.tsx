@@ -1,11 +1,11 @@
 import {
   Award,
+  BrainCircuit,
   Code2,
   MessageSquare,
   PieChart,
   Play,
   ShieldCheck,
-  Sparkles,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -20,7 +20,7 @@ const SKILL_TAGS = [
 ];
 
 const TOOL_ICONS = [
-  { Icon: Sparkles, label: "AI-assisted learning" },
+  { Icon: BrainCircuit, label: "AI-assisted learning" },
   { Icon: Code2, label: "Hands-on projects" },
   { Icon: PieChart, label: "Career analytics" },
   { Icon: MessageSquare, label: "1:1 mentorship" },

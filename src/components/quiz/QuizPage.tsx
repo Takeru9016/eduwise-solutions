@@ -5,11 +5,12 @@ import {
   ArrowLeft,
   ArrowRight,
   CheckCircle2,
+  Compass,
   Loader2,
   Lock,
   Mail,
+  PartyPopper,
   Phone,
-  Sparkles,
   User,
   XCircle,
 } from "lucide-react";
@@ -194,7 +195,7 @@ export default function QuizPage({ courses }: QuizPageProps) {
           <div>
             <div className="mb-8 text-center">
               <div className="mb-4 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-99 px-4 py-2 font-bold text-grey-15 text-sm">
-                <Sparkles className="h-4 w-4" />
+                <Compass className="h-4 w-4" />
                 Course Matcher
               </div>
               <h1 className="mb-3 font-black font-vietnam text-3xl text-grey-15 sm:text-4xl">
@@ -271,7 +272,7 @@ export default function QuizPage({ courses }: QuizPageProps) {
         {step === "lead" && (
           <div className="overflow-hidden rounded-3xl border-2 border-grey-15 bg-white shadow-[6px_6px_0_0_var(--color-grey-15)]">
             <div className="bg-grey-15 px-7 py-6 text-center">
-              <Sparkles className="mx-auto mb-3 h-8 w-8 text-primary-90" />
+              <PartyPopper className="mx-auto mb-3 h-8 w-8 text-primary-90" />
               <h2 className="mb-1 font-bold font-vietnam text-2xl text-white">
                 Almost there!
               </h2>

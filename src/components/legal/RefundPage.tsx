@@ -12,12 +12,12 @@ import {
   Copy,
   CreditCard,
   FileText,
+  LifeBuoy,
   Mail,
   Phone,
   RefreshCcw,
   Scale,
   ShieldCheck,
-  Sparkles,
   Target,
   Trophy,
   Users,
@@ -630,7 +630,7 @@ function BottomCTA() {
     <section className="py-16 sm:py-20">
       <div className="container">
         <div className="mx-auto max-w-4xl rounded-3xl border-2 border-grey-15 bg-grey-15 p-8 text-center text-white shadow-[6px_6px_0_0_var(--color-grey-15)] sm:p-10">
-          <Sparkles className="mx-auto mb-4 h-8 w-8 text-primary-90" />
+          <LifeBuoy className="mx-auto mb-4 h-8 w-8 text-primary-90" />
           <h3 className="mb-3 font-black font-vietnam text-white text-xl sm:text-2xl">
             Have questions about our refund policy?
           </h3>

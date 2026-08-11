@@ -5,9 +5,9 @@ import {
   Building2,
   GraduationCap,
   HelpCircle,
+  Lightbulb,
   MessageCircle,
   Search,
-  Sparkles,
   Users,
 } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -37,7 +37,7 @@ const CATEGORY_ICONS = [
   GraduationCap,
   Building2,
   BookOpen,
-  Sparkles,
+  Lightbulb,
   Users,
   HelpCircle,
 ];

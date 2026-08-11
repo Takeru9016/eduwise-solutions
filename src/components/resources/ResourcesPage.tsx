@@ -1,4 +1,4 @@
-import { DownloadCloud, Sparkles } from "lucide-react";
+import { DownloadCloud, Gift } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -33,7 +33,7 @@ export default function ResourcesPage({ resources }: ResourcesPageProps) {
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-99 px-4 py-2 font-bold text-grey-15 text-sm sm:mb-8">
-              <Sparkles className="h-4 w-4" />
+              <Gift className="h-4 w-4" />
               Free Resources
             </div>
 

@@ -3,12 +3,12 @@
 import {
   ArrowRight,
   ArrowUpRight,
+  BookOpen,
   ChevronDown,
   ChevronRight,
   Mail,
   Menu,
   Phone,
-  Sparkles,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -164,7 +164,7 @@ const DesktopMegaMenu = ({
           <div className="grid grid-cols-3 gap-0 divide-x divide-grey-15/10">
             {categoriesWithCourses.map((category) => {
               const CategoryIcon =
-                CATEGORIES.find((c) => c.id === category.id)?.icon ?? Sparkles;
+                CATEGORIES.find((c) => c.id === category.id)?.icon ?? BookOpen;
 
               return (
                 <div className="p-4" key={category.id}>
@@ -342,7 +342,7 @@ const MobileNavigation = ({
                 {categoriesWithCourses.map((category) => {
                   const CategoryIcon =
                     CATEGORIES.find((c) => c.id === category.id)?.icon ??
-                    Sparkles;
+                    BookOpen;
 
                   return (
                     <div key={category.id}>

@@ -9,7 +9,7 @@ import {
   CheckCircle,
   Clock,
   GraduationCap,
-  Sparkles,
+  Target,
   Users,
 } from "lucide-react";
 import Image from "next/image";
@@ -231,7 +231,7 @@ export default function CoursesPage({ courses }: OurCourseProps) {
               className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-99 px-4 py-2 font-semibold text-grey-15 text-sm sm:mb-8"
               data-reveal
             >
-              <Sparkles className="h-4 w-4" />
+              <Target className="h-4 w-4" />
               Your Career, Your Choice
             </div>
 

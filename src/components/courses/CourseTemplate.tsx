@@ -10,6 +10,7 @@ import {
   Building,
   Calendar,
   Check,
+  CheckCircle2,
   ChevronDown,
   Clock,
   Cloud,
@@ -30,6 +31,7 @@ import {
   Shield,
   Sparkles,
   Star,
+  Tag,
   Target,
   TrendingUp,
   UserCheck,
@@ -97,9 +99,9 @@ const ICON_MAP: Record<string, LucideIcon> = {
 
 function getIcon(name?: string): LucideIcon {
   if (!name) {
-    return Sparkles;
+    return CheckCircle2;
   }
-  return ICON_MAP[name] || Sparkles;
+  return ICON_MAP[name] || CheckCircle2;
 }
 
 const CARD_TINTS = [
@@ -273,7 +275,7 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
                 className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-99 px-4 py-2 font-semibold text-grey-15 text-sm"
                 data-reveal
               >
-                <Sparkles className="h-4 w-4" />
+                <GraduationCap className="h-4 w-4" />
                 {course.subtitle}
               </div>
 
@@ -793,7 +795,7 @@ function PricingCard({
       <div className="relative flex flex-col justify-center bg-grey-15 p-8 sm:p-10">
         {discount > 0 && (
           <span className="mb-6 inline-flex w-fit items-center gap-1.5 rounded-full border-2 border-grey-15 bg-gold px-4 py-1.5 font-bold text-grey-15 text-xs">
-            <Sparkles className="h-3 w-3" />
+            <Tag className="h-3 w-3" />
             {discount}% OFF - Limited Seats
           </span>
         )}

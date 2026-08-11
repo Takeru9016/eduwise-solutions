@@ -1,7 +1,7 @@
 "use client";
 
 import { gsap } from "gsap";
-import { Check, Sparkles } from "lucide-react";
+import { BookOpen, Check, Star, Wallet } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 
@@ -61,7 +61,7 @@ function PricingCard({
     ? Math.round(((originalPrice - course.price) / originalPrice) * 100)
     : 0;
   const category = CATEGORIES.find((c) => c.id === course.category);
-  const CategoryIcon = category?.icon ?? Sparkles;
+  const CategoryIcon = category?.icon ?? BookOpen;
   const tint = CARD_TINTS[index % CARD_TINTS.length];
 
   return (
@@ -71,7 +71,7 @@ function PricingCard({
     >
       {course.featured && (
         <span className="absolute top-4 right-4 z-10 inline-flex items-center gap-1 rounded-full border-2 border-grey-15 bg-gold px-3 py-1 font-bold text-grey-15 text-xs">
-          <Sparkles className="h-3 w-3" />
+          <Star className="h-3 w-3" />
           Popular
         </span>
       )}
@@ -205,7 +205,7 @@ export default function PricingPage({ courses }: PricingPageProps) {
               className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-99 px-4 py-2 font-semibold text-grey-15 text-sm sm:mb-8"
               data-reveal
             >
-              <Sparkles className="h-4 w-4" />
+              <Wallet className="h-4 w-4" />
               Transparent Pricing
             </div>
 

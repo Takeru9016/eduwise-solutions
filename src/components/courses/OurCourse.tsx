@@ -18,6 +18,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { CATEGORIES } from "@/data/courses";
+import { prefersReducedMotion } from "@/lib/utils";
 
 // Types
 export interface SanityCourseListItem {
@@ -194,7 +195,7 @@ export default function CoursesPage({ courses }: OurCourseProps) {
 
   useEffect(() => {
     const hero = heroRef.current;
-    if (!hero) {
+    if (!hero || prefersReducedMotion()) {
       return;
     }
     const targets = hero.querySelectorAll("[data-reveal]");
@@ -207,7 +208,7 @@ export default function CoursesPage({ courses }: OurCourseProps) {
 
   useEffect(() => {
     const cards = cardRefs.current.filter(Boolean);
-    if (!cards.length) {
+    if (!cards.length || prefersReducedMotion()) {
       return;
     }
     const tween = gsap.fromTo(

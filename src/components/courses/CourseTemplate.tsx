@@ -47,6 +47,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import { prefersReducedMotion } from "@/lib/utils";
 import type {
   CareerTrackItem,
   CourseContent,
@@ -122,7 +123,7 @@ function useStaggerReveal<T extends HTMLElement>(count: number) {
 
   useEffect(() => {
     const items = itemRefs.current.filter(Boolean);
-    if (!items.length) {
+    if (!items.length || prefersReducedMotion()) {
       return;
     }
     const tween = gsap.fromTo(
@@ -216,7 +217,7 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
 
   useEffect(() => {
     const hero = heroRef.current;
-    if (!hero) {
+    if (!hero || prefersReducedMotion()) {
       return;
     }
     const targets = hero.querySelectorAll("[data-reveal]");
@@ -799,16 +800,16 @@ function PricingCard({
         <p className="mb-2 font-bold text-primary-90 text-xs uppercase tracking-wider">
           One-time Payment
         </p>
-        <p className="font-black font-vietnam text-5xl text-white">
+        <p className="font-black font-vietnam text-5xl text-white tabular-nums">
           ₹{course.price.toLocaleString("en-IN")}
         </p>
         {hasDiscount && (
-          <p className="mt-2 text-lg text-white/50 line-through">
+          <p className="mt-2 text-lg text-white/50 tabular-nums line-through">
             ₹{course.originalPrice.toLocaleString("en-IN")}
           </p>
         )}
         {hasSaving && (
-          <p className="mt-4 font-bold text-primary-90 text-sm">
+          <p className="mt-4 font-bold text-primary-90 text-sm tabular-nums">
             You save ₹{saving.toLocaleString("en-IN")}
           </p>
         )}

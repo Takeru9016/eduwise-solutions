@@ -248,14 +248,14 @@ const DesktopNavLinks = ({
 const DesktopCTAs = () => (
   <div className="hidden items-center gap-3 lg:flex">
     <Link
-      className="inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-white px-5 py-2.5 font-bold text-grey-15 text-sm transition-transform hover:-translate-y-0.5"
+      className="inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-white px-5 py-2.5 font-bold text-grey-15 text-sm transition-transform hover:-translate-y-0.5 active:scale-[0.97]"
       href="https://learner.eduwise.solutions/"
       target="_blank"
     >
       LMS Login
     </Link>
     <Link
-      className="group inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-75 px-5 py-2.5 font-bold text-grey-15 text-sm transition-transform hover:-translate-y-0.5"
+      className="group inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-75 px-5 py-2.5 font-bold text-grey-15 text-sm transition-transform hover:-translate-y-0.5 active:scale-[0.97]"
       href="/contact"
     >
       Contact Us
@@ -400,7 +400,7 @@ const MobileNavigation = ({
             ))}
 
             <Link
-              className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full border-2 border-grey-15 bg-white px-5 py-3 font-bold text-grey-15 transition-transform hover:-translate-y-0.5"
+              className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full border-2 border-grey-15 bg-white px-5 py-3 font-bold text-grey-15 transition-transform hover:-translate-y-0.5 active:scale-[0.97]"
               href="https://learner.eduwise.solutions/"
               onClick={handleClose}
               target="_blank"
@@ -409,7 +409,7 @@ const MobileNavigation = ({
             </Link>
 
             <Link
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full border-2 border-grey-15 bg-primary-75 px-5 py-3 font-bold text-grey-15 transition-transform hover:-translate-y-0.5"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full border-2 border-grey-15 bg-primary-75 px-5 py-3 font-bold text-grey-15 transition-transform hover:-translate-y-0.5 active:scale-[0.97]"
               href="/contact"
               onClick={handleClose}
             >

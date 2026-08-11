@@ -12,6 +12,7 @@ import {
 import Link from "next/link";
 import { Accordion as AccordionPrimitive } from "radix-ui";
 import { useEffect, useRef } from "react";
+import { prefersReducedMotion } from "@/lib/utils";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -57,7 +58,7 @@ export default function FAQsSection() {
   useEffect(() => {
     const section = sectionRef.current;
     const items = itemRefs.current.filter(Boolean);
-    if (!(section && items.length)) {
+    if (!(section && items.length) || prefersReducedMotion()) {
       return;
     }
 
@@ -109,7 +110,7 @@ export default function FAQsSection() {
                 to help.
               </p>
               <Link
-                className="group inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-white px-6 py-3 font-bold text-grey-15 transition-transform hover:-translate-y-0.5"
+                className="group inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-white px-6 py-3 font-bold text-grey-15 transition-transform hover:-translate-y-0.5 active:scale-[0.97]"
                 href="/contact"
               >
                 Talk to Our Team

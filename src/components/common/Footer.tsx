@@ -122,7 +122,7 @@ export default function Footer() {
 
             <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
               <Link
-                className="group inline-flex items-center justify-center gap-2 rounded-full border-2 border-grey-15 bg-grey-15 px-6 py-3 font-bold text-sm text-white transition-transform hover:-translate-y-0.5"
+                className="group inline-flex items-center justify-center gap-2 rounded-full border-2 border-grey-15 bg-grey-15 px-6 py-3 font-bold text-sm text-white transition-transform hover:-translate-y-0.5 active:scale-[0.97]"
                 href="/courses"
               >
                 <GraduationCap className="h-4 w-4" />
@@ -130,7 +130,7 @@ export default function Footer() {
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
-                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-grey-15 bg-white px-6 py-3 font-bold text-grey-15 text-sm transition-transform hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-grey-15 bg-white px-6 py-3 font-bold text-grey-15 text-sm transition-transform hover:-translate-y-0.5 active:scale-[0.97]"
                 href="/contact"
               >
                 <Phone className="h-4 w-4" />
@@ -193,7 +193,7 @@ export default function Footer() {
               {socialLinks.map((social) => (
                 <Link
                   aria-label={social.label}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-grey-15 bg-white transition-transform duration-200 hover:-translate-y-0.5"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-grey-15 bg-white transition-transform duration-200 hover:-translate-y-0.5 active:scale-[0.97]"
                   href={social.href}
                   key={social.label}
                   rel="noopener noreferrer"

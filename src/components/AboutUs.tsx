@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import { prefersReducedMotion } from "@/lib/utils";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -32,7 +33,7 @@ function useStaggerReveal<T extends HTMLElement>(count: number) {
   useEffect(() => {
     const container = containerRef.current;
     const items = itemRefs.current.filter(Boolean);
-    if (!(container && items.length)) {
+    if (!(container && items.length) || prefersReducedMotion()) {
       return;
     }
     const tween = gsap.fromTo(
@@ -100,7 +101,7 @@ export default function AboutUs() {
 
   useEffect(() => {
     const hero = heroRef.current;
-    if (!hero) {
+    if (!hero || prefersReducedMotion()) {
       return;
     }
     const targets = hero.querySelectorAll("[data-reveal]");
@@ -202,7 +203,7 @@ export default function AboutUs() {
                 Computing.
               </p>
               <p className="mb-8 text-grey-35 text-lg leading-relaxed">
-                Our counsellors sit with every learner one-on-one to map out a
+                Our counselors sit with every learner one-on-one to map out a
                 career goal before the first class starts, then track progress
                 against it through placement.
               </p>

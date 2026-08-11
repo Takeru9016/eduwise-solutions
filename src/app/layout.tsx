@@ -71,9 +71,15 @@ export default function RootLayout({
           }}
           type="application/ld+json"
         />
+        <a
+          className="sr-only rounded-full border-2 border-grey-15 bg-white px-4 py-2 font-bold text-grey-15 text-sm shadow-[4px_4px_0_0_var(--color-grey-15)] focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-100"
+          href="#main-content"
+        >
+          Skip to main content
+        </a>
         <MetaPixel />
         <LinkedInInsight />
-        {children}
+        <div id="main-content">{children}</div>
         <PopupForm />
         <Toaster
           position="top-center"
@@ -85,11 +91,11 @@ export default function RootLayout({
               cancelButton:
                 "bg-gray-200 text-gray-800 px-3 py-1 rounded-md ml-2 text-sm",
               description: "text-sm text-gray-600 mt-1",
-              error: "border-l-4 border-red-500",
-              success: "border-l-4 border-green-500",
+              error: "border-2 border-red-500",
+              success: "border-2 border-green-500",
               title: "font-medium text-gray-900",
               toast:
-                "group toast group flex w-full items-center border-l-4 border-green-500 p-4 pr-10 shadow-lg",
+                "group toast group flex w-full items-center border-2 border-grey-15 p-4 pr-10 shadow-lg",
             },
           }}
         />

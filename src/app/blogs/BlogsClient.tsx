@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 
-import { formatDate } from "@/lib/utils";
+import { formatDate, prefersReducedMotion } from "@/lib/utils";
 import { urlFor } from "@/sanity/lib/image";
 
 interface Category {
@@ -211,7 +211,7 @@ export default function BlogsClient({ posts, categories }: BlogsClientProps) {
 
   useEffect(() => {
     const hero = heroRef.current;
-    if (!hero) {
+    if (!hero || prefersReducedMotion()) {
       return;
     }
     const targets = hero.querySelectorAll("[data-reveal]");
@@ -224,7 +224,7 @@ export default function BlogsClient({ posts, categories }: BlogsClientProps) {
 
   useEffect(() => {
     const cards = cardRefs.current.filter(Boolean);
-    if (!cards.length) {
+    if (!cards.length || prefersReducedMotion()) {
       return;
     }
     const tween = gsap.fromTo(

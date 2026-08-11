@@ -9,11 +9,11 @@ import {
   GraduationCap,
   LayoutGrid,
   type LucideIcon,
-  Sparkles,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import { prefersReducedMotion } from "@/lib/utils";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -150,7 +150,7 @@ export default function BenefitSection() {
   useEffect(() => {
     const section = sectionRef.current;
     const cards = cardRefs.current.filter(Boolean);
-    if (!(section && cards.length)) {
+    if (!(section && cards.length) || prefersReducedMotion()) {
       return;
     }
 
@@ -178,10 +178,6 @@ export default function BenefitSection() {
       <div className="container">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-14">
           <div className="flex flex-col justify-center">
-            <div className="mb-4 inline-flex w-fit items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-99 px-4 py-2 font-semibold text-grey-15 text-sm">
-              <Sparkles className="h-4 w-4" />
-              Why Students Choose Us
-            </div>
             <h2 className="mb-4 font-black font-vietnam text-3xl text-grey-15 tracking-tight md:text-4xl">
               Benefits That Set Us Apart
             </h2>

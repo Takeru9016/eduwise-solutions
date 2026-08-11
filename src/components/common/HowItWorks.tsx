@@ -11,6 +11,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { prefersReducedMotion } from "@/lib/utils";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -106,7 +107,7 @@ export default function HowItWorks() {
   useEffect(() => {
     const path = pathRef.current;
     const section = sectionRef.current;
-    if (!(path && section && pathD)) {
+    if (!(path && section && pathD) || prefersReducedMotion()) {
       return;
     }
 

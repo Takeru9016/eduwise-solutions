@@ -7,6 +7,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { CATEGORIES } from "@/data/courses";
+import { prefersReducedMotion } from "@/lib/utils";
 
 export interface PricingCourse {
   _id: string;
@@ -107,11 +108,11 @@ function PricingCard({
 
         <div className="mb-5">
           <div className="flex items-baseline gap-2">
-            <span className="font-black font-vietnam text-3xl text-grey-15">
+            <span className="font-black font-vietnam text-3xl text-grey-15 tabular-nums">
               {formatInr(course.price)}
             </span>
             {hasDiscount && (
-              <span className="text-grey-50 text-sm line-through">
+              <span className="text-grey-50 text-sm tabular-nums line-through">
                 {formatInr(originalPrice)}
               </span>
             )}
@@ -169,7 +170,7 @@ export default function PricingPage({ courses }: PricingPageProps) {
 
   useEffect(() => {
     const hero = heroRef.current;
-    if (!hero) {
+    if (!hero || prefersReducedMotion()) {
       return;
     }
     const targets = hero.querySelectorAll("[data-reveal]");
@@ -182,7 +183,7 @@ export default function PricingPage({ courses }: PricingPageProps) {
 
   useEffect(() => {
     const cards = cardRefs.current.filter(Boolean);
-    if (!cards.length) {
+    if (!cards.length || prefersReducedMotion()) {
       return;
     }
     const tween = gsap.fromTo(

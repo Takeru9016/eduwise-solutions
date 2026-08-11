@@ -1,4 +1,4 @@
-import { ArrowUpRight, Sparkles } from "lucide-react";
+import { ArrowUpRight, GraduationCap } from "lucide-react";
 import Link from "next/link";
 
 import { CATEGORIES, COURSES } from "@/data/courses";
@@ -29,7 +29,7 @@ export default function DomainsShowcase() {
       <div className="container">
         <div className="mb-12 text-center lg:mb-16">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-99 px-4 py-2 font-semibold text-grey-15 text-sm">
-            <Sparkles className="h-4 w-4" />
+            <GraduationCap className="h-4 w-4" />
             {totalPrograms}+ Career Programs
           </div>
           <h2 className="mb-4 font-black font-vietnam text-4xl text-grey-15 tracking-tight sm:text-5xl">

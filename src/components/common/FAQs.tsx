@@ -5,9 +5,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   ArrowUpRight,
   MessageCircle,
+  MessageCircleQuestion,
   Minus,
   Plus,
-  Sparkles,
 } from "lucide-react";
 import Link from "next/link";
 import { Accordion as AccordionPrimitive } from "radix-ui";
@@ -87,7 +87,7 @@ export default function FAQsSection() {
         <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[1fr_1.4fr]">
           <div className="lg:sticky lg:top-24">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-99 px-4 py-2 font-semibold text-grey-15 text-sm">
-              <Sparkles className="h-4 w-4" />
+              <MessageCircleQuestion className="h-4 w-4" />
               Get Quick Answers
             </div>
             <h2 className="mb-4 font-black font-vietnam text-3xl text-grey-15 tracking-tight md:text-4xl">

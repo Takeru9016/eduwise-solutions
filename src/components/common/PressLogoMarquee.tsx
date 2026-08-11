@@ -50,7 +50,7 @@ export function PressLogoMarquee({ logos }: { logos: MarqueeLogo[] }) {
       <div className="flex w-max items-center gap-12 sm:gap-16" ref={trackRef}>
         {doubled.map((logo, index) => (
           <div
-            className="relative h-8 w-28 shrink-0 grayscale transition-all duration-200 hover:grayscale-0 sm:h-9 sm:w-32"
+            className="relative h-8 w-28 shrink-0 grayscale transition-[filter] duration-200 hover:grayscale-0 sm:h-9 sm:w-32"
             key={`${logo.name}-${index}`}
           >
             <Image

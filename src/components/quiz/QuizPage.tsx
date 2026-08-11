@@ -233,7 +233,7 @@ export default function QuizPage({ courses }: QuizPageProps) {
                     const selected = answers[question.id] === option.value;
                     return (
                       <label
-                        className={`flex cursor-pointer items-center gap-3 rounded-2xl border-2 p-4 transition-all ${
+                        className={`flex cursor-pointer items-center gap-3 rounded-2xl border-2 p-4 transition-colors ${
                           selected
                             ? "border-grey-15 bg-primary-90"
                             : "border-grey-15/15 hover:border-grey-15"
@@ -290,7 +290,7 @@ export default function QuizPage({ courses }: QuizPageProps) {
                   <User className="absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-grey-40" />
                   <input
                     {...register("name")}
-                    className={`h-12 w-full rounded-xl border-2 bg-light-97 pr-4 pl-11 text-grey-15 text-sm transition-all placeholder:text-grey-40 focus:outline-hidden ${
+                    className={`h-12 w-full rounded-xl border-2 bg-light-97 pr-4 pl-11 text-grey-15 text-sm transition-colors placeholder:text-grey-40 focus:outline-hidden ${
                       errors.name
                         ? "border-red-400"
                         : "border-grey-15/20 focus:border-primary-75"
@@ -312,7 +312,7 @@ export default function QuizPage({ courses }: QuizPageProps) {
                   <Mail className="absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-grey-40" />
                   <input
                     {...register("email")}
-                    className={`h-12 w-full rounded-xl border-2 bg-light-97 pr-4 pl-11 text-grey-15 text-sm transition-all placeholder:text-grey-40 focus:outline-hidden ${
+                    className={`h-12 w-full rounded-xl border-2 bg-light-97 pr-4 pl-11 text-grey-15 text-sm transition-colors placeholder:text-grey-40 focus:outline-hidden ${
                       errors.email
                         ? "border-red-400"
                         : "border-grey-15/20 focus:border-primary-75"
@@ -338,7 +338,7 @@ export default function QuizPage({ courses }: QuizPageProps) {
                     <Phone className="absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-grey-40" />
                     <input
                       {...register("mobile")}
-                      className={`h-12 w-full rounded-r-xl border-2 bg-light-97 pr-4 pl-11 text-grey-15 text-sm transition-all placeholder:text-grey-40 focus:outline-hidden ${
+                      className={`h-12 w-full rounded-r-xl border-2 bg-light-97 pr-4 pl-11 text-grey-15 text-sm transition-colors placeholder:text-grey-40 focus:outline-hidden ${
                         errors.mobile
                           ? "border-red-400"
                           : "border-grey-15/20 focus:border-primary-75"

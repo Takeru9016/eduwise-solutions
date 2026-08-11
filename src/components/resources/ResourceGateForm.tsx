@@ -120,7 +120,7 @@ export default function ResourceGateForm({
             <User className="absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-grey-40" />
             <input
               {...register("name")}
-              className={`h-12 w-full rounded-xl border-2 bg-light-97 pr-4 pl-11 text-grey-15 text-sm transition-all placeholder:text-grey-40 focus:outline-hidden ${
+              className={`h-12 w-full rounded-xl border-2 bg-light-97 pr-4 pl-11 text-grey-15 text-sm transition-colors placeholder:text-grey-40 focus:outline-hidden ${
                 errors.name
                   ? "border-red-400"
                   : "border-grey-15/20 focus:border-primary-75"
@@ -142,7 +142,7 @@ export default function ResourceGateForm({
             <Mail className="absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-grey-40" />
             <input
               {...register("email")}
-              className={`h-12 w-full rounded-xl border-2 bg-light-97 pr-4 pl-11 text-grey-15 text-sm transition-all placeholder:text-grey-40 focus:outline-hidden ${
+              className={`h-12 w-full rounded-xl border-2 bg-light-97 pr-4 pl-11 text-grey-15 text-sm transition-colors placeholder:text-grey-40 focus:outline-hidden ${
                 errors.email
                   ? "border-red-400"
                   : "border-grey-15/20 focus:border-primary-75"

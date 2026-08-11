@@ -112,7 +112,7 @@ export default function ToolsSection() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           {toolsData.map((cat) => (
             <div
-              className="flex flex-col items-center rounded-xl border border-light-90 bg-white p-8 text-center shadow-lg transition-all duration-300 hover:border-primary-90"
+              className="flex flex-col items-center rounded-xl border border-light-90 bg-white p-8 text-center shadow-lg transition-colors duration-300 hover:border-primary-90"
               key={cat.title}
             >
               <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary-95">

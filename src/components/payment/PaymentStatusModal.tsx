@@ -98,7 +98,7 @@ export default function PaymentStatusModal({
       />
 
       {/* Modal */}
-      <div className="relative mx-4 w-full max-w-md transform rounded-lg bg-white p-8 shadow-xl transition-all duration-300 ease-in-out">
+      <div className="relative mx-4 w-full max-w-md rounded-lg bg-white p-8 shadow-xl">
         <div
           className={`${details.bgColor} mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full`}
         >

@@ -17,7 +17,7 @@ export interface SanityPressFeature {
 export function PressCard({ feature }: { feature: SanityPressFeature }) {
   return (
     <Link
-      className="group relative flex h-full flex-col justify-between rounded-3xl border-2 border-grey-15 bg-white p-6 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)] sm:p-7"
+      className="group relative flex h-full flex-col justify-between rounded-3xl border-2 border-grey-15 bg-white p-6 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-[transform,box-shadow] duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)] sm:p-7"
       href={feature.articleUrl}
       rel="noopener noreferrer"
       target="_blank"

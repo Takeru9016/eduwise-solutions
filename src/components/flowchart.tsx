@@ -39,7 +39,7 @@ export function Flowchart({
           <React.Fragment key={step._key}>
             {/* Step Box */}
             <div
-              className={`group relative rounded-lg px-6 py-4 shadow-md transition-all duration-300 hover:scale-105 hover:shadow-xl ${
+              className={`group relative rounded-lg px-6 py-4 shadow-md transition-[transform,box-shadow] duration-300 hover:scale-105 hover:shadow-xl ${
                 step.color === "primary"
                   ? "bg-primary-75 text-white"
                   : step.color === "secondary"

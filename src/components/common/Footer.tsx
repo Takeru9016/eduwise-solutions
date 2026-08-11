@@ -88,7 +88,7 @@ const LinkGroup = ({
             className="group inline-flex items-center gap-1.5 text-grey-40 text-sm transition-colors duration-200 hover:text-grey-15"
             href={link.href}
           >
-            <ArrowRight className="-ml-4 h-3 w-3 opacity-0 transition-all duration-200 group-hover:ml-0 group-hover:opacity-60" />
+            <ArrowRight className="h-3 w-3 -translate-x-4 opacity-0 transition-[transform,opacity] duration-200 group-hover:translate-x-0 group-hover:opacity-60" />
             {link.label}
           </Link>
         </li>

@@ -60,7 +60,7 @@ export default function ResourcesPage({ resources }: ResourcesPageProps) {
                 const tint = CARD_TINTS[index % CARD_TINTS.length];
                 return (
                   <Link
-                    className={`group flex flex-col overflow-hidden rounded-2xl border-2 border-grey-15 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)] ${tint}`}
+                    className={`group flex flex-col overflow-hidden rounded-2xl border-2 border-grey-15 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-[transform,box-shadow] duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)] ${tint}`}
                     href={`/resources/${resource.slug.current}`}
                     key={resource._id}
                   >

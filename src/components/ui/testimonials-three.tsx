@@ -100,7 +100,7 @@ export function TestimonialsThree({
         <div className="columns-1 gap-5 sm:columns-2 lg:columns-3">
           {sorted.map((t, index) => (
             <div
-              className={`group mb-5 break-inside-avoid rounded-2xl border-2 border-grey-15 p-6 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)] md:p-7 ${CARD_TINTS[index % CARD_TINTS.length]}`}
+              className={`group mb-5 break-inside-avoid rounded-2xl border-2 border-grey-15 p-6 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-[transform,box-shadow] duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)] md:p-7 ${CARD_TINTS[index % CARD_TINTS.length]}`}
               key={t.id}
               ref={(el) => {
                 cardRefs.current[index] = el;

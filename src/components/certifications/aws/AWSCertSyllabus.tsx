@@ -50,7 +50,7 @@ function CertTab({
   return (
     <button
       aria-selected={active}
-      className={`flex min-h-11 shrink-0 items-center gap-2 whitespace-nowrap rounded-xl border-2 px-4 py-2.5 font-bold text-sm transition-all duration-200 focus:outline-hidden focus:ring-2 focus:ring-primary-75 lg:w-full lg:shrink lg:justify-start ${
+      className={`flex min-h-11 shrink-0 items-center gap-2 whitespace-nowrap rounded-xl border-2 px-4 py-2.5 font-bold text-sm transition-[color,background-color,border-color,box-shadow] duration-200 focus:outline-hidden focus:ring-2 focus:ring-primary-75 lg:w-full lg:shrink lg:justify-start ${
         active
           ? "border-grey-15 bg-primary-75 text-grey-15"
           : `${s.bg} border-grey-15/15 text-grey-35 hover:border-grey-15`
@@ -80,7 +80,7 @@ function SectionTab({
   return (
     <button
       aria-selected={active}
-      className={`flex min-h-11 shrink-0 items-center gap-2 whitespace-nowrap rounded-xl border-2 px-4 py-2.5 font-bold text-sm transition-all duration-200 focus:outline-hidden focus:ring-2 focus:ring-primary-75 ${
+      className={`flex min-h-11 shrink-0 items-center gap-2 whitespace-nowrap rounded-xl border-2 px-4 py-2.5 font-bold text-sm transition-[color,background-color,border-color,box-shadow] duration-200 focus:outline-hidden focus:ring-2 focus:ring-primary-75 ${
         active
           ? "border-grey-15 bg-grey-15 text-white"
           : "border-grey-15/15 bg-white text-grey-35 hover:border-grey-15"

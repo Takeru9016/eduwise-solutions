@@ -95,7 +95,7 @@ const TextCard = ({
 
   return (
     <div
-      className={`group flex flex-col gap-3 rounded-2xl border-2 border-grey-15 p-5 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)] sm:p-6 ${benefit.tint}`}
+      className={`group flex flex-col gap-3 rounded-2xl border-2 border-grey-15 p-5 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-[transform,box-shadow] duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)] sm:p-6 ${benefit.tint}`}
       ref={cardRef}
     >
       <div className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-grey-15 bg-white">
@@ -121,7 +121,7 @@ const ImageCard = ({
   cardRef: (el: HTMLDivElement | null) => void;
 }) => (
   <div
-    className="group relative h-48 overflow-hidden rounded-2xl border-2 border-grey-15 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)] sm:h-full sm:min-h-48"
+    className="group relative h-48 overflow-hidden rounded-2xl border-2 border-grey-15 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-[transform,box-shadow] duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)] sm:h-full sm:min-h-48"
     ref={cardRef}
   >
     <Image

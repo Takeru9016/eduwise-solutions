@@ -131,7 +131,7 @@ export default function PlacementSection({
               className="pl-4 md:basis-1/2 lg:basis-1/3"
               key={student._id}
             >
-              <div className="group h-full rounded-3xl border-2 border-grey-15 bg-white p-6 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)]">
+              <div className="group h-full rounded-3xl border-2 border-grey-15 bg-white p-6 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-[transform,box-shadow] duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)]">
                 <div className="mb-5 flex items-center gap-4 border-grey-15/10 border-b pb-5">
                   <div className="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-grey-15 bg-primary-99">
                     {student.image ? (

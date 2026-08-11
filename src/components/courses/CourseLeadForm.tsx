@@ -161,7 +161,7 @@ export default function CourseLeadForm({ courseTitle }: CourseLeadFormProps) {
             <User className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 text-grey-40" />
             <input
               {...register("name")}
-              className={`h-14 w-full rounded-xl border-2 bg-light-97 pr-4 pl-12 text-base text-grey-15 transition-all placeholder:text-grey-40 focus:outline-hidden ${
+              className={`h-14 w-full rounded-xl border-2 bg-light-97 pr-4 pl-12 text-base text-grey-15 transition-colors placeholder:text-grey-40 focus:outline-hidden ${
                 errors.name
                   ? "border-red-400"
                   : "border-grey-15/20 focus:border-primary-75"
@@ -183,7 +183,7 @@ export default function CourseLeadForm({ courseTitle }: CourseLeadFormProps) {
             <Mail className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 text-grey-40" />
             <input
               {...register("email")}
-              className={`h-14 w-full rounded-xl border-2 bg-light-97 pr-4 pl-12 text-base text-grey-15 transition-all placeholder:text-grey-40 focus:outline-hidden ${
+              className={`h-14 w-full rounded-xl border-2 bg-light-97 pr-4 pl-12 text-base text-grey-15 transition-colors placeholder:text-grey-40 focus:outline-hidden ${
                 errors.email
                   ? "border-red-400"
                   : "border-grey-15/20 focus:border-primary-75"
@@ -209,7 +209,7 @@ export default function CourseLeadForm({ courseTitle }: CourseLeadFormProps) {
               <Phone className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 text-grey-40" />
               <input
                 {...register("mobile")}
-                className={`h-14 w-full rounded-r-xl border-2 bg-light-97 pr-4 pl-12 text-base text-grey-15 transition-all placeholder:text-grey-40 focus:outline-hidden ${
+                className={`h-14 w-full rounded-r-xl border-2 bg-light-97 pr-4 pl-12 text-base text-grey-15 transition-colors placeholder:text-grey-40 focus:outline-hidden ${
                   errors.mobile
                     ? "border-red-400"
                     : "border-grey-15/20 focus:border-primary-75"
@@ -237,7 +237,7 @@ export default function CourseLeadForm({ courseTitle }: CourseLeadFormProps) {
                 type="checkbox"
               />
               <div
-                className={`flex h-5 w-5 items-center justify-center rounded border-2 transition-all ${
+                className={`flex h-5 w-5 items-center justify-center rounded border-2 transition-colors ${
                   errors.consent
                     ? "border-red-400"
                     : consentChecked
@@ -272,7 +272,7 @@ export default function CourseLeadForm({ courseTitle }: CourseLeadFormProps) {
         )}
 
         <button
-          className="flex h-14 w-full items-center justify-center gap-2 rounded-full border-2 border-grey-15 bg-primary-75 font-bold font-vietnam text-base text-grey-15 tracking-wide transition-all duration-200 hover:bg-primary-90 disabled:cursor-not-allowed disabled:opacity-60"
+          className="flex h-14 w-full items-center justify-center gap-2 rounded-full border-2 border-grey-15 bg-primary-75 font-bold font-vietnam text-base text-grey-15 tracking-wide transition-[background-color,opacity] duration-200 hover:bg-primary-90 disabled:cursor-not-allowed disabled:opacity-60"
           disabled={status === "loading"}
           type="submit"
         >

@@ -147,8 +147,8 @@ export default function FAQsSection() {
                     </span>
                   </AccordionPrimitive.Trigger>
                 </AccordionPrimitive.Header>
-                <AccordionPrimitive.Content className="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
-                  <p className="px-6 pb-6 pl-17 text-grey-70 leading-relaxed sm:pl-20">
+                <AccordionPrimitive.Content className="grid transition-[grid-template-rows] duration-200 ease-out data-[state=closed]:grid-rows-[0fr] data-[state=open]:grid-rows-[1fr]">
+                  <p className="min-h-0 overflow-hidden px-6 pb-6 pl-17 text-grey-70 leading-relaxed sm:pl-20">
                     {faq.answer}
                   </p>
                 </AccordionPrimitive.Content>

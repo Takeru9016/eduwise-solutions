@@ -386,7 +386,7 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
               const tint = CARD_TINTS[i % CARD_TINTS.length];
               return (
                 <div
-                  className={`flex flex-col gap-3 rounded-2xl border-2 border-grey-15 p-6 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)] ${tint}`}
+                  className={`flex flex-col gap-3 rounded-2xl border-2 border-grey-15 p-6 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-[transform,box-shadow] duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)] ${tint}`}
                   key={feature.title}
                   ref={(el) => {
                     features.itemRefs.current[i] = el;

@@ -34,7 +34,7 @@ const AccordionTrigger = ({
   <AccordionPrimitive.Header className="flex">
     <AccordionPrimitive.Trigger
       className={cn(
-        "flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180",
+        "flex flex-1 items-center justify-between py-4 font-medium hover:underline [&[data-state=open]>svg]:rotate-180",
         className
       )}
       ref={ref}
@@ -56,11 +56,13 @@ const AccordionContent = ({
   ref?: React.Ref<React.ElementRef<typeof AccordionPrimitive.Content>>;
 }) => (
   <AccordionPrimitive.Content
-    className="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+    className="grid text-sm transition-[grid-template-rows] duration-200 ease-out data-[state=closed]:grid-rows-[0fr] data-[state=open]:grid-rows-[1fr]"
     ref={ref}
     {...props}
   >
-    <div className={cn("pt-0 pb-4", className)}>{children}</div>
+    <div className={cn("min-h-0 overflow-hidden pt-0 pb-4", className)}>
+      {children}
+    </div>
   </AccordionPrimitive.Content>
 );
 

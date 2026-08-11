@@ -138,7 +138,7 @@ const DesktopMegaMenu = ({
       </Link>
 
       {/* Mega-menu panel */}
-      <div className="invisible absolute top-full left-[-340px] z-50 pt-4 opacity-0 transition-all duration-200 group-hover/courses:visible group-hover/courses:opacity-100">
+      <div className="invisible absolute top-full left-[-340px] z-50 pt-4 opacity-0 transition-opacity duration-200 group-hover/courses:visible group-hover/courses:opacity-100">
         <div className="w-[860px] overflow-hidden rounded-3xl border-2 border-grey-15 bg-white shadow-[8px_8px_0_0_var(--color-grey-15)]">
           {/* Header */}
           <div className="flex items-center justify-between border-grey-15 border-b-2 bg-primary-99 px-6 py-4">
@@ -464,7 +464,7 @@ export default function Navbar({ categoriesWithCourses }: NavbarProps) {
 
   const navClasses = useMemo(
     () =>
-      `w-full py-4 sticky top-0 bg-white/85 backdrop-blur-md z-50 transition-all duration-300 ${
+      `w-full py-4 sticky top-0 bg-white/85 backdrop-blur-md z-50 transition-[box-shadow,border-color] duration-300 ${
         scrolled
           ? "shadow-sm border-b-2 border-grey-15"
           : "border-b-2 border-transparent"

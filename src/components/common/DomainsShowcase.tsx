@@ -48,7 +48,7 @@ export default function DomainsShowcase() {
 
             return (
               <Link
-                className={`group relative flex flex-col justify-between overflow-hidden rounded-3xl border-2 border-grey-15 p-6 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)] sm:p-8 ${domain.span} ${domain.tint}`}
+                className={`group relative flex flex-col justify-between overflow-hidden rounded-3xl border-2 border-grey-15 p-6 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-[transform,box-shadow] duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)] sm:p-8 ${domain.span} ${domain.tint}`}
                 href={`/courses?category=${domain.id}`}
                 key={domain.id}
               >

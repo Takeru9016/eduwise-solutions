@@ -10,13 +10,14 @@ import {
   CheckCircle2,
   GraduationCap,
   Handshake,
+  ListChecks,
   Rocket,
-  Sparkles,
   Target,
   Users,
 } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import { prefersReducedMotion } from "@/lib/utils";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -32,7 +33,7 @@ function useStaggerReveal<T extends HTMLElement>(count: number) {
   useEffect(() => {
     const container = containerRef.current;
     const items = itemRefs.current.filter(Boolean);
-    if (!(container && items.length)) {
+    if (!(container && items.length) || prefersReducedMotion()) {
       return;
     }
     const tween = gsap.fromTo(
@@ -68,7 +69,7 @@ const pipelineSteps = [
   {
     description:
       "Resume building, LinkedIn optimization, communication, interview technique, Excel, call pitching, and more.",
-    icon: Sparkles,
+    icon: ListChecks,
     title: "Skill Development",
   },
   {
@@ -100,7 +101,7 @@ export default function AboutUs() {
 
   useEffect(() => {
     const hero = heroRef.current;
-    if (!hero) {
+    if (!hero || prefersReducedMotion()) {
       return;
     }
     const targets = hero.querySelectorAll("[data-reveal]");
@@ -119,7 +120,7 @@ export default function AboutUs() {
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1fr_1fr] lg:gap-16">
             <div data-reveal>
               <div className="mb-4 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-99 px-4 py-2 font-semibold text-grey-15 text-sm">
-                <Sparkles className="h-4 w-4" />
+                <Handshake className="h-4 w-4" />
                 Welcome to Eduwise
               </div>
               <h1 className="mb-5 font-black font-vietnam text-4xl text-grey-15 tracking-tight md:text-5xl lg:text-6xl">
@@ -202,7 +203,7 @@ export default function AboutUs() {
                 Computing.
               </p>
               <p className="mb-8 text-grey-35 text-lg leading-relaxed">
-                Our counsellors sit with every learner one-on-one to map out a
+                Our counselors sit with every learner one-on-one to map out a
                 career goal before the first class starts, then track progress
                 against it through placement.
               </p>

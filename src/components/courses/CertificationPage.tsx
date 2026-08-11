@@ -1,12 +1,12 @@
 import {
   AlertCircle,
+  BadgeCheck,
   BookOpen,
   Building,
   CheckCircle2,
   Clock,
   DollarSign,
   GraduationCap,
-  Sparkles,
   Users,
 } from "lucide-react";
 import Image from "next/image";
@@ -47,7 +47,7 @@ const PageHeader = () => (
     <div className="container relative mx-auto">
       <div className="mx-auto max-w-4xl text-center">
         <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 font-medium text-primary-75 text-sm">
-          <Sparkles className="text-primary-75" size={16} />
+          <BadgeCheck className="text-primary-75" size={16} />
           Get Certified, Get Hired
         </div>
 

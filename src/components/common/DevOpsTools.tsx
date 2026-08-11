@@ -93,7 +93,7 @@ export default function DevOpsToolsSection() {
           <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 lg:gap-5 xl:grid-cols-5">
             {toolsData.map((tool, index) => (
               <div
-                className="group flex cursor-pointer items-center gap-2 rounded-xl bg-white px-3 py-3 transition-all duration-300 hover:scale-105 hover:shadow-xl lg:gap-3 lg:px-4"
+                className="group flex cursor-pointer items-center gap-2 rounded-xl bg-white px-3 py-3 transition-[transform,box-shadow] duration-300 hover:scale-105 hover:shadow-xl lg:gap-3 lg:px-4"
                 key={`${tool.name}-${index}`}
               >
                 <div className="flex h-7 w-7 shrink-0 items-center justify-center lg:h-10 lg:w-10">

@@ -13,7 +13,7 @@ export const portableTextComponents: PortableTextComponents = {
   block: {
     // Blockquote
     blockquote: ({ children }) => (
-      <blockquote className="my-6 border-primary-75 border-l-4 bg-light-95 py-4 pr-4 pl-6 text-grey-35 italic">
+      <blockquote className="my-6 rounded-2xl border-2 border-grey-15 bg-light-95 p-6 text-grey-35 italic">
         {children}
       </blockquote>
     ),

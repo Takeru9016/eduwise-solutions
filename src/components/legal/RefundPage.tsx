@@ -12,12 +12,12 @@ import {
   Copy,
   CreditCard,
   FileText,
+  LifeBuoy,
   Mail,
   Phone,
   RefreshCcw,
   Scale,
   ShieldCheck,
-  Sparkles,
   Target,
   Trophy,
   Users,
@@ -94,7 +94,7 @@ function PolicyCard({
 
   return (
     <div
-      className={`overflow-hidden rounded-2xl border-2 border-grey-15 bg-white transition-all duration-200 ${
+      className={`overflow-hidden rounded-2xl border-2 border-grey-15 bg-white transition-shadow duration-200 ${
         isOpen
           ? "shadow-[6px_6px_0_0_var(--color-grey-15)]"
           : "shadow-[4px_4px_0_0_var(--color-grey-15)]"
@@ -130,13 +130,15 @@ function PolicyCard({
       </button>
 
       <div
-        className={`overflow-hidden transition-all duration-300 ease-in-out ${
-          isOpen ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
+        className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out ${
+          isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
         }`}
       >
-        <div className="px-4 pt-0 pb-5 sm:px-5 sm:pb-6">
-          <div className="mb-4 h-px bg-grey-15/10 sm:mb-5" />
-          {section.content}
+        <div className="min-h-0 overflow-hidden">
+          <div className="px-4 pt-0 pb-5 sm:px-5 sm:pb-6">
+            <div className="mb-4 h-px bg-grey-15/10 sm:mb-5" />
+            {section.content}
+          </div>
         </div>
       </div>
     </div>
@@ -628,7 +630,7 @@ function BottomCTA() {
     <section className="py-16 sm:py-20">
       <div className="container">
         <div className="mx-auto max-w-4xl rounded-3xl border-2 border-grey-15 bg-grey-15 p-8 text-center text-white shadow-[6px_6px_0_0_var(--color-grey-15)] sm:p-10">
-          <Sparkles className="mx-auto mb-4 h-8 w-8 text-primary-90" />
+          <LifeBuoy className="mx-auto mb-4 h-8 w-8 text-primary-90" />
           <h3 className="mb-3 font-black font-vietnam text-white text-xl sm:text-2xl">
             Have questions about our refund policy?
           </h3>

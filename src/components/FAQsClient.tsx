@@ -5,9 +5,9 @@ import {
   Building2,
   GraduationCap,
   HelpCircle,
+  Lightbulb,
   MessageCircle,
   Search,
-  Sparkles,
   Users,
 } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -37,7 +37,7 @@ const CATEGORY_ICONS = [
   GraduationCap,
   Building2,
   BookOpen,
-  Sparkles,
+  Lightbulb,
   Users,
   HelpCircle,
 ];
@@ -139,7 +139,7 @@ export default function FAQsClient({ categories }: FAQsClientProps) {
                     const active = idx === activeCategory;
                     return (
                       <button
-                        className={`flex min-h-11 shrink-0 items-center gap-2 whitespace-nowrap rounded-xl border-2 px-4 py-2.5 text-left font-bold text-sm transition-all duration-200 lg:w-full ${
+                        className={`flex min-h-11 shrink-0 items-center gap-2 whitespace-nowrap rounded-xl border-2 px-4 py-2.5 text-left font-bold text-sm transition-colors duration-200 lg:w-full ${
                           active
                             ? "border-grey-15 bg-primary-75 text-grey-15"
                             : "border-grey-15/15 bg-white text-grey-35 hover:border-grey-15"

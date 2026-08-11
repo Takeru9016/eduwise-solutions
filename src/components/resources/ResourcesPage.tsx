@@ -1,4 +1,4 @@
-import { DownloadCloud, Sparkles } from "lucide-react";
+import { DownloadCloud, Gift } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -33,7 +33,7 @@ export default function ResourcesPage({ resources }: ResourcesPageProps) {
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-99 px-4 py-2 font-bold text-grey-15 text-sm sm:mb-8">
-              <Sparkles className="h-4 w-4" />
+              <Gift className="h-4 w-4" />
               Free Resources
             </div>
 
@@ -60,7 +60,7 @@ export default function ResourcesPage({ resources }: ResourcesPageProps) {
                 const tint = CARD_TINTS[index % CARD_TINTS.length];
                 return (
                   <Link
-                    className={`group flex flex-col overflow-hidden rounded-2xl border-2 border-grey-15 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)] ${tint}`}
+                    className={`group flex flex-col overflow-hidden rounded-2xl border-2 border-grey-15 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-[transform,box-shadow] duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)] ${tint}`}
                     href={`/resources/${resource.slug.current}`}
                     key={resource._id}
                   >

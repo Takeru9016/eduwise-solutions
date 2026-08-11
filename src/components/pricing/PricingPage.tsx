@@ -1,12 +1,13 @@
 "use client";
 
 import { gsap } from "gsap";
-import { Check, Sparkles } from "lucide-react";
+import { BookOpen, Check, Star, Wallet } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { CATEGORIES } from "@/data/courses";
+import { prefersReducedMotion } from "@/lib/utils";
 
 export interface PricingCourse {
   _id: string;
@@ -60,17 +61,17 @@ function PricingCard({
     ? Math.round(((originalPrice - course.price) / originalPrice) * 100)
     : 0;
   const category = CATEGORIES.find((c) => c.id === course.category);
-  const CategoryIcon = category?.icon ?? Sparkles;
+  const CategoryIcon = category?.icon ?? BookOpen;
   const tint = CARD_TINTS[index % CARD_TINTS.length];
 
   return (
     <div
-      className="group relative flex h-full flex-col overflow-hidden rounded-3xl border-2 border-grey-15 bg-white shadow-[4px_4px_0_0_var(--color-grey-15)] transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)]"
+      className="group relative flex h-full flex-col overflow-hidden rounded-3xl border-2 border-grey-15 bg-white shadow-[4px_4px_0_0_var(--color-grey-15)] transition-[transform,box-shadow] duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)]"
       ref={cardRef}
     >
       {course.featured && (
         <span className="absolute top-4 right-4 z-10 inline-flex items-center gap-1 rounded-full border-2 border-grey-15 bg-gold px-3 py-1 font-bold text-grey-15 text-xs">
-          <Sparkles className="h-3 w-3" />
+          <Star className="h-3 w-3" />
           Popular
         </span>
       )}
@@ -107,11 +108,11 @@ function PricingCard({
 
         <div className="mb-5">
           <div className="flex items-baseline gap-2">
-            <span className="font-black font-vietnam text-3xl text-grey-15">
+            <span className="font-black font-vietnam text-3xl text-grey-15 tabular-nums">
               {formatInr(course.price)}
             </span>
             {hasDiscount && (
-              <span className="text-grey-50 text-sm line-through">
+              <span className="text-grey-50 text-sm tabular-nums line-through">
                 {formatInr(originalPrice)}
               </span>
             )}
@@ -169,7 +170,7 @@ export default function PricingPage({ courses }: PricingPageProps) {
 
   useEffect(() => {
     const hero = heroRef.current;
-    if (!hero) {
+    if (!hero || prefersReducedMotion()) {
       return;
     }
     const targets = hero.querySelectorAll("[data-reveal]");
@@ -182,7 +183,7 @@ export default function PricingPage({ courses }: PricingPageProps) {
 
   useEffect(() => {
     const cards = cardRefs.current.filter(Boolean);
-    if (!cards.length) {
+    if (!cards.length || prefersReducedMotion()) {
       return;
     }
     const tween = gsap.fromTo(
@@ -204,7 +205,7 @@ export default function PricingPage({ courses }: PricingPageProps) {
               className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-99 px-4 py-2 font-semibold text-grey-15 text-sm sm:mb-8"
               data-reveal
             >
-              <Sparkles className="h-4 w-4" />
+              <Wallet className="h-4 w-4" />
               Transparent Pricing
             </div>
 
@@ -232,7 +233,7 @@ export default function PricingPage({ courses }: PricingPageProps) {
             <div className="scrollbar-hide -mx-4 flex gap-2.5 overflow-x-auto px-4 pb-2 sm:mx-0 sm:flex-wrap sm:justify-center sm:px-0">
               {FILTER_TABS.map((tab) => (
                 <button
-                  className={`shrink-0 whitespace-nowrap rounded-full border-2 border-grey-15 px-4 py-2 font-bold text-sm transition-all duration-200 sm:px-6 sm:py-2.5 ${
+                  className={`shrink-0 whitespace-nowrap rounded-full border-2 border-grey-15 px-4 py-2 font-bold text-sm transition-colors duration-200 sm:px-6 sm:py-2.5 ${
                     activeFilter === tab.value
                       ? "bg-primary-75 text-grey-15"
                       : "bg-white text-grey-35 hover:bg-primary-99"

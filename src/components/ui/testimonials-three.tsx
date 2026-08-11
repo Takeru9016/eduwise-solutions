@@ -2,13 +2,13 @@
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Quote, Sparkles, Star } from "lucide-react";
+import { Quote, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useRef } from "react";
 
 import { Icons } from "@/components/ui/icons";
-import { cn } from "@/lib/utils";
+import { cn, prefersReducedMotion } from "@/lib/utils";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -58,7 +58,7 @@ export function TestimonialsThree({
   useEffect(() => {
     const section = sectionRef.current;
     const cards = cardRefs.current.filter(Boolean);
-    if (!(section && cards.length)) {
+    if (!(section && cards.length) || prefersReducedMotion()) {
       return;
     }
 
@@ -89,10 +89,6 @@ export function TestimonialsThree({
     <div className={cn("relative w-full", className)} ref={sectionRef}>
       <div className="mx-auto max-w-6xl px-4 md:px-8">
         <div className="mb-12 text-center md:mb-16">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-99 px-4 py-2 font-semibold text-grey-15 text-sm">
-            <Sparkles className="h-4 w-4" />
-            Student Stories
-          </div>
           <h2 className="mb-4 font-black font-vietnam text-3xl text-grey-15 tracking-tight md:text-4xl lg:text-5xl">
             What Our Students Say
           </h2>
@@ -104,7 +100,7 @@ export function TestimonialsThree({
         <div className="columns-1 gap-5 sm:columns-2 lg:columns-3">
           {sorted.map((t, index) => (
             <div
-              className={`group mb-5 break-inside-avoid rounded-2xl border-2 border-grey-15 p-6 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)] md:p-7 ${CARD_TINTS[index % CARD_TINTS.length]}`}
+              className={`group mb-5 break-inside-avoid rounded-2xl border-2 border-grey-15 p-6 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-[transform,box-shadow] duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)] md:p-7 ${CARD_TINTS[index % CARD_TINTS.length]}`}
               key={t.id}
               ref={(el) => {
                 cardRefs.current[index] = el;
@@ -131,7 +127,7 @@ export function TestimonialsThree({
                 )}
               </div>
 
-              <p className="mt-5 text-grey-35 text-sm leading-relaxed md:text-base">
+              <p className="mt-5 line-clamp-3 text-grey-35 text-sm leading-relaxed md:text-base">
                 &ldquo;{t.content}&rdquo;
               </p>
 

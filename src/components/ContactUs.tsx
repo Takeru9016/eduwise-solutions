@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CheckCircle2, Mail, Send, Sparkles, XCircle } from "lucide-react";
+import { CheckCircle2, Mail, MessageCircle, Send, XCircle } from "lucide-react";
 import { useState } from "react";
 import { type Control, useForm } from "react-hook-form";
 import * as z from "zod";
@@ -168,7 +168,7 @@ export default function ContactUsSection() {
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-99 px-4 py-2 font-bold text-grey-15 text-sm sm:mb-8">
-              <Sparkles className="h-4 w-4" />
+              <MessageCircle className="h-4 w-4" />
               Get in Touch with Us
             </div>
 

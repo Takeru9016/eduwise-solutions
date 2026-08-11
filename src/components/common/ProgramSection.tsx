@@ -1,4 +1,4 @@
-import { ArrowUpRight, Sparkles } from "lucide-react";
+import { ArrowUpRight, BookOpen } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -44,11 +44,11 @@ const ProgramCard = ({
   const tint = CARD_TINTS[index % CARD_TINTS.length];
   const placement = program.stats.find((s) => s.label === "Placement")?.value;
   const CategoryIcon =
-    CATEGORIES.find((c) => c.id === program.category)?.icon ?? Sparkles;
+    CATEGORIES.find((c) => c.id === program.category)?.icon ?? BookOpen;
 
   return (
     <Link
-      className={`group relative flex flex-col overflow-hidden rounded-3xl border-2 border-grey-15 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)] ${tint}`}
+      className={`group relative flex flex-col overflow-hidden rounded-3xl border-2 border-grey-15 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-[transform,box-shadow] duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)] ${tint}`}
       href={`/courses/${program.slug.current}`}
     >
       <div className="relative h-44 w-full border-grey-15 border-b-2">
@@ -110,17 +110,13 @@ export default async function Programs() {
       <div className="container">
         <div className="mb-12 flex flex-col items-center justify-between gap-6 sm:flex-row md:mb-16">
           <div className="text-center sm:text-left">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-99 px-4 py-2 font-semibold text-grey-15 text-sm">
-              <Sparkles className="h-4 w-4" />
-              Featured Programs
-            </div>
             <h2 className="font-black font-vietnam text-3xl text-grey-15 tracking-tight md:text-4xl lg:text-5xl">
               Choose Your Area of Interest
             </h2>
           </div>
 
           <Link
-            className="group inline-flex shrink-0 items-center gap-2 rounded-full border-2 border-grey-15 bg-white px-6 py-3 font-bold text-grey-15 transition-transform hover:-translate-y-0.5"
+            className="group inline-flex shrink-0 items-center gap-2 rounded-full border-2 border-grey-15 bg-white px-6 py-3 font-bold text-grey-15 transition-transform hover:-translate-y-0.5 active:scale-[0.97]"
             href="/courses"
           >
             View All Programs

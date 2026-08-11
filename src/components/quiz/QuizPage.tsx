@@ -5,11 +5,12 @@ import {
   ArrowLeft,
   ArrowRight,
   CheckCircle2,
+  Compass,
   Loader2,
   Lock,
   Mail,
+  PartyPopper,
   Phone,
-  Sparkles,
   User,
   XCircle,
 } from "lucide-react";
@@ -194,7 +195,7 @@ export default function QuizPage({ courses }: QuizPageProps) {
           <div>
             <div className="mb-8 text-center">
               <div className="mb-4 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-99 px-4 py-2 font-bold text-grey-15 text-sm">
-                <Sparkles className="h-4 w-4" />
+                <Compass className="h-4 w-4" />
                 Course Matcher
               </div>
               <h1 className="mb-3 font-black font-vietnam text-3xl text-grey-15 sm:text-4xl">
@@ -233,7 +234,7 @@ export default function QuizPage({ courses }: QuizPageProps) {
                     const selected = answers[question.id] === option.value;
                     return (
                       <label
-                        className={`flex cursor-pointer items-center gap-3 rounded-2xl border-2 p-4 transition-all ${
+                        className={`flex cursor-pointer items-center gap-3 rounded-2xl border-2 p-4 transition-colors ${
                           selected
                             ? "border-grey-15 bg-primary-90"
                             : "border-grey-15/15 hover:border-grey-15"
@@ -271,7 +272,7 @@ export default function QuizPage({ courses }: QuizPageProps) {
         {step === "lead" && (
           <div className="overflow-hidden rounded-3xl border-2 border-grey-15 bg-white shadow-[6px_6px_0_0_var(--color-grey-15)]">
             <div className="bg-grey-15 px-7 py-6 text-center">
-              <Sparkles className="mx-auto mb-3 h-8 w-8 text-primary-90" />
+              <PartyPopper className="mx-auto mb-3 h-8 w-8 text-primary-90" />
               <h2 className="mb-1 font-bold font-vietnam text-2xl text-white">
                 Almost there!
               </h2>
@@ -290,7 +291,7 @@ export default function QuizPage({ courses }: QuizPageProps) {
                   <User className="absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-grey-40" />
                   <input
                     {...register("name")}
-                    className={`h-12 w-full rounded-xl border-2 bg-light-97 pr-4 pl-11 text-grey-15 text-sm transition-all placeholder:text-grey-40 focus:outline-hidden ${
+                    className={`h-12 w-full rounded-xl border-2 bg-light-97 pr-4 pl-11 text-grey-15 text-sm transition-colors placeholder:text-grey-40 focus:outline-hidden ${
                       errors.name
                         ? "border-red-400"
                         : "border-grey-15/20 focus:border-primary-75"
@@ -312,7 +313,7 @@ export default function QuizPage({ courses }: QuizPageProps) {
                   <Mail className="absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-grey-40" />
                   <input
                     {...register("email")}
-                    className={`h-12 w-full rounded-xl border-2 bg-light-97 pr-4 pl-11 text-grey-15 text-sm transition-all placeholder:text-grey-40 focus:outline-hidden ${
+                    className={`h-12 w-full rounded-xl border-2 bg-light-97 pr-4 pl-11 text-grey-15 text-sm transition-colors placeholder:text-grey-40 focus:outline-hidden ${
                       errors.email
                         ? "border-red-400"
                         : "border-grey-15/20 focus:border-primary-75"
@@ -338,7 +339,7 @@ export default function QuizPage({ courses }: QuizPageProps) {
                     <Phone className="absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-grey-40" />
                     <input
                       {...register("mobile")}
-                      className={`h-12 w-full rounded-r-xl border-2 bg-light-97 pr-4 pl-11 text-grey-15 text-sm transition-all placeholder:text-grey-40 focus:outline-hidden ${
+                      className={`h-12 w-full rounded-r-xl border-2 bg-light-97 pr-4 pl-11 text-grey-15 text-sm transition-colors placeholder:text-grey-40 focus:outline-hidden ${
                         errors.mobile
                           ? "border-red-400"
                           : "border-grey-15/20 focus:border-primary-75"

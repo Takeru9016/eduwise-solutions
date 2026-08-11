@@ -9,7 +9,7 @@ import {
   CheckCircle,
   Clock,
   GraduationCap,
-  Sparkles,
+  Target,
   Users,
 } from "lucide-react";
 import Image from "next/image";
@@ -18,6 +18,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { CATEGORIES } from "@/data/courses";
+import { prefersReducedMotion } from "@/lib/utils";
 
 // Types
 export interface SanityCourseListItem {
@@ -73,7 +74,7 @@ function FilterTabs({
     <div className="scrollbar-hide -mx-4 flex gap-2.5 overflow-x-auto px-4 pb-2 sm:mx-0 sm:flex-wrap sm:justify-center sm:px-0">
       {tabs.map((tab) => (
         <button
-          className={`shrink-0 whitespace-nowrap rounded-full border-2 border-grey-15 px-4 py-2 font-bold text-sm transition-all duration-200 sm:px-6 sm:py-2.5 ${
+          className={`shrink-0 whitespace-nowrap rounded-full border-2 border-grey-15 px-4 py-2 font-bold text-sm transition-colors duration-200 sm:px-6 sm:py-2.5 ${
             activeFilter === tab.value
               ? "bg-primary-75 text-grey-15"
               : "bg-white text-grey-35 hover:bg-primary-99"
@@ -106,7 +107,7 @@ function CourseCard({
 
   return (
     <div
-      className="group flex flex-col overflow-hidden rounded-3xl border-2 border-grey-15 bg-white shadow-[4px_4px_0_0_var(--color-grey-15)] transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)]"
+      className="group flex flex-col overflow-hidden rounded-3xl border-2 border-grey-15 bg-white shadow-[4px_4px_0_0_var(--color-grey-15)] transition-[transform,box-shadow] duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)]"
       ref={cardRef}
     >
       {/* Image Section */}
@@ -194,7 +195,7 @@ export default function CoursesPage({ courses }: OurCourseProps) {
 
   useEffect(() => {
     const hero = heroRef.current;
-    if (!hero) {
+    if (!hero || prefersReducedMotion()) {
       return;
     }
     const targets = hero.querySelectorAll("[data-reveal]");
@@ -207,7 +208,7 @@ export default function CoursesPage({ courses }: OurCourseProps) {
 
   useEffect(() => {
     const cards = cardRefs.current.filter(Boolean);
-    if (!cards.length) {
+    if (!cards.length || prefersReducedMotion()) {
       return;
     }
     const tween = gsap.fromTo(
@@ -230,7 +231,7 @@ export default function CoursesPage({ courses }: OurCourseProps) {
               className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-99 px-4 py-2 font-semibold text-grey-15 text-sm sm:mb-8"
               data-reveal
             >
-              <Sparkles className="h-4 w-4" />
+              <Target className="h-4 w-4" />
               Your Career, Your Choice
             </div>
 

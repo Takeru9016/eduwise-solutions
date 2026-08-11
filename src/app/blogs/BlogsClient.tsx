@@ -2,12 +2,12 @@
 
 import type { SanityImageSource } from "@sanity/image-url";
 import { gsap } from "gsap";
-import { ArrowRight, Newspaper, Sparkles } from "lucide-react";
+import { ArrowRight, Newspaper } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 
-import { formatDate } from "@/lib/utils";
+import { formatDate, prefersReducedMotion } from "@/lib/utils";
 import { urlFor } from "@/sanity/lib/image";
 
 interface Category {
@@ -70,7 +70,7 @@ function FeaturedPost({ post }: { post: Post }) {
 
   return (
     <Link
-      className="group grid overflow-hidden rounded-3xl border-2 border-grey-15 bg-white shadow-[6px_6px_0_0_var(--color-grey-15)] transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[8px_8px_0_0_var(--color-grey-15)] md:grid-cols-2"
+      className="group grid overflow-hidden rounded-3xl border-2 border-grey-15 bg-white shadow-[6px_6px_0_0_var(--color-grey-15)] transition-[transform,box-shadow] duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[8px_8px_0_0_var(--color-grey-15)] md:grid-cols-2"
       href={`/blogs/${post.slug.current}`}
     >
       <div className="relative h-56 w-full border-grey-15 border-b-2 md:h-full md:border-r-2 md:border-b-0">
@@ -91,7 +91,7 @@ function FeaturedPost({ post }: { post: Post }) {
 
       <div className="flex flex-col justify-center gap-4 bg-gold-90 p-6 sm:p-10">
         <span className="inline-flex w-fit items-center gap-1.5 rounded-full border-2 border-grey-15 bg-white px-3 py-1 font-bold text-grey-15 text-xs">
-          <Sparkles className="h-3 w-3" />
+          <Newspaper className="h-3 w-3" />
           Latest Article
         </span>
 
@@ -138,7 +138,7 @@ export function PostCard({
 
   return (
     <div
-      className="group flex flex-col overflow-hidden rounded-3xl border-2 border-grey-15 bg-white shadow-[4px_4px_0_0_var(--color-grey-15)] transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)]"
+      className="group flex flex-col overflow-hidden rounded-3xl border-2 border-grey-15 bg-white shadow-[4px_4px_0_0_var(--color-grey-15)] transition-[transform,box-shadow] duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)]"
       ref={cardRef}
     >
       <Link
@@ -211,7 +211,7 @@ export default function BlogsClient({ posts, categories }: BlogsClientProps) {
 
   useEffect(() => {
     const hero = heroRef.current;
-    if (!hero) {
+    if (!hero || prefersReducedMotion()) {
       return;
     }
     const targets = hero.querySelectorAll("[data-reveal]");
@@ -224,7 +224,7 @@ export default function BlogsClient({ posts, categories }: BlogsClientProps) {
 
   useEffect(() => {
     const cards = cardRefs.current.filter(Boolean);
-    if (!cards.length) {
+    if (!cards.length || prefersReducedMotion()) {
       return;
     }
     const tween = gsap.fromTo(
@@ -279,7 +279,7 @@ export default function BlogsClient({ posts, categories }: BlogsClientProps) {
           <div className="mb-8 sm:mb-12">
             <div className="scrollbar-hide -mx-4 flex gap-2.5 overflow-x-auto px-4 pb-2 sm:mx-0 sm:flex-wrap sm:justify-center sm:px-0">
               <button
-                className={`shrink-0 whitespace-nowrap rounded-full border-2 border-grey-15 px-4 py-2 font-bold text-sm transition-all duration-200 sm:px-6 sm:py-2.5 ${
+                className={`shrink-0 whitespace-nowrap rounded-full border-2 border-grey-15 px-4 py-2 font-bold text-sm transition-colors duration-200 sm:px-6 sm:py-2.5 ${
                   activeCategory === "all"
                     ? "bg-primary-75 text-grey-15"
                     : "bg-white text-grey-35 hover:bg-primary-99"
@@ -291,7 +291,7 @@ export default function BlogsClient({ posts, categories }: BlogsClientProps) {
               </button>
               {categories.map((category) => (
                 <button
-                  className={`shrink-0 whitespace-nowrap rounded-full border-2 border-grey-15 px-4 py-2 font-bold text-sm transition-all duration-200 sm:px-6 sm:py-2.5 ${
+                  className={`shrink-0 whitespace-nowrap rounded-full border-2 border-grey-15 px-4 py-2 font-bold text-sm transition-colors duration-200 sm:px-6 sm:py-2.5 ${
                     activeCategory === category._id
                       ? "bg-primary-75 text-grey-15"
                       : "bg-white text-grey-35 hover:bg-primary-99"

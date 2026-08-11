@@ -126,7 +126,7 @@ export default function PrivacyPolicyPage() {
             <div className="mb-8 flex flex-wrap justify-center gap-2">
               {TABS.map((tab) => (
                 <button
-                  className={`rounded-full border-2 px-5 py-2.5 font-bold text-sm transition-all duration-200 ${
+                  className={`rounded-full border-2 px-5 py-2.5 font-bold text-sm transition-colors duration-200 ${
                     activeTab === tab.id
                       ? "border-grey-15 bg-primary-75 text-grey-15"
                       : "border-grey-15/15 bg-white text-grey-35 hover:border-grey-15"

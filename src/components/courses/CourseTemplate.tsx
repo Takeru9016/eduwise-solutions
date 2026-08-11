@@ -10,6 +10,7 @@ import {
   Building,
   Calendar,
   Check,
+  CheckCircle2,
   ChevronDown,
   Clock,
   Cloud,
@@ -30,6 +31,7 @@ import {
   Shield,
   Sparkles,
   Star,
+  Tag,
   Target,
   TrendingUp,
   UserCheck,
@@ -47,6 +49,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import { prefersReducedMotion } from "@/lib/utils";
 import type {
   CareerTrackItem,
   CourseContent,
@@ -96,9 +99,9 @@ const ICON_MAP: Record<string, LucideIcon> = {
 
 function getIcon(name?: string): LucideIcon {
   if (!name) {
-    return Sparkles;
+    return CheckCircle2;
   }
-  return ICON_MAP[name] || Sparkles;
+  return ICON_MAP[name] || CheckCircle2;
 }
 
 const CARD_TINTS = [
@@ -122,7 +125,7 @@ function useStaggerReveal<T extends HTMLElement>(count: number) {
 
   useEffect(() => {
     const items = itemRefs.current.filter(Boolean);
-    if (!items.length) {
+    if (!items.length || prefersReducedMotion()) {
       return;
     }
     const tween = gsap.fromTo(
@@ -216,7 +219,7 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
 
   useEffect(() => {
     const hero = heroRef.current;
-    if (!hero) {
+    if (!hero || prefersReducedMotion()) {
       return;
     }
     const targets = hero.querySelectorAll("[data-reveal]");
@@ -272,7 +275,7 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
                 className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-99 px-4 py-2 font-semibold text-grey-15 text-sm"
                 data-reveal
               >
-                <Sparkles className="h-4 w-4" />
+                <GraduationCap className="h-4 w-4" />
                 {course.subtitle}
               </div>
 
@@ -385,7 +388,7 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
               const tint = CARD_TINTS[i % CARD_TINTS.length];
               return (
                 <div
-                  className={`flex flex-col gap-3 rounded-2xl border-2 border-grey-15 p-6 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)] ${tint}`}
+                  className={`flex flex-col gap-3 rounded-2xl border-2 border-grey-15 p-6 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-[transform,box-shadow] duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)] ${tint}`}
                   key={feature.title}
                   ref={(el) => {
                     features.itemRefs.current[i] = el;
@@ -792,23 +795,23 @@ function PricingCard({
       <div className="relative flex flex-col justify-center bg-grey-15 p-8 sm:p-10">
         {discount > 0 && (
           <span className="mb-6 inline-flex w-fit items-center gap-1.5 rounded-full border-2 border-grey-15 bg-gold px-4 py-1.5 font-bold text-grey-15 text-xs">
-            <Sparkles className="h-3 w-3" />
+            <Tag className="h-3 w-3" />
             {discount}% OFF - Limited Seats
           </span>
         )}
         <p className="mb-2 font-bold text-primary-90 text-xs uppercase tracking-wider">
           One-time Payment
         </p>
-        <p className="font-black font-vietnam text-5xl text-white">
+        <p className="font-black font-vietnam text-5xl text-white tabular-nums">
           ₹{course.price.toLocaleString("en-IN")}
         </p>
         {hasDiscount && (
-          <p className="mt-2 text-lg text-white/50 line-through">
+          <p className="mt-2 text-lg text-white/50 tabular-nums line-through">
             ₹{course.originalPrice.toLocaleString("en-IN")}
           </p>
         )}
         {hasSaving && (
-          <p className="mt-4 font-bold text-primary-90 text-sm">
+          <p className="mt-4 font-bold text-primary-90 text-sm tabular-nums">
             You save ₹{saving.toLocaleString("en-IN")}
           </p>
         )}

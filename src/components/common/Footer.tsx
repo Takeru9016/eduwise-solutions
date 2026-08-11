@@ -5,7 +5,7 @@ import {
   Mail,
   MapPin,
   Phone,
-  Sparkles,
+  Rocket,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -88,7 +88,7 @@ const LinkGroup = ({
             className="group inline-flex items-center gap-1.5 text-grey-40 text-sm transition-colors duration-200 hover:text-grey-15"
             href={link.href}
           >
-            <ArrowRight className="-ml-4 h-3 w-3 opacity-0 transition-all duration-200 group-hover:ml-0 group-hover:opacity-60" />
+            <ArrowRight className="h-3 w-3 -translate-x-4 opacity-0 transition-[transform,opacity] duration-200 group-hover:translate-x-0 group-hover:opacity-60" />
             {link.label}
           </Link>
         </li>
@@ -108,7 +108,7 @@ export default function Footer() {
           <div className="flex flex-col items-center justify-between gap-8 rounded-3xl border-2 border-grey-15 bg-primary-75 p-8 shadow-[4px_4px_0_0_var(--color-grey-15)] sm:p-10 lg:flex-row">
             <div className="max-w-xl text-center lg:text-left">
               <div className="mb-4 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-white px-4 py-1.5 font-semibold text-grey-15 text-xs">
-                <Sparkles className="h-3.5 w-3.5" />
+                <Rocket className="h-3.5 w-3.5" />
                 Start Your Journey
               </div>
               <h2 className="mb-2 font-black font-vietnam text-2xl text-grey-15 leading-tight sm:text-3xl">
@@ -122,7 +122,7 @@ export default function Footer() {
 
             <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
               <Link
-                className="group inline-flex items-center justify-center gap-2 rounded-full border-2 border-grey-15 bg-grey-15 px-6 py-3 font-bold text-sm text-white transition-transform hover:-translate-y-0.5"
+                className="group inline-flex items-center justify-center gap-2 rounded-full border-2 border-grey-15 bg-grey-15 px-6 py-3 font-bold text-sm text-white transition-transform hover:-translate-y-0.5 active:scale-[0.97]"
                 href="/courses"
               >
                 <GraduationCap className="h-4 w-4" />
@@ -130,7 +130,7 @@ export default function Footer() {
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
-                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-grey-15 bg-white px-6 py-3 font-bold text-grey-15 text-sm transition-transform hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-grey-15 bg-white px-6 py-3 font-bold text-grey-15 text-sm transition-transform hover:-translate-y-0.5 active:scale-[0.97]"
                 href="/contact"
               >
                 <Phone className="h-4 w-4" />
@@ -193,7 +193,7 @@ export default function Footer() {
               {socialLinks.map((social) => (
                 <Link
                   aria-label={social.label}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-grey-15 bg-white transition-transform duration-200 hover:-translate-y-0.5"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-grey-15 bg-white transition-transform duration-200 hover:-translate-y-0.5 active:scale-[0.97]"
                   href={social.href}
                   key={social.label}
                   rel="noopener noreferrer"

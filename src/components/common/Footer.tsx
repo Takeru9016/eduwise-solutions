@@ -115,7 +115,7 @@ export default function Footer() {
                 Pick a program, or talk it through first
               </h2>
               <p className="text-grey-20 text-sm sm:text-base">
-                2,000+ students have gone through these programs and gotten
+                8,000+ students have gone through these programs and gotten
                 placed. You can be next.
               </p>
             </div>

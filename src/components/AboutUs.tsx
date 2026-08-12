@@ -136,7 +136,7 @@ export default function AboutUs() {
               <div className="mt-8 flex flex-wrap gap-3">
                 {[
                   { label: "Years of Experience", value: "8+" },
-                  { label: "Learners Trained", value: "2,000+" },
+                  { label: "Learners Trained", value: "8,000+" },
                   { label: "Hiring Partners", value: "150+" },
                 ].map((stat) => (
                   <div

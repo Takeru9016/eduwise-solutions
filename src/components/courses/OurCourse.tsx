@@ -45,7 +45,7 @@ interface OurCourseProps {
 
 // Data
 const heroStats = [
-  { icon: Users, label: "Students", value: "2000+" },
+  { icon: Users, label: "Students", value: "8,000+" },
   { icon: Award, label: "Placements", value: "100%" },
   { icon: Building, label: "Hiring Partners", value: "250+" },
 ] as const;

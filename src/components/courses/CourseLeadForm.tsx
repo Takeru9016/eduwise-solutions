@@ -36,7 +36,7 @@ interface CourseLeadFormProps {
 }
 
 const TRUST_BADGES = [
-  { icon: Users, label: "2,000+ Enrolled" },
+  { icon: Users, label: "8,000+ Enrolled" },
   { icon: Shield, label: "100% Safe" },
   { icon: Zap, label: "Free Counselling" },
 ];

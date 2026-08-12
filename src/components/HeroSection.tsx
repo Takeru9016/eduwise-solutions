@@ -135,7 +135,7 @@ export default function HeroSection() {
             </div>
             <div>
               <div className="font-black font-vietnam text-4xl text-grey-15">
-                20+
+                8,000+
               </div>
               <div className="text-grey-40 text-sm">Learners</div>
             </div>

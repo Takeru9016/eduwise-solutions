@@ -12,7 +12,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
-import { CATEGORIES } from "@/data/courses";
 
 const TOOL_ICONS = [
   { Icon: BrainCircuit, label: "AI-assisted learning" },
@@ -57,71 +56,29 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Right column - AWS partner badge, domain grid, cohort strip - no photos */}
-          <div className="mx-auto w-full max-w-md lg:mx-0 lg:max-w-none">
-            <div className="overflow-hidden rounded-3xl border-2 border-grey-15 bg-white shadow-[8px_8px_0_0_var(--color-grey-15)]">
-              {/* AWS Partner tile */}
-              <Link
-                className="group flex items-center justify-between gap-3 border-grey-15 border-b-2 bg-grey-15 px-5 py-4 transition-colors hover:bg-grey-20 sm:px-6 sm:py-5"
-                href="/certifications/aws"
-              >
-                <div className="flex min-w-0 items-center gap-3">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white">
-                    <Image
-                      alt="AWS"
-                      className="object-contain"
-                      height={20}
-                      src="/partners/aws.svg"
-                      width={30}
-                    />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="font-bold text-gold text-sm sm:text-base">
-                      Official AWS Partner
-                    </p>
-                    <p className="truncate text-white/70 text-xs">
-                      Cloud-powered training &amp; certifications
-                    </p>
-                  </div>
-                </div>
-                <ArrowUpRight className="h-4 w-4 shrink-0 text-gold transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1" />
-              </Link>
-
-              {/* Domain grid */}
-              <div className="grid grid-cols-2 gap-px bg-grey-15/10 sm:grid-cols-3">
-                {CATEGORIES.map((cat) => {
-                  const Icon = cat.icon;
-                  return (
-                    <Link
-                      className="group flex flex-col items-center gap-2 bg-white px-3 py-5 text-center transition-colors hover:bg-primary-99"
-                      href={`/courses?category=${cat.id}`}
-                      key={cat.id}
-                    >
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-grey-15 bg-primary-99 transition-transform duration-200 group-hover:-translate-y-0.5">
-                        <Icon className="h-4 w-4 text-grey-15" />
-                      </div>
-                      <span className="font-semibold text-grey-15 text-xs leading-tight">
-                        {cat.label}
-                      </span>
-                    </Link>
-                  );
-                })}
+          {/* Right column - next-cohort urgency card, no photos */}
+          <div className="mx-auto flex w-full max-w-md items-center lg:mx-0 lg:max-w-none">
+            <div className="w-full rounded-3xl border-2 border-grey-15 bg-gold p-8 shadow-[8px_8px_0_0_var(--color-grey-15)] sm:p-10 lg:p-12">
+              <div className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-grey-15 bg-white">
+                <CalendarClock className="h-6 w-6 text-grey-15" />
               </div>
 
-              {/* Next-cohort strip */}
-              <Link
-                className="group flex items-center justify-between gap-3 border-grey-15 border-t-2 bg-gold px-5 py-4 transition-colors hover:bg-gold/80 sm:px-6"
-                href="/courses"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-grey-15 bg-white">
-                    <CalendarClock className="h-4 w-4 text-grey-15" />
-                  </div>
-                  <p className="font-bold text-grey-15 text-sm">
-                    New batches start every month - enroll today
-                  </p>
-                </div>
-                <ArrowUpRight className="h-4 w-4 shrink-0 text-grey-15 transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1" />
+              <p className="mt-6 font-bold text-grey-15 text-xs uppercase tracking-wider">
+                Enrollment Open
+              </p>
+              <h2 className="mt-2 font-black font-vietnam text-3xl text-grey-15 leading-tight sm:text-4xl">
+                New batches start every month
+              </h2>
+              <p className="mt-4 max-w-sm text-grey-20 leading-relaxed">
+                Live, mentor-led classes - no fixed intake, no long wait. Pick a
+                program and start learning within weeks.
+              </p>
+
+              <Link className="mt-8 inline-block" href="/courses">
+                <Button className="h-auto rounded-full border-2 border-grey-15 bg-white px-7 py-3.5 font-bold text-base text-grey-15 shadow-none transition-transform hover:-translate-y-0.5 hover:bg-primary-99">
+                  Enroll Now
+                  <ArrowUpRight className="ml-1 h-4 w-4" />
+                </Button>
               </Link>
             </div>
           </div>

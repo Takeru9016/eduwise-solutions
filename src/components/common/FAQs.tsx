@@ -31,8 +31,8 @@ const HOMEPAGE_FAQS: FAQ[] = [
   },
   {
     answer:
-      "Yes, our in-house course has job-guaranteed courses include placement guaranteed. For other courses, we offer career counseling and networking opportunities.",
-    question: "Do you provide job placement guaranteed?",
+      "Yes, we provide 100% placement assistance across our programs, including dedicated career counseling, resume support, and networking opportunities.",
+    question: "Do you provide placement assistance?",
   },
   {
     answer:

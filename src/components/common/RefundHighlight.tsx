@@ -37,7 +37,7 @@ export default function RefundHighlight() {
                   Risk-Free
                 </span>
                 <h3 className="font-black font-vietnam text-2xl text-grey-15 md:text-3xl">
-                  100% Placement Guarantee
+                  100% Placement Assistance
                 </h3>
                 <p className="mt-1 text-grey-40 text-sm md:text-base">
                   We&apos;re confident in our placement success

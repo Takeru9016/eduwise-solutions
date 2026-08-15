@@ -1,8 +1,6 @@
 import {
   Award,
-  BookOpen,
   BrainCircuit,
-  Briefcase,
   Check,
   Code2,
   MessageSquare,
@@ -23,11 +21,11 @@ const TOOL_ICONS = [
   { Icon: Award, label: "Certification prep" },
 ];
 
-const ROADMAP_STEPS = [
-  { Icon: BookOpen, active: true, label: "Learn" },
-  { Icon: Code2, active: true, label: "Build" },
-  { Icon: Award, active: false, label: "Certify" },
-  { Icon: Briefcase, active: false, label: "Get Hired" },
+const SKILL_TAGS = [
+  { filled: true, label: "AI & Data Science" },
+  { filled: false, label: "Cloud & DevOps" },
+  { filled: false, label: "Full Stack Dev" },
+  { filled: false, label: "Cyber Security" },
 ];
 
 const LEARNING_PATH = [
@@ -104,28 +102,6 @@ export default function HeroSection() {
                       </div>
                     ))}
                   </div>
-
-                  {/* Mini roadmap strip */}
-                  <div className="relative flex items-start justify-between border-grey-15/10 border-t px-5 pt-4 pb-5">
-                    <div className="-translate-y-1/2 absolute top-8 right-9 left-9 h-0.5 bg-grey-15/15" />
-                    {ROADMAP_STEPS.map((step) => (
-                      <div
-                        className="relative z-10 flex flex-col items-center gap-1.5"
-                        key={step.label}
-                      >
-                        <div
-                          className={`flex h-8 w-8 items-center justify-center rounded-full border-2 border-grey-15 ${
-                            step.active ? "bg-primary-75" : "bg-white"
-                          }`}
-                        >
-                          <step.Icon className="h-3.5 w-3.5 text-grey-15" />
-                        </div>
-                        <span className="font-semibold text-[10px] text-grey-15/70">
-                          {step.label}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
                 </div>
 
                 {/* Secondary panel - stat sticker */}
@@ -140,6 +116,22 @@ export default function HeroSection() {
                     </div>
                   </div>
                 </div>
+              </div>
+
+              {/* Floating skill tags - stacked along the top-right edge */}
+              <div className="absolute top-4 right-0 flex flex-col items-end gap-2 lg:right-[-8%]">
+                {SKILL_TAGS.map((tag) => (
+                  <span
+                    className={`whitespace-nowrap rounded-full border-2 border-grey-15 px-4 py-2 font-semibold text-xs sm:text-sm ${
+                      tag.filled
+                        ? "bg-gold text-grey-15"
+                        : "bg-white text-grey-15"
+                    }`}
+                    key={tag.label}
+                  >
+                    {tag.label}
+                  </span>
+                ))}
               </div>
 
               {/* Floating info card - overlapping bottom-right */}

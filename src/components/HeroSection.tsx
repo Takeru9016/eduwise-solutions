@@ -1,23 +1,17 @@
 import {
+  ArrowUpRight,
   Award,
   BrainCircuit,
   Code2,
   MessageSquare,
   PieChart,
   Play,
-  ShieldCheck,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
-
-const SKILL_TAGS = [
-  { filled: true, label: "AI & Data Science" },
-  { filled: false, label: "Cloud & DevOps" },
-  { filled: false, label: "Full Stack Dev" },
-  { filled: false, label: "Cyber Security" },
-];
+import { CATEGORIES } from "@/data/courses";
 
 const TOOL_ICONS = [
   { Icon: BrainCircuit, label: "AI-assisted learning" },
@@ -62,63 +56,55 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Right column - photo collage, floating badges */}
-          <div className="relative mx-auto w-full max-w-md lg:mx-0 lg:max-w-none">
-            <div className="relative flex justify-center lg:justify-start">
-              <div className="relative aspect-square w-full max-w-sm lg:max-w-95">
-                {/* Primary photo - dominant sticker frame */}
-                <div className="absolute top-0 right-0 h-4/5 w-4/5 rotate-2 overflow-hidden rounded-3xl border-2 border-grey-15 bg-white shadow-[8px_8px_0_0_var(--color-grey-15)]">
-                  <Image
-                    alt="Eduwise Solutions learner"
-                    className="h-full w-full object-cover"
-                    fill
-                    priority
-                    sizes="(min-width: 1024px) 320px, 280px"
-                    src="/testimonials/arvind.jpeg"
-                  />
-                </div>
-                {/* Secondary photo - smaller sticker frame, offset behind-left */}
-                <div className="absolute bottom-0 left-0 h-3/5 w-3/5 -rotate-6 overflow-hidden rounded-2xl border-2 border-grey-15 bg-white shadow-[6px_6px_0_0_var(--color-grey-15)]">
-                  <Image
-                    alt="Eduwise Solutions learner"
-                    className="h-full w-full object-cover"
-                    fill
-                    sizes="(min-width: 1024px) 220px, 190px"
-                    src="/testimonials/akshay.jpeg"
-                  />
-                </div>
-              </div>
-
-              {/* Floating skill tags - stacked along the top-right edge */}
-              <div className="absolute top-4 right-0 flex flex-col items-end gap-2 lg:right-[-8%]">
-                {SKILL_TAGS.map((tag) => (
-                  <span
-                    className={`whitespace-nowrap rounded-full border-2 border-grey-15 px-4 py-2 font-semibold text-xs sm:text-sm ${
-                      tag.filled
-                        ? "bg-gold text-grey-15"
-                        : "bg-white text-grey-15"
-                    }`}
-                    key={tag.label}
-                  >
-                    {tag.label}
-                  </span>
-                ))}
-              </div>
-
-              {/* Floating info card - soft card, lower-right, overlapping the photo frame */}
-              <div className="absolute right-0 bottom-8 w-56 rounded-2xl border border-light-90 bg-white p-4 shadow-xl lg:right-[-6%] lg:bottom-0">
-                <div className="mb-2 flex items-center gap-2">
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold">
-                    <ShieldCheck className="h-4 w-4 text-grey-15" />
+          {/* Right column - AWS partner badge + domain grid, no photos */}
+          <div className="mx-auto w-full max-w-md lg:mx-0 lg:max-w-none">
+            <div className="overflow-hidden rounded-3xl border-2 border-grey-15 bg-white shadow-[8px_8px_0_0_var(--color-grey-15)]">
+              {/* AWS Partner tile */}
+              <Link
+                className="group flex items-center justify-between gap-3 border-grey-15 border-b-2 bg-grey-15 px-5 py-4 transition-colors hover:bg-grey-20 sm:px-6 sm:py-5"
+                href="/certifications/aws"
+              >
+                <div className="flex min-w-0 items-center gap-3">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white">
+                    <Image
+                      alt="AWS"
+                      className="object-contain"
+                      height={20}
+                      src="/partners/aws.svg"
+                      width={30}
+                    />
                   </div>
-                  <h3 className="font-bold font-vietnam text-grey-15 text-sm">
-                    Mentor-Led Learning
-                  </h3>
+                  <div className="min-w-0">
+                    <p className="font-bold text-gold text-sm sm:text-base">
+                      Official AWS Partner
+                    </p>
+                    <p className="truncate text-white/70 text-xs">
+                      Cloud-powered training &amp; certifications
+                    </p>
+                  </div>
                 </div>
-                <p className="text-grey-40 text-xs leading-relaxed">
-                  Learn directly from industry experts with hands-on projects
-                  and real interview practice.
-                </p>
+                <ArrowUpRight className="h-4 w-4 shrink-0 text-gold transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1" />
+              </Link>
+
+              {/* Domain grid */}
+              <div className="grid grid-cols-2 gap-px bg-grey-15/10 sm:grid-cols-3">
+                {CATEGORIES.map((cat) => {
+                  const Icon = cat.icon;
+                  return (
+                    <Link
+                      className="group flex flex-col items-center gap-2 bg-white px-3 py-5 text-center transition-colors hover:bg-primary-99"
+                      href={`/courses?category=${cat.id}`}
+                      key={cat.id}
+                    >
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-grey-15 bg-primary-99 transition-transform duration-200 group-hover:-translate-y-0.5">
+                        <Icon className="h-4 w-4 text-grey-15" />
+                      </div>
+                      <span className="font-semibold text-grey-15 text-xs leading-tight">
+                        {cat.label}
+                      </span>
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           </div>

@@ -2,6 +2,7 @@ import {
   ArrowUpRight,
   Award,
   BrainCircuit,
+  CalendarClock,
   Code2,
   MessageSquare,
   PieChart,
@@ -56,7 +57,7 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Right column - AWS partner badge + domain grid, no photos */}
+          {/* Right column - AWS partner badge, domain grid, cohort strip - no photos */}
           <div className="mx-auto w-full max-w-md lg:mx-0 lg:max-w-none">
             <div className="overflow-hidden rounded-3xl border-2 border-grey-15 bg-white shadow-[8px_8px_0_0_var(--color-grey-15)]">
               {/* AWS Partner tile */}
@@ -106,6 +107,22 @@ export default function HeroSection() {
                   );
                 })}
               </div>
+
+              {/* Next-cohort strip */}
+              <Link
+                className="group flex items-center justify-between gap-3 border-grey-15 border-t-2 bg-gold px-5 py-4 transition-colors hover:bg-gold/80 sm:px-6"
+                href="/courses"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-grey-15 bg-white">
+                    <CalendarClock className="h-4 w-4 text-grey-15" />
+                  </div>
+                  <p className="font-bold text-grey-15 text-sm">
+                    New batches start every month - enroll today
+                  </p>
+                </div>
+                <ArrowUpRight className="h-4 w-4 shrink-0 text-grey-15 transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1" />
+              </Link>
             </div>
           </div>
         </div>

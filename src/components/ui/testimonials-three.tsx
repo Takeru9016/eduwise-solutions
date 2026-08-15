@@ -39,6 +39,69 @@ const CARD_TINTS = [
   "bg-primary-95",
 ] as const;
 
+function TestimonialCard({
+  t,
+  tint,
+}: {
+  t: TestimonialThreeUp;
+  tint: string;
+}) {
+  return (
+    <div
+      className={`w-[320px] shrink-0 rounded-2xl border-2 border-grey-15 p-6 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-[transform,box-shadow] duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)] sm:w-95 md:p-7 ${tint}`}
+    >
+      <div className="flex items-start justify-between">
+        <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-grey-15 bg-white">
+          <Quote className="h-4 w-4 text-gold" fill="var(--color-gold)" />
+        </div>
+        {t.linkedinUrl && (
+          <Link
+            aria-label={`View ${t.name} on LinkedIn`}
+            className="flex items-center gap-1.5 rounded-full border-2 border-grey-15 bg-white px-3 py-1.5 font-semibold text-grey-15 text-xs transition-transform duration-200 hover:-translate-y-0.5"
+            href={t.linkedinUrl}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <Icons.linkedin className="h-3.5 w-3.5" />
+            LinkedIn
+          </Link>
+        )}
+      </div>
+
+      <p className="mt-5 line-clamp-4 text-grey-35 text-sm leading-relaxed md:text-base">
+        &ldquo;{t.content}&rdquo;
+      </p>
+
+      <div className="mt-6 flex items-center gap-3 border-grey-15/20 border-t pt-5">
+        <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full border-2 border-grey-15">
+          <Image alt={t.name} className="object-cover" fill src={t.avatar} />
+        </div>
+        <div className="min-w-0 flex-1">
+          <p className="truncate font-bold font-vietnam text-grey-15 text-sm">
+            {t.name}
+          </p>
+          <p className="truncate text-grey-40 text-xs">
+            {t.role}
+            {t.company ? ` · ${t.company}` : ""}
+          </p>
+        </div>
+        {t.rating && (
+          <div className="flex shrink-0 items-center gap-0.5">
+            {Array.from({ length: t.rating }).map((_, i) => (
+              <Star
+                className="h-3.5 w-3.5 text-gold"
+                fill="var(--color-gold)"
+                key={`${t.id}-star-${i}`}
+                strokeWidth={0}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export function TestimonialsThree({
   testimonials,
   className,
@@ -53,24 +116,21 @@ export function TestimonialsThree({
   );
 
   const sectionRef = useRef<HTMLDivElement>(null);
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const section = sectionRef.current;
-    const cards = cardRefs.current.filter(Boolean);
-    if (!(section && cards.length) || prefersReducedMotion()) {
+    if (!section || prefersReducedMotion()) {
       return;
     }
 
     const tween = gsap.fromTo(
-      cards,
+      section,
       { opacity: 0, y: 24 },
       {
         duration: 0.6,
         ease: "power2.out",
         opacity: 1,
         scrollTrigger: { start: "top 80%", trigger: section },
-        stagger: 0.06,
         y: 0,
       }
     );
@@ -96,73 +156,16 @@ export function TestimonialsThree({
             Placements, career switches, and pay bumps - in their own words.
           </p>
         </div>
+      </div>
 
-        <div className="columns-1 gap-5 sm:columns-2 lg:columns-3">
-          {sorted.map((t, index) => (
-            <div
-              className={`group mb-5 break-inside-avoid rounded-2xl border-2 border-grey-15 p-6 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-[transform,box-shadow] duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)] md:p-7 ${CARD_TINTS[index % CARD_TINTS.length]}`}
-              key={t.id}
-              ref={(el) => {
-                cardRefs.current[index] = el;
-              }}
-            >
-              <div className="flex items-start justify-between">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-grey-15 bg-white">
-                  <Quote
-                    className="h-4 w-4 text-gold"
-                    fill="var(--color-gold)"
-                  />
-                </div>
-                {t.linkedinUrl && (
-                  <Link
-                    aria-label={`View ${t.name} on LinkedIn`}
-                    className="flex items-center gap-1.5 rounded-full border-2 border-grey-15 bg-white px-3 py-1.5 font-semibold text-grey-15 text-xs transition-transform duration-200 hover:-translate-y-0.5"
-                    href={t.linkedinUrl}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <Icons.linkedin className="h-3.5 w-3.5" />
-                    LinkedIn
-                  </Link>
-                )}
-              </div>
-
-              <p className="mt-5 line-clamp-3 text-grey-35 text-sm leading-relaxed md:text-base">
-                &ldquo;{t.content}&rdquo;
-              </p>
-
-              <div className="mt-6 flex items-center gap-3 border-grey-15/20 border-t pt-5">
-                <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full border-2 border-grey-15">
-                  <Image
-                    alt={t.name}
-                    className="object-cover"
-                    fill
-                    src={t.avatar}
-                  />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="truncate font-bold font-vietnam text-grey-15 text-sm">
-                    {t.name}
-                  </p>
-                  <p className="truncate text-grey-40 text-xs">
-                    {t.role}
-                    {t.company ? ` · ${t.company}` : ""}
-                  </p>
-                </div>
-                {t.rating && (
-                  <div className="flex shrink-0 items-center gap-0.5">
-                    {Array.from({ length: t.rating }).map((_, i) => (
-                      <Star
-                        className="h-3.5 w-3.5 text-gold"
-                        fill="var(--color-gold)"
-                        key={`${t.id}-star-${i}`}
-                        strokeWidth={0}
-                      />
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
+      <div className="mask-[linear-gradient(to_right,transparent,black_5%,black_95%,transparent)] relative overflow-hidden py-2">
+        <div className="flex w-fit gap-5 [animation-duration:55s] animate-scroll-left hover:paused motion-reduce:animate-none">
+          {[...sorted, ...sorted].map((t, index) => (
+            <TestimonialCard
+              key={`${t.id}-${index}`}
+              t={t}
+              tint={CARD_TINTS[index % CARD_TINTS.length]}
+            />
           ))}
         </div>
       </div>

@@ -88,9 +88,8 @@ export default function HeroSection() {
                     {LEARNING_PATH.map((step) => (
                       <div className="flex items-center gap-3" key={step.label}>
                         <div
-                          className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 border-grey-15 ${
-                            step.done ? "bg-primary-75" : "bg-white"
-                          }`}
+                          className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 border-grey-15 ${step.done ? "bg-primary-75" : "bg-white"
+                            }`}
                         >
                           {step.done && (
                             <Check className="h-3.5 w-3.5 text-grey-15" />
@@ -112,7 +111,7 @@ export default function HeroSection() {
                       100%
                     </div>
                     <div className="font-semibold text-grey-15/70 text-xs">
-                      Placement Assistance
+                      Placement Assurance
                     </div>
                   </div>
                 </div>
@@ -122,11 +121,10 @@ export default function HeroSection() {
               <div className="absolute top-4 right-0 flex flex-col items-end gap-2 lg:right-[-8%]">
                 {SKILL_TAGS.map((tag) => (
                   <span
-                    className={`whitespace-nowrap rounded-full border-2 border-grey-15 px-4 py-2 font-semibold text-xs sm:text-sm ${
-                      tag.filled
+                    className={`whitespace-nowrap rounded-full border-2 border-grey-15 px-4 py-2 font-semibold text-xs sm:text-sm ${tag.filled
                         ? "bg-gold text-grey-15"
                         : "bg-white text-grey-15"
-                    }`}
+                      }`}
                     key={tag.label}
                   >
                     {tag.label}
@@ -178,7 +176,7 @@ export default function HeroSection() {
               <div className="font-black font-vietnam text-4xl text-grey-15">
                 100%
               </div>
-              <div className="text-grey-40 text-sm">Placement Assistance</div>
+              <div className="text-grey-40 text-sm">Placement Assurance</div>
             </div>
           </div>
 

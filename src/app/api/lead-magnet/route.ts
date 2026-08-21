@@ -1,16 +1,9 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import LeadMagnetDeliveryEmail from "@/emails/lead-magnet-delivery";
-import {
-  appendRow,
-  ensureSheetExists,
-  getSheetsClient,
-} from "@/lib/google-sheets";
+import { recordLead } from "@/lib/leads";
 import { client } from "@/sanity/lib/client";
 import { LEAD_MAGNET_BY_SLUG_QUERY } from "@/sanity/lib/queries";
-
-const SHEET_NAME = "Lead Magnet Downloads";
-const HEADERS = ["Name", "Email", "Resource", "Timestamp"];
 
 interface LeadMagnet {
   _id: string;
@@ -44,9 +37,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const sheets = getSheetsClient();
-    await ensureSheetExists(sheets, SHEET_NAME, HEADERS);
-    await appendRow(sheets, SHEET_NAME, [
+    await recordLead("leadMagnet", [
       name,
       email,
       resource.title,

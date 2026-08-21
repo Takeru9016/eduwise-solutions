@@ -1,19 +1,5 @@
 import { NextResponse } from "next/server";
-import {
-  appendRow,
-  ensureSheetExists,
-  getSheetsClient,
-} from "@/lib/google-sheets";
-
-const SHEET_NAME = "Quiz Leads";
-const HEADERS = [
-  "Name",
-  "Email",
-  "Mobile",
-  "Recommended Category",
-  "Wants Job Guarantee",
-  "Timestamp",
-];
+import { recordLead } from "@/lib/leads";
 
 export async function POST(req: Request) {
   try {
@@ -28,16 +14,18 @@ export async function POST(req: Request) {
       );
     }
 
-    const sheets = getSheetsClient();
-    await ensureSheetExists(sheets, SHEET_NAME, HEADERS);
-    await appendRow(sheets, SHEET_NAME, [
-      name,
-      email,
-      mobile,
-      recommendedCategory || "Not specified",
-      wantsJobGuarantee ? "Yes" : "No",
-      new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
-    ]);
+    await recordLead(
+      "quizLead",
+      [
+        name,
+        email,
+        mobile,
+        recommendedCategory || "Not specified",
+        wantsJobGuarantee ? "Yes" : "No",
+        new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
+      ],
+      mobile
+    );
 
     return NextResponse.json({ success: true });
   } catch (error) {

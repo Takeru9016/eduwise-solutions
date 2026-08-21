@@ -1,20 +1,5 @@
 import { NextResponse } from "next/server";
-import {
-  appendRow,
-  ensureSheetExists,
-  getSheetsClient,
-} from "@/lib/google-sheets";
-
-const SHEET_NAME = "LinkedIn";
-const HEADERS = [
-  "Name",
-  "Email",
-  "Mobile",
-  "Course Interest",
-  "Source",
-  "Timestamp",
-  "Consent",
-];
+import { recordLead } from "@/lib/leads";
 
 export async function POST(req: Request) {
   try {
@@ -28,17 +13,19 @@ export async function POST(req: Request) {
       );
     }
 
-    const sheets = getSheetsClient();
-    await ensureSheetExists(sheets, SHEET_NAME, HEADERS);
-    await appendRow(sheets, SHEET_NAME, [
-      name,
-      email,
-      mobile,
-      course || "Not specified",
-      "Course Hero Form",
-      new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
-      consent ? "Yes" : "No",
-    ]);
+    await recordLead(
+      "linkedinLead",
+      [
+        name,
+        email,
+        mobile,
+        course || "Not specified",
+        "Course Hero Form",
+        new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
+        consent ? "Yes" : "No",
+      ],
+      mobile
+    );
 
     return NextResponse.json({ success: true });
   } catch (error) {

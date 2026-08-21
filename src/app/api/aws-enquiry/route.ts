@@ -1,35 +1,24 @@
 import { NextResponse } from "next/server";
-import {
-  appendRow,
-  ensureSheetExists,
-  getSheetsClient,
-} from "@/lib/google-sheets";
-
-const SHEET_NAME = "AWS Enquiry";
-const HEADERS = [
-  "First Name",
-  "Last Name",
-  "Email",
-  "Mobile Number",
-  "Subject",
-  "Message",
-];
+import { recordLead } from "@/lib/leads";
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const sheets = getSheetsClient();
-    await ensureSheetExists(sheets, SHEET_NAME, HEADERS);
-    await appendRow(sheets, SHEET_NAME, [
-      body.firstName,
-      body.lastName,
-      body.email,
-      body.mobile,
-      body.subject,
-      body.message,
-    ]);
+    const { duplicateSource } = await recordLead(
+      "awsEnquiry",
+      [
+        body.firstName,
+        body.lastName,
+        body.email,
+        body.mobile,
+        body.subject,
+        body.message,
+      ],
+      body.mobile
+    );
 
     return NextResponse.json({
+      duplicate: Boolean(duplicateSource),
       message: "Form submission saved successfully",
       success: true,
     });

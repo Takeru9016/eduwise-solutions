@@ -291,3 +291,11 @@ export const PRICING_QUERY = `
     isJobGuaranteeProgram
   }
 `;
+
+export const REDIRECTS_QUERY = `
+  *[_type == "redirect" && isActive == true] {
+    source,
+    destination,
+    permanent
+  }
+`;

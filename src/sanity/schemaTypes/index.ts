@@ -11,6 +11,7 @@ import { leadMagnetType } from "./leadMagnetType";
 import { placedStudentType } from "./placedStudentType";
 import { postType } from "./postType";
 import { pressFeatureType } from "./pressFeatureType";
+import { redirectType } from "./redirectType";
 import { testimonialType } from "./testimonialType";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
@@ -28,5 +29,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     pressFeatureType,
     courseType,
     leadMagnetType,
+    redirectType,
   ],
 };

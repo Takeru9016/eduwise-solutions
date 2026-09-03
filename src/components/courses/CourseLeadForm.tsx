@@ -44,6 +44,7 @@ const TRUST_BADGES = [
 declare global {
   interface Window {
     lintrk?: (action: string, params: { conversion_id: number }) => void;
+    oaiq?: (...args: unknown[]) => void;
   }
 }
 
@@ -83,6 +84,7 @@ export default function CourseLeadForm({ courseTitle }: CourseLeadFormProps) {
           email: data.email,
           mobile: `+91${data.mobile}`,
           name: data.name,
+          pagePath: window.location.pathname,
         }),
         headers: { "Content-Type": "application/json" },
         method: "POST",
@@ -93,7 +95,19 @@ export default function CourseLeadForm({ courseTitle }: CourseLeadFormProps) {
         throw new Error(json.error || "Submission failed");
       }
 
+      const result = await res.json();
+
       setStatus("success");
+
+      if (result.event_id) {
+        window.oaiq?.(
+          "measure",
+          "lead_created",
+          { type: "customer_action" },
+          { event_id: result.event_id }
+        );
+      }
+
       window.lintrk?.("track", { conversion_id: 26_490_044 });
       reset();
     } catch (err) {

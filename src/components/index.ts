@@ -23,6 +23,7 @@ export { default as LinkedInInsight } from "./common/LinkedInInsight";
 export { default as MetaPixel } from "./common/MetaPixel";
 export { default as NavbarClient } from "./common/Navbar";
 export { default as Navbar } from "./common/NavbarServer";
+export { default as OpenAiPixel } from "./common/OpenAiPixel";
 export { default as PopupForm } from "./common/PopupForm";
 export { default as ProgramSection } from "./common/ProgramSection";
 export { default as RefundHighlight } from "./common/RefundHighlight";

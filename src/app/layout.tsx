@@ -5,7 +5,12 @@ import { Be_Vietnam_Pro } from "next/font/google";
 
 import "./globals.css";
 import { Toaster } from "sonner";
-import { LinkedInInsight, MetaPixel, PopupForm } from "@/components";
+import {
+  LinkedInInsight,
+  MetaPixel,
+  OpenAiPixel,
+  PopupForm,
+} from "@/components";
 import { organizationJsonLd, SITE_URL } from "@/lib/seo";
 
 const beVietnamPro = Be_Vietnam_Pro({
@@ -79,6 +84,7 @@ export default function RootLayout({
         </a>
         <MetaPixel />
         <LinkedInInsight />
+        <OpenAiPixel />
         <div id="main-content">{children}</div>
         <PopupForm />
         <Toaster

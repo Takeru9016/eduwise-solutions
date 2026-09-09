@@ -18,6 +18,7 @@ export { default as DomainsShowcase } from "./common/DomainsShowcase";
 export { default as FAQs } from "./common/FAQs";
 export { default as FeaturedPress } from "./common/FeaturedPress";
 export { default as Footer } from "./common/Footer";
+export { GoogleTagManagerNoScript } from "./common/GoogleTagManager";
 export { default as HowItWorks } from "./common/HowItWorks";
 export { default as LinkedInInsight } from "./common/LinkedInInsight";
 export { default as MetaPixel } from "./common/MetaPixel";

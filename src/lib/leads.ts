@@ -4,8 +4,14 @@ import {
   ensureSheetExists,
   getSheetsClient,
 } from "@/lib/google-sheets";
+import { sanitizeSheetRow } from "@/lib/security/sanitize-sheets";
 
 const DEDUP_WINDOW_MS = 24 * 60 * 60 * 1000;
+// Narrower than DEDUP_WINDOW_MS and scoped to the same sheet only - this
+// flags a retry/double-click/replay of THIS submission so the caller can
+// skip firing a second ad conversion, without touching the existing
+// cross-sheet "Duplicate Check" business logic below.
+const REPLAY_WINDOW_MS = 5 * 60 * 1000;
 
 interface LeadSheetConfig {
   headers: readonly string[];
@@ -123,12 +129,13 @@ function hasRecentMatch(
   });
 }
 
-async function findDuplicateSource(
+async function analyzeMobileHistory(
   sheets: sheets_v4.Sheets,
   mobile: string,
-  excludeKey: LeadSourceKey
-): Promise<string | null> {
+  key: LeadSourceKey
+): Promise<{ duplicateSource: string | null; isReplay: boolean }> {
   const cutoff = Date.now() - DEDUP_WINDOW_MS;
+  const replayCutoff = Date.now() - REPLAY_WINDOW_MS;
   const entries = Object.entries(LEAD_SHEETS) as [
     LeadSourceKey,
     LeadSheetConfig,
@@ -136,18 +143,31 @@ async function findDuplicateSource(
   const candidates = entries.filter(([, config]) => config.mobileColumn >= 0);
 
   const results = await Promise.all(
-    candidates.map(async ([key, config]) => {
+    candidates.map(async ([candidateKey, config]) => {
       const rows = await fetchSheetRows(sheets, config.sheetName);
-      const matched = hasRecentMatch(rows, config, mobile, cutoff);
-      return matched ? { key, sheetName: config.sheetName } : null;
+      return {
+        candidateKey,
+        isOwnRecentReplay:
+          candidateKey === key &&
+          hasRecentMatch(rows, config, mobile, replayCutoff),
+        matchedDuplicate: hasRecentMatch(rows, config, mobile, cutoff),
+        sheetName: config.sheetName,
+      };
     })
   );
 
-  const match = results.find(Boolean);
-  if (!match) {
-    return null;
+  const duplicateMatch = results.find((r) => r.matchedDuplicate);
+  let duplicateSource: string | null = null;
+  if (duplicateMatch) {
+    duplicateSource =
+      duplicateMatch.candidateKey === key
+        ? "the same form"
+        : duplicateMatch.sheetName;
   }
-  return match.key === excludeKey ? "the same form" : match.sheetName;
+
+  const isReplay = results.some((r) => r.isOwnRecentReplay);
+
+  return { duplicateSource, isReplay };
 }
 
 /**
@@ -155,27 +175,35 @@ async function findDuplicateSource(
  * layout per tab) and cross-checks mobile number against every other lead
  * sheet for a submission in the last 24h, so the same person filling
  * multiple funnels shows up flagged rather than silently duplicated.
+ *
+ * Also reports `isReplay` - a much narrower same-sheet, same-mobile match
+ * within the last few minutes - so callers can skip firing a second ad
+ * conversion for a retry/double-click without affecting the business-level
+ * "Duplicate Check" column above.
+ *
+ * Cell values are sanitized against spreadsheet formula injection before
+ * being written.
  */
 export async function recordLead(
   key: LeadSourceKey,
   contentFields: (string | number)[],
   mobile?: string
-): Promise<{ duplicateSource: string | null }> {
+): Promise<{ duplicateSource: string | null; isReplay: boolean }> {
   const config = LEAD_SHEETS[key];
   const sheets = getSheetsClient();
   await ensureSheetExists(sheets, config.sheetName, [...config.headers]);
 
-  const duplicateSource = mobile
-    ? await findDuplicateSource(sheets, mobile, key)
-    : null;
+  const { duplicateSource, isReplay } = mobile
+    ? await analyzeMobileHistory(sheets, mobile, key)
+    : { duplicateSource: null, isReplay: false };
 
-  const row = [
+  const row = sanitizeSheetRow([
     ...contentFields,
     new Date().toISOString(),
     mobile ? (duplicateSource ?? "No") : "N/A",
-  ];
+  ]);
 
   await appendRow(sheets, config.sheetName, row);
 
-  return { duplicateSource };
+  return { duplicateSource, isReplay };
 }

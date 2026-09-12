@@ -13,9 +13,14 @@ import {
   XCircle,
   Zap,
 } from "lucide-react";
+import type { BaseSyntheticEvent } from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { HoneypotField } from "@/components/ui/honeypot-field";
+import { TurnstileWidget } from "@/components/ui/turnstile-widget";
+import { useFormToken } from "@/hooks/useFormToken";
+import { HONEYPOT_FIELD_NAME } from "@/lib/security/honeypot";
 
 const schema = z.object({
   consent: z.boolean().refine((v) => v === true, {
@@ -53,6 +58,8 @@ export default function CourseLeadForm({ courseTitle }: CourseLeadFormProps) {
     "idle" | "loading" | "success" | "error"
   >("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const formToken = useFormToken();
 
   const {
     register,
@@ -73,18 +80,26 @@ export default function CourseLeadForm({ courseTitle }: CourseLeadFormProps) {
 
   const consentChecked = watch("consent");
 
-  const onSubmit = async (data: FormValues) => {
+  const onSubmit = async (data: FormValues, event?: BaseSyntheticEvent) => {
     setStatus("loading");
     setErrorMsg("");
     try {
+      const formEl = event?.target as HTMLFormElement | undefined;
+      const honeypotValue = formEl
+        ? new FormData(formEl).get(HONEYPOT_FIELD_NAME)
+        : "";
+
       const res = await fetch("/api/linkedin-lead", {
         body: JSON.stringify({
+          [HONEYPOT_FIELD_NAME]: honeypotValue,
           consent: data.consent,
           course: data.course || courseTitle || "Not specified",
           email: data.email,
+          formToken,
           mobile: `+91${data.mobile}`,
           name: data.name,
           pagePath: window.location.pathname,
+          turnstileToken,
         }),
         headers: { "Content-Type": "application/json" },
         method: "POST",
@@ -99,6 +114,9 @@ export default function CourseLeadForm({ courseTitle }: CourseLeadFormProps) {
 
       setStatus("success");
 
+      // Both conversions only fire when the backend confirms this
+      // submission was accepted as a genuine, non-duplicate lead
+      // (event_id is only present in that case).
       if (result.event_id) {
         window.oaiq?.(
           "measure",
@@ -106,9 +124,9 @@ export default function CourseLeadForm({ courseTitle }: CourseLeadFormProps) {
           { type: "customer_action" },
           { event_id: result.event_id }
         );
+        window.lintrk?.("track", { conversion_id: 26_490_044 });
       }
 
-      window.lintrk?.("track", { conversion_id: 26_490_044 });
       reset();
     } catch (err) {
       setStatus("error");
@@ -170,6 +188,7 @@ export default function CourseLeadForm({ courseTitle }: CourseLeadFormProps) {
         noValidate
         onSubmit={handleSubmit(onSubmit)}
       >
+        <HoneypotField />
         <div>
           <div className="relative">
             <User className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 text-grey-40" />
@@ -284,6 +303,8 @@ export default function CourseLeadForm({ courseTitle }: CourseLeadFormProps) {
             {errorMsg}
           </div>
         )}
+
+        <TurnstileWidget onVerify={setTurnstileToken} />
 
         <button
           className="flex h-14 w-full items-center justify-center gap-2 rounded-full border-2 border-grey-15 bg-primary-75 font-bold font-vietnam text-base text-grey-15 tracking-wide transition-[background-color,opacity] duration-200 hover:bg-primary-90 disabled:cursor-not-allowed disabled:opacity-60"

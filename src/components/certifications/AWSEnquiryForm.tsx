@@ -21,6 +21,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { HoneypotField } from "@/components/ui/honeypot-field";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -29,6 +30,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { TurnstileWidget } from "@/components/ui/turnstile-widget";
+import { useFormToken } from "@/hooks/useFormToken";
+import { HONEYPOT_FIELD_NAME } from "@/lib/security/honeypot";
 import { submitWithRetry } from "@/utils/api";
 
 const contactFormSchema = z.object({
@@ -113,6 +117,8 @@ export default function AWSEnquiryForm() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const formToken = useFormToken();
 
   const form = useForm<ContactFormValues>({
     defaultValues: {
@@ -126,16 +132,27 @@ export default function AWSEnquiryForm() {
     resolver: zodResolver(contactFormSchema),
   });
 
-  const onSubmit = async (data: ContactFormValues) => {
+  const onSubmit = async (
+    data: ContactFormValues,
+    event?: React.BaseSyntheticEvent
+  ) => {
     try {
       setIsSubmitting(true);
       setErrorMessage("");
       setShowDialog(false);
 
+      const formEl = event?.target as HTMLFormElement | undefined;
+      const honeypotValue = formEl
+        ? new FormData(formEl).get(HONEYPOT_FIELD_NAME)
+        : "";
+
       const response = await submitWithRetry(
         {
           ...data,
+          [HONEYPOT_FIELD_NAME]: String(honeypotValue ?? ""),
+          formToken,
           message: data.message || "",
+          turnstileToken,
         },
         3,
         "/api/aws-enquiry"
@@ -184,6 +201,7 @@ export default function AWSEnquiryForm() {
           className="space-y-4 px-7 py-7"
           onSubmit={form.handleSubmit(onSubmit)}
         >
+          <HoneypotField />
           <FormInputField
             control={form.control}
             label="First Name"
@@ -245,6 +263,8 @@ export default function AWSEnquiryForm() {
               </FormItem>
             )}
           />
+
+          <TurnstileWidget onVerify={setTurnstileToken} />
 
           <Button
             className="flex h-12 w-full items-center justify-center gap-2 rounded-full border-2 border-grey-15 bg-primary-75 font-bold text-grey-15 hover:bg-primary-90"

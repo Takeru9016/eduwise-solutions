@@ -15,7 +15,11 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { HoneypotField } from "@/components/ui/honeypot-field";
 import { Input } from "@/components/ui/input";
+import { TurnstileWidget } from "@/components/ui/turnstile-widget";
+import { useFormToken } from "@/hooks/useFormToken";
+import { HONEYPOT_FIELD_NAME } from "@/lib/security/honeypot";
 import { submitWithRetry } from "@/utils/api";
 
 // Form validation schema
@@ -48,6 +52,8 @@ export default function PopupForm() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [hasInteracted, setHasInteracted] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const formToken = useFormToken();
 
   // Form initialization
   const form = useForm<FormValues>({
@@ -76,18 +82,29 @@ export default function PopupForm() {
   }, [hasInteracted, isSuccess]);
 
   // Form submission handler
-  const onSubmit = async (data: FormValues) => {
+  const onSubmit = async (
+    data: FormValues,
+    event?: React.BaseSyntheticEvent
+  ) => {
     try {
       setIsSubmitting(true);
       setErrorMessage("");
 
+      const formEl = event?.target as HTMLFormElement | undefined;
+      const honeypotValue = formEl
+        ? new FormData(formEl).get(HONEYPOT_FIELD_NAME)
+        : "";
+
       const response = await submitWithRetry({
+        [HONEYPOT_FIELD_NAME]: String(honeypotValue ?? ""),
         email: data.email,
         firstName: data.name,
+        formToken,
         lastName: "",
         message: "",
         mobile: data.mobile,
         subject: "Popup Form Submission",
+        turnstileToken,
       });
 
       if (!response) {
@@ -145,6 +162,7 @@ export default function PopupForm() {
               form={form}
               isSubmitting={isSubmitting}
               onSubmit={onSubmit}
+              onTurnstileVerify={setTurnstileToken}
             />
           )}
         </div>
@@ -187,16 +205,22 @@ const SuccessMessage = () => (
 const FormContent = ({
   form,
   onSubmit,
+  onTurnstileVerify,
   errorMessage,
   isSubmitting,
 }: {
   form: UseFormReturn<FormValues>;
-  onSubmit: (data: FormValues) => Promise<void>;
+  onSubmit: (
+    data: FormValues,
+    event?: React.BaseSyntheticEvent
+  ) => Promise<void>;
+  onTurnstileVerify: (token: string) => void;
   errorMessage: string;
   isSubmitting: boolean;
 }) => (
   <Form {...form}>
     <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
+      <HoneypotField />
       <FormField
         control={form.control}
         name="name"
@@ -262,6 +286,8 @@ const FormContent = ({
       />
 
       {errorMessage && <ErrorMessage message={errorMessage} />}
+
+      <TurnstileWidget onVerify={onTurnstileVerify} />
 
       <SubmitButton isSubmitting={isSubmitting} />
     </form>

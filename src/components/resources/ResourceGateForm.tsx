@@ -13,6 +13,10 @@ import {
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { HoneypotField } from "@/components/ui/honeypot-field";
+import { TurnstileWidget } from "@/components/ui/turnstile-widget";
+import { useFormToken } from "@/hooks/useFormToken";
+import { HONEYPOT_FIELD_NAME } from "@/lib/security/honeypot";
 
 const gateSchema = z.object({
   email: z.string().email("Enter a valid email address"),
@@ -35,6 +39,8 @@ export default function ResourceGateForm({
   >("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [downloadUrl, setDownloadUrl] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const formToken = useFormToken();
 
   const {
     register,
@@ -45,15 +51,26 @@ export default function ResourceGateForm({
     resolver: zodResolver(gateSchema),
   });
 
-  const onSubmit = async (data: GateFormValues) => {
+  const onSubmit = async (
+    data: GateFormValues,
+    event?: React.BaseSyntheticEvent
+  ) => {
     setStatus("loading");
     setErrorMsg("");
     try {
+      const formEl = event?.target as HTMLFormElement | undefined;
+      const honeypotValue = formEl
+        ? new FormData(formEl).get(HONEYPOT_FIELD_NAME)
+        : "";
+
       const res = await fetch("/api/lead-magnet", {
         body: JSON.stringify({
+          [HONEYPOT_FIELD_NAME]: String(honeypotValue ?? ""),
           email: data.email,
+          formToken,
           name: data.name,
           slug: resourceSlug,
+          turnstileToken,
         }),
         headers: { "Content-Type": "application/json" },
         method: "POST",
@@ -115,6 +132,7 @@ export default function ResourceGateForm({
         noValidate
         onSubmit={handleSubmit(onSubmit)}
       >
+        <HoneypotField />
         <div>
           <div className="relative">
             <User className="absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-grey-40" />
@@ -165,6 +183,8 @@ export default function ResourceGateForm({
             {errorMsg}
           </div>
         )}
+
+        <TurnstileWidget onVerify={setTurnstileToken} />
 
         <button
           className="flex h-12 w-full items-center justify-center gap-2 rounded-full border-2 border-grey-15 bg-primary-75 font-bold text-grey-15 text-sm transition-colors hover:bg-primary-90 disabled:cursor-not-allowed disabled:opacity-60"

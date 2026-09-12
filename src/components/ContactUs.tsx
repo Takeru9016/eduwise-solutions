@@ -21,6 +21,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { HoneypotField } from "@/components/ui/honeypot-field";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -30,7 +31,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { TurnstileWidget } from "@/components/ui/turnstile-widget";
+import { useFormToken } from "@/hooks/useFormToken";
 import { useSanityCourses } from "@/hooks/useSanityCourses";
+import { HONEYPOT_FIELD_NAME } from "@/lib/security/honeypot";
 import { submitWithRetry } from "@/utils/api";
 import ContactInfo from "./common/ContactInfo";
 import LoadingOverlay from "./common/LoadingOverlay";
@@ -106,6 +110,8 @@ export default function ContactUsSection() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const formToken = useFormToken();
 
   const { courses: subjects, isLoading: isLoadingSubjects } =
     useSanityCourses();
@@ -122,15 +128,26 @@ export default function ContactUsSection() {
     resolver: zodResolver(contactFormSchema),
   });
 
-  const onSubmit = async (data: ContactFormValues) => {
+  const onSubmit = async (
+    data: ContactFormValues,
+    event?: React.BaseSyntheticEvent
+  ) => {
     try {
       setIsSubmitting(true);
       setErrorMessage("");
       setShowDialog(false);
 
+      const formEl = event?.target as HTMLFormElement | undefined;
+      const honeypotValue = formEl
+        ? new FormData(formEl).get(HONEYPOT_FIELD_NAME)
+        : "";
+
       const response = await submitWithRetry({
         ...data,
+        [HONEYPOT_FIELD_NAME]: String(honeypotValue ?? ""),
+        formToken,
         message: data.message || "",
+        turnstileToken,
       });
 
       if (!response) {
@@ -205,6 +222,7 @@ export default function ContactUsSection() {
                   className="space-y-6"
                   onSubmit={form.handleSubmit(onSubmit)}
                 >
+                  <HoneypotField />
                   <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                     <FormInputField
                       control={form.control}
@@ -298,6 +316,8 @@ export default function ContactUsSection() {
                       </FormItem>
                     )}
                   />
+
+                  <TurnstileWidget onVerify={setTurnstileToken} />
 
                   <Button
                     className="flex h-12 w-full items-center justify-center gap-2 rounded-full border-2 border-grey-15 bg-primary-75 px-8 font-bold text-grey-15 hover:bg-primary-90 md:w-auto"

@@ -2,6 +2,7 @@
 
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
+import { useFormToken } from "@/hooks/useFormToken";
 
 // Add Razorpay types
 interface RazorpayResponse {
@@ -59,6 +60,7 @@ export default function PaymentForm({
 }: PaymentFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);
+  const formToken = useFormToken();
   const [formData, setFormData] = useState({
     email: "",
     fullName: "",
@@ -245,6 +247,7 @@ export default function PaymentForm({
         body: JSON.stringify({
           email: formData.email,
           firstName,
+          formToken,
           lastName,
           message: `Payment ID: ${paymentId}`,
           mobile: formData.mobile, // This will be stored in "Mobile Number" column

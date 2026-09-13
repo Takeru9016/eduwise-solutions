@@ -2,15 +2,14 @@
  * Cloudflare Turnstile server-side verification.
  *
  * Fails open (skips the check, logs a warning) when TURNSTILE_SECRET_KEY
- * is unset - the widget still renders using the default Cloudflare TEST
- * sitekey (1x00000000000000000000AA, "always passes"), but until a real
- * secret is configured this provides NO actual bot protection. Replace
- * both NEXT_PUBLIC_TURNSTILE_SITE_KEY and TURNSTILE_SECRET_KEY with real
- * production keys from the Cloudflare Turnstile dashboard before launch.
+ * is unset - the widget still renders (using NEXT_PUBLIC_TURNSTILE_SITE_KEY,
+ * falling back to Cloudflare's public TEST sitekey if unset), but until the
+ * matching secret is configured this provides NO actual bot protection.
  */
 
 const VERIFY_ENDPOINT =
   "https://challenges.cloudflare.com/turnstile/v0/siteverify";
+const VERIFY_TIMEOUT_MS = 10_000;
 
 export interface TurnstileResult {
   skipped: boolean;
@@ -40,7 +39,11 @@ export async function verifyTurnstileToken(
       body.set("remoteip", remoteIp);
     }
 
-    const res = await fetch(VERIFY_ENDPOINT, { body, method: "POST" });
+    const res = await fetch(VERIFY_ENDPOINT, {
+      body,
+      method: "POST",
+      signal: AbortSignal.timeout(VERIFY_TIMEOUT_MS),
+    });
     const data = (await res.json()) as { success: boolean };
     return { skipped: false, success: Boolean(data.success) };
   } catch (error) {

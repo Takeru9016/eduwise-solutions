@@ -1,4 +1,6 @@
 import type { sheets_v4 } from "googleapis";
+import { after } from "next/server";
+import { sendAdminLeadNotification } from "@/lib/email-sender";
 import {
   appendRow,
   ensureSheetExists,
@@ -204,6 +206,11 @@ export async function recordLead(
   ]);
 
   await appendRow(sheets, config.sheetName, row);
+
+  const fields = config.headers
+    .slice(0, contentFields.length)
+    .map((label, index) => ({ label, value: String(contentFields[index]) }));
+  after(() => sendAdminLeadNotification(config.sheetName, fields));
 
   return { duplicateSource, isReplay };
 }

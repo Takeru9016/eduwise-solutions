@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { z } from "zod";
 import LeadMagnetDeliveryEmail from "@/emails/lead-magnet-delivery";
+import { SITE_FROM_EMAIL } from "@/lib/email-sender";
 import { recordLead } from "@/lib/leads";
 import {
   checkBotSignals,
@@ -108,7 +109,7 @@ export async function POST(req: Request) {
     if (resendApiKey) {
       const resend = new Resend(resendApiKey);
       await resend.emails.send({
-        from: "Eduwise Solutions <onboarding@resend.dev>",
+        from: SITE_FROM_EMAIL,
         react: LeadMagnetDeliveryEmail({
           downloadUrl: resource.pdfUrl,
           name: body.name,

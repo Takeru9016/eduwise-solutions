@@ -359,7 +359,7 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
       />
 
       {/* HERO */}
-      <section className="bg-light-97 py-16 sm:py-20 lg:py-24" ref={heroRef}>
+      <section className="bg-light-97 py-12 sm:py-14 lg:py-16" ref={heroRef}>
         <div className="container">
           <div className="grid items-center gap-10 lg:grid-cols-[1fr_460px] lg:gap-14">
             <div className="text-center lg:text-left">
@@ -442,7 +442,7 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
 
               {course.heroImageUrl && (
                 <div
-                  className="relative mt-10 h-100 w-full overflow-hidden rounded-3xl border-2 border-grey-15"
+                  className="relative mt-8 h-72 w-full overflow-hidden rounded-3xl border-2 border-grey-15"
                   data-reveal
                 >
                   <Image

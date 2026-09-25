@@ -59,7 +59,7 @@ export async function generateMetadata({
       title: course.seoTitle || course.title,
     },
     robots: { follow: true, index: true },
-    title: course.seoTitle || course.title,
+    title: { absolute: course.seoTitle || course.title },
   };
 }
 

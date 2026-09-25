@@ -19,6 +19,7 @@ import {
   GraduationCap,
   HelpCircle,
   IndianRupee,
+  Info,
   Laptop,
   LifeBuoy,
   Lightbulb,
@@ -53,6 +54,7 @@ import { prefersReducedMotion } from "@/lib/utils";
 import type {
   CareerTrackItem,
   CourseContent,
+  CourseFAQ,
   CourseTool,
   ISAStep,
   PRTStep,
@@ -62,6 +64,7 @@ import RefundHighlight from "../common/RefundHighlight";
 import PaymentModal from "../payment/PaymentModal";
 import PaymentStatusModal from "../payment/PaymentStatusModal";
 import CourseLeadForm from "./CourseLeadForm";
+import CourseOverviewTabs from "./CourseOverviewTabs";
 import PlacementSection from "./PlacementSection";
 
 const ICON_MAP: Record<string, LucideIcon> = {
@@ -193,12 +196,104 @@ function buildJGSteps(course: CourseContent): JGStep[] {
   return jgSteps;
 }
 
+function useScrollSpyAccordion(count: number) {
+  const [activeValue, setActiveValue] = useState("jg-0");
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    if (!count) {
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) {
+            continue;
+          }
+          const index = itemRefs.current.indexOf(
+            entry.target as HTMLDivElement
+          );
+          if (index !== -1) {
+            setActiveValue(`jg-${index}`);
+          }
+        }
+      },
+      { rootMargin: "-25% 0px -65% 0px", threshold: 0 }
+    );
+    for (const el of itemRefs.current) {
+      if (el) {
+        observer.observe(el);
+      }
+    }
+    return () => observer.disconnect();
+  }, [count]);
+
+  return { activeValue, itemRefs, setActiveValue };
+}
+
+function JobGuaranteeTrack({ steps }: { steps: JGStep[] }) {
+  const scrollSpy = useScrollSpyAccordion(steps.length);
+
+  return (
+    <section>
+      <h2 className="mb-2 font-black font-vietnam text-2xl text-grey-15 sm:text-3xl">
+        Job Guarantee Track
+      </h2>
+      <p className="mb-8 text-grey-40">
+        Your path from graduation to a confirmed offer letter. Scroll to move
+        through each step.
+      </p>
+      <Accordion
+        className="space-y-6"
+        collapsible
+        onValueChange={scrollSpy.setActiveValue}
+        type="single"
+        value={scrollSpy.activeValue}
+      >
+        {steps.map((step, i) => (
+          <div
+            key={step.title}
+            ref={(el) => {
+              scrollSpy.itemRefs.current[i] = el;
+            }}
+          >
+            <AccordionItem
+              className="overflow-hidden rounded-3xl border-2 border-grey-15"
+              value={`jg-${i}`}
+            >
+              <AccordionTrigger className="gap-4 bg-grey-15 px-6 py-5 text-white hover:no-underline">
+                <div className="flex items-center gap-4">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-white/30 font-bold text-white">
+                    {i + 1}
+                  </div>
+                  <div className="text-left">
+                    <h3 className="font-bold font-vietnam text-lg text-white">
+                      {step.title}
+                    </h3>
+                    <p className="mt-0.5 text-sm text-white/70">
+                      {step.description}
+                    </p>
+                  </div>
+                </div>
+              </AccordionTrigger>
+              <AccordionContent className="bg-white p-6 sm:p-8">
+                {step.content}
+              </AccordionContent>
+            </AccordionItem>
+          </div>
+        ))}
+      </Accordion>
+    </section>
+  );
+}
+
 interface CourseTemplateProps {
   course: CourseContent;
 }
 
 export default function CourseTemplate({ course }: CourseTemplateProps) {
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+  const [expandedTool, setExpandedTool] = useState<string | null>(null);
   const [paymentStatus, setPaymentStatus] = useState<{
     isOpen: boolean;
     status: "success" | "failure" | "cancelled";
@@ -210,9 +305,6 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
 
   const heroRef = useRef<HTMLDivElement>(null);
   const features = useStaggerReveal<HTMLDivElement>(course.features.length);
-  const targetAudience = useStaggerReveal<HTMLDivElement>(
-    course.targetAudience?.length ?? 0
-  );
   const careerPaths = useStaggerReveal<HTMLDivElement>(
     course.careerPaths?.length ?? 0
   );
@@ -335,6 +427,19 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
                 })}
               </div>
 
+              <div
+                className="mt-6 flex justify-center lg:justify-start"
+                data-reveal
+              >
+                <Link
+                  className="inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-white px-6 py-3 font-bold text-grey-15 text-sm transition-transform hover:-translate-y-0.5 active:scale-[0.97]"
+                  href="#curriculum"
+                >
+                  <BookOpen className="h-4 w-4" />
+                  View Course Curriculum
+                </Link>
+              </div>
+
               {course.heroImageUrl && (
                 <div
                   className="relative mt-10 h-100 w-full overflow-hidden rounded-3xl border-2 border-grey-15"
@@ -374,6 +479,11 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
       {course.slug.current.toLowerCase() === "devops" && <RefundHighlight />}
 
       <div className="container space-y-16 py-12 sm:py-16 lg:py-20">
+        {/* COURSE OVERVIEW */}
+        {course.overview && course.overview.length > 0 && (
+          <CourseOverviewTabs overview={course.overview} />
+        )}
+
         {/* PROGRAM HIGHLIGHTS */}
         <section>
           <h2 className="mb-8 font-black font-vietnam text-2xl text-grey-15 sm:text-3xl">
@@ -459,7 +569,7 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
         )}
 
         {/* CURRICULUM - OPEN ROADMAP */}
-        <section>
+        <section id="curriculum">
           <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
             <h2 className="font-black font-vietnam text-2xl text-grey-15 sm:text-3xl">
               Course Curriculum
@@ -553,39 +663,7 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
         </section>
 
         {/* JOB GUARANTEE TRACK */}
-        {jgSteps.length > 0 && (
-          <section>
-            <h2 className="mb-2 font-black font-vietnam text-2xl text-grey-15 sm:text-3xl">
-              Job Guarantee Track
-            </h2>
-            <p className="mb-8 text-grey-40">
-              Your path from graduation to a confirmed offer letter.
-            </p>
-            <div className="space-y-6">
-              {jgSteps.map((step, i) => (
-                <div
-                  className="overflow-hidden rounded-3xl border-2 border-grey-15"
-                  key={step.title}
-                >
-                  <div className="flex items-center gap-4 bg-grey-15 px-6 py-5">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-white/30 font-bold text-white">
-                      {i + 1}
-                    </div>
-                    <div>
-                      <h3 className="font-bold font-vietnam text-lg text-white">
-                        {step.title}
-                      </h3>
-                      <p className="mt-0.5 text-sm text-white/70">
-                        {step.description}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="bg-white p-6 sm:p-8">{step.content}</div>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
+        {jgSteps.length > 0 && <JobGuaranteeTrack steps={jgSteps} />}
 
         {/* TOOLS */}
         {course.tools && course.tools.length > 0 && (
@@ -594,59 +672,47 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
               Tools &amp; Technologies
             </h2>
             <div className="grid grid-cols-3 gap-4 sm:grid-cols-4">
-              {course.tools.map((tool) => (
-                <div
-                  className="flex flex-col items-center gap-2 rounded-2xl border-2 border-grey-15 bg-white p-4"
-                  key={tool.name}
-                >
-                  {tool.logoUrl ? (
-                    <Image
-                      alt={tool.name}
-                      className="h-10 w-10 object-contain"
-                      height={40}
-                      src={tool.logoUrl}
-                      width={40}
-                    />
-                  ) : (
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-grey-15 bg-primary-90">
-                      <Code className="h-5 w-5 text-grey-15" />
-                    </div>
-                  )}
-                  <span className="text-center font-bold text-grey-35 text-xs">
-                    {tool.name}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* TARGET AUDIENCE */}
-        {course.targetAudience && course.targetAudience.length > 0 && (
-          <section>
-            <h2 className="mb-8 font-black font-vietnam text-2xl text-grey-15 sm:text-3xl">
-              Who Is This For
-            </h2>
-            <div
-              className="grid grid-cols-1 gap-4 sm:grid-cols-2"
-              ref={targetAudience.containerRef}
-            >
-              {course.targetAudience.map((target, i) => {
-                const Icon = getIcon(target.icon);
+              {course.tools.map((tool) => {
+                const isExpanded = expandedTool === tool.name;
                 return (
                   <div
-                    className="flex items-center gap-4 rounded-2xl border-2 border-grey-15 bg-white p-5"
-                    key={target.title}
-                    ref={(el) => {
-                      targetAudience.itemRefs.current[i] = el;
-                    }}
+                    className="relative flex flex-col items-center gap-2 rounded-2xl border-2 border-grey-15 bg-white p-4"
+                    key={tool.name}
                   >
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-2 border-grey-15 bg-primary-90">
-                      <Icon className="h-5 w-5 text-grey-15" />
-                    </div>
-                    <p className="font-bold font-vietnam text-grey-15">
-                      {target.title}
-                    </p>
+                    {tool.description && (
+                      <button
+                        aria-expanded={isExpanded}
+                        aria-label={`${tool.name} description`}
+                        className="absolute top-2 right-2 flex h-5 w-5 items-center justify-center rounded-full border border-grey-15/30 text-grey-40 transition-colors hover:border-grey-15 hover:text-grey-15"
+                        onClick={() =>
+                          setExpandedTool(isExpanded ? null : tool.name)
+                        }
+                        type="button"
+                      >
+                        <Info className="h-3 w-3" />
+                      </button>
+                    )}
+                    {tool.logoUrl ? (
+                      <Image
+                        alt={tool.name}
+                        className="h-10 w-10 object-contain"
+                        height={40}
+                        src={tool.logoUrl}
+                        width={40}
+                      />
+                    ) : (
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-grey-15 bg-primary-90">
+                        <Code className="h-5 w-5 text-grey-15" />
+                      </div>
+                    )}
+                    <span className="text-center font-bold text-grey-35 text-xs">
+                      {tool.name}
+                    </span>
+                    {isExpanded && tool.description && (
+                      <p className="text-center text-[11px] text-grey-40 leading-snug">
+                        {tool.description}
+                      </p>
+                    )}
                   </div>
                 );
               })}
@@ -734,31 +800,18 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
             <h2 className="mb-8 font-black font-vietnam text-2xl text-grey-15 sm:text-3xl">
               Frequently Asked Questions
             </h2>
-            <Accordion className="space-y-3" collapsible type="single">
-              {course.faq.map((item, i) => (
-                <AccordionItem
-                  className="overflow-hidden rounded-2xl border-2 border-grey-15 bg-white"
-                  key={item.question}
-                  value={`faq-${i}`}
-                >
-                  <AccordionTrigger className="gap-3 px-5 py-4 hover:no-underline">
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-grey-15 bg-primary-90 font-bold text-grey-15 text-sm">
-                        {i + 1}
-                      </div>
-                      <span className="font-bold font-vietnam text-grey-15">
-                        {item.question}
-                      </span>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="px-5 pl-15">
-                    <p className="text-grey-35 leading-relaxed">
-                      {item.answer}
-                    </p>
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
+              <FAQColumn
+                items={course.faq.filter((item) => item.category !== "career")}
+                keyPrefix="training"
+                title="Certification & Training"
+              />
+              <FAQColumn
+                items={course.faq.filter((item) => item.category === "career")}
+                keyPrefix="career"
+                title="Career & Placement"
+              />
+            </div>
             <div className="mt-8 text-center">
               <p className="mb-4 text-grey-40">Still have questions?</p>
               <Link
@@ -864,6 +917,50 @@ function PricingCard({
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function FAQColumn({
+  items,
+  keyPrefix,
+  title,
+}: {
+  items: CourseFAQ[];
+  keyPrefix: string;
+  title: string;
+}) {
+  if (items.length === 0) {
+    return null;
+  }
+  return (
+    <div>
+      <h3 className="mb-4 font-bold font-vietnam text-grey-30 text-sm uppercase tracking-wider">
+        {title}
+      </h3>
+      <Accordion className="space-y-3" collapsible type="single">
+        {items.map((item, i) => (
+          <AccordionItem
+            className="overflow-hidden rounded-2xl border-2 border-grey-15 bg-white"
+            key={item.question}
+            value={`faq-${keyPrefix}-${i}`}
+          >
+            <AccordionTrigger className="gap-3 px-5 py-4 hover:no-underline">
+              <div className="flex items-center gap-3">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-grey-15 bg-primary-90 font-bold text-grey-15 text-sm">
+                  {i + 1}
+                </div>
+                <span className="font-bold font-vietnam text-grey-15">
+                  {item.question}
+                </span>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent className="px-5 pl-15">
+              <p className="text-grey-35 leading-relaxed">{item.answer}</p>
+            </AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
     </div>
   );
 }

@@ -188,6 +188,60 @@ export const courseType = defineType({
       validation: (Rule) => Rule.required().min(2).max(6),
     }),
 
+    // Overview Group ("What is X / Why Learn / Who Can Learn / How It Works" tabs)
+    defineField({
+      description:
+        "Tabbed panel shown right after the hero. Each item becomes one tab.",
+      group: "content",
+      name: "overview",
+      of: [
+        {
+          fields: [
+            {
+              description: 'Lucide icon name, e.g. "HelpCircle"',
+              name: "icon",
+              title: "Tab Icon",
+              type: "string",
+            },
+            {
+              description: 'Short label for the tab button, e.g. "Why Learn"',
+              name: "tabLabel",
+              title: "Tab Label",
+              type: "string",
+              validation: (Rule) => Rule.required().max(30),
+            },
+            {
+              description:
+                'Heading shown in the panel, e.g. "Why Learn DevOps?"',
+              name: "title",
+              title: "Panel Title",
+              type: "string",
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              description: "Paragraph content for this tab.",
+              name: "body",
+              rows: 4,
+              title: "Body Text",
+              type: "text",
+            },
+            {
+              description:
+                'Optional bullet list, used instead of/alongside body (e.g. for a "Core Skills" tab).',
+              name: "bullets",
+              of: [{ type: "string" }],
+              title: "Bullet Points",
+              type: "array",
+            },
+          ],
+          preview: { select: { subtitle: "tabLabel", title: "title" } },
+          type: "object",
+        },
+      ],
+      title: "Overview Tabs",
+      type: "array",
+    }),
+
     // Curriculum Group
     defineField({
       group: "curriculum",
@@ -443,6 +497,14 @@ export const courseType = defineType({
               title: "Tool Logo",
               type: "image",
             },
+            {
+              description:
+                "Optional one-line description, shown when the learner taps the info icon on this tool's card.",
+              name: "description",
+              title: "Short Description",
+              type: "string",
+              validation: (Rule) => Rule.max(120),
+            },
           ],
           preview: { select: { media: "logo", title: "name" } },
           type: "object",
@@ -460,6 +522,19 @@ export const courseType = defineType({
           fields: [
             { name: "question", title: "Question", type: "string" },
             { name: "answer", rows: 3, title: "Answer", type: "text" },
+            {
+              description:
+                "Groups this FAQ into a column. Defaults to the first column if left unset.",
+              name: "category",
+              options: {
+                list: [
+                  { title: "Certification & Training", value: "training" },
+                  { title: "Career & Placement", value: "career" },
+                ],
+              },
+              title: "Category",
+              type: "string",
+            },
           ],
           preview: { select: { title: "question" } },
           type: "object",
@@ -521,6 +596,15 @@ export const courseType = defineType({
       title: "SEO Description",
       type: "text",
       validation: (Rule) => Rule.max(160),
+    }),
+    defineField({
+      description:
+        "Meta keywords tag. Has no effect on Google ranking (deprecated since ~2009) - kept for completeness/checklist compliance only.",
+      group: "seo",
+      name: "seoKeywords",
+      of: [{ type: "string" }],
+      title: "SEO Keywords",
+      type: "array",
     }),
   ],
   groups: [

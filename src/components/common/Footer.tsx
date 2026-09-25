@@ -249,14 +249,6 @@ export default function Footer() {
           </div>
         </div>
       </div>
-
-      {/* Ghost wordmark */}
-      <p
-        aria-hidden="true"
-        className="pointer-events-none mb-[-3vw] select-none overflow-hidden text-center font-black font-vietnam text-[18vw] text-grey-15/5 leading-none"
-      >
-        Eduwise
-      </p>
     </footer>
   );
 }

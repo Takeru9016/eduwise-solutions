@@ -60,12 +60,22 @@ export interface TargetAudience {
 }
 
 export interface CourseTool {
+  description?: string;
   logoUrl?: string;
   name: string;
 }
 
+export interface CourseOverviewTab {
+  body?: string;
+  bullets?: string[];
+  icon?: string;
+  tabLabel: string;
+  title: string;
+}
+
 export interface CourseFAQ {
   answer: string;
+  category?: "career" | "training";
   question: string;
 }
 
@@ -105,6 +115,7 @@ export interface CourseContent {
   isJobGuaranteeProgram?: boolean;
   modules: CourseModule[];
   originalPrice: number;
+  overview?: CourseOverviewTab[];
 
   // Pricing (required)
   price: number;
@@ -112,6 +123,7 @@ export interface CourseContent {
   seoDescription?: string;
 
   // SEO
+  seoKeywords?: string[];
   seoTitle?: string;
   slug: { current: string };
 

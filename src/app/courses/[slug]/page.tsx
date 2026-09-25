@@ -2,7 +2,13 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Footer, Navbar } from "@/components";
 import CourseTemplate from "@/components/courses/CourseTemplate";
-import { courseJsonLd } from "@/lib/seo";
+import {
+  absoluteUrl,
+  breadcrumbJsonLd,
+  courseJsonLd,
+  faqPageJsonLd,
+  localBusinessJsonLd,
+} from "@/lib/seo";
 import { client } from "@/sanity/lib/client";
 import {
   ALL_COURSE_SLUGS_QUERY,
@@ -39,15 +45,20 @@ export async function generateMetadata({
   }
 
   return {
+    alternates: {
+      canonical: absoluteUrl(`/courses/${slug}`),
+    },
     description:
       course.seoDescription ||
       course.description ||
       `Learn ${course.title} with Eduwise Solutions. ${course.subtitle}`,
+    keywords: course.seoKeywords?.length ? course.seoKeywords : undefined,
     openGraph: {
       description: course.seoDescription || course.description,
       images: course.heroImageUrl ? [{ url: course.heroImageUrl }] : [],
       title: course.seoTitle || course.title,
     },
+    robots: { follow: true, index: true },
     title: course.seoTitle || course.title,
   };
 }
@@ -72,6 +83,7 @@ export default async function CoursePage({ params }: PageProps) {
           __html: JSON.stringify(
             courseJsonLd({
               description: course.description,
+              modules: course.modules,
               price: course.price,
               seoDescription: course.seoDescription,
               slug: course.slug.current,
@@ -82,6 +94,35 @@ export default async function CoursePage({ params }: PageProps) {
         }}
         type="application/ld+json"
       />
+      <script
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: static, code-generated JSON-LD, not user input
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(localBusinessJsonLd()),
+        }}
+        type="application/ld+json"
+      />
+      <script
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: static, code-generated JSON-LD, not user input
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbJsonLd([
+              { name: "Home", path: "/" },
+              { name: "Courses", path: "/courses" },
+              { name: course.title, path: `/courses/${slug}` },
+            ])
+          ),
+        }}
+        type="application/ld+json"
+      />
+      {course.faq && course.faq.length > 0 && (
+        <script
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: static, code-generated JSON-LD, not user input
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(faqPageJsonLd(course.faq)),
+          }}
+          type="application/ld+json"
+        />
+      )}
       <Navbar />
       <CourseTemplate course={course} />
       <Footer />

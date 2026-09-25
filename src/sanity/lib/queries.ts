@@ -159,6 +159,7 @@ export const COURSE_BY_SLUG_QUERY = `
     stats,
     features,
     highlights,
+    overview,
     modules,
     price,
     originalPrice,
@@ -169,6 +170,7 @@ export const COURSE_BY_SLUG_QUERY = `
     isJobGuaranteeProgram,
     tools[] {
       name,
+      description,
       "logoUrl": logo.asset->url
     },
     prtSteps,
@@ -183,7 +185,8 @@ export const COURSE_BY_SLUG_QUERY = `
     batchInfo,
     industryGrowth,
     seoTitle,
-    seoDescription
+    seoDescription,
+    seoKeywords
   }
 `;
 

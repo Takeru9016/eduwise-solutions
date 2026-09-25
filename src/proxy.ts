@@ -30,7 +30,7 @@ async function getRedirectRules(): Promise<RedirectRule[]> {
   return cachedRules;
 }
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const rules = await getRedirectRules();
   const match = rules.find((rule) => rule.source === request.nextUrl.pathname);
 

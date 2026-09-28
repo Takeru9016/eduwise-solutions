@@ -55,3 +55,7 @@ certificates
 # monorepo config, not pnpm 11's newer allowBuilds/onlyBuiltDependencies use.
 # Run `pnpm approve-builds --all` locally if pnpm warns about ignored builds.
 pnpm-workspace.yaml
+graphify-out/cache/
+/.agents
+/.claude
+/graphify-out

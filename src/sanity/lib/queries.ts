@@ -14,11 +14,19 @@ export const POSTS_QUERY = `
 export const POST_BY_SLUG_QUERY = `
   *[_type == "post" && slug.current == $slug][0]{
     _id,
+    _updatedAt,
     title,
     slug,
     publishedAt,
     mainImage,
     body,
+    seoTitle,
+    h1,
+    seoDescription,
+    seoKeywords,
+    canonicalUrl,
+    noIndex,
+    faq,
     "categories": categories[]-> { _id, title, slug },
     "author": author-> { _id, name, image }
   }

@@ -12,6 +12,12 @@ import { portableTextComponents } from "@/components/portable-text-components";
 import { PreviewBanner } from "@/components/preview-banner";
 import { PreviewProvider } from "@/components/preview-provider";
 import { Button } from "@/components/ui/button";
+import {
+  absoluteUrl,
+  articleJsonLd,
+  breadcrumbJsonLd,
+  faqPageJsonLd,
+} from "@/lib/seo";
 import { formatDate } from "@/lib/utils";
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
@@ -34,13 +40,30 @@ interface TypedObject {
 }
 interface Post {
   _id: string;
+  _updatedAt?: string;
   author?: Author;
   body?: TypedObject[];
+  canonicalUrl?: string;
   categories?: Category[];
+  faq?: { answer: string; question: string }[];
+  h1?: string;
   mainImage?: SanityImageWithAlt;
+  noIndex?: boolean;
   publishedAt?: string;
+  seoDescription?: string;
+  seoKeywords?: string[];
+  seoTitle?: string;
   slug: { current: string };
   title: string;
+}
+
+function getPostDescription(post: Post) {
+  if (post.seoDescription) {
+    return post.seoDescription;
+  }
+  return post.categories?.length
+    ? `${post.title} - ${post.categories.map((c) => c.title).join(", ")} | Eduwise Solutions`
+    : post.title;
 }
 
 export const revalidate = 10; // Revalidate every 10 seconds
@@ -57,19 +80,25 @@ export async function generateMetadata({
     return { title: "Post Not Found" };
   }
 
-  const description = post.categories?.length
-    ? `${post.title} - ${post.categories.map((c) => c.title).join(", ")} | Eduwise Solutions`
-    : post.title;
+  const description = getPostDescription(post);
+  const metaTitle = post.seoTitle || post.title;
 
   return {
+    alternates: {
+      canonical: post.canonicalUrl || absoluteUrl(`/blogs/${slug}`),
+    },
     description,
+    keywords: post.seoKeywords?.length ? post.seoKeywords : undefined,
     openGraph: {
       description,
       images: post.mainImage ? [{ url: urlFor(post.mainImage).url() }] : [],
-      title: post.title,
+      title: metaTitle,
       type: "article",
     },
-    title: post.title,
+    robots: post.noIndex
+      ? { follow: true, index: false }
+      : { follow: true, index: true },
+    title: post.seoTitle ? { absolute: post.seoTitle } : post.title,
   };
 }
 
@@ -132,7 +161,7 @@ function BlogPostContent({
             )}
 
             <h1 className="mb-6 font-black font-vietnam text-3xl text-grey-15 leading-tight sm:text-4xl md:text-5xl">
-              {post.title}
+              {post.h1 || post.title}
             </h1>
 
             <div className="mb-8 flex flex-wrap items-center gap-5 border-grey-15/15 border-y py-4">
@@ -241,8 +270,33 @@ export default async function BlogPostPage(props: {
       })
     : [];
 
+  const jsonLd = [
+    articleJsonLd({
+      authorName: post.author?.name,
+      dateModified: post._updatedAt,
+      datePublished: post.publishedAt,
+      description: getPostDescription(post),
+      imageUrl: post.mainImage ? urlFor(post.mainImage).url() : null,
+      slug,
+      title: post.h1 || post.title,
+    }),
+    breadcrumbJsonLd([
+      { name: "Home", path: "/" },
+      { name: "Blogs", path: "/blogs" },
+      { name: post.title, path: `/blogs/${slug}` },
+    ]),
+    ...(post.faq?.length ? [faqPageJsonLd(post.faq)] : []),
+  ];
+
   return (
     <>
+      {jsonLd.map((schema) => (
+        <script
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+          key={schema["@type"]}
+          type="application/ld+json"
+        />
+      ))}
       <Navbar />
       {isDraftMode ? (
         <>

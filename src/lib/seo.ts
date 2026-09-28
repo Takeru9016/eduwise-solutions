@@ -117,6 +117,46 @@ export function courseJsonLd(course: {
   };
 }
 
+export function articleJsonLd(post: {
+  authorName?: string | null;
+  dateModified?: string | null;
+  datePublished?: string | null;
+  description?: string | null;
+  imageUrl?: string | null;
+  slug: string;
+  title: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    author: {
+      "@type": "Person",
+      name: post.authorName || "Eduwise Team",
+    },
+    headline: post.title,
+    inLanguage: "en-IN",
+    mainEntityOfPage: {
+      "@id": absoluteUrl(`/blogs/${post.slug}`),
+      "@type": "WebPage",
+    },
+    publisher: {
+      "@type": "Organization",
+      logo: {
+        "@type": "ImageObject",
+        url: absoluteUrl("/favicon/android-chrome-512x512.png"),
+      },
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+    ...(post.description ? { description: post.description } : {}),
+    ...(post.imageUrl ? { image: [post.imageUrl] } : {}),
+    ...(post.datePublished ? { datePublished: post.datePublished } : {}),
+    ...(post.dateModified || post.datePublished
+      ? { dateModified: post.dateModified || post.datePublished }
+      : {}),
+  };
+}
+
 export function faqPageJsonLd(
   questions: { answer: string; question: string }[]
 ) {

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import type { Post as BlogPost } from "@/app/blogs/BlogsClient";
 import { Footer, Navbar } from "@/components";
 import CourseTemplate from "@/components/courses/CourseTemplate";
 import {
@@ -13,6 +14,7 @@ import { client } from "@/sanity/lib/client";
 import {
   ALL_COURSE_SLUGS_QUERY,
   COURSE_BY_SLUG_QUERY,
+  COURSE_RELATED_POSTS_QUERY,
 } from "@/sanity/lib/queries";
 import type { CourseContent } from "@/types/course";
 
@@ -75,6 +77,10 @@ export default async function CoursePage({ params }: PageProps) {
     notFound();
   }
 
+  const blogPosts = await client.fetch<BlogPost[]>(COURSE_RELATED_POSTS_QUERY, {
+    slug,
+  });
+
   return (
     <>
       <script
@@ -124,7 +130,7 @@ export default async function CoursePage({ params }: PageProps) {
         />
       )}
       <Navbar />
-      <CourseTemplate course={course} />
+      <CourseTemplate blogPosts={blogPosts} course={course} />
       <Footer />
     </>
   );

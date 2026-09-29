@@ -112,7 +112,7 @@ export default function HeroSection() {
                       100%
                     </div>
                     <div className="font-semibold text-grey-15/70 text-xs">
-                      Placement Assurance
+                      Placement Assistance
                     </div>
                   </div>
                 </div>
@@ -178,7 +178,7 @@ export default function HeroSection() {
               <div className="font-black font-vietnam text-4xl text-grey-15">
                 100%
               </div>
-              <div className="text-grey-40 text-sm">Placement Assurance</div>
+              <div className="text-grey-40 text-sm">Placement Assistance</div>
             </div>
           </div>
 

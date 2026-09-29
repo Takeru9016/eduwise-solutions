@@ -156,7 +156,7 @@ export default function Footer() {
 
             <p className="max-w-xs text-grey-40 text-sm leading-relaxed">
               Empowering careers through industry-aligned education with 100%
-              placement assurance and live mentorship.
+              placement assistance and live mentorship.
             </p>
 
             <div className="space-y-3.5">

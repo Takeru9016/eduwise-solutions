@@ -41,7 +41,7 @@ const HOMEPAGE_FAQS: FAQ[] = [
   },
   {
     answer:
-      "We offer a wide range of programs, including Skill Development courses, Job Guaranteed courses, and more.",
+      "We offer a wide range of programs, including Skill Development courses, Placement Assistance courses, and more.",
     question: "What types of courses are available?",
   },
   {

@@ -50,6 +50,23 @@ export const RELATED_POSTS_QUERY = `
   }
 `;
 
+export const COURSE_RELATED_POSTS_QUERY = `
+  *[
+    _type == "post" &&
+    defined(slug.current) &&
+    count(categories[_ref in *[_type == "course" && slug.current == $slug][0].relatedBlogCategories[]._ref]) > 0
+  ] | order(publishedAt desc)[0...3]{
+    _id,
+    title,
+    slug,
+    publishedAt,
+    mainImage,
+    "excerpt": pt::text(body[0...1]),
+    "categories": categories[]-> { _id, title, slug },
+    "author": author-> { _id, name, image }
+  }
+`;
+
 export const CATEGORIES_QUERY = `
   *[_type == "category"]|order(title asc){
     _id,
@@ -200,7 +217,22 @@ export const COURSE_BY_SLUG_QUERY = `
 
 export const ALL_COURSE_SLUGS_QUERY = `
   *[_type == "course" && defined(slug.current)] {
-    "slug": slug.current
+    "slug": slug.current,
+    "updatedAt": _updatedAt
+  }
+`;
+
+export const SITEMAP_POSTS_QUERY = `
+  *[_type == "post" && defined(slug.current) && noIndex != true] {
+    "slug": slug.current,
+    "updatedAt": _updatedAt
+  }
+`;
+
+export const SITEMAP_RESOURCES_QUERY = `
+  *[_type == "leadMagnet" && isActive == true && defined(slug.current)] {
+    "slug": slug.current,
+    "updatedAt": _updatedAt
   }
 `;
 

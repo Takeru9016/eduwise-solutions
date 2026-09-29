@@ -87,7 +87,7 @@ const pipelineSteps = [
 ];
 
 const benefits = [
-  { icon: CheckCircle2, label: "Guaranteed Job Opportunities" },
+  { icon: CheckCircle2, label: "Job Placement Assistance" },
   { icon: CheckCircle2, label: "Industry-Driven Training" },
   { icon: CheckCircle2, label: "MNC Partnerships" },
   { icon: CheckCircle2, label: "Affordable & Effective" },

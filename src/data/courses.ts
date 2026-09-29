@@ -86,7 +86,7 @@ const defaultStats = (duration: string): CourseStat[] => [
   { icon: CheckCircle, label: "Live Session", value: "100%" },
   { icon: Users, label: "Doubt Clearing", value: "1:1" },
   { icon: Building, label: "Companies", value: "250+" },
-  { icon: Award, label: "Placement", value: "100%" },
+  { icon: Award, label: "Placement Assistance", value: "100%" },
 ];
 
 // All Courses
@@ -422,7 +422,7 @@ export const COURSES: Course[] = [
     accentColor: "from-pink-500 to-fuchsia-600",
     category: "career",
     description:
-      "Get a 100% job guarantee with our comprehensive programme! Learn resume building, LinkedIn optimization, business communication, and more.",
+      "Get 100% placement assistance with our comprehensive programme! Learn resume building, LinkedIn optimization, business communication, and more.",
     emoji: "🎯",
     featured: true,
     icon: BookCheck,
@@ -435,9 +435,9 @@ export const COURSES: Course[] = [
       { icon: Users, label: "Doubt Clearing", value: "1:1" },
       { icon: Infinity, label: "Access", value: "Lifetime" },
       { icon: Building, label: "Companies", value: "250+" },
-      { icon: Award, label: "Placement", value: "100%" },
+      { icon: Award, label: "Placement Assistance", value: "100%" },
     ],
-    subtitle: "100% Job Guarantee",
+    subtitle: "100% Placement Assistance",
     title: "Placement Accelerator",
   },
 ];

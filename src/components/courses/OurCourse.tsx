@@ -46,7 +46,7 @@ interface OurCourseProps {
 // Data
 const heroStats = [
   { icon: Users, label: "Students", value: "8,000+" },
-  { icon: Award, label: "Placements", value: "100%" },
+  { icon: Award, label: "Placement Assistance", value: "100%" },
   { icon: Building, label: "Hiring Partners", value: "250+" },
 ] as const;
 
@@ -145,7 +145,9 @@ function CourseCard({
           </div>
           <div className="flex items-center gap-1.5 rounded-full border-2 border-grey-15 bg-white px-2.5 py-1.5 text-xs sm:text-sm">
             <Award className="h-3.5 w-3.5 shrink-0 text-grey-15" />
-            <span className="font-semibold text-grey-15">100% Placement</span>
+            <span className="font-semibold text-grey-15">
+              100% Placement Assistance
+            </span>
           </div>
         </div>
 
@@ -248,7 +250,7 @@ export default function CoursesPage({ courses }: OurCourseProps) {
             >
               Comprehensive, industry-aligned programs designed to help you
               master new skills, advance your career, and achieve your goals
-              with 100% placement assurance.
+              with 100% placement assistance.
             </p>
 
             <div

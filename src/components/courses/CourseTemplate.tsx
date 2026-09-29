@@ -43,6 +43,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
+import type { Post as BlogPost } from "@/app/blogs/BlogsClient";
 import {
   Accordion,
   AccordionContent,
@@ -63,6 +64,7 @@ import GoogleReviews from "../common/GoogleReviews";
 import RefundHighlight from "../common/RefundHighlight";
 import PaymentModal from "../payment/PaymentModal";
 import PaymentStatusModal from "../payment/PaymentStatusModal";
+import CourseBlogPreview from "./CourseBlogPreview";
 import CourseLeadForm from "./CourseLeadForm";
 import CourseOverviewTabs from "./CourseOverviewTabs";
 import PlacementSection from "./PlacementSection";
@@ -161,7 +163,7 @@ function buildJGSteps(course: CourseContent): JGStep[] {
     jgSteps.push({
       content: <PRTStepsGrid steps={course.prtSteps} />,
       description:
-        "To become eligible for our Job Guarantee Program, complete these milestones.",
+        "To become eligible for our Placement Assistance Program, complete these milestones.",
       title: "Placement Readiness Test (PRT)",
     });
   }
@@ -237,7 +239,7 @@ function JobGuaranteeTrack({ steps }: { steps: JGStep[] }) {
   return (
     <section>
       <h2 className="mb-2 font-black font-vietnam text-2xl text-grey-15 sm:text-3xl">
-        Job Guarantee Track
+        Placement Assistance Track
       </h2>
       <p className="mb-8 text-grey-40">
         Your path from graduation to a confirmed offer letter. Scroll to move
@@ -288,10 +290,14 @@ function JobGuaranteeTrack({ steps }: { steps: JGStep[] }) {
 }
 
 interface CourseTemplateProps {
+  blogPosts?: BlogPost[];
   course: CourseContent;
 }
 
-export default function CourseTemplate({ course }: CourseTemplateProps) {
+export default function CourseTemplate({
+  blogPosts = [],
+  course,
+}: CourseTemplateProps) {
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [expandedTool, setExpandedTool] = useState<string | null>(null);
   const [paymentStatus, setPaymentStatus] = useState<{
@@ -662,7 +668,7 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
           </Accordion>
         </section>
 
-        {/* JOB GUARANTEE TRACK */}
+        {/* PLACEMENT ASSISTANCE TRACK */}
         {jgSteps.length > 0 && <JobGuaranteeTrack steps={jgSteps} />}
 
         {/* TOOLS */}
@@ -793,6 +799,8 @@ export default function CourseTemplate({ course }: CourseTemplateProps) {
 
         <PlacementSection categorySlug={course.slug.current} />
         <GoogleReviews categorySlug={course.slug.current} />
+
+        <CourseBlogPreview courseTitle={course.title} posts={blogPosts} />
 
         {/* FAQ */}
         {course.faq && course.faq.length > 0 && (

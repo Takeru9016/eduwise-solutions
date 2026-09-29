@@ -123,7 +123,7 @@ function formatKnowledgeBaseText(knowledge: ChatbotKnowledge): string {
       lines.push(`EMI Option: ${course.emiOption}`);
     }
     if (course.isJobGuaranteeProgram) {
-      lines.push("This course includes a Job Guarantee Program.");
+      lines.push("This course includes a Placement Assistance Program.");
     }
     if (course.whatsIncluded?.length) {
       lines.push(`What's Included: ${course.whatsIncluded.join(", ")}`);

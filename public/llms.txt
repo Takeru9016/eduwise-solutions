@@ -1,0 +1,63 @@
+# EduWise Solutions
+
+> EduWise Solutions is an Indian ed-tech company offering industry-aligned, live mentor-led career programs in software development, AI & data, cloud, DevOps and security, engineering and design, and business and finance. Programs include hands-on projects, placement assistance and certification, plus AWS certification training.
+
+## Company Pages
+
+- [Home](https://eduwise.solutions)
+- [About Us](https://eduwise.solutions/about)
+- [Contact](https://eduwise.solutions/contact)
+- [Pricing](https://eduwise.solutions/pricing)
+- [FAQ](https://eduwise.solutions/faq)
+- [Testimonials](https://eduwise.solutions/testimonials)
+- [Press Coverage](https://eduwise.solutions/press)
+
+## Explore More
+
+- [All Courses](https://eduwise.solutions/courses)
+- [Find Your Course (Quiz)](https://eduwise.solutions/quiz)
+- [Free Guides & Resources](https://eduwise.solutions/resources)
+- [Blogs](https://eduwise.solutions/blogs)
+- [Learner LMS Login](https://learner.eduwise.solutions/)
+
+## Development & Programming
+
+- [Frontend Web Development](https://eduwise.solutions/courses/frontend-web-development)
+- [Full Stack Development](https://eduwise.solutions/courses/full-stack-development)
+- [Java Backend Development](https://eduwise.solutions/courses/java-backend-development)
+- [Python Programming](https://eduwise.solutions/courses/python-programming)
+- [UI/UX Product Design](https://eduwise.solutions/courses/ui-ux-product-design)
+
+## AI & Data
+
+- [Artificial Intelligence & Machine Learning](https://eduwise.solutions/courses/ai-ml)
+- [Data Science](https://eduwise.solutions/courses/data-science)
+
+## Cloud, DevOps & Security
+
+- [Cyber Security](https://eduwise.solutions/courses/cyber-security)
+- [DevOps](https://eduwise.solutions/courses/devops)
+- [AWS Certifications](https://eduwise.solutions/certifications/aws)
+
+## Engineering & AutoCAD Design
+
+- [AutoCAD Design](https://eduwise.solutions/courses/autocad-design)
+- [Embedded Systems & IoT](https://eduwise.solutions/courses/embedded-systems-and-iot)
+
+## Business & Finance
+
+- [Applied Psychology](https://eduwise.solutions/courses/applied-psychology)
+- [Digital Marketing](https://eduwise.solutions/courses/digital-marketing)
+- [Finance & Accounting](https://eduwise.solutions/courses/finance-and-accounting)
+- [HR Management](https://eduwise.solutions/courses/hr-management)
+- [Stock Market & Investing](https://eduwise.solutions/courses/stock-market-and-investing)
+
+## Career
+
+- [Placement Accelerator](https://eduwise.solutions/courses/placement-accelerator)
+
+## Legal
+
+- [Privacy Policy](https://eduwise.solutions/privacy)
+- [Terms of Service](https://eduwise.solutions/terms)
+- [Refund Policy](https://eduwise.solutions/refund)

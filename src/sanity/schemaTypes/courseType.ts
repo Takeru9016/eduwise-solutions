@@ -21,7 +21,7 @@ export const courseType = defineType({
     }),
     defineField({
       description:
-        'E.g. "Become a DevOps Engineer with 100% Placement Assurance"',
+        'E.g. "Become a DevOps Engineer with 100% Placement Assistance"',
       group: "content",
       name: "subtitle",
       title: "Subtitle / Tagline",
@@ -298,7 +298,7 @@ export const courseType = defineType({
       group: "curriculum",
       initialValue: false,
       name: "isJobGuaranteeProgram",
-      title: "Is Job Guarantee Program?",
+      title: "Is Placement Assistance Program?",
       type: "boolean",
     }),
     defineField({
@@ -542,6 +542,16 @@ export const courseType = defineType({
       ],
       title: "FAQ",
       type: "array",
+    }),
+    defineField({
+      description:
+        "Blog categories whose latest posts appear in the 'Learn more' section on this course page. Leave empty to show the 'coming soon' message.",
+      group: "extras",
+      name: "relatedBlogCategories",
+      of: [{ to: [{ type: "category" }], type: "reference" }],
+      title: "Related Blog Categories",
+      type: "array",
+      validation: (Rule) => Rule.max(4),
     }),
     defineField({
       description: "Optional floating card info in hero section.",

@@ -102,7 +102,7 @@ function PricingCard({
         {course.isJobGuaranteeProgram && (
           <span className="mb-4 inline-flex w-fit items-center gap-1.5 rounded-full border-2 border-grey-15 bg-primary-90 px-3 py-1 font-bold text-grey-15 text-xs">
             <Check className="h-3 w-3" />
-            Job Guarantee Program
+            Placement Assistance Program
           </span>
         )}
 

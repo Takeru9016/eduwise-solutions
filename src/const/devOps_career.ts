@@ -114,6 +114,6 @@ export const careerTrackData: CareerTrackItem[] = [
       "Post-Placement Support",
     ],
     id: 7,
-    title: "Placement Assurance",
+    title: "Placement Assistance",
   },
 ];

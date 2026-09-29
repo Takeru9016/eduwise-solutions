@@ -59,7 +59,7 @@ const PageHeader = () => (
           At Eduwise Solutions, we provide industry-relevant certification
           courses designed to help you gain practical skills and advance your
           career. Our programs include hands-on training, expert mentorship, and
-          guaranteed job placement support.
+          dedicated job placement assistance.
         </p>
 
         <CourseFeatures />
@@ -71,7 +71,7 @@ const PageHeader = () => (
 const CourseFeatures = () => {
   const features: CourseFeature[] = [
     { icon: CheckCircle2, text: "Industry-Recognized" },
-    { icon: CheckCircle2, text: "Job Guarantee" },
+    { icon: CheckCircle2, text: "Placement Assistance" },
     { icon: CheckCircle2, text: "Expert Mentorship" },
   ];
 
@@ -115,7 +115,7 @@ const CourseCardComponent = ({ course }: { course: CourseCard }) => {
           className="absolute bottom-4 left-4 border-white text-white"
           variant="outline"
         >
-          100% Job Guarantee
+          100% Placement Assistance
         </Badge>
       </div>
 
@@ -310,7 +310,7 @@ export default function CertificationPage() {
       description:
         "100% placement assistance with our network of partner companies",
       icon: Building,
-      title: "Job Guarantee",
+      title: "Placement Assistance",
     },
     {
       description: "Receive industry-recognized certifications upon completion",

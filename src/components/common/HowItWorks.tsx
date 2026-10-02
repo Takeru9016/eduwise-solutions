@@ -2,56 +2,14 @@
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import {
-  Award,
-  Briefcase,
-  ClipboardCheck,
-  Code2,
-  GraduationCap,
-  type LucideIcon,
-} from "lucide-react";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { getIcon } from "@/lib/icon-map";
 import { prefersReducedMotion } from "@/lib/utils";
+import type { HomePageContent } from "@/types/pages";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
-
-interface Step {
-  description: string;
-  icon: LucideIcon;
-  title: string;
-}
-
-const STEPS: Step[] = [
-  {
-    description:
-      "Choose your program and complete a simple enrollment process.",
-    icon: ClipboardCheck,
-    title: "Enroll",
-  },
-  {
-    description:
-      "Attend live classes with industry experts and access materials.",
-    icon: GraduationCap,
-    title: "Learn",
-  },
-  {
-    description: "Work on real-world projects and hands-on assignments.",
-    icon: Code2,
-    title: "Practice",
-  },
-  {
-    description: "Earn industry-recognized certificates upon completion.",
-    icon: Award,
-    title: "Get Certified",
-  },
-  {
-    description: "Apply for jobs with our dedicated placement support.",
-    icon: Briefcase,
-    title: "Get Placed",
-  },
-];
 
 // Builds a smooth vertical S-curve through a list of (x,y) node centers.
 function buildCurvePath(points: { x: number; y: number }[]): string {
@@ -68,7 +26,12 @@ function buildCurvePath(points: { x: number; y: number }[]): string {
   return d;
 }
 
-export default function HowItWorks() {
+export default function HowItWorks({
+  content,
+}: {
+  content: NonNullable<HomePageContent["howItWorks"]>;
+}) {
+  const steps = content.steps ?? [];
   const sectionRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
   const badgeRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -163,11 +126,10 @@ export default function HowItWorks() {
           {/* Left - headline + illustration */}
           <div className="lg:sticky lg:top-24 lg:self-start">
             <h2 className="font-black font-vietnam text-4xl text-grey-15 leading-[1.05] tracking-tight sm:text-5xl">
-              Get Job-Ready in 5 Steps
+              {content.heading}
             </h2>
             <p className="mt-5 max-w-sm text-grey-40 text-lg leading-relaxed">
-              From enrollment to placement - one guided path, backed by mentors
-              the whole way.
+              {content.subheading}
             </p>
 
             <svg
@@ -268,8 +230,8 @@ export default function HowItWorks() {
             )}
 
             <div className="flex flex-col gap-14 sm:gap-16">
-              {STEPS.map((step, index) => {
-                const Icon = step.icon;
+              {steps.map((step, index) => {
+                const Icon = getIcon(step.icon);
                 const offset = index % 2 === 0 ? "sm:ml-0" : "sm:ml-24";
 
                 return (

@@ -1,25 +1,27 @@
-import { CAREER_TABLE } from "./aws-data";
+import type { AwsPageContent } from "@/types/pages";
 
-export default function AWSCareerTable() {
+export default function AWSCareerTable({
+  content,
+}: {
+  content: NonNullable<AwsPageContent["career"]>;
+}) {
   return (
     <section className="bg-light-97 py-16 sm:py-20">
       <div className="container">
         <div className="mb-12 text-center">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-99 px-4 py-2 font-bold text-grey-15 text-sm">
-            Career Outlook
+            {content.eyebrow}
           </div>
           <h2 className="mb-4 font-black font-vietnam text-3xl text-grey-15 lg:text-5xl">
-            AWS Certification Career Opportunities
+            {content.heading}
           </h2>
           <p className="mx-auto max-w-2xl text-grey-35 text-lg">
-            Overview of common career paths associated with AWS Certifications.
-            Salary ranges are approximate and vary by location, experience, and
-            organization.
+            {content.subheading}
           </p>
         </div>
 
         <div className="space-y-4">
-          {CAREER_TABLE.map((row) => (
+          {(content.rows ?? []).map((row) => (
             <div
               className="rounded-2xl border-2 border-grey-15 bg-white p-6 shadow-[4px_4px_0_0_var(--color-grey-15)]"
               key={row.cert}
@@ -65,8 +67,7 @@ export default function AWSCareerTable() {
         </div>
 
         <p className="mt-6 text-center text-grey-40 text-xs italic">
-          Note: Salary ranges are indicative and may vary depending on market
-          conditions, geographic location, and individual expertise.
+          {content.note}
         </p>
       </div>
     </section>

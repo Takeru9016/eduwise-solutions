@@ -1,41 +1,21 @@
-import {
-  Award,
-  BrainCircuit,
-  Check,
-  Code2,
-  MessageSquare,
-  PieChart,
-  Play,
-  ShieldCheck,
-} from "lucide-react";
+import { Award, Check, Play, ShieldCheck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
+import { getIcon } from "@/lib/icon-map";
+import type { HomePageContent } from "@/types/pages";
 
-const TOOL_ICONS = [
-  { Icon: BrainCircuit, label: "AI-assisted learning" },
-  { Icon: Code2, label: "Hands-on projects" },
-  { Icon: PieChart, label: "Career analytics" },
-  { Icon: MessageSquare, label: "1:1 mentorship" },
-  { Icon: Award, label: "Certification prep" },
-];
-
-const SKILL_TAGS = [
-  { filled: true, label: "AI & Data Science" },
-  { filled: false, label: "Cloud & DevOps" },
-  { filled: false, label: "Full Stack Dev" },
-  { filled: false, label: "Cyber Security" },
-];
-
-const LEARNING_PATH = [
-  { done: true, label: "AI & Data Science" },
-  { done: true, label: "Cloud & DevOps" },
-  { done: false, label: "Full Stack Development" },
-  { done: false, label: "Cyber Security" },
-];
-
-export default function HeroSection() {
+export default function HeroSection({
+  hero,
+}: {
+  hero: NonNullable<HomePageContent["hero"]>;
+}) {
+  const headlineLines = hero.headlineLines ?? [];
+  const learningPath = hero.learningPath ?? [];
+  const skillTags = hero.skillTags ?? [];
+  const stats = hero.stats ?? [];
+  const toolIcons = hero.toolIcons ?? [];
   return (
     <section className="relative overflow-hidden bg-light-97 py-14 sm:py-20 lg:py-24">
       <div className="container relative">
@@ -43,9 +23,11 @@ export default function HeroSection() {
           {/* Left column - copy */}
           <div className="text-center lg:text-left">
             <h1 className="pt-2 font-black font-vietnam text-6xl text-grey-15 leading-[1.05] tracking-tight sm:text-7xl lg:text-8xl">
-              <span className="block">Accelerate</span>
-              <span className="block">Your Tech</span>
-              <span className="block">Career</span>
+              {headlineLines.map((line) => (
+                <span className="block" key={line}>
+                  {line}
+                </span>
+              ))}
             </h1>
 
             {/* Decorative pill/dot indicator */}
@@ -57,14 +39,13 @@ export default function HeroSection() {
             </div>
 
             <p className="mx-auto mt-6 max-w-md text-grey-35 text-lg leading-relaxed lg:mx-0">
-              Job-ready courses in AI, cloud, and development - built with
-              industry mentors to turn curiosity into a career.
+              {hero.subtext}
             </p>
 
             <div className="mt-8">
               <Link href="/courses">
                 <Button className="h-auto rounded-full border-2 border-grey-15 bg-primary-75 px-8 py-4 font-bold text-base text-grey-15 shadow-none transition-transform hover:-translate-y-0.5 hover:bg-primary-80">
-                  Explore Courses
+                  {hero.ctaLabel}
                 </Button>
               </Link>
             </div>
@@ -85,7 +66,7 @@ export default function HeroSection() {
                     </span>
                   </div>
                   <div className="space-y-3 p-5">
-                    {LEARNING_PATH.map((step) => (
+                    {learningPath.map((step) => (
                       <div className="flex items-center gap-3" key={step.label}>
                         <div
                           className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 border-grey-15 ${
@@ -109,10 +90,10 @@ export default function HeroSection() {
                   <div className="flex h-full flex-col items-center justify-center gap-1 p-4 text-center">
                     <Award className="h-8 w-8 text-grey-15" />
                     <div className="font-black font-vietnam text-4xl text-grey-15">
-                      100%
+                      {hero.stickerValue}
                     </div>
                     <div className="font-semibold text-grey-15/70 text-xs">
-                      Placement Assistance
+                      {hero.stickerLabel}
                     </div>
                   </div>
                 </div>
@@ -120,7 +101,7 @@ export default function HeroSection() {
 
               {/* Floating skill tags - stacked along the top-right edge */}
               <div className="absolute top-4 right-0 flex flex-col items-end gap-2 lg:right-[-8%]">
-                {SKILL_TAGS.map((tag) => (
+                {skillTags.map((tag) => (
                   <span
                     className={`whitespace-nowrap rounded-full border-2 border-grey-15 px-4 py-2 font-semibold text-xs sm:text-sm ${
                       tag.filled
@@ -141,12 +122,11 @@ export default function HeroSection() {
                     <ShieldCheck className="h-4 w-4 text-grey-15" />
                   </div>
                   <h3 className="font-bold font-vietnam text-grey-15 text-sm">
-                    Mentor-Led Learning
+                    {hero.floatingCardTitle}
                   </h3>
                 </div>
                 <p className="text-grey-40 text-xs leading-relaxed">
-                  Learn directly from industry experts with hands-on projects
-                  and real interview practice.
+                  {hero.floatingCardBody}
                 </p>
               </div>
             </div>
@@ -156,30 +136,14 @@ export default function HeroSection() {
         {/* Bottom row - stats (under col 1) and course strip (under col 2), same row */}
         <div className="mt-16 grid items-center gap-10 lg:mt-20 lg:grid-cols-[1fr_1.3fr] lg:gap-8">
           <div className="mx-auto grid w-fit grid-cols-2 gap-x-8 gap-y-6 text-center lg:mx-0 lg:text-left">
-            <div>
-              <div className="font-black font-vietnam text-4xl text-grey-15">
-                17+
+            {stats.map((stat) => (
+              <div key={stat.label}>
+                <div className="font-black font-vietnam text-4xl text-grey-15">
+                  {stat.value}
+                </div>
+                <div className="text-grey-40 text-sm">{stat.label}</div>
               </div>
-              <div className="text-grey-40 text-sm">Courses</div>
-            </div>
-            <div>
-              <div className="font-black font-vietnam text-4xl text-grey-15">
-                8,000+
-              </div>
-              <div className="text-grey-40 text-sm">Learners</div>
-            </div>
-            <div>
-              <div className="font-black font-vietnam text-4xl text-grey-15">
-                50+
-              </div>
-              <div className="text-grey-40 text-sm">Industry Projects</div>
-            </div>
-            <div>
-              <div className="font-black font-vietnam text-4xl text-grey-15">
-                100%
-              </div>
-              <div className="text-grey-40 text-sm">Placement Assistance</div>
-            </div>
+            ))}
           </div>
 
           <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-center">
@@ -200,20 +164,23 @@ export default function HeroSection() {
 
             <div className="flex-1 text-center sm:text-left">
               <h2 className="mb-4 font-bold font-vietnam text-grey-15 text-xl leading-snug sm:text-2xl">
-                17+ programs across 6 domains - pick one and start this month
+                {hero.stripHeading}
               </h2>
               <div className="flex justify-center gap-3 sm:justify-start">
-                {TOOL_ICONS.map(({ Icon, label }) => (
-                  <div
-                    aria-label={label}
-                    className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-grey-15 bg-white text-grey-15"
-                    key={label}
-                    role="img"
-                    title={label}
-                  >
-                    <Icon className="h-4 w-4" />
-                  </div>
-                ))}
+                {toolIcons.map(({ icon, label }) => {
+                  const Icon = getIcon(icon);
+                  return (
+                    <div
+                      aria-label={label}
+                      className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-grey-15 bg-white text-grey-15"
+                      key={label}
+                      role="img"
+                      title={label}
+                    >
+                      <Icon className="h-4 w-4" />
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>

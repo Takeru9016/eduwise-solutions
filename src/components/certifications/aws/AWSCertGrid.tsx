@@ -1,6 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import { ArrowRight, BookOpen } from "lucide-react";
-import { CATEGORY_STYLES, CERTIFICATIONS, type CertCategory } from "./aws-data";
+import type {
+  AwsCertification,
+  AwsPageContent,
+  CertLevel,
+} from "@/types/pages";
+import { CATEGORY_STYLES, CERT_LEVELS } from "./aws-styles";
 
 const CARD_TINTS = [
   "bg-primary-99",
@@ -11,7 +16,7 @@ const CARD_TINTS = [
   "bg-primary-95",
 ] as const;
 
-function CategoryBadge({ cat }: { cat: CertCategory }) {
+function CategoryBadge({ cat }: { cat: CertLevel }) {
   return (
     <span className="inline-flex items-center rounded-full border-2 border-grey-15 bg-white px-3 py-1 font-bold text-grey-15 text-xs uppercase tracking-wider">
       {cat}
@@ -19,13 +24,7 @@ function CategoryBadge({ cat }: { cat: CertCategory }) {
   );
 }
 
-function CertCard({
-  cert,
-  tint,
-}: {
-  cert: (typeof CERTIFICATIONS)[number];
-  tint: string;
-}) {
+function CertCard({ cert, tint }: { cert: AwsCertification; tint: string }) {
   return (
     <article
       className={`group flex h-full flex-col overflow-hidden rounded-2xl border-2 border-grey-15 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-[transform,box-shadow] duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)] ${tint}`}
@@ -35,12 +34,12 @@ function CertCard({
           alt={`${cert.title} badge`}
           className="h-24 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
           loading="lazy"
-          src={cert.img}
+          src={cert.badgeImageUrl ?? cert.badgeImagePath}
         />
       </div>
 
       <div className="flex grow flex-col gap-3 p-5">
-        <CategoryBadge cat={cert.cat} />
+        <CategoryBadge cat={cert.level} />
 
         <div>
           <h3 className="font-bold font-vietnam text-base text-grey-15 leading-snug">
@@ -49,7 +48,15 @@ function CertCard({
           <p className="mt-0.5 font-mono text-grey-40 text-xs">{cert.code}</p>
         </div>
 
-        <p className="grow text-grey-35 text-sm leading-relaxed">{cert.desc}</p>
+        <p className="grow text-grey-35 text-sm leading-relaxed">
+          {cert.description}
+        </p>
+
+        {cert.examFee && (
+          <p className="font-bold text-grey-15 text-sm">
+            Exam fee: {cert.examFee}
+          </p>
+        )}
 
         <div className="mt-auto flex flex-col gap-2">
           <a
@@ -74,13 +81,14 @@ function CertCard({
   );
 }
 
-export default function AWSCertGrid() {
-  const categories: CertCategory[] = [
-    "Foundational",
-    "Associate",
-    "Professional",
-    "Specialty",
-  ];
+export default function AWSCertGrid({
+  certifications,
+  content,
+}: {
+  certifications: AwsCertification[];
+  content: NonNullable<AwsPageContent["certGrid"]>;
+}) {
+  const categories = CERT_LEVELS;
 
   let tintIndex = 0;
 
@@ -89,20 +97,18 @@ export default function AWSCertGrid() {
       <div className="container">
         <div className="mb-14 text-center">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-99 px-4 py-2 font-bold text-grey-15 text-sm">
-            All Certification Tracks
+            {content.eyebrow}
           </div>
           <h2 className="mb-4 font-black font-vietnam text-3xl text-grey-15 lg:text-5xl">
-            Available AWS Certifications
+            {content.heading}
           </h2>
           <p className="mx-auto max-w-2xl text-grey-35 text-lg">
-            AWS offers certifications for learners and professionals at
-            different stages of their cloud journey. Choose the track that
-            aligns with your career goals.
+            {content.subheading}
           </p>
         </div>
 
         {categories.map((cat) => {
-          const certs = CERTIFICATIONS.filter((c) => c.cat === cat);
+          const certs = certifications.filter((c) => c.level === cat);
           if (!certs.length) {
             return null;
           }

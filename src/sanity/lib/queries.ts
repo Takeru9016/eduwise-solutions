@@ -342,3 +342,26 @@ export const REDIRECTS_QUERY = `
     permanent
   }
 `;
+
+export const HOME_PAGE_QUERY = `*[_id == "homePage"][0]`;
+
+export const AWS_PAGE_QUERY = `*[_id == "awsPage"][0]`;
+
+export const AWS_CERTIFICATIONS_QUERY = `
+  *[_type == "awsCertification"] | order(order asc) {
+    _id,
+    title,
+    code,
+    level,
+    order,
+    description,
+    examFee,
+    studyWeeks,
+    badgeImagePath,
+    "badgeImageUrl": badgeImage.asset->url,
+    domains,
+    studyTips,
+    resources,
+    sampleQA
+  }
+`;

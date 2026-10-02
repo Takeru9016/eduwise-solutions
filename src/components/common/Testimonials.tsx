@@ -30,7 +30,13 @@ function transformTestimonials(sanityData: SanityTestimonial[]) {
 }
 
 // Main component - Server Component
-export default async function TestimonialsSectionBasic() {
+export default async function TestimonialsSectionBasic({
+  heading,
+  subheading,
+}: {
+  heading?: string;
+  subheading?: string;
+}) {
   const testimonials =
     await client.fetch<SanityTestimonial[]>(TESTIMONIALS_QUERY);
   const transformedTestimonials = transformTestimonials(testimonials);
@@ -38,7 +44,11 @@ export default async function TestimonialsSectionBasic() {
   return (
     <section className="bg-white py-16 md:py-24">
       <div className="container">
-        <TestimonialsThree testimonials={transformedTestimonials} />
+        <TestimonialsThree
+          heading={heading}
+          subheading={subheading}
+          testimonials={transformedTestimonials}
+        />
       </div>
     </section>
   );

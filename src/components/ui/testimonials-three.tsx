@@ -28,6 +28,8 @@ export interface TestimonialThreeUp {
 
 interface TestimonialsThreeProps {
   className?: string;
+  heading?: string;
+  subheading?: string;
   testimonials: TestimonialThreeUp[];
 }
 
@@ -103,6 +105,8 @@ function TestimonialCard({ t, tint }: { t: TestimonialThreeUp; tint: string }) {
 export function TestimonialsThree({
   testimonials,
   className,
+  heading = "What Our Students Say",
+  subheading = "Placements, career switches, and pay bumps - in their own words.",
 }: TestimonialsThreeProps) {
   const sorted = useMemo(
     () =>
@@ -148,10 +152,10 @@ export function TestimonialsThree({
       <div className="mx-auto max-w-6xl px-4 md:px-8">
         <div className="mb-12 text-center md:mb-16">
           <h2 className="mb-4 font-black font-vietnam text-3xl text-grey-15 tracking-tight md:text-4xl lg:text-5xl">
-            What Our Students Say
+            {heading}
           </h2>
           <p className="mx-auto max-w-xl text-grey-40 text-lg leading-relaxed">
-            Placements, career switches, and pay bumps - in their own words.
+            {subheading}
           </p>
         </div>
       </div>

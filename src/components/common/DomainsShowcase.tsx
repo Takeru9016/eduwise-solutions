@@ -2,6 +2,7 @@ import { ArrowUpRight, GraduationCap } from "lucide-react";
 import Link from "next/link";
 
 import { CATEGORIES, COURSES } from "@/data/courses";
+import type { HomePageContent } from "@/types/pages";
 
 // Row 1: large card on the left (development), two small on the right.
 // Row 2: two small on the left, large card on the right (business) - the
@@ -21,7 +22,11 @@ const DOMAIN_CARDS = CATEGORIES.map((category, index) => ({
   ...CARD_STYLE[index % CARD_STYLE.length],
 }));
 
-export default function DomainsShowcase() {
+export default function DomainsShowcase({
+  content,
+}: {
+  content: NonNullable<HomePageContent["domains"]>;
+}) {
   const totalPrograms = COURSES.length;
 
   return (
@@ -33,11 +38,10 @@ export default function DomainsShowcase() {
             {totalPrograms}+ Career Programs
           </div>
           <h2 className="mb-4 font-black font-vietnam text-4xl text-grey-15 tracking-tight sm:text-5xl">
-            Pick Your Path
+            {content.heading}
           </h2>
           <p className="mx-auto max-w-xl text-grey-40 text-lg leading-relaxed">
-            Six career domains, one goal - job-ready skills backed by industry
-            mentors.
+            {content.subheading}
           </p>
         </div>
 

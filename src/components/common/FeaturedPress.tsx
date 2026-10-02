@@ -6,8 +6,13 @@ import type { SanityPressFeature } from "@/components/press/PressCard";
 import { PressCard } from "@/components/press/PressCard";
 import { client } from "@/sanity/lib/client";
 import { PRESS_FEATURES_QUERY } from "@/sanity/lib/queries";
+import type { HomePageContent } from "@/types/pages";
 
-export default async function FeaturedPress() {
+export default async function FeaturedPress({
+  content,
+}: {
+  content: NonNullable<HomePageContent["press"]>;
+}) {
   let pressFeatures: SanityPressFeature[] = [];
 
   try {
@@ -49,10 +54,11 @@ export default async function FeaturedPress() {
       <div className="container">
         <div className="mb-12 text-center md:mb-16">
           <h2 className="mb-4 font-black font-vietnam text-3xl text-grey-15 tracking-tight md:text-4xl lg:text-5xl">
-            As Seen In
+            {content.heading}
           </h2>
           <p className="mx-auto max-w-2xl text-grey-40 text-lg">
-            {pressFeatures.length}+ mentions across Indian publications
+            {content.subheading ??
+              `${pressFeatures.length}+ mentions across Indian publications`}
           </p>
         </div>
 

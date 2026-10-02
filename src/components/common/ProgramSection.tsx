@@ -93,7 +93,7 @@ const ProgramCard = ({
   );
 };
 
-export default async function Programs() {
+export default async function Programs({ heading }: { heading?: string }) {
   let programs: SanityFeaturedProgram[] = [];
 
   try {
@@ -111,7 +111,7 @@ export default async function Programs() {
         <div className="mb-12 flex flex-col items-center justify-between gap-6 sm:flex-row md:mb-16">
           <div className="text-center sm:text-left">
             <h2 className="font-black font-vietnam text-3xl text-grey-15 tracking-tight md:text-4xl lg:text-5xl">
-              Choose Your Area of Interest
+              {heading}
             </h2>
           </div>
 

@@ -10,12 +10,13 @@ import {
   ListChecks,
 } from "lucide-react";
 import { useMemo, useState } from "react";
-import { CATEGORY_STYLES, type CertCategory } from "./aws-data";
-import {
-  CERT_SYLLABUS,
-  type CertSyllabus,
-  type SampleQuestion,
-} from "./aws-syllabus-data";
+import type {
+  AwsPageContent,
+  CertLevel,
+  CertSyllabus,
+  SampleQuestion,
+} from "@/types/pages";
+import { CATEGORY_STYLES } from "./aws-styles";
 
 const OPTION_LETTERS = ["A", "B", "C", "D"];
 const TIMELINE_DOMAIN_MAX_WEEKS = 12;
@@ -46,7 +47,7 @@ function CertTab({
   active: boolean;
   onSelect: () => void;
 }) {
-  const s = CATEGORY_STYLES[cert.level as CertCategory];
+  const s = CATEGORY_STYLES[cert.level as CertLevel];
   return (
     <button
       aria-selected={active}
@@ -96,7 +97,7 @@ function SectionTab({
 }
 
 function OverviewChips({ cert }: { cert: CertSyllabus }) {
-  const s = CATEGORY_STYLES[cert.level as CertCategory];
+  const s = CATEGORY_STYLES[cert.level as CertLevel];
   return (
     <div className="flex flex-wrap gap-2.5">
       <span className="inline-flex items-center gap-1.5 rounded-full border-2 border-grey-15/15 bg-white px-3 py-1.5 font-bold text-grey-35 text-xs">
@@ -418,25 +419,33 @@ function SectionPanel({
   }
 }
 
-export default function AWSCertSyllabus() {
-  const [selectedCode, setSelectedCode] = useState(CERT_SYLLABUS[0].code);
+export default function AWSCertSyllabus({
+  certs,
+  content,
+}: {
+  certs: CertSyllabus[];
+  content: NonNullable<AwsPageContent["syllabus"]>;
+}) {
+  const [selectedCode, setSelectedCode] = useState(certs[0]?.code ?? "");
   const [selectedSection, setSelectedSection] = useState<SectionId>("overview");
-  const selectedCert =
-    CERT_SYLLABUS.find((c) => c.code === selectedCode) ?? CERT_SYLLABUS[0];
+  const selectedCert = certs.find((c) => c.code === selectedCode) ?? certs[0];
+
+  if (!selectedCert) {
+    return null;
+  }
 
   return (
     <section className="bg-white py-16 sm:py-20" id="syllabus">
       <div className="container">
         <div className="mb-12 text-center">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-99 px-4 py-2 font-bold text-grey-15 text-sm">
-            Exam Preparation
+            {content.eyebrow}
           </div>
           <h2 className="mb-4 font-black font-vietnam text-3xl text-grey-15 lg:text-5xl">
-            Syllabus & Sample Q&amp;A
+            {content.heading}
           </h2>
           <p className="mx-auto max-w-2xl text-grey-35 text-lg">
-            Explore official exam blueprints, sample questions, study tips, and
-            timelines for every AWS certification we support.
+            {content.subheading}
           </p>
         </div>
 
@@ -447,7 +456,7 @@ export default function AWSCertSyllabus() {
               className="scrollbar-hide -mx-4 flex gap-2 overflow-x-auto px-4 pb-3 lg:mx-0 lg:max-h-[calc(100vh-8rem)] lg:flex-col lg:gap-1.5 lg:overflow-visible lg:overflow-y-auto lg:px-0 lg:pb-0"
               role="tablist"
             >
-              {CERT_SYLLABUS.map((cert) => (
+              {certs.map((cert) => (
                 <CertTab
                   active={cert.code === selectedCode}
                   cert={cert}
@@ -486,7 +495,7 @@ export default function AWSCertSyllabus() {
             <div role="tabpanel">
               {selectedSection === "timeline" ? (
                 <CertTimelineChart
-                  certs={CERT_SYLLABUS}
+                  certs={certs}
                   onSelect={setSelectedCode}
                   selectedCode={selectedCert.code}
                 />

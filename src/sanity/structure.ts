@@ -1,6 +1,7 @@
 import { BookIcon } from "@sanity/icons/Book";
 import { DocumentsIcon } from "@sanity/icons/Documents";
 import { HomeIcon } from "@sanity/icons/Home";
+import { RocketIcon } from "@sanity/icons/Rocket";
 import type { StructureResolver } from "sanity/structure";
 
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
@@ -8,6 +9,38 @@ export const structure: StructureResolver = (S) =>
   S.list()
     .title("Content")
     .items([
+      // Pages (singletons)
+      S.listItem()
+        .title("Pages")
+        .icon(HomeIcon)
+        .child(
+          S.list()
+            .title("Pages")
+            .items([
+              S.listItem()
+                .title("Home Page")
+                .icon(HomeIcon)
+                .child(
+                  S.document()
+                    .schemaType("homePage")
+                    .documentId("homePage")
+                    .title("Home Page")
+                ),
+              S.listItem()
+                .title("AWS Certification Page")
+                .icon(RocketIcon)
+                .child(
+                  S.document()
+                    .schemaType("awsPage")
+                    .documentId("awsPage")
+                    .title("AWS Certification Page")
+                ),
+              S.documentTypeListItem("awsCertification").title(
+                "AWS Certifications"
+              ),
+            ])
+        ),
+      S.divider(),
       // Blog section
       S.listItem()
         .title("Blog")
@@ -68,6 +101,9 @@ export const structure: StructureResolver = (S) =>
             "placedStudent",
             "googleReview",
             "course",
+            "homePage",
+            "awsPage",
+            "awsCertification",
           ].includes(item.getId()!)
       ),
     ]);

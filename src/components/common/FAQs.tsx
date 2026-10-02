@@ -13,45 +13,18 @@ import Link from "next/link";
 import { Accordion as AccordionPrimitive } from "radix-ui";
 import { useEffect, useRef } from "react";
 import { prefersReducedMotion } from "@/lib/utils";
+import type { HomePageContent } from "@/types/pages";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-interface FAQ {
-  answer: string;
-  question: string;
-}
-
-const HOMEPAGE_FAQS: FAQ[] = [
-  {
-    answer:
-      "A Bengaluru-based training platform with 17+ mentor-led programs across development, AI & data, cloud, design, and business. We also run career counseling and placement support for enrolled students.",
-    question: "What is Eduwise Solutions?",
-  },
-  {
-    answer:
-      "Yes, we provide 100% placement assistance across our programs, including dedicated career counseling, resume support, and networking opportunities.",
-    question: "Do you provide placement assistance?",
-  },
-  {
-    answer:
-      "Yes. Our professional programs are designed to let you balance work and studies.",
-    question: "Can I earn while learning?",
-  },
-  {
-    answer:
-      "We offer a wide range of programs, including Skill Development courses, Placement Assistance courses, and more.",
-    question: "What types of courses are available?",
-  },
-  {
-    answer:
-      "Yes, many courses offer flexible payment plans. We can guide you through available options during counseling.",
-    question: "Do you offer payment plans?",
-  },
-];
-
-export default function FAQsSection() {
+export default function FAQsSection({
+  content,
+}: {
+  content: NonNullable<HomePageContent["faq"]>;
+}) {
+  const faqs = content.items ?? [];
   const sectionRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -88,14 +61,13 @@ export default function FAQsSection() {
           <div className="lg:sticky lg:top-24">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-99 px-4 py-2 font-semibold text-grey-15 text-sm">
               <MessageCircleQuestion className="h-4 w-4" />
-              Get Quick Answers
+              {content.eyebrow}
             </div>
             <h2 className="mb-4 font-black font-vietnam text-3xl text-grey-15 tracking-tight md:text-4xl">
-              Common Questions
+              {content.heading}
             </h2>
             <p className="mb-8 text-grey-40 text-lg leading-relaxed">
-              Get quick answers to frequently asked questions about our programs
-              and services.
+              {content.subheading}
             </p>
 
             <div className="rounded-3xl border-2 border-grey-15 bg-primary-75 p-8 shadow-[4px_4px_0_0_var(--color-grey-15)]">
@@ -103,17 +75,16 @@ export default function FAQsSection() {
                 <MessageCircle className="h-6 w-6 text-grey-15" />
               </div>
               <h3 className="mb-2 font-bold font-vietnam text-grey-15 text-xl">
-                Still Have Questions?
+                {content.helpTitle}
               </h3>
               <p className="mb-6 text-grey-20 leading-relaxed">
-                Can&apos;t find what you&apos;re looking for? Our team is here
-                to help.
+                {content.helpBody}
               </p>
               <Link
                 className="group inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-white px-6 py-3 font-bold text-grey-15 transition-transform hover:-translate-y-0.5 active:scale-[0.97]"
                 href="/contact"
               >
-                Talk to Our Team
+                {content.helpCta}
                 <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1" />
               </Link>
             </div>
@@ -124,7 +95,7 @@ export default function FAQsSection() {
             collapsible
             type="single"
           >
-            {HOMEPAGE_FAQS.map((faq, index) => (
+            {faqs.map((faq, index) => (
               <AccordionPrimitive.Item
                 className="overflow-hidden rounded-3xl border-2 border-grey-15 bg-white shadow-[4px_4px_0_0_var(--color-grey-15)] transition-colors duration-300 data-[state=open]:bg-grey-15"
                 key={faq.question}

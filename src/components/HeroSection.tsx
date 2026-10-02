@@ -22,7 +22,7 @@ export default function HeroSection({
         <div className="grid items-start gap-16 lg:grid-cols-[1fr_1.3fr] lg:gap-8">
           {/* Left column - copy */}
           <div className="text-center lg:text-left">
-            <h1 className="pt-2 font-black font-vietnam text-6xl text-grey-15 leading-[1.05] tracking-tight sm:text-7xl lg:text-8xl">
+            <h1 className="pt-2 font-black font-vietnam text-5xl text-grey-15 leading-[1.05] tracking-tight sm:text-7xl lg:text-8xl min-[375px]:text-6xl">
               {headlineLines.map((line) => (
                 <span className="block" key={line}>
                   {line}
@@ -53,7 +53,7 @@ export default function HeroSection({
 
           {/* Right column - sticker collage, floating pills + info card, no photos */}
           <div className="relative mx-auto w-full max-w-md lg:mx-0 lg:max-w-none">
-            <div className="relative flex justify-center lg:justify-start">
+            <div className="relative flex flex-col items-center gap-5 lg:block">
               <div className="relative aspect-square w-full max-w-sm lg:max-w-95">
                 {/* Primary panel - mock learning-path dashboard */}
                 <div className="absolute top-0 right-0 h-4/5 w-4/5 rotate-2 overflow-hidden rounded-3xl border-2 border-grey-15 bg-white shadow-[8px_8px_0_0_var(--color-grey-15)]">
@@ -100,7 +100,7 @@ export default function HeroSection({
               </div>
 
               {/* Floating skill tags - stacked along the top-right edge */}
-              <div className="absolute top-4 right-0 flex flex-col items-end gap-2 lg:right-[-8%]">
+              <div className="flex flex-wrap justify-center gap-2 lg:absolute lg:top-4 lg:right-[-8%] lg:flex-col lg:items-end">
                 {skillTags.map((tag) => (
                   <span
                     className={`whitespace-nowrap rounded-full border-2 border-grey-15 px-4 py-2 font-semibold text-xs sm:text-sm ${
@@ -116,7 +116,7 @@ export default function HeroSection({
               </div>
 
               {/* Floating info card - overlapping bottom-right */}
-              <div className="absolute right-0 bottom-8 w-56 rounded-2xl border border-light-90 bg-white p-4 shadow-xl lg:right-[-6%] lg:bottom-0">
+              <div className="w-full max-w-sm rounded-2xl border border-light-90 bg-white p-4 shadow-xl lg:absolute lg:right-[-6%] lg:bottom-0 lg:w-56 lg:max-w-none">
                 <div className="mb-2 flex items-center gap-2">
                   <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold">
                     <ShieldCheck className="h-4 w-4 text-grey-15" />

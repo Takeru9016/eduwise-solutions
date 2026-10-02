@@ -117,7 +117,7 @@ function PolicyCard({
           <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-grey-15 bg-white sm:h-10 sm:w-10">
             <Icon className="h-4 w-4 text-grey-15 sm:h-[18px] sm:w-[18px]" />
           </div>
-          <h3 className="truncate font-bold font-vietnam text-grey-15 text-sm sm:text-base lg:text-lg">
+          <h3 className="font-bold font-vietnam text-grey-15 text-sm leading-snug sm:text-base lg:text-lg">
             {section.title}
           </h3>
         </div>

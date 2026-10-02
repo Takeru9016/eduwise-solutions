@@ -265,9 +265,7 @@ export default function CoursesPage({ courses }: OurCourseProps) {
                   <p className="font-bold font-vietnam text-grey-15 text-sm leading-tight sm:text-base">
                     {totalPrograms}+
                   </p>
-                  <p className="text-[10px] text-grey-40 leading-tight sm:text-xs">
-                    Programs
-                  </p>
+                  <p className="text-grey-40 text-xs leading-tight">Programs</p>
                 </div>
               </div>
               {heroStats.map((stat) => {
@@ -284,7 +282,7 @@ export default function CoursesPage({ courses }: OurCourseProps) {
                       <p className="font-bold font-vietnam text-grey-15 text-sm leading-tight sm:text-base">
                         {stat.value}
                       </p>
-                      <p className="text-[10px] text-grey-40 leading-tight sm:text-xs">
+                      <p className="text-grey-40 text-xs leading-tight">
                         {stat.label}
                       </p>
                     </div>

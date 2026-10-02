@@ -81,11 +81,11 @@ const LinkGroup = ({
     <h3 className="mb-4 font-bold font-vietnam text-grey-15 text-sm uppercase tracking-wider">
       {title}
     </h3>
-    <ul className="grid grid-cols-2 gap-x-4 gap-y-2.5 sm:grid-cols-1">
+    <ul className="grid grid-cols-2 gap-x-4 sm:grid-cols-1 sm:gap-y-2.5">
       {links.map((link) => (
         <li key={link.label}>
           <Link
-            className="group inline-flex items-center gap-1.5 text-grey-40 text-sm transition-colors duration-200 hover:text-grey-15"
+            className="group inline-flex min-h-11 items-center gap-1.5 text-grey-40 text-sm transition-colors duration-200 hover:text-grey-15 sm:min-h-0"
             href={link.href}
           >
             <ArrowRight className="h-3 w-3 -translate-x-4 opacity-0 transition-[transform,opacity] duration-200 group-hover:translate-x-0 group-hover:opacity-60" />
@@ -144,7 +144,7 @@ export default function Footer() {
         <div className="mt-10 grid grid-cols-1 gap-10 border-grey-15/10 border-t pt-10 pb-12 sm:mt-16 sm:pt-16 sm:pb-16 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
           {/* Brand + Contact - span 4 */}
           <div className="space-y-6 lg:col-span-4">
-            <Link className="inline-block" href="/">
+            <Link className="inline-block py-2" href="/">
               <Image
                 alt="Eduwise Solutions"
                 className="w-37.5 object-contain transition-opacity hover:opacity-80"

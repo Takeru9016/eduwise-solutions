@@ -37,6 +37,8 @@ interface BlogsClientProps {
   posts: Post[];
 }
 
+const PAGE_SIZE = 12;
+
 export const CARD_TINTS = [
   "bg-primary-99",
   "bg-gold-90",
@@ -128,8 +130,10 @@ export function PostCard({
   post,
   index,
   cardRef,
+  hidden = false,
 }: {
   cardRef?: (el: HTMLDivElement | null) => void;
+  hidden?: boolean;
   index: number;
   post: Post;
 }) {
@@ -138,7 +142,7 @@ export function PostCard({
 
   return (
     <div
-      className="group flex flex-col overflow-hidden rounded-3xl border-2 border-grey-15 bg-white shadow-[4px_4px_0_0_var(--color-grey-15)] transition-[transform,box-shadow] duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)]"
+      className={`group flex-col overflow-hidden rounded-3xl border-2 border-grey-15 bg-white shadow-[4px_4px_0_0_var(--color-grey-15)] transition-[transform,box-shadow] duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)] ${hidden ? "hidden" : "flex"}`}
       ref={cardRef}
     >
       <Link
@@ -195,6 +199,8 @@ export function PostCard({
 
 export default function BlogsClient({ posts, categories }: BlogsClientProps) {
   const [activeCategory, setActiveCategory] = useState<string>("all");
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const animatedFrom = useRef(0);
   const heroRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -222,8 +228,21 @@ export default function BlogsClient({ posts, categories }: BlogsClientProps) {
     );
   }, []);
 
+  const selectCategory = (id: string) => {
+    animatedFrom.current = 0;
+    setActiveCategory(id);
+    setVisibleCount(PAGE_SIZE);
+  };
+
+  const loadMore = () => {
+    animatedFrom.current = visibleCount;
+    setVisibleCount((count) => count + PAGE_SIZE);
+  };
+
   useEffect(() => {
-    const cards = cardRefs.current.filter(Boolean);
+    const cards = cardRefs.current
+      .slice(animatedFrom.current, visibleCount)
+      .filter(Boolean);
     if (!cards.length || prefersReducedMotion()) {
       return;
     }
@@ -235,7 +254,7 @@ export default function BlogsClient({ posts, categories }: BlogsClientProps) {
     return () => {
       tween.kill();
     };
-  }, [gridPosts]);
+  }, [gridPosts, visibleCount]);
 
   return (
     <main className="min-h-screen bg-white">
@@ -284,7 +303,7 @@ export default function BlogsClient({ posts, categories }: BlogsClientProps) {
                     ? "bg-primary-75 text-grey-15"
                     : "bg-white text-grey-35 hover:bg-primary-99"
                 }`}
-                onClick={() => setActiveCategory("all")}
+                onClick={() => selectCategory("all")}
                 type="button"
               >
                 All Posts
@@ -297,7 +316,7 @@ export default function BlogsClient({ posts, categories }: BlogsClientProps) {
                       : "bg-white text-grey-35 hover:bg-primary-99"
                   }`}
                   key={category._id}
-                  onClick={() => setActiveCategory(category._id)}
+                  onClick={() => selectCategory(category._id)}
                   type="button"
                 >
                   {category.title}
@@ -307,18 +326,35 @@ export default function BlogsClient({ posts, categories }: BlogsClientProps) {
           </div>
 
           {gridPosts.length > 0 ? (
-            <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {gridPosts.map((post, index) => (
-                <PostCard
-                  cardRef={(el) => {
-                    cardRefs.current[index] = el;
-                  }}
-                  index={index}
-                  key={post._id}
-                  post={post}
-                />
-              ))}
-            </div>
+            <>
+              <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
+                {gridPosts.map((post, index) => (
+                  <PostCard
+                    cardRef={(el) => {
+                      cardRefs.current[index] = el;
+                    }}
+                    hidden={index >= visibleCount}
+                    index={index}
+                    key={post._id}
+                    post={post}
+                  />
+                ))}
+              </div>
+              {gridPosts.length > visibleCount && (
+                <div className="mt-10 flex flex-col items-center gap-3 sm:mt-12">
+                  <p className="text-grey-40 text-sm">
+                    Showing {visibleCount} of {gridPosts.length} articles
+                  </p>
+                  <button
+                    className="inline-flex min-h-11 items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-75 px-8 py-3 font-bold text-grey-15 transition-transform hover:-translate-y-0.5 hover:bg-primary-80 active:scale-[0.97]"
+                    onClick={loadMore}
+                    type="button"
+                  >
+                    Load more articles
+                  </button>
+                </div>
+              )}
+            </>
           ) : (
             <div className="py-16 text-center">
               <p className="text-grey-40 text-lg">
@@ -327,7 +363,7 @@ export default function BlogsClient({ posts, categories }: BlogsClientProps) {
               </p>
               <button
                 className="mt-4 font-bold text-grey-15 hover:underline"
-                onClick={() => setActiveCategory("all")}
+                onClick={() => selectCategory("all")}
                 type="button"
               >
                 View all posts

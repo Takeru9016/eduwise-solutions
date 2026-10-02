@@ -78,7 +78,7 @@ const SCROLL_THRESHOLD = 20;
 // Sub-components
 
 const Logo = ({ className = "" }: LogoProps) => (
-  <Link className={`relative ${className}`} href="/">
+  <Link className={`relative -my-2 inline-block py-2 ${className}`} href="/">
     <Image
       alt="Eduwise Solutions"
       className="w-[120px] object-contain md:w-[140px] lg:w-[160px]"

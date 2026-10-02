@@ -24,7 +24,7 @@ export default function RefundHighlight() {
     <section className="bg-light-97 py-12 md:py-16">
       <div className="container">
         <div className="rounded-3xl border-2 border-grey-15 bg-white p-6 shadow-[4px_4px_0_0_var(--color-grey-15)] sm:p-8">
-          <div className="flex flex-col items-center justify-between gap-8 lg:flex-row lg:gap-12">
+          <div className="flex flex-col items-center justify-between gap-8 xl:flex-row xl:gap-12">
             <div className="flex items-center gap-4 md:gap-6">
               <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border-2 border-grey-15 bg-primary-90 md:h-20 md:w-20">
                 <ShieldCheck
@@ -45,7 +45,7 @@ export default function RefundHighlight() {
               </div>
             </div>
 
-            <div className="flex flex-col gap-3 sm:flex-row sm:gap-6">
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-6">
               {highlights.map((item) => (
                 <div
                   className="flex items-center gap-2 text-grey-30"

@@ -45,7 +45,7 @@ export function PressCard({ feature }: { feature: SanityPressFeature }) {
       </div>
 
       {feature.featured && (
-        <span className="absolute -top-2 -left-2 rounded-full border-2 border-grey-15 bg-gold px-2.5 py-0.5 font-semibold text-[10px] text-grey-15 uppercase tracking-wide">
+        <span className="absolute -top-2 -left-2 rounded-full border-2 border-grey-15 bg-gold px-2.5 py-0.5 font-semibold text-grey-15 text-xs uppercase tracking-wide">
           Featured
         </span>
       )}

@@ -26,9 +26,9 @@ const ContactItem = ({ detail }: { detail: ContactDetail }) => {
           <ContactIcon className="h-5 w-5 text-primary-90" />
         </div>
 
-        <div className="grow">
+        <div className="min-w-0 grow">
           <p className="mb-1 font-bold text-white">{detail.title}</p>
-          <p className="flex items-center gap-2 text-grey-70 text-sm transition-colors group-hover:text-primary-90">
+          <p className="flex items-center gap-2 text-grey-70 text-sm transition-colors [overflow-wrap:anywhere] group-hover:text-primary-90">
             {detail.value}
             <ExternalLink
               className="opacity-0 transition-opacity group-hover:opacity-100"

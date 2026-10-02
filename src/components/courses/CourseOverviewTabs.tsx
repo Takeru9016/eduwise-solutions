@@ -10,6 +10,7 @@ import {
   Workflow,
 } from "lucide-react";
 import { useState } from "react";
+import { useScrollFade } from "@/hooks/use-scroll-fade";
 import type { CourseOverviewTab } from "@/types/course";
 
 const ICON_MAP: Record<string, LucideIcon> = {
@@ -86,6 +87,7 @@ export default function CourseOverviewTabs({
   overview: CourseOverviewTab[];
 }) {
   const [selectedLabel, setSelectedLabel] = useState(overview[0].tabLabel);
+  const { fadeClass, ref: tabListRef } = useScrollFade<HTMLDivElement>();
   const selectedTab =
     overview.find((tab) => tab.tabLabel === selectedLabel) ?? overview[0];
 
@@ -97,7 +99,8 @@ export default function CourseOverviewTabs({
       <div className="min-w-0 rounded-3xl border-2 border-grey-15 bg-light-97 p-5 sm:p-8">
         <div
           aria-label="Select overview section"
-          className="scrollbar-hide -mx-5 mb-6 flex gap-2 overflow-x-auto px-5 pb-3 sm:-mx-8 sm:px-8 lg:mx-0 lg:flex-wrap lg:overflow-visible lg:px-0"
+          className={`scrollbar-hide -mx-5 mb-6 flex gap-2 overflow-x-auto px-5 pb-3 sm:-mx-8 sm:px-8 lg:mx-0 lg:flex-wrap lg:overflow-visible lg:px-0 ${fadeClass}`}
+          ref={tabListRef}
           role="tablist"
         >
           {overview.map((tab) => (

@@ -38,7 +38,7 @@ export default function AWSScheduleSteps({
                   />
                 </div>
                 <div>
-                  <span className="mb-1 block font-bold text-[10px] text-primary-90 uppercase tracking-widest">
+                  <span className="mb-1 block font-bold text-primary-90 text-xs uppercase tracking-widest">
                     Step {i + 1}
                   </span>
                   <p className="font-semibold text-white text-xs leading-tight">

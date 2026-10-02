@@ -62,7 +62,7 @@ const ImageCard = ({
       alt={benefit.title}
       className="object-cover transition-transform duration-500 group-hover:scale-105"
       fill
-      sizes="(min-width: 1024px) 320px, 50vw"
+      sizes="(min-width: 1024px) 320px, (min-width: 640px) 50vw, 100vw"
       src={benefit.imagePath ?? ""}
     />
     <div className="absolute inset-0 bg-linear-to-t from-grey-15/90 via-grey-15/10 to-transparent" />
@@ -132,7 +132,7 @@ export default function BenefitSection({
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {items.map((benefit, index) =>
               benefit.imagePath ? (
                 <ImageCard

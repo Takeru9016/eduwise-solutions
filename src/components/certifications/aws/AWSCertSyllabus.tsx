@@ -10,6 +10,7 @@ import {
   ListChecks,
 } from "lucide-react";
 import { useMemo, useState } from "react";
+import { useScrollFade } from "@/hooks/use-scroll-fade";
 import type {
   AwsPageContent,
   CertLevel,
@@ -337,7 +338,7 @@ function CertTimelineChart({
         <div className="relative h-4">
           {TIMELINE_TICKS.map((t) => (
             <span
-              className="absolute -translate-x-1/2 font-medium text-[10px] text-grey-40 first:translate-x-0 last:-translate-x-full"
+              className="absolute -translate-x-1/2 font-medium text-grey-40 text-xs first:translate-x-0 last:-translate-x-full"
               key={t}
               style={{ left: `${(t / TIMELINE_DOMAIN_MAX_WEEKS) * 100}%` }}
             >
@@ -428,6 +429,8 @@ export default function AWSCertSyllabus({
 }) {
   const [selectedCode, setSelectedCode] = useState(certs[0]?.code ?? "");
   const [selectedSection, setSelectedSection] = useState<SectionId>("overview");
+  const certFade = useScrollFade<HTMLDivElement>();
+  const sectionFade = useScrollFade<HTMLDivElement>();
   const selectedCert = certs.find((c) => c.code === selectedCode) ?? certs[0];
 
   if (!selectedCert) {
@@ -453,7 +456,8 @@ export default function AWSCertSyllabus({
           <aside className="lg:sticky lg:top-24 lg:self-start">
             <div
               aria-label="Select AWS certification"
-              className="scrollbar-hide -mx-4 flex gap-2 overflow-x-auto px-4 pb-3 lg:mx-0 lg:max-h-[calc(100vh-8rem)] lg:flex-col lg:gap-1.5 lg:overflow-visible lg:overflow-y-auto lg:px-0 lg:pb-0"
+              className={`scrollbar-hide -mx-4 flex gap-2 overflow-x-auto px-4 pb-3 lg:mx-0 lg:max-h-[calc(100vh-8rem)] lg:flex-col lg:gap-1.5 lg:overflow-visible lg:overflow-y-auto lg:px-0 lg:pb-0 ${certFade.fadeClass}`}
+              ref={certFade.ref}
               role="tablist"
             >
               {certs.map((cert) => (
@@ -479,7 +483,8 @@ export default function AWSCertSyllabus({
 
             <div
               aria-label="Select syllabus section"
-              className="scrollbar-hide -mx-5 mb-6 flex gap-2 overflow-x-auto px-5 pb-3 sm:-mx-8 sm:px-8 lg:mx-0 lg:flex-wrap lg:overflow-visible lg:px-0"
+              className={`scrollbar-hide -mx-5 mb-6 flex gap-2 overflow-x-auto px-5 pb-3 sm:-mx-8 sm:px-8 lg:mx-0 lg:flex-wrap lg:overflow-visible lg:px-0 ${sectionFade.fadeClass}`}
+              ref={sectionFade.ref}
               role="tablist"
             >
               {SECTIONS.map((section) => (

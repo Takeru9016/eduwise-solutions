@@ -22,8 +22,8 @@ export default function AWSHero({
         }}
       />
 
-      <div className="container relative z-10 grid items-center gap-10 py-20 sm:py-24 lg:grid-cols-[1fr_460px] lg:gap-14 lg:py-28">
-        <div>
+      <div className="container relative z-10 grid grid-cols-1 items-center gap-10 py-20 sm:py-24 lg:grid-cols-[1fr_460px] lg:gap-14 lg:py-28">
+        <div className="min-w-0">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-white/20 bg-white/10 px-4 py-2">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img

@@ -171,6 +171,10 @@
   }
 }
 
+@utility scroll-fade-r {
+  mask-image: linear-gradient(to right, black calc(100% - 2.5rem), transparent);
+}
+
 @layer base {
   :root {
     /* Original theme colors (OKLCH, converted from HSL - same rendered color) */

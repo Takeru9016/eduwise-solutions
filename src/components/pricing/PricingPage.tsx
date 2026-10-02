@@ -77,7 +77,7 @@ function PricingCard({
       )}
 
       <div
-        className={`flex items-center gap-3 border-grey-15 border-b-2 p-6 ${tint}`}
+        className={`flex items-center gap-3 border-grey-15 border-b-2 p-6 ${course.featured ? "pt-14" : ""} ${tint}`}
       >
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-grey-15 bg-white">
           <CategoryIcon className="h-5 w-5 text-grey-15" />
@@ -88,7 +88,7 @@ function PricingCard({
               {category.label}
             </p>
           )}
-          <h3 className="truncate font-bold font-vietnam text-grey-15 text-lg">
+          <h3 className="font-bold font-vietnam text-grey-15 text-lg leading-snug">
             {course.title}
           </h3>
         </div>

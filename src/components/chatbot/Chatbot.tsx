@@ -258,7 +258,7 @@ const MessageBubble = ({
 
         <time
           className={cn(
-            "mt-1 block text-[10px]",
+            "mt-1 block text-xs",
             isBot ? "text-grey-60" : "text-white/70"
           )}
         >

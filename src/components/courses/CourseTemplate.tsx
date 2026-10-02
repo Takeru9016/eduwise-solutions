@@ -68,6 +68,7 @@ import CourseBlogPreview from "./CourseBlogPreview";
 import CourseLeadForm from "./CourseLeadForm";
 import CourseOverviewTabs from "./CourseOverviewTabs";
 import PlacementSection from "./PlacementSection";
+import { StickyApplyBar } from "./StickyApplyBar";
 
 const ICON_MAP: Record<string, LucideIcon> = {
   Award,
@@ -124,7 +125,7 @@ interface JGStep {
   title: string;
 }
 
-function useStaggerReveal<T extends HTMLElement>(count: number) {
+function useStaggerReveal<T extends HTMLElement>(_count: number) {
   const containerRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(T | null)[]>([]);
 
@@ -149,7 +150,7 @@ function useStaggerReveal<T extends HTMLElement>(count: number) {
       tween.scrollTrigger?.kill();
       tween.kill();
     };
-  }, [count]);
+  }, []);
 
   return { containerRef, itemRefs };
 }
@@ -341,7 +342,7 @@ export default function CourseTemplate({
   const jgSteps = buildJGSteps(course);
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white pb-20 lg:pb-0">
       <Script
         src="https://checkout.razorpay.com/v1/checkout.js"
         strategy="lazyOnload"
@@ -367,8 +368,8 @@ export default function CourseTemplate({
       {/* HERO */}
       <section className="bg-light-97 py-12 sm:py-14 lg:py-16" ref={heroRef}>
         <div className="container">
-          <div className="grid items-center gap-10 lg:grid-cols-[1fr_460px] lg:gap-14">
-            <div className="text-center lg:text-left">
+          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1fr_460px] lg:gap-14">
+            <div className="min-w-0 text-center lg:text-left">
               <div
                 className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-99 px-4 py-2 font-semibold text-grey-15 text-sm"
                 data-reveal
@@ -404,7 +405,7 @@ export default function CourseTemplate({
                       <p className="font-bold font-vietnam text-grey-15 text-sm leading-tight sm:text-base">
                         {course.duration}
                       </p>
-                      <p className="text-[10px] text-grey-40 leading-tight sm:text-xs">
+                      <p className="text-grey-40 text-xs leading-tight">
                         Duration
                       </p>
                     </div>
@@ -424,7 +425,7 @@ export default function CourseTemplate({
                         <p className="font-bold font-vietnam text-grey-15 text-sm leading-tight sm:text-base">
                           {stat.value}
                         </p>
-                        <p className="text-[10px] text-grey-40 leading-tight sm:text-xs">
+                        <p className="text-grey-40 text-xs leading-tight">
                           {stat.label}
                         </p>
                       </div>
@@ -448,12 +449,12 @@ export default function CourseTemplate({
 
               {course.heroImageUrl && (
                 <div
-                  className="relative mt-8 h-72 w-full overflow-hidden rounded-3xl border-2 border-grey-15"
+                  className="relative mt-8 h-52 w-full overflow-hidden rounded-3xl border-2 border-grey-15 bg-white sm:h-72"
                   data-reveal
                 >
                   <Image
                     alt={course.title}
-                    className="object-cover"
+                    className="object-contain lg:object-cover"
                     fill
                     priority
                     sizes="(max-width: 1024px) 100vw, 704px"
@@ -463,7 +464,7 @@ export default function CourseTemplate({
               )}
             </div>
 
-            <div data-reveal>
+            <div className="scroll-mt-24" data-reveal id="apply">
               {course.batchInfo && (
                 <div className="mb-4 flex items-center gap-2 rounded-full border-2 border-grey-15 bg-white px-4 py-2 text-sm">
                   <span className="h-2 w-2 shrink-0 rounded-full bg-primary-75" />
@@ -689,7 +690,7 @@ export default function CourseTemplate({
                       <button
                         aria-expanded={isExpanded}
                         aria-label={`${tool.name} description`}
-                        className="absolute top-2 right-2 flex h-5 w-5 items-center justify-center rounded-full border border-grey-15/30 text-grey-40 transition-colors hover:border-grey-15 hover:text-grey-15"
+                        className="absolute top-2 right-2 flex h-5 w-5 items-center justify-center rounded-full border border-grey-15/30 text-grey-40 transition-colors after:absolute after:-inset-3 after:content-[''] hover:border-grey-15 hover:text-grey-15"
                         onClick={() =>
                           setExpandedTool(isExpanded ? null : tool.name)
                         }
@@ -715,7 +716,7 @@ export default function CourseTemplate({
                       {tool.name}
                     </span>
                     {isExpanded && tool.description && (
-                      <p className="text-center text-[11px] text-grey-40 leading-snug">
+                      <p className="text-center text-grey-40 text-xs leading-snug">
                         {tool.description}
                       </p>
                     )}
@@ -832,6 +833,7 @@ export default function CourseTemplate({
           </section>
         )}
       </div>
+      <StickyApplyBar courseTitle={course.title} targetId="apply" />
     </main>
   );
 }
@@ -954,7 +956,7 @@ function FAQColumn({
             value={`faq-${keyPrefix}-${i}`}
           >
             <AccordionTrigger className="gap-3 px-5 py-4 hover:no-underline">
-              <div className="flex items-center gap-3">
+              <div className="flex min-w-0 flex-1 items-center gap-3 text-left">
                 <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-grey-15 bg-primary-90 font-bold text-grey-15 text-sm">
                   {i + 1}
                 </div>
@@ -1088,7 +1090,7 @@ function HiringPartnersGrid({
             ) : (
               <div className="flex flex-col items-center gap-1">
                 <Building className="h-4 w-4 text-grey-40" />
-                <span className="text-center font-bold text-[10px] text-grey-30 leading-tight">
+                <span className="text-center font-bold text-grey-30 text-xs leading-tight">
                   {partner.name}
                 </span>
               </div>

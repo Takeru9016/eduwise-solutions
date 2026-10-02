@@ -72,9 +72,9 @@ function StepIndicator({ step }: { step: Step }) {
   const activeIndex = STEPS.findIndex((s) => s.id === step);
 
   return (
-    <div className="mb-8 flex items-center justify-center gap-2">
+    <div className="mb-8 flex items-center justify-center gap-1.5 sm:gap-2">
       {STEPS.map((s, i) => (
-        <div className="flex items-center gap-2" key={s.id}>
+        <div className="flex items-center gap-1.5 sm:gap-2" key={s.id}>
           <div
             className={`flex items-center gap-2 rounded-full border-2 px-3 py-1.5 font-bold text-xs transition-colors ${
               i <= activeIndex
@@ -91,7 +91,7 @@ function StepIndicator({ step }: { step: Step }) {
           </div>
           {i < STEPS.length - 1 && (
             <div
-              className={`h-0.5 w-6 ${i < activeIndex ? "bg-grey-15" : "bg-grey-15/15"}`}
+              className={`h-0.5 w-3 sm:w-6 ${i < activeIndex ? "bg-grey-15" : "bg-grey-15/15"}`}
             />
           )}
         </div>

@@ -12,6 +12,7 @@ import { useEffect, useId, useRef } from "react";
 // TURNSTILE_SECRET_KEY is set server-side).
 const DEFAULT_TEST_SITE_KEY = "1x00000000000000000000AA";
 const POLL_INTERVAL_MS = 200;
+const NORMAL_WIDGET_WIDTH_PX = 300;
 
 interface TurnstileApi {
   remove: (widgetId: string) => void;
@@ -21,6 +22,7 @@ interface TurnstileApi {
       callback: (token: string) => void;
       "expired-callback"?: () => void;
       sitekey: string;
+      size?: "normal" | "compact";
     }
   ) => string;
 }
@@ -58,6 +60,8 @@ export function TurnstileWidget({
         callback: (token) => onVerifyRef.current(token),
         "expired-callback": () => onVerifyRef.current(""),
         sitekey: siteKey,
+        size:
+          container.clientWidth < NORMAL_WIDGET_WIDTH_PX ? "compact" : "normal",
       });
     };
 

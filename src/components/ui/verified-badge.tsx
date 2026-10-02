@@ -15,7 +15,7 @@ export function VerifiedBadge({
 
   return (
     <span
-      className="inline-flex shrink-0 items-center gap-1 rounded-full border-2 border-grey-15 bg-primary-90 px-2 py-0.5 font-bold text-[10px] text-grey-15 uppercase tracking-wide"
+      className="inline-flex shrink-0 items-center gap-1 rounded-full border-2 border-grey-15 bg-primary-90 px-2 py-0.5 font-bold text-grey-15 text-xs uppercase tracking-wide"
       title="Verified via LinkedIn"
     >
       <BadgeCheck className="h-3 w-3" />

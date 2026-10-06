@@ -221,7 +221,7 @@ export default function CoursesPage({ courses }: OurCourseProps) {
     return () => {
       tween.kill();
     };
-  }, [filteredCourses]);
+  }, []);
 
   return (
     <main className="min-h-screen bg-white">
@@ -263,7 +263,7 @@ export default function CoursesPage({ courses }: OurCourseProps) {
                 </div>
                 <div className="text-left">
                   <p className="font-bold font-vietnam text-grey-15 text-sm leading-tight sm:text-base">
-                    {totalPrograms}+
+                    {totalPrograms}
                   </p>
                   <p className="text-grey-40 text-xs leading-tight">Programs</p>
                 </div>

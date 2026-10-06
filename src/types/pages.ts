@@ -4,6 +4,13 @@ export interface SectionHeading {
   subheading?: string;
 }
 
+export interface DomainCardContent {
+  _key?: string;
+  category: string;
+  icon?: string;
+  title: string;
+}
+
 export interface PageSeo {
   description?: string;
   keywords?: string[];
@@ -34,7 +41,10 @@ export interface HomePageContent {
     }[];
     subheading?: string;
   };
-  domains?: SectionHeading & { enabled?: boolean };
+  domains?: SectionHeading & {
+    cards?: DomainCardContent[];
+    enabled?: boolean;
+  };
   faq?: SectionHeading & {
     enabled?: boolean;
     helpBody?: string;

@@ -13,7 +13,7 @@ import {
 } from "@/components";
 import { absoluteUrl, faqPageJsonLd } from "@/lib/seo";
 import { client } from "@/sanity/lib/client";
-import { HOME_PAGE_QUERY } from "@/sanity/lib/queries";
+import { COURSE_CATEGORIES_QUERY, HOME_PAGE_QUERY } from "@/sanity/lib/queries";
 import type { HomePageContent } from "@/types/pages";
 
 export const revalidate = 60;
@@ -31,7 +31,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const home = await client.fetch<HomePageContent | null>(HOME_PAGE_QUERY);
+  const [home, courseCategories] = await Promise.all([
+    client.fetch<HomePageContent | null>(HOME_PAGE_QUERY),
+    client.fetch<string[]>(COURSE_CATEGORIES_QUERY),
+  ]);
 
   if (!home) {
     throw new Error("Home Page document is missing in Sanity");
@@ -54,7 +57,10 @@ export default async function Home() {
       <main className="min-h-screen">
         {home.hero && <HeroSection hero={home.hero} />}
         {home.domains && home.domains.enabled !== false && (
-          <DomainsShowcase content={home.domains} />
+          <DomainsShowcase
+            content={home.domains}
+            courseCategories={courseCategories}
+          />
         )}
         {home.howItWorks && home.howItWorks.enabled !== false && (
           <HowItWorks content={home.howItWorks} />

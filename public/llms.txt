@@ -1,6 +1,6 @@
 # EduWise Solutions
 
-> EduWise Solutions is an Indian ed-tech company offering industry-aligned, live mentor-led career programs in software development, AI & data, cloud, DevOps and security, engineering and design, and business and finance. Programs include hands-on projects, placement assistance and certification, plus AWS certification training.
+> EduWise Solutions is an Indian ed-tech company offering industry-aligned, live mentor-led career programs in AI & data, cloud, DevOps and security, and digital marketing. Programs include hands-on projects, placement assistance and certification, plus AWS certification training.
 
 ## Company Pages
 
@@ -20,17 +20,9 @@
 - [Blogs](https://eduwise.solutions/blogs)
 - [Learner LMS Login](https://learner.eduwise.solutions/)
 
-## Development & Programming
-
-- [Frontend Web Development](https://eduwise.solutions/courses/frontend-web-development)
-- [Full Stack Development](https://eduwise.solutions/courses/full-stack-development)
-- [Java Backend Development](https://eduwise.solutions/courses/java-backend-development)
-- [Python Programming](https://eduwise.solutions/courses/python-programming)
-- [UI/UX Product Design](https://eduwise.solutions/courses/ui-ux-product-design)
-
 ## AI & Data
 
-- [Artificial Intelligence & Machine Learning](https://eduwise.solutions/courses/ai-ml)
+- [Artificial Intelligence & Machine Learning](https://eduwise.solutions/courses/ai-machine-learning-course)
 - [Data Science](https://eduwise.solutions/courses/data-science)
 
 ## Cloud, DevOps & Security
@@ -39,22 +31,9 @@
 - [DevOps](https://eduwise.solutions/courses/devops)
 - [AWS Certifications](https://eduwise.solutions/certifications/aws)
 
-## Engineering & AutoCAD Design
+## Business & Marketing
 
-- [AutoCAD Design](https://eduwise.solutions/courses/autocad-design)
-- [Embedded Systems & IoT](https://eduwise.solutions/courses/embedded-systems-and-iot)
-
-## Business & Finance
-
-- [Applied Psychology](https://eduwise.solutions/courses/applied-psychology)
 - [Digital Marketing](https://eduwise.solutions/courses/digital-marketing)
-- [Finance & Accounting](https://eduwise.solutions/courses/finance-and-accounting)
-- [HR Management](https://eduwise.solutions/courses/hr-management)
-- [Stock Market & Investing](https://eduwise.solutions/courses/stock-market-and-investing)
-
-## Career
-
-- [Placement Accelerator](https://eduwise.solutions/courses/placement-accelerator)
 
 ## Legal
 

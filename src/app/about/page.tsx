@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 
 import { AboutUs, Footer, Navbar } from "@/components";
+import { client } from "@/sanity/lib/client";
+import { COURSE_CATEGORIES_QUERY } from "@/sanity/lib/queries";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   description:
@@ -8,12 +12,19 @@ export const metadata: Metadata = {
   title: "About Us",
 };
 
-export default function AboutUsPage() {
+export default async function AboutUsPage() {
+  const courseCategories = await client.fetch<string[]>(
+    COURSE_CATEGORIES_QUERY
+  );
+
   return (
     <>
       <Navbar />
       <main className="min-h-screen">
-        <AboutUs />
+        <AboutUs
+          domainCount={new Set(courseCategories).size}
+          programCount={courseCategories.length}
+        />
       </main>
       <Footer />
     </>

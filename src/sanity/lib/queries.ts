@@ -345,6 +345,8 @@ export const REDIRECTS_QUERY = `
 
 export const HOME_PAGE_QUERY = `*[_id == "homePage"][0]`;
 
+export const COURSE_CATEGORIES_QUERY = `*[_type == "course"].category`;
+
 export const AWS_PAGE_QUERY = `*[_id == "awsPage"][0]`;
 
 export const AWS_CERTIFICATIONS_QUERY = `

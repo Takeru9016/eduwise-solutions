@@ -26,7 +26,7 @@ if (typeof window !== "undefined") {
 type IconType = React.ComponentType<React.SVGProps<SVGSVGElement>>;
 
 // Hook: fade + stagger a group of items in on scroll
-function useStaggerReveal<T extends HTMLElement>(count: number) {
+function useStaggerReveal<T extends HTMLElement>(_count: number) {
   const containerRef = useRef<T>(null);
   const itemRefs = useRef<(HTMLElement | null)[]>([]);
 
@@ -53,7 +53,7 @@ function useStaggerReveal<T extends HTMLElement>(count: number) {
       tween.kill();
     };
     // biome-ignore lint/correctness/useExhaustiveDependencies: rebuild on item count change
-  }, [count]);
+  }, []);
 
   return { containerRef, itemRefs };
 }
@@ -93,7 +93,13 @@ const benefits = [
   { icon: CheckCircle2, label: "Affordable & Effective" },
 ];
 
-export default function AboutUs() {
+export default function AboutUs({
+  domainCount,
+  programCount,
+}: {
+  domainCount: number;
+  programCount: number;
+}) {
   const heroRef = useRef<HTMLDivElement>(null);
   const story = useStaggerReveal<HTMLDivElement>(differentiators.length);
   const pipeline = useStaggerReveal<HTMLDivElement>(pipelineSteps.length);
@@ -128,9 +134,10 @@ export default function AboutUs() {
               </h1>
               <p className="text-grey-40 text-lg leading-relaxed">
                 Eduwise Solutions runs live, mentor-led career programs out of
-                Bengaluru - 17+ tracks across development, AI & data, cloud,
-                design, and business, each one built to end in a placement, not
-                just a certificate.
+                Bengaluru - {programCount}{" "}
+                {programCount === 1 ? "program" : "programs"} across{" "}
+                {domainCount} {domainCount === 1 ? "domain" : "domains"}, each
+                one built to end in a placement, not just a certificate.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-3">

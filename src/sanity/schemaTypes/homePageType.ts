@@ -8,6 +8,15 @@ import {
   textField,
 } from "./pageFields";
 
+const DOMAIN_CATEGORY_OPTIONS = [
+  { title: "Development", value: "development" },
+  { title: "AI & Data", value: "ai-data" },
+  { title: "Cloud, DevOps & Security", value: "cloud-devops-security" },
+  { title: "Engineering & Design", value: "engineering" },
+  { title: "Business & Finance", value: "business" },
+  { title: "Career", value: "career" },
+];
+
 const TINT_OPTIONS = [
   { title: "Light mint", value: "bg-primary-99" },
   { title: "Gold", value: "bg-gold-90" },
@@ -88,7 +97,28 @@ export const homePageType = defineType({
     }),
     section({
       description:
-        'Course category cards. The cards themselves come from your courses; here you edit the text. The "17+ Career Programs" pill is automatic.',
+        'One card per course category. Edit the title and icon here. The "N Career Programs" pill and the count on each card are automatic from your live courses, and a card with no live courses is hidden.',
+      fields: [
+        objectList(
+          "cards",
+          "Cards",
+          [
+            defineField({
+              name: "category",
+              options: {
+                list: DOMAIN_CATEGORY_OPTIONS,
+              },
+              title: "Course category this card links to",
+              type: "string",
+              validation: (Rule) => Rule.required(),
+            }),
+            textField("title", "Card title"),
+            iconField(),
+          ],
+          "title",
+          "category"
+        ),
+      ],
       name: "domains",
       title: "Domains (Pick Your Path)",
     }),

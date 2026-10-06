@@ -65,6 +65,34 @@ export interface CourseTool {
   name: string;
 }
 
+export interface CourseMentor {
+  bio?: string;
+  enabled?: boolean;
+  experience?: string;
+  expertise?: string[];
+  imageUrl?: string;
+  linkedInUrl?: string;
+  name?: string;
+  profileLinkLabel?: string;
+  role?: string;
+  sectionDescription?: string;
+  sectionEyebrow?: string;
+  sectionTitle?: string;
+}
+
+export interface CourseCertificate {
+  completionRequirements?: string;
+  completionRequirementsTitle?: string;
+  description?: string;
+  enabled?: boolean;
+  imageUrl?: string;
+  issuer?: string;
+  issuerPrefix?: string;
+  sectionDescription?: string;
+  sectionEyebrow?: string;
+  sectionTitle?: string;
+}
+
 export interface CourseOverviewTab {
   body?: string;
   bullets?: string[];
@@ -98,6 +126,7 @@ export interface CourseContent {
   careerServiceFee?: number;
   careerTrack?: CareerTrackItem[];
   category: string;
+  certificate?: CourseCertificate;
   description: string;
   duration: string;
   emiOption?: string;
@@ -113,6 +142,7 @@ export interface CourseContent {
 
   // Curriculum journey (sections 2-5)
   isJobGuaranteeProgram?: boolean;
+  mentor?: CourseMentor;
   modules: CourseModule[];
   originalPrice: number;
   overview?: CourseOverviewTab[];

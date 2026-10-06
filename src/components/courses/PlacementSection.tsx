@@ -110,7 +110,7 @@ export default function PlacementSection({
           Success Stories
         </div>
         <h2 className="mb-4 font-black font-vietnam text-3xl text-grey-15 lg:text-5xl">
-          Our Placed Students
+          Our Successfully Places Students
         </h2>
         <p className="mx-auto max-w-3xl text-grey-35 text-lg">
           See where our graduates are working now. From career transitions to

@@ -295,6 +295,152 @@ interface CourseTemplateProps {
   course: CourseContent;
 }
 
+function CourseCredibilitySections({ course }: { course: CourseContent }) {
+  return (
+    <>
+      {/* COURSE MENTOR */}
+      {course.mentor?.enabled && course.mentor.name && (
+        <section className="rounded-3xl border-2 border-grey-15 bg-light-97 p-6 sm:p-10">
+          <div className="mx-auto max-w-5xl">
+            <div className="mb-8 max-w-2xl">
+              {course.mentor.sectionEyebrow && (
+                <p className="mb-2 font-bold text-grey-40 text-sm uppercase tracking-wide">
+                  {course.mentor.sectionEyebrow}
+                </p>
+              )}
+              {course.mentor.sectionTitle && (
+                <h2 className="mb-3 font-black font-vietnam text-2xl text-grey-15 sm:text-3xl">
+                  {course.mentor.sectionTitle}
+                </h2>
+              )}
+              {course.mentor.sectionDescription && (
+                <p className="text-grey-35 leading-relaxed">
+                  {course.mentor.sectionDescription}
+                </p>
+              )}
+            </div>
+            <div className="grid items-center gap-8 md:grid-cols-[minmax(220px,0.8fr)_1.2fr]">
+              {course.mentor.imageUrl && (
+                <div className="overflow-hidden rounded-2xl border-2 border-grey-15 bg-white">
+                  <Image
+                    alt={course.mentor.name}
+                    className="aspect-[4/5] w-full object-cover"
+                    height={700}
+                    src={course.mentor.imageUrl}
+                    width={560}
+                  />
+                </div>
+              )}
+              <div>
+                <h3 className="font-black font-vietnam text-2xl text-grey-15">
+                  {course.mentor.name}
+                </h3>
+                {course.mentor.role && (
+                  <p className="mt-1 font-semibold text-grey-35">
+                    {course.mentor.role}
+                  </p>
+                )}
+                {course.mentor.experience && (
+                  <p className="mt-3 inline-flex rounded-full border border-grey-15/20 bg-white px-3 py-1 font-bold text-grey-15 text-sm">
+                    {course.mentor.experience}
+                  </p>
+                )}
+                {course.mentor.bio && (
+                  <p className="mt-4 whitespace-pre-line text-grey-35 leading-relaxed">
+                    {course.mentor.bio}
+                  </p>
+                )}
+                {course.mentor.expertise &&
+                  course.mentor.expertise.length > 0 && (
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {course.mentor.expertise.map((item) => (
+                        <span
+                          className="rounded-full border border-grey-15/20 bg-white px-3 py-1.5 font-semibold text-grey-15 text-sm"
+                          key={item}
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                {course.mentor.linkedInUrl && (
+                  <a
+                    className="mt-5 inline-flex font-bold text-grey-15 underline underline-offset-4"
+                    href={course.mentor.linkedInUrl}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    {course.mentor.profileLinkLabel}
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* COURSE CERTIFICATE */}
+      {course.certificate?.enabled && course.certificate.imageUrl && (
+        <section className="rounded-3xl border-2 border-grey-15 bg-primary-99 p-6 sm:p-10">
+          <div className="grid items-center gap-8 lg:grid-cols-2">
+            <div>
+              {course.certificate.sectionEyebrow && (
+                <p className="mb-2 font-bold text-grey-40 text-sm uppercase tracking-wide">
+                  {course.certificate.sectionEyebrow}
+                </p>
+              )}
+              {course.certificate.sectionTitle && (
+                <h2 className="mb-4 font-black font-vietnam text-2xl text-grey-15 sm:text-3xl">
+                  {course.certificate.sectionTitle}
+                </h2>
+              )}
+              {course.certificate.sectionDescription && (
+                <p className="mb-4 text-grey-35 leading-relaxed">
+                  {course.certificate.sectionDescription}
+                </p>
+              )}
+              {course.certificate.issuer && (
+                <p className="mb-3 text-grey-35">
+                  {course.certificate.issuerPrefix}{" "}
+                  <span className="font-bold text-grey-15">
+                    {course.certificate.issuer}
+                  </span>
+                </p>
+              )}
+              {course.certificate.description && (
+                <p className="text-grey-35 leading-relaxed">
+                  {course.certificate.description}
+                </p>
+              )}
+              {course.certificate.completionRequirements && (
+                <div className="mt-5 rounded-2xl border border-grey-15/20 bg-white p-4">
+                  {course.certificate.completionRequirementsTitle && (
+                    <h3 className="mb-1 font-bold text-grey-15">
+                      {course.certificate.completionRequirementsTitle}
+                    </h3>
+                  )}
+                  <p className="text-grey-35 text-sm leading-relaxed">
+                    {course.certificate.completionRequirements}
+                  </p>
+                </div>
+              )}
+            </div>
+            <div className="rounded-2xl border-2 border-grey-15 bg-white p-3 sm:p-5">
+              <Image
+                alt={`${course.title} certificate preview`}
+                className="h-auto max-h-[440px] w-full object-contain"
+                height={900}
+                src={course.certificate.imageUrl}
+                width={1200}
+              />
+            </div>
+          </div>
+        </section>
+      )}
+    </>
+  );
+}
+
 export default function CourseTemplate({
   blogPosts = [],
   course,
@@ -668,6 +814,8 @@ export default function CourseTemplate({
             ))}
           </Accordion>
         </section>
+
+        <CourseCredibilitySections course={course} />
 
         {/* PLACEMENT ASSISTANCE TRACK */}
         {jgSteps.length > 0 && <JobGuaranteeTrack steps={jgSteps} />}

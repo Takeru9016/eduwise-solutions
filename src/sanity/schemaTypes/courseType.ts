@@ -442,6 +442,177 @@ export const courseType = defineType({
       validation: (Rule) => Rule.required().min(3),
     }),
 
+    // Course credibility sections (optional and independently controlled)
+    defineField({
+      description:
+        "Show a course-specific mentor profile on the course page. Turn it off to hide the section while keeping its content in Studio.",
+      fields: [
+        {
+          initialValue: false,
+          name: "enabled",
+          title: "Show this section",
+          type: "boolean",
+        },
+        {
+          name: "sectionEyebrow",
+          title: "Section Eyebrow",
+          type: "string",
+          validation: (Rule) => Rule.max(60),
+        },
+        {
+          name: "sectionTitle",
+          title: "Section Heading",
+          type: "string",
+          validation: (Rule) => Rule.max(100),
+        },
+        {
+          name: "sectionDescription",
+          rows: 3,
+          title: "Section Introduction",
+          type: "text",
+          validation: (Rule) => Rule.max(300),
+        },
+        {
+          name: "name",
+          title: "Mentor Name",
+          type: "string",
+          validation: (Rule) => Rule.max(100),
+        },
+        {
+          name: "role",
+          title: "Current Role / Speciality",
+          type: "string",
+          validation: (Rule) => Rule.max(120),
+        },
+        {
+          description:
+            'E.g. "12 years in cloud infrastructure". Use verifiable details.',
+          name: "experience",
+          title: "Experience",
+          type: "string",
+          validation: (Rule) => Rule.max(120),
+        },
+        {
+          name: "bio",
+          rows: 5,
+          title: "Mentor Background",
+          type: "text",
+          validation: (Rule) => Rule.max(800),
+        },
+        {
+          description: "Optional portrait for the mentor card.",
+          name: "image",
+          options: { hotspot: true },
+          title: "Mentor Photo",
+          type: "image",
+        },
+        {
+          description: "Skills or subject areas the mentor teaches.",
+          name: "expertise",
+          of: [{ type: "string" }],
+          title: "Areas of Expertise",
+          type: "array",
+          validation: (Rule) => Rule.max(8),
+        },
+        {
+          description: "Optional public LinkedIn profile URL.",
+          name: "linkedInUrl",
+          title: "LinkedIn Profile",
+          type: "url",
+        },
+        {
+          name: "profileLinkLabel",
+          title: "Profile Link Label",
+          type: "string",
+          validation: (Rule) => Rule.max(80),
+        },
+      ],
+      group: "credibility",
+      name: "mentor",
+      title: "Meet Your Mentor",
+      type: "object",
+    }),
+    defineField({
+      description:
+        "Show an editable preview and accurate details about the certificate learners can earn for this course.",
+      fields: [
+        {
+          initialValue: false,
+          name: "enabled",
+          title: "Show this section",
+          type: "boolean",
+        },
+        {
+          name: "sectionEyebrow",
+          title: "Section Eyebrow",
+          type: "string",
+          validation: (Rule) => Rule.max(60),
+        },
+        {
+          name: "sectionTitle",
+          title: "Section Heading",
+          type: "string",
+          validation: (Rule) => Rule.max(100),
+        },
+        {
+          name: "sectionDescription",
+          rows: 3,
+          title: "Section Introduction",
+          type: "text",
+          validation: (Rule) => Rule.max(300),
+        },
+        {
+          description:
+            "Upload the certificate preview artwork. Use an image that reflects the certificate students actually receive.",
+          name: "image",
+          options: { hotspot: true },
+          title: "Certificate Preview",
+          type: "image",
+        },
+        {
+          description: "Name of the organization issuing the certificate.",
+          name: "issuer",
+          title: "Certificate Issuer",
+          type: "string",
+          validation: (Rule) => Rule.max(120),
+        },
+        {
+          name: "issuerPrefix",
+          title: "Text Before Issuer Name",
+          type: "string",
+          validation: (Rule) => Rule.max(60),
+        },
+        {
+          description:
+            "Describe what the certificate recognizes. Avoid implying third-party accreditation unless verified.",
+          name: "description",
+          rows: 3,
+          title: "What the Certificate Recognizes",
+          type: "text",
+          validation: (Rule) => Rule.max(400),
+        },
+        {
+          description:
+            "State the actual completion or assessment criteria, if any.",
+          name: "completionRequirements",
+          rows: 3,
+          title: "How Students Earn It",
+          type: "text",
+          validation: (Rule) => Rule.max(300),
+        },
+        {
+          name: "completionRequirementsTitle",
+          title: "Completion Requirements Heading",
+          type: "string",
+          validation: (Rule) => Rule.max(80),
+        },
+      ],
+      group: "credibility",
+      name: "certificate",
+      title: "Course Certificate",
+      type: "object",
+    }),
+
     // Extras Group (Optional)
     defineField({
       description: "Career roles with optional salary ranges.",
@@ -621,6 +792,7 @@ export const courseType = defineType({
     { default: true, name: "content", title: "Content" },
     { name: "curriculum", title: "Curriculum" },
     { name: "pricing", title: "Pricing" },
+    { name: "credibility", title: "Mentor & Certificate" },
     { name: "extras", title: "Extras" },
     { name: "seo", title: "SEO" },
   ],

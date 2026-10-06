@@ -1,7 +1,7 @@
 "use client";
 
 import type { SanityImageSource } from "@sanity/image-url";
-import { ArrowRight, Briefcase, Clock, Loader2, User } from "lucide-react";
+import { ArrowRight, Briefcase, Clock, Loader2 } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import {
@@ -28,6 +28,13 @@ interface PlacedStudent {
 
 interface PlacementSectionProps {
   categorySlug: string;
+}
+
+function getStudentInitials(name: string) {
+  const nameParts = name.trim().split(/\s+/).filter(Boolean);
+  return nameParts.length > 1
+    ? `${nameParts[0][0]}${nameParts.at(-1)?.[0]}`.toUpperCase()
+    : (nameParts[0]?.[0] ?? "?").toUpperCase();
 }
 
 export default function PlacementSection({
@@ -142,7 +149,12 @@ export default function PlacementSection({
                         src={urlFor(student.image).url()}
                       />
                     ) : (
-                      <User className="h-8 w-8 text-grey-40" />
+                      <span
+                        aria-hidden="true"
+                        className="font-bold font-vietnam text-lg text-grey-15"
+                      >
+                        {getStudentInitials(student.name)}
+                      </span>
                     )}
                   </div>
                   <div className="min-w-0 flex-1">

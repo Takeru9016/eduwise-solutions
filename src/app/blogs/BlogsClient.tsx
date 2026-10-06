@@ -152,7 +152,7 @@ export function PostCard({
         {post.mainImage ? (
           <Image
             alt={(post.mainImage as SanityImageWithAlt).alt ?? post.title}
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className="object-contain transition-transform duration-500 group-hover:scale-105"
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
             src={urlFor(post.mainImage).url()}

@@ -59,3 +59,4 @@ graphify-out/cache/
 /.agents
 /.claude
 /graphify-out
+/.omc

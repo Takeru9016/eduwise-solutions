@@ -31,6 +31,15 @@ export function organizationJsonLd() {
   };
 }
 
+export function websiteJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE_NAME,
+    url: SITE_URL,
+  };
+}
+
 export function localBusinessJsonLd() {
   return {
     "@context": "https://schema.org",

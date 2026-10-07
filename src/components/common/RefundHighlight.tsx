@@ -36,9 +36,9 @@ export default function RefundHighlight() {
                 <span className="mb-1 inline-flex items-center rounded-full border-2 border-grey-15 bg-gold-90 px-3 py-1 font-bold text-grey-15 text-xs uppercase tracking-wide">
                   Risk-Free
                 </span>
-                <h3 className="font-black font-vietnam text-2xl text-grey-15 md:text-3xl">
+                <p className="font-black font-vietnam text-2xl text-grey-15 md:text-3xl">
                   100% Placement Assistance
-                </h3>
+                </p>
                 <p className="mt-1 text-grey-40 text-sm md:text-base">
                   We&apos;re confident in our placement success
                 </p>

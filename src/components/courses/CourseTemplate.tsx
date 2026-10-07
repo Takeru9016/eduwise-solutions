@@ -270,9 +270,9 @@ function JobGuaranteeTrack({ steps }: { steps: JGStep[] }) {
                     {i + 1}
                   </div>
                   <div className="text-left">
-                    <h3 className="font-bold font-vietnam text-lg text-white">
+                    <span className="block font-bold font-vietnam text-lg text-white">
                       {step.title}
-                    </h3>
+                    </span>
                     <p className="mt-0.5 text-sm text-white/70">
                       {step.description}
                     </p>
@@ -757,9 +757,9 @@ export default function CourseTemplate({
                 >
                   <AccordionTrigger className="gap-3 px-5 py-4 hover:no-underline sm:px-6">
                     <div className="flex flex-wrap items-baseline justify-between gap-2 text-left">
-                      <h3 className="font-bold font-vietnam text-grey-15 text-lg">
+                      <span className="block font-bold font-vietnam text-grey-15 text-lg">
                         {mod.title}
-                      </h3>
+                      </span>
                       {mod.duration && (
                         <span className="shrink-0 text-grey-40 text-xs">
                           {mod.duration}
@@ -776,9 +776,9 @@ export default function CourseTemplate({
                     <div className="space-y-4">
                       {mod.submodules?.map((submod) => (
                         <div key={submod.title}>
-                          <h5 className="mb-2 font-bold font-vietnam text-grey-15 text-sm">
+                          <h4 className="mb-2 font-bold font-vietnam text-grey-15 text-sm">
                             {submod.title}
-                          </h5>
+                          </h4>
                           {submod.subtopics?.length > 0 && (
                             <div className="mb-2 flex flex-wrap gap-2">
                               {submod.subtopics.map((topic) => (
@@ -929,9 +929,9 @@ export default function CourseTemplate({
                     <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-full border-2 border-grey-15 bg-white">
                       <Icon className="h-5 w-5 text-grey-15" />
                     </div>
-                    <h4 className="mb-2 font-bold font-vietnam text-grey-15">
+                    <h3 className="mb-2 font-bold font-vietnam text-grey-15">
                       {career.title}
-                    </h4>
+                    </h3>
                     {career.salary && (
                       <div className="flex items-center gap-1.5">
                         <p className="font-bold text-grey-15">

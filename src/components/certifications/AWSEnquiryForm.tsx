@@ -191,9 +191,9 @@ export default function AWSEnquiryForm() {
         <p className="mb-1 font-bold text-primary-90 text-xs uppercase tracking-widest">
           Free Enquiry
         </p>
-        <h3 className="font-bold font-vietnam text-2xl text-white leading-snug">
+        <p className="font-bold font-vietnam text-2xl text-white leading-snug">
           Get AWS Voucher Guidance
-        </h3>
+        </p>
       </div>
 
       <Form {...form}>

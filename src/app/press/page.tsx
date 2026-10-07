@@ -51,7 +51,7 @@ export default async function PressPage() {
           ) : (
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {pressFeatures.map((feature) => (
-                <PressCard feature={feature} key={feature._id} />
+                <PressCard feature={feature} key={feature._id} titleAs="h2" />
               ))}
             </div>
           )}

@@ -121,9 +121,9 @@ export default function HeroSection({
                   <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold">
                     <ShieldCheck className="h-4 w-4 text-grey-15" />
                   </div>
-                  <h3 className="font-bold font-vietnam text-grey-15 text-sm">
+                  <p className="font-bold font-vietnam text-grey-15 text-sm">
                     {hero.floatingCardTitle}
-                  </h3>
+                  </p>
                 </div>
                 <p className="text-grey-40 text-xs leading-relaxed">
                   {hero.floatingCardBody}

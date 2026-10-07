@@ -19,9 +19,9 @@ export const portableTextComponents: PortableTextComponents = {
     ),
     // Headings
     h1: ({ children }) => (
-      <h1 className="mt-12 mb-6 font-black font-vietnam text-4xl text-grey-15 first:mt-0">
+      <h2 className="mt-12 mb-6 font-black font-vietnam text-4xl text-grey-15 first:mt-0">
         {children}
-      </h1>
+      </h2>
     ),
     h2: ({ children }) => (
       <h2 className="mt-10 mb-5 font-black font-vietnam text-3xl text-grey-15 first:mt-0">

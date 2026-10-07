@@ -78,9 +78,9 @@ const LinkGroup = ({
   links: FooterLink[];
 }) => (
   <div>
-    <h3 className="mb-4 font-bold font-vietnam text-grey-15 text-sm uppercase tracking-wider">
+    <p className="mb-4 font-bold font-vietnam text-grey-15 text-sm uppercase tracking-wider">
       {title}
-    </h3>
+    </p>
     <ul className="grid grid-cols-2 gap-x-4 sm:grid-cols-1 sm:gap-y-2.5">
       {links.map((link) => (
         <li key={link.label}>
@@ -111,9 +111,9 @@ export default function Footer() {
                 <Rocket className="h-3.5 w-3.5" />
                 Start Your Journey
               </div>
-              <h2 className="mb-2 font-black font-vietnam text-2xl text-grey-15 leading-tight sm:text-3xl">
+              <p className="mb-2 font-black font-vietnam text-2xl text-grey-15 leading-tight sm:text-3xl">
                 Pick a program, or talk it through first
-              </h2>
+              </p>
               <p className="text-grey-20 text-sm sm:text-base">
                 8,000+ students have gone through these programs and gotten
                 placed. You can be next.

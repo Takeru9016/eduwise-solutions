@@ -14,7 +14,13 @@ export interface SanityPressFeature {
   publishedAt?: string;
 }
 
-export function PressCard({ feature }: { feature: SanityPressFeature }) {
+export function PressCard({
+  feature,
+  titleAs: Title = "h3",
+}: {
+  feature: SanityPressFeature;
+  titleAs?: "h2" | "h3";
+}) {
   return (
     <Link
       className="group relative flex h-full flex-col justify-between rounded-3xl border-2 border-grey-15 bg-white p-6 shadow-[4px_4px_0_0_var(--color-grey-15)] transition-[transform,box-shadow] duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_var(--color-grey-15)] sm:p-7"
@@ -36,9 +42,9 @@ export function PressCard({ feature }: { feature: SanityPressFeature }) {
       </div>
 
       <div className="mt-6">
-        <h3 className="mb-2 line-clamp-2 font-bold font-vietnam text-grey-15 text-lg leading-snug">
+        <Title className="mb-2 line-clamp-2 font-bold font-vietnam text-grey-15 text-lg leading-snug">
           {feature.headline}
-        </h3>
+        </Title>
         <p className="line-clamp-3 text-grey-40 text-sm leading-relaxed">
           {feature.description}
         </p>

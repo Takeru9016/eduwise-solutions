@@ -11,7 +11,7 @@ import {
   ProgramSection,
   Testimonials,
 } from "@/components";
-import { absoluteUrl, faqPageJsonLd } from "@/lib/seo";
+import { absoluteUrl, faqPageJsonLd, websiteJsonLd } from "@/lib/seo";
 import { client } from "@/sanity/lib/client";
 import { COURSE_CATEGORIES_QUERY, HOME_PAGE_QUERY } from "@/sanity/lib/queries";
 import type { HomePageContent } from "@/types/pages";
@@ -53,6 +53,13 @@ export default async function Home() {
           type="application/ld+json"
         />
       )}
+      <script
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: static, code-generated JSON-LD, not user input
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(websiteJsonLd()),
+        }}
+        type="application/ld+json"
+      />
       <Navbar />
       <main className="min-h-screen">
         {home.hero && <HeroSection hero={home.hero} />}

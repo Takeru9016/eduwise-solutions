@@ -143,9 +143,9 @@ const DesktopMegaMenu = ({
           {/* Header */}
           <div className="flex items-center justify-between border-grey-15 border-b-2 bg-primary-99 px-6 py-4">
             <div>
-              <h3 className="font-bold font-vietnam text-base text-grey-15">
+              <p className="font-bold font-vietnam text-base text-grey-15">
                 Explore Our Courses
-              </h3>
+              </p>
               <p className="mt-0.5 text-grey-40 text-xs">
                 {totalCourses}+ industry-ready programs to accelerate your
                 career
@@ -171,9 +171,9 @@ const DesktopMegaMenu = ({
                   {/* Category header */}
                   <div className="mb-3 flex items-center gap-2">
                     <CategoryIcon className="h-3.5 w-3.5 text-grey-15" />
-                    <h4 className="font-bold text-grey-40 text-xs uppercase tracking-wider">
+                    <p className="font-bold text-grey-40 text-xs uppercase tracking-wider">
                       {category.label}
-                    </h4>
+                    </p>
                   </div>
 
                   {/* Course links */}

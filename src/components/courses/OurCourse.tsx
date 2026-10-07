@@ -129,9 +129,9 @@ function CourseCard({
 
       {/* Content Section */}
       <div className={`flex flex-1 flex-col p-5 sm:p-6 ${tint}`}>
-        <h3 className="mb-3 font-bold font-vietnam text-grey-15 text-lg sm:text-xl">
+        <h2 className="mb-3 font-bold font-vietnam text-grey-15 text-lg sm:text-xl">
           {course.title}
-        </h3>
+        </h2>
 
         {/* Quick stats */}
         <div className="mb-5 flex flex-wrap gap-2">

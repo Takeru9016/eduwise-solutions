@@ -140,9 +140,9 @@ export default function CourseLeadForm({ courseTitle }: CourseLeadFormProps) {
         <div className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-grey-15 bg-primary-90">
           <CheckCircle2 className="h-9 w-9 text-grey-15" />
         </div>
-        <h3 className="font-bold font-vietnam text-2xl text-grey-15">
+        <p className="font-bold font-vietnam text-2xl text-grey-15">
           You&apos;re all set!
-        </h3>
+        </p>
         <p className="max-w-xs text-grey-40 leading-relaxed">
           Our counselor will reach out to you within 24 hours. Check your
           WhatsApp &amp; email for updates.
@@ -164,9 +164,9 @@ export default function CourseLeadForm({ courseTitle }: CourseLeadFormProps) {
         <p className="mb-1 font-bold text-primary-90 text-xs uppercase tracking-widest">
           Free Counselling Session
         </p>
-        <h3 className="font-bold font-vietnam text-2xl text-white leading-snug">
+        <p className="font-bold font-vietnam text-2xl text-white leading-snug">
           Get A Free Career Counselling Session
-        </h3>
+        </p>
       </div>
 
       <div className="grid grid-cols-3 divide-x-2 divide-grey-15/10 border-grey-15/10 border-b bg-primary-99">

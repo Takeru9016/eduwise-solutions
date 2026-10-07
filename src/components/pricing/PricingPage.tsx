@@ -88,9 +88,9 @@ function PricingCard({
               {category.label}
             </p>
           )}
-          <h3 className="font-bold font-vietnam text-grey-15 text-lg leading-snug">
+          <h2 className="font-bold font-vietnam text-grey-15 text-lg leading-snug">
             {course.title}
-          </h3>
+          </h2>
         </div>
       </div>
 
@@ -194,7 +194,7 @@ export default function PricingPage({ courses }: PricingPageProps) {
     return () => {
       tween.kill();
     };
-  }, [filteredCourses]);
+  }, []);
 
   return (
     <main className="min-h-screen bg-white">

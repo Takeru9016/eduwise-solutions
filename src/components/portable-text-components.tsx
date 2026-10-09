@@ -1,7 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { PortableTextComponents } from "next-sanity";
-import { urlFor } from "@/sanity/lib/image";
+import { BlogImage } from "@/components/blog/BlogImage";
+import { headingId } from "@/lib/blog-toc";
+import { getImageDimensions, urlFor } from "@/sanity/lib/image";
 import { Flowchart } from "./flowchart";
 
 interface TableRow {
@@ -18,18 +19,27 @@ export const portableTextComponents: PortableTextComponents = {
       </blockquote>
     ),
     // Headings
-    h1: ({ children }) => (
-      <h2 className="mt-12 mb-6 font-black font-vietnam text-4xl text-grey-15 first:mt-0">
+    h1: ({ children, value }) => (
+      <h2
+        className="mt-12 mb-6 scroll-mt-28 font-black font-vietnam text-4xl text-grey-15 first:mt-0"
+        id={value?._key ? headingId(value._key) : undefined}
+      >
         {children}
       </h2>
     ),
-    h2: ({ children }) => (
-      <h2 className="mt-10 mb-5 font-black font-vietnam text-3xl text-grey-15 first:mt-0">
+    h2: ({ children, value }) => (
+      <h2
+        className="mt-10 mb-5 scroll-mt-28 font-black font-vietnam text-3xl text-grey-15 first:mt-0"
+        id={value?._key ? headingId(value._key) : undefined}
+      >
         {children}
       </h2>
     ),
-    h3: ({ children }) => (
-      <h3 className="mt-8 mb-4 font-bold font-vietnam text-2xl text-grey-15 first:mt-0">
+    h3: ({ children, value }) => (
+      <h3
+        className="mt-8 mb-4 scroll-mt-28 font-bold font-vietnam text-2xl text-grey-15 first:mt-0"
+        id={value?._key ? headingId(value._key) : undefined}
+      >
         {children}
       </h3>
     ),
@@ -126,35 +136,20 @@ export const portableTextComponents: PortableTextComponents = {
         return null;
       }
 
-      // Get alignment from value (defaults to center)
-      const alignment =
-        (value.alignment as "left" | "center" | "right") || "center";
-
-      // Map alignment to Tailwind classes
-      const alignmentClasses: Record<string, string> = {
-        center: "mx-auto",
-        left: "mr-auto",
-        right: "ml-auto",
+      const dimensions = getImageDimensions(value) ?? {
+        height: 675,
+        width: 1200,
       };
 
       return (
-        <figure className={`my-8 ${alignmentClasses[alignment]}`}>
-          <div className="relative w-full overflow-hidden rounded-lg">
-            <Image
-              alt={value.alt || "Blog image"}
-              className="h-auto w-full"
-              height={600}
-              sizes="(max-width: 768px) 100vw, 800px"
-              src={urlFor(value).url()}
-              width={800}
-            />
-          </div>
-          {value.alt && (
-            <figcaption className="mt-2 text-center text-grey-40 text-sm italic">
-              {value.alt}
-            </figcaption>
-          )}
-        </figure>
+        <BlogImage
+          alt={value.alt ?? ""}
+          caption={value.caption}
+          fullSrc={urlFor(value).width(Math.min(2000, dimensions.width)).url()}
+          height={dimensions.height}
+          src={urlFor(value).width(Math.min(1440, dimensions.width)).url()}
+          width={dimensions.width}
+        />
       );
     },
 

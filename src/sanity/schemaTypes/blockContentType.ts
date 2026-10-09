@@ -67,8 +67,19 @@ export const blockContentType = defineType({
     defineArrayMember({
       fields: [
         {
+          description:
+            "Describe what the image shows in 8-15 words. Read by screen readers and search engines. Not shown on the page.",
           name: "alt",
           title: "Alternative Text",
+          type: "string",
+          validation: (Rule) =>
+            Rule.required().warning("Add alt text so the image is accessible"),
+        },
+        {
+          description:
+            "Optional line shown under the image. Leave empty for no caption.",
+          name: "caption",
+          title: "Caption",
           type: "string",
         },
       ],

@@ -25,9 +25,13 @@ export const postType = defineType({
     defineField({
       fields: [
         defineField({
+          description:
+            "Describe what the image shows in 8-15 words. Read by screen readers and search engines. Not shown on the page.",
           name: "alt",
           title: "Alternative text",
           type: "string",
+          validation: (Rule) =>
+            Rule.required().warning("Add alt text so the image is accessible"),
         }),
       ],
       group: "content",
@@ -35,6 +39,15 @@ export const postType = defineType({
       options: {
         hotspot: true,
       },
+      type: "image",
+    }),
+    defineField({
+      description:
+        "Optional. Used only for link previews (WhatsApp, LinkedIn, Google). Upload 1200x630. If empty, the Main Image is used.",
+      group: "seo",
+      name: "socialImage",
+      options: { hotspot: true },
+      title: "Social Sharing Image",
       type: "image",
     }),
     defineField({

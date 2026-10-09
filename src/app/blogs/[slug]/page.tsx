@@ -1,17 +1,21 @@
 import type { SanityImageSource } from "@sanity/image-url";
-import { ArrowLeft, Calendar, Clock, Newspaper } from "lucide-react";
 import type { Metadata } from "next";
 import { draftMode } from "next/headers";
-import Image from "next/image";
 import Link from "next/link";
 import { PortableText } from "next-sanity";
 import type { Post as ListPost } from "@/app/blogs/BlogsClient";
-import { AuthorAvatar, PostCard } from "@/app/blogs/BlogsClient";
+import { PostCard } from "@/app/blogs/BlogsClient";
 import { Footer, Navbar } from "@/components";
+import { BlogHero } from "@/components/blog/BlogHero";
+import type { BlogCtaCourse } from "@/components/blog/BlogSidebarCta";
+import { BlogSidebarCta } from "@/components/blog/BlogSidebarCta";
+import { TableOfContents } from "@/components/blog/TableOfContents";
+import { StickyApplyBar } from "@/components/courses/StickyApplyBar";
 import { portableTextComponents } from "@/components/portable-text-components";
 import { PreviewBanner } from "@/components/preview-banner";
 import { PreviewProvider } from "@/components/preview-provider";
 import { Button } from "@/components/ui/button";
+import { extractToc } from "@/lib/blog-toc";
 import {
   absoluteUrl,
   articleJsonLd,
@@ -21,7 +25,11 @@ import {
 import { formatDate } from "@/lib/utils";
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
-import { POST_BY_SLUG_QUERY, RELATED_POSTS_QUERY } from "@/sanity/lib/queries";
+import {
+  BLOG_CTA_COURSE_QUERY,
+  POST_BY_SLUG_QUERY,
+  RELATED_POSTS_QUERY,
+} from "@/sanity/lib/queries";
 
 interface Category {
   _id: string;
@@ -54,6 +62,7 @@ interface Post {
   seoKeywords?: string[];
   seoTitle?: string;
   slug: { current: string };
+  socialImage?: SanityImageSource;
   title: string;
 }
 
@@ -64,6 +73,13 @@ function getPostDescription(post: Post) {
   return post.categories?.length
     ? `${post.title} - ${post.categories.map((c) => c.title).join(", ")} | Eduwise Solutions`
     : post.title;
+}
+
+function getShareImageUrl(post: Post) {
+  if (post.socialImage) {
+    return urlFor(post.socialImage).width(1200).height(630).fit("crop").url();
+  }
+  return post.mainImage ? urlFor(post.mainImage).url() : null;
 }
 
 export const revalidate = 10; // Revalidate every 10 seconds
@@ -91,7 +107,9 @@ export async function generateMetadata({
     keywords: post.seoKeywords?.length ? post.seoKeywords : undefined,
     openGraph: {
       description,
-      images: post.mainImage ? [{ url: urlFor(post.mainImage).url() }] : [],
+      images: getShareImageUrl(post)
+        ? [{ url: getShareImageUrl(post) as string }]
+        : [],
       title: metaTitle,
       type: "article",
     },
@@ -124,110 +142,87 @@ function estimateReadTime(body?: TypedObject[]) {
 }
 
 function BlogPostContent({
+  ctaCourse,
   post,
   relatedPosts,
 }: {
+  ctaCourse: BlogCtaCourse | null;
   post: Post;
   relatedPosts: ListPost[];
 }) {
   const date = formatDate(post.publishedAt);
   const readTime = estimateReadTime(post.body);
+  const tocItems = extractToc(post.body);
 
   return (
-    <main className="min-h-screen bg-white">
-      <article className="py-10 sm:py-14">
+    <main className="min-h-screen bg-white pb-20 lg:pb-0">
+      <BlogHero
+        author={post.author}
+        categories={post.categories}
+        date={date}
+        heading={post.h1 || post.title}
+        image={post.mainImage}
+        readTime={readTime}
+      />
+
+      <article className="py-8 sm:py-12">
         <div className="container">
-          <div className="mx-auto max-w-3xl">
-            <Link
-              aria-label="Back to blogs"
-              className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-white px-4 py-2 font-bold text-grey-15 text-sm transition-colors hover:bg-primary-99"
-              href="/blogs"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Back to Blogs
-            </Link>
+          <div className="mx-auto max-w-3xl lg:hidden">
+            <TableOfContents items={tocItems} variant="inline" />
+          </div>
+        </div>
 
-            {post.categories && post.categories.length > 0 && (
-              <div className="mb-4 flex flex-wrap gap-2">
-                {post.categories.map((category) => (
-                  <span
-                    className="inline-flex items-center rounded-full border-2 border-grey-15 bg-primary-90 px-3 py-1 font-bold text-grey-15 text-xs"
-                    key={category._id}
+        <div className="mx-auto max-w-[1280px] px-4 sm:px-6">
+          <div className="grid gap-10 lg:grid-cols-[208px_minmax(0,1fr)_272px]">
+            <aside className="hidden lg:block">
+              <div className="sticky top-28">
+                <TableOfContents items={tocItems} variant="sidebar" />
+              </div>
+            </aside>
+
+            <div className="min-w-0">
+              <div className="mx-auto max-w-3xl">
+                <PortableText
+                  components={portableTextComponents}
+                  value={post.body ?? ([] as TypedObject[])}
+                />
+              </div>
+
+              <div className="mx-auto mt-14 max-w-3xl" id="blog-end-cta">
+                <div className="flex flex-col items-center gap-6 rounded-3xl border-2 border-grey-15 bg-grey-15 px-6 py-12 text-center sm:px-12">
+                  <h2 className="font-black font-vietnam text-2xl text-white sm:text-3xl">
+                    Ready to build this skill?
+                  </h2>
+                  <p className="max-w-xl text-white/70">
+                    Explore hands-on programs designed to take you from
+                    fundamentals to job-ready.
+                  </p>
+                  <Button
+                    asChild
+                    className="rounded-full border-2 border-grey-15 bg-primary-75 px-8 font-bold text-grey-15 shadow-none hover:bg-primary-90"
+                    size="lg"
                   >
-                    {category.title}
-                  </span>
-                ))}
+                    <Link href="/courses">Explore Courses</Link>
+                  </Button>
+                </div>
               </div>
-            )}
+            </div>
 
-            <h1 className="mb-6 font-black font-vietnam text-3xl text-grey-15 leading-tight sm:text-4xl md:text-5xl">
-              {post.h1 || post.title}
-            </h1>
-
-            <div className="mb-8 flex flex-wrap items-center gap-5 border-grey-15/15 border-y py-4">
-              <div className="flex items-center gap-2.5">
-                <AuthorAvatar author={post.author} />
-                <span className="font-bold text-grey-15 text-sm">
-                  {post.author?.name ?? "Eduwise Team"}
-                </span>
+            <aside className="hidden lg:block">
+              <div className="sticky top-28">
+                <BlogSidebarCta course={ctaCourse} />
               </div>
-              {date && (
-                <span className="flex items-center gap-1.5 text-grey-40 text-sm">
-                  <Calendar className="h-4 w-4" />
-                  {date}
-                </span>
-              )}
-              <span className="flex items-center gap-1.5 text-grey-40 text-sm">
-                <Clock className="h-4 w-4" />
-                {readTime} min read
-              </span>
-            </div>
-          </div>
-
-          {post.mainImage ? (
-            <div className="relative mx-auto mb-10 h-64 w-full max-w-4xl overflow-hidden rounded-3xl border-2 border-grey-15 bg-light-95 sm:h-128">
-              <Image
-                alt={(post.mainImage as SanityImageWithAlt).alt ?? post.title}
-                className="object-fill"
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 896px"
-                src={urlFor(post.mainImage).url()}
-              />
-            </div>
-          ) : (
-            <div className="mx-auto mb-10 flex h-64 w-full max-w-4xl items-center justify-center rounded-3xl border-2 border-grey-15 bg-primary-99 sm:h-96">
-              <Newspaper className="h-14 w-14 text-grey-40" />
-            </div>
-          )}
-
-          <div className="mx-auto max-w-3xl">
-            <PortableText
-              components={portableTextComponents}
-              value={post.body ?? ([] as TypedObject[])}
-            />
-          </div>
-
-          <div className="mx-auto mt-14 max-w-3xl">
-            <div className="flex flex-col items-center gap-6 rounded-3xl border-2 border-grey-15 bg-grey-15 px-6 py-12 text-center sm:px-12">
-              <h2 className="font-black font-vietnam text-2xl text-white sm:text-3xl">
-                Ready to build this skill?
-              </h2>
-              <p className="max-w-xl text-white/70">
-                Explore hands-on programs designed to take you from fundamentals
-                to job-ready.
-              </p>
-              <Button
-                asChild
-                className="rounded-full border-2 border-grey-15 bg-primary-75 px-8 font-bold text-grey-15 shadow-none hover:bg-primary-90"
-                size="lg"
-              >
-                <Link href="/courses">Explore Courses</Link>
-              </Button>
-            </div>
+            </aside>
           </div>
         </div>
       </article>
+
+      <StickyApplyBar
+        courseTitle={ctaCourse?.title ?? "Start your tech career"}
+        href={ctaCourse ? `/courses/${ctaCourse.slug}` : "/courses"}
+        label={ctaCourse ? "View Course" : "Explore"}
+        targetId="blog-end-cta"
+      />
 
       {relatedPosts.length > 0 && (
         <section className="border-grey-15/10 border-t py-12 sm:py-16">
@@ -270,13 +265,19 @@ export default async function BlogPostPage(props: {
       })
     : [];
 
+  const ctaCourse = categoryIds.length
+    ? await client.fetch<BlogCtaCourse | null>(BLOG_CTA_COURSE_QUERY, {
+        categoryIds,
+      })
+    : null;
+
   const jsonLd = [
     articleJsonLd({
       authorName: post.author?.name,
       dateModified: post._updatedAt,
       datePublished: post.publishedAt,
       description: getPostDescription(post),
-      imageUrl: post.mainImage ? urlFor(post.mainImage).url() : null,
+      imageUrl: getShareImageUrl(post),
       slug,
       title: post.h1 || post.title,
     }),
@@ -306,13 +307,21 @@ export default async function BlogPostPage(props: {
             query={POST_BY_SLUG_QUERY}
           >
             {(data) => (
-              <BlogPostContent post={data} relatedPosts={relatedPosts} />
+              <BlogPostContent
+                ctaCourse={ctaCourse}
+                post={data}
+                relatedPosts={relatedPosts}
+              />
             )}
           </PreviewProvider>
           <PreviewBanner />
         </>
       ) : (
-        <BlogPostContent post={post} relatedPosts={relatedPosts} />
+        <BlogPostContent
+          ctaCourse={ctaCourse}
+          post={post}
+          relatedPosts={relatedPosts}
+        />
       )}
       <Footer />
     </>

@@ -19,6 +19,7 @@ export const POST_BY_SLUG_QUERY = `
     slug,
     publishedAt,
     mainImage,
+    socialImage,
     body,
     seoTitle,
     h1,
@@ -29,6 +30,16 @@ export const POST_BY_SLUG_QUERY = `
     faq,
     "categories": categories[]-> { _id, title, slug },
     "author": author-> { _id, name, image }
+  }
+`;
+
+export const BLOG_CTA_COURSE_QUERY = `
+  *[
+    _type == "course" &&
+    count(relatedBlogCategories[_ref in $categoryIds]) > 0
+  ] | order(count(relatedBlogCategories) asc, featured desc, title asc)[0]{
+    title,
+    "slug": slug.current
   }
 `;
 

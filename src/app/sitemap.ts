@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { SITE_URL } from "@/lib/seo";
+import { STATIC_SITEMAP_ROUTES } from "@/lib/static-sitemap-routes";
 import { client } from "@/sanity/lib/client";
 import {
   ALL_COURSE_SLUGS_QUERY,
@@ -8,38 +9,14 @@ import {
   SITEMAP_RESOURCES_QUERY,
 } from "@/sanity/lib/queries";
 
-export const revalidate = 3600;
-
-type Frequency = NonNullable<MetadataRoute.Sitemap[number]["changeFrequency"]>;
-
-interface StaticRoute {
-  changeFrequency: Frequency;
-  path: string;
-  priority: number;
-}
+// Webhooks invalidate the sitemap after CMS changes; this interval is a
+// fallback in case a webhook is delayed or misconfigured.
+export const revalidate = 300;
 
 interface SlugEntry {
   slug: string;
   updatedAt: string;
 }
-
-const STATIC_ROUTES: StaticRoute[] = [
-  { changeFrequency: "weekly", path: "", priority: 1 },
-  { changeFrequency: "weekly", path: "/courses", priority: 0.9 },
-  { changeFrequency: "weekly", path: "/pricing", priority: 0.9 },
-  { changeFrequency: "weekly", path: "/certifications/aws", priority: 0.9 },
-  { changeFrequency: "weekly", path: "/blogs", priority: 0.8 },
-  { changeFrequency: "monthly", path: "/about", priority: 0.6 },
-  { changeFrequency: "monthly", path: "/contact", priority: 0.6 },
-  { changeFrequency: "monthly", path: "/faq", priority: 0.6 },
-  { changeFrequency: "monthly", path: "/testimonials", priority: 0.6 },
-  { changeFrequency: "monthly", path: "/quiz", priority: 0.6 },
-  { changeFrequency: "monthly", path: "/resources", priority: 0.6 },
-  { changeFrequency: "yearly", path: "/press", priority: 0.4 },
-  { changeFrequency: "yearly", path: "/privacy", priority: 0.4 },
-  { changeFrequency: "yearly", path: "/terms", priority: 0.4 },
-  { changeFrequency: "yearly", path: "/refund", priority: 0.4 },
-];
 
 function latest(entries: SlugEntry[]) {
   if (entries.length === 0) {
@@ -51,19 +28,11 @@ function latest(entries: SlugEntry[]) {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  let courses: SlugEntry[] = [];
-  let posts: SlugEntry[] = [];
-  let resources: SlugEntry[] = [];
-
-  try {
-    [courses, posts, resources] = await Promise.all([
-      client.fetch<SlugEntry[]>(ALL_COURSE_SLUGS_QUERY),
-      client.fetch<SlugEntry[]>(SITEMAP_POSTS_QUERY),
-      client.fetch<SlugEntry[]>(SITEMAP_RESOURCES_QUERY),
-    ]);
-  } catch (err) {
-    console.error("[sitemap] Failed to fetch Sanity slugs:", err);
-  }
+  const [courses, posts, resources] = await Promise.all([
+    client.fetch<SlugEntry[]>(ALL_COURSE_SLUGS_QUERY),
+    client.fetch<SlugEntry[]>(SITEMAP_POSTS_QUERY),
+    client.fetch<SlugEntry[]>(SITEMAP_RESOURCES_QUERY),
+  ]);
 
   const sectionLastModified: Record<string, Date | undefined> = {
     "/blogs": latest(posts),
@@ -71,12 +40,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/resources": latest(resources),
   };
 
-  const staticEntries: MetadataRoute.Sitemap = STATIC_ROUTES.map((route) => ({
-    changeFrequency: route.changeFrequency,
-    lastModified: sectionLastModified[route.path],
-    priority: route.priority,
-    url: `${SITE_URL}${route.path}`,
-  }));
+  const staticEntries: MetadataRoute.Sitemap = STATIC_SITEMAP_ROUTES.map(
+    (route) => ({
+      changeFrequency: route.changeFrequency,
+      lastModified: sectionLastModified[route.path],
+      priority: route.priority,
+      url: `${SITE_URL}${route.path}`,
+    })
+  );
 
   const courseEntries: MetadataRoute.Sitemap = courses.map((course) => ({
     changeFrequency: "weekly",

@@ -25,6 +25,7 @@
     "@sanity/preview-kit": "^6.2.0",
     "@sanity/table": "^3.1.16",
     "@sanity/vision": "^6.13.2",
+    "@sanity/webhook": "4.0.4",
     "@upstash/ratelimit": "^2.0.8",
     "@upstash/redis": "^1.38.4",
     "@vercel/analytics": "^2.0.1",

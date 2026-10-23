@@ -1,8 +1,9 @@
 import { isValidSignature } from "@sanity/webhook";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
+import { SITEMAP_DOCUMENT_TYPES } from "@/lib/sitemap-content";
 
-const SITEMAP_DOCUMENT_TYPES = new Set(["course", "post", "leadMagnet"]);
+const sitemapDocumentTypes = new Set<string>(SITEMAP_DOCUMENT_TYPES);
 const MAX_WEBHOOK_BODY_SIZE = 64 * 1024;
 const SIGNATURE_MAX_AGE_MS = 5 * 60 * 1000;
 const SIGNATURE_TIMESTAMP_PATTERN = /^t=(\d+)[, ]+v1=/;
@@ -53,7 +54,7 @@ export async function POST(request: Request) {
 
   if (
     typeof payload._type !== "string" ||
-    !SITEMAP_DOCUMENT_TYPES.has(payload._type)
+    !sitemapDocumentTypes.has(payload._type)
   ) {
     return NextResponse.json({ revalidated: false, skipped: true });
   }

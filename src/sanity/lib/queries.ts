@@ -255,20 +255,40 @@ export const COURSE_BY_SLUG_QUERY = `
 export const ALL_COURSE_SLUGS_QUERY = `
   *[_type == "course" && defined(slug.current)] {
     "slug": slug.current,
-    "updatedAt": _updatedAt
+    "updatedAt": _updatedAt,
+    "contentDates": array::compact([
+      heroImage.asset->_updatedAt,
+      mentor.image.asset->_updatedAt,
+      certificate.image.asset->_updatedAt
+    ]) + *[
+      _type in ["placedStudent", "googleReview"] &&
+      category->slug.current == ^.slug.current
+    ]._updatedAt + (
+      *[_type == "post" && defined(slug.current) && references(^.relatedBlogCategories[]._ref)]
+        | order(publishedAt desc)[0...3]
+    )._updatedAt
   }
 `;
 
 export const SITEMAP_POSTS_QUERY = `
   *[_type == "post" && defined(slug.current) && noIndex != true] {
     "slug": slug.current,
-    "updatedAt": _updatedAt
+    "updatedAt": _updatedAt,
+    "contentDates": array::compact([author->_updatedAt, mainImage.asset->_updatedAt]) + coalesce(categories[]->_updatedAt, [])
   }
 `;
 
 export const SITEMAP_RESOURCES_QUERY = `
   *[_type == "leadMagnet" && isActive == true && defined(slug.current)] {
     "slug": slug.current,
+    "updatedAt": _updatedAt,
+    "contentDates": array::compact([coverImage.asset->_updatedAt, pdfFile.asset->_updatedAt])
+  }
+`;
+
+export const SITEMAP_PAGE_UPDATES_QUERY = `
+  *[_type in $types && !(_id in path("drafts.**")) && !(_id in path("versions.**"))] {
+    _type,
     "updatedAt": _updatedAt
   }
 `;

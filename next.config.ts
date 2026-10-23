@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { createSitemapManifest } from "./scripts/sitemap-manifest";
 
 // Report-Only for now, not enforced: this app renders inline scripts for
 // GTM/Meta/LinkedIn/OpenAI on statically-generated pages, so a per-request
@@ -33,6 +34,9 @@ const SECURITY_HEADERS = [
 ];
 
 const nextConfig: NextConfig = {
+  env: {
+    SITEMAP_SOURCE_MANIFEST: JSON.stringify(createSitemapManifest()),
+  },
   /* config options here */
   async headers() {
     return [

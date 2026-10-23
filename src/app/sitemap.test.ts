@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
   ALL_COURSE_SLUGS_QUERY,
+  SITEMAP_PAGE_UPDATES_QUERY,
   SITEMAP_POSTS_QUERY,
   SITEMAP_RESOURCES_QUERY,
 } from "@/sanity/lib/queries";
@@ -9,10 +10,34 @@ const { fetch } = vi.hoisted(() => ({ fetch: vi.fn() }));
 
 vi.mock("@/sanity/lib/client", () => ({ client: { fetch } }));
 
+vi.mock("@/lib/static-sitemap-routes", () => ({
+  SOURCE_TEMPLATE_DATES: { "/blogs/[slug]": "2026-01-01T00:00:00Z" },
+  STATIC_SITEMAP_ROUTES: [
+    {
+      changeFrequency: "weekly",
+      lastModified: "2026-01-01T00:00:00Z",
+      path: "/",
+      priority: 1,
+    },
+    {
+      changeFrequency: "weekly",
+      lastModified: "2026-01-01T00:00:00Z",
+      path: "/blogs",
+      priority: 0.8,
+    },
+    {
+      changeFrequency: "yearly",
+      lastModified: "2026-01-02T00:00:00Z",
+      path: "/privacy",
+      priority: 0.4,
+    },
+  ],
+}));
+
 import sitemap from "./sitemap";
 
 describe("sitemap", () => {
-  beforeEach(() => fetch.mockReset());
+  beforeEach(() => fetch.mockReset().mockResolvedValue([]));
 
   it("includes the current course, indexable post, and active resource slugs", async () => {
     const updatedAt = "2026-10-01T12:00:00.000Z";
@@ -30,6 +55,63 @@ describe("sitemap", () => {
     expect(fetch).toHaveBeenNthCalledWith(1, ALL_COURSE_SLUGS_QUERY);
     expect(fetch).toHaveBeenNthCalledWith(2, SITEMAP_POSTS_QUERY);
     expect(fetch).toHaveBeenNthCalledWith(3, SITEMAP_RESOURCES_QUERY);
+  });
+
+  it("omits all audit exclusions while retaining target and replacement URLs", async () => {
+    const { NOINDEX_PATHS, SITEMAP_ONLY_EXCLUSIONS } = await import(
+      "@/lib/indexing-policy"
+    );
+    const excluded = [...NOINDEX_PATHS, ...SITEMAP_ONLY_EXCLUSIONS];
+    const updatedAt = "2026-10-01T12:00:00Z";
+    fetch
+      .mockResolvedValueOnce([
+        ...excluded
+          .filter((path) => path.startsWith("/courses/"))
+          .map((path) => ({ slug: path.slice(9), updatedAt })),
+        { slug: "devops", updatedAt },
+      ])
+      .mockResolvedValueOnce([
+        ...excluded
+          .filter((path) => path.startsWith("/blogs/"))
+          .map((path) => ({ slug: path.slice(7), updatedAt })),
+        { slug: "what-is-devops", updatedAt },
+      ])
+      .mockResolvedValueOnce([])
+      .mockResolvedValueOnce([]);
+    const urls = (await sitemap()).map(({ url }) => url);
+    for (const path of excluded) {
+      expect(urls).not.toContain(`https://eduwise.solutions${path}`);
+    }
+    expect(urls).toContain("https://eduwise.solutions/courses/devops");
+    expect(urls).toContain("https://eduwise.solutions/blogs/what-is-devops");
+  });
+
+  it("uses source and CMS update times without changing dates on each request", async () => {
+    fetch
+      .mockResolvedValueOnce([])
+      .mockResolvedValueOnce([
+        { slug: "article", updatedAt: "2026-10-01T12:00:00Z" },
+      ])
+      .mockResolvedValueOnce([])
+      .mockResolvedValueOnce([
+        { _type: "post", updatedAt: "2026-10-01T12:00:00Z" },
+      ]);
+    const entries = await sitemap();
+    expect(
+      entries.find(({ url }) => url.endsWith("/privacy"))?.lastModified
+    ).toEqual(new Date("2026-01-02T00:00:00Z"));
+    expect(
+      entries.find(({ url }) => url.endsWith("/blogs"))?.lastModified
+    ).toEqual(new Date("2026-10-01T12:00:00Z"));
+    expect(
+      entries.find(({ url }) => url.endsWith("/blogs/article"))?.lastModified
+    ).toEqual(new Date("2026-10-01T12:00:00Z"));
+    expect(fetch).toHaveBeenCalledWith(
+      SITEMAP_PAGE_UPDATES_QUERY,
+      expect.objectContaining({
+        types: expect.arrayContaining(["homePage", "awsPage"]),
+      })
+    );
   });
 
   it("filters out no-index posts and inactive resources at the query level", () => {

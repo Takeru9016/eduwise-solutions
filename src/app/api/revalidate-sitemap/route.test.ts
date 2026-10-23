@@ -58,6 +58,14 @@ describe("POST /api/revalidate-sitemap", () => {
     expect(revalidatePath).toHaveBeenCalledWith("/sitemap.xml");
   });
 
+  it("revalidates after a CMS singleton page is updated", async () => {
+    const response = await POST(
+      makeRequest(JSON.stringify({ _type: "homePage" }))
+    );
+    expect(response.status).toBe(200);
+    expect(revalidatePath).toHaveBeenCalledWith("/sitemap.xml");
+  });
+
   it("rejects invalid signatures", async () => {
     const response = await POST(
       makeRequest(JSON.stringify({ _type: "course" }), SECRET, false)
@@ -83,7 +91,7 @@ describe("POST /api/revalidate-sitemap", () => {
 
   it("skips document types that do not affect the sitemap", async () => {
     const response = await POST(
-      makeRequest(JSON.stringify({ _type: "testimonial" }))
+      makeRequest(JSON.stringify({ _type: "redirect" }))
     );
 
     expect(response.status).toBe(200);

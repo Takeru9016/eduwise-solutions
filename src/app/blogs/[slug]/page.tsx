@@ -2,6 +2,7 @@ import type { SanityImageSource } from "@sanity/image-url";
 import type { Metadata } from "next";
 import { draftMode } from "next/headers";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { PortableText } from "next-sanity";
 import type { Post as ListPost } from "@/app/blogs/BlogsClient";
 import { PostCard } from "@/app/blogs/BlogsClient";
@@ -16,6 +17,7 @@ import { PreviewBanner } from "@/components/preview-banner";
 import { PreviewProvider } from "@/components/preview-provider";
 import { Button } from "@/components/ui/button";
 import { extractToc } from "@/lib/blog-toc";
+import { shouldNoIndex } from "@/lib/indexing-policy";
 import {
   absoluteUrl,
   articleJsonLd,
@@ -93,7 +95,7 @@ export async function generateMetadata({
   const post = await client.fetch<Post | null>(POST_BY_SLUG_QUERY, { slug });
 
   if (!post) {
-    return { title: "Post Not Found" };
+    return { robots: { follow: true, index: false }, title: "Post Not Found" };
   }
 
   const description = getPostDescription(post);
@@ -113,9 +115,10 @@ export async function generateMetadata({
       title: metaTitle,
       type: "article",
     },
-    robots: post.noIndex
-      ? { follow: true, index: false }
-      : { follow: true, index: true },
+    robots:
+      post.noIndex || shouldNoIndex(`/blogs/${slug}`)
+        ? { follow: true, index: false }
+        : { follow: true, index: true },
     title: post.seoTitle ? { absolute: post.seoTitle } : post.title,
   };
 }
@@ -254,7 +257,7 @@ export default async function BlogPostPage(props: {
   });
 
   if (!post) {
-    return null;
+    notFound();
   }
 
   const categoryIds = post.categories?.map((c) => c._id) ?? [];

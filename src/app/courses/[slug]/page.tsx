@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import type { Post as BlogPost } from "@/app/blogs/BlogsClient";
 import { Footer, Navbar } from "@/components";
 import CourseTemplate from "@/components/courses/CourseTemplate";
+import { shouldNoIndex } from "@/lib/indexing-policy";
 import {
   absoluteUrl,
   breadcrumbJsonLd,
@@ -43,7 +44,10 @@ export async function generateMetadata({
   );
 
   if (!course) {
-    return { title: "Course Not Found" };
+    return {
+      robots: { follow: true, index: false },
+      title: "Course Not Found",
+    };
   }
 
   return {
@@ -60,7 +64,7 @@ export async function generateMetadata({
       images: course.heroImageUrl ? [{ url: course.heroImageUrl }] : [],
       title: course.seoTitle || course.title,
     },
-    robots: { follow: true, index: true },
+    robots: { follow: true, index: !shouldNoIndex(`/courses/${slug}`) },
     title: { absolute: course.seoTitle || course.title },
   };
 }

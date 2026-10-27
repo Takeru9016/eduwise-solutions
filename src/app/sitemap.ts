@@ -18,9 +18,11 @@ import {
   SITEMAP_RESOURCES_QUERY,
 } from "@/sanity/lib/queries";
 
-// Webhooks invalidate the sitemap after CMS changes; this interval is a
-// fallback in case a webhook is delayed or misconfigured.
-export const revalidate = 300;
+// Generate from published content on every request. Production ISR served an
+// outdated sitemap despite its revalidation interval and missed new articles.
+export const dynamic = "force-dynamic";
+
+const fetchOptions = { cache: "no-store", perspective: "published" } as const;
 
 interface SlugEntry {
   contentDates?: string[];
@@ -37,12 +39,13 @@ function latest(...values: (string | undefined)[]) {
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [courses, posts, resources, updates] = await Promise.all([
-    client.fetch<SlugEntry[]>(ALL_COURSE_SLUGS_QUERY),
-    client.fetch<SlugEntry[]>(SITEMAP_POSTS_QUERY),
-    client.fetch<SlugEntry[]>(SITEMAP_RESOURCES_QUERY),
+    client.fetch<SlugEntry[]>(ALL_COURSE_SLUGS_QUERY, {}, fetchOptions),
+    client.fetch<SlugEntry[]>(SITEMAP_POSTS_QUERY, {}, fetchOptions),
+    client.fetch<SlugEntry[]>(SITEMAP_RESOURCES_QUERY, {}, fetchOptions),
     client.fetch<{ _type: string; updatedAt: string }[]>(
       SITEMAP_PAGE_UPDATES_QUERY,
-      { types: [...SITEMAP_DOCUMENT_TYPES] }
+      { types: [...SITEMAP_DOCUMENT_TYPES] },
+      fetchOptions
     ),
   ]);
 

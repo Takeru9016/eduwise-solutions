@@ -34,7 +34,7 @@ vi.mock("@/lib/static-sitemap-routes", () => ({
   ],
 }));
 
-import sitemap from "./sitemap";
+import sitemap, { dynamic } from "./sitemap";
 
 describe("sitemap", () => {
   beforeEach(() => fetch.mockReset().mockResolvedValue([]));
@@ -52,9 +52,46 @@ describe("sitemap", () => {
     expect(urls).toContain("https://eduwise.solutions/courses/cloud-course");
     expect(urls).toContain("https://eduwise.solutions/blogs/new-article");
     expect(urls).toContain("https://eduwise.solutions/resources/study-guide");
-    expect(fetch).toHaveBeenNthCalledWith(1, ALL_COURSE_SLUGS_QUERY);
-    expect(fetch).toHaveBeenNthCalledWith(2, SITEMAP_POSTS_QUERY);
-    expect(fetch).toHaveBeenNthCalledWith(3, SITEMAP_RESOURCES_QUERY);
+    const options = { cache: "no-store", perspective: "published" };
+    expect(fetch).toHaveBeenNthCalledWith(
+      1,
+      ALL_COURSE_SLUGS_QUERY,
+      {},
+      options
+    );
+    expect(fetch).toHaveBeenNthCalledWith(2, SITEMAP_POSTS_QUERY, {}, options);
+    expect(fetch).toHaveBeenNthCalledWith(
+      3,
+      SITEMAP_RESOURCES_QUERY,
+      {},
+      options
+    );
+  });
+
+  it("includes newly published articles on the next request without a webhook or redeployment", async () => {
+    expect(dynamic).toBe("force-dynamic");
+    const article = {
+      slug: "what-is-digital-marketing",
+      updatedAt: "2026-10-26T10:07:13Z",
+    };
+    fetch
+      .mockResolvedValueOnce([])
+      .mockResolvedValueOnce([])
+      .mockResolvedValueOnce([])
+      .mockResolvedValueOnce([])
+      .mockResolvedValueOnce([])
+      .mockResolvedValueOnce([article])
+      .mockResolvedValueOnce([])
+      .mockResolvedValueOnce([]);
+
+    const before = await sitemap();
+    const after = await sitemap();
+    const url = "https://eduwise.solutions/blogs/what-is-digital-marketing";
+    expect(before.map((entry) => entry.url)).not.toContain(url);
+    expect(after.map((entry) => entry.url)).toContain(url);
+    for (const call of fetch.mock.calls) {
+      expect(call[2]).toEqual({ cache: "no-store", perspective: "published" });
+    }
   });
 
   it("omits all audit exclusions while retaining target and replacement URLs", async () => {
@@ -110,7 +147,8 @@ describe("sitemap", () => {
       SITEMAP_PAGE_UPDATES_QUERY,
       expect.objectContaining({
         types: expect.arrayContaining(["homePage", "awsPage"]),
-      })
+      }),
+      { cache: "no-store", perspective: "published" }
     );
   });
 

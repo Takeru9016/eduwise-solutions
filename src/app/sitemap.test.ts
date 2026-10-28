@@ -14,7 +14,7 @@ vi.mock("@/lib/static-sitemap-routes", () => ({
   SOURCE_TEMPLATE_DATES: { "/blogs/[slug]": "2026-01-01T00:00:00Z" },
   STATIC_SITEMAP_ROUTES: [
     {
-      changeFrequency: "weekly",
+      changeFrequency: "daily",
       lastModified: "2026-01-01T00:00:00Z",
       path: "/",
       priority: 1,
@@ -121,6 +121,30 @@ describe("sitemap", () => {
     }
     expect(urls).toContain("https://eduwise.solutions/courses/devops");
     expect(urls).toContain("https://eduwise.solutions/blogs/what-is-devops");
+  });
+
+  it("restores the five approved articles to indexing and the dynamic sitemap", async () => {
+    const { shouldNoIndex } = await import("@/lib/indexing-policy");
+    const restoredSlugs = [
+      "top-devops-skills-get-hired-2026",
+      "devops-periodic-table-complete-guide-2026",
+      "why-cybersecurity-smartest-skill-2026",
+      "top-skills-to-become-data-scientist-2026",
+      "2026-must-learn-skills-why-devops-is-the-smartest-career-move-in-india",
+    ];
+    fetch.mockResolvedValueOnce([]).mockResolvedValueOnce(
+      restoredSlugs.map((slug) => ({
+        slug,
+        updatedAt: "2026-10-09T15:42:37Z",
+      }))
+    );
+
+    const urls = (await sitemap()).map((entry) => entry.url);
+    for (const slug of restoredSlugs) {
+      expect(shouldNoIndex(`/blogs/${slug}`)).toBe(false);
+      expect(urls).toContain(`https://eduwise.solutions/blogs/${slug}`);
+    }
+    expect(shouldNoIndex("/blogs/devops-tools-2026-complete-guide")).toBe(true);
   });
 
   it("uses source and CMS update times without changing dates on each request", async () => {

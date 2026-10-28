@@ -42,7 +42,7 @@ export const STATIC_SITEMAP_ROUTES: StaticSitemapRoute[] = manifest.routes.map(
       priority = 0.8;
     }
     if (route.path === "/") {
-      changeFrequency = "weekly";
+      changeFrequency = "daily";
       priority = 1;
     }
     return { ...route, changeFrequency, priority };

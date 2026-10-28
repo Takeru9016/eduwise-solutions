@@ -2,9 +2,7 @@
 // Target pages and replacement URLs are intentionally not excluded.
 export const NOINDEX_PATHS = new Set([
   "/blogs/top-3-tech-courses-2026-high-paying-career",
-  "/blogs/top-devops-skills-get-hired-2026",
   "/blogs/devops-tools-2026-complete-guide",
-  "/blogs/devops-periodic-table-complete-guide-2026",
   "/blogs/devops-mistakes-beginners-2026",
   "/blogs/devops-market-india-2026-opportunities",
   "/blogs/devops-engineer-salary-india-2026-guide",
@@ -12,7 +10,6 @@ export const NOINDEX_PATHS = new Set([
   "/blogs/ci-cd-pipeline-guide-devops-2026",
   "/blogs/cloud-service-equivalents-aws-azure-gcp-2026",
   "/blogs/aws-azure-gcp-devops-comparison-2026",
-  "/blogs/2026-must-learn-skills-why-devops-is-the-smartest-career-move-in-india",
   "/blogs/five-strategic-pillars-of-devops-transformation",
   "/blogs/essential-linux-skills-devops-engineers",
   "/blogs/devops-interview-questions-preparation-guide",
@@ -22,7 +19,6 @@ export const NOINDEX_PATHS = new Set([
   "/blogs/is-cybersecurity-high-salary-career-2026-india",
   "/blogs/future-cybersecurity-jobs-skills-2026",
   "/blogs/cybersecurity-salaries-india-2026-guide",
-  "/blogs/why-cybersecurity-smartest-skill-2026",
   "/blogs/cybersecurity-career-guide-roadmap-2026",
   "/blogs/aws-vs-data-science-vs-web-development-2026",
   "/blogs/will-ai-replace-data-analysts-2026",
@@ -31,7 +27,6 @@ export const NOINDEX_PATHS = new Set([
   "/blogs/12th-pass-data-scientist-guide-2026",
   "/blogs/mba-vs-data-science-2026",
   "/blogs/how-to-become-data-scientist-after-graduation-2026",
-  "/blogs/top-skills-to-become-data-scientist-2026",
   "/blogs/is-data-science-good-career-india-2026",
   "/blogs/data-science-roadmap-beginners-india-2026",
   "/blogs/how-to-get-cloud-engineer-job-india-2026",

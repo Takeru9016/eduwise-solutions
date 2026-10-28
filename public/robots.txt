@@ -1,6 +1,6 @@
-# Eduwise Solutions - Robots.txt
+# Eduwise Solutions - robots.txt File
 
-
+# All crawlers (default rules)
 User-agent: *
 Allow: /
 Allow: /llms.txt
@@ -8,26 +8,20 @@ Disallow: /studio/
 Disallow: /api/
 Disallow: /cdn-cgi/
 Disallow: /blog?*
-
-
-# Images allowed
-
-
+# Images and XML allowed
 Allow: /*.webp
 Allow: /*.jpeg
 Allow: /*.jpg
 Allow: /*.JPEG
 Allow: /*.JPG
-Allow: /*.GIF
 Allow: /*.gif
-Allow: /*.PNG
+Allow: /*.GIF
 Allow: /*.png
+Allow: /*.PNG
 Allow: /*.xml
-
-
-# AI / AEO bots (explicitly allowed for visibility)
-
-
+# ---------------------------------------
+# Search and AI / AEO bots (explicitly allowed for visibility)
+# ---------------------------------------
 User-agent: Googlebot
 User-agent: Googlebot-Image
 User-agent: Bingbot
@@ -46,6 +40,12 @@ User-agent: anthropic-ai
 User-agent: Applebot
 User-agent: Applebot-Extended
 Allow: /
+Allow: /llms.txt
+Disallow: /studio/
+Disallow: /api/
+Disallow: /cdn-cgi/
+Disallow: /blog?*
 
 
+# Sitemap
 Sitemap: https://eduwise.solutions/sitemap.xml

@@ -151,7 +151,7 @@ export default function PlacementSection({
                     ) : (
                       <span
                         aria-hidden="true"
-                        className="font-bold font-vietnam text-lg text-grey-15"
+                        className="font-bold font-vietnam text-grey-15 text-lg"
                       >
                         {getStudentInitials(student.name)}
                       </span>

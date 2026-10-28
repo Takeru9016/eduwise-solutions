@@ -8,6 +8,7 @@ Disallow: /studio/
 Disallow: /api/
 Disallow: /cdn-cgi/
 Disallow: /blog?*
+
 # Images and XML allowed
 Allow: /*.webp
 Allow: /*.jpeg
@@ -19,6 +20,7 @@ Allow: /*.GIF
 Allow: /*.png
 Allow: /*.PNG
 Allow: /*.xml
+
 # ---------------------------------------
 # Search and AI / AEO bots (explicitly allowed for visibility)
 # ---------------------------------------

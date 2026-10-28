@@ -83,13 +83,26 @@ describe("static sitemap route discovery", () => {
       });
       mkdirSync(path.join(root, "src/app/other"), { recursive: true });
       mkdirSync(path.join(root, "src/components"), { recursive: true });
+      mkdirSync(path.join(root, "src/components/common"), { recursive: true });
+      writeFileSync(
+        path.join(root, "src/components/common/Navbar.tsx"),
+        "export default function Navbar() { return 'navigation'; }"
+      );
+      writeFileSync(
+        path.join(root, "src/components/index.ts"),
+        "export { default as Card } from './Card'; export { default as Navbar } from './common/Navbar';"
+      );
+      writeFileSync(
+        path.join(root, "src/app/layout.tsx"),
+        "export default function Layout() { return 'shared layout'; }"
+      );
       writeFileSync(
         path.join(root, "src/components/Card.tsx"),
         "export default function Card() { return 'first'; }"
       );
       writeFileSync(
         path.join(root, "src/app/(marketing)/new-page/page.tsx"),
-        "import Card from '@/components/Card'; export default Card;"
+        "import { Card, Navbar } from '@/components'; export default Card;"
       );
       writeFileSync(
         path.join(root, "src/app/other/page.tsx"),
@@ -102,6 +115,19 @@ describe("static sitemap route discovery", () => {
         "export default function Card() { return 'updated'; }"
       );
       commit("2026-02-01T12:00:00Z");
+      writeFileSync(
+        path.join(root, "src/components/common/Navbar.tsx"),
+        "export default function Navbar() { return 'new navigation'; }"
+      );
+      writeFileSync(
+        path.join(root, "src/app/layout.tsx"),
+        "export default function Layout() { return 'new shared layout'; }"
+      );
+      writeFileSync(
+        path.join(root, "src/components/index.ts"),
+        "export { default as Card } from './Card'; export { default as Navbar } from './common/Navbar'; export { default as Unrelated } from './Card';"
+      );
+      commit("2026-03-01T12:00:00Z");
       const manifest = createSitemapManifest(root);
       expect(manifest.routes.map((route) => route.path)).toEqual([
         "/new-page",
@@ -118,13 +144,14 @@ describe("static sitemap route discovery", () => {
     }
   });
 
-  it("records source dates for every discovered page and dynamic template", () => {
+  it("records static content dates and leaves CMS detail routes to Sanity", () => {
     const manifest = createSitemapManifest();
     for (const route of manifest.routes) {
       expect(Number.isFinite(Date.parse(route.lastModified ?? ""))).toBe(true);
     }
-    expect(manifest.templates["/blogs/[slug]"]).toBeTruthy();
-    expect(manifest.templates["/courses/[slug]"]).toBeTruthy();
+    expect(manifest.routes.some((route) => route.path.includes("["))).toBe(
+      false
+    );
     expect(
       manifest.routes.some(({ path: route }) => route.startsWith("/studio"))
     ).toBe(false);

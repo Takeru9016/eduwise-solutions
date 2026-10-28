@@ -11,7 +11,6 @@ const { fetch } = vi.hoisted(() => ({ fetch: vi.fn() }));
 vi.mock("@/sanity/lib/client", () => ({ client: { fetch } }));
 
 vi.mock("@/lib/static-sitemap-routes", () => ({
-  SOURCE_TEMPLATE_DATES: { "/blogs/[slug]": "2026-01-01T00:00:00Z" },
   STATIC_SITEMAP_ROUTES: [
     {
       changeFrequency: "daily",
@@ -179,6 +178,40 @@ describe("sitemap", () => {
   it("filters out no-index posts and inactive resources at the query level", () => {
     expect(SITEMAP_POSTS_QUERY).toContain("noIndex != true");
     expect(SITEMAP_RESOURCES_QUERY).toContain("isActive == true");
+  });
+
+  it("keeps independent CMS content dates when the website is redeployed", async () => {
+    fetch
+      .mockResolvedValueOnce([
+        { slug: "course", updatedAt: "2025-12-01T10:00:00Z" },
+      ])
+      .mockResolvedValueOnce([
+        { slug: "older-post", updatedAt: "2025-11-01T10:00:00Z" },
+        {
+          contentDates: ["2026-10-21T12:00:00Z"],
+          slug: "updated-post",
+          updatedAt: "2026-10-20T11:00:00Z",
+        },
+      ])
+      .mockResolvedValueOnce([
+        { slug: "resource", updatedAt: "2025-10-01T10:00:00Z" },
+      ]);
+    const entries = await sitemap();
+    const dates = new Map(
+      entries.map((entry) => [entry.url, entry.lastModified])
+    );
+    expect(dates.get("https://eduwise.solutions/courses/course")).toEqual(
+      new Date("2025-12-01T10:00:00Z")
+    );
+    expect(dates.get("https://eduwise.solutions/blogs/older-post")).toEqual(
+      new Date("2025-11-01T10:00:00Z")
+    );
+    expect(dates.get("https://eduwise.solutions/blogs/updated-post")).toEqual(
+      new Date("2026-10-21T12:00:00Z")
+    );
+    expect(dates.get("https://eduwise.solutions/resources/resource")).toEqual(
+      new Date("2025-10-01T10:00:00Z")
+    );
   });
 
   it("throws if Sanity fails instead of returning a sitemap missing CMS routes", async () => {

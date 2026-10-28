@@ -32,7 +32,6 @@ const extensions = [
 export function createSitemapManifest(root = process.cwd()) {
   const history = prepareHistory(root);
   const routes: SourceRoute[] = [];
-  const templates: Record<string, string | undefined> = {};
   const dependencyCache = new Map<string, Set<string>>();
 
   function resolveImport(file: string, specifier: string) {
@@ -65,10 +64,11 @@ export function createSitemapManifest(root = process.cwd()) {
       return cached;
     }
     seen.add(key);
-    const files = new Set([file]);
-    for (const reference of moduleReferences(file, names)) {
+    const module = moduleReferences(file, names);
+    const files = new Set<string>(module.isReExport ? [] : [file]);
+    for (const reference of module.references) {
       const target = resolveImport(file, reference.specifier);
-      if (!target) {
+      if (!(target && isContentSource(root, target))) {
         continue;
       }
       for (const dependency of dependencies(
@@ -83,49 +83,27 @@ export function createSitemapManifest(root = process.cwd()) {
     return files;
   }
 
-  function walk(
-    directory: string,
-    segments: string[] = [],
-    layouts: string[] = []
-  ) {
-    const inherited = [...layouts];
-    for (const filename of [
-      "layout.tsx",
-      "layout.ts",
-      "layout.jsx",
-      "layout.js",
-    ]) {
-      const file = path.join(directory, filename);
-      if (existsSync(file)) {
-        inherited.push(file);
-      }
-    }
+  function walk(directory: string, segments: string[] = []) {
     for (const entry of readdirSync(directory, { withFileTypes: true })) {
       const file = path.join(directory, entry.name);
       if (entry.isDirectory()) {
         if (isPublicSegment(entry.name)) {
-          walk(file, [...segments, entry.name], inherited);
+          walk(file, [...segments, entry.name]);
         }
       } else if (PAGE_FILE_PATTERN.test(entry.name)) {
-        addPage(file, segments, inherited);
+        addPage(file, segments);
       }
     }
   }
 
-  function addPage(file: string, segments: string[], layouts: string[]) {
+  function addPage(file: string, segments: string[]) {
     const route = `/${segments.filter((segment) => !(segment.startsWith("(") && segment.endsWith(")"))).join("/")}`;
     const files = new Set<string>();
-    for (const source of [file, ...layouts]) {
-      for (const dependency of dependencies(source)) {
-        files.add(path.relative(root, dependency));
-      }
+    for (const dependency of dependencies(file)) {
+      files.add(path.relative(root, dependency));
     }
     const lastModified = sourceDate(history.directory, files, history.revision);
-    if (segments.some((segment) => segment.startsWith("["))) {
-      templates[route] = lastModified;
-    } else {
-      routes.push({ lastModified, path: route });
-    }
+    routes.push({ lastModified, path: route });
   }
 
   try {
@@ -135,12 +113,11 @@ export function createSitemapManifest(root = process.cwd()) {
   }
   if (routes.some((route) => !route.lastModified)) {
     console.warn(
-      "[sitemap] Source history unavailable. Set SOURCE_DATE_EPOCH to the source commit timestamp for static lastmod dates. Deployment time is not used."
+      "[sitemap] Source history unavailable. Static pages without a verified content update date omit lastmod."
     );
   }
   return {
     routes: routes.sort((a, b) => a.path.localeCompare(b.path)),
-    templates,
   };
 }
 
@@ -200,10 +177,6 @@ function importNames(clause?: ts.ImportClause) {
 }
 
 function sourceDate(root: string, files: Set<string>, revision = "HEAD") {
-  const explicitDate = archiveSourceDate();
-  if (explicitDate) {
-    return explicitDate;
-  }
   try {
     const date = execFileSync(
       "git",
@@ -218,22 +191,14 @@ function sourceDate(root: string, files: Set<string>, revision = "HEAD") {
       return date;
     }
   } catch {
-    // Archive builds can provide the source commit timestamp explicitly.
+    // Unknown dates are omitted rather than replaced with deployment time.
   }
-}
-
-function archiveSourceDate() {
-  const epoch = Number(process.env.SOURCE_DATE_EPOCH);
-  const date = new Date(epoch * 1000);
-  return epoch > 0 && Number.isFinite(date.getTime())
-    ? date.toISOString()
-    : undefined;
 }
 
 function isPublicSegment(segment: string) {
   return !(
     ["api", "studio"].includes(segment) ||
-    ["_", "@", "(.)", "(..)", "(...)"].some((prefix) =>
+    ["_", "@", "[", "(.)", "(..)", "(...)"].some((prefix) =>
       segment.startsWith(prefix)
     )
   );
@@ -244,7 +209,7 @@ const PAGE_FILE_PATTERN = /^page\.[jt]sx?$/;
 
 function moduleReferences(file: string, names?: Set<string>) {
   if (!SOURCE_FILE_PATTERN.test(file)) {
-    return [];
+    return { isReExport: false, references: [] };
   }
   const source = ts.createSourceFile(
     file,
@@ -252,11 +217,39 @@ function moduleReferences(file: string, names?: Set<string>) {
     ts.ScriptTarget.Latest,
     true
   );
-  return source.statements.flatMap((statement) => {
-    const reference = getModuleReference(statement, names);
-    return reference ? [reference] : [];
-  });
+  return {
+    isReExport:
+      source.statements.length > 0 &&
+      source.statements.every(ts.isExportDeclaration),
+    references: source.statements.flatMap((statement) => {
+      const reference = getModuleReference(statement, names);
+      return reference ? [reference] : [];
+    }),
+  };
 }
+
+// Shared navigation, presentation and SEO plumbing are not page content.
+// Their deployment must not reset content dates across the whole website.
+function isContentSource(root: string, file: string) {
+  const relative = path.relative(root, file).split(path.sep).join("/");
+  return !(
+    NON_CONTENT_FILES.has(relative) ||
+    NON_CONTENT_PREFIXES.some((prefix) => relative.startsWith(prefix)) ||
+    relative.endsWith(".css")
+  );
+}
+
+const NON_CONTENT_FILES = new Set([
+  "src/lib/seo.ts",
+  "src/lib/utils.ts",
+  "src/lib/indexing-policy.ts",
+]);
+const NON_CONTENT_PREFIXES = [
+  "src/sanity/",
+  "src/components/ui/",
+  "src/components/common/Navbar",
+  "src/components/common/Footer",
+];
 
 // Vercel may supply a shallow checkout or omit .git. Fetch only source history
 // into a temporary bare repository, pinned to the deployment's exact commit.
@@ -280,7 +273,7 @@ function prepareHistory(root: string): {
   const owner = process.env.VERCEL_GIT_REPO_OWNER;
   const repository = process.env.VERCEL_GIT_REPO_SLUG;
   const revision = process.env.VERCEL_GIT_COMMIT_SHA;
-  if (archiveSourceDate() || !(owner && repository && revision)) {
+  if (!(owner && repository && revision)) {
     return { directory: root, revision: "HEAD" };
   }
   if (
@@ -310,7 +303,7 @@ function prepareHistory(root: string): {
   } catch (cause) {
     rmSync(directory, { force: true, recursive: true });
     throw new Error(
-      "Cannot retrieve source history for sitemap lastmod dates. Build with full Git history or supply SOURCE_DATE_EPOCH for archive builds.",
+      "Cannot retrieve source history for sitemap lastmod dates. Build with full Git history available.",
       { cause }
     );
   }

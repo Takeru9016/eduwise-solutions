@@ -13,15 +13,13 @@ export interface StaticSitemapRoute {
 
 interface SourceManifest {
   routes: { lastModified?: string; path: string }[];
-  templates: Record<string, string | undefined>;
 }
 
 // Build-time discovery is bundled here: ISR needs neither Git nor source files.
 const manifest: SourceManifest = JSON.parse(
-  process.env.SITEMAP_SOURCE_MANIFEST ?? '{"routes":[],"templates":{}}'
+  process.env.SITEMAP_SOURCE_MANIFEST ?? '{"routes":[]}'
 );
 
-export const SOURCE_TEMPLATE_DATES = manifest.templates;
 const YEARLY_PATHS = new Set(["/press", "/privacy", "/terms", "/refund"]);
 const PRIMARY_PATHS = new Set(["/courses", "/pricing", "/certifications/aws"]);
 

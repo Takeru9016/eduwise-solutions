@@ -6,10 +6,7 @@ import {
   PAGE_CONTENT_TYPES,
   SITEMAP_DOCUMENT_TYPES,
 } from "@/lib/sitemap-content";
-import {
-  SOURCE_TEMPLATE_DATES,
-  STATIC_SITEMAP_ROUTES,
-} from "@/lib/static-sitemap-routes";
+import { STATIC_SITEMAP_ROUTES } from "@/lib/static-sitemap-routes";
 import { client } from "@/sanity/lib/client";
 import {
   ALL_COURSE_SLUGS_QUERY,
@@ -71,11 +68,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .filter((course) => shouldIncludeInSitemap(`/courses/${course.slug}`))
     .map((course) => ({
       changeFrequency: "weekly",
-      lastModified: latest(
-        course.updatedAt,
-        SOURCE_TEMPLATE_DATES["/courses/[slug]"],
-        ...(course.contentDates ?? [])
-      ),
+      lastModified: latest(course.updatedAt, ...(course.contentDates ?? [])),
       priority: 0.9,
       url: `${SITE_URL}/courses/${course.slug}`,
     }));
@@ -84,22 +77,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .filter((post) => shouldIncludeInSitemap(`/blogs/${post.slug}`))
     .map((post) => ({
       changeFrequency: "monthly",
-      lastModified: latest(
-        post.updatedAt,
-        SOURCE_TEMPLATE_DATES["/blogs/[slug]"],
-        ...(post.contentDates ?? [])
-      ),
+      lastModified: latest(post.updatedAt, ...(post.contentDates ?? [])),
       priority: 0.7,
       url: `${SITE_URL}/blogs/${post.slug}`,
     }));
 
   const resourceEntries: MetadataRoute.Sitemap = resources.map((resource) => ({
     changeFrequency: "monthly",
-    lastModified: latest(
-      resource.updatedAt,
-      SOURCE_TEMPLATE_DATES["/resources/[slug]"],
-      ...(resource.contentDates ?? [])
-    ),
+    lastModified: latest(resource.updatedAt, ...(resource.contentDates ?? [])),
     priority: 0.6,
     url: `${SITE_URL}/resources/${resource.slug}`,
   }));

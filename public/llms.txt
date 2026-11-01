@@ -1,6 +1,6 @@
 # EduWise Solutions
 
-> EduWise Solutions is an Indian ed-tech company offering industry-aligned, live mentor-led career programs in AI & data, cloud, DevOps and security, and digital marketing. Programs include hands-on projects, placement assistance and certification, plus AWS certification training.
+> EduWise Solutions is an Indian ed-tech company offering industry-aligned, live mentor-led career programs in AI & data, cloud, DevOps and security, and digital marketing. Programs include hands-on projects and placement assistance. Eduwise Solutions is an AWS Partner.
 
 ## Company Pages
 

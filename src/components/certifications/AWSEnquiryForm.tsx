@@ -192,7 +192,7 @@ export default function AWSEnquiryForm() {
           Free Enquiry
         </p>
         <p className="font-bold font-vietnam text-2xl text-white leading-snug">
-          Get AWS Voucher Guidance
+          Get AWS Certification Guidance
         </p>
       </div>
 

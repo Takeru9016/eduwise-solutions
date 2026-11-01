@@ -15,12 +15,8 @@ export default function AWSPartnerBanner() {
         src="/partners/aws.svg"
         width={36}
       />
-      <span className="min-w-0 truncate font-medium text-xs sm:text-sm">
-        <span className="font-bold text-gold">Official AWS Partner</span>
-        <span className="mx-2 hidden text-white/30 sm:inline">•</span>
-        <span className="hidden text-white/80 sm:inline">
-          Cloud-powered training &amp; certifications
-        </span>
+      <span className="min-w-0 truncate font-bold text-gold text-xs sm:text-sm">
+        AWS Partner
       </span>
       <ArrowUpRight className="h-3.5 w-3.5 shrink-0 text-gold transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1" />
     </Link>

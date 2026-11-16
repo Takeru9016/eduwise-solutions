@@ -32,6 +32,7 @@ import {
   wantsJobGuaranteeProgram,
 } from "@/lib/quiz";
 import { HONEYPOT_FIELD_NAME } from "@/lib/security/honeypot";
+import { getLeadUtm } from "@/lib/utm";
 
 export interface QuizCourse {
   _id: string;
@@ -184,6 +185,7 @@ export default function QuizPage({ courses }: QuizPageProps) {
           name: data.name,
           recommendedCategory: categoryMeta?.label ?? recommendedCategory,
           turnstileToken,
+          utm: getLeadUtm(),
           wantsJobGuarantee: preferJgp,
         }),
         headers: { "Content-Type": "application/json" },

@@ -21,6 +21,7 @@ import { HoneypotField } from "@/components/ui/honeypot-field";
 import { TurnstileWidget } from "@/components/ui/turnstile-widget";
 import { useFormToken } from "@/hooks/useFormToken";
 import { HONEYPOT_FIELD_NAME } from "@/lib/security/honeypot";
+import { getLeadUtm } from "@/lib/utm";
 
 const schema = z.object({
   consent: z.boolean().refine((v) => v === true, {
@@ -100,6 +101,7 @@ export default function CourseLeadForm({ courseTitle }: CourseLeadFormProps) {
           name: data.name,
           pagePath: window.location.pathname,
           turnstileToken,
+          utm: getLeadUtm(),
         }),
         headers: { "Content-Type": "application/json" },
         method: "POST",

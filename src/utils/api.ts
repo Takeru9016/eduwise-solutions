@@ -1,3 +1,5 @@
+import { getLeadUtm } from "@/lib/utm";
+
 interface FormData {
   email: string;
   firstName: string;
@@ -23,7 +25,8 @@ export async function submitWithRetry(
       const timeoutId = setTimeout(() => controller.abort(), 10_000); // Increased timeout to 10s
 
       const response = await fetch(endpoint, {
-        body: JSON.stringify(data),
+        // Campaign tags remembered from the landing URL (see lib/utm.ts).
+        body: JSON.stringify({ ...data, utm: getLeadUtm() }),
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",

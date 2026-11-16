@@ -3,6 +3,7 @@
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useFormToken } from "@/hooks/useFormToken";
+import { getLeadUtm } from "@/lib/utm";
 
 // Add Razorpay types
 interface RazorpayResponse {
@@ -252,6 +253,7 @@ export default function PaymentForm({
           message: `Payment ID: ${paymentId}`,
           mobile: formData.mobile, // This will be stored in "Mobile Number" column
           subject: programName,
+          utm: getLeadUtm(),
         }),
         headers: {
           "Content-Type": "application/json",

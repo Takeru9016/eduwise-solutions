@@ -19,6 +19,7 @@ import {
   emailSchema,
   mobileSchema,
   nameSchema,
+  utmSchema,
 } from "@/lib/security/validation";
 
 // Name is legacy: this route now handles every CourseLeadForm submission
@@ -39,6 +40,7 @@ const bodySchema = z.object({
   name: nameSchema,
   pagePath: z.string().optional(),
   turnstileToken: z.string().optional(),
+  utm: utmSchema,
 });
 
 export async function POST(req: Request) {
@@ -95,7 +97,16 @@ export async function POST(req: Request) {
         new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
         body.consent ? "Yes" : "No",
       ],
-      body.mobile
+      body.mobile,
+      {
+        courseText: body.course,
+        email: body.email,
+        form: `Website: Course form${body.pagePath ? ` (${body.pagePath.slice(0, 100)})` : ""}`,
+        fullName: body.name,
+        message: `Course selected: ${body.course}`,
+        mobile: body.mobile,
+        utm: body.utm,
+      }
     );
 
     // Lead is already persisted at this point. Everything below is

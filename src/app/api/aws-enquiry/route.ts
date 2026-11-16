@@ -13,6 +13,7 @@ import {
   freeTextSchema,
   mobileSchema,
   nameSchema,
+  utmSchema,
 } from "@/lib/security/validation";
 
 const GENERIC_ERROR = {
@@ -29,6 +30,7 @@ const bodySchema = z.object({
   mobile: mobileSchema,
   subject: freeTextSchema(150),
   turnstileToken: z.string().optional(),
+  utm: utmSchema,
 });
 
 export async function POST(req: Request) {
@@ -84,7 +86,17 @@ export async function POST(req: Request) {
         body.subject,
         body.message,
       ],
-      body.mobile
+      body.mobile,
+      {
+        course: "AWS Certification / Voucher",
+        email: body.email,
+        firstName: body.firstName,
+        form: "Website: AWS enquiry form",
+        lastName: body.lastName,
+        message: [body.subject, body.message].filter(Boolean).join("\n"),
+        mobile: body.mobile,
+        utm: body.utm,
+      }
     );
 
     return NextResponse.json({

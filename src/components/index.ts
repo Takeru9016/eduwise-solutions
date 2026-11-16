@@ -29,6 +29,7 @@ export { default as PopupForm } from "./common/PopupForm";
 export { default as ProgramSection } from "./common/ProgramSection";
 export { default as RefundHighlight } from "./common/RefundHighlight";
 export { default as Testimonials } from "./common/Testimonials";
+export { default as UtmCapture } from "./common/UtmCapture";
 export { default as OurCourse } from "./courses/OurCourse";
 export { default as FAQsPage } from "./FAQsPage";
 export { default as HeroSection } from "./HeroSection";

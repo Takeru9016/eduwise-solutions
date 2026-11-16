@@ -12,6 +12,7 @@ import {
   MetaPixel,
   OpenAiPixel,
   PopupForm,
+  UtmCapture,
 } from "@/components";
 import { GTM_ID } from "@/components/common/GoogleTagManager";
 import { organizationJsonLd, SITE_URL } from "@/lib/seo";
@@ -108,6 +109,7 @@ export default function RootLayout({
         <MetaPixel />
         <LinkedInInsight />
         <OpenAiPixel />
+        <UtmCapture />
         <div id="main-content">{children}</div>
         <PopupForm />
         <Toaster

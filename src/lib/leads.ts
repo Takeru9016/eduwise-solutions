@@ -1,5 +1,6 @@
 import type { sheets_v4 } from "googleapis";
 import { after } from "next/server";
+import { type CrmLeadInput, pushLeadToCrm } from "@/lib/crm";
 import { sendAdminLeadNotification } from "@/lib/email-sender";
 import {
   appendRow,
@@ -185,11 +186,17 @@ async function analyzeMobileHistory(
  *
  * Cell values are sanitized against spreadsheet formula injection before
  * being written.
+ *
+ * When `crmLead` is given, the lead is also pushed to the CRM after the
+ * response is sent (never for a replay, so a double-click does not create
+ * a second CRM lead). The Sheet stays the source of truth: a CRM failure
+ * only triggers an admin email, it never fails the submission.
  */
 export async function recordLead(
   key: LeadSourceKey,
   contentFields: (string | number)[],
-  mobile?: string
+  mobile?: string,
+  crmLead?: CrmLeadInput
 ): Promise<{ duplicateSource: string | null; isReplay: boolean }> {
   const config = LEAD_SHEETS[key];
   const sheets = getSheetsClient();
@@ -211,6 +218,12 @@ export async function recordLead(
     .slice(0, contentFields.length)
     .map((label, index) => ({ label, value: String(contentFields[index]) }));
   after(() => sendAdminLeadNotification(config.sheetName, fields));
+
+  if (crmLead && !isReplay) {
+    after(async () => {
+      await pushLeadToCrm(crmLead);
+    });
+  }
 
   return { duplicateSource, isReplay };
 }

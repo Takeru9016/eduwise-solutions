@@ -12,6 +12,7 @@ import {
   emailSchema,
   mobileSchema,
   nameSchema,
+  utmSchema,
 } from "@/lib/security/validation";
 
 const GENERIC_ERROR = {
@@ -26,6 +27,7 @@ const bodySchema = z.object({
   name: nameSchema,
   recommendedCategory: z.string().trim().max(100).optional(),
   turnstileToken: z.string().optional(),
+  utm: utmSchema,
   wantsJobGuarantee: z.boolean().optional(),
 });
 
@@ -82,7 +84,16 @@ export async function POST(req: Request) {
         body.wantsJobGuarantee ? "Yes" : "No",
         new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
       ],
-      body.mobile
+      body.mobile,
+      {
+        courseText: body.recommendedCategory,
+        email: body.email,
+        form: "Website: Course-finder quiz",
+        fullName: body.name,
+        message: `Quiz recommended: ${body.recommendedCategory || "Not specified"}; wants job guarantee: ${body.wantsJobGuarantee ? "Yes" : "No"}`,
+        mobile: body.mobile,
+        utm: body.utm,
+      }
     );
 
     return NextResponse.json({ success: true });

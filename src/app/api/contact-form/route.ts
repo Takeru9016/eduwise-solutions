@@ -13,7 +13,11 @@ import {
   freeTextSchema,
   mobileSchema,
   nameSchema,
+  utmSchema,
 } from "@/lib/security/validation";
+
+// PaymentForm sends message "Payment ID: <razorpay id>" after a payment.
+const PAYMENT_MESSAGE_PATTERN = /^Payment ID: (pay_[A-Za-z0-9]+)/;
 
 const GENERIC_ERROR = {
   error: "Failed to process form submission",
@@ -29,6 +33,7 @@ const bodySchema = z.object({
   mobile: mobileSchema,
   subject: freeTextSchema(150),
   turnstileToken: z.string().optional(),
+  utm: utmSchema,
 });
 
 export async function POST(req: Request) {
@@ -74,6 +79,8 @@ export async function POST(req: Request) {
       return NextResponse.json(GENERIC_ERROR, { status: 429 });
     }
 
+    const paymentId = PAYMENT_MESSAGE_PATTERN.exec(body.message)?.[1];
+
     const { duplicateSource } = await recordLead(
       "contactForm",
       [
@@ -84,7 +91,24 @@ export async function POST(req: Request) {
         body.subject,
         body.message,
       ],
-      body.mobile
+      body.mobile,
+      {
+        courseText: body.subject,
+        email: body.email,
+        firstName: body.firstName,
+        // The payment page (PaymentForm) also posts here after a Razorpay
+        // payment, with message "Payment ID: pay_...". The CRM sync checks
+        // that ID with Razorpay and, only if paid, records the person as
+        // enrolled instead of a new lead for an associate to cold-call.
+        form: paymentId
+          ? "Website: Payment confirmation"
+          : "Website: Contact form",
+        lastName: body.lastName,
+        message: [body.subject, body.message].filter(Boolean).join("\n"),
+        mobile: body.mobile,
+        paymentId,
+        utm: body.utm,
+      }
     );
 
     return NextResponse.json({

@@ -34,3 +34,31 @@ export async function sendAdminLeadNotification(
     );
   }
 }
+
+/**
+ * Tells the admin that a lead reached the Google Sheet but could NOT be
+ * created in the CRM, with enough detail to add it by hand. Never throws.
+ */
+export async function sendCrmSyncFailureNotification(
+  form: string,
+  problem: string,
+  lead: Record<string, string>
+): Promise<void> {
+  const fields = [
+    { label: "Problem", value: problem },
+    ...Object.entries(lead)
+      .filter(([key]) => key !== "custom_source_key")
+      .map(([key, value]) => ({
+        label: key === "email" ? "Email" : key,
+        value,
+      })),
+  ];
+  try {
+    await sendAdminLeadNotification(
+      `CRM sync FAILED (${form}) - add this lead by hand`,
+      fields
+    );
+  } catch (error) {
+    console.error("[email-sender] Failed to send CRM failure notice:", error);
+  }
+}

@@ -64,6 +64,25 @@ export const courseSchema = z
   .optional()
   .default("Not specified");
 
+const utmValueSchema = z
+  .string()
+  .trim()
+  .max(100)
+  .refine((v) => !CONTROL_CHAR_PATTERN.test(v), "Invalid characters")
+  .optional();
+
+// Campaign tags the browser remembered from the landing URL (lib/utm.ts).
+// Attribution is best-effort: anything malformed is dropped (`catch`) so a
+// bad or tampered tag can never cost us the lead itself.
+export const utmSchema = z
+  .object({
+    campaign: utmValueSchema,
+    medium: utmValueSchema,
+    source: utmValueSchema,
+  })
+  .optional()
+  .catch(undefined);
+
 // Internal source labels only - never an arbitrary client-supplied string.
 export const SOURCE_ALLOWLIST = [
   "Course Hero Form",

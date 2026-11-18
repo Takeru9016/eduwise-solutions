@@ -539,10 +539,13 @@ export default function CourseTemplate({
   const counselling = course.enrolmentMode === "counselling";
   const counsellingLabel =
     course.counsellingLabel || "Request a Free Counselling Call";
+  const courseCounsellingLabel = counselling ? counsellingLabel : undefined;
   const price =
     !counselling && typeof course.price === "number" && course.price > 0
       ? course.price
       : undefined;
+  const heroPaymentPrice =
+    course.enrolmentMode === "payment" ? price : undefined;
 
   const jgSteps = buildJGSteps(course);
 
@@ -683,24 +686,12 @@ export default function CourseTemplate({
               )}
             </div>
 
-            <div className="scroll-mt-24" data-reveal id="apply">
-              {course.batchInfo && (
-                <div className="mb-4 flex items-center gap-2 rounded-full border-2 border-grey-15 bg-white px-4 py-2 text-sm">
-                  <span className="h-2 w-2 shrink-0 rounded-full bg-primary-75" />
-                  <span className="font-bold text-grey-15">
-                    {course.batchInfo.status}
-                  </span>
-                  <span className="text-grey-40">
-                    · {course.batchInfo.enrolledCount} ·{" "}
-                    {course.batchInfo.label}
-                  </span>
-                </div>
-              )}
-              <CourseLeadForm
-                counsellingLabel={counselling ? counsellingLabel : undefined}
-                courseTitle={course.title}
-              />
-            </div>
+            <CourseHeroEnrolment
+              counsellingLabel={courseCounsellingLabel}
+              course={course}
+              onEnroll={openPaymentModal}
+              price={heroPaymentPrice}
+            />
           </div>
         </div>
       </section>
@@ -1052,10 +1043,53 @@ export default function CourseTemplate({
       </div>
       <StickyApplyBar
         courseTitle={course.title}
-        label={counselling ? counsellingLabel : undefined}
+        label={
+          heroPaymentPrice === undefined ? courseCounsellingLabel : "Enroll Now"
+        }
         targetId="apply"
       />
     </main>
+  );
+}
+
+function CourseHeroEnrolment({
+  counsellingLabel,
+  course,
+  onEnroll,
+  price,
+}: {
+  counsellingLabel?: string;
+  course: CourseContent;
+  onEnroll: () => void;
+  price?: number;
+}) {
+  return (
+    <div className="scroll-mt-24" data-reveal id="apply">
+      {course.batchInfo && (
+        <div className="mb-4 flex items-center gap-2 rounded-full border-2 border-grey-15 bg-white px-4 py-2 text-sm">
+          <span className="h-2 w-2 shrink-0 rounded-full bg-primary-75" />
+          <span className="font-bold text-grey-15">
+            {course.batchInfo.status}
+          </span>
+          <span className="text-grey-40">
+            · {course.batchInfo.enrolledCount} · {course.batchInfo.label}
+          </span>
+        </div>
+      )}
+      {price === undefined ? (
+        <CourseLeadForm
+          counsellingLabel={counsellingLabel}
+          courseTitle={course.title}
+        />
+      ) : (
+        <PricingCard
+          compact
+          course={course}
+          onEnroll={onEnroll}
+          price={price}
+        />
+      )}
+    </div>
   );
 }
 
@@ -1124,10 +1158,12 @@ function CourseEnrolmentSection({
 }
 
 function PricingCard({
+  compact,
   course,
   onEnroll,
   price,
 }: {
+  compact?: boolean;
   course: CourseContent;
   onEnroll: () => void;
   price: number;
@@ -1138,7 +1174,9 @@ function PricingCard({
   const discount = hasDiscount ? Math.round((saving / originalPrice) * 100) : 0;
 
   return (
-    <div className="overflow-hidden rounded-3xl border-2 border-grey-15 shadow-[6px_6px_0_0_var(--color-grey-15)] md:grid md:grid-cols-[1fr_1.2fr]">
+    <div
+      className={`overflow-hidden rounded-3xl border-2 border-grey-15 shadow-[6px_6px_0_0_var(--color-grey-15)] ${compact ? "" : "md:grid md:grid-cols-[1fr_1.2fr]"}`}
+    >
       {/* Left - price panel */}
       <div className="relative flex flex-col justify-center bg-grey-15 p-8 sm:p-10">
         {discount > 0 && (

@@ -317,18 +317,16 @@ export const aiBusinessCourse = {
     _type: "object",
     description:
       "Receive a course completion certificate from Eduwise Solutions when you complete the program.",
-    enabled: true,
+    enabled: false,
     issuer: "Eduwise Solutions",
     issuerPrefix: "Issued by",
     sectionTitle: "Course Completion Certificate",
   },
-  counsellingLabel: "Request a Free Counselling Call",
-  counsellingWhatsAppUrl: "https://wa.me/919148774540",
   description:
     "Use AI to do everyday business work, then build automations with Claude Code and n8n. Across 45 live classes, you’ll complete 16 guided projects and connect them in one capstone. No programming background is required.",
   duration: "45 live classes",
   emoji: "🤖",
-  enrolmentMode: "counselling",
+  enrolmentMode: "payment",
   faq: [
     [
       "Do I need coding knowledge?",
@@ -356,7 +354,7 @@ export const aiBusinessCourse = {
     ],
     [
       "How do I join a batch?",
-      "Request a free counselling call. The team will help you check the upcoming schedule and explain enrolment.",
+      "Select Enroll Now to pay the course fee online. Contact Eduwise Solutions if you need help with the upcoming schedule.",
     ],
   ].map(([question, answer], index) => ({
     _key: `faq-${index + 1}`,
@@ -482,6 +480,7 @@ export const aiBusinessCourse = {
       title: "Phase 3 · Claude Code and Automation (Classes 31–45)",
     }),
   ],
+  originalPrice: 50_000,
   overview: [
     {
       _key: "progression",
@@ -500,8 +499,9 @@ export const aiBusinessCourse = {
       title: "Open to Beginners and Non-Technical Roles",
     },
   ],
+  price: 20_000,
   seoDescription:
-    "Learn practical AI for business in 45 live classes. Build 16 guided projects and a capstone with Claude Code and n8n. Request a free counselling call.",
+    "Learn practical AI for business in 45 live classes. Build 16 guided projects and a capstone with Claude Code and n8n. Enroll online.",
   seoKeywords: [
     "AI for business",
     "business automation course",
@@ -570,10 +570,9 @@ export const aiBusinessCourse = {
     ["Canva AI", "Build branded visuals and campaign assets."],
     ["Claude Code", "Build and refine websites and small business apps."],
     ["n8n", "Connect triggers, applications, and human approval steps."],
-    [
-      "Google Forms, Sheets, and Gmail",
-      "Capture enquiries, organise data, and send follow-ups.",
-    ],
+    ["Google Forms", "Capture enquiries and collect responses."],
+    ["Google Sheets", "Organise form responses and workflow data."],
+    ["Gmail", "Send acknowledgements and follow-up emails."],
   ].map(([name, description], index) => ({
     _key: `tool-${index + 1}`,
     _type: "object",

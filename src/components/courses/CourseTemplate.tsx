@@ -15,6 +15,7 @@ import {
   Clock,
   Cloud,
   Code,
+  Download,
   FileText,
   GraduationCap,
   HelpCircle,
@@ -54,8 +55,10 @@ import { Button } from "@/components/ui/button";
 import { prefersReducedMotion } from "@/lib/utils";
 import type {
   CareerTrackItem,
+  CourseCertificate,
   CourseContent,
   CourseFAQ,
+  CourseMentor,
   CourseTool,
   ISAStep,
   PRTStep,
@@ -67,6 +70,7 @@ import PaymentStatusModal from "../payment/PaymentStatusModal";
 import CourseBlogPreview from "./CourseBlogPreview";
 import CourseLeadForm from "./CourseLeadForm";
 import CourseOverviewTabs from "./CourseOverviewTabs";
+import CourseProjects from "./CourseProjects";
 import PlacementSection from "./PlacementSection";
 import { StickyApplyBar } from "./StickyApplyBar";
 
@@ -81,6 +85,7 @@ const ICON_MAP: Record<string, LucideIcon> = {
   Clock,
   Cloud,
   Code,
+  Download,
   FileText,
   GraduationCap,
   HelpCircle,
@@ -295,149 +300,200 @@ interface CourseTemplateProps {
   course: CourseContent;
 }
 
+function MentorProfile({ mentor }: { mentor: CourseMentor }) {
+  return (
+    <div
+      className={
+        mentor.imageUrl
+          ? "grid items-center gap-5 sm:grid-cols-[minmax(120px,0.7fr)_1fr]"
+          : ""
+      }
+    >
+      {mentor.imageUrl && (
+        <div className="overflow-hidden rounded-2xl border-2 border-grey-15 bg-white">
+          <Image
+            alt={mentor.name ?? ""}
+            className="aspect-[4/5] w-full object-cover"
+            height={700}
+            src={mentor.imageUrl}
+            width={560}
+          />
+        </div>
+      )}
+      <div>
+        <h3 className="font-black font-vietnam text-2xl text-grey-15">
+          {mentor.name}
+        </h3>
+        {mentor.role && (
+          <p className="mt-1 font-semibold text-grey-35">{mentor.role}</p>
+        )}
+        {mentor.experience && (
+          <p className="mt-3 inline-flex rounded-full border border-grey-15/20 bg-white px-3 py-1 font-bold text-grey-15 text-sm">
+            {mentor.experience}
+          </p>
+        )}
+        {mentor.bio && (
+          <p className="mt-4 whitespace-pre-line text-grey-35 leading-relaxed">
+            {mentor.bio}
+          </p>
+        )}
+        {mentor.expertise && mentor.expertise.length > 0 && (
+          <div className="mt-5 flex flex-wrap gap-2">
+            {mentor.expertise.map((item) => (
+              <span
+                className="rounded-full border border-grey-15/20 bg-white px-3 py-1.5 font-semibold text-grey-15 text-sm"
+                key={item}
+              >
+                {item}
+              </span>
+            ))}
+          </div>
+        )}
+        {mentor.linkedInUrl && (
+          <a
+            className="mt-5 inline-flex font-bold text-grey-15 underline underline-offset-4"
+            href={mentor.linkedInUrl}
+            rel="noreferrer"
+            target="_blank"
+          >
+            {mentor.profileLinkLabel || "View LinkedIn profile"}
+          </a>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function CourseCredibilitySections({ course }: { course: CourseContent }) {
+  const profiles =
+    course.mentors?.profiles?.filter((mentor) => mentor.name) ?? [];
+  const showMultiple = course.mentors?.enabled !== false && profiles.length > 0;
+  const legacy = course.mentor;
+  const showLegacy = !showMultiple && legacy?.enabled && Boolean(legacy.name);
+  const sectionTitle = showMultiple
+    ? course.mentors?.sectionTitle
+    : legacy?.sectionTitle;
+  const sectionDescription = showMultiple
+    ? course.mentors?.sectionDescription
+    : legacy?.sectionDescription;
+
   return (
     <>
-      {/* COURSE MENTOR */}
-      {course.mentor?.enabled && course.mentor.name && (
+      {(showMultiple || showLegacy) && (
         <section className="rounded-3xl border-2 border-grey-15 bg-light-97 p-6 sm:p-10">
-          <div className="mx-auto max-w-5xl">
-            <div className="mb-8 max-w-2xl">
-              {course.mentor.sectionEyebrow && (
-                <p className="mb-2 font-bold text-grey-40 text-sm uppercase tracking-wide">
-                  {course.mentor.sectionEyebrow}
-                </p>
-              )}
-              {course.mentor.sectionTitle && (
-                <h2 className="mb-3 font-black font-vietnam text-2xl text-grey-15 sm:text-3xl">
-                  {course.mentor.sectionTitle}
-                </h2>
-              )}
-              {course.mentor.sectionDescription && (
-                <p className="text-grey-35 leading-relaxed">
-                  {course.mentor.sectionDescription}
-                </p>
-              )}
-            </div>
-            <div className="grid items-center gap-8 md:grid-cols-[minmax(220px,0.8fr)_1.2fr]">
-              {course.mentor.imageUrl && (
-                <div className="overflow-hidden rounded-2xl border-2 border-grey-15 bg-white">
-                  <Image
-                    alt={course.mentor.name}
-                    className="aspect-[4/5] w-full object-cover"
-                    height={700}
-                    src={course.mentor.imageUrl}
-                    width={560}
+          {showLegacy && legacy.sectionEyebrow && (
+            <p className="mb-2 font-bold text-grey-40 text-sm uppercase tracking-wide">
+              {legacy.sectionEyebrow}
+            </p>
+          )}
+          <h2 className="font-black font-vietnam text-2xl text-grey-15 sm:text-3xl">
+            {sectionTitle ||
+              (showMultiple ? "Meet Your Mentors" : "Meet Your Mentor")}
+          </h2>
+          {sectionDescription && (
+            <p className="mt-3 max-w-2xl text-grey-35 leading-relaxed">
+              {sectionDescription}
+            </p>
+          )}
+          <div
+            className={
+              showMultiple
+                ? "mt-8 grid gap-8 xl:grid-cols-2"
+                : "mx-auto mt-8 max-w-5xl"
+            }
+          >
+            {showMultiple
+              ? profiles.map((mentor) => (
+                  <MentorProfile
+                    key={mentor._key ?? mentor.name}
+                    mentor={mentor}
                   />
-                </div>
-              )}
-              <div>
-                <h3 className="font-black font-vietnam text-2xl text-grey-15">
-                  {course.mentor.name}
-                </h3>
-                {course.mentor.role && (
-                  <p className="mt-1 font-semibold text-grey-35">
-                    {course.mentor.role}
-                  </p>
-                )}
-                {course.mentor.experience && (
-                  <p className="mt-3 inline-flex rounded-full border border-grey-15/20 bg-white px-3 py-1 font-bold text-grey-15 text-sm">
-                    {course.mentor.experience}
-                  </p>
-                )}
-                {course.mentor.bio && (
-                  <p className="mt-4 whitespace-pre-line text-grey-35 leading-relaxed">
-                    {course.mentor.bio}
-                  </p>
-                )}
-                {course.mentor.expertise &&
-                  course.mentor.expertise.length > 0 && (
-                    <div className="mt-5 flex flex-wrap gap-2">
-                      {course.mentor.expertise.map((item) => (
-                        <span
-                          className="rounded-full border border-grey-15/20 bg-white px-3 py-1.5 font-semibold text-grey-15 text-sm"
-                          key={item}
-                        >
-                          {item}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                {course.mentor.linkedInUrl && (
-                  <a
-                    className="mt-5 inline-flex font-bold text-grey-15 underline underline-offset-4"
-                    href={course.mentor.linkedInUrl}
-                    rel="noreferrer"
-                    target="_blank"
-                  >
-                    {course.mentor.profileLinkLabel}
-                  </a>
-                )}
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* COURSE CERTIFICATE */}
-      {course.certificate?.enabled && course.certificate.imageUrl && (
-        <section className="rounded-3xl border-2 border-grey-15 bg-primary-99 p-6 sm:p-10">
-          <div className="grid items-center gap-8 lg:grid-cols-2">
-            <div>
-              {course.certificate.sectionEyebrow && (
-                <p className="mb-2 font-bold text-grey-40 text-sm uppercase tracking-wide">
-                  {course.certificate.sectionEyebrow}
-                </p>
-              )}
-              {course.certificate.sectionTitle && (
-                <h2 className="mb-4 font-black font-vietnam text-2xl text-grey-15 sm:text-3xl">
-                  {course.certificate.sectionTitle}
-                </h2>
-              )}
-              {course.certificate.sectionDescription && (
-                <p className="mb-4 text-grey-35 leading-relaxed">
-                  {course.certificate.sectionDescription}
-                </p>
-              )}
-              {course.certificate.issuer && (
-                <p className="mb-3 text-grey-35">
-                  {course.certificate.issuerPrefix}{" "}
-                  <span className="font-bold text-grey-15">
-                    {course.certificate.issuer}
-                  </span>
-                </p>
-              )}
-              {course.certificate.description && (
-                <p className="text-grey-35 leading-relaxed">
-                  {course.certificate.description}
-                </p>
-              )}
-              {course.certificate.completionRequirements && (
-                <div className="mt-5 rounded-2xl border border-grey-15/20 bg-white p-4">
-                  {course.certificate.completionRequirementsTitle && (
-                    <h3 className="mb-1 font-bold text-grey-15">
-                      {course.certificate.completionRequirementsTitle}
-                    </h3>
-                  )}
-                  <p className="text-grey-35 text-sm leading-relaxed">
-                    {course.certificate.completionRequirements}
-                  </p>
-                </div>
-              )}
-            </div>
-            <div className="rounded-2xl border-2 border-grey-15 bg-white p-3 sm:p-5">
-              <Image
-                alt={`${course.title} certificate preview`}
-                className="h-auto max-h-[440px] w-full object-contain"
-                height={900}
-                src={course.certificate.imageUrl}
-                width={1200}
-              />
-            </div>
+                ))
+              : showLegacy && <MentorProfile mentor={legacy} />}
           </div>
         </section>
       )}
     </>
+  );
+}
+
+function CourseCertificateSection({
+  certificate,
+  courseTitle,
+}: {
+  certificate?: CourseCertificate;
+  courseTitle: string;
+}) {
+  if (
+    !(certificate?.enabled && (certificate.imageUrl || certificate.description))
+  ) {
+    return null;
+  }
+
+  return (
+    <section className="rounded-3xl border-2 border-grey-15 bg-primary-99 p-6 sm:p-10">
+      <div
+        className={
+          certificate.imageUrl
+            ? "grid items-center gap-8 lg:grid-cols-2"
+            : "max-w-3xl"
+        }
+      >
+        <div>
+          {certificate.sectionEyebrow && (
+            <p className="mb-2 font-bold text-grey-40 text-sm uppercase tracking-wide">
+              {certificate.sectionEyebrow}
+            </p>
+          )}
+          {certificate.sectionTitle && (
+            <h2 className="mb-4 font-black font-vietnam text-2xl text-grey-15 sm:text-3xl">
+              {certificate.sectionTitle}
+            </h2>
+          )}
+          {certificate.sectionDescription && (
+            <p className="mb-4 text-grey-35 leading-relaxed">
+              {certificate.sectionDescription}
+            </p>
+          )}
+          {certificate.issuer && (
+            <p className="mb-3 text-grey-35">
+              {certificate.issuerPrefix}{" "}
+              <span className="font-bold text-grey-15">
+                {certificate.issuer}
+              </span>
+            </p>
+          )}
+          {certificate.description && (
+            <p className="text-grey-35 leading-relaxed">
+              {certificate.description}
+            </p>
+          )}
+          {certificate.completionRequirements && (
+            <div className="mt-5 rounded-2xl border border-grey-15/20 bg-white p-4">
+              {certificate.completionRequirementsTitle && (
+                <h3 className="mb-1 font-bold text-grey-15">
+                  {certificate.completionRequirementsTitle}
+                </h3>
+              )}
+              <p className="text-grey-35 text-sm leading-relaxed">
+                {certificate.completionRequirements}
+              </p>
+            </div>
+          )}
+        </div>
+        {certificate.imageUrl && (
+          <div className="rounded-2xl border-2 border-grey-15 bg-white p-3 sm:p-5">
+            <Image
+              alt={`${courseTitle} certificate preview`}
+              className="h-auto max-h-[440px] w-full object-contain"
+              height={900}
+              src={certificate.imageUrl}
+              width={1200}
+            />
+          </div>
+        )}
+      </div>
+    </section>
   );
 }
 
@@ -480,36 +536,43 @@ export default function CourseTemplate({
   const handleCloseStatusModal = () =>
     setPaymentStatus((prev) => ({ ...prev, isOpen: false }));
 
-  const discount = Math.round(
-    ((course.originalPrice - course.price) / course.originalPrice) * 100
-  );
-  const saving = course.originalPrice - course.price;
+  const counselling = course.enrolmentMode === "counselling";
+  const counsellingLabel =
+    course.counsellingLabel || "Request a Free Counselling Call";
+  const price =
+    !counselling && typeof course.price === "number" && course.price > 0
+      ? course.price
+      : undefined;
 
   const jgSteps = buildJGSteps(course);
 
   return (
     <main className="min-h-screen bg-white pb-20 lg:pb-0">
-      <Script
-        src="https://checkout.razorpay.com/v1/checkout.js"
-        strategy="lazyOnload"
-      />
+      {price !== undefined && (
+        <>
+          <Script
+            src="https://checkout.razorpay.com/v1/checkout.js"
+            strategy="lazyOnload"
+          />
 
-      <PaymentStatusModal
-        isOpen={paymentStatus.isOpen}
-        message={paymentStatus.message}
-        onClose={handleCloseStatusModal}
-        status={paymentStatus.status}
-      />
-      <PaymentModal
-        amount={course.price}
-        isOpen={isPaymentModalOpen}
-        onClose={closePaymentModal}
-        onPaymentComplete={(status, message) => {
-          setPaymentStatus({ isOpen: true, message, status });
-          closePaymentModal();
-        }}
-        programName={course.title}
-      />
+          <PaymentStatusModal
+            isOpen={paymentStatus.isOpen}
+            message={paymentStatus.message}
+            onClose={handleCloseStatusModal}
+            status={paymentStatus.status}
+          />
+          <PaymentModal
+            amount={price}
+            isOpen={isPaymentModalOpen}
+            onClose={closePaymentModal}
+            onPaymentComplete={(status, message) => {
+              setPaymentStatus({ isOpen: true, message, status });
+              closePaymentModal();
+            }}
+            programName={course.title}
+          />
+        </>
+      )}
 
       {/* HERO */}
       <section className="bg-light-97 py-12 sm:py-14 lg:py-16" ref={heroRef}>
@@ -581,7 +644,7 @@ export default function CourseTemplate({
               </div>
 
               <div
-                className="mt-6 flex justify-center lg:justify-start"
+                className="mt-6 flex flex-wrap justify-center gap-3 lg:justify-start"
                 data-reveal
               >
                 <Link
@@ -591,6 +654,16 @@ export default function CourseTemplate({
                   <BookOpen className="h-4 w-4" />
                   View Course Curriculum
                 </Link>
+                {course.brochureUrl && (
+                  <a
+                    className="inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-white px-6 py-3 font-bold text-grey-15 text-sm"
+                    href={course.brochureUrl}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    <Download className="h-4 w-4" /> Download Brochure (PDF)
+                  </a>
+                )}
               </div>
 
               {course.heroImageUrl && (
@@ -623,7 +696,10 @@ export default function CourseTemplate({
                   </span>
                 </div>
               )}
-              <CourseLeadForm courseTitle={course.title} />
+              <CourseLeadForm
+                counsellingLabel={counselling ? counsellingLabel : undefined}
+                courseTitle={course.title}
+              />
             </div>
           </div>
         </div>
@@ -815,7 +891,12 @@ export default function CourseTemplate({
           </Accordion>
         </section>
 
+        <CourseProjects course={course} />
         <CourseCredibilitySections course={course} />
+        <CourseCertificateSection
+          certificate={course.certificate}
+          courseTitle={course.title}
+        />
 
         {/* PLACEMENT ASSISTANCE TRACK */}
         {jgSteps.length > 0 && <JobGuaranteeTrack steps={jgSteps} />}
@@ -875,25 +956,13 @@ export default function CourseTemplate({
           </section>
         )}
 
-        {/* PROGRAM INVESTMENT */}
-        <section>
-          <div className="mb-8 text-center">
-            <h2 className="font-black font-vietnam text-2xl text-grey-15 sm:text-3xl">
-              Program Investment
-            </h2>
-            <p className="mt-2 text-grey-40">
-              One-time payment, transparent pricing, no hidden fees.
-            </p>
-          </div>
-          <div className="mx-auto max-w-3xl">
-            <PricingCard
-              course={course}
-              discount={discount}
-              onEnroll={openPaymentModal}
-              saving={saving}
-            />
-          </div>
-        </section>
+        <CourseEnrolmentSection
+          counselling={counselling}
+          counsellingLabel={counsellingLabel}
+          course={course}
+          openPaymentModal={openPaymentModal}
+          price={price}
+        />
 
         {/* CAREER OPPORTUNITIES */}
         {course.careerPaths && course.careerPaths.length > 0 && (
@@ -981,24 +1050,92 @@ export default function CourseTemplate({
           </section>
         )}
       </div>
-      <StickyApplyBar courseTitle={course.title} targetId="apply" />
+      <StickyApplyBar
+        courseTitle={course.title}
+        label={counselling ? counsellingLabel : undefined}
+        targetId="apply"
+      />
     </main>
+  );
+}
+
+function CourseEnrolmentSection({
+  counselling,
+  counsellingLabel,
+  course,
+  openPaymentModal,
+  price,
+}: {
+  counselling: boolean;
+  counsellingLabel: string;
+  course: CourseContent;
+  openPaymentModal: () => void;
+  price?: number;
+}) {
+  return (
+    <>
+      {price !== undefined && (
+        <section>
+          <div className="mb-8 text-center">
+            <h2 className="font-black font-vietnam text-2xl text-grey-15 sm:text-3xl">
+              Program Investment
+            </h2>
+            <p className="mt-2 text-grey-40">
+              One-time payment, transparent pricing, no hidden fees.
+            </p>
+          </div>
+          <div className="mx-auto max-w-3xl">
+            <PricingCard
+              course={course}
+              onEnroll={openPaymentModal}
+              price={price}
+            />
+          </div>
+        </section>
+      )}
+      {counselling && (
+        <section className="rounded-3xl border-2 border-grey-15 bg-primary-99 p-6 sm:p-10">
+          <h2 className="font-black font-vietnam text-2xl text-grey-15 sm:text-3xl">
+            Talk to a Course Counsellor
+          </h2>
+          <p className="mt-3 text-grey-35">
+            Ask about the curriculum, class schedule, and how to join.
+          </p>
+          <div className="mt-5 flex flex-wrap gap-3">
+            <Button asChild>
+              <Link href="#apply">{counsellingLabel}</Link>
+            </Button>
+            {course.counsellingWhatsAppUrl && (
+              <Button asChild variant="outline">
+                <a
+                  href={course.counsellingWhatsAppUrl}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Chat on WhatsApp
+                </a>
+              </Button>
+            )}
+          </div>
+        </section>
+      )}
+    </>
   );
 }
 
 function PricingCard({
   course,
-  discount,
-  saving,
   onEnroll,
+  price,
 }: {
   course: CourseContent;
-  discount: number;
   onEnroll: () => void;
-  saving: number;
+  price: number;
 }) {
-  const hasDiscount = course.originalPrice > course.price;
-  const hasSaving = saving > 0;
+  const originalPrice = course.originalPrice ?? price;
+  const saving = originalPrice - price;
+  const hasDiscount = saving > 0;
+  const discount = hasDiscount ? Math.round((saving / originalPrice) * 100) : 0;
 
   return (
     <div className="overflow-hidden rounded-3xl border-2 border-grey-15 shadow-[6px_6px_0_0_var(--color-grey-15)] md:grid md:grid-cols-[1fr_1.2fr]">
@@ -1014,14 +1151,14 @@ function PricingCard({
           One-time Payment
         </p>
         <p className="font-black font-vietnam text-5xl text-white tabular-nums">
-          ₹{course.price.toLocaleString("en-IN")}
+          ₹{price.toLocaleString("en-IN")}
         </p>
         {hasDiscount && (
           <p className="mt-2 text-lg text-white/50 tabular-nums line-through">
-            ₹{course.originalPrice.toLocaleString("en-IN")}
+            ₹{originalPrice.toLocaleString("en-IN")}
           </p>
         )}
-        {hasSaving && (
+        {hasDiscount && (
           <p className="mt-4 font-bold text-primary-90 text-sm tabular-nums">
             You save ₹{saving.toLocaleString("en-IN")}
           </p>

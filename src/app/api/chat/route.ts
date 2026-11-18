@@ -50,10 +50,11 @@ interface KnowledgeCourse {
   description: string;
   duration: string;
   emiOption: string | null;
+  enrolmentMode?: "counselling" | "payment";
   faq: { answer: string; question: string }[] | null;
   isJobGuaranteeProgram: boolean | null;
   originalPrice: number | null;
-  price: number;
+  price: number | null;
   subtitle: string;
   title: string;
   whatsIncluded: string[] | null;
@@ -96,6 +97,29 @@ function generateWhatsAppLink(
   return `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 }
 
+function formatCourseEnrolment(course: KnowledgeCourse): string[] {
+  if (course.enrolmentMode === "counselling") {
+    return [
+      "Enrolment: Request a free counselling call through the course page.",
+    ];
+  }
+
+  const lines = [
+    typeof course.price === "number"
+      ? `Price: ₹${course.price.toLocaleString("en-IN")}`
+      : "Price: Ask Eduwise for the current fee.",
+  ];
+  if (course.originalPrice) {
+    lines.push(
+      `Original Price: ₹${course.originalPrice.toLocaleString("en-IN")}`
+    );
+  }
+  if (course.emiOption) {
+    lines.push(`EMI Option: ${course.emiOption}`);
+  }
+  return lines;
+}
+
 /**
  * Renders live Sanity content (courses, FAQs) into plain text for the
  * chatbot's knowledge base, replacing a hand-maintained faq.txt file that
@@ -111,17 +135,9 @@ function formatKnowledgeBaseText(knowledge: ChatbotKnowledge): string {
       `Subtitle: ${course.subtitle}`,
       `Description: ${course.description}`,
       `Duration: ${course.duration}`,
-      `Price: ₹${course.price.toLocaleString("en-IN")}`,
+      ...formatCourseEnrolment(course),
     ];
 
-    if (course.originalPrice) {
-      lines.push(
-        `Original Price: ₹${course.originalPrice.toLocaleString("en-IN")}`
-      );
-    }
-    if (course.emiOption) {
-      lines.push(`EMI Option: ${course.emiOption}`);
-    }
     if (course.isJobGuaranteeProgram) {
       lines.push("This course includes a Placement Assistance Program.");
     }

@@ -31,6 +31,9 @@ export type CrmCourse = (typeof CRM_COURSES)[number];
 // Order matters: "Master DevOps with Gen AI" must map to DevOps, not to the
 // AI & ML course, so DevOps is checked before the generic AI pattern.
 const COURSE_PATTERNS: [RegExp, CrmCourse][] = [
+  // The CRM has no dedicated option for this course. The enquiry message
+  // retains the full course title for the counselling team.
+  [/\bai for business\s*(?:&|and)\s*automation\b/i, "Other"],
   [/devops/i, "DevOps with Gen AI"],
   [/data\s*science/i, "Data Science"],
   [/cyber/i, "Cyber Security"],

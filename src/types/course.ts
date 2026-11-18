@@ -1,3 +1,5 @@
+export type CourseEnrolmentMode = "payment" | "counselling";
+
 // TypeScript types matching the Sanity course schema
 
 export interface CourseStat {
@@ -25,9 +27,16 @@ export interface CourseSubModule {
   title: string;
 }
 
+export interface CourseProject {
+  _key: string;
+  description?: string;
+  title: string;
+}
+
 export interface CourseModule {
   description: string;
   duration?: string;
+  projects?: CourseProject[];
   submodules: CourseSubModule[];
   title: string;
 }
@@ -66,6 +75,7 @@ export interface CourseTool {
 }
 
 export interface CourseMentor {
+  _key?: string;
   bio?: string;
   enabled?: boolean;
   experience?: string;
@@ -120,6 +130,8 @@ export interface CourseContent {
   _id: string;
   accentColor: string;
   batchInfo?: BatchInfo;
+  brochureUrl?: string;
+  capstone?: { description?: string; outcomes?: string[]; title: string };
 
   // Optional sections
   careerPaths?: CareerPath[];
@@ -127,10 +139,13 @@ export interface CourseContent {
   careerTrack?: CareerTrackItem[];
   category: string;
   certificate?: CourseCertificate;
+  counsellingLabel?: string;
+  counsellingWhatsAppUrl?: string;
   description: string;
   duration: string;
   emiOption?: string;
   emoji: string;
+  enrolmentMode?: CourseEnrolmentMode;
   faq?: CourseFAQ[];
   featured: boolean;
   features: CourseFeature[];
@@ -143,12 +158,17 @@ export interface CourseContent {
   // Curriculum journey (sections 2-5)
   isJobGuaranteeProgram?: boolean;
   mentor?: CourseMentor;
+  mentors?: {
+    enabled?: boolean;
+    profiles?: CourseMentor[];
+    sectionDescription?: string;
+    sectionTitle?: string;
+  };
   modules: CourseModule[];
-  originalPrice: number;
+  originalPrice?: number | null;
   overview?: CourseOverviewTab[];
 
-  // Pricing (required)
-  price: number;
+  price?: number | null;
   prtSteps?: PRTStep[];
   seoDescription?: string;
 

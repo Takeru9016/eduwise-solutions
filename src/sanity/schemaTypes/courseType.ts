@@ -1,6 +1,70 @@
 import { BookIcon } from "@sanity/icons/Book";
 import { defineField, defineType } from "sanity";
 
+const mentorProfileFields = [
+  defineField({
+    name: "name",
+    title: "Mentor Name",
+    type: "string",
+    validation: (Rule) => Rule.max(100),
+  }),
+  defineField({
+    name: "role",
+    title: "Current Role / Speciality",
+    type: "string",
+    validation: (Rule) => Rule.max(120),
+  }),
+  defineField({
+    description:
+      'E.g. "12 years in cloud infrastructure". Use verifiable details.',
+    name: "experience",
+    title: "Experience",
+    type: "string",
+    validation: (Rule) => Rule.max(120),
+  }),
+  defineField({
+    name: "bio",
+    rows: 5,
+    title: "Mentor Background",
+    type: "text",
+    validation: (Rule) => Rule.max(800),
+  }),
+  defineField({
+    description: "Optional portrait for the mentor card.",
+    name: "image",
+    options: { hotspot: true },
+    title: "Mentor Photo",
+    type: "image",
+  }),
+  defineField({
+    description: "Skills or subject areas the mentor teaches.",
+    name: "expertise",
+    of: [{ type: "string" }],
+    title: "Areas of Expertise",
+    type: "array",
+    validation: (Rule) => Rule.max(8),
+  }),
+  defineField({
+    description: "Optional public LinkedIn profile URL.",
+    name: "linkedInUrl",
+    title: "LinkedIn Profile",
+    type: "url",
+  }),
+  defineField({
+    name: "profileLinkLabel",
+    title: "Profile Link Label",
+    type: "string",
+    validation: (Rule) => Rule.max(80),
+  }),
+  defineField({
+    description: "Optional website asset path, used when no photo is uploaded.",
+    name: "imagePath",
+    title: "Mentor Photo Path",
+    type: "string",
+    validation: (Rule) => Rule.regex(/^\/courses\/[a-z0-9/_.-]+$/),
+  }),
+];
+
 export const courseType = defineType({
   fields: [
     // Content Group
@@ -60,7 +124,29 @@ export const courseType = defineType({
       options: { hotspot: true },
       title: "Hero Image",
       type: "image",
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.custom((value, { document }) =>
+          value?.asset || document?.heroImagePath
+            ? true
+            : "Upload a hero image or supply a website asset path."
+        ),
+    }),
+    defineField({
+      description:
+        "Optional website asset path, used when no hero image is uploaded.",
+      group: "content",
+      name: "heroImagePath",
+      title: "Hero Image Path",
+      type: "string",
+      validation: (Rule) => Rule.regex(/^\/courses\/[a-z0-9/_.-]+$/),
+    }),
+    defineField({
+      group: "content",
+      name: "brochureUrl",
+      title: "Brochure Link",
+      type: "url",
+      validation: (Rule) =>
+        Rule.uri({ allowRelative: true, scheme: ["https"] }),
     }),
     defineField({
       description: 'E.g. "from-blue-500 to-cyan-500"',
@@ -256,6 +342,30 @@ export const courseType = defineType({
               type: "string",
             },
             {
+              name: "projects",
+              of: [
+                {
+                  fields: [
+                    {
+                      name: "title",
+                      title: "Project Title",
+                      type: "string",
+                      validation: (Rule) => Rule.required(),
+                    },
+                    {
+                      name: "description",
+                      rows: 2,
+                      title: "What Learners Build",
+                      type: "text",
+                    },
+                  ],
+                  type: "object",
+                },
+              ],
+              title: "Guided Projects",
+              type: "array",
+            },
+            {
               name: "submodules",
               of: [
                 {
@@ -289,6 +399,33 @@ export const courseType = defineType({
       title: "Curriculum Modules",
       type: "array",
       validation: (Rule) => Rule.required().min(1),
+    }),
+
+    defineField({
+      fields: [
+        {
+          name: "title",
+          title: "Capstone Title",
+          type: "string",
+          validation: (Rule) => Rule.required(),
+        },
+        {
+          name: "description",
+          rows: 3,
+          title: "Capstone Description",
+          type: "text",
+        },
+        {
+          name: "outcomes",
+          of: [{ type: "string" }],
+          title: "What Learners Build",
+          type: "array",
+        },
+      ],
+      group: "curriculum",
+      name: "capstone",
+      title: "Final Capstone",
+      type: "object",
     }),
 
     // Curriculum Journey (Sections 2-5)
@@ -408,26 +545,64 @@ export const courseType = defineType({
       type: "number",
     }),
 
-    // Pricing Group
+    // Pricing and enrolment
+    defineField({
+      group: "pricing",
+      initialValue: "payment",
+      name: "enrolmentMode",
+      options: {
+        list: [
+          { title: "Online payment", value: "payment" },
+          { title: "Free counselling enquiry", value: "counselling" },
+        ],
+      },
+      title: "Enrolment Mode",
+      type: "string",
+    }),
+    defineField({
+      group: "pricing",
+      hidden: ({ document }) => document?.enrolmentMode !== "counselling",
+      name: "counsellingLabel",
+      title: "Counselling Button Label",
+      type: "string",
+      validation: (Rule) => Rule.max(45),
+    }),
+    defineField({
+      group: "pricing",
+      hidden: ({ document }) => document?.enrolmentMode !== "counselling",
+      name: "counsellingWhatsAppUrl",
+      title: "Counselling WhatsApp Link",
+      type: "url",
+      validation: (Rule) => Rule.uri({ scheme: ["https"] }),
+    }),
     defineField({
       description: "Current discounted price in INR.",
       group: "pricing",
+      hidden: ({ document }) => document?.enrolmentMode === "counselling",
       name: "price",
       title: "Price (₹)",
       type: "number",
-      validation: (Rule) => Rule.required().positive(),
+      validation: (Rule) =>
+        Rule.custom((value, { document }) =>
+          document?.enrolmentMode === "counselling" ||
+          (typeof value === "number" && value > 0)
+            ? true
+            : "Enter a positive price for online enrolment."
+        ),
     }),
     defineField({
       description: "Strikethrough price shown for comparison.",
       group: "pricing",
+      hidden: ({ document }) => document?.enrolmentMode === "counselling",
       name: "originalPrice",
       title: "Original Price (₹)",
       type: "number",
-      validation: (Rule) => Rule.required().positive(),
+      validation: (Rule) => Rule.positive(),
     }),
     defineField({
       description: 'E.g. "₹5,000/month" - leave empty if no EMI.',
       group: "pricing",
+      hidden: ({ document }) => document?.enrolmentMode === "counselling",
       name: "emiOption",
       title: "EMI Option",
       type: "string",
@@ -472,64 +647,48 @@ export const courseType = defineType({
           type: "text",
           validation: (Rule) => Rule.max(300),
         },
-        {
-          name: "name",
-          title: "Mentor Name",
-          type: "string",
-          validation: (Rule) => Rule.max(100),
-        },
-        {
-          name: "role",
-          title: "Current Role / Speciality",
-          type: "string",
-          validation: (Rule) => Rule.max(120),
-        },
-        {
-          description:
-            'E.g. "12 years in cloud infrastructure". Use verifiable details.',
-          name: "experience",
-          title: "Experience",
-          type: "string",
-          validation: (Rule) => Rule.max(120),
-        },
-        {
-          name: "bio",
-          rows: 5,
-          title: "Mentor Background",
-          type: "text",
-          validation: (Rule) => Rule.max(800),
-        },
-        {
-          description: "Optional portrait for the mentor card.",
-          name: "image",
-          options: { hotspot: true },
-          title: "Mentor Photo",
-          type: "image",
-        },
-        {
-          description: "Skills or subject areas the mentor teaches.",
-          name: "expertise",
-          of: [{ type: "string" }],
-          title: "Areas of Expertise",
-          type: "array",
-          validation: (Rule) => Rule.max(8),
-        },
-        {
-          description: "Optional public LinkedIn profile URL.",
-          name: "linkedInUrl",
-          title: "LinkedIn Profile",
-          type: "url",
-        },
-        {
-          name: "profileLinkLabel",
-          title: "Profile Link Label",
-          type: "string",
-          validation: (Rule) => Rule.max(80),
-        },
+        ...mentorProfileFields,
       ],
       group: "credibility",
       name: "mentor",
       title: "Meet Your Mentor",
+      type: "object",
+    }),
+    defineField({
+      description:
+        "Show multiple mentors. This section takes precedence over the single mentor profile.",
+      fields: [
+        {
+          initialValue: true,
+          name: "enabled",
+          title: "Show this section",
+          type: "boolean",
+        },
+        { name: "sectionTitle", title: "Section Heading", type: "string" },
+        {
+          name: "sectionDescription",
+          rows: 3,
+          title: "Section Introduction",
+          type: "text",
+        },
+        {
+          name: "profiles",
+          of: [
+            {
+              fields: [...mentorProfileFields],
+              preview: {
+                select: { media: "image", subtitle: "role", title: "name" },
+              },
+              type: "object",
+            },
+          ],
+          title: "Mentor Profiles",
+          type: "array",
+        },
+      ],
+      group: "credibility",
+      name: "mentors",
+      title: "Meet Your Mentors",
       type: "object",
     }),
     defineField({

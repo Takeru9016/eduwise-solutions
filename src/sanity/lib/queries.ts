@@ -187,7 +187,7 @@ export const COURSE_BY_SLUG_QUERY = `
     subtitle,
     description,
     category,
-    "heroImageUrl": heroImage.asset->url,
+    "heroImageUrl": coalesce(heroImage.asset->url, heroImagePath),
     accentColor,
     emoji,
     duration,
@@ -197,6 +197,27 @@ export const COURSE_BY_SLUG_QUERY = `
     highlights,
     overview,
     modules,
+    capstone,
+    brochureUrl,
+    enrolmentMode,
+    counsellingLabel,
+    counsellingWhatsAppUrl,
+    mentors {
+      enabled,
+      sectionTitle,
+      sectionDescription,
+      profiles[] {
+        _key,
+        name,
+        role,
+        experience,
+        bio,
+        expertise,
+        linkedInUrl,
+        profileLinkLabel,
+        "imageUrl": coalesce(image.asset->url, imagePath)
+      }
+    },
     mentor {
       enabled,
       sectionEyebrow,
@@ -209,7 +230,7 @@ export const COURSE_BY_SLUG_QUERY = `
       expertise,
       linkedInUrl,
       profileLinkLabel,
-      "imageUrl": image.asset->url
+      "imageUrl": coalesce(image.asset->url, imagePath)
     },
     certificate {
       enabled,
@@ -260,7 +281,7 @@ export const ALL_COURSE_SLUGS_QUERY = `
       heroImage.asset->_updatedAt,
       mentor.image.asset->_updatedAt,
       certificate.image.asset->_updatedAt
-    ]) + *[
+    ]) + array::compact(coalesce(mentors.profiles[].image.asset->_updatedAt, [])) + *[
       _type in ["placedStudent", "googleReview"] &&
       category->slug.current == ^.slug.current
     ]._updatedAt + (
@@ -300,7 +321,7 @@ export const COURSES_LIST_QUERY = `
     slug,
     subtitle,
     category,
-    "heroImageUrl": heroImage.asset->url,
+    "heroImageUrl": coalesce(heroImage.asset->url, heroImagePath),
     emoji,
     duration,
     price,
@@ -317,7 +338,7 @@ export const FEATURED_PROGRAMS_QUERY = `
     subtitle,
     description,
     category,
-    "heroImageUrl": heroImage.asset->url,
+    "heroImageUrl": coalesce(heroImage.asset->url, heroImagePath),
     duration,
     stats
   }
@@ -357,6 +378,7 @@ export const CHATBOT_KNOWLEDGE_QUERY = `
     description,
     category,
     duration,
+    enrolmentMode,
     price,
     originalPrice,
     emiOption,
@@ -376,16 +398,18 @@ export const CHATBOT_KNOWLEDGE_QUERY = `
 `;
 
 export const PRICING_QUERY = `
-  *[_type == "course" && defined(price)] | order(category asc, title asc) {
+  *[_type == "course" && (enrolmentMode == "counselling" || price > 0)] | order(category asc, title asc) {
     _id,
     title,
     slug,
     subtitle,
     category,
     duration,
-    price,
-    originalPrice,
-    emiOption,
+    enrolmentMode,
+    counsellingLabel,
+    "price": select(enrolmentMode == "counselling" => null, price),
+    "originalPrice": select(enrolmentMode == "counselling" => null, originalPrice),
+    "emiOption": select(enrolmentMode == "counselling" => null, emiOption),
     whatsIncluded,
     featured,
     isJobGuaranteeProgram

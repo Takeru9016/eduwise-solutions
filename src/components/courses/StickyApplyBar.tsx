@@ -41,12 +41,12 @@ export function StickyApplyBar({
           {courseTitle}
         </p>
         <Link
-          className="inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-75 px-5 font-bold text-grey-15 text-sm transition-transform active:scale-[0.97]"
+          className="inline-flex min-h-11 max-w-[65%] shrink-0 items-center gap-2 rounded-full border-2 border-grey-15 bg-primary-75 px-3 py-1 font-bold text-grey-15 text-sm transition-transform active:scale-[0.97] sm:px-5"
           href={href ?? `#${targetId}`}
           tabIndex={formInView ? -1 : 0}
         >
           {label}
-          <ArrowRight className="h-4 w-4" />
+          <ArrowRight className="h-4 w-4 shrink-0" />
         </Link>
       </div>
     </div>

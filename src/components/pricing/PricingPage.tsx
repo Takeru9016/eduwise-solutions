@@ -8,16 +8,19 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { CATEGORIES } from "@/data/courses";
 import { prefersReducedMotion } from "@/lib/utils";
+import type { CourseEnrolmentMode } from "@/types/course";
 
 export interface PricingCourse {
   _id: string;
   category: string;
+  counsellingLabel?: string;
   duration: string | null;
   emiOption: string | null;
+  enrolmentMode?: CourseEnrolmentMode;
   featured: boolean;
   isJobGuaranteeProgram: boolean | null;
   originalPrice: number | null;
-  price: number;
+  price: number | null;
   slug: { current: string };
   subtitle: string | null;
   title: string;
@@ -56,10 +59,15 @@ function PricingCard({
   index: number;
 }) {
   const originalPrice = course.originalPrice ?? 0;
-  const hasDiscount = originalPrice > course.price;
-  const discountPct = hasDiscount
-    ? Math.round(((originalPrice - course.price) / originalPrice) * 100)
-    : 0;
+  const counselling = course.enrolmentMode === "counselling";
+  const price = counselling ? null : course.price;
+  const saving = price === null ? 0 : originalPrice - price;
+  const discountPct =
+    saving > 0 ? Math.round((saving / originalPrice) * 100) : 0;
+  const programHref = `/courses/${course.slug.current}`;
+  const enrolmentLabel = counselling
+    ? course.counsellingLabel || "Request a Free Counselling Call"
+    : "View Program & Enroll";
   const category = CATEGORIES.find((c) => c.id === course.category);
   const CategoryIcon = category?.icon ?? BookOpen;
   const tint = CARD_TINTS[index % CARD_TINTS.length];
@@ -106,30 +114,38 @@ function PricingCard({
           </span>
         )}
 
-        <div className="mb-5">
-          <div className="flex items-baseline gap-2">
-            <span className="font-black font-vietnam text-3xl text-grey-15 tabular-nums">
-              {formatInr(course.price)}
-            </span>
-            {hasDiscount && (
-              <span className="text-grey-50 text-sm tabular-nums line-through">
-                {formatInr(originalPrice)}
+        {price !== null && (
+          <div className="mb-5">
+            <div className="flex items-baseline gap-2">
+              <span className="font-black font-vietnam text-3xl text-grey-15 tabular-nums">
+                {formatInr(price)}
               </span>
+              {saving > 0 && (
+                <span className="text-grey-50 text-sm tabular-nums line-through">
+                  {formatInr(originalPrice)}
+                </span>
+              )}
+            </div>
+            {saving > 0 && (
+              <p className="mt-1 font-bold text-primary-40 text-xs">
+                Save {discountPct}% • {formatInr(saving)} off
+              </p>
+            )}
+            {course.emiOption && (
+              <p className="mt-2 text-grey-40 text-xs">
+                EMI from{" "}
+                <span className="font-bold text-grey-15">
+                  {course.emiOption}
+                </span>
+              </p>
             )}
           </div>
-          {hasDiscount && (
-            <p className="mt-1 font-bold text-primary-40 text-xs">
-              Save {discountPct}% • {formatInr(originalPrice - course.price)}{" "}
-              off
-            </p>
-          )}
-          {course.emiOption && (
-            <p className="mt-2 text-grey-40 text-xs">
-              EMI from{" "}
-              <span className="font-bold text-grey-15">{course.emiOption}</span>
-            </p>
-          )}
-        </div>
+        )}
+        {counselling && (
+          <p className="mb-5 font-bold text-grey-15">
+            Free counselling enquiry
+          </p>
+        )}
 
         {course.whatsIncluded && course.whatsIncluded.length > 0 && (
           <ul className="mb-6 flex-1 space-y-2.5">
@@ -146,8 +162,8 @@ function PricingCard({
           asChild
           className="mt-auto w-full rounded-full border-2 border-grey-15 bg-white font-bold text-grey-15 shadow-none hover:bg-primary-99"
         >
-          <Link href={`/courses/${course.slug.current}`}>
-            View Program & Enroll
+          <Link href={counselling ? `${programHref}#apply` : programHref}>
+            {enrolmentLabel}
           </Link>
         </Button>
       </div>

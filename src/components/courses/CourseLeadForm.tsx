@@ -38,6 +38,7 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>;
 
 interface CourseLeadFormProps {
+  counsellingLabel?: string;
   courseTitle?: string;
 }
 
@@ -54,7 +55,10 @@ declare global {
   }
 }
 
-export default function CourseLeadForm({ courseTitle }: CourseLeadFormProps) {
+export default function CourseLeadForm({
+  counsellingLabel,
+  courseTitle,
+}: CourseLeadFormProps) {
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
@@ -146,8 +150,9 @@ export default function CourseLeadForm({ courseTitle }: CourseLeadFormProps) {
           You&apos;re all set!
         </p>
         <p className="max-w-xs text-grey-40 leading-relaxed">
-          Our counselor will reach out to you within 24 hours. Check your
-          WhatsApp &amp; email for updates.
+          {counsellingLabel
+            ? "Your enquiry has been received. Our team will contact you to arrange your counselling call."
+            : "Our counselor will reach out to you within 24 hours. Check your WhatsApp & email for updates."}
         </p>
         <button
           className="mt-2 font-bold text-primary-75 text-sm hover:underline"
@@ -167,23 +172,25 @@ export default function CourseLeadForm({ courseTitle }: CourseLeadFormProps) {
           Free Counselling Session
         </p>
         <p className="font-bold font-vietnam text-2xl text-white leading-snug">
-          Get A Free Career Counselling Session
+          {counsellingLabel ?? "Get A Free Career Counselling Session"}
         </p>
       </div>
 
-      <div className="grid grid-cols-3 divide-x-2 divide-grey-15/10 border-grey-15/10 border-b bg-primary-99">
-        {TRUST_BADGES.map(({ icon: Icon, label }) => (
-          <div
-            className="flex flex-col items-center gap-1.5 px-2 py-4 text-center"
-            key={label}
-          >
-            <Icon className="h-5 w-5 text-primary-75" />
-            <span className="font-bold text-grey-35 text-xs leading-tight sm:text-sm">
-              {label}
-            </span>
-          </div>
-        ))}
-      </div>
+      {!counsellingLabel && (
+        <div className="grid grid-cols-3 divide-x-2 divide-grey-15/10 border-grey-15/10 border-b bg-primary-99">
+          {TRUST_BADGES.map(({ icon: Icon, label }) => (
+            <div
+              className="flex flex-col items-center gap-1.5 px-2 py-4 text-center"
+              key={label}
+            >
+              <Icon className="h-5 w-5 text-primary-75" />
+              <span className="font-bold text-grey-35 text-xs leading-tight sm:text-sm">
+                {label}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
 
       <form
         className="space-y-5 px-7 py-7"
@@ -319,7 +326,7 @@ export default function CourseLeadForm({ courseTitle }: CourseLeadFormProps) {
               Submitting...
             </>
           ) : (
-            "Apply Now - It's Free"
+            (counsellingLabel ?? "Apply Now - It's Free")
           )}
         </button>
 

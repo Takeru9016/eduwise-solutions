@@ -94,7 +94,10 @@ export default async function CoursePage({ params }: PageProps) {
             courseJsonLd({
               description: course.description,
               modules: course.modules,
-              price: course.price,
+              price:
+                course.enrolmentMode === "counselling"
+                  ? undefined
+                  : course.price,
               seoDescription: course.seoDescription,
               slug: course.slug.current,
               subtitle: course.subtitle,

@@ -13,6 +13,7 @@ import { structureTool } from "sanity/structure";
 import { apiVersion, dataset, projectId } from "./src/sanity/env";
 import { schema } from "./src/sanity/schemaTypes";
 import { structure } from "./src/sanity/structure";
+import { aiBusinessCourseTemplate } from "./src/sanity/templates/ai-business-course";
 
 const SINGLETON_TYPES = new Set(["homePage", "awsPage"]);
 
@@ -44,5 +45,8 @@ export default defineConfig({
   ],
   projectId,
   // Add and edit the content schema in the './sanity/schemaTypes' folder
-  schema,
+  schema: {
+    ...schema,
+    templates: (templates) => [...templates, aiBusinessCourseTemplate],
+  },
 });

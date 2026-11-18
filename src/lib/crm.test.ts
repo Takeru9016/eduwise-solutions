@@ -35,6 +35,7 @@ describe("mapCourseInterest", () => {
       "AWS Certification / Voucher",
     ],
     ["AI", "AI & Machine Learning"],
+    ["AI for Business & Automation", "Other"],
   ])("maps %s", (text, expected) => {
     expect(mapCourseInterest(text)).toBe(expected);
   });

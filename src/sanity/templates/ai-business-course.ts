@@ -322,6 +322,7 @@ export const aiBusinessCourse = {
     issuerPrefix: "Issued by",
     sectionTitle: "Course Completion Certificate",
   },
+  counsellingLabel: "Request a Free Counselling Call",
   description:
     "Use AI to do everyday business work, then build automations with Claude Code and n8n. Across 45 live classes, you’ll complete 16 guided projects and connect them in one capstone. No programming background is required.",
   duration: "45 live classes",

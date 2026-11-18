@@ -560,10 +560,11 @@ export const courseType = defineType({
       type: "string",
     }),
     defineField({
+      description:
+        "Optional label for the enquiry form in the course hero and its mobile shortcut.",
       group: "pricing",
-      hidden: ({ document }) => document?.enrolmentMode !== "counselling",
       name: "counsellingLabel",
-      title: "Counselling Button Label",
+      title: "Hero Enquiry Label",
       type: "string",
       validation: (Rule) => Rule.max(45),
     }),

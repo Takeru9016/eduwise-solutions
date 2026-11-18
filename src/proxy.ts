@@ -42,7 +42,7 @@ export async function proxy(request: NextRequest) {
     ? match.destination
     : new URL(match.destination, request.url);
 
-  return NextResponse.redirect(destination, match.permanent ? 308 : 307);
+  return NextResponse.redirect(destination, match.permanent ? 301 : 307);
 }
 
 export const config = {

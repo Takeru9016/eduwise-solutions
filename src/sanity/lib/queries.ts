@@ -179,6 +179,17 @@ export const COURSES_NAV_QUERY = `
 `;
 
 // Course Queries
+const COURSE_BROCHURE_PROJECTION = `
+  "brochureUrl": coalesce(brochureFile.asset->url, brochureUrl)
+`;
+
+export const COURSE_BROCHURE_BY_SLUG_QUERY = `
+  *[_type == "course" && slug.current == $slug][0] {
+    title,
+    ${COURSE_BROCHURE_PROJECTION}
+  }
+`;
+
 export const COURSE_BY_SLUG_QUERY = `
   *[_type == "course" && slug.current == $slug][0] {
     _id,
@@ -198,7 +209,7 @@ export const COURSE_BY_SLUG_QUERY = `
     overview,
     modules,
     capstone,
-    "brochureUrl": coalesce(brochureFile.asset->url, brochureUrl),
+    ${COURSE_BROCHURE_PROJECTION},
     enrolmentMode,
     counsellingLabel,
     counsellingWhatsAppUrl,

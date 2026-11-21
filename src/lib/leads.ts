@@ -54,6 +54,21 @@ const LEAD_SHEETS = {
     sheetName: "Website Lead",
     timestampColumn: 6,
   },
+  courseBrochure: {
+    headers: [
+      "Name",
+      "Email",
+      "Mobile",
+      "Course",
+      "Course Slug",
+      "Contact Consent",
+      "Logged At",
+      "Duplicate Check",
+    ],
+    mobileColumn: 2,
+    sheetName: "Brochure Downloads",
+    timestampColumn: 6,
+  },
   leadMagnet: {
     headers: [
       "Name",

@@ -1,3 +1,4 @@
+import { useId } from "react";
 import { HONEYPOT_FIELD_NAME } from "@/lib/security/honeypot";
 
 /**
@@ -6,15 +7,17 @@ import { HONEYPOT_FIELD_NAME } from "@/lib/security/honeypot";
  * so it never affects a legitimate user's experience.
  */
 export function HoneypotField() {
+  const id = useId();
+
   return (
     <div
       aria-hidden="true"
       className="absolute top-[-9999px] left-[-9999px] h-0 w-0 overflow-hidden"
     >
-      <label htmlFor={HONEYPOT_FIELD_NAME}>Company website</label>
+      <label htmlFor={id}>Company website</label>
       <input
         autoComplete="off"
-        id={HONEYPOT_FIELD_NAME}
+        id={id}
         name={HONEYPOT_FIELD_NAME}
         tabIndex={-1}
         type="text"

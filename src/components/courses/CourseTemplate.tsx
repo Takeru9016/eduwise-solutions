@@ -68,6 +68,7 @@ import RefundHighlight from "../common/RefundHighlight";
 import PaymentModal from "../payment/PaymentModal";
 import PaymentStatusModal from "../payment/PaymentStatusModal";
 import CourseBlogPreview from "./CourseBlogPreview";
+import CourseBrochureDownload from "./CourseBrochureDownload";
 import CourseLeadForm from "./CourseLeadForm";
 import CourseOverviewTabs from "./CourseOverviewTabs";
 import CourseProjects from "./CourseProjects";
@@ -297,7 +298,8 @@ function JobGuaranteeTrack({ steps }: { steps: JGStep[] }) {
 
 interface CourseTemplateProps {
   blogPosts?: BlogPost[];
-  course: CourseContent;
+  course: Omit<CourseContent, "brochureUrl">;
+  hasBrochure: boolean;
 }
 
 function MentorProfile({ mentor }: { mentor: CourseMentor }) {
@@ -500,6 +502,7 @@ function CourseCertificateSection({
 export default function CourseTemplate({
   blogPosts = [],
   course,
+  hasBrochure,
 }: CourseTemplateProps) {
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [expandedTool, setExpandedTool] = useState<string | null>(null);
@@ -657,15 +660,11 @@ export default function CourseTemplate({
                   <BookOpen className="h-4 w-4" />
                   View Course Curriculum
                 </Link>
-                {course.brochureUrl && (
-                  <a
-                    className="inline-flex items-center gap-2 rounded-full border-2 border-grey-15 bg-white px-6 py-3 font-bold text-grey-15 text-sm"
-                    href={course.brochureUrl}
-                    rel="noreferrer"
-                    target="_blank"
-                  >
-                    <Download className="h-4 w-4" /> Download Brochure (PDF)
-                  </a>
+                {hasBrochure && (
+                  <CourseBrochureDownload
+                    courseSlug={course.slug.current}
+                    key={course.slug.current}
+                  />
                 )}
               </div>
 

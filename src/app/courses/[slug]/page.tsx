@@ -81,6 +81,8 @@ export default async function CoursePage({ params }: PageProps) {
     notFound();
   }
 
+  const { brochureUrl, ...courseDetails } = course;
+
   const blogPosts = await client.fetch<BlogPost[]>(COURSE_RELATED_POSTS_QUERY, {
     slug,
   });
@@ -137,7 +139,11 @@ export default async function CoursePage({ params }: PageProps) {
         />
       )}
       <Navbar />
-      <CourseTemplate blogPosts={blogPosts} course={course} />
+      <CourseTemplate
+        blogPosts={blogPosts}
+        course={courseDetails}
+        hasBrochure={Boolean(brochureUrl)}
+      />
       <Footer />
     </>
   );

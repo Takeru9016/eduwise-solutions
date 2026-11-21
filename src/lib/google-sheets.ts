@@ -1,3 +1,4 @@
+import { randomInt } from "node:crypto";
 import { google, type sheets_v4 } from "googleapis";
 
 function validateEnvVariables() {
@@ -47,39 +48,57 @@ export async function ensureSheetExists(
   headers: string[]
 ) {
   const spreadsheetId = process.env.SPREADSHEET_ID;
+  const sheetExists = async () => {
+    const spreadsheet = await sheets.spreadsheets.get({
+      fields: "sheets.properties.title",
+      spreadsheetId,
+    });
+    return spreadsheet.data.sheets?.some(
+      (sheet) => sheet.properties?.title === sheetName
+    );
+  };
 
-  const spreadsheet = await sheets.spreadsheets.get({ spreadsheetId });
-  const exists = spreadsheet.data.sheets?.some(
-    (sheet) => sheet.properties?.title === sheetName
-  );
-
-  if (exists) {
+  if (await sheetExists()) {
     return;
   }
 
-  await sheets.spreadsheets.batchUpdate({
-    requestBody: {
-      requests: [
-        {
-          addSheet: {
-            properties: {
-              gridProperties: { columnCount: headers.length, rowCount: 1000 },
-              title: sheetName,
+  // Create the tab and its headers atomically, including on concurrent first submissions.
+  const sheetId = randomInt(1, 2 ** 31);
+  try {
+    await sheets.spreadsheets.batchUpdate({
+      requestBody: {
+        requests: [
+          {
+            addSheet: {
+              properties: {
+                gridProperties: { columnCount: headers.length, rowCount: 1000 },
+                sheetId,
+                title: sheetName,
+              },
             },
           },
-        },
-      ],
-    },
-    spreadsheetId,
-  });
-
-  const lastColumn = String.fromCharCode(64 + headers.length); // 1 -> A, 6 -> F, 7 -> G
-  await sheets.spreadsheets.values.update({
-    range: `${sheetName}!A1:${lastColumn}1`,
-    requestBody: { values: [headers] },
-    spreadsheetId,
-    valueInputOption: "RAW",
-  });
+          {
+            updateCells: {
+              fields: "userEnteredValue",
+              rows: [
+                {
+                  values: headers.map((stringValue) => ({
+                    userEnteredValue: { stringValue },
+                  })),
+                },
+              ],
+              start: { columnIndex: 0, rowIndex: 0, sheetId },
+            },
+          },
+        ],
+      },
+      spreadsheetId,
+    });
+  } catch (error) {
+    if (!(await sheetExists())) {
+      throw error;
+    }
+  }
 }
 
 export async function appendRow(

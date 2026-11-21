@@ -141,9 +141,19 @@ export const courseType = defineType({
       validation: (Rule) => Rule.regex(/^\/courses\/[a-z0-9/_.-]+$/),
     }),
     defineField({
+      description:
+        "Upload or replace the course brochure PDF, then publish the course to update the website download.",
+      group: "content",
+      name: "brochureFile",
+      options: { accept: "application/pdf" },
+      title: "Brochure PDF",
+      type: "file",
+    }),
+    defineField({
+      description: "Optional fallback when no brochure PDF is uploaded.",
       group: "content",
       name: "brochureUrl",
-      title: "Brochure Link",
+      title: "Fallback Brochure Link",
       type: "url",
       validation: (Rule) =>
         Rule.uri({ allowRelative: true, scheme: ["https"] }),

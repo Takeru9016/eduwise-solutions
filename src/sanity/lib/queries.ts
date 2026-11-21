@@ -198,7 +198,7 @@ export const COURSE_BY_SLUG_QUERY = `
     overview,
     modules,
     capstone,
-    brochureUrl,
+    "brochureUrl": coalesce(brochureFile.asset->url, brochureUrl),
     enrolmentMode,
     counsellingLabel,
     counsellingWhatsAppUrl,
